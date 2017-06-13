@@ -1,0 +1,33 @@
+//
+//  PrefixHeader.pch
+//  OST
+//
+//  Created by Luciano Castro on 6/12/17.
+//  Copyright © 2017 OST. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+// Network
+#import "OSTNetworkManager.h"
+#import "OSTNetworkManager+Login.h"
+
+// App
+#import "AppDelegate.h"
+
+// Constants
+#import "OSTConstants.h"
+
+// Core Data
+#import "MagicalRecord.h"
+
+// Helpers
+#import "OHAlertView.h"
+#import "DejalActivityView.h"
+
+#endif /* PrefixHeader_pch */
+
