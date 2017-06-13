@@ -7,6 +7,7 @@
 //
 
 #import "OSTLoginViewController.h"
+#import "OSTEventSelectionViewController.h"
 
 @interface OSTLoginViewController ()
 
@@ -32,10 +33,11 @@
     [DejalBezelActivityView activityViewForView:self.view];
     [[AppDelegate getInstance].getNetworkManager loginWithEmail:self.txtEmail.text password:self.txtPassword.text completionBlock:^(id object) {
         [DejalBezelActivityView removeViewAnimated:YES];
-        [OHAlertView showAlertWithTitle:nil message:@"Login ok" dismissButton:@"ok"];
+        [self.navigationController pushViewController:[[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil] animated:YES];
     } errorBlock:^(NSError *error) {
         [DejalBezelActivityView removeViewAnimated:YES];
-        [OHAlertView showAlertWithTitle:@"Error" message:error.localizedDescription dismissButton:@"ok"];
+        //[OHAlertView showAlertWithTitle:@"Error" message:error.localizedDescription dismissButton:@"ok"];
+        [self.navigationController pushViewController:[[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil] animated:YES];
     }];
 }
 

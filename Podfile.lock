@@ -19,6 +19,7 @@ PODS:
   - DejalActivityView (1.2)
   - Fabric (1.6.11)
   - FXKeychain (1.5.3)
+  - IQDropDownTextField (1.1.0)
   - JTObjectMapping (1.1.2)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - DejalActivityView (= 1.2)
   - Fabric
   - FXKeychain (~> 1.5)
+  - IQDropDownTextField (= 1.1.0)
   - JTObjectMapping (= 1.1.2)
   - MagicalRecord (= 2.3.2)
   - NSDate+Helper (= 1.0.0)
@@ -45,12 +47,13 @@ SPEC CHECKSUMS:
   DejalActivityView: 94d85757728a02cbb32445fcf6dfba17dc1e7393
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
+  IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
   JTObjectMapping: 179cae6acadb27be5b7f5c019c216cb99d28e112
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   NSDate+Helper: 38676f1c2bd50fcebcebf8fc281276e1f18df18c
   OHAlertView: 8be643171f973214045e734bf937f5fe70dfdc2b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
-PODFILE CHECKSUM: 45e643d650867230889c4c017fb1edd89494d006
+PODFILE CHECKSUM: ac54580f959424385041881c105790279fd30673
 
 COCOAPODS: 1.2.1

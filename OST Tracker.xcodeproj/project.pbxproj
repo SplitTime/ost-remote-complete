@@ -15,6 +15,8 @@
 		6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */; };
 		6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
+		6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */; };
+		6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
 		6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
 		6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */; };
 		6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
@@ -50,6 +52,9 @@
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
 		6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6A549E5C1EEF8B9400783F80 /* OSTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTConstants.h; sourceTree = "<group>"; };
+		6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTRunnerTrackerViewController.h; sourceTree = "<group>"; };
+		6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTRunnerTrackerViewController.m; sourceTree = "<group>"; };
+		6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRunnerTrackerViewController.xib; sourceTree = "<group>"; };
 		6AEFFC051EEF83DA009EEE21 /* OST Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC091EEF83DA009EEE21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -129,6 +134,9 @@
 				6A549E521EEF881C00783F80 /* OSTEventSelectionViewController.h */,
 				6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */,
 				6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */,
+				6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */,
+				6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */,
+				6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -290,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
+				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */,
@@ -407,6 +416,7 @@
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
 				6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */,
+				6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */,
 				6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */,
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,

@@ -16,6 +16,7 @@ pod 'Crashlytics'
 pod 'FXKeychain', '~> 1.5'
 pod 'Reachability', '~> 3.2'
 pod 'DejalActivityView', '1.2'
+pod 'IQDropDownTextField', '1.1.0'
 
 end
 
