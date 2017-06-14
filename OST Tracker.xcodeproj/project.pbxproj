@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6AA6E9D31EF0E4C70061EEB0 /* Mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6AA6E9D41EF0E4C70061EEB0 /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
+			buildPhases = (
+				6AA6E9D71EF0E4E30061EEB0 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Mogenerator;
+			productName = Mogenerator;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5AD831746D7DE94ECBB7CB5A /* Pods_OST_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
@@ -17,6 +31,11 @@
 		6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
 		6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */; };
 		6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
+		6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */; };
+		6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
+		6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */; };
+		6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */; };
+		6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
 		6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
 		6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */; };
 		6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
@@ -55,6 +74,16 @@
 		6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTRunnerTrackerViewController.h; sourceTree = "<group>"; };
 		6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTRunnerTrackerViewController.m; sourceTree = "<group>"; };
 		6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRunnerTrackerViewController.xib; sourceTree = "<group>"; };
+		6AA6E9D01EF0DF320061EEB0 /* OSTNetworkManager+Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Events.h"; sourceTree = "<group>"; };
+		6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Events.m"; sourceTree = "<group>"; };
+		6AA6E9DA1EF0E7D70061EEB0 /* _EntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EntryModel.h; sourceTree = "<group>"; };
+		6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EntryModel.m; sourceTree = "<group>"; };
+		6AA6E9DC1EF0E7D70061EEB0 /* _EventModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EventModel.h; sourceTree = "<group>"; };
+		6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EventModel.m; sourceTree = "<group>"; };
+		6AA6E9DE1EF0E7D70061EEB0 /* EntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryModel.h; sourceTree = "<group>"; };
+		6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryModel.m; sourceTree = "<group>"; };
+		6AA6E9E01EF0E7D70061EEB0 /* EventModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventModel.h; sourceTree = "<group>"; };
+		6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventModel.m; sourceTree = "<group>"; };
 		6AEFFC051EEF83DA009EEE21 /* OST Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC091EEF83DA009EEE21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,13 +147,6 @@
 			path = DataBase;
 			sourceTree = "<group>";
 		};
-		6A549E481EEF865100783F80 /* DataModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataModels;
-			sourceTree = "<group>";
-		};
 		6A549E491EEF865100783F80 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,8 +170,33 @@
 				6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */,
 				6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */,
 				6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */,
+				6AA6E9D01EF0DF320061EEB0 /* OSTNetworkManager+Events.h */,
+				6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		6AA6E9D81EF0E7D70061EEB0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6AA6E9D91EF0E7D70061EEB0 /* Managed */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6AA6E9D91EF0E7D70061EEB0 /* Managed */ = {
+			isa = PBXGroup;
+			children = (
+				6AA6E9DA1EF0E7D70061EEB0 /* _EntryModel.h */,
+				6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */,
+				6AA6E9DC1EF0E7D70061EEB0 /* _EventModel.h */,
+				6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */,
+				6AA6E9DE1EF0E7D70061EEB0 /* EntryModel.h */,
+				6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */,
+				6AA6E9E01EF0E7D70061EEB0 /* EventModel.h */,
+				6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */,
+			);
+			path = Managed;
 			sourceTree = "<group>";
 		};
 		6AEFFBFC1EEF83DA009EEE21 = {
@@ -177,7 +224,7 @@
 			children = (
 				6A549E571EEF8A3E00783F80 /* Network */,
 				6A549E471EEF865100783F80 /* DataBase */,
-				6A549E481EEF865100783F80 /* DataModels */,
+				6AA6E9D81EF0E7D70061EEB0 /* Model */,
 				6A549E491EEF865100783F80 /* ViewControllers */,
 				6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */,
 				6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */,
@@ -262,8 +309,13 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = OST;
 				TargetAttributes = {
+					6AA6E9D31EF0E4C70061EEB0 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
 					6AEFFC041EEF83DA009EEE21 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					6AEFFC1D1EEF83DA009EEE21 = {
@@ -288,6 +340,7 @@
 			targets = (
 				6AEFFC041EEF83DA009EEE21 /* OST Tracker */,
 				6AEFFC1D1EEF83DA009EEE21 /* OST TrackerTests */,
+				6AA6E9D31EF0E4C70061EEB0 /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -375,6 +428,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6AA6E9D71EF0E4E30061EEB0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mogenerator -m 'OST Tracker/Database/OSTDataModel.xcdatamodeld' -O 'OST Tracker/Model/Managed' --template-var arc=true";
+		};
 		7421FF7EABECE4DE01C9A1CF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,10 +481,15 @@
 				6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
+				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
 				6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */,
+				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
 				6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */,
+				6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */,
+				6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */,
 				6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */,
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
+				6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +524,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6AA6E9D51EF0E4C70061EEB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6AA6E9D61EF0E4C70061EEB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		6AEFFC251EEF83DA009EEE21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -551,6 +636,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -576,6 +662,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -583,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -608,6 +696,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -640,6 +729,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6AA6E9D41EF0E4C70061EEB0 /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6AA6E9D51EF0E4C70061EEB0 /* Debug */,
+				6AA6E9D61EF0E4C70061EEB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		6AEFFC001EEF83DA009EEE21 /* Build configuration list for PBXProject "OST Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

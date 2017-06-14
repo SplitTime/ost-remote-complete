@@ -9,11 +9,13 @@
 #import "OSTEventSelectionViewController.h"
 #import "IQDropDownTextField.h"
 #import "OSTRunnerTrackerViewController.h"
+#import "EventModel.h"
 
 @interface OSTEventSelectionViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtEvent;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtStation;
+@property (strong, nonatomic) NSMutableArray * events;
 
 @end
 
@@ -23,7 +25,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.txtEvent.isOptionalDropDown = NO;
-    [self.txtEvent setItemList:[NSArray arrayWithObjects:@"London",@"Johannesburg",@"Moscow",@"Mumbai",@"Tokyo",@"Sydney", nil]];
     
     UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
     [keyboardToolbar sizeToFit];
@@ -46,13 +47,59 @@
                                       target:self action:@selector(onDoneSelectedStation)];
     keyboardToolbar.items = @[flexBarButton, doneBarButton];
     self.txtStation.inputAccessoryView = keyboardToolbar;
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    [self.txtStation setItemList:[NSArray arrayWithObjects:@"Johannesburg",@"Moscow",@"Mumbai",@"Tokyo",@"Sydney", nil]];
+    [DejalBezelActivityView activityViewForView:self.view];
+    [[AppDelegate getInstance].getNetworkManager getAllEventsWithCompletionBlock:^(id object) {
+        [DejalBezelActivityView removeViewAnimated:YES];
+        
+        NSMutableArray * pickerEvents = [NSMutableArray new];
+        for (id dataObject in object[@"data"])
+        {
+            [pickerEvents addObject:[EventModel MR_importFromObject:dataObject]];
+        }
+        
+        self.events = pickerEvents;
+        
+        NSMutableArray * eventStrings = [NSMutableArray new];
+        
+        for (EventModel * event in pickerEvents)
+        {
+            [eventStrings addObject:event.name];
+        }
+        
+        [self.txtEvent setItemList:eventStrings];
+        [self.txtEvent becomeFirstResponder];
+        
+    } errorBlock:^(NSError *error) {
+        [DejalBezelActivityView removeViewAnimated:YES];
+    }];
 }
 
 -(void)onDoneSelectedEvent
 {
     [self.txtEvent resignFirstResponder];
+    
+    NSMutableArray * aidStations = [NSMutableArray new];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", self.txtEvent.selectedItem];
+    NSArray *filteredArray = [self.events filteredArrayUsingPredicate:predicate];
+    EventModel * firstFoundObject = nil;
+    firstFoundObject =  filteredArray.count > 0 ? filteredArray.firstObject : nil;
+    
+    for (NSDictionary * dictionary in firstFoundObject.aidStations)
+    {
+        [aidStations addObject:dictionary[@"id"]];
+    }
+    
+    [self.txtStation setItemList:aidStations];
+    
+    [self.txtStation becomeFirstResponder];
+    
 }
 
 -(void)onDoneSelectedStation

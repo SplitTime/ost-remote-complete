@@ -8,6 +8,8 @@
 
 // MACROS
 
+#define OSTCoredataFile @"OSTDataModel"
+
 #ifndef STR_PROP
     #define STR_PROP( prop ) [self mappedKeyName:NSStringFromSelector(@selector(prop))]
 #endif

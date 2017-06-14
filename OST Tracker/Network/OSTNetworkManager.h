@@ -38,4 +38,6 @@ typedef void (^OSTErrorBlock)(NSError* error);
 
 @property (nonatomic,strong) NSString * serviceURL;
 
+- (void)addTokenToHeader: (NSString*) token;
+
 @end

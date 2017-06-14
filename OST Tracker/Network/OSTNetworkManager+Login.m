@@ -14,10 +14,19 @@
 
 - (NSURLSessionDataTask*)loginWithEmail:(NSString*)email password:(NSString*)password completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
 {
-    NSURLSessionDataTask *dataTask = [self POST:[NSString stringWithFormat:@"%@?user[email]=%@&user[password]=%@",OSTLoginEndpoint, email, password] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    self.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [self.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    
+    NSDictionary * params = @{@"user[email]":email,@"user[password]":password};
+    
+    NSURLSessionDataTask *dataTask = [self POST:OSTLoginEndpoint parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
+        self.requestSerializer = [AFJSONRequestSerializer serializer];
+        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         onCompletion(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        self.requestSerializer = [AFJSONRequestSerializer serializer];
+        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         onError(error);
     }];
     

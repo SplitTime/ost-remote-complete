@@ -15,6 +15,7 @@
 // Network
 #import "OSTNetworkManager.h"
 #import "OSTNetworkManager+Login.h"
+#import "OSTNetworkManager+Events.h"
 
 // App
 #import "AppDelegate.h"

@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+    <entity name="EntryModel" representedClassName="EntryModel" syncable="YES"/>
+    <entity name="EventModel" representedClassName="EventModel" syncable="YES">
+        <attribute name="aidStations" optional="YES" attributeType="Transformable" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="relationships.aidStations.data"/>
+            </userInfo>
+        </attribute>
+        <attribute name="eventId" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.name"/>
+            </userInfo>
+        </attribute>
+        <attribute name="slug" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.slug"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <elements>
+        <element name="EventModel" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="45"/>
+    </elements>
 </model>

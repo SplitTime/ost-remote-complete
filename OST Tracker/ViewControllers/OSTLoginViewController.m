@@ -31,24 +31,16 @@
 - (IBAction)onLogin:(id)sender
 {
     [DejalBezelActivityView activityViewForView:self.view];
-    [[AppDelegate getInstance].getNetworkManager loginWithEmail:self.txtEmail.text password:self.txtPassword.text completionBlock:^(id object) {
+    [[AppDelegate getInstance].getNetworkManager loginWithEmail:self.txtEmail.text password:self.txtPassword.text completionBlock:^(id object)
+    {
+        [[AppDelegate getInstance].getNetworkManager addTokenToHeader:object[@"token"]];
         [DejalBezelActivityView removeViewAnimated:YES];
         [self.navigationController pushViewController:[[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil] animated:YES];
     } errorBlock:^(NSError *error) {
         [DejalBezelActivityView removeViewAnimated:YES];
-        //[OHAlertView showAlertWithTitle:@"Error" message:error.localizedDescription dismissButton:@"ok"];
-        [self.navigationController pushViewController:[[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil] animated:YES];
+        [OHAlertView showAlertWithTitle:@"Error" message:error.localizedDescription dismissButton:@"ok"];
     }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

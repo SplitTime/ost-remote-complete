@@ -40,7 +40,16 @@
     
     [self.window makeKeyAndVisible];
     
+    [self initializeCoredata];
+    
     return YES;
+}
+
+#pragma mark - CoreData Setup
+
+- (void) initializeCoredata
+{
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:OSTCoredataFile];
 }
 
 
