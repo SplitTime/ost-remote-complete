@@ -8,18 +8,15 @@
 
 #import "OSTNetworkManager.h"
 
-#define OSTServiceURL   @"https://ost-stage.herokuapp.com/api/v1/"
-
 @implementation OSTNetworkManager
 
 - (id)init
 {
-    NSString * servicesURL   = OSTServiceURL;
-    self = [[OSTNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:servicesURL]];
+    self = [[OSTNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"]]];
     
     if (self)
     {
-        self.serviceURL = servicesURL;
+        self.serviceURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"];
         self.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
         //self.responseSerializer = [JSONResponseSerializerWithData serializer];
         self.requestSerializer = [AFJSONRequestSerializer serializer];

@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */; };
+		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
 		5AD831746D7DE94ECBB7CB5A /* Pods_OST_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
@@ -29,6 +31,25 @@
 		6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */; };
 		6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
+		6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */; };
+		6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
+		6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
+		6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
+		6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
+		6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
+		6A5E0CF51EF1B25E00399EEC /* OSTRunnerTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */; };
+		6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */; };
+		6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */; };
+		6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
+		6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */; };
+		6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */; };
+		6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
+		6A5E0CFD1EF1B25E00399EEC /* Pods_OST_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */; };
+		6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
+		6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
+		6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
+		6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
+		6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
 		6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */; };
 		6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
 		6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */; };
@@ -58,6 +79,8 @@
 		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.release.xcconfig"; sourceTree = "<group>"; };
+		579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.debug.xcconfig"; sourceTree = "<group>"; };
 		6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Login.h"; sourceTree = "<group>"; };
 		6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Login.m"; sourceTree = "<group>"; };
 		6A549E4B1EEF866F00783F80 /* OSTDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSTDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -71,6 +94,7 @@
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
 		6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6A549E5C1EEF8B9400783F80 /* OSTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTConstants.h; sourceTree = "<group>"; };
+		6A5E0D091EF1B25E00399EEC /* OST Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTRunnerTrackerViewController.h; sourceTree = "<group>"; };
 		6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTRunnerTrackerViewController.m; sourceTree = "<group>"; };
 		6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRunnerTrackerViewController.xib; sourceTree = "<group>"; };
@@ -84,7 +108,7 @@
 		6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryModel.m; sourceTree = "<group>"; };
 		6AA6E9E01EF0E7D70061EEB0 /* EventModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventModel.h; sourceTree = "<group>"; };
 		6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventModel.m; sourceTree = "<group>"; };
-		6AEFFC051EEF83DA009EEE21 /* OST Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AEFFC051EEF83DA009EEE21 /* OST Remote Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC091EEF83DA009EEE21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -94,17 +118,31 @@
 		6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OST TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0E751E4ADA6FD2038FFD486 /* Pods-OST Remote Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.release.xcconfig"; sourceTree = "<group>"; };
+		BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6A5E0CFC1EF1B25E00399EEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A5E0CFD1EF1B25E00399EEC /* Pods_OST_Tracker.framework in Frameworks */,
+				56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6AEFFC021EEF83DA009EEE21 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5AD831746D7DE94ECBB7CB5A /* Pods_OST_Tracker.framework in Frameworks */,
+				396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +162,8 @@
 			children = (
 				3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */,
 				DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */,
+				BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */,
+				A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,6 +175,10 @@
 				B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */,
 				427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */,
 				AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */,
+				579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */,
+				4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */,
+				A0E751E4ADA6FD2038FFD486 /* Pods-OST Remote Dev.debug.xcconfig */,
+				EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -213,8 +257,9 @@
 		6AEFFC061EEF83DA009EEE21 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6AEFFC051EEF83DA009EEE21 /* OST Tracker.app */,
+				6AEFFC051EEF83DA009EEE21 /* OST Remote Dev.app */,
 				6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */,
+				6A5E0D091EF1B25E00399EEC /* OST Remote.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,9 +303,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6AEFFC041EEF83DA009EEE21 /* OST Tracker */ = {
+		6A5E0CEC1EF1B25E00399EEC /* OST Remote */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6AEFFC271EEF83DA009EEE21 /* Build configuration list for PBXNativeTarget "OST Tracker" */;
+			buildConfigurationList = 6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OST Remote" */;
+			buildPhases = (
+				6A5E0CED1EF1B25E00399EEC /* [CP] Check Pods Manifest.lock */,
+				6A5E0CEE1EF1B25E00399EEC /* Sources */,
+				6A5E0CFC1EF1B25E00399EEC /* Frameworks */,
+				6A5E0CFE1EF1B25E00399EEC /* Resources */,
+				6A5E0D041EF1B25E00399EEC /* [CP] Embed Pods Frameworks */,
+				6A5E0D051EF1B25E00399EEC /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OST Remote";
+			productName = "OST Tracker";
+			productReference = 6A5E0D091EF1B25E00399EEC /* OST Remote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6AEFFC271EEF83DA009EEE21 /* Build configuration list for PBXNativeTarget "OST Remote Dev" */;
 			buildPhases = (
 				1809B394149CDF9D2F9497CF /* [CP] Check Pods Manifest.lock */,
 				6AEFFC011EEF83DA009EEE21 /* Sources */,
@@ -273,9 +338,9 @@
 			);
 			dependencies = (
 			);
-			name = "OST Tracker";
+			name = "OST Remote Dev";
 			productName = "OST Tracker";
-			productReference = 6AEFFC051EEF83DA009EEE21 /* OST Tracker.app */;
+			productReference = 6AEFFC051EEF83DA009EEE21 /* OST Remote Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6AEFFC1D1EEF83DA009EEE21 /* OST TrackerTests */ = {
@@ -338,7 +403,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6AEFFC041EEF83DA009EEE21 /* OST Tracker */,
+				6A5E0CEC1EF1B25E00399EEC /* OST Remote */,
+				6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */,
 				6AEFFC1D1EEF83DA009EEE21 /* OST TrackerTests */,
 				6AA6E9D31EF0E4C70061EEB0 /* Mogenerator */,
 			);
@@ -346,6 +412,18 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6A5E0CFE1EF1B25E00399EEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
+				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
+				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
+				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
+				6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6AEFFC031EEF83DA009EEE21 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -425,7 +503,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A5E0CED1EF1B25E00399EEC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6A5E0D041EF1B25E00399EEC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A5E0D051EF1B25E00399EEC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6AA6E9D71EF0E4E30061EEB0 /* ShellScript */ = {
@@ -453,7 +576,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DC560F3F9F5D26CEFFD58E62 /* [CP] Copy Pods Resources */ = {
@@ -474,6 +597,26 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6A5E0CEE1EF1B25E00399EEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */,
+				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
+				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
+				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
+				6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */,
+				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
+				6A5E0CF51EF1B25E00399EEC /* OSTRunnerTrackerViewController.m in Sources */,
+				6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */,
+				6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */,
+				6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */,
+				6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */,
+				6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */,
+				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6AEFFC011EEF83DA009EEE21 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -507,7 +650,7 @@
 /* Begin PBXTargetDependency section */
 		6AEFFC201EEF83DA009EEE21 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6AEFFC041EEF83DA009EEE21 /* OST Tracker */;
+			target = 6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */;
 			targetProxy = 6AEFFC1F1EEF83DA009EEE21 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -524,6 +667,76 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6A5E0D071EF1B25E00399EEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BACKEND_URL = "https://opensplittime.org/api/v1/";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FXKeychain\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/JTObjectMapping\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MagicalRecord\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/NSDate+Helper\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/OHAlertView\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Reachability\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+				);
+				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		6A5E0D081EF1B25E00399EEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BACKEND_URL = "https://opensplittime.org/api/v1/";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/FXKeychain\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/JTObjectMapping\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MagicalRecord\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/NSDate+Helper\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/OHAlertView\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Reachability\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
+					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
+				);
+				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		6AA6E9D51EF0E4C70061EEB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -634,11 +847,12 @@
 		};
 		6AEFFC281EEF83DA009EEE21 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */;
+			baseConfigurationReference = A0E751E4ADA6FD2038FFD486 /* Pods-OST Remote Dev.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -660,7 +874,7 @@
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker";
+				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -668,11 +882,12 @@
 		};
 		6AEFFC291EEF83DA009EEE21 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */;
+			baseConfigurationReference = EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -694,7 +909,7 @@
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker";
+				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-Tracker.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -729,6 +944,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OST Remote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A5E0D071EF1B25E00399EEC /* Debug */,
+				6A5E0D081EF1B25E00399EEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6AA6E9D41EF0E4C70061EEB0 /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -736,6 +960,7 @@
 				6AA6E9D61EF0E4C70061EEB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6AEFFC001EEF83DA009EEE21 /* Build configuration list for PBXProject "OST Tracker" */ = {
 			isa = XCConfigurationList;
@@ -746,7 +971,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6AEFFC271EEF83DA009EEE21 /* Build configuration list for PBXNativeTarget "OST Tracker" */ = {
+		6AEFFC271EEF83DA009EEE21 /* Build configuration list for PBXNativeTarget "OST Remote Dev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6AEFFC281EEF83DA009EEE21 /* Debug */,

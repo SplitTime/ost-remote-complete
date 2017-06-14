@@ -20,7 +20,11 @@ pod 'IQDropDownTextField', '1.1.0'
 
 end
 
-target 'OST Tracker' do
+target 'OST Remote' do
+    used_pods
+end
+
+target 'OST Remote Dev' do
     used_pods
 end
 
