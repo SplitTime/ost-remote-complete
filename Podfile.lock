@@ -27,6 +27,7 @@ PODS:
   - NSDate+Helper (1.0.0)
   - OHAlertView (3.0.1)
   - Reachability (3.2)
+  - SAMKeychain (1.5.2)
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - NSDate+Helper (= 1.0.0)
   - OHAlertView (= 3.0.1)
   - Reachability (~> 3.2)
+  - SAMKeychain (= 1.5.2)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -53,7 +55,8 @@ SPEC CHECKSUMS:
   NSDate+Helper: 38676f1c2bd50fcebcebf8fc281276e1f18df18c
   OHAlertView: 8be643171f973214045e734bf937f5fe70dfdc2b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
 
-PODFILE CHECKSUM: 55a7ab17ec74610673f504b1d9cab63f5bb75340
+PODFILE CHECKSUM: 7b2b1ff5e3eb7bb82a6c79845f6703287f8f79cf
 
 COCOAPODS: 1.2.1

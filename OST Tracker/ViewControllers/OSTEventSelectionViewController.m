@@ -47,6 +47,9 @@
                                       target:self action:@selector(onDoneSelectedStation)];
     keyboardToolbar.items = @[flexBarButton, doneBarButton];
     self.txtStation.inputAccessoryView = keyboardToolbar;
+    
+    self.btnNext.alpha = 0;
+    self.txtStation.alpha = 0;
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -98,6 +101,10 @@
     
     [self.txtStation setItemList:aidStations];
     
+    [UIView animateWithDuration:0.3 animations:^{
+        self.txtStation.alpha = 1;
+    }];
+    
     [self.txtStation becomeFirstResponder];
     
 }
@@ -105,6 +112,9 @@
 -(void)onDoneSelectedStation
 {
     [self.txtStation resignFirstResponder];
+    [UIView animateWithDuration:0.8 animations:^{
+        self.btnNext.alpha = 1;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -25,6 +25,10 @@
 		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
 		5AD831746D7DE94ECBB7CB5A /* Pods_OST_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
+		6A2F2D6C1EF1BD42007CA921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2F2D6B1EF1BD42007CA921 /* Security.framework */; };
+		6A2F2D6D1EF1BD49007CA921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2F2D6B1EF1BD42007CA921 /* Security.framework */; };
+		6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */; };
+		6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */; };
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
 		6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
 		6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
@@ -83,6 +87,9 @@
 		579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.debug.xcconfig"; sourceTree = "<group>"; };
 		6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Login.h"; sourceTree = "<group>"; };
 		6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Login.m"; sourceTree = "<group>"; };
+		6A2F2D6B1EF1BD42007CA921 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6A2F2D6F1EF1C49A007CA921 /* OSTSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTSessionManager.h; sourceTree = "<group>"; };
+		6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTSessionManager.m; sourceTree = "<group>"; };
 		6A549E4B1EEF866F00783F80 /* OSTDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSTDataModel.xcdatamodel; sourceTree = "<group>"; };
 		6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTLoginViewController.h; sourceTree = "<group>"; };
 		6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTLoginViewController.m; sourceTree = "<group>"; };
@@ -132,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A2F2D6C1EF1BD42007CA921 /* Security.framework in Frameworks */,
 				6A5E0CFD1EF1B25E00399EEC /* Pods_OST_Tracker.framework in Frameworks */,
 				56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */,
 			);
@@ -141,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A2F2D6D1EF1BD49007CA921 /* Security.framework in Frameworks */,
 				5AD831746D7DE94ECBB7CB5A /* Pods_OST_Tracker.framework in Frameworks */,
 				396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */,
 			);
@@ -160,6 +169,7 @@
 		0DF73CC3B87086394F68562D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A2F2D6B1EF1BD42007CA921 /* Security.framework */,
 				3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */,
 				DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */,
 				BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */,
@@ -181,6 +191,15 @@
 				EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6A2F2D6E1EF1C46B007CA921 /* SessionManager */ = {
+			isa = PBXGroup;
+			children = (
+				6A2F2D6F1EF1C49A007CA921 /* OSTSessionManager.h */,
+				6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */,
+			);
+			path = SessionManager;
 			sourceTree = "<group>";
 		};
 		6A549E471EEF865100783F80 /* DataBase */ = {
@@ -267,6 +286,7 @@
 		6AEFFC071EEF83DA009EEE21 /* OST Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				6A2F2D6E1EF1C46B007CA921 /* SessionManager */,
 				6A549E571EEF8A3E00783F80 /* Network */,
 				6A549E471EEF865100783F80 /* DataBase */,
 				6AA6E9D81EF0E7D70061EEB0 /* Model */,
@@ -612,6 +632,7 @@
 				6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */,
 				6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */,
 				6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */,
+				6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
 			);
@@ -632,6 +653,7 @@
 				6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */,
 				6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */,
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
+				6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
 			);
