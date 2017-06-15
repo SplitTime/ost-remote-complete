@@ -24,6 +24,22 @@
 		396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */; };
 		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
+		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
+		6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
+		6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */; };
+		6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */; };
+		6A11A05C1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A05A1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m */; };
+		6A11A05D1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A05A1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m */; };
+		6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
+		6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
+		6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0611EF2CB4000D6D2CA /* OSTEditEntryViewController.m */; };
+		6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0611EF2CB4000D6D2CA /* OSTEditEntryViewController.m */; };
+		6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */; };
+		6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */; };
+		6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
+		6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
+		6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */; };
+		6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */; };
 		6A2F2D6C1EF1BD42007CA921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2F2D6B1EF1BD42007CA921 /* Security.framework */; };
 		6A2F2D6D1EF1BD49007CA921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2F2D6B1EF1BD42007CA921 /* Security.framework */; };
 		6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */; };
@@ -85,6 +101,19 @@
 		579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.debug.xcconfig"; sourceTree = "<group>"; };
 		6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Login.h"; sourceTree = "<group>"; };
 		6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Login.m"; sourceTree = "<group>"; };
+		6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTRightMenuViewController.h; sourceTree = "<group>"; };
+		6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTRightMenuViewController.m; sourceTree = "<group>"; };
+		6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRightMenuViewController.xib; sourceTree = "<group>"; };
+		6A11A0591EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTReviewSubmitViewController.h; sourceTree = "<group>"; };
+		6A11A05A1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTReviewSubmitViewController.m; sourceTree = "<group>"; };
+		6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewSubmitViewController.xib; sourceTree = "<group>"; };
+		6A11A0601EF2CB4000D6D2CA /* OSTEditEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTEditEntryViewController.h; sourceTree = "<group>"; };
+		6A11A0611EF2CB4000D6D2CA /* OSTEditEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTEditEntryViewController.m; sourceTree = "<group>"; };
+		6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTEditEntryViewController.xib; sourceTree = "<group>"; };
+		6A11A0671EF2CE5C00D6D2CA /* _CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CurrentCourse.h; sourceTree = "<group>"; };
+		6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CurrentCourse.m; sourceTree = "<group>"; };
+		6A11A0691EF2CE5C00D6D2CA /* CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentCourse.h; sourceTree = "<group>"; };
+		6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentCourse.m; sourceTree = "<group>"; };
 		6A2F2D6B1EF1BD42007CA921 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6A2F2D6F1EF1C49A007CA921 /* OSTSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTSessionManager.h; sourceTree = "<group>"; };
 		6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTSessionManager.m; sourceTree = "<group>"; };
@@ -218,6 +247,15 @@
 				6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */,
 				6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */,
 				6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */,
+				6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */,
+				6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */,
+				6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */,
+				6A11A0591EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.h */,
+				6A11A05A1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m */,
+				6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */,
+				6A11A0601EF2CB4000D6D2CA /* OSTEditEntryViewController.h */,
+				6A11A0611EF2CB4000D6D2CA /* OSTEditEntryViewController.m */,
+				6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -250,6 +288,10 @@
 				6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */,
 				6AA6E9DC1EF0E7D70061EEB0 /* _EventModel.h */,
 				6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */,
+				6A11A0671EF2CE5C00D6D2CA /* _CurrentCourse.h */,
+				6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */,
+				6A11A0691EF2CE5C00D6D2CA /* CurrentCourse.h */,
+				6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */,
 				6AA6E9DE1EF0E7D70061EEB0 /* EntryModel.h */,
 				6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */,
 				6AA6E9E01EF0E7D70061EEB0 /* EventModel.h */,
@@ -444,7 +486,10 @@
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
+				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
+				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
+				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,7 +501,10 @@
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
+				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
+				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
+				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,10 +674,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
+				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
+				6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
+				6A11A05C1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
 				6A5E0CF51EF1B25E00399EEC /* OSTRunnerTrackerViewController.m in Sources */,
@@ -639,6 +691,7 @@
 				6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */,
 				6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */,
+				6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,10 +700,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
+				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
+				6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
+				6A11A05D1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
 				6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */,
@@ -660,6 +717,7 @@
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
 				6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */,
+				6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,16 +14,18 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - APLSlideMenu (0.2.0)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - DejalActivityView (1.2)
   - Fabric (1.6.11)
   - FXKeychain (1.5.3)
   - IQDropDownTextField (1.1.0)
+  - IQKeyboardManager (4.0.10)
   - JTObjectMapping (1.1.2)
-  - MagicalRecord (2.3.2):
-    - MagicalRecord/Core (= 2.3.2)
-  - MagicalRecord/Core (2.3.2)
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core (= 2.2)
+  - MagicalRecord/Core (2.2)
   - NSDate+Helper (1.0.0)
   - OHAlertView (3.0.1)
   - Reachability (3.2)
@@ -31,13 +33,15 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
+  - APLSlideMenu (= 0.2.0)
   - Crashlytics
   - DejalActivityView (= 1.2)
   - Fabric
   - FXKeychain (~> 1.5)
   - IQDropDownTextField (= 1.1.0)
+  - IQKeyboardManager (= 4.0.10)
   - JTObjectMapping (= 1.1.2)
-  - MagicalRecord (= 2.3.2)
+  - MagicalRecord (= 2.2)
   - NSDate+Helper (= 1.0.0)
   - OHAlertView (= 3.0.1)
   - Reachability (~> 3.2)
@@ -45,18 +49,20 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  APLSlideMenu: b853c61317f2ff8d7e80c1d0ffb5ec22d5552005
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   DejalActivityView: 94d85757728a02cbb32445fcf6dfba17dc1e7393
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
   IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
+  IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JTObjectMapping: 179cae6acadb27be5b7f5c019c216cb99d28e112
-  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  MagicalRecord: 2dc87179ae7c1f2a274442624ec65a07d4357a6f
   NSDate+Helper: 38676f1c2bd50fcebcebf8fc281276e1f18df18c
   OHAlertView: 8be643171f973214045e734bf937f5fe70dfdc2b
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SimpleKeychain: 84c748463eec601dfee5e7990f55cc82edc5488d
 
-PODFILE CHECKSUM: 23b9c8398c070b967bb934edc617b0a238af704f
+PODFILE CHECKSUM: f67dd7d685e7c140bcea048561555178f4bec933
 
 COCOAPODS: 1.2.1

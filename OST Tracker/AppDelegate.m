@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 #import "OSTLoginViewController.h"
+#import "APLSlideMenuViewController.h"
+#import "OSTRunnerTrackerViewController.h"
+#import "OSTRightMenuViewController.h"
+#import "OSTReviewSubmitViewController.h"
+#import "CurrentCourse.h"
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()
 
@@ -31,18 +37,63 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self initializeCoredata];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 60;
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
-    UINavigationController * navVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    
-    self.window.rootViewController = navVC;
+    if ([CurrentCourse getCurrentCourse])
+    {
+        [self loadLeftMenu];
+    }
+    else
+    {
+        [self loadLogin];
+    }
     
     [self.window makeKeyAndVisible];
     
-    [self initializeCoredata];
-    
     return YES;
+}
+
+- (void) loadLogin
+{
+    OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.window.rootViewController = loginVC;
+}
+
+- (void) loadLeftMenu
+{
+    self.rightMenuVC = [[APLSlideMenuViewController alloc] init];
+    
+    self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.rightMenuVC.contentViewController = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.window.rootViewController = self.rightMenuVC;
+}
+
+- (void) showTracker
+{
+    self.rightMenuVC.contentViewController = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
+}
+
+- (void) showReview
+{
+    self.rightMenuVC.contentViewController = [[OSTReviewSubmitViewController alloc] initWithNibName:nil bundle:nil];
+}
+
+- (void) logout
+{
+    [CurrentCourse MR_truncateAll];
+    [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+    
+    OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
+    self.window.rootViewController = loginVC;
 }
 
 #pragma mark - CoreData Setup

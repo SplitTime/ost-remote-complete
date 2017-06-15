@@ -6,7 +6,7 @@ use_frameworks!
 
 def used_pods
 
-pod 'MagicalRecord', '2.3.2'
+pod 'MagicalRecord', '2.2'
 pod 'NSDate+Helper', '1.0.0'
 pod 'OHAlertView', '3.0.1'
 pod 'AFNetworking', '3.1.0'
@@ -18,6 +18,8 @@ pod 'Reachability', '~> 3.2'
 pod 'DejalActivityView', '1.2'
 pod 'IQDropDownTextField', '1.1.0'
 pod 'SimpleKeychain','0.8.0'
+pod 'IQKeyboardManager','4.0.10'
+pod 'APLSlideMenu','0.2.0'
 
 end
 

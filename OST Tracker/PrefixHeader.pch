@@ -24,7 +24,7 @@
 #import "OSTConstants.h"
 
 // Core Data
-#import "MagicalRecord.h"
+#import "CoreData+MagicalRecord.h"
 
 // Helpers
 #import "OHAlertView.h"

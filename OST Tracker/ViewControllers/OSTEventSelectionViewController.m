@@ -10,11 +10,13 @@
 #import "IQDropDownTextField.h"
 #import "OSTRunnerTrackerViewController.h"
 #import "EventModel.h"
+#import "CurrentCourse.h"
 
 @interface OSTEventSelectionViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtEvent;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtStation;
+@property (strong, nonatomic) NSManagedObjectContext * tempContext;
 @property (strong, nonatomic) NSMutableArray * events;
 
 @end
@@ -56,6 +58,8 @@
 {
     [super viewDidAppear:animated];
     
+    self.tempContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+    
     [DejalBezelActivityView activityViewForView:self.view];
     [[AppDelegate getInstance].getNetworkManager getAllEventsWithCompletionBlock:^(id object) {
         [DejalBezelActivityView removeViewAnimated:YES];
@@ -63,7 +67,7 @@
         NSMutableArray * pickerEvents = [NSMutableArray new];
         for (id dataObject in object[@"data"])
         {
-            [pickerEvents addObject:[EventModel MR_importFromObject:dataObject]];
+            [pickerEvents addObject:[EventModel MR_importFromObject:dataObject inContext:self.tempContext]];
         }
         
         self.events = pickerEvents;
@@ -124,7 +128,13 @@
 
 - (IBAction)onNext:(id)sender
 {
-    [self.navigationController pushViewController:[[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil] animated:YES];
+    CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
+    
+    currentCourse.courseId = [NSDecimalNumber decimalNumberWithString:@"10"];
+    [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+    
+    [[AppDelegate getInstance] loadLeftMenu];
 }
 
 /*

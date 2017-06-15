@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "APLSlideMenuViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UINavigationController *navigationController;
+@property (strong, nonatomic) APLSlideMenuViewController * rightMenuVC;
 + (AppDelegate *)getInstance;
 - (OSTNetworkManager*) getNetworkManager;
+- (void) logout;
+- (void) loadLeftMenu;
+- (void) showTracker;
+- (void) showReview;
 
 @end
 
