@@ -14,6 +14,9 @@
 #import "OSTReviewSubmitViewController.h"
 #import "CurrentCourse.h"
 #import "IQKeyboardManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface AppDelegate ()
 
@@ -54,7 +57,8 @@
     }
     
     [self.window makeKeyAndVisible];
-    
+    [Fabric with:@[[Crashlytics class]]];
+
     return YES;
 }
 

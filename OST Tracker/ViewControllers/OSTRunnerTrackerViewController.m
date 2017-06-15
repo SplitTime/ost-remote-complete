@@ -7,6 +7,7 @@
 //
 
 #import "OSTRunnerTrackerViewController.h"
+#import "IQKeyboardManager.h"
 
 @interface OSTRunnerTrackerViewController ()
 
@@ -26,6 +27,8 @@
                                                               target: self
                                                             selector:@selector(onTick:)
                                                             userInfo: nil repeats:YES];
+    
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 360;
 }
 
 -(void)onTick:(NSTimer *)timer
