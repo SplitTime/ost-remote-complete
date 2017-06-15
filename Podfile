@@ -17,7 +17,7 @@ pod 'FXKeychain', '~> 1.5'
 pod 'Reachability', '~> 3.2'
 pod 'DejalActivityView', '1.2'
 pod 'IQDropDownTextField', '1.1.0'
-pod 'SAMKeychain','1.5.2'
+pod 'SimpleKeychain','0.8.0'
 
 end
 

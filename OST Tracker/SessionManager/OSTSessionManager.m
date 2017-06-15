@@ -7,40 +7,30 @@
 //
 
 #import "OSTSessionManager.h"
-#import "SAMKeychain.h"
 
-#define OSTKeychainService @"OST Session"
+#import <SimpleKeychain/SimpleKeychain.h>
+
+#define OSTUserHash @"ba4e70c750190aba2e69821071081060"
+#define OSTPasswordHash @"cb592cf34daaac3a853c05d2a4652c6a"
+
+#define OSTKeychainService @"com.OST.OST-Remote"
 
 @implementation OSTSessionManager
 
 + (NSString*) getStoredUserName
 {
-    
-    return nil;
+    return [[A0SimpleKeychain keychain] stringForKey:OSTUserHash];
 }
 
 + (NSString*) getStoredPassword
 {
-    return nil;
+    return [[A0SimpleKeychain keychain] stringForKey:OSTPasswordHash];
 }
 
 + (void) setUserName:(NSString*) username andPassword:(NSString*) password
 {
-    //NSArray * accounts = [SAMKeychain accountsForService:OSTKeychainService];
-    
-    //First Delete all passwords for previous accounts
-    
-    /*for (NSString* account in accounts)
-    {
-        [SAMKeychain deletePasswordForService:OSTKeychainService account:account];
-    }
-    
-    [SAMKeychain setPassword:password forService:OSTKeychainService account:username];*/
-}
-
-+ (void) setUserPassword:(NSString*) username
-{
-    
+    [[A0SimpleKeychain keychain] setString:username forKey:OSTUserHash];
+    [[A0SimpleKeychain keychain] setString:password forKey:OSTPasswordHash];
 }
 
 @end

@@ -10,4 +10,8 @@
 
 @interface OSTSessionManager : NSObject
 
++ (NSString*) getStoredUserName;
++ (NSString*) getStoredPassword;
++ (void) setUserName:(NSString*) username andPassword:(NSString*) password;
+
 @end
