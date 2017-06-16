@@ -8,7 +8,7 @@
 
 #import "OSTNetworkManager+Events.h"
 
-#define OSTEventsEndpoint @"events"
+#define OSTEventsEndpoint @"events?include=splits"
 
 @implementation OSTNetworkManager (Events)
 

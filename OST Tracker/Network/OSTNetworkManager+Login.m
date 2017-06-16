@@ -7,6 +7,7 @@
 //
 
 #import "OSTNetworkManager+Login.h"
+#import "OSTSessionManager.h"
 
 #define OSTLoginEndpoint @"auth"
 
@@ -32,6 +33,14 @@
     
     [dataTask resume];
     return dataTask;
+}
+
+- (NSURLSessionDataTask*)autoLoginWithCompletionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+{
+    return [self loginWithEmail:[OSTSessionManager getStoredUserName] password:[OSTSessionManager getStoredPassword] completionBlock:^(id object) {
+            [[AppDelegate getInstance].getNetworkManager addTokenToHeader:object[@"token"]];
+            onCompletion(object);
+    } errorBlock:onError];
 }
 
 @end

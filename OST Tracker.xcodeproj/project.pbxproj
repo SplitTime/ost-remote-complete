@@ -40,6 +40,12 @@
 		6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
 		6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */; };
 		6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */; };
+		6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0701EF372DE00D6D2CA /* _CourseSplits.m */; };
+		6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0701EF372DE00D6D2CA /* _CourseSplits.m */; };
+		6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0721EF372DE00D6D2CA /* CourseSplits.m */; };
+		6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0721EF372DE00D6D2CA /* CourseSplits.m */; };
+		6A11A0791EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0781EF3809B00D6D2CA /* OSTNetworkManager+Entries.m */; };
+		6A11A07A1EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0781EF3809B00D6D2CA /* OSTNetworkManager+Entries.m */; };
 		6A2F2D6C1EF1BD42007CA921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2F2D6B1EF1BD42007CA921 /* Security.framework */; };
 		6A2F2D6D1EF1BD49007CA921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2F2D6B1EF1BD42007CA921 /* Security.framework */; };
 		6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */; };
@@ -114,6 +120,12 @@
 		6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CurrentCourse.m; sourceTree = "<group>"; };
 		6A11A0691EF2CE5C00D6D2CA /* CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentCourse.h; sourceTree = "<group>"; };
 		6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentCourse.m; sourceTree = "<group>"; };
+		6A11A06F1EF372DE00D6D2CA /* _CourseSplits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CourseSplits.h; sourceTree = "<group>"; };
+		6A11A0701EF372DE00D6D2CA /* _CourseSplits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CourseSplits.m; sourceTree = "<group>"; };
+		6A11A0711EF372DE00D6D2CA /* CourseSplits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSplits.h; sourceTree = "<group>"; };
+		6A11A0721EF372DE00D6D2CA /* CourseSplits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSplits.m; sourceTree = "<group>"; };
+		6A11A0771EF3809B00D6D2CA /* OSTNetworkManager+Entries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Entries.h"; sourceTree = "<group>"; };
+		6A11A0781EF3809B00D6D2CA /* OSTNetworkManager+Entries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Entries.m"; sourceTree = "<group>"; };
 		6A2F2D6B1EF1BD42007CA921 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6A2F2D6F1EF1C49A007CA921 /* OSTSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTSessionManager.h; sourceTree = "<group>"; };
 		6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTSessionManager.m; sourceTree = "<group>"; };
@@ -269,6 +281,8 @@
 				6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */,
 				6AA6E9D01EF0DF320061EEB0 /* OSTNetworkManager+Events.h */,
 				6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */,
+				6A11A0771EF3809B00D6D2CA /* OSTNetworkManager+Entries.h */,
+				6A11A0781EF3809B00D6D2CA /* OSTNetworkManager+Entries.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -290,6 +304,10 @@
 				6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */,
 				6A11A0671EF2CE5C00D6D2CA /* _CurrentCourse.h */,
 				6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */,
+				6A11A06F1EF372DE00D6D2CA /* _CourseSplits.h */,
+				6A11A0701EF372DE00D6D2CA /* _CourseSplits.m */,
+				6A11A0711EF372DE00D6D2CA /* CourseSplits.h */,
+				6A11A0721EF372DE00D6D2CA /* CourseSplits.m */,
 				6A11A0691EF2CE5C00D6D2CA /* CurrentCourse.h */,
 				6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */,
 				6AA6E9DE1EF0E7D70061EEB0 /* EntryModel.h */,
@@ -707,8 +725,10 @@
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
 				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
+				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
+				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A11A05C1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
@@ -716,6 +736,7 @@
 				6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */,
 				6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */,
 				6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */,
+				6A11A0791EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
 				6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */,
 				6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */,
@@ -733,8 +754,10 @@
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
+				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
+				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A11A05D1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
@@ -742,6 +765,7 @@
 				6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */,
 				6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */,
 				6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */,
+				6A11A07A1EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
 				6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */,

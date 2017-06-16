@@ -20,19 +20,29 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) CurrentCourseID *objectID;
 
-@property (nonatomic, strong, nullable) NSDecimalNumber* courseId;
+@property (nonatomic, strong, nullable) NSString* eventId;
+
+@property (nonatomic, strong, nullable) NSString* splitId;
 
 @end
 
 @interface _CurrentCourse (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSDecimalNumber*)primitiveCourseId;
-- (void)setPrimitiveCourseId:(NSDecimalNumber*)value;
+- (NSString*)primitiveEventId;
+- (void)setPrimitiveEventId:(NSString*)value;
+
+- (NSString*)primitiveSplitId;
+- (void)setPrimitiveSplitId:(NSString*)value;
 
 @end
 
 @interface CurrentCourseAttributes: NSObject 
-+ (NSString *)courseId;
++ (NSString *)eventId;
++ (NSString *)splitId;
+@end
+
+@interface CurrentCourseUserInfo: NSObject 
++ (NSString *)relatedByAttribute;
 @end
 
 NS_ASSUME_NONNULL_END

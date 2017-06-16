@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="1.0">
-    <entity name="CurrentCourse" representedClassName="CurrentCourse" syncable="YES">
-        <attribute name="courseId" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <userInfo>
-            <entry key="relatedByAttribute" value="courseId"/>
-        </userInfo>
-    </entity>
-    <entity name="EntryModel" representedClassName="EntryModel" syncable="YES"/>
-    <entity name="EventModel" representedClassName="EventModel" syncable="YES">
-        <attribute name="aidStations" optional="YES" attributeType="Transformable" syncable="YES">
+    <entity name="CourseSplits" representedClassName="CourseSplits" syncable="YES">
+        <attribute name="baseName" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="mappedKeyName" value="relationships.aidStations.data"/>
+                <entry key="mappedKeyName" value="attributes.baseName"/>
             </userInfo>
         </attribute>
+        <attribute name="kind" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.kind"/>
+            </userInfo>
+        </attribute>
+        <attribute name="nameExtentions" optional="YES" attributeType="Transformable" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.nameExtentions"/>
+            </userInfo>
+        </attribute>
+        <attribute name="splitId" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <userInfo>
+            <entry key="relatedByAttribute" value="splitId"/>
+        </userInfo>
+    </entity>
+    <entity name="CurrentCourse" representedClassName="CurrentCourse" syncable="YES">
+        <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="splitId" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <userInfo>
+            <entry key="relatedByAttribute" value="splitId"/>
+        </userInfo>
+    </entity>
+    <entity name="EntryModel" representedClassName="EntryModel" syncable="YES">
+        <attribute name="absoluteTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bibNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bitKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="entryId" optional="YES" attributeType="Decimal" defaultValueString="0.0" indexed="YES" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="splitId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stoppedHere" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="submitted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="withPacer" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="EventModel" representedClassName="EventModel" syncable="YES">
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
@@ -28,13 +63,19 @@
                 <entry key="mappedKeyName" value="attributes.slug"/>
             </userInfo>
         </attribute>
+        <attribute name="splits" optional="YES" attributeType="Transformable" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="relationships.splits.data"/>
+            </userInfo>
+        </attribute>
         <userInfo>
             <entry key="relatedByAttribute" value="eventId"/>
         </userInfo>
     </entity>
     <elements>
-        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="180"/>
         <element name="EventModel" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="60"/>
+        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="75"/>
+        <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="105"/>
     </elements>
 </model>

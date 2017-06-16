@@ -7,6 +7,9 @@
 //
 
 #import "OSTReviewSubmitViewController.h"
+#import "OSTNetworkManager+Login.h"
+#import "OSTNetworkManager+Entries.h"
+#import "EntryModel.h"
 
 @interface OSTReviewSubmitViewController ()
 
@@ -30,7 +33,37 @@
 
 - (IBAction)onSubmit:(id)sender
 {
+    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"submitted == NIL"]];
     
+    if (entries.count == 0)
+    {
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Nothing to send" dismissButton:@"Ok"];
+        return;
+    }
+    
+    [DejalBezelActivityView activityViewForView:self.view];
+    [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id object) {
+        [DejalBezelActivityView removeViewAnimated:YES];
+        [[AppDelegate getInstance].getNetworkManager submitEntries:entries completionBlock:^(id object) {
+            [DejalBezelActivityView removeViewAnimated:YES];
+            [OHAlertView showAlertWithTitle:nil message:@"Submitted" dismissButton:@"Ok"];
+            
+            for (EntryModel * entry in entries)
+            {
+                entry.submitted = @(YES);
+            }
+            
+            [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+            
+        } errorBlock:^(NSError *error) {
+            [DejalBezelActivityView removeViewAnimated:YES];
+            [OHAlertView showAlertWithTitle:@"Error" message:@"Can't submit, try again later" dismissButton:@"Ok"];
+        }];
+    } errorBlock:^(NSError *error) {
+        [DejalBezelActivityView removeViewAnimated:YES];
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Can't submit, try again later" dismissButton:@"Ok"];
+    }];
 }
 
 /*

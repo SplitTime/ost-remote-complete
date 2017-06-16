@@ -11,6 +11,7 @@
 #import "OSTRunnerTrackerViewController.h"
 #import "EventModel.h"
 #import "CurrentCourse.h"
+#import "CourseSplits.h"
 
 @interface OSTEventSelectionViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
@@ -18,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtStation;
 @property (strong, nonatomic) NSManagedObjectContext * tempContext;
 @property (strong, nonatomic) NSMutableArray * events;
+@property (strong, nonatomic) NSMutableArray * splits;
+@property (strong, nonatomic) NSArray * eventSplits;
+@property (strong, nonatomic) NSString * eventId;
 
 @end
 
@@ -65,9 +69,14 @@
         [DejalBezelActivityView removeViewAnimated:YES];
         
         NSMutableArray * pickerEvents = [NSMutableArray new];
+        self.splits = [NSMutableArray new];
         for (id dataObject in object[@"data"])
         {
             [pickerEvents addObject:[EventModel MR_importFromObject:dataObject inContext:self.tempContext]];
+        }
+        for (id dataObject in object[@"included"])
+        {
+            [self.splits addObject:[CourseSplits MR_importFromObject:dataObject inContext:self.tempContext]];
         }
         
         self.events = pickerEvents;
@@ -91,23 +100,33 @@
 {
     [self.txtEvent resignFirstResponder];
     
-    NSMutableArray * aidStations = [NSMutableArray new];
+    NSMutableArray * splitStrings = [NSMutableArray new];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", self.txtEvent.selectedItem];
     NSArray *filteredArray = [self.events filteredArrayUsingPredicate:predicate];
     EventModel * firstFoundObject = nil;
     firstFoundObject =  filteredArray.count > 0 ? filteredArray.firstObject : nil;
     
-    for (NSDictionary * dictionary in firstFoundObject.aidStations)
+    NSMutableArray * splitIdsToSearch = [NSMutableArray new];
+    for (NSDictionary * dictionary in firstFoundObject.splits)
     {
-        [aidStations addObject:dictionary[@"id"]];
+        [splitIdsToSearch addObject:dictionary[@"id"]];
     }
     
-    [self.txtStation setItemList:aidStations];
+    self.eventSplits = [self.splits filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"splitId IN %@",splitIdsToSearch]];
+    
+    for (CourseSplits * split in self.eventSplits)
+    {
+        [splitStrings addObject:split.baseName];
+    }
+    
+    [self.txtStation setItemList:splitStrings];
     
     [UIView animateWithDuration:0.3 animations:^{
         self.txtStation.alpha = 1;
     }];
+    
+    self.eventId = firstFoundObject.eventId;
     
     [self.txtStation becomeFirstResponder];
     
@@ -128,9 +147,15 @@
 
 - (IBAction)onNext:(id)sender
 {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"baseName == %@", self.txtStation.selectedItem];
+    NSArray *filteredArray = [self.splits filteredArrayUsingPredicate:predicate];
+    CourseSplits * firstFoundObject = nil;
+    firstFoundObject =  filteredArray.count > 0 ? filteredArray.firstObject : nil;
+    
     CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
     
-    currentCourse.courseId = [NSDecimalNumber decimalNumberWithString:@"10"];
+    currentCourse.splitId = firstFoundObject.splitId;
+    currentCourse.eventId = self.eventId;
     [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     

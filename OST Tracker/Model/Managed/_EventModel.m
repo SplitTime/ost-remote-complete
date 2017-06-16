@@ -32,20 +32,17 @@
 	return keyPaths;
 }
 
-@dynamic aidStations;
-
 @dynamic eventId;
 
 @dynamic name;
 
 @dynamic slug;
 
+@dynamic splits;
+
 @end
 
 @implementation EventModelAttributes 
-+ (NSString *)aidStations {
-	return @"aidStations";
-}
 + (NSString *)eventId {
 	return @"eventId";
 }
@@ -54,6 +51,15 @@
 }
 + (NSString *)slug {
 	return @"slug";
+}
++ (NSString *)splits {
+	return @"splits";
+}
+@end
+
+@implementation EventModelUserInfo 
++ (NSString *)relatedByAttribute {
+	return @"eventId";
 }
 @end
 

@@ -32,13 +32,24 @@
 	return keyPaths;
 }
 
-@dynamic courseId;
+@dynamic eventId;
+
+@dynamic splitId;
 
 @end
 
 @implementation CurrentCourseAttributes 
-+ (NSString *)courseId {
-	return @"courseId";
++ (NSString *)eventId {
+	return @"eventId";
+}
++ (NSString *)splitId {
+	return @"splitId";
+}
+@end
+
+@implementation CurrentCourseUserInfo 
++ (NSString *)relatedByAttribute {
+	return @"splitId";
 }
 @end
 

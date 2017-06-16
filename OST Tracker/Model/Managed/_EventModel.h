@@ -22,20 +22,17 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) EventModelID *objectID;
 
-@property (nonatomic, strong, nullable) id aidStations;
-
 @property (nonatomic, strong, nullable) NSString* eventId;
 
 @property (nonatomic, strong, nullable) NSString* name;
 
 @property (nonatomic, strong, nullable) NSString* slug;
 
+@property (nonatomic, strong, nullable) id splits;
+
 @end
 
 @interface _EventModel (CoreDataGeneratedPrimitiveAccessors)
-
-- (id)primitiveAidStations;
-- (void)setPrimitiveAidStations:(id)value;
 
 - (NSString*)primitiveEventId;
 - (void)setPrimitiveEventId:(NSString*)value;
@@ -46,13 +43,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveSlug;
 - (void)setPrimitiveSlug:(NSString*)value;
 
+- (id)primitiveSplits;
+- (void)setPrimitiveSplits:(id)value;
+
 @end
 
 @interface EventModelAttributes: NSObject 
-+ (NSString *)aidStations;
 + (NSString *)eventId;
 + (NSString *)name;
 + (NSString *)slug;
++ (NSString *)splits;
+@end
+
+@interface EventModelUserInfo: NSObject 
++ (NSString *)relatedByAttribute;
 @end
 
 NS_ASSUME_NONNULL_END
