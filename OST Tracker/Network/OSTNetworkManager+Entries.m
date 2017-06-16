@@ -24,7 +24,7 @@
                                      @"attributes": @{
                                          @"bibNumber": entry.bibNumber,
                                          @"splitId": entry.splitId,
-                                         @"bitkey": entry.bitKey,
+                                         @"subSplitKind": entry.bitKey,
                                          @"absoluteTime": entry.absoluteTime,
                                          @"withPacer": entry.withPacer,
                                          @"stoppedHere": entry.stoppedHere,

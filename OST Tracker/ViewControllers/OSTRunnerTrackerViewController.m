@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *swchPaser;
 @property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
 @property (strong, nonatomic) NSString * splitId;
+@property (strong, nonatomic) NSString * dayString;
 
 @end
 
@@ -40,6 +41,10 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
     self.lblTime.text = [dateFormatter stringFromDate:[NSDate date]];
+    
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    self.dayString = [dateFormatter stringFromDate:[NSDate date]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,10 +73,10 @@
     
     EntryModel * entry = [EntryModel MR_createEntity];
     entry.bibNumber = self.txtBibNumber.text;
-    entry.bitKey = @"1";
+    entry.bitKey = @"in";
     entry.splitId = self.splitId;
     int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
-    entry.absoluteTime = [NSString stringWithFormat:@"%@%01d:00",self.lblTime.text,timezoneoffset];
+    entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%01d:00",self.dayString, self.lblTime.text,timezoneoffset];
     if (self.swchPaser.on)
         entry.withPacer = @"true";
     else entry.withPacer = @"false";
@@ -97,7 +102,7 @@
     
     EntryModel * entry = [EntryModel MR_createEntity];
     entry.bibNumber = self.txtBibNumber.text;
-    entry.bitKey = @"64";
+    entry.bitKey = @"out";
     entry.splitId = self.splitId;
     int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
     entry.absoluteTime = [NSString stringWithFormat:@"%@%01d:00",self.lblTime.text,timezoneoffset];
