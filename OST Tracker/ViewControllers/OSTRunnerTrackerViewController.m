@@ -67,7 +67,7 @@
 {
     if (self.txtBibNumber.text.length == 0)
     {
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Please type a bid number" dismissButton:@"Ok"];
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Please type a BIB number" dismissButton:@"Ok"];
         return;
     }
     
@@ -96,7 +96,7 @@
 {
     if (self.txtBibNumber.text.length == 0)
     {
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Please type a bid number" dismissButton:@"Ok"];
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Please type a BIB number" dismissButton:@"Ok"];
         return;
     }
     
