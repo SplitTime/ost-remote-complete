@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="1.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="1.1">
     <entity name="CourseSplits" representedClassName="CourseSplits" syncable="YES">
         <attribute name="baseName" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -73,9 +73,9 @@
         </userInfo>
     </entity>
     <elements>
+        <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="105"/>
+        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="75"/>
         <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="180"/>
         <element name="EventModel" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="75"/>
-        <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="105"/>
     </elements>
 </model>

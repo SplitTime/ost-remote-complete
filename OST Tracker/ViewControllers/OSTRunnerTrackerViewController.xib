@@ -60,7 +60,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                 </textField>
                 <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="uyk-13-lFs">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
