@@ -11,6 +11,7 @@
 #import "CurrentCourse.h"
 #import "OSTSessionManager.h"
 #import "EffortModel.h"
+#import "UIView+Additions.h"
 
 @interface OSTRunnerTrackerViewController ()
 
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnLeft;
 @property (weak, nonatomic) IBOutlet UIButton *btnRight;
 @property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
+@property (weak, nonatomic) IBOutlet UIView *pacerAndAidView;
 @property (strong, nonatomic) NSString * splitId;
 @property (weak, nonatomic) IBOutlet UILabel *lblRunnerInfo;
 @property (strong, nonatomic) NSString * dayString;
@@ -40,6 +42,13 @@
                                                             userInfo: nil repeats:YES];
     
     self.splitId = [CurrentCourse getCurrentCourse].splitId;
+    
+    if (IS_IPHONE_5)
+    {
+        self.pacerAndAidView.top = self.pacerAndAidView.top - 25;
+        self.btnLeft.top = self.btnLeft.top - 55;
+        self.btnRight.top = self.btnRight.top - 55;
+    }
 }
 
 -(void)onTick:(NSTimer *)timer

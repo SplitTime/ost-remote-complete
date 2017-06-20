@@ -58,6 +58,8 @@
 		6A41AE071EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */; };
 		6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */; };
 		6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */; };
+		6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */; };
+		6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */; };
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
 		6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
 		6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
@@ -144,6 +146,8 @@
 		6A41AE031EF8B59D00C9F834 /* OSTReviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTReviewTableViewCell.h; sourceTree = "<group>"; };
 		6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTReviewTableViewCell.m; sourceTree = "<group>"; };
 		6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewTableViewCell.xib; sourceTree = "<group>"; };
+		6A41AE0A1EF8D71500C9F834 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
+		6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		6A549E4B1EEF866F00783F80 /* OSTDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSTDataModel.xcdatamodel; sourceTree = "<group>"; };
 		6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTLoginViewController.h; sourceTree = "<group>"; };
 		6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTLoginViewController.m; sourceTree = "<group>"; };
@@ -382,6 +386,8 @@
 				6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */,
 				6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */,
 				6AEFFC191EEF83DA009EEE21 /* Info.plist */,
+				6A41AE0A1EF8D71500C9F834 /* UIView+Additions.h */,
+				6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */,
 				6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */,
 				6A549E5C1EEF8B9400783F80 /* OSTConstants.h */,
 				6AEFFC081EEF83DA009EEE21 /* Supporting Files */,
@@ -764,6 +770,7 @@
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A11A05C1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */,
+				6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
 				6A5E0CF51EF1B25E00399EEC /* OSTRunnerTrackerViewController.m in Sources */,
 				6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */,
@@ -796,6 +803,7 @@
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A11A05D1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */,
+				6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
 				6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */,
 				6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */,
