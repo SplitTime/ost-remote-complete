@@ -26,11 +26,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* bitKey;
 
+@property (nonatomic, strong, nullable) NSString* courseId;
+
+@property (nonatomic, strong, nullable) NSString* courseName;
+
+@property (nonatomic, strong, nullable) NSString* displayTime;
+
 @property (nonatomic, strong, nullable) NSDecimalNumber* entryId;
+
+@property (nonatomic, strong, nullable) NSString* fullName;
 
 @property (nonatomic, strong, nullable) NSString* source;
 
 @property (nonatomic, strong, nullable) NSString* splitId;
+
+@property (nonatomic, strong, nullable) NSString* splitName;
 
 @property (nonatomic, strong, nullable) NSString* stoppedHere;
 
@@ -55,14 +65,29 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveBitKey;
 - (void)setPrimitiveBitKey:(NSString*)value;
 
+- (NSString*)primitiveCourseId;
+- (void)setPrimitiveCourseId:(NSString*)value;
+
+- (NSString*)primitiveCourseName;
+- (void)setPrimitiveCourseName:(NSString*)value;
+
+- (NSString*)primitiveDisplayTime;
+- (void)setPrimitiveDisplayTime:(NSString*)value;
+
 - (NSDecimalNumber*)primitiveEntryId;
 - (void)setPrimitiveEntryId:(NSDecimalNumber*)value;
+
+- (NSString*)primitiveFullName;
+- (void)setPrimitiveFullName:(NSString*)value;
 
 - (NSString*)primitiveSource;
 - (void)setPrimitiveSource:(NSString*)value;
 
 - (NSString*)primitiveSplitId;
 - (void)setPrimitiveSplitId:(NSString*)value;
+
+- (NSString*)primitiveSplitName;
+- (void)setPrimitiveSplitName:(NSString*)value;
 
 - (NSString*)primitiveStoppedHere;
 - (void)setPrimitiveStoppedHere:(NSString*)value;
@@ -82,9 +107,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)absoluteTime;
 + (NSString *)bibNumber;
 + (NSString *)bitKey;
++ (NSString *)courseId;
++ (NSString *)courseName;
++ (NSString *)displayTime;
 + (NSString *)entryId;
++ (NSString *)fullName;
 + (NSString *)source;
 + (NSString *)splitId;
++ (NSString *)splitName;
 + (NSString *)stoppedHere;
 + (NSString *)submitted;
 + (NSString *)withPacer;

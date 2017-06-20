@@ -13,5 +13,6 @@
 + (NSString*) getStoredUserName;
 + (NSString*) getStoredPassword;
 + (void) setUserName:(NSString*) username andPassword:(NSString*) password;
++ (NSString *) getUUIDString;
 
 @end

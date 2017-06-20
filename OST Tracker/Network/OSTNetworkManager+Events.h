@@ -11,5 +11,6 @@
 @interface OSTNetworkManager (Events)
 
 - (NSURLSessionDataTask*)getAllEventsWithCompletionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError;
+- (NSURLSessionDataTask*)getEventsDetails:(NSString*)eventId completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError;
 
 @end

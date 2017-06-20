@@ -34,7 +34,11 @@
 
 @dynamic eventId;
 
+@dynamic eventName;
+
 @dynamic splitId;
+
+@dynamic splitName;
 
 @end
 
@@ -42,8 +46,14 @@
 + (NSString *)eventId {
 	return @"eventId";
 }
++ (NSString *)eventName {
+	return @"eventName";
+}
 + (NSString *)splitId {
 	return @"splitId";
+}
++ (NSString *)splitName {
+	return @"splitName";
 }
 @end
 

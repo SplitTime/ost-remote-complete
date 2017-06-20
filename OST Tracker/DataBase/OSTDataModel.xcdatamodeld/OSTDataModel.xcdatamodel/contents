@@ -27,22 +27,49 @@
     </entity>
     <entity name="CurrentCourse" representedClassName="CurrentCourse" syncable="YES">
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="splitId" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
             </userInfo>
         </attribute>
+        <attribute name="splitName" optional="YES" attributeType="String" syncable="YES"/>
         <userInfo>
             <entry key="relatedByAttribute" value="splitId"/>
+        </userInfo>
+    </entity>
+    <entity name="EffortModel" representedClassName="EffortModel" syncable="YES">
+        <attribute name="bibNumber" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.bibNumber"/>
+            </userInfo>
+        </attribute>
+        <attribute name="effortId" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.fullName"/>
+            </userInfo>
+        </attribute>
+        <userInfo>
+            <entry key="relatedByAttribute" value="effortId"/>
         </userInfo>
     </entity>
     <entity name="EntryModel" representedClassName="EntryModel" syncable="YES">
         <attribute name="absoluteTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bibNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bitKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="entryId" optional="YES" attributeType="Decimal" defaultValueString="0.0" indexed="YES" syncable="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="splitId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="splitName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stoppedHere" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="submitted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="withPacer" optional="YES" attributeType="String" syncable="YES"/>
@@ -74,8 +101,9 @@
     </entity>
     <elements>
         <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="105"/>
-        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="75"/>
-        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="180"/>
+        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="105"/>
+        <element name="EffortModel" positionX="-54" positionY="54" width="128" height="90"/>
+        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="255"/>
         <element name="EventModel" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

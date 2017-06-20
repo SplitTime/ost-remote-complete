@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTRunnerTrackerViewController">
             <connections>
+                <outlet property="btnLeft" destination="fOu-hS-R9H" id="jJS-bZ-VRz"/>
+                <outlet property="btnRight" destination="Jgi-Yq-TgX" id="N5U-NC-zkX"/>
+                <outlet property="lblRunnerInfo" destination="BN5-h1-nq1" id="BrY-PG-36G"/>
                 <outlet property="lblTime" destination="pdE-tx-zbe" id="Lxz-df-fPe"/>
                 <outlet property="lblTitle" destination="DGN-GA-gMc" id="M5O-bp-cZH"/>
                 <outlet property="swchPaser" destination="9rl-tb-OKm" id="rW5-gf-6Ia"/>
@@ -40,7 +43,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onLeftButton:" destination="-1" eventType="touchUpInside" id="TrF-Zy-cZr"/>
+                        <action selector="onEntryButton:" destination="-1" eventType="touchUpInside" id="08Z-bW-MIg"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jgi-Yq-TgX">
@@ -52,7 +55,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onRightButton:" destination="-1" eventType="touchUpInside" id="76b-hW-lIi"/>
+                        <action selector="onEntryButton:" destination="-1" eventType="touchUpInside" id="saF-If-yB5"/>
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bib Number:" minimumFontSize="17" clearButtonMode="always" id="eLm-05-491">
@@ -60,7 +63,10 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                    <connections>
+                        <action selector="txtBibNumberChanged:" destination="-1" eventType="editingChanged" id="2Q9-I6-rpf"/>
+                    </connections>
                 </textField>
                 <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="uyk-13-lFs">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>

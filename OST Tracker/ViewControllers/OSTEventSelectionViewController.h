@@ -10,4 +10,6 @@
 
 @interface OSTEventSelectionViewController : UIViewController
 
+@property (assign, nonatomic) BOOL changeStation;
+
 @end

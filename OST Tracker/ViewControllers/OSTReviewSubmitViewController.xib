@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTReviewSubmitViewController">
             <connections>
+                <outlet property="tableView" destination="a7i-U9-acx" id="Qso-AB-LRp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -42,13 +43,25 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RHE-00-eos">
-                    <rect key="frame" x="128" y="235" width="118" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Submit"/>
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.10815345495939255" green="0.72826337814331055" blue="0.19865483045578003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Sync Data">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="onSubmit:" destination="-1" eventType="touchUpInside" id="3HG-9b-0T9"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="a7i-U9-acx">
+                    <rect key="frame" x="0.0" y="58" width="375" height="558"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Brc-wo-GiH"/>
+                        <outlet property="delegate" destination="-1" id="suy-I0-lUd"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>

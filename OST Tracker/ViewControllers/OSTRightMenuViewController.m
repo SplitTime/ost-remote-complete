@@ -7,6 +7,7 @@
 //
 
 #import "OSTRightMenuViewController.h"
+#import "OSTEventSelectionViewController.h"
 
 @interface OSTRightMenuViewController ()
 
@@ -37,7 +38,10 @@
 
 - (IBAction)onChangeStation:(id)sender
 {
-
+    OSTEventSelectionViewController * event = [[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil];
+    event.changeStation = YES;
+    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+    [[AppDelegate getInstance].window.rootViewController presentViewController:event animated:YES completion:nil];
 }
 
 - (IBAction)onReviewSync:(id)sender

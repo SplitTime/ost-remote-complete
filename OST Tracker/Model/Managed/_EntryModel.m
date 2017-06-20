@@ -44,11 +44,21 @@
 
 @dynamic bitKey;
 
+@dynamic courseId;
+
+@dynamic courseName;
+
+@dynamic displayTime;
+
 @dynamic entryId;
+
+@dynamic fullName;
 
 @dynamic source;
 
 @dynamic splitId;
+
+@dynamic splitName;
 
 @dynamic stoppedHere;
 
@@ -86,14 +96,29 @@
 + (NSString *)bitKey {
 	return @"bitKey";
 }
++ (NSString *)courseId {
+	return @"courseId";
+}
++ (NSString *)courseName {
+	return @"courseName";
+}
++ (NSString *)displayTime {
+	return @"displayTime";
+}
 + (NSString *)entryId {
 	return @"entryId";
+}
++ (NSString *)fullName {
+	return @"fullName";
 }
 + (NSString *)source {
 	return @"source";
 }
 + (NSString *)splitId {
 	return @"splitId";
+}
++ (NSString *)splitName {
+	return @"splitName";
 }
 + (NSString *)stoppedHere {
 	return @"stoppedHere";

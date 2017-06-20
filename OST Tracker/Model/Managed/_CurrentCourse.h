@@ -22,7 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* eventId;
 
+@property (nonatomic, strong, nullable) NSString* eventName;
+
 @property (nonatomic, strong, nullable) NSString* splitId;
+
+@property (nonatomic, strong, nullable) NSString* splitName;
 
 @end
 
@@ -31,14 +35,22 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveEventId;
 - (void)setPrimitiveEventId:(NSString*)value;
 
+- (NSString*)primitiveEventName;
+- (void)setPrimitiveEventName:(NSString*)value;
+
 - (NSString*)primitiveSplitId;
 - (void)setPrimitiveSplitId:(NSString*)value;
+
+- (NSString*)primitiveSplitName;
+- (void)setPrimitiveSplitName:(NSString*)value;
 
 @end
 
 @interface CurrentCourseAttributes: NSObject 
 + (NSString *)eventId;
++ (NSString *)eventName;
 + (NSString *)splitId;
++ (NSString *)splitName;
 @end
 
 @interface CurrentCourseUserInfo: NSObject 

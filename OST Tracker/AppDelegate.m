@@ -16,7 +16,8 @@
 #import "IQKeyboardManager.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
+#import "CourseSplits.h"
+#import "EffortModel.h"
 
 @interface AppDelegate ()
 
@@ -93,6 +94,8 @@
 - (void) logout
 {
     [CurrentCourse MR_truncateAll];
+    [CourseSplits MR_truncateAll];
+    [EffortModel MR_truncateAll];
     [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     

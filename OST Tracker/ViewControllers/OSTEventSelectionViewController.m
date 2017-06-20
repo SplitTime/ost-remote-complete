@@ -12,6 +12,8 @@
 #import "EventModel.h"
 #import "CurrentCourse.h"
 #import "CourseSplits.h"
+#import "EffortModel.h"
+#import "CourseSplits.h"
 
 @interface OSTEventSelectionViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
@@ -20,8 +22,10 @@
 @property (strong, nonatomic) NSManagedObjectContext * tempContext;
 @property (strong, nonatomic) NSMutableArray * events;
 @property (strong, nonatomic) NSMutableArray * splits;
+@property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 @property (strong, nonatomic) NSArray * eventSplits;
 @property (strong, nonatomic) NSString * eventId;
+@property (strong, nonatomic) NSString * eventName;
 
 @end
 
@@ -56,10 +60,41 @@
     
     self.btnNext.alpha = 0;
     self.txtStation.alpha = 0;
+    
+    if (!self.changeStation)
+    {
+        self.btnCancel.hidden = YES;
+    }
+}
+
+- (IBAction)onCancel:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    if (self.changeStation)
+    {
+        CurrentCourse * course = [CurrentCourse getCurrentCourse];
+        self.txtEvent.userInteractionEnabled = NO;
+        [self.txtEvent setItemList:@[course.eventName]];
+        NSArray * stations = [CourseSplits MR_findAll];
+        NSMutableArray * stationStrings = [NSMutableArray new];
+        for (CourseSplits * split in stations)
+        {
+            [stationStrings addObject:split.baseName];
+        }
+        [self.txtStation setItemList:stationStrings];
+        [self.txtStation becomeFirstResponder];
+        self.eventSplits = stations;
+        self.splits = stations.mutableCopy;
+        
+        self.btnNext.alpha = 1;
+        self.txtStation.alpha = 1;
+        return;
+    }
+    
     [super viewDidAppear:animated];
     
     self.tempContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
@@ -127,6 +162,7 @@
     }];
     
     self.eventId = firstFoundObject.eventId;
+    self.eventName = firstFoundObject.name;
     
     [self.txtStation becomeFirstResponder];
     
@@ -152,14 +188,53 @@
     CourseSplits * firstFoundObject = nil;
     firstFoundObject =  filteredArray.count > 0 ? filteredArray.firstObject : nil;
     
-    CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
+    if (!firstFoundObject)
+    {
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Please Select a Split" dismissButton:@"Ok"];
+        return;
+    }
     
-    currentCourse.splitId = firstFoundObject.splitId;
-    currentCourse.eventId = self.eventId;
-    [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+    if (self.changeStation)
+    {
+        CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
+        currentCourse.splitId = firstFoundObject.splitId;
+        currentCourse.splitName = firstFoundObject.baseName;
+        [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+        [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
     
-    [[AppDelegate getInstance] loadLeftMenu];
+    [DejalBezelActivityView activityViewForView:self.view];
+    [[AppDelegate getInstance].getNetworkManager getEventsDetails:self.eventId completionBlock:^(id object)
+    {
+        [DejalBezelActivityView removeViewAnimated:YES];
+        CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
+        
+        for (id dataObject in object[@"included"])
+        {
+            if ([dataObject[@"type"] isEqualToString:@"splits"])
+            {
+                [CourseSplits MR_importFromObject:dataObject];
+            }
+            else if ([dataObject[@"type"] isEqualToString:@"efforts"])
+            {
+                [EffortModel MR_importFromObject:dataObject];
+            }
+        }
+        currentCourse.splitId = firstFoundObject.splitId;
+        currentCourse.eventId = self.eventId;
+        currentCourse.splitName = firstFoundObject.baseName;
+        currentCourse.eventName = self.eventName;
+        [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+        [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+        
+        [[AppDelegate getInstance] loadLeftMenu];
+    } errorBlock:^(NSError *error) {
+        [DejalBezelActivityView removeViewAnimated:YES];
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get course details" dismissButton:@"Ok"];
+    }];
 }
 
 /*

@@ -50,6 +50,14 @@
 		6A2F2D6D1EF1BD49007CA921 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A2F2D6B1EF1BD42007CA921 /* Security.framework */; };
 		6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */; };
 		6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */; };
+		6A41ADFE1EF7F2BF00C9F834 /* _EffortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41ADFB1EF7F2BF00C9F834 /* _EffortModel.m */; };
+		6A41ADFF1EF7F2BF00C9F834 /* _EffortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41ADFB1EF7F2BF00C9F834 /* _EffortModel.m */; };
+		6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */; };
+		6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */; };
+		6A41AE061EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */; };
+		6A41AE071EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */; };
+		6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */; };
+		6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */; };
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
 		6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
 		6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
@@ -129,6 +137,13 @@
 		6A2F2D6B1EF1BD42007CA921 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6A2F2D6F1EF1C49A007CA921 /* OSTSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTSessionManager.h; sourceTree = "<group>"; };
 		6A2F2D701EF1C49A007CA921 /* OSTSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTSessionManager.m; sourceTree = "<group>"; };
+		6A41ADFA1EF7F2BF00C9F834 /* _EffortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EffortModel.h; sourceTree = "<group>"; };
+		6A41ADFB1EF7F2BF00C9F834 /* _EffortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EffortModel.m; sourceTree = "<group>"; };
+		6A41ADFC1EF7F2BF00C9F834 /* EffortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffortModel.h; sourceTree = "<group>"; };
+		6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffortModel.m; sourceTree = "<group>"; };
+		6A41AE031EF8B59D00C9F834 /* OSTReviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTReviewTableViewCell.h; sourceTree = "<group>"; };
+		6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTReviewTableViewCell.m; sourceTree = "<group>"; };
+		6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewTableViewCell.xib; sourceTree = "<group>"; };
 		6A549E4B1EEF866F00783F80 /* OSTDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSTDataModel.xcdatamodel; sourceTree = "<group>"; };
 		6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTLoginViewController.h; sourceTree = "<group>"; };
 		6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTLoginViewController.m; sourceTree = "<group>"; };
@@ -239,6 +254,16 @@
 			path = SessionManager;
 			sourceTree = "<group>";
 		};
+		6A41AE021EF8B58300C9F834 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				6A41AE031EF8B59D00C9F834 /* OSTReviewTableViewCell.h */,
+				6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */,
+				6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
 		6A549E471EEF865100783F80 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +275,7 @@
 		6A549E491EEF865100783F80 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6A41AE021EF8B58300C9F834 /* TableViewCells */,
 				6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */,
 				6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */,
 				6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */,
@@ -306,6 +332,10 @@
 				6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */,
 				6A11A06F1EF372DE00D6D2CA /* _CourseSplits.h */,
 				6A11A0701EF372DE00D6D2CA /* _CourseSplits.m */,
+				6A41ADFA1EF7F2BF00C9F834 /* _EffortModel.h */,
+				6A41ADFB1EF7F2BF00C9F834 /* _EffortModel.m */,
+				6A41ADFC1EF7F2BF00C9F834 /* EffortModel.h */,
+				6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */,
 				6A11A0711EF372DE00D6D2CA /* CourseSplits.h */,
 				6A11A0721EF372DE00D6D2CA /* CourseSplits.m */,
 				6A11A0691EF2CE5C00D6D2CA /* CurrentCourse.h */,
@@ -453,7 +483,7 @@
 				ORGANIZATIONNAME = OST;
 				TargetAttributes = {
 					6A5E0CEC1EF1B25E00399EEC = {
-						DevelopmentTeam = 8W67BG4L69;
+						DevelopmentTeam = MEL2GJ9CJX;
 					};
 					6AA6E9D31EF0E4C70061EEB0 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -507,6 +537,7 @@
 				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
+				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
 				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
@@ -522,6 +553,7 @@
 				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
+				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
@@ -720,6 +752,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A41AE061EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
@@ -740,8 +773,10 @@
 				6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */,
 				6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */,
+				6A41ADFE1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,
 				6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
+				6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,6 +784,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A41AE071EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
@@ -769,8 +805,10 @@
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
 				6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */,
+				6A41ADFF1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,
 				6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
+				6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,7 +850,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_URL = "https://opensplittime.org/api/v1/";
-				DEVELOPMENT_TEAM = 8W67BG4L69;
+				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -848,7 +886,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_URL = "https://opensplittime.org/api/v1/";
-				DEVELOPMENT_TEAM = 8W67BG4L69;
+				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -992,7 +1030,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
-				DEVELOPMENT_TEAM = MEL2GJ9CJX;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1014,8 +1053,10 @@
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1028,7 +1069,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
-				DEVELOPMENT_TEAM = MEL2GJ9CJX;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1050,8 +1092,10 @@
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -33,4 +33,15 @@
     [[A0SimpleKeychain keychain] setString:password forKey:OSTPasswordHash];
 }
 
++ (NSString *) getUUIDString
+{
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"UUID"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUUID UUID] UUIDString] forKey:@"UUID"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID"];
+}
+
 @end

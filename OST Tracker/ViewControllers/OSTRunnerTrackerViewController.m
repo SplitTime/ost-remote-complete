@@ -9,6 +9,8 @@
 #import "OSTRunnerTrackerViewController.h"
 #import "EntryModel.h"
 #import "CurrentCourse.h"
+#import "OSTSessionManager.h"
+#import "EffortModel.h"
 
 @interface OSTRunnerTrackerViewController ()
 
@@ -17,9 +19,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
 @property (strong, nonatomic) NSTimer * timer;
 @property (weak, nonatomic) IBOutlet UISwitch *swchPaser;
+@property (weak, nonatomic) IBOutlet UIButton *btnLeft;
+@property (weak, nonatomic) IBOutlet UIButton *btnRight;
 @property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
 @property (strong, nonatomic) NSString * splitId;
+@property (weak, nonatomic) IBOutlet UILabel *lblRunnerInfo;
 @property (strong, nonatomic) NSString * dayString;
+@property (strong, nonatomic) EffortModel * racer;
 
 @end
 
@@ -63,7 +69,7 @@
     [[AppDelegate getInstance].rightMenuVC showRightMenu:YES];
 }
 
-- (IBAction)onLeftButton:(id)sender
+- (IBAction)onEntryButton:(id)sender
 {
     if (self.txtBibNumber.text.length == 0)
     {
@@ -71,12 +77,17 @@
         return;
     }
     
+    CurrentCourse * course = [CurrentCourse MR_findFirst];
+    
     EntryModel * entry = [EntryModel MR_createEntity];
     entry.bibNumber = self.txtBibNumber.text;
-    entry.bitKey = @"in";
+    if (sender == self.btnLeft)
+        entry.bitKey = @"in";
+    else entry.bitKey = @"out";
     entry.splitId = self.splitId;
     int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
     entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%01d:00",self.dayString, self.lblTime.text,timezoneoffset];
+    entry.displayTime = self.lblTime.text;
     if (self.swchPaser.on)
         entry.withPacer = @"true";
     else entry.withPacer = @"false";
@@ -84,41 +95,47 @@
         entry.stoppedHere = @"true";
     else entry.stoppedHere = @"false";
     
-    entry.source = @"ost-remote-88581b60112003f4e3ce60981756abfc";
+    entry.courseName = course.eventName;
+    entry.splitName = course.splitName;
     
-    [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
-    [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
-    
-    self.txtBibNumber.text = @"";
-}
-
-- (IBAction)onRightButton:(id)sender
-{
-    if (self.txtBibNumber.text.length == 0)
+    if (self.racer)
     {
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Please type a BIB number" dismissButton:@"Ok"];
-        return;
+        entry.fullName = self.racer.fullName;
     }
     
-    EntryModel * entry = [EntryModel MR_createEntity];
-    entry.bibNumber = self.txtBibNumber.text;
-    entry.bitKey = @"out";
-    entry.splitId = self.splitId;
-    int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
-    entry.absoluteTime = [NSString stringWithFormat:@"%@%01d:00",self.lblTime.text,timezoneoffset];
-    if (self.swchPaser.on)
-        entry.withPacer = @"true";
-    else entry.withPacer = @"false";
-    if (self.swchStoppedHere.on)
-        entry.stoppedHere = @"true";
-    else entry.stoppedHere = @"false";
-    
-    entry.source = @"ost-remote-88581b60112003f4e3ce60981756abfc";
+    entry.source = [NSString stringWithFormat:@"ost-remote-%@",[OSTSessionManager getUUIDString]];
     
     [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     
     self.txtBibNumber.text = @"";
+    
+    [self txtBibNumberChanged:nil];
+}
+
+- (IBAction)txtBibNumberChanged:(id)sender
+{
+    self.racer = nil;
+    self.lblRunnerInfo.textColor = [UIColor darkGrayColor];
+    if (self.txtBibNumber.text.length == 0)
+    {
+        self.lblRunnerInfo.text = @"Add Bib Number to search for runner";
+    }
+    else
+    {
+        EffortModel * effort = [EffortModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber == %@", [NSDecimalNumber decimalNumberWithString:self.txtBibNumber.text]]];
+        
+        if (effort)
+        {
+            self.lblRunnerInfo.text = [NSString stringWithFormat:@"Racer Found: %@",effort.fullName];
+            self.racer = effort;
+        }
+        else
+        {
+            self.lblRunnerInfo.text = @"Racer Not Found!";
+            self.lblRunnerInfo.textColor = [UIColor redColor];
+        }
+    }
 }
 
 /*
