@@ -12,9 +12,13 @@
 #import "EntryModel.h"
 #import "OSTReviewTableViewCell.h"
 #import "OSTEditEntryViewController.h"
+#import "CurrentCourse.h"
+#import "IQDropDownTextField.h"
 
 @interface OSTReviewSubmitViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet IQDropDownTextField *txtSortBy;
 @property (strong, nonatomic) NSArray * entries;
 
 @end
@@ -25,6 +29,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.tableView registerNib: [UINib nibWithNibName:@"OSTReviewTableViewCell" bundle:nil] forCellReuseIdentifier:@"OSTReviewTableViewCell"];
+    
+    self.txtSortBy.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.txtSortBy.layer.borderWidth = 1;
+    self.txtSortBy.layer.cornerRadius = 3;
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.txtSortBy.leftView = paddingView;
+    self.txtSortBy.leftViewMode = UITextFieldViewModeAlways;
+    
+    [self.txtSortBy setItemList:@[@"Name", @"Time Displayed", @"Time Entered", @"Bib #"]];
+    self.txtSortBy.selectedRow = 1;
     
 }
 
@@ -41,7 +56,9 @@
 
 - (void) loadData
 {
-    self.entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"submitted == NIL"]];
+    self.entries = [EntryModel MR_findAll];//[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"submitted == NIL"]];
+    
+    self.lblTitle.text = [CurrentCourse getCurrentCourse].eventName;
     
     [self.tableView reloadData];
 }
@@ -107,19 +124,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
-    
     [self presentViewController:editVC animated:YES completion:nil];
+    [editVC configureWithEntry:self.entries[indexPath.row]];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

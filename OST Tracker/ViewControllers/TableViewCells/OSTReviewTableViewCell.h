@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblInOrOut;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
+@property (weak, nonatomic) IBOutlet UIImageView *imgPacer;
+@property (weak, nonatomic) IBOutlet UIImageView *imgStopped;
 
 - (void) configureWithEntry:(EntryModel*) entry;
 
