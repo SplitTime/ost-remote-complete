@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSArray * eventSplits;
 @property (strong, nonatomic) NSString * eventId;
 @property (strong, nonatomic) NSString * eventName;
+@property (weak, nonatomic) IBOutlet UIImageView *imgTriangleAidStation;
 
 @end
 
@@ -65,6 +66,23 @@
     {
         self.btnCancel.hidden = YES;
     }
+    
+    self.txtStation.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.txtStation.layer.borderWidth = 1;
+    self.txtStation.layer.cornerRadius = 3;
+    
+    self.txtEvent.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.txtEvent.layer.borderWidth = 1;
+    self.txtEvent.layer.cornerRadius = 3;
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.txtStation.leftView = paddingView;
+    self.txtStation.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIView *paddingViewForPassword = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.txtEvent.leftView = paddingViewForPassword;
+    self.txtEvent.leftViewMode = UITextFieldViewModeAlways;
+
 }
 
 - (IBAction)onCancel:(id)sender
@@ -159,6 +177,7 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         self.txtStation.alpha = 1;
+        self.imgTriangleAidStation.hidden = NO;
     }];
     
     self.eventId = firstFoundObject.eventId;
@@ -196,7 +215,7 @@
     
     if (self.changeStation)
     {
-        CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
+        CurrentCourse * currentCourse = [CurrentCourse getCurrentCourse];
         currentCourse.splitId = firstFoundObject.splitId;
         currentCourse.splitName = firstFoundObject.baseName;
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];

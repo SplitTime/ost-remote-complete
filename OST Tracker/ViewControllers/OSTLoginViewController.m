@@ -25,6 +25,22 @@
     // Do any additional setup after loading the view from its nib.
     self.txtEmail.text = [OSTSessionManager getStoredUserName];
     self.txtPassword.text = [OSTSessionManager getStoredPassword];
+    
+    self.txtEmail.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.txtEmail.layer.borderWidth = 1;
+    self.txtEmail.layer.cornerRadius = 3;
+    
+    self.txtPassword.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.txtPassword.layer.borderWidth = 1;
+    self.txtPassword.layer.cornerRadius = 3;
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.txtEmail.leftView = paddingView;
+    self.txtEmail.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIView *paddingViewForPassword = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.txtPassword.leftView = paddingViewForPassword;
+    self.txtPassword.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (void)didReceiveMemoryWarning {

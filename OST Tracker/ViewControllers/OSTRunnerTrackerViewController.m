@@ -62,6 +62,7 @@
 {
     [super viewWillAppear:animated];
     [self.txtBibNumber becomeFirstResponder];
+    self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
 }
 
 - (IBAction)onRight:(id)sender
