@@ -72,6 +72,7 @@
         <attribute name="splitName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stoppedHere" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="submitted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timeEntered" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="withPacer" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="EventModel" representedClassName="EventModel" syncable="YES">
@@ -103,7 +104,7 @@
         <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="105"/>
         <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="105"/>
         <element name="EffortModel" positionX="-54" positionY="54" width="128" height="90"/>
-        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="255"/>
+        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="270"/>
         <element name="EventModel" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

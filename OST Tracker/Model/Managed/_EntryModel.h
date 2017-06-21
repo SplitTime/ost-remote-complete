@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)submittedValue;
 - (void)setSubmittedValue:(BOOL)value_;
 
+@property (nonatomic, strong, nullable) NSDate* timeEntered;
+
 @property (nonatomic, strong, nullable) NSString* withPacer;
 
 @end
@@ -98,6 +100,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)primitiveSubmittedValue;
 - (void)setPrimitiveSubmittedValue:(BOOL)value_;
 
+- (NSDate*)primitiveTimeEntered;
+- (void)setPrimitiveTimeEntered:(NSDate*)value;
+
 - (NSString*)primitiveWithPacer;
 - (void)setPrimitiveWithPacer:(NSString*)value;
 
@@ -117,6 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)splitName;
 + (NSString *)stoppedHere;
 + (NSString *)submitted;
++ (NSString *)timeEntered;
 + (NSString *)withPacer;
 @end
 

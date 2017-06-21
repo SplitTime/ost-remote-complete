@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="btnLeft" destination="fOu-hS-R9H" id="jJS-bZ-VRz"/>
                 <outlet property="btnRight" destination="Jgi-Yq-TgX" id="N5U-NC-zkX"/>
+                <outlet property="lblInTimeBadge" destination="naY-J2-LaL" id="0KX-l1-DA4"/>
+                <outlet property="lblOutTimeBadge" destination="od4-F2-CcV" id="ny0-wf-plf"/>
                 <outlet property="lblRunnerInfo" destination="BN5-h1-nq1" id="BrY-PG-36G"/>
                 <outlet property="lblTime" destination="pdE-tx-zbe" id="Lxz-df-fPe"/>
                 <outlet property="lblTitle" destination="DGN-GA-gMc" id="M5O-bp-cZH"/>
@@ -172,6 +174,22 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="naY-J2-LaL">
+                    <rect key="frame" x="147" y="362" width="20" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="od4-F2-CcV">
+                    <rect key="frame" x="352" y="362" width="20" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.9370916485786438" green="0.93694382905960083" blue="0.95754462480545044" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="274.5" y="-9.5"/>

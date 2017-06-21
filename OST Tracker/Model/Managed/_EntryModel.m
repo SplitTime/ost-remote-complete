@@ -82,6 +82,8 @@
 	[self setPrimitiveSubmitted:@(value_)];
 }
 
+@dynamic timeEntered;
+
 @dynamic withPacer;
 
 @end
@@ -125,6 +127,9 @@
 }
 + (NSString *)submitted {
 	return @"submitted";
+}
++ (NSString *)timeEntered {
+	return @"timeEntered";
 }
 + (NSString *)withPacer {
 	return @"withPacer";
