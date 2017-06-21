@@ -107,6 +107,8 @@
     
     entry.courseName = course.eventName;
     entry.splitName = course.splitName;
+    entry.courseId = course.eventId;
+    entry.splitId = course.splitId;
     
     if (self.racer)
     {

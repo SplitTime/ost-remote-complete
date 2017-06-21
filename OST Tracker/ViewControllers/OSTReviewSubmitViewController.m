@@ -14,12 +14,15 @@
 #import "OSTEditEntryViewController.h"
 #import "CurrentCourse.h"
 #import "IQDropDownTextField.h"
+#import "OSTReviewSectionHeader.h"
+#import "UIView+Additions.h"
 
 @interface OSTReviewSubmitViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtSortBy;
-@property (strong, nonatomic) NSArray * entries;
+@property (strong, nonatomic) NSMutableArray * entries;
+@property (strong, nonatomic) NSArray * splitTitles;
 
 @end
 
@@ -56,7 +59,24 @@
 
 - (void) loadData
 {
-    self.entries = [EntryModel MR_findAll];//[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"submitted == NIL"]];
+    self.entries = [NSMutableArray new];
+    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@",[CurrentCourse getCurrentCourse].eventId]];
+    
+    NSMutableSet * set = [NSMutableSet new];
+    
+    for (EntryModel * entry in entries)
+    {
+        [set addObject:entry.splitName];
+    }
+    
+    self.splitTitles = set.allObjects;
+    
+    entries = nil;
+    
+    for (NSString * title in self.splitTitles)
+    {
+        [self.entries addObject:[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && splitName == %@",[CurrentCourse getCurrentCourse].eventId,title]]];
+    }
     
     self.lblTitle.text = [CurrentCourse getCurrentCourse].eventName;
     
@@ -70,7 +90,8 @@
 
 - (IBAction)onSubmit:(id)sender
 {
-    if (self.entries.count == 0)
+    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]];
+    if (entries.count == 0)
     {
         [OHAlertView showAlertWithTitle:@"Error" message:@"Nothing to send" dismissButton:@"Ok"];
         return;
@@ -79,11 +100,11 @@
     [DejalBezelActivityView activityViewForView:self.view];
     [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id object) {
         [DejalBezelActivityView removeViewAnimated:YES];
-        [[AppDelegate getInstance].getNetworkManager submitEntries:self.entries completionBlock:^(id object) {
+        [[AppDelegate getInstance].getNetworkManager submitEntries:entries completionBlock:^(id object) {
             [DejalBezelActivityView removeViewAnimated:YES];
             [OHAlertView showAlertWithTitle:nil message:@"Submitted" dismissButton:@"Ok"];
             
-            for (EntryModel * entry in self.entries)
+            for (EntryModel * entry in entries)
             {
                 entry.submitted = @(YES);
             }
@@ -107,7 +128,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
-    return [self.entries count];
+    return [self.entries[section] count];
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    OSTReviewSectionHeader * sectionHeader = [OSTReviewSectionHeader instanceFromNib];
+    
+    sectionHeader.lblTitle.text = [NSString stringWithFormat:@"%@ Entries:", self.splitTitles[section]];
+    
+    return sectionHeader;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.entries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,7 +151,7 @@
     OSTReviewTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"OSTReviewTableViewCell" forIndexPath:indexPath];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell configureWithEntry:self.entries[indexPath.row]];
+    [cell configureWithEntry:self.entries[indexPath.section][indexPath.row]];
     
     return cell;
 }
@@ -125,7 +160,7 @@
 {
     OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
     [self presentViewController:editVC animated:YES completion:nil];
-    [editVC configureWithEntry:self.entries[indexPath.row]];
+    [editVC configureWithEntry:self.entries[indexPath.section][indexPath.row]];
 }
 
 @end

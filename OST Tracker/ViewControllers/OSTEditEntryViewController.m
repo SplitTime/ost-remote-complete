@@ -8,6 +8,7 @@
 
 #import "OSTEditEntryViewController.h"
 #import "EffortModel.h"
+#import "IQKeyboardManager.h"
 
 @interface OSTEditEntryViewController ()
 
@@ -21,6 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.txtDate.dropDownMode = IQDropDownModeDateTimePicker;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,6 +105,11 @@
         }
     }
 
+}
+
+- (void)dealloc
+{
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
 
 @end
