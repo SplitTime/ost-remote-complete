@@ -21,11 +21,9 @@
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtStation;
 @property (strong, nonatomic) NSManagedObjectContext * tempContext;
 @property (strong, nonatomic) NSMutableArray * events;
-@property (strong, nonatomic) NSMutableArray * splits;
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
-@property (strong, nonatomic) NSArray * eventSplits;
-@property (strong, nonatomic) NSString * eventId;
-@property (strong, nonatomic) NSString * eventName;
+@property (strong, nonatomic) EventModel * selectedEvent;
+@property (strong, nonatomic) NSArray * liveAttributes;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTriangleAidStation;
 
 @end
@@ -97,19 +95,18 @@
         CurrentCourse * course = [CurrentCourse getCurrentCourse];
         self.txtEvent.userInteractionEnabled = NO;
         [self.txtEvent setItemList:@[course.eventName]];
-        NSArray * stations = [CourseSplits MR_findAll];
+        NSArray * stations = course.liveAttributes;
         NSMutableArray * stationStrings = [NSMutableArray new];
-        for (CourseSplits * split in stations)
+        for (NSDictionary * split in stations)
         {
-            [stationStrings addObject:split.baseName];
+            [stationStrings addObject:split[@"title"]];
         }
         [self.txtStation setItemList:stationStrings];
         [self.txtStation becomeFirstResponder];
-        self.eventSplits = stations;
-        self.splits = stations.mutableCopy;
         
         self.btnNext.alpha = 1;
         self.txtStation.alpha = 1;
+        self.liveAttributes = course.liveAttributes;
         return;
     }
     
@@ -122,14 +119,10 @@
         [DejalBezelActivityView removeViewAnimated:YES];
         
         NSMutableArray * pickerEvents = [NSMutableArray new];
-        self.splits = [NSMutableArray new];
+        
         for (id dataObject in object[@"data"])
         {
             [pickerEvents addObject:[EventModel MR_importFromObject:dataObject inContext:self.tempContext]];
-        }
-        for (id dataObject in object[@"included"])
-        {
-            [self.splits addObject:[CourseSplits MR_importFromObject:dataObject inContext:self.tempContext]];
         }
         
         self.events = pickerEvents;
@@ -160,17 +153,16 @@
     EventModel * firstFoundObject = nil;
     firstFoundObject =  filteredArray.count > 0 ? filteredArray.firstObject : nil;
     
-    NSMutableArray * splitIdsToSearch = [NSMutableArray new];
-    for (NSDictionary * dictionary in firstFoundObject.splits)
+    if (firstFoundObject == nil)
     {
-        [splitIdsToSearch addObject:dictionary[@"id"]];
+        return;
     }
     
-    self.eventSplits = [self.splits filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"splitId IN %@",splitIdsToSearch]];
+    self.selectedEvent = firstFoundObject;
     
-    for (CourseSplits * split in self.eventSplits)
+    for (NSDictionary * liveEntry in self.selectedEvent.liveEntryAttributes)
     {
-        [splitStrings addObject:split.baseName];
+        [splitStrings addObject:liveEntry[@"title"]];
     }
     
     [self.txtStation setItemList:splitStrings];
@@ -180,11 +172,7 @@
         self.imgTriangleAidStation.hidden = NO;
     }];
     
-    self.eventId = firstFoundObject.eventId;
-    self.eventName = firstFoundObject.name;
-    
     [self.txtStation becomeFirstResponder];
-    
 }
 
 -(void)onDoneSelectedStation
@@ -202,9 +190,19 @@
 
 - (IBAction)onNext:(id)sender
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"baseName == %@", self.txtStation.selectedItem];
-    NSArray *filteredArray = [self.splits filteredArrayUsingPredicate:predicate];
-    CourseSplits * firstFoundObject = nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", self.txtStation.selectedItem];
+    NSArray *filteredArray = nil;
+    
+    if (!self.liveAttributes)
+    {
+        filteredArray = [self.selectedEvent.liveEntryAttributes filteredArrayUsingPredicate:predicate];
+    }
+    else
+    {
+        filteredArray = [self.liveAttributes filteredArrayUsingPredicate:predicate];
+    }
+    
+    NSDictionary * firstFoundObject = nil;
     firstFoundObject =  filteredArray.count > 0 ? filteredArray.firstObject : nil;
     
     if (!firstFoundObject)
@@ -216,8 +214,9 @@
     if (self.changeStation)
     {
         CurrentCourse * currentCourse = [CurrentCourse getCurrentCourse];
-        currentCourse.splitId = firstFoundObject.splitId;
-        currentCourse.splitName = firstFoundObject.baseName;
+        currentCourse.splitId = [firstFoundObject[@"entries"][0][@"splitId"] stringValue];
+        currentCourse.splitName = firstFoundObject[@"title"];
+        currentCourse.splitAttributes = firstFoundObject;
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
 
@@ -226,26 +225,26 @@
     }
     
     [DejalBezelActivityView activityViewForView:self.view];
-    [[AppDelegate getInstance].getNetworkManager getEventsDetails:self.eventId completionBlock:^(id object)
+    [[AppDelegate getInstance].getNetworkManager getEventsDetails:self.selectedEvent.eventId completionBlock:^(id object)
     {
         [DejalBezelActivityView removeViewAnimated:YES];
         CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
         
         for (id dataObject in object[@"included"])
         {
-            if ([dataObject[@"type"] isEqualToString:@"splits"])
-            {
-                [CourseSplits MR_importFromObject:dataObject];
-            }
-            else if ([dataObject[@"type"] isEqualToString:@"efforts"])
+            if ([dataObject[@"type"] isEqualToString:@"efforts"])
             {
                 [EffortModel MR_importFromObject:dataObject];
             }
         }
-        currentCourse.splitId = firstFoundObject.splitId;
-        currentCourse.eventId = self.eventId;
-        currentCourse.splitName = firstFoundObject.baseName;
-        currentCourse.eventName = self.eventName;
+        currentCourse.splitId = [firstFoundObject[@"entries"][0][@"splitId"] stringValue];
+        currentCourse.eventId = self.selectedEvent.eventId;
+        currentCourse.splitName = firstFoundObject[@"title"];
+        currentCourse.eventName = self.selectedEvent.name;
+        currentCourse.multiLap = self.selectedEvent.multiLap;
+        currentCourse.splitAttributes = firstFoundObject;
+        currentCourse.liveAttributes = self.selectedEvent.liveEntryAttributes;
+        
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
         

@@ -25,6 +25,10 @@
 {
     self.lblTime.text = entry.displayTime;
     self.lblName.text = entry.fullName;
+    if (self.lblName.text.length == 0)
+    {
+        self.lblName.text = @"Bib not found";
+    }
     self.lblNumber.text = [NSString stringWithFormat:@"#%@",entry.bibNumber];
     self.lblInOrOut.text = [entry.bitKey capitalizedString];
     

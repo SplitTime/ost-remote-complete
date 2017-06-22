@@ -10,6 +10,7 @@
 #import "OSTEventSelectionViewController.h"
 #import "OSTSessionManager.h"
 #import "CurrentCourse.h"
+#import "IQKeyboardManager.h"
 
 @interface OSTLoginViewController ()
 
@@ -41,6 +42,13 @@
     UIView *paddingViewForPassword = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
     self.txtPassword.leftView = paddingViewForPassword;
     self.txtPassword.leftViewMode = UITextFieldViewModeAlways;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,9 +81,8 @@
         }
     } errorBlock:^(NSError *error) {
         [DejalBezelActivityView removeViewAnimated:YES];
-        [OHAlertView showAlertWithTitle:@"Error" message:error.localizedDescription dismissButton:@"ok"];
+        [OHAlertView showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Can't Login. Make sure you are connected to the internet. %@", error.errorsFromDictionary] dismissButton:@"ok"];
     }];
 }
-
 
 @end

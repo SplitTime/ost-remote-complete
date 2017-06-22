@@ -29,6 +29,7 @@
 // Helpers
 #import "OHAlertView.h"
 #import "DejalActivityView.h"
+#import "NSError+OSTErrors.h"
 
 #endif /* PrefixHeader_pch */
 

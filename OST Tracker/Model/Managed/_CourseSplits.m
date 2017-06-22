@@ -34,11 +34,7 @@
 
 @dynamic baseName;
 
-@dynamic kind;
-
-@dynamic nameExtentions;
-
-@dynamic splitId;
+@dynamic entries;
 
 @end
 
@@ -46,20 +42,14 @@
 + (NSString *)baseName {
 	return @"baseName";
 }
-+ (NSString *)kind {
-	return @"kind";
-}
-+ (NSString *)nameExtentions {
-	return @"nameExtentions";
-}
-+ (NSString *)splitId {
-	return @"splitId";
++ (NSString *)entries {
+	return @"entries";
 }
 @end
 
 @implementation CourseSplitsUserInfo 
 + (NSString *)relatedByAttribute {
-	return @"splitId";
+	return @"baseName";
 }
 @end
 

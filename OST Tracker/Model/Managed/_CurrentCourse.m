@@ -29,12 +29,42 @@
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"multiLapValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"multiLap"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+
 	return keyPaths;
 }
 
 @dynamic eventId;
 
 @dynamic eventName;
+
+@dynamic liveAttributes;
+
+@dynamic multiLap;
+
+- (BOOL)multiLapValue {
+	NSNumber *result = [self multiLap];
+	return [result boolValue];
+}
+
+- (void)setMultiLapValue:(BOOL)value_ {
+	[self setMultiLap:@(value_)];
+}
+
+- (BOOL)primitiveMultiLapValue {
+	NSNumber *result = [self primitiveMultiLap];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveMultiLapValue:(BOOL)value_ {
+	[self setPrimitiveMultiLap:@(value_)];
+}
+
+@dynamic splitAttributes;
 
 @dynamic splitId;
 
@@ -48,6 +78,15 @@
 }
 + (NSString *)eventName {
 	return @"eventName";
+}
++ (NSString *)liveAttributes {
+	return @"liveAttributes";
+}
++ (NSString *)multiLap {
+	return @"multiLap";
+}
++ (NSString *)splitAttributes {
+	return @"splitAttributes";
 }
 + (NSString *)splitId {
 	return @"splitId";

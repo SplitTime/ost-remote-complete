@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSObject;
 
+@class NSObject;
+
 @interface EventModelID : NSManagedObjectID {}
 @end
 
@@ -23,6 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, strong) EventModelID *objectID;
 
 @property (nonatomic, strong, nullable) NSString* eventId;
+
+@property (nonatomic, strong, nullable) id liveEntryAttributes;
+
+@property (nonatomic, strong, nullable) NSNumber* multiLap;
+
+@property (atomic) BOOL multiLapValue;
+- (BOOL)multiLapValue;
+- (void)setMultiLapValue:(BOOL)value_;
 
 @property (nonatomic, strong, nullable) NSString* name;
 
@@ -37,6 +47,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveEventId;
 - (void)setPrimitiveEventId:(NSString*)value;
 
+- (id)primitiveLiveEntryAttributes;
+- (void)setPrimitiveLiveEntryAttributes:(id)value;
+
+- (NSNumber*)primitiveMultiLap;
+- (void)setPrimitiveMultiLap:(NSNumber*)value;
+
+- (BOOL)primitiveMultiLapValue;
+- (void)setPrimitiveMultiLapValue:(BOOL)value_;
+
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
@@ -50,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EventModelAttributes: NSObject 
 + (NSString *)eventId;
++ (NSString *)liveEntryAttributes;
++ (NSString *)multiLap;
 + (NSString *)name;
 + (NSString *)slug;
 + (NSString *)splits;

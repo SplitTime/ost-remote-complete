@@ -24,11 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* baseName;
 
-@property (nonatomic, strong, nullable) NSString* kind;
-
-@property (nonatomic, strong, nullable) id nameExtentions;
-
-@property (nonatomic, strong, nullable) NSString* splitId;
+@property (nonatomic, strong, nullable) id entries;
 
 @end
 
@@ -37,22 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveBaseName;
 - (void)setPrimitiveBaseName:(NSString*)value;
 
-- (NSString*)primitiveKind;
-- (void)setPrimitiveKind:(NSString*)value;
-
-- (id)primitiveNameExtentions;
-- (void)setPrimitiveNameExtentions:(id)value;
-
-- (NSString*)primitiveSplitId;
-- (void)setPrimitiveSplitId:(NSString*)value;
+- (id)primitiveEntries;
+- (void)setPrimitiveEntries:(id)value;
 
 @end
 
 @interface CourseSplitsAttributes: NSObject 
 + (NSString *)baseName;
-+ (NSString *)kind;
-+ (NSString *)nameExtentions;
-+ (NSString *)splitId;
++ (NSString *)entries;
 @end
 
 @interface CourseSplitsUserInfo: NSObject 

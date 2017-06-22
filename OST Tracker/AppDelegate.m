@@ -44,7 +44,7 @@
     
     [self initializeCoredata];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 60;
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 80;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     

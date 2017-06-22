@@ -30,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblRunnerInfo;
 @property (strong, nonatomic) NSString * dayString;
 @property (strong, nonatomic) EffortModel * racer;
+@property (assign, nonatomic) CGRect originalLeftBtnFrame;
+@property (assign, nonatomic) CGRect originalRightBtnFrame;
 
 @end
 
@@ -60,6 +62,7 @@
     
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
+    
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -83,6 +86,53 @@
     [super viewWillAppear:animated];
     [self.txtBibNumber becomeFirstResponder];
     self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
+    
+    if (CGRectIsEmpty(self.originalLeftBtnFrame))
+    {
+        self.originalLeftBtnFrame = self.btnLeft.frame;
+    }
+    
+    if (CGRectIsEmpty(self.originalRightBtnFrame))
+    {
+        self.originalRightBtnFrame = self.btnRight.frame;
+    }
+    
+    self.btnLeft.frame = self.originalLeftBtnFrame;
+    self.btnRight.frame = self.originalRightBtnFrame;
+    
+    NSArray * entries = [CurrentCourse getCurrentCourse].splitAttributes[@"entries"];
+    
+    NSArray * splitEntriesIn = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"subSplitKind == %@",@"in"]];
+    NSArray * splitEntriesOut = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"subSplitKind == %@",@"out"]];
+    
+    if (splitEntriesIn.count != 0 && splitEntriesOut.count == 0)
+    {
+        self.btnLeft.width = self.btnRight.right - self.btnLeft.left;
+        self.btnRight.hidden = YES;
+        
+        [self.btnLeft setTitle:splitEntriesIn[0][@"label"] forState:UIControlStateNormal];
+    }
+    if (splitEntriesIn.count == 0 && splitEntriesOut.count != 0)
+    {
+        self.btnRight.width = self.btnRight.right - self.btnLeft.left;
+        self.btnLeft.hidden = YES;
+        self.btnRight.left = self.btnLeft.left;
+        
+        [self.btnRight setTitle:splitEntriesOut[0][@"label"] forState:UIControlStateNormal];
+    }
+    else if(splitEntriesIn.count != 0 && splitEntriesOut.count != 0)
+    {
+        self.btnRight.hidden = NO;
+        self.btnLeft.hidden = NO;
+        
+        self.btnRight.frame = self.originalRightBtnFrame;
+        self.btnLeft.frame = self.originalLeftBtnFrame;
+        
+        [self.btnLeft setTitle:splitEntriesIn[0][@"label"] forState:UIControlStateNormal];
+        [self.btnRight setTitle:splitEntriesOut[0][@"label"] forState:UIControlStateNormal];
+    }
+    
+    self.lblInTimeBadge.right = self.btnLeft.right - 5;
 }
 
 - (IBAction)onRight:(id)sender
@@ -155,23 +205,41 @@
             self.lblRunnerInfo.text = [NSString stringWithFormat:@"Racer Found: %@",effort.fullName];
             self.racer = effort;
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
-            {
-                self.lblInTimeBadge.hidden = NO;
-                self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
-            }
-            
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
-            {
-                self.lblOutTimeBadge.hidden = NO;
-                self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
-            }
         }
         else
         {
             self.lblRunnerInfo.text = @"Racer Not Found!";
             self.lblRunnerInfo.textColor = [UIColor redColor];
         }
+        
+        if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
+        {
+            self.lblInTimeBadge.hidden = NO;
+            if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
+            {
+                self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
+            }
+            else
+            {
+                self.lblInTimeBadge.text = @"!";
+                self.lblInTimeBadge.backgroundColor = [UIColor clearColor];
+            }
+        }
+        
+        if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
+        {
+            self.lblOutTimeBadge.hidden = NO;
+            if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
+            {
+                self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
+            }
+            else
+            {
+                self.lblOutTimeBadge.text = @"!";
+                self.lblOutTimeBadge.backgroundColor = [UIColor clearColor];
+            }
+        }
+
     }
 }
 

@@ -11,6 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NSObject;
+
+@class NSObject;
+
 @interface CurrentCourseID : NSManagedObjectID {}
 @end
 
@@ -23,6 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) NSString* eventId;
 
 @property (nonatomic, strong, nullable) NSString* eventName;
+
+@property (nonatomic, strong, nullable) id liveAttributes;
+
+@property (nonatomic, strong, nullable) NSNumber* multiLap;
+
+@property (atomic) BOOL multiLapValue;
+- (BOOL)multiLapValue;
+- (void)setMultiLapValue:(BOOL)value_;
+
+@property (nonatomic, strong, nullable) id splitAttributes;
 
 @property (nonatomic, strong, nullable) NSString* splitId;
 
@@ -38,6 +52,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveEventName;
 - (void)setPrimitiveEventName:(NSString*)value;
 
+- (id)primitiveLiveAttributes;
+- (void)setPrimitiveLiveAttributes:(id)value;
+
+- (NSNumber*)primitiveMultiLap;
+- (void)setPrimitiveMultiLap:(NSNumber*)value;
+
+- (BOOL)primitiveMultiLapValue;
+- (void)setPrimitiveMultiLapValue:(BOOL)value_;
+
+- (id)primitiveSplitAttributes;
+- (void)setPrimitiveSplitAttributes:(id)value;
+
 - (NSString*)primitiveSplitId;
 - (void)setPrimitiveSplitId:(NSString*)value;
 
@@ -49,6 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CurrentCourseAttributes: NSObject 
 + (NSString *)eventId;
 + (NSString *)eventName;
++ (NSString *)liveAttributes;
++ (NSString *)multiLap;
++ (NSString *)splitAttributes;
 + (NSString *)splitId;
 + (NSString *)splitName;
 @end

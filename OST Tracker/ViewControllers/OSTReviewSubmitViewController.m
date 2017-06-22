@@ -116,7 +116,7 @@
             
         } errorBlock:^(NSError *error) {
             [DejalBezelActivityView removeViewAnimated:YES];
-            [OHAlertView showAlertWithTitle:@"Error" message:@"Can't submit, try again later" dismissButton:@"Ok"];
+            [OHAlertView showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Can't submit, try again later. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
         }];
     } errorBlock:^(NSError *error) {
         [DejalBezelActivityView removeViewAnimated:YES];
@@ -158,6 +158,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    if ([[self.entries[indexPath.section][indexPath.row] submitted] boolValue])
+    {
+        return;
+    }
+    
     OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
     [self presentViewController:editVC animated:YES completion:nil];
     [editVC configureWithEntry:self.entries[indexPath.section][indexPath.row]];
