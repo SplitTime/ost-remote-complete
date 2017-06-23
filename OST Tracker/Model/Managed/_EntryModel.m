@@ -52,6 +52,8 @@
 
 @dynamic entryId;
 
+@dynamic entryTime;
+
 @dynamic fullName;
 
 @dynamic source;
@@ -109,6 +111,9 @@
 }
 + (NSString *)entryId {
 	return @"entryId";
+}
++ (NSString *)entryTime {
+	return @"entryTime";
 }
 + (NSString *)fullName {
 	return @"fullName";

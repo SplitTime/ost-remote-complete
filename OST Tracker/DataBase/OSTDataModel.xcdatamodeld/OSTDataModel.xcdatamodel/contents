@@ -59,6 +59,7 @@
         <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="entryId" optional="YES" attributeType="Decimal" defaultValueString="0.0" indexed="YES" syncable="YES"/>
+        <attribute name="entryTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="splitId" optional="YES" attributeType="String" syncable="YES"/>
@@ -107,7 +108,7 @@
         <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="75"/>
         <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="150"/>
         <element name="EffortModel" positionX="-54" positionY="54" width="128" height="90"/>
-        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="270"/>
+        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="285"/>
         <element name="EventModel" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

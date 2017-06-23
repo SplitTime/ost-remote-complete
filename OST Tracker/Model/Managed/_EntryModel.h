@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSDecimalNumber* entryId;
 
+@property (nonatomic, strong, nullable) NSDate* entryTime;
+
 @property (nonatomic, strong, nullable) NSString* fullName;
 
 @property (nonatomic, strong, nullable) NSString* source;
@@ -79,6 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDecimalNumber*)primitiveEntryId;
 - (void)setPrimitiveEntryId:(NSDecimalNumber*)value;
 
+- (NSDate*)primitiveEntryTime;
+- (void)setPrimitiveEntryTime:(NSDate*)value;
+
 - (NSString*)primitiveFullName;
 - (void)setPrimitiveFullName:(NSString*)value;
 
@@ -116,6 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)courseName;
 + (NSString *)displayTime;
 + (NSString *)entryId;
++ (NSString *)entryTime;
 + (NSString *)fullName;
 + (NSString *)source;
 + (NSString *)splitId;

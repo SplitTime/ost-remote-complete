@@ -17,6 +17,7 @@
                 <outlet property="swchStoppedHere" destination="eQ3-Fk-JGC" id="iBp-Fg-7s5"/>
                 <outlet property="txtBibNumber" destination="sfc-6M-yoK" id="sI1-d8-LE8"/>
                 <outlet property="txtDate" destination="ZwX-pG-ZTw" id="RUi-w0-fWZ"/>
+                <outlet property="txtTime" destination="dMQ-UJ-B8b" id="cJw-DK-uSh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -79,7 +80,7 @@
                     </connections>
                 </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="cab-xC-R6Y">
-                    <rect key="frame" x="0.0" y="232" width="375" height="88"/>
+                    <rect key="frame" x="0.0" y="259" width="375" height="88"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With Pacer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Vk-zN-zAP">
@@ -118,10 +119,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" id="sFf-sW-Hpc">
-                    <rect key="frame" x="0.0" y="159" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="154" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ROZ-ra-DG4">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ROZ-ra-DG4">
                             <rect key="frame" x="23" y="12" width="128" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -142,6 +143,44 @@
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="1f1-qV-RiX" appends="YES" id="GqM-5h-W8c"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" misplaced="YES" id="fZw-te-UdC">
+                    <rect key="frame" x="0.0" y="198" width="375" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D5a-fd-TUp">
+                            <rect key="frame" x="23" y="12" width="128" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="qzN-v3-gSO">
+                            <rect key="frame" x="14" y="43" width="359" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" red="0.74901960779999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="dMQ-UJ-B8b">
+                            <rect key="frame" x="139" y="7" width="213" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="timeEndEditing:" destination="-1" eventType="editingDidEnd" id="JMT-EB-KBn"/>
+                                <action selector="timeEndEditing:" destination="-1" eventType="editingDidEndOnExit" id="XKs-GO-PCf"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="j15-Vh-RF9" appends="YES" id="tnI-Nt-eDh"/>
+                    </connections>
                 </view>
                 <view contentMode="scaleToFill" misplaced="YES" id="9Sy-eY-300">
                     <rect key="frame" x="0.0" y="75" width="375" height="44"/>
@@ -171,11 +210,30 @@
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="HNo-Be-EPf" appends="YES" id="cAB-Ms-y0e"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.9370916485786438" green="0.93694382905960083" blue="0.95754462480545044" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
+        <tapGestureRecognizer id="HNo-Be-EPf">
+            <connections>
+                <action selector="onBibNumber:" destination="-1" id="zeB-hu-fE4"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="1f1-qV-RiX">
+            <connections>
+                <action selector="onTime:" destination="-1" id="gC7-Ei-Dcg"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="j15-Vh-RF9">
+            <connections>
+                <action selector="onEditTime:" destination="-1" id="Lxe-tE-Ihd"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -32,6 +32,7 @@
 @property (strong, nonatomic) EffortModel * racer;
 @property (assign, nonatomic) CGRect originalLeftBtnFrame;
 @property (assign, nonatomic) CGRect originalRightBtnFrame;
+@property (strong, nonatomic) NSDate * entryDateTime;
 
 @end
 
@@ -67,13 +68,16 @@
 
 -(void)onTick:(NSTimer *)timer
 {
+    NSDate * date = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
-    self.lblTime.text = [dateFormatter stringFromDate:[NSDate date]];
+    self.lblTime.text = [dateFormatter stringFromDate:date];
     
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    self.dayString = [dateFormatter stringFromDate:[NSDate date]];
+    self.dayString = [dateFormatter stringFromDate:date];
+    
+    self.entryDateTime = date;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -157,7 +161,7 @@
     else entry.bitKey = @"out";
     entry.splitId = self.splitId;
     int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
-    entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%01d:00",self.dayString, self.lblTime.text,timezoneoffset];
+    entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",self.dayString, self.lblTime.text,timezoneoffset];
     entry.displayTime = self.lblTime.text;
     if (self.swchPaser.on)
         entry.withPacer = @"true";
@@ -170,6 +174,9 @@
     entry.splitName = course.splitName;
     entry.courseId = course.eventId;
     entry.splitId = course.splitId;
+    entry.entryTime = self.entryDateTime;
+    
+    entry.timeEntered = [NSDate date];
     
     if (self.racer)
     {
