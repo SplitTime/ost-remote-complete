@@ -68,7 +68,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wdd-wJ-F0G">
-                    <rect key="frame" x="94" y="483" width="186" height="53"/>
+                    <rect key="frame" x="94" y="500" width="186" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <state key="normal" image="Begin Tracking">
@@ -101,7 +101,7 @@
     </objects>
     <resources>
         <image name="Background" width="375" height="667"/>
-        <image name="Begin Tracking" width="164" height="35"/>
+        <image name="Begin Tracking" width="194" height="40"/>
         <image name="Close" width="73" height="22"/>
         <image name="OST Logo" width="226" height="259"/>
         <image name="Triangle" width="14" height="8"/>

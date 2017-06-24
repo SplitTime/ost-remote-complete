@@ -44,7 +44,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gIJ-ml-Q4J">
-                    <rect key="frame" x="119" y="466" width="136" height="50"/>
+                    <rect key="frame" x="119" y="500" width="136" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <state key="normal" image="Login">
@@ -86,7 +86,7 @@
     </objects>
     <resources>
         <image name="Background" width="375" height="667"/>
-        <image name="Login" width="100" height="35"/>
+        <image name="Login" width="150" height="40"/>
         <image name="OST Logo" width="226" height="259"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
