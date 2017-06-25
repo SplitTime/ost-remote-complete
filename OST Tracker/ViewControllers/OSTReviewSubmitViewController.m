@@ -44,6 +44,22 @@
     [self.txtSortBy setItemList:@[@"Name", @"Time Displayed", @"Time Entered", @"Bib #"]];
     self.txtSortBy.selectedRow = 1;
     
+    UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
+    [keyboardToolbar sizeToFit];
+    UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                      target:nil action:nil];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                      target:self action:@selector(onDoneSelectedSortBy:)];
+    keyboardToolbar.items = @[flexBarButton, doneBarButton];
+    self.txtSortBy.inputAccessoryView = keyboardToolbar;
+}
+
+- (void) onDoneSelectedSortBy:(id) sender
+{
+    [self.txtSortBy resignFirstResponder];
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,10 +89,34 @@
     
     entries = nil;
     
+    NSMutableArray * splitEntries = nil;
+    
+    NSString * sortKey = @"fullName";
+    
+    if (self.txtSortBy.selectedRow == 0)
+    {
+        sortKey = @"fullName";
+    }
+    else if (self.txtSortBy.selectedRow == 1)
+    {
+        sortKey = @"entryTime";
+    }
+    else if (self.txtSortBy.selectedRow == 2)
+    {
+        sortKey = @"timeEntered";
+    }
+    else if (self.txtSortBy.selectedRow == 3)
+    {
+        sortKey = @"bibNumberDecimal";
+    }
+    
     for (NSString * title in self.splitTitles)
     {
-        [self.entries addObject:[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && splitName == %@",[CurrentCourse getCurrentCourse].eventId,title]]];
+        splitEntries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && splitName == %@",[CurrentCourse getCurrentCourse].eventId,title]].mutableCopy;
+        [splitEntries sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]]];
+        [self.entries addObject:splitEntries];
     }
+    
     
     self.lblTitle.text = [CurrentCourse getCurrentCourse].eventName;
     

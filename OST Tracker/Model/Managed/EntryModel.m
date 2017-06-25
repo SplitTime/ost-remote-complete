@@ -9,5 +9,9 @@
 @implementation EntryModel
 
 // Custom logic goes here.
+- (NSNumber*)bibNumberDecimal
+{
+    return [NSDecimalNumber decimalNumberWithString:self.bibNumber];
+}
 
 @end

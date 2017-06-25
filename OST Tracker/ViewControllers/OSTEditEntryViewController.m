@@ -17,6 +17,7 @@
 @property (strong, nonatomic) EntryModel * entry;
 @property (weak, nonatomic) IBOutlet UITextField *txtTime;
 @property (strong, nonatomic) CustomUIDatePicker * customPicker;
+@property (strong, nonatomic) EffortModel * effort;
 
 @end
 
@@ -76,6 +77,15 @@
 - (IBAction)onUpdate:(id)sender
 {
     self.entry.bibNumber = self.txtBibNumber.text;
+    
+    if (self.effort)
+    {
+        self.entry.fullName = self.effort.fullName;
+    }
+    else
+    {
+        self.entry.fullName = nil;
+    }
     
     self.entry.entryTime = [self.txtDate.date dateByAddingTimeInterval:self.customPicker.getPickerTimeInMS/1000];
     
@@ -166,12 +176,13 @@
         if (effort)
         {
             self.lblRunner.text = [NSString stringWithFormat:@"Racer Found: %@",effort.fullName];
-            
+            self.effort = effort;
         }
         else
         {
             self.lblRunner.text = @"Racer Not Found!";
             self.lblRunner.textColor = [UIColor redColor];
+            self.effort = nil;
         }
     }
 

@@ -63,7 +63,6 @@
     
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
-    
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -189,6 +188,8 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     
     self.txtBibNumber.text = @"";
+    self.swchPaser.on = NO;
+    self.swchStoppedHere.on = NO;
     
     [self txtBibNumberChanged:nil];
 }
