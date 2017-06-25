@@ -28,12 +28,16 @@
 
 - (NSURLSessionDataTask*)getEventsDetails:(NSString*)eventId completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
 {
-    NSURLSessionDataTask *dataTask = [self GET:[NSString stringWithFormat:OSTEventDetailsEndpoint,eventId] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-                                      {
-                                          onCompletion(responseObject);
-                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                          onError(error);
-                                      }];
+    NSURLSessionDataTask *dataTask = [self autoLoginWithCompletionBlock:^(id object) {
+        [self GET:[NSString stringWithFormat:OSTEventDetailsEndpoint,eventId] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+                                          {
+                                              onCompletion(responseObject);
+                                          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                              onError(error);
+                                          }];
+    } errorBlock:^(NSError *error) {
+        onError(error);
+    }];
     
     [dataTask resume];
     return dataTask;

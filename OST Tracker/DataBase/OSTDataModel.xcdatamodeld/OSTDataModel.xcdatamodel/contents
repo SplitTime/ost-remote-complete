@@ -100,6 +100,12 @@
                 <entry key="mappedKeyName" value="relationships.splits.data"/>
             </userInfo>
         </attribute>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="dateFormat" value="yyyy-MM-dd'T'HH:mm:ss'.'SSSZZZ"/>
+                <entry key="mappedKeyName" value="attributes.startTime"/>
+            </userInfo>
+        </attribute>
         <userInfo>
             <entry key="relatedByAttribute" value="eventId"/>
         </userInfo>
@@ -109,6 +115,6 @@
         <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="150"/>
         <element name="EffortModel" positionX="-54" positionY="54" width="128" height="90"/>
         <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="285"/>
-        <element name="EventModel" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="EventModel" positionX="-63" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

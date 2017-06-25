@@ -125,6 +125,8 @@
             [pickerEvents addObject:[EventModel MR_importFromObject:dataObject inContext:self.tempContext]];
         }
         
+        [pickerEvents sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO]]];
+        
         self.events = pickerEvents;
         
         NSMutableArray * eventStrings = [NSMutableArray new];
