@@ -52,7 +52,12 @@
 
 - (IBAction)onLogout:(id)sender
 {
-    [[AppDelegate getInstance] logout];
+    [OHAlertView showAlertWithTitle:@"Are you sure you would like to log out?" message:@"You will not be able to log back in or add entries until you have a data connection again." cancelButton:@"Cancel" otherButtons:@[@"Logout"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
+        if (buttonIndex == 1)
+        {
+            [[AppDelegate getInstance] logout];
+        }
+    }];
 }
 
 /*

@@ -8,6 +8,7 @@
 
 #import "OSTNetworkManager+Login.h"
 #import "OSTSessionManager.h"
+#import "OSTLoginViewController.h"
 
 #define OSTLoginEndpoint @"auth"
 
@@ -40,7 +41,24 @@
     return [self loginWithEmail:[OSTSessionManager getStoredUserName] password:[OSTSessionManager getStoredPassword] completionBlock:^(id object) {
             [[AppDelegate getInstance].getNetworkManager addTokenToHeader:object[@"token"]];
             onCompletion(object);
-    } errorBlock:onError];
+    } errorBlock:^(NSError *error) {
+        if([[error errorsFromDictionary] containsString:@" errors: Invalid email or password"])
+        {
+            UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+            
+            while (topController.presentedViewController) {
+                topController = topController.presentedViewController;
+            }
+
+            OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
+            [topController presentViewController:loginVC animated:YES completion:nil];
+            loginVC.completionBlock = onCompletion;
+        }
+        else
+        {
+            onError(error);
+        }
+    }];
 }
 
 @end

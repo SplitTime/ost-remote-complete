@@ -145,7 +145,7 @@
             [self loadData];
         } errorBlock:^(NSError *error) {
             [DejalBezelActivityView removeViewAnimated:YES];
-            [OHAlertView showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Can't submit, try again later. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
+            [OHAlertView showAlertWithTitle:@"Unable to sync" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
             [self loadData];
         }];
     } errorBlock:^(NSError *error) {

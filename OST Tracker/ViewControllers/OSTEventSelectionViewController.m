@@ -25,6 +25,7 @@
 @property (strong, nonatomic) EventModel * selectedEvent;
 @property (strong, nonatomic) NSArray * liveAttributes;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTriangleAidStation;
+@property (assign, nonatomic) BOOL eventsLoaded;
 
 @end
 
@@ -90,6 +91,11 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    if (self.eventsLoaded)
+    {
+        return;
+    }
+    
     if (self.changeStation)
     {
         CurrentCourse * course = [CurrentCourse getCurrentCourse];
@@ -138,9 +144,13 @@
         
         [self.txtEvent setItemList:eventStrings];
         [self.txtEvent becomeFirstResponder];
+        self.eventsLoaded = YES;
         
     } errorBlock:^(NSError *error) {
         [DejalBezelActivityView removeViewAnimated:YES];
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get the events" cancelButton:@"Ok" otherButtons:nil buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
+            [self viewDidAppear:animated];
+        }];
     }];
 }
 

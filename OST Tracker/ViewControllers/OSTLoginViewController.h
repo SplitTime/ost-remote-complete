@@ -10,4 +10,6 @@
 
 @interface OSTLoginViewController : UIViewController
 
+@property (strong, nonatomic) OSTCompletionArrayBlock completionBlock;
+
 @end

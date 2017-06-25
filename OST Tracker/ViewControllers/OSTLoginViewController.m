@@ -71,8 +71,9 @@
         [OSTSessionManager setUserName:self.txtEmail.text andPassword:self.txtPassword.text];
         [[AppDelegate getInstance].getNetworkManager addTokenToHeader:object[@"token"]];
         [DejalBezelActivityView removeViewAnimated:YES];
-        if ([CurrentCourse getCurrentCourse])
+        if (self.completionBlock)
         {
+            self.completionBlock(nil);
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
@@ -81,7 +82,7 @@
         }
     } errorBlock:^(NSError *error) {
         [DejalBezelActivityView removeViewAnimated:YES];
-        [OHAlertView showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Can't Login. Make sure you are connected to the internet. %@", error.errorsFromDictionary] dismissButton:@"ok"];
+        [OHAlertView showAlertWithTitle:@"Unable to login" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. %@", error.errorsFromDictionary] dismissButton:@"Ok"];
     }];
 }
 
