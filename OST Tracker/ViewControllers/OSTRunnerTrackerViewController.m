@@ -153,7 +153,7 @@
     }
     
     CurrentCourse * course = [CurrentCourse MR_findFirst];
-    
+
     EntryModel * entry = [EntryModel MR_createEntity];
     entry.bibNumber = self.txtBibNumber.text;
     if (sender == self.btnLeft)
@@ -229,7 +229,6 @@
             else
             {
                 self.lblInTimeBadge.text = @"!";
-                self.lblInTimeBadge.backgroundColor = [UIColor clearColor];
             }
         }
         
@@ -243,7 +242,6 @@
             else
             {
                 self.lblOutTimeBadge.text = @"!";
-                self.lblOutTimeBadge.backgroundColor = [UIColor clearColor];
             }
         }
 

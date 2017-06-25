@@ -90,7 +90,7 @@
 
 - (IBAction)onSubmit:(id)sender
 {
-    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]];
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]].mutableCopy;
     if (entries.count == 0)
     {
         [OHAlertView showAlertWithTitle:@"Error" message:@"Nothing to send" dismissButton:@"Ok"];
@@ -99,28 +99,58 @@
     
     [DejalBezelActivityView activityViewForView:self.view];
     [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id object) {
-        [DejalBezelActivityView removeViewAnimated:YES];
-        [[AppDelegate getInstance].getNetworkManager submitEntries:entries completionBlock:^(id object) {
+        [self submitEntries:entries completionBlock:^(id object) {
             [DejalBezelActivityView removeViewAnimated:YES];
             [OHAlertView showAlertWithTitle:nil message:@"Submitted" dismissButton:@"Ok"];
-            
-            for (EntryModel * entry in entries)
-            {
-                entry.submitted = @(YES);
-            }
-            
-            [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
-            [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
-            
             [self loadData];
-            
         } errorBlock:^(NSError *error) {
             [DejalBezelActivityView removeViewAnimated:YES];
             [OHAlertView showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Can't submit, try again later. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
+            [self loadData];
         }];
     } errorBlock:^(NSError *error) {
         [DejalBezelActivityView removeViewAnimated:YES];
         [OHAlertView showAlertWithTitle:@"Error" message:@"Can't submit, try again later" dismissButton:@"Ok"];
+        [self loadData];
+    }];
+}
+
+- (void) submitEntries:(NSMutableArray*) entries completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+{
+    NSArray * subEntries = nil;
+    
+    long entriesCount = entries.count;
+    
+    if (entriesCount > 300)
+    {
+        subEntries = [entries subarrayWithRange:NSMakeRange(0, 300)];
+    }
+    else
+    {
+        subEntries = [entries subarrayWithRange:NSMakeRange(0, entriesCount)];
+    }
+    
+    if (subEntries.count == 0)
+    {
+        onCompletion(nil);
+        return;
+    }
+    
+    [[AppDelegate getInstance].getNetworkManager submitEntries:subEntries completionBlock:^(id object) {
+    
+        for (EntryModel * entry in subEntries)
+        {
+            entry.submitted = @(YES);
+            [entries removeObject:entry];
+        }
+        
+        [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+        [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+        
+        [self submitEntries:entries completionBlock:onCompletion errorBlock:onError];
+        
+    } errorBlock:^(NSError *error) {
+        onError(error);
     }];
 }
 
