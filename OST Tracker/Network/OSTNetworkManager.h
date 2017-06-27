@@ -15,6 +15,7 @@ typedef void (^OSTCompletionNumberBlock)(NSNumber* number);
 typedef void (^OSTCompletionArrayBlock)(NSArray* records);
 typedef void (^OSTCompletionDictionaryBlock)(NSDictionary* records);
 typedef void (^OSTCompletionObjectBlock)(id object);
+typedef void (^OSTProgressBlock)(NSProgress * _Nonnull uploadProgress);
 typedef void (^OSTErrorBlock)(NSError* error);
 
 @protocol OSTManagedObjectUpdateKeys

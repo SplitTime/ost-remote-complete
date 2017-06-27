@@ -22,6 +22,7 @@
 @interface AppDelegate ()
 
 @property (strong, nonatomic) OSTNetworkManager* networkManager;
+@property (strong, nonatomic) OSTRunnerTrackerViewController * OSTTrackerVC;
 
 @end
 
@@ -76,14 +77,16 @@
     
     self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
     
-    self.rightMenuVC.contentViewController = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
+    if (!self.OSTTrackerVC)
+        self.OSTTrackerVC = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
+    self.rightMenuVC.contentViewController = self.OSTTrackerVC;
     
     self.window.rootViewController = self.rightMenuVC;
 }
 
 - (void) showTracker
 {
-    self.rightMenuVC.contentViewController = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
+    self.rightMenuVC.contentViewController = self.OSTTrackerVC;
 }
 
 - (void) showReview

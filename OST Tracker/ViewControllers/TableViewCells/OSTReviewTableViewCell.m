@@ -29,7 +29,9 @@
     {
         self.lblName.text = @"Bib not found";
     }
-    self.lblNumber.text = [NSString stringWithFormat:@"#%@",entry.bibNumber];
+    if (![entry.bibNumber isEqualToString:@"-1"])
+        self.lblNumber.text = [NSString stringWithFormat:@"#%@",entry.bibNumber];
+    else self.lblNumber.text = @"";
     self.lblInOrOut.text = [entry.bitKey capitalizedString];
     
     if (entry.submitted.boolValue)

@@ -15,7 +15,6 @@
 
 @interface OSTRunnerTrackerViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *txtBibNumber;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
 @property (strong, nonatomic) NSTimer * timer;
@@ -140,21 +139,21 @@
 
 - (IBAction)onRight:(id)sender
 {
+    [self.txtBibNumber resignFirstResponder];
     [[AppDelegate getInstance].rightMenuVC showRightMenu:YES];
 }
 
 - (IBAction)onEntryButton:(id)sender
 {
-    if (self.txtBibNumber.text.length == 0)
-    {
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Please type a BIB number" dismissButton:@"Ok"];
-        return;
-    }
-    
     CurrentCourse * course = [CurrentCourse MR_findFirst];
 
     EntryModel * entry = [EntryModel MR_createEntity];
-    entry.bibNumber = self.txtBibNumber.text;
+    
+    if (self.txtBibNumber.text.length == 0)
+    {
+        entry.bibNumber = @"-1";
+    }
+    else entry.bibNumber = self.txtBibNumber.text;
     if (sender == self.btnLeft)
         entry.bitKey = @"in";
     else entry.bitKey = @"out";
@@ -210,53 +209,42 @@
         
         if (effort)
         {
-            self.lblRunnerInfo.text = [NSString stringWithFormat:@"Racer Found: %@",effort.fullName];
+            self.lblRunnerInfo.text = [NSString stringWithFormat:@"Bib Found: %@",effort.fullName];
             self.racer = effort;
             
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
+            {
+                self.lblInTimeBadge.hidden = NO;
+                if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
+                {
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
+                }
+                else
+                {
+                    self.lblInTimeBadge.text = @"!";
+                }
+            }
+            
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
+            {
+                self.lblOutTimeBadge.hidden = NO;
+                if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
+                {
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
+                }
+                else
+                {
+                    self.lblOutTimeBadge.text = @"!";
+                }
+            }
+
         }
         else
         {
-            self.lblRunnerInfo.text = @"Racer Not Found!";
+            self.lblRunnerInfo.text = @"Bib Not Found";
             self.lblRunnerInfo.textColor = [UIColor redColor];
         }
-        
-        if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
-        {
-            self.lblInTimeBadge.hidden = NO;
-            if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
-            {
-                self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
-            }
-            else
-            {
-                self.lblInTimeBadge.text = @"!";
-            }
-        }
-        
-        if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count])
-        {
-            self.lblOutTimeBadge.hidden = NO;
-            if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
-            {
-                self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
-            }
-            else
-            {
-                self.lblOutTimeBadge.text = @"!";
-            }
-        }
-
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

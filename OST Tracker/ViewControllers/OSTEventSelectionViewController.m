@@ -16,16 +16,12 @@
 #import "CourseSplits.h"
 
 @interface OSTEventSelectionViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *btnNext;
-@property (weak, nonatomic) IBOutlet IQDropDownTextField *txtEvent;
-@property (weak, nonatomic) IBOutlet IQDropDownTextField *txtStation;
-@property (strong, nonatomic) NSManagedObjectContext * tempContext;
-@property (strong, nonatomic) NSMutableArray * events;
-@property (weak, nonatomic) IBOutlet UIButton *btnCancel;
-@property (strong, nonatomic) EventModel * selectedEvent;
-@property (strong, nonatomic) NSArray * liveAttributes;
-@property (weak, nonatomic) IBOutlet UIImageView *imgTriangleAidStation;
-@property (assign, nonatomic) BOOL eventsLoaded;
+@property (weak, nonatomic) IBOutlet UILabel *progressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lblSelectEvent;
+@property (weak, nonatomic) IBOutlet UILabel *lblSelectAidStation;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *eventTriangle;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
 
 @end
 
@@ -61,18 +57,24 @@
     self.btnNext.alpha = 0;
     self.txtStation.alpha = 0;
     
-    if (!self.changeStation)
+    if (self.changeStation)
+    {
+        self.eventTriangle.hidden = YES;
+        self.lblSelectEvent.hidden = YES;
+        self.imgTriangleAidStation.hidden = NO;
+        self.txtEvent.textAlignment = NSTextAlignmentCenter;
+    }
+    else
     {
         self.btnCancel.hidden = YES;
+        self.txtEvent.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.txtEvent.layer.borderWidth = 1;
+        self.txtEvent.layer.cornerRadius = 3;
     }
     
     self.txtStation.layer.borderColor = [UIColor whiteColor].CGColor;
     self.txtStation.layer.borderWidth = 1;
     self.txtStation.layer.cornerRadius = 3;
-    
-    self.txtEvent.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.txtEvent.layer.borderWidth = 1;
-    self.txtEvent.layer.cornerRadius = 3;
     
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
     self.txtStation.leftView = paddingView;
@@ -81,6 +83,9 @@
     UIView *paddingViewForPassword = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
     self.txtEvent.leftView = paddingViewForPassword;
     self.txtEvent.leftViewMode = UITextFieldViewModeAlways;
+    
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 3.0f);
+    self.progressBar.transform = transform;
 
 }
 
@@ -91,6 +96,8 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     if (self.eventsLoaded)
     {
         return;
@@ -116,42 +123,9 @@
         return;
     }
     
-    [super viewDidAppear:animated];
-    
-    self.tempContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
-    
-    [DejalBezelActivityView activityViewForView:self.view];
-    [[AppDelegate getInstance].getNetworkManager getAllEventsWithCompletionBlock:^(id object) {
-        [DejalBezelActivityView removeViewAnimated:YES];
-        
-        NSMutableArray * pickerEvents = [NSMutableArray new];
-        
-        for (id dataObject in object[@"data"])
-        {
-            [pickerEvents addObject:[EventModel MR_importFromObject:dataObject inContext:self.tempContext]];
-        }
-        
-        [pickerEvents sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO]]];
-        
-        self.events = pickerEvents;
-        
-        NSMutableArray * eventStrings = [NSMutableArray new];
-        
-        for (EventModel * event in pickerEvents)
-        {
-            [eventStrings addObject:event.name];
-        }
-        
-        [self.txtEvent setItemList:eventStrings];
-        [self.txtEvent becomeFirstResponder];
-        self.eventsLoaded = YES;
-        
-    } errorBlock:^(NSError *error) {
-        [DejalBezelActivityView removeViewAnimated:YES];
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get the events" cancelButton:@"Ok" otherButtons:nil buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
-            [self viewDidAppear:animated];
-        }];
-    }];
+    [self.txtEvent setItemList:self.eventStrings];
+    [self.txtEvent becomeFirstResponder];
+    self.eventsLoaded = YES;
 }
 
 -(void)onDoneSelectedEvent
@@ -195,6 +169,36 @@
     }];
 }
 
+- (void) showSelectFields
+{
+    self.lblSelectEvent.hidden = NO;
+    self.lblSelectAidStation.hidden = NO;
+    self.btnNext.hidden = NO;
+    self.txtEvent.hidden = NO;
+    self.txtStation.hidden = NO;
+    self.eventTriangle.hidden = NO;
+    self.imgTriangleAidStation.hidden = NO;
+    
+    self.progressLabel.hidden = YES;
+    [self.activityIndicator stopAnimating];
+    self.progressBar.hidden = YES;
+}
+
+- (void) showLoadingFields
+{
+    self.lblSelectEvent.hidden = YES;
+    self.lblSelectAidStation.hidden = YES;
+    self.btnNext.hidden = YES;
+    self.txtEvent.hidden = YES;
+    self.txtStation.hidden = YES;
+    self.eventTriangle.hidden = YES;
+    self.imgTriangleAidStation.hidden = YES;
+    
+    self.progressLabel.hidden = NO;
+    [self.activityIndicator startAnimating];
+    self.progressBar.hidden = NO;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -233,13 +237,17 @@
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
 
         [self dismissViewControllerAnimated:YES completion:nil];
+        [[AppDelegate getInstance] showTracker];
         return;
     }
     
-    [DejalBezelActivityView activityViewForView:self.view];
+    self.progressLabel.text = [NSString stringWithFormat:@"Downloading %@ Data",self.txtEvent.selectedItem];
+    [self showLoadingFields];
+    self.progressBar.progress = 0.5;
     [[AppDelegate getInstance].getNetworkManager getEventsDetails:self.selectedEvent.eventId completionBlock:^(id object)
     {
-        [DejalBezelActivityView removeViewAnimated:YES];
+        self.progressBar.progress = 1;
+        [self.activityIndicator stopAnimating];
         CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
         
         for (id dataObject in object[@"included"])
@@ -262,6 +270,7 @@
         
         [[AppDelegate getInstance] loadLeftMenu];
     } errorBlock:^(NSError *error) {
+        [self showSelectFields];
         [DejalBezelActivityView removeViewAnimated:YES];
         [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get course details" dismissButton:@"Ok"];
     }];

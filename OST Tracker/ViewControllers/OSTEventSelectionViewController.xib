@@ -11,9 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTEventSelectionViewController">
             <connections>
+                <outlet property="activityIndicator" destination="A3K-LK-QAp" id="S5v-J2-dEs"/>
                 <outlet property="btnCancel" destination="RTb-VC-Ptu" id="U8E-Ja-Pay"/>
                 <outlet property="btnNext" destination="wdd-wJ-F0G" id="Jp6-wS-Qg2"/>
+                <outlet property="eventTriangle" destination="f5z-G2-apk" id="B1u-R1-AFq"/>
                 <outlet property="imgTriangleAidStation" destination="Yfn-hb-qt3" id="ce0-OA-puA"/>
+                <outlet property="lblSelectAidStation" destination="7h6-P6-fR8" id="Xwl-Gt-Tux"/>
+                <outlet property="lblSelectEvent" destination="mOO-eE-niY" id="3kY-MA-eiN"/>
+                <outlet property="progressBar" destination="Rqf-xL-VFs" id="b9s-yy-Krj"/>
+                <outlet property="progressLabel" destination="8Bi-RF-nCs" id="s7F-jq-EYO"/>
                 <outlet property="txtEvent" destination="hDv-ja-cN4" id="tVl-3M-b6f"/>
                 <outlet property="txtStation" destination="BGi-su-uxv" id="G7D-zU-rNB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background" id="R4F-Rr-Q8U">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Background" id="R4F-Rr-Q8U">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -35,6 +41,17 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Downloading Event Data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="8Bi-RF-nCs">
+                    <rect key="frame" x="16" y="379" width="327" height="21"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" id="A3K-LK-QAp">
+                    <rect key="frame" x="169" y="330" width="37" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select Aid Station:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7h6-P6-fR8">
                     <rect key="frame" x="16" y="397" width="132" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -87,13 +104,19 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RTb-VC-Ptu">
-                    <rect key="frame" x="281" y="20" width="94" height="30"/>
+                    <rect key="frame" x="275" y="20" width="94" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="Close"/>
+                    <state key="normal" image="Right Cancel"/>
                     <connections>
                         <action selector="onCancel:" destination="-1" eventType="touchUpInside" id="aTL-rT-Kde"/>
                     </connections>
                 </button>
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" id="Rqf-xL-VFs">
+                    <rect key="frame" x="30" y="419" width="312" height="2"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="progressTintColor" red="0.91284191609999998" green="0.94112306830000003" blue="0.9536196589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="trackTintColor" red="0.1234888062" green="0.36268717049999999" blue="0.48761421440000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </progressView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>
@@ -102,8 +125,8 @@
     <resources>
         <image name="Background" width="375" height="667"/>
         <image name="Begin Tracking" width="194" height="40"/>
-        <image name="Close" width="73" height="22"/>
         <image name="OST Logo" width="226" height="259"/>
+        <image name="Right Cancel" width="82" height="22"/>
         <image name="Triangle" width="14" height="8"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

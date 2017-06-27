@@ -8,6 +8,7 @@
 
 #import "OSTRightMenuViewController.h"
 #import "OSTEventSelectionViewController.h"
+#import "OSTRunnerTrackerViewController.h"
 
 @interface OSTRightMenuViewController ()
 
@@ -28,6 +29,11 @@
 - (IBAction)onClose:(id)sender
 {
     [[AppDelegate getInstance].rightMenuVC hideMenu:YES];
+    
+    if ([[AppDelegate getInstance].rightMenuVC.contentViewController isKindOfClass:[OSTRunnerTrackerViewController class]])
+    {
+        [((OSTRunnerTrackerViewController*)([AppDelegate getInstance].rightMenuVC.contentViewController)).txtBibNumber becomeFirstResponder];
+    }
 }
 
 - (IBAction)onSubmit:(id)sender

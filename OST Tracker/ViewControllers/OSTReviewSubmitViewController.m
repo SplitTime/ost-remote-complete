@@ -19,7 +19,15 @@
 
 @interface OSTReviewSubmitViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblSyncing;
+@property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *lblYourDataIsSynced;
+@property (weak, nonatomic) IBOutlet UIImageView *imgCheckMark;
+@property (weak, nonatomic) IBOutlet UILabel *lblSuccess;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
+@property (weak, nonatomic) IBOutlet UIButton *btnReturnToLiveEntry;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtSortBy;
 @property (strong, nonatomic) NSMutableArray * entries;
 @property (strong, nonatomic) NSArray * splitTitles;
@@ -123,27 +131,73 @@
     [self.tableView reloadData];
 }
 
+- (void) showLoadingScreen
+{
+    [self.view addSubview:self.loadingView];
+    [self.view bringSubviewToFront:self.loadingView];
+    self.loadingView.alpha = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.loadingView.alpha = 1;
+    }];
+}
+
+- (void) showLoadingValues
+{
+    self.imgCheckMark.hidden = YES;
+    self.lblSuccess.hidden = YES;
+    self.lblYourDataIsSynced.hidden = YES;
+    self.btnReturnToLiveEntry.hidden = YES;
+    
+    [self.activityIndicator startAnimating];
+    self.lblSyncing.hidden = NO;
+    self.progressBar.hidden = NO;
+}
+
+- (void) showFinishLoadingValues
+{
+    self.imgCheckMark.hidden = NO;
+    self.lblSuccess.hidden = NO;
+    self.lblYourDataIsSynced.hidden = NO;
+    self.btnReturnToLiveEntry.hidden = NO;
+    
+    [self.activityIndicator stopAnimating];
+    self.lblSyncing.hidden = YES;
+    self.progressBar.hidden = YES;
+}
+
 - (IBAction)onRightMenu:(id)sender
 {
     [[AppDelegate getInstance].rightMenuVC showRightMenu:YES];
 }
 
+- (IBAction)onReturnToLiveEntry:(id)sender
+{
+    [self.activityIndicator stopAnimating];
+    self.loadingView.hidden = YES;
+    [self.loadingView removeFromSuperview];
+    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+    [[AppDelegate getInstance] showTracker];
+    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+}
+
 - (IBAction)onSubmit:(id)sender
 {
-    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]].mutableCopy;
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     if (entries.count == 0)
     {
         [OHAlertView showAlertWithTitle:@"Error" message:@"Nothing to send" dismissButton:@"Ok"];
         return;
     }
     
-    [DejalBezelActivityView activityViewForView:self.view];
+    [self showLoadingScreen];
+    [self showLoadingValues];
     [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id object) {
         [self submitEntries:entries completionBlock:^(id object) {
+            [self showFinishLoadingValues];
             [DejalBezelActivityView removeViewAnimated:YES];
-            [OHAlertView showAlertWithTitle:nil message:@"Submitted" dismissButton:@"Ok"];
             [self loadData];
         } errorBlock:^(NSError *error) {
+            [self.loadingView removeFromSuperview];
             [DejalBezelActivityView removeViewAnimated:YES];
             [OHAlertView showAlertWithTitle:@"Unable to sync" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
             [self loadData];
@@ -164,10 +218,12 @@
     if (entriesCount > 300)
     {
         subEntries = [entries subarrayWithRange:NSMakeRange(0, 300)];
+        self.progressBar.progress = 300.0/entriesCount;
     }
     else
     {
         subEntries = [entries subarrayWithRange:NSMakeRange(0, entriesCount)];
+        self.progressBar.progress = 1;
     }
     
     if (subEntries.count == 0)
@@ -237,5 +293,6 @@
     [self presentViewController:editVC animated:YES completion:nil];
     [editVC configureWithEntry:self.entries[indexPath.section][indexPath.row]];
 }
+
 
 @end

@@ -13,9 +13,9 @@
 
 @implementation OSTNetworkManager (Events)
 
-- (NSURLSessionDataTask*)getAllEventsWithCompletionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+- (NSURLSessionDataTask*)getAllEventsWithCompletionBlock:(OSTCompletionObjectBlock)onCompletion progressBlock:(OSTProgressBlock)onProgress errorBlock:(OSTErrorBlock)onError
 {
-    NSURLSessionDataTask *dataTask = [self GET:OSTEventsEndpoint parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *dataTask = [self GET:OSTEventsEndpoint parameters:nil progress:onProgress success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
       onCompletion(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

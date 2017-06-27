@@ -10,4 +10,6 @@
 
 @interface OSTRunnerTrackerViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *txtBibNumber;
+
 @end

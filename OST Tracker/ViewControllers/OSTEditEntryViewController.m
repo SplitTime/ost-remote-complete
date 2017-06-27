@@ -76,7 +76,9 @@
 
 - (IBAction)onUpdate:(id)sender
 {
-    self.entry.bibNumber = self.txtBibNumber.text;
+    [self onDoneSelectedTime:nil];
+    if (self.txtBibNumber.text.length)
+        self.entry.bibNumber = self.txtBibNumber.text;
     
     if (self.effort)
     {
@@ -143,7 +145,8 @@
 {
     self.entry = entry;
     
-    self.txtBibNumber.text = entry.bibNumber;
+    if (![entry.bibNumber isEqualToString:@"-1"])
+        self.txtBibNumber.text = entry.bibNumber;
     self.lblTitle.text = entry.courseName;
     self.swchPacer.on = entry.withPacer.boolValue;
     self.swchStoppedHere.on = entry.stoppedHere.boolValue;
@@ -185,7 +188,6 @@
             self.effort = nil;
         }
     }
-
 }
 
 - (void)dealloc
