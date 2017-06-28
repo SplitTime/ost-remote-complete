@@ -101,6 +101,7 @@
     [self.txtPassword resignFirstResponder];
     [self.txtEmail resignFirstResponder];
     [self showLoadingFields];
+    self.loadingLabel.text = @"Trying to log in";
     [[AppDelegate getInstance].getNetworkManager loginWithEmail:self.txtEmail.text password:self.txtPassword.text completionBlock:^(id object)
     {
         self.progressBar.progress = 0.5;
@@ -116,8 +117,7 @@
             [self loadEventData];
         }
     } errorBlock:^(NSError *error) {
-        [self showLoadingFields];
-        [DejalBezelActivityView removeViewAnimated:YES];
+        [self showLoginFields];
         [OHAlertView showAlertWithTitle:@"Unable to login" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. %@", error.errorsFromDictionary] dismissButton:@"Ok"];
     }];
 }
@@ -127,7 +127,7 @@
     OSTEventSelectionViewController * eventVC = [[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil] ;
     
     eventVC.tempContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
-    
+    self.loadingLabel.text = @"Downloading Event Data";
     [[AppDelegate getInstance].getNetworkManager getAllEventsWithCompletionBlock:^(id object) {
         [self.activityIndicator stopAnimating];
         self.progressBar.progress = 1;
@@ -155,7 +155,7 @@
     } progressBlock:^(NSProgress * _Nonnull uploadProgress) {
         
     } errorBlock:^(NSError *error) {
-        [DejalBezelActivityView removeViewAnimated:YES];
+        [self showLoginFields];
         [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get the events" cancelButton:@"Try Again" otherButtons:nil buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
                 [self loadEventData];
             }];
