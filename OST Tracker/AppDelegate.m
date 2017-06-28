@@ -86,7 +86,9 @@
 
 - (void) showTracker
 {
+    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
     self.rightMenuVC.contentViewController = self.OSTTrackerVC;
+    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
 }
 
 - (void) showReview

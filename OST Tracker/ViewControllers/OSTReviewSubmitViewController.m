@@ -78,6 +78,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    self.loadingView.size = self.view.size;
     [self loadData];
 }
 

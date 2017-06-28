@@ -60,9 +60,12 @@
     if (self.changeStation)
     {
         self.eventTriangle.hidden = YES;
-        self.lblSelectEvent.hidden = YES;
+        self.lblSelectEvent.textAlignment = NSTextAlignmentCenter;
+        self.lblSelectEvent.text = @"(Please logout to change events)";
         self.imgTriangleAidStation.hidden = NO;
         self.txtEvent.textAlignment = NSTextAlignmentCenter;
+        self.txtEvent.font = [UIFont boldSystemFontOfSize:16];
+        [self.btnNext setImage:[UIImage imageNamed:@"Live Entry"] forState:UIControlStateNormal];
     }
     else
     {
