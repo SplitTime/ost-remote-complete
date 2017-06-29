@@ -73,10 +73,12 @@
 
 - (void) loadLeftMenu
 {
-    self.rightMenuVC = [[APLSlideMenuViewController alloc] init];
-    
-    self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
-    
+    if (!self.rightMenuVC)
+    {
+        self.rightMenuVC = [[APLSlideMenuViewController alloc] init];
+        self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
+    }
+
     if (!self.OSTTrackerVC)
         self.OSTTrackerVC = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
     self.rightMenuVC.contentViewController = self.OSTTrackerVC;
