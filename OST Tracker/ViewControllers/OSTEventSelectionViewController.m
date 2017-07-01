@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lblSelectEvent;
 @property (weak, nonatomic) IBOutlet UILabel *lblSelectAidStation;
+@property (weak, nonatomic) IBOutlet UIButton *btnLogout;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *eventTriangle;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
@@ -70,6 +71,7 @@
     else
     {
         self.btnCancel.hidden = YES;
+        self.btnLogout.hidden = NO;
         self.txtEvent.layer.borderColor = [UIColor whiteColor].CGColor;
         self.txtEvent.layer.borderWidth = 1;
         self.txtEvent.layer.cornerRadius = 3;
@@ -200,6 +202,16 @@
     self.progressLabel.hidden = NO;
     [self.activityIndicator startAnimating];
     self.progressBar.hidden = NO;
+}
+
+- (IBAction)onLogout:(id)sender
+{
+    [OHAlertView showAlertWithTitle:@"Are you sure you would like to log out?" message:@"You will not be able to log back in or add entries until you have a data connection again." cancelButton:@"Cancel" otherButtons:@[@"Logout"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
+        if (buttonIndex == 1)
+        {
+            [[AppDelegate getInstance] logout];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

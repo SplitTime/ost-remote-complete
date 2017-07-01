@@ -20,6 +20,7 @@
 - (void) loadLeftMenu;
 - (void) showTracker;
 - (void) showReview;
+- (void) resetNetworkManager;
 
 @end
 

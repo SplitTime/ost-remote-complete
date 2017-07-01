@@ -528,7 +528,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = MEL2GJ9CJX;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -1083,7 +1083,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1108,8 +1108,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8c9f0374-b83f-4627-bfc1-8b66205566d2";
+				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev (Ad Hoc Cert)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1122,7 +1122,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1147,8 +1147,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "8c9f0374-b83f-4627-bfc1-8b66205566d2";
+				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev (Ad Hoc Cert)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

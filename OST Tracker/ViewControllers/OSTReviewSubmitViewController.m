@@ -50,7 +50,7 @@
     self.txtSortBy.leftViewMode = UITextFieldViewModeAlways;
     
     [self.txtSortBy setItemList:@[@"Name", @"Time Displayed", @"Time Entered", @"Bib #"]];
-    self.txtSortBy.selectedRow = 1;
+    self.txtSortBy.selectedRow = 3;
     
     UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
     [keyboardToolbar sizeToFit];
@@ -192,19 +192,20 @@
     
     [self showLoadingScreen];
     [self showLoadingValues];
+    
     [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id object) {
         [self submitEntries:entries completionBlock:^(id object) {
             [self showFinishLoadingValues];
-            [DejalBezelActivityView removeViewAnimated:YES];
             [self loadData];
         } errorBlock:^(NSError *error) {
             [self.loadingView removeFromSuperview];
-            [DejalBezelActivityView removeViewAnimated:YES];
+            [self showFinishLoadingValues];
             [OHAlertView showAlertWithTitle:@"Unable to sync" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
             [self loadData];
         }];
     } errorBlock:^(NSError *error) {
-        [DejalBezelActivityView removeViewAnimated:YES];
+        [self.loadingView removeFromSuperview];
+        [self showFinishLoadingValues];
         [OHAlertView showAlertWithTitle:@"Error" message:@"Can't submit, try again later" dismissButton:@"Ok"];
         [self loadData];
     }];

@@ -33,6 +33,11 @@
     return (AppDelegate*)[[UIApplication sharedApplication] delegate];
 }
 
+- (void) resetNetworkManager
+{
+    self.networkManager = [[OSTNetworkManager alloc] init];
+}
+
 - (OSTNetworkManager*) getNetworkManager
 {
     if (self.networkManager == nil)
@@ -105,6 +110,7 @@
     [EffortModel MR_truncateAll];
     [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+    [[AppDelegate getInstance].getNetworkManager addTokenToHeader:nil];
     
     OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
     self.window.rootViewController = loginVC;

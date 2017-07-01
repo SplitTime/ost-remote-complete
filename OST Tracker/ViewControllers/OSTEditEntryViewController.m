@@ -170,7 +170,7 @@
     self.lblRunner.textColor = [UIColor darkGrayColor];
     if (self.txtBibNumber.text.length == 0)
     {
-        self.lblRunner.text = @"Add Bib Number to search for runner";
+        self.lblRunner.text = @"";
     }
     else
     {

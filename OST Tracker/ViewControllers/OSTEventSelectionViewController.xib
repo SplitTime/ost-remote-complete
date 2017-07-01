@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="A3K-LK-QAp" id="S5v-J2-dEs"/>
                 <outlet property="btnCancel" destination="RTb-VC-Ptu" id="U8E-Ja-Pay"/>
+                <outlet property="btnLogout" destination="cev-e2-Cct" id="fBq-2c-isW"/>
                 <outlet property="btnNext" destination="wdd-wJ-F0G" id="Jp6-wS-Qg2"/>
                 <outlet property="eventTriangle" destination="f5z-G2-apk" id="B1u-R1-AFq"/>
                 <outlet property="imgTriangleAidStation" destination="Yfn-hb-qt3" id="ce0-OA-puA"/>
@@ -117,6 +118,17 @@
                     <color key="progressTintColor" red="0.91284191609999998" green="0.94112306830000003" blue="0.9536196589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="trackTintColor" red="0.1234888062" green="0.36268717049999999" blue="0.48761421440000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </progressView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cev-e2-Cct">
+                    <rect key="frame" x="275" y="20" width="100" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Log out">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="sf3-1c-87o"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>

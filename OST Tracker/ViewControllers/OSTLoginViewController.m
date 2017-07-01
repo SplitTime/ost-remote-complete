@@ -118,7 +118,15 @@
         }
     } errorBlock:^(NSError *error) {
         [self showLoginFields];
-        [OHAlertView showAlertWithTitle:@"Unable to login" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. %@", error.errorsFromDictionary] dismissButton:@"Ok"];
+        
+        if (error.errorsFromDictionary.length != 0)
+        {
+            [OHAlertView showAlertWithTitle:@"Unable to login" message:error.errorsFromDictionary dismissButton:@"Ok"];
+        }
+        else
+        {
+            [OHAlertView showAlertWithTitle:@"Unable to login" message:@"Please try again later when you have a data or wi-fi connection" dismissButton:@"Ok"];
+        }
     }];
 }
 
@@ -129,6 +137,14 @@
     eventVC.tempContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
     self.loadingLabel.text = @"Downloading Event Data";
     [[AppDelegate getInstance].getNetworkManager getAllEventsWithCompletionBlock:^(id object) {
+    
+        if ([object[@"data"] count] == 0)
+        {
+            [self showLoginFields];
+            [[AppDelegate getInstance].getNetworkManager addTokenToHeader:nil];
+            [OHAlertView showAlertWithTitle:@"Error" message:@"You are not authorized for any events. Please ask your race director or volunteer coordinator to add you as a steward for an event." dismissButton:@"Ok"];
+            return;
+        }
         [self.activityIndicator stopAnimating];
         self.progressBar.progress = 1;
         

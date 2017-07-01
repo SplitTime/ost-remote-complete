@@ -33,8 +33,10 @@
 
 - (void)addTokenToHeader: (NSString*) token
 {
-    if(token.length == 0)
-        return;
+    if (token.length == 0)
+    {
+        [self.requestSerializer setValue:@"" forHTTPHeaderField:@"Authorization"];
+    }
     
     [self.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",token] forHTTPHeaderField:@"Authorization"];
 }
