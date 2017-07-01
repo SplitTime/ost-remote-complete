@@ -28,6 +28,7 @@ static NSString * const JSONResponseSerializerWithDataKey = @"JSONResponseSerial
     returnString = [returnString stringByReplacingOccurrencesOfString:@"{" withString:@" "];
     returnString = [returnString stringByReplacingOccurrencesOfString:@"}" withString:@" "];
     returnString = [returnString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    returnString = [returnString stringByReplacingOccurrencesOfString:@"errors:" withString:@""];
     return returnString;
 }
 

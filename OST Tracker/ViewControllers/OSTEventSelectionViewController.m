@@ -238,7 +238,7 @@
     
     if (!firstFoundObject)
     {
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Please Select a Split" dismissButton:@"Ok"];
+        [OHAlertView showAlertWithTitle:@"" message:@"You need to select an aid station to continue." dismissButton:@"Ok"];
         return;
     }
     

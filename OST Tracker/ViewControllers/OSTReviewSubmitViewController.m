@@ -102,16 +102,20 @@
     
     NSString * sortKey = @"fullName";
     
+    BOOL ascending = YES;
+    
     if (self.txtSortBy.selectedRow == 0)
     {
         sortKey = @"fullName";
     }
     else if (self.txtSortBy.selectedRow == 1)
     {
+        ascending = NO;
         sortKey = @"entryTime";
     }
     else if (self.txtSortBy.selectedRow == 2)
     {
+        ascending = NO;
         sortKey = @"timeEntered";
     }
     else if (self.txtSortBy.selectedRow == 3)
@@ -122,7 +126,7 @@
     for (NSString * title in self.splitTitles)
     {
         splitEntries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && splitName == %@",[CurrentCourse getCurrentCourse].eventId,title]].mutableCopy;
-        [splitEntries sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]]];
+        [splitEntries sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending]]];
         [self.entries addObject:splitEntries];
     }
     
@@ -204,9 +208,20 @@
             [self loadData];
         }];
     } errorBlock:^(NSError *error) {
+    
+        NSString * errorMessage = nil;
+        if (error.code == -1009)
+        {
+            errorMessage = @"The device is not connected to the internet.";
+        }
+        else
+        {
+            errorMessage = [NSString stringWithFormat:@"Error: %@",[error errorsFromDictionary]];
+        }
+        
         [self.loadingView removeFromSuperview];
         [self showFinishLoadingValues];
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Can't submit, try again later" dismissButton:@"Ok"];
+        [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
         [self loadData];
     }];
 }

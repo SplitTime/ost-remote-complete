@@ -120,7 +120,7 @@
 
 - (IBAction)onDelete:(id)sender
 {
-    [OHAlertView showAlertWithTitle:@"Warning!" message:@"Are you sure you want to delete this Entry?" cancelButton:@"Cancel" otherButtons:@[@"Delete"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
+    [OHAlertView showAlertWithTitle:@"This action cannot be undone." message:@"Are you sure you want to delete this Entry?" cancelButton:@"Cancel" otherButtons:@[@"Delete"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
         
         if (buttonIndex == 1)
         {
