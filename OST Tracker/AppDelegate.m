@@ -86,16 +86,14 @@
 
     if (!self.OSTTrackerVC)
         self.OSTTrackerVC = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
+
     self.rightMenuVC.contentViewController = self.OSTTrackerVC;
-    
     self.window.rootViewController = self.rightMenuVC;
 }
 
 - (void) showTracker
 {
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
     self.rightMenuVC.contentViewController = self.OSTTrackerVC;
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
 }
 
 - (void) showReview

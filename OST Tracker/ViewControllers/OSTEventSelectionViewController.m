@@ -14,6 +14,7 @@
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "CourseSplits.h"
+#import "IQKeyboardManager.h"
 
 @interface OSTEventSelectionViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
@@ -91,11 +92,13 @@
     
     CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 3.0f);
     self.progressBar.transform = transform;
-
+    
+    [IQKeyboardManager sharedManager].enable = YES;
 }
 
 - (IBAction)onCancel:(id)sender
 {
+    [IQKeyboardManager sharedManager].enable = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -131,6 +134,11 @@
     [self.txtEvent setItemList:self.eventStrings];
     [self.txtEvent becomeFirstResponder];
     self.eventsLoaded = YES;
+    
+    if (self.eventStrings.count == 1)
+    {
+        [self onDoneSelectedEvent];
+    }
 }
 
 -(void)onDoneSelectedEvent
@@ -251,6 +259,7 @@
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
 
+        [IQKeyboardManager sharedManager].enable = NO;
         [self dismissViewControllerAnimated:YES completion:nil];
         [[AppDelegate getInstance] showTracker];
         return;

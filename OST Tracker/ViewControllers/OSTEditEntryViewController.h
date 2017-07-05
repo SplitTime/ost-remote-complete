@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblRunner;
 @property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtDate;
+@property (nonatomic, copy) void (^entryHasBeenDeletedBlock)(void);
+@property (nonatomic, copy) void (^entryHasBeenUpdatedBlock)(void);
 
 - (IBAction)onBibNumberChanged:(id)sender;
 - (void) configureWithEntry:(EntryModel*)entry;

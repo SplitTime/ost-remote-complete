@@ -47,6 +47,7 @@
     keyboardToolbar.items = @[cancelBarButton, flexBarButton, doneBarButton];
     
     self.txtTime.inputAccessoryView = keyboardToolbar;
+    [IQKeyboardManager sharedManager].enable = YES;
 }
 
 - (void) onDoneSelectedTime:(id) sender
@@ -111,6 +112,11 @@
     [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if (self.entryHasBeenUpdatedBlock)
+    {
+        self.entryHasBeenUpdatedBlock();
+    }
 }
 
 - (IBAction)onClose:(id)sender
@@ -128,6 +134,10 @@
             [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
             [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
             [self dismissViewControllerAnimated:YES completion:nil];
+            if (self.entryHasBeenDeletedBlock)
+            {
+                self.entryHasBeenDeletedBlock();
+            }
         }
     }];
 }
@@ -178,12 +188,12 @@
         
         if (effort)
         {
-            self.lblRunner.text = [NSString stringWithFormat:@"Racer Found: %@",effort.fullName];
+            self.lblRunner.text = [NSString stringWithFormat:@"Bib Found: %@",effort.fullName];
             self.effort = effort;
         }
         else
         {
-            self.lblRunner.text = @"Racer Not Found!";
+            self.lblRunner.text = @"Bib Not Found!";
             self.lblRunner.textColor = [UIColor redColor];
             self.effort = nil;
         }
@@ -192,6 +202,7 @@
 
 - (void)dealloc
 {
+    [IQKeyboardManager sharedManager].enable = NO;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
 

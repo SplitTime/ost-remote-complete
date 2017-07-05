@@ -57,6 +57,7 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
 
@@ -110,10 +111,12 @@
         if (self.completionBlock)
         {
             self.completionBlock(nil);
+            [IQKeyboardManager sharedManager].enable = NO;
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
+            [IQKeyboardManager sharedManager].enable = NO;
             [self loadEventData];
         }
     } errorBlock:^(NSError *error) {

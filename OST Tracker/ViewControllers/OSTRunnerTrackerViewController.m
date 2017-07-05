@@ -12,6 +12,8 @@
 #import "OSTSessionManager.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
+#import "OSTEditEntryViewController.h"
+#import "IQKeyboardManager.h"
 
 @interface OSTRunnerTrackerViewController ()
 
@@ -23,15 +25,18 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnRight;
 @property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
 @property (weak, nonatomic) IBOutlet UIView *pacerAndAidView;
+@property (weak, nonatomic) IBOutlet UILabel *lblPersonAdded;
 @property (strong, nonatomic) NSString * splitId;
 @property (weak, nonatomic) IBOutlet UILabel *lblOutTimeBadge;
 @property (weak, nonatomic) IBOutlet UILabel *lblInTimeBadge;
 @property (weak, nonatomic) IBOutlet UILabel *lblRunnerInfo;
 @property (strong, nonatomic) NSString * dayString;
+@property (weak, nonatomic) IBOutlet UILabel *lblAdded;
 @property (strong, nonatomic) EffortModel * racer;
 @property (assign, nonatomic) CGRect originalLeftBtnFrame;
 @property (assign, nonatomic) CGRect originalRightBtnFrame;
 @property (strong, nonatomic) NSDate * entryDateTime;
+@property (strong, nonatomic) EntryModel * lastEntry;
 
 @end
 
@@ -62,6 +67,8 @@
     
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
+    
+    [self.txtBibNumber sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -85,6 +92,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    [self.txtBibNumber sendActionsForControlEvents:UIControlEventTouchUpInside];
     [super viewWillAppear:animated];
     [self.txtBibNumber becomeFirstResponder];
     self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
@@ -186,15 +195,75 @@
     [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     
+    self.lblRunnerInfo.hidden = YES;
+    self.lblAdded.hidden = NO;
+    self.lblPersonAdded.hidden = NO;
+    
+    NSString * entryName = entry.fullName;
+    
+    if (entryName.length == 0)
+    {
+        entryName = @"Bib not found";
+    }
+    
+    self.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@ (%@)", [entry.bibNumber isEqualToString:@"-1"]?@"":entry.bibNumber, entryName, entry.displayTime];
+    
+    self.lastEntry = entry;
+    
     self.txtBibNumber.text = @"";
     self.swchPaser.on = NO;
     self.swchStoppedHere.on = NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
     
-    [self txtBibNumberChanged:nil];
+    if ([string rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet].invertedSet].location != NSNotFound)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (IBAction)onRunnerInfo:(id)sender
+{
+    if (self.lastEntry)
+    {
+        OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
+        [self presentViewController:editVC animated:YES completion:nil];
+        editVC.entryHasBeenDeletedBlock = ^
+        {
+            self.lastEntry = nil;
+            self.lblPersonAdded.hidden = YES;
+            self.lblAdded.hidden = YES;
+        };
+        
+        editVC.entryHasBeenUpdatedBlock = ^
+        {
+            NSString * entryName = self.lastEntry.fullName;
+            
+            if (entryName.length == 0)
+            {
+                entryName = @"Bib not found";
+            }
+            
+            self.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@ (%@)", [self.lastEntry.bibNumber isEqualToString:@"-1"]?@"":self.lastEntry.bibNumber, entryName, self.lastEntry.displayTime];
+            
+        };
+        
+        [editVC configureWithEntry:self.lastEntry];
+    }
 }
 
 - (IBAction)txtBibNumberChanged:(id)sender
 {
+    self.lblRunnerInfo.hidden = NO;
+    self.lastEntry = nil;
+    
+    self.lblAdded.hidden = YES;
+    self.lblPersonAdded.hidden = YES;
+    
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
     self.racer = nil;
