@@ -93,8 +93,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.txtBibNumber sendActionsForControlEvents:UIControlEventTouchUpInside];
-    [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [self.txtBibNumber becomeFirstResponder];
     self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
     
