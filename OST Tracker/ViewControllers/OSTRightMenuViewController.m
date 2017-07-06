@@ -39,15 +39,15 @@
 - (IBAction)onSubmit:(id)sender
 {
     [[AppDelegate getInstance] showTracker];
-    [[AppDelegate getInstance].rightMenuVC hideMenu:NO];
+    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
 }
 
 - (IBAction)onChangeStation:(id)sender
 {
+    //[[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
     OSTEventSelectionViewController * event = [[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil];
     event.changeStation = YES;
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
-    [[AppDelegate getInstance].window.rootViewController presentViewController:event animated:YES completion:nil];
+    [self presentViewController:event animated:YES completion:nil];
 }
 
 - (IBAction)onReviewSync:(id)sender

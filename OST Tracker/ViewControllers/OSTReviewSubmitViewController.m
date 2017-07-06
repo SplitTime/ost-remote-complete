@@ -315,5 +315,4 @@
     [editVC configureWithEntry:self.entries[indexPath.section][indexPath.row]];
 }
 
-
 @end

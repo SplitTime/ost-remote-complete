@@ -99,6 +99,7 @@
 - (IBAction)onCancel:(id)sender
 {
     [IQKeyboardManager sharedManager].enable = NO;
+    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -262,8 +263,13 @@
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
 
         [IQKeyboardManager sharedManager].enable = NO;
-        [self dismissViewControllerAnimated:YES completion:nil];
+
         [[AppDelegate getInstance] showTracker];
+        [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
         return;
     }
     
@@ -299,7 +305,6 @@
         [[AppDelegate getInstance] loadLeftMenu];
     } errorBlock:^(NSError *error) {
         [weakSelf showSelectFields];
-        [DejalBezelActivityView removeViewAnimated:YES];
         [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get course details" dismissButton:@"Ok"];
     }];
 }
