@@ -187,7 +187,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BN5-h1-nq1">
-                    <rect key="frame" x="16" y="131" width="343" height="21"/>
+                    <rect key="frame" x="23" y="131" width="336" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <gestureRecognizers/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -202,14 +202,14 @@
                     </connections>
                 </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Added:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OsX-Jc-g6K">
-                    <rect key="frame" x="16" y="131" width="55" height="21"/>
+                    <rect key="frame" x="23" y="131" width="55" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name=".SFNSText" family=".SF NS Text" pointSize="16"/>
                     <color key="textColor" red="0.28866000000000003" green="0.56455" blue="0.88624000000000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="#34 Luciano Castro  (09:52:20)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AS8-LV-odn">
-                    <rect key="frame" x="70" y="131" width="289" height="21"/>
+                    <rect key="frame" x="76" y="131" width="283" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <color key="textColor" red="0.28866000000000003" green="0.56455" blue="0.88624000000000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
