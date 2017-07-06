@@ -160,10 +160,14 @@
     self.swchPaser.on = NO;
     self.swchStoppedHere.on = NO;
     self.txtBibNumber.text = nil;
+    self.lblInTimeBadge.hidden = YES;
+    self.lblOutTimeBadge.hidden = YES;
 }
 
 - (IBAction)onEntryButton:(id)sender
 {
+    self.lblOutTimeBadge.hidden = YES;
+    self.lblInTimeBadge.hidden = YES;
     CurrentCourse * course = [CurrentCourse MR_findFirst];
 
     EntryModel * entry = [EntryModel MR_createEntity];
@@ -171,6 +175,7 @@
     if (self.txtBibNumber.text.length == 0)
     {
         entry.bibNumber = @"-1";
+        self.racer = nil;
     }
     else entry.bibNumber = self.txtBibNumber.text;
     if (sender == self.btnLeft)
@@ -297,7 +302,7 @@
                 self.lblInTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,(long)[CurrentCourse getCurrentCourse].splitId]] count]];
                 }
                 else
                 {
@@ -310,7 +315,7 @@
                 self.lblOutTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitId]] count]];
                 }
                 else
                 {

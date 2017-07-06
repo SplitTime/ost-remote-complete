@@ -100,6 +100,7 @@
 - (void) showTracker
 {
     self.rightMenuVC.contentViewController = self.OSTTrackerVC;
+    [self.OSTTrackerVC cleanData];
 }
 
 - (void) showReview
