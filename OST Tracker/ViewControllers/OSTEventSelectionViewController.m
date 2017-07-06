@@ -166,9 +166,10 @@
     
     [self.txtStation setItemList:splitStrings];
     
+    __weak OSTEventSelectionViewController * weakSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
-        self.txtStation.alpha = 1;
-        self.imgTriangleAidStation.hidden = NO;
+        weakSelf.txtStation.alpha = 1;
+        weakSelf.imgTriangleAidStation.hidden = NO;
     }];
     
     [self.txtStation becomeFirstResponder];
@@ -177,8 +178,9 @@
 -(void)onDoneSelectedStation
 {
     [self.txtStation resignFirstResponder];
+    __weak OSTEventSelectionViewController * weakSelf = self;
     [UIView animateWithDuration:0.8 animations:^{
-        self.btnNext.alpha = 1;
+        weakSelf.btnNext.alpha = 1;
     }];
 }
 
@@ -268,10 +270,12 @@
     self.progressLabel.text = [NSString stringWithFormat:@"Downloading %@ Data",self.txtEvent.selectedItem];
     [self showLoadingFields];
     self.progressBar.progress = 0.5;
+    
+    __weak OSTEventSelectionViewController * weakSelf = self;
     [[AppDelegate getInstance].getNetworkManager getEventsDetails:self.selectedEvent.eventId completionBlock:^(id object)
     {
-        self.progressBar.progress = 1;
-        [self.activityIndicator stopAnimating];
+        weakSelf.progressBar.progress = 1;
+        [weakSelf.activityIndicator stopAnimating];
         CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
         
         for (id dataObject in object[@"included"])
@@ -282,19 +286,19 @@
             }
         }
         currentCourse.splitId = [firstFoundObject[@"entries"][0][@"splitId"] stringValue];
-        currentCourse.eventId = self.selectedEvent.eventId;
+        currentCourse.eventId = weakSelf.selectedEvent.eventId;
         currentCourse.splitName = firstFoundObject[@"title"];
-        currentCourse.eventName = self.selectedEvent.name;
-        currentCourse.multiLap = self.selectedEvent.multiLap;
+        currentCourse.eventName = weakSelf.selectedEvent.name;
+        currentCourse.multiLap = weakSelf.selectedEvent.multiLap;
         currentCourse.splitAttributes = firstFoundObject;
-        currentCourse.liveAttributes = self.selectedEvent.liveEntryAttributes;
+        currentCourse.liveAttributes = weakSelf.selectedEvent.liveEntryAttributes;
         
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
         
         [[AppDelegate getInstance] loadLeftMenu];
     } errorBlock:^(NSError *error) {
-        [self showSelectFields];
+        [weakSelf showSelectFields];
         [DejalBezelActivityView removeViewAnimated:YES];
         [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get course details" dismissButton:@"Ok"];
     }];

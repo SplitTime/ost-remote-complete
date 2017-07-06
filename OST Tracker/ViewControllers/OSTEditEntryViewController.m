@@ -126,17 +126,18 @@
 
 - (IBAction)onDelete:(id)sender
 {
+    __weak OSTEditEntryViewController * weakSelf = self;
     [OHAlertView showAlertWithTitle:@"This action cannot be undone." message:@"Are you sure you want to delete this Entry?" cancelButton:@"Cancel" otherButtons:@[@"Delete"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
         
         if (buttonIndex == 1)
         {
-            [self.entry MR_deleteEntity];
+            [weakSelf.entry MR_deleteEntity];
             [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
             [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            if (self.entryHasBeenDeletedBlock)
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            if (weakSelf.entryHasBeenDeletedBlock)
             {
-                self.entryHasBeenDeletedBlock();
+                weakSelf.entryHasBeenDeletedBlock();
             }
         }
     }];

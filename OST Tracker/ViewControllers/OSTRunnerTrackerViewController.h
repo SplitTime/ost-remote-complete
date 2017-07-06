@@ -12,4 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *txtBibNumber;
 
+- (void) cleanData;
+
+
 @end

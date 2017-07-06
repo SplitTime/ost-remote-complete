@@ -152,6 +152,16 @@
     [[AppDelegate getInstance].rightMenuVC showRightMenu:YES];
 }
 
+- (void) cleanData
+{
+    self.lastEntry = nil;
+    self.lblAdded.hidden = YES;
+    self.lblPersonAdded.hidden = YES;
+    self.lblRunnerInfo.hidden = YES;
+    self.swchPaser.on = NO;
+    self.swchStoppedHere.on = NO;
+}
+
 - (IBAction)onEntryButton:(id)sender
 {
     CurrentCourse * course = [CurrentCourse MR_findFirst];

@@ -141,8 +141,9 @@
     [self.view addSubview:self.loadingView];
     [self.view bringSubviewToFront:self.loadingView];
     self.loadingView.alpha = 0;
+    __weak OSTReviewSubmitViewController * weakSelf = self;
     [UIView animateWithDuration:0.5 animations:^{
-        self.loadingView.alpha = 1;
+        weakSelf.loadingView.alpha = 1;
     }];
 }
 
@@ -197,15 +198,17 @@
     [self showLoadingScreen];
     [self showLoadingValues];
     
+    __weak OSTReviewSubmitViewController * weakSelf = self;
+    
     [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id object) {
-        [self submitEntries:entries completionBlock:^(id object) {
-            [self showFinishLoadingValues];
-            [self loadData];
+        [weakSelf submitEntries:entries completionBlock:^(id object) {
+            [weakSelf showFinishLoadingValues];
+            [weakSelf loadData];
         } errorBlock:^(NSError *error) {
-            [self.loadingView removeFromSuperview];
-            [self showFinishLoadingValues];
+            [weakSelf.loadingView removeFromSuperview];
+            [weakSelf showFinishLoadingValues];
             [OHAlertView showAlertWithTitle:@"Unable to sync" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
-            [self loadData];
+            [weakSelf loadData];
         }];
     } errorBlock:^(NSError *error) {
     
@@ -219,10 +222,10 @@
             errorMessage = [NSString stringWithFormat:@"Error: %@",[error errorsFromDictionary]];
         }
         
-        [self.loadingView removeFromSuperview];
-        [self showFinishLoadingValues];
+        [weakSelf.loadingView removeFromSuperview];
+        [weakSelf showFinishLoadingValues];
         [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
-        [self loadData];
+        [weakSelf loadData];
     }];
 }
 
@@ -249,6 +252,7 @@
         return;
     }
     
+    __weak OSTReviewSubmitViewController * weakSelf = self;
     [[AppDelegate getInstance].getNetworkManager submitEntries:subEntries completionBlock:^(id object) {
     
         for (EntryModel * entry in subEntries)
@@ -260,7 +264,7 @@
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
         
-        [self submitEntries:entries completionBlock:onCompletion errorBlock:onError];
+        [weakSelf submitEntries:entries completionBlock:onCompletion errorBlock:onError];
         
     } errorBlock:^(NSError *error) {
         onError(error);

@@ -11,16 +11,16 @@
 #import "AFNetworking.h"
 
 typedef void (^VoidBlock)(void);
-typedef void (^OSTCompletionNumberBlock)(NSNumber* number);
+typedef void (^OSTCompletionNumberBlock)(NSNumber* _Nullable number);
 typedef void (^OSTCompletionArrayBlock)(NSArray* records);
 typedef void (^OSTCompletionDictionaryBlock)(NSDictionary* records);
 typedef void (^OSTCompletionObjectBlock)(id object);
 typedef void (^OSTProgressBlock)(NSProgress * _Nonnull uploadProgress);
-typedef void (^OSTErrorBlock)(NSError* error);
+typedef void (^OSTErrorBlock)(NSError* _Nullable error);
 
 @protocol OSTManagedObjectUpdateKeys
 
-+ (NSString*)recordsKey;
++ (NSString*_Nullable)recordsKey;
 + (NSString*)uniqueId;
 + (NSString*)remoteUniqueId;
 

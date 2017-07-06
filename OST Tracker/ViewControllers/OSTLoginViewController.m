@@ -131,23 +131,25 @@
     [self.txtEmail resignFirstResponder];
     [self showLoadingFields];
     self.loadingLabel.text = @"Trying to log in";
+    
+    __weak OSTLoginViewController * weakSelf = self;
     [[AppDelegate getInstance].getNetworkManager loginWithEmail:self.txtEmail.text password:self.txtPassword.text completionBlock:^(id object)
     {
-        self.progressBar.progress = 0.5;
-        [OSTSessionManager setUserName:self.txtEmail.text andPassword:self.txtPassword.text];
+        weakSelf.progressBar.progress = 0.5;
+        [OSTSessionManager setUserName:weakSelf.txtEmail.text andPassword:weakSelf.txtPassword.text];
         [[AppDelegate getInstance].getNetworkManager addTokenToHeader:object[@"token"]];
-        if (self.completionBlock)
+        if (weakSelf.completionBlock)
         {
-            self.completionBlock(nil);
+            weakSelf.completionBlock(nil);
             [IQKeyboardManager sharedManager].enable = NO;
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
-            [self loadEventData];
+            [weakSelf loadEventData];
         }
     } errorBlock:^(NSError *error) {
-        [self showLoginFields];
+        [weakSelf showLoginFields];
         
         if (error.errorsFromDictionary.length != 0)
         {
@@ -164,19 +166,20 @@
 {
     OSTEventSelectionViewController * eventVC = [[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil] ;
     
+    __weak OSTLoginViewController * weakSelf = self;
     eventVC.tempContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
     self.loadingLabel.text = @"Downloading Event Data";
     [[AppDelegate getInstance].getNetworkManager getAllEventsWithCompletionBlock:^(id object) {
     
         if ([object[@"data"] count] == 0)
         {
-            [self showLoginFields];
+            [weakSelf showLoginFields];
             [[AppDelegate getInstance].getNetworkManager addTokenToHeader:nil];
             [OHAlertView showAlertWithTitle:@"Error" message:@"You are not authorized for any events. Please ask your race director or volunteer coordinator to add you as a steward for an event." dismissButton:@"Ok"];
             return;
         }
-        [self.activityIndicator stopAnimating];
-        self.progressBar.progress = 1;
+        [weakSelf.activityIndicator stopAnimating];
+        weakSelf.progressBar.progress = 1;
         
         NSMutableArray * pickerEvents = [NSMutableArray new];
         
@@ -197,14 +200,14 @@
         }
         
         [IQKeyboardManager sharedManager].enable = NO;
-        [self presentViewController:eventVC animated:YES completion:nil];
+        [weakSelf presentViewController:eventVC animated:YES completion:nil];
 
     } progressBlock:^(NSProgress * _Nonnull uploadProgress) {
         
     } errorBlock:^(NSError *error) {
-        [self showLoginFields];
+        [weakSelf showLoginFields];
         [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get the events" cancelButton:@"Try Again" otherButtons:nil buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
-                [self loadEventData];
+                [weakSelf loadEventData];
             }];
     }];
 }

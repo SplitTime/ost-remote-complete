@@ -85,7 +85,13 @@
     }
 
     if (!self.OSTTrackerVC)
+    {
         self.OSTTrackerVC = [[OSTRunnerTrackerViewController alloc] initWithNibName:nil bundle:nil];
+    }
+    else
+    {
+        [self.OSTTrackerVC cleanData];
+    }
 
     self.rightMenuVC.contentViewController = self.OSTTrackerVC;
     self.window.rootViewController = self.rightMenuVC;
