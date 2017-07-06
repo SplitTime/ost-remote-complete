@@ -160,6 +160,7 @@
     self.lblRunnerInfo.hidden = YES;
     self.swchPaser.on = NO;
     self.swchStoppedHere.on = NO;
+    self.txtBibNumber.text = nil;
 }
 
 - (IBAction)onEntryButton:(id)sender
@@ -242,23 +243,24 @@
     {
         OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
         [self presentViewController:editVC animated:YES completion:nil];
+        __weak OSTRunnerTrackerViewController * weakSelf = self;
         editVC.entryHasBeenDeletedBlock = ^
         {
-            self.lastEntry = nil;
-            self.lblPersonAdded.hidden = YES;
-            self.lblAdded.hidden = YES;
+            weakSelf.lastEntry = nil;
+            weakSelf.lblPersonAdded.hidden = YES;
+            weakSelf.lblAdded.hidden = YES;
         };
         
         editVC.entryHasBeenUpdatedBlock = ^
         {
-            NSString * entryName = self.lastEntry.fullName;
+            NSString * entryName = weakSelf.lastEntry.fullName;
             
             if (entryName.length == 0)
             {
                 entryName = @"Bib not found";
             }
             
-            self.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@ (%@)", [self.lastEntry.bibNumber isEqualToString:@"-1"]?@"":self.lastEntry.bibNumber, entryName, self.lastEntry.displayTime];
+            weakSelf.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@ (%@)", [weakSelf.lastEntry.bibNumber isEqualToString:@"-1"]?@"":weakSelf.lastEntry.bibNumber, entryName, weakSelf.lastEntry.displayTime];
             
         };
         
