@@ -22,6 +22,8 @@
         self.responseSerializer = [JSONResponseSerializerWithData serializer];
         self.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
+        [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
         
         [self.requestSerializer setTimeoutInterval:OSTNetworkTimeout];
         

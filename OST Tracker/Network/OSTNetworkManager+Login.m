@@ -19,16 +19,23 @@
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     
+    [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
+    [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    
     NSDictionary * params = @{@"user[email]":email,@"user[password]":password};
     
     NSURLSessionDataTask *dataTask = [self POST:OSTLoginEndpoint parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         self.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
+        [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
         onCompletion(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         self.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
+        [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
         onError(error);
     }];
     

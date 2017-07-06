@@ -52,6 +52,34 @@
     self.txtPassword.leftView = paddingViewForPassword;
     self.txtPassword.leftViewMode = UITextFieldViewModeAlways;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    
+    UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
+    [keyboardToolbar sizeToFit];
+    UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                      target:nil action:nil];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                      target:self action:@selector(onDoneInKeyboard)];
+    keyboardToolbar.items = @[flexBarButton, doneBarButton];
+    self.txtEmail.inputAccessoryView = keyboardToolbar;
+    
+    keyboardToolbar = [[UIToolbar alloc] init];
+    [keyboardToolbar sizeToFit];
+    flexBarButton = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                     target:nil action:nil];
+    doneBarButton = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                     target:self action:@selector(onDoneInKeyboard)];
+    keyboardToolbar.items = @[flexBarButton, doneBarButton];
+    self.txtPassword.inputAccessoryView = keyboardToolbar;
+}
+
+-(void)onDoneInKeyboard
+{
+    [self.txtEmail resignFirstResponder];
+    [self.txtPassword resignFirstResponder];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -116,7 +144,6 @@
         }
         else
         {
-            [IQKeyboardManager sharedManager].enable = NO;
             [self loadEventData];
         }
     } errorBlock:^(NSError *error) {
@@ -169,6 +196,7 @@
             [eventVC.eventStrings addObject:event.name];
         }
         
+        [IQKeyboardManager sharedManager].enable = NO;
         [self presentViewController:eventVC animated:YES completion:nil];
 
     } progressBlock:^(NSProgress * _Nonnull uploadProgress) {
