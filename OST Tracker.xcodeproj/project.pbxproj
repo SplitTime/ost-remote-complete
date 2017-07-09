@@ -919,6 +919,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -958,6 +959,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1105,6 +1107,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1144,6 +1147,7 @@
 					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
