@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "APLSlideMenuViewController.h"
+#import "MFSideMenu.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UINavigationController *navigationController;
-@property (strong, nonatomic) APLSlideMenuViewController * rightMenuVC;
+@property (strong, nonatomic) MFSideMenuContainerViewController * rightMenuVC;
 + (AppDelegate *)getInstance;
 - (OSTNetworkManager*) getNetworkManager;
 - (void) logout;

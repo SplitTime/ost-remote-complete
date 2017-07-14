@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "OSTLoginViewController.h"
-#import "APLSlideMenuViewController.h"
+#import "MFSideMenu.h"
 #import "OSTRunnerTrackerViewController.h"
 #import "OSTRightMenuViewController.h"
 #import "OSTReviewSubmitViewController.h"
@@ -80,7 +80,7 @@
 {
     if (!self.rightMenuVC)
     {
-        self.rightMenuVC = [[APLSlideMenuViewController alloc] init];
+        self.rightMenuVC = [[MFSideMenuContainerViewController alloc] init];
         self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
     }
 
@@ -93,19 +93,19 @@
         [self.OSTTrackerVC cleanData];
     }
 
-    self.rightMenuVC.contentViewController = self.OSTTrackerVC;
+    self.rightMenuVC.centerViewController = self.OSTTrackerVC;
     self.window.rootViewController = self.rightMenuVC;
 }
 
 - (void) showTracker
 {
-    self.rightMenuVC.contentViewController = self.OSTTrackerVC;
+    self.rightMenuVC.centerViewController= self.OSTTrackerVC;
     [self.OSTTrackerVC cleanData];
 }
 
 - (void) showReview
 {
-    self.rightMenuVC.contentViewController = [[OSTReviewSubmitViewController alloc] initWithNibName:nil bundle:nil];
+    self.rightMenuVC.centerViewController = [[OSTReviewSubmitViewController alloc] initWithNibName:nil bundle:nil];
 }
 
 - (void) logout

@@ -148,7 +148,7 @@
 - (IBAction)onRight:(id)sender
 {
     [self.txtBibNumber resignFirstResponder];
-    [[AppDelegate getInstance].rightMenuVC showRightMenu:YES];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
 - (void) cleanData

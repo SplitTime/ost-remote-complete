@@ -28,18 +28,18 @@
 
 - (IBAction)onClose:(id)sender
 {
-    [[AppDelegate getInstance].rightMenuVC hideMenu:YES];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
     
-    if ([[AppDelegate getInstance].rightMenuVC.contentViewController isKindOfClass:[OSTRunnerTrackerViewController class]])
+    if ([[AppDelegate getInstance].rightMenuVC.centerViewController isKindOfClass:[OSTRunnerTrackerViewController class]])
     {
-        [((OSTRunnerTrackerViewController*)([AppDelegate getInstance].rightMenuVC.contentViewController)).txtBibNumber becomeFirstResponder];
+        [((OSTRunnerTrackerViewController*)([AppDelegate getInstance].rightMenuVC.centerViewController)).txtBibNumber becomeFirstResponder];
     }
 }
 
 - (IBAction)onSubmit:(id)sender
 {
     [[AppDelegate getInstance] showTracker];
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
 - (IBAction)onChangeStation:(id)sender
@@ -53,7 +53,7 @@
 - (IBAction)onReviewSync:(id)sender
 {
     [[AppDelegate getInstance] showReview];
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
 - (IBAction)onLogout:(id)sender
@@ -61,7 +61,7 @@
     [OHAlertView showAlertWithTitle:@"Are you sure you would like to log out?" message:@"You will not be able to log back in or add entries until you have a data connection again." cancelButton:@"Cancel" otherButtons:@[@"Logout"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
         if (buttonIndex == 1)
         {
-            [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+            [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
             [[AppDelegate getInstance] logout];
         }
     }];

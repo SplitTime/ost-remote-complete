@@ -99,7 +99,7 @@
 - (IBAction)onCancel:(id)sender
 {
     [IQKeyboardManager sharedManager].enable = NO;
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -265,7 +265,7 @@
         [IQKeyboardManager sharedManager].enable = NO;
 
         [[AppDelegate getInstance] showTracker];
-        [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
+        [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
         
         [self dismissViewControllerAnimated:YES completion:^{
             

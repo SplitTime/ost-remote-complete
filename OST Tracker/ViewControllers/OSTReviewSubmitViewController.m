@@ -173,7 +173,7 @@
 
 - (IBAction)onRightMenu:(id)sender
 {
-    [[AppDelegate getInstance].rightMenuVC showRightMenu:YES];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
 - (IBAction)onReturnToLiveEntry:(id)sender
@@ -181,9 +181,7 @@
     [self.activityIndicator stopAnimating];
     self.loadingView.hidden = YES;
     [self.loadingView removeFromSuperview];
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
     [[AppDelegate getInstance] showTracker];
-    [[AppDelegate getInstance].rightMenuVC switchRightMenu:NO];
 }
 
 - (IBAction)onSubmit:(id)sender
