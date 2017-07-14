@@ -302,7 +302,7 @@
                 self.lblInTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,(long)[CurrentCourse getCurrentCourse].splitId]] count]];
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId == %@",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,(long)[CurrentCourse getCurrentCourse].splitId]] count]];
                 }
                 else
                 {

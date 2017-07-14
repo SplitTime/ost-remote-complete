@@ -91,11 +91,11 @@
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     if (view != nil) {
-        ((UILabel*)view).text = [NSString stringWithFormat:@"%lu", row];
+        ((UILabel*)view).text = [NSString stringWithFormat:@"%lu", (long)row];
         return view;
     }
     UILabel *columnView = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, self.frame.size.width/3 - 35, 30)];
-    columnView.text = [NSString stringWithFormat:@"%lu", row];
+    columnView.text = [NSString stringWithFormat:@"%lu", (long)row];
     columnView.textAlignment = NSTextAlignmentLeft;
     
     return columnView;

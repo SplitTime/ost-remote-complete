@@ -144,7 +144,7 @@
 }
 - (IBAction)timeEndEditing:(id)sender
 {
-    self.txtTime.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",self.customPicker.hours,self.customPicker.mins,self.customPicker.secs];
+    self.txtTime.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)self.customPicker.hours,(long)self.customPicker.mins,self.customPicker.secs];
 }
 
 - (IBAction)onEditTime:(id)sender
@@ -171,7 +171,7 @@
     self.customPicker.secs = components.second;
     
     [self.customPicker selectRowsInPicker];
-    self.txtTime.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",components.hour,components.minute,components.second];
+    self.txtTime.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld",(long)components.hour,components.minute,components.second];
     
     [self onBibNumberChanged:nil];
 }
