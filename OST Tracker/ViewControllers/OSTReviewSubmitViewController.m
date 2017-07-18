@@ -205,7 +205,7 @@
         } errorBlock:^(NSError *error) {
             [weakSelf.loadingView removeFromSuperview];
             [weakSelf showFinishLoadingValues];
-            [OHAlertView showAlertWithTitle:@"Unable to sync" message:[NSString stringWithFormat:@"Please try again later when you have a data or wi-fi connection. Error: %@",[error errorsFromDictionary]] dismissButton:@"Ok"];
+            [OHAlertView showAlertWithTitle:@"Unable to sync" message:[NSString stringWithFormat:@"%@",[error errorsFromDictionary]] dismissButton:@"Ok"];
             [weakSelf loadData];
         }];
     } errorBlock:^(NSError *error) {
