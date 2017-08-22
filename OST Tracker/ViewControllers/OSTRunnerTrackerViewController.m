@@ -14,8 +14,9 @@
 #import "UIView+Additions.h"
 #import "OSTEditEntryViewController.h"
 #import "IQKeyboardManager.h"
+#import <APNumberPad/APNumberPad.h>
 
-@interface OSTRunnerTrackerViewController ()
+@interface OSTRunnerTrackerViewController () <APNumberPadDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
@@ -69,6 +70,15 @@
     self.lblInTimeBadge.hidden = YES;
     
     [self.txtBibNumber sendActionsForControlEvents:UIControlEventTouchUpInside];
+    __weak OSTRunnerTrackerViewController * weakSelf = self;
+    self.txtBibNumber.inputView = ({
+        APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:weakSelf];
+        // configure function button
+        //
+        [numberPad.leftFunctionButton setTitle:@"#" forState:UIControlStateNormal];
+        numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        numberPad;
+    });
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -330,6 +340,12 @@
             self.lblRunnerInfo.textColor = [UIColor redColor];
         }
     }
+}
+
+#pragma mark - APNumberPadDelegate
+
+- (void)numberPad:(APNumberPad *)numberPad functionButtonAction:(UIButton *)functionButton textInput:(UIResponder<UITextInput> *)textInput {
+    [textInput insertText:@"#"];
 }
 
 @end

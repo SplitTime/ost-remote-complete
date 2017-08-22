@@ -18,6 +18,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import "CourseSplits.h"
 #import "EffortModel.h"
+#import "UIView+Additions.h"
 
 @interface AppDelegate ()
 
@@ -82,6 +83,7 @@
     {
         self.rightMenuVC = [[MFSideMenuContainerViewController alloc] init];
         self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
+        self.rightMenuVC.rightMenuViewController.view.height = self.window.height;
     }
 
     if (!self.OSTTrackerVC)
@@ -94,18 +96,21 @@
     }
 
     self.rightMenuVC.centerViewController = self.OSTTrackerVC;
+    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
     self.window.rootViewController = self.rightMenuVC;
 }
 
 - (void) showTracker
 {
     self.rightMenuVC.centerViewController= self.OSTTrackerVC;
+    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
     [self.OSTTrackerVC cleanData];
 }
 
 - (void) showReview
 {
     self.rightMenuVC.centerViewController = [[OSTReviewSubmitViewController alloc] initWithNibName:nil bundle:nil];
+    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
 }
 
 - (void) logout
