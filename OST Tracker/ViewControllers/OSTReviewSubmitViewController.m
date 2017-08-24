@@ -50,7 +50,15 @@
     self.txtSortBy.leftViewMode = UITextFieldViewModeAlways;
     
     [self.txtSortBy setItemList:@[@"Name", @"Time Displayed", @"Time Entered", @"Bib #"]];
-    self.txtSortBy.selectedRow = 3;
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"reviewScreenPicklistValue"])
+    {
+        self.txtSortBy.selectedRow = [[[NSUserDefaults standardUserDefaults] objectForKey:@"reviewScreenPicklistValue"] integerValue];
+    }
+    else
+    {
+        self.txtSortBy.selectedRow = 3;
+    }
     
     UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
     [keyboardToolbar sizeToFit];
@@ -66,6 +74,9 @@
 
 - (void) onDoneSelectedSortBy:(id) sender
 {
+    [[NSUserDefaults standardUserDefaults] setObject:@(self.txtSortBy.selectedRow+1) forKey:@"reviewScreenPicklistValue"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self.txtSortBy resignFirstResponder];
     [self loadData];
 }

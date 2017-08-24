@@ -42,7 +42,10 @@
 - (OSTNetworkManager*) getNetworkManager
 {
     if (self.networkManager == nil)
+    {
         self.networkManager = [[OSTNetworkManager alloc] init];
+        [self.networkManager.reachabilityManager startMonitoring];
+    }
     return self.networkManager;
 }
 
