@@ -75,7 +75,7 @@
         APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:weakSelf];
         // configure function button
         //
-        [numberPad.leftFunctionButton setTitle:@"#" forState:UIControlStateNormal];
+        [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
         numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         numberPad;
     });
@@ -345,7 +345,7 @@
 #pragma mark - APNumberPadDelegate
 
 - (void)numberPad:(APNumberPad *)numberPad functionButtonAction:(UIButton *)functionButton textInput:(UIResponder<UITextInput> *)textInput {
-    [textInput insertText:@"#"];
+    [textInput insertText:@"*"];
 }
 
 @end
