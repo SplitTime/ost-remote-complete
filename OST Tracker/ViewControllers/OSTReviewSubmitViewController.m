@@ -30,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnReturnToLiveEntry;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtSortBy;
 @property (strong, nonatomic) NSMutableArray * entries;
-@property (strong, nonatomic) NSArray * splitTitles;
+@property (strong, nonatomic) NSMutableArray * splitTitles;
 
 @end
 
@@ -105,7 +105,7 @@
         [set addObject:entry.splitName];
     }
     
-    self.splitTitles = set.allObjects;
+    self.splitTitles = set.allObjects.mutableCopy;
     
     entries = nil;
     
@@ -132,6 +132,12 @@
     else if (self.txtSortBy.selectedRow == 3)
     {
         sortKey = @"bibNumberDecimal";
+    }
+    
+    if ([self.splitTitles containsObject:[CurrentCourse getCurrentCourse].splitName])
+    {
+        [self.splitTitles removeObject:[CurrentCourse getCurrentCourse].splitName];
+        [self.splitTitles insertObject:[CurrentCourse getCurrentCourse].splitName atIndex:0];
     }
     
     for (NSString * title in self.splitTitles)
