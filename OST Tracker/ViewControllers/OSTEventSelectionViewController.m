@@ -94,6 +94,9 @@
     self.progressBar.transform = transform;
     
     [IQKeyboardManager sharedManager].enable = YES;
+    
+    [self.txtStation removeInputAssistant];
+    [self.txtEvent removeInputAssistant];
 }
 
 - (IBAction)onCancel:(id)sender

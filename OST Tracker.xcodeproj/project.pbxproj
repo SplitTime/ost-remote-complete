@@ -99,6 +99,8 @@
 		6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */; };
 		6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */; };
 		6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
+		6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
+		6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
 		6ABFC1E11EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6ABFC1E21EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
@@ -190,6 +192,8 @@
 		6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryModel.m; sourceTree = "<group>"; };
 		6AA6E9E01EF0E7D70061EEB0 /* EventModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventModel.h; sourceTree = "<group>"; };
 		6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventModel.m; sourceTree = "<group>"; };
+		6AA7C2F31F5DE58300D9F952 /* UITextField+RemoveInputAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+RemoveInputAssistant.h"; sourceTree = "<group>"; };
+		6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+RemoveInputAssistant.m"; sourceTree = "<group>"; };
 		6ABFC1DF1EFD56E900A0F1AC /* CustomUIDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomUIDatePicker.h; sourceTree = "<group>"; };
 		6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomUIDatePicker.m; sourceTree = "<group>"; };
 		6AEFFC051EEF83DA009EEE21 /* OST Remote Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -409,6 +413,8 @@
 				6A549E491EEF865100783F80 /* ViewControllers */,
 				6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */,
 				6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */,
+				6AA7C2F31F5DE58300D9F952 /* UITextField+RemoveInputAssistant.h */,
+				6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */,
 				6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */,
 				6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */,
 				6AEFFC191EEF83DA009EEE21 /* Info.plist */,
@@ -795,6 +801,7 @@
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
 				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
+				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
@@ -832,6 +839,7 @@
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
+				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,

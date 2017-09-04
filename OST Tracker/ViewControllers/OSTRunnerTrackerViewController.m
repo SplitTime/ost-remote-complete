@@ -79,6 +79,8 @@
         numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         numberPad;
     });
+    
+    [self.txtBibNumber removeInputAssistant];
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -300,7 +302,12 @@
     }
     else
     {
-        EffortModel * effort = [EffortModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber == %@", [NSDecimalNumber decimalNumberWithString:self.txtBibNumber.text]]];
+        EffortModel * effort = nil;
+        
+        if (![self.txtBibNumber.text containsString:@"*"])
+        {
+            effort = [EffortModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber == %@", [NSDecimalNumber decimalNumberWithString:self.txtBibNumber.text]]];
+        }
         
         if (effort)
         {

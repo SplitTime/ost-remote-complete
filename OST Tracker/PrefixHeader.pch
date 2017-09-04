@@ -30,6 +30,7 @@
 #import "OHAlertView.h"
 #import "DejalActivityView.h"
 #import "NSError+OSTErrors.h"
+#import "UITextField+RemoveInputAssistant.h"
 
 #endif /* PrefixHeader_pch */
 

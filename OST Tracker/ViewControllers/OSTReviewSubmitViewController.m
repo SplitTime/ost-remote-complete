@@ -70,6 +70,10 @@
                                       target:self action:@selector(onDoneSelectedSortBy:)];
     keyboardToolbar.items = @[flexBarButton, doneBarButton];
     self.txtSortBy.inputAccessoryView = keyboardToolbar;
+    
+    self.txtSortBy.isOptionalDropDown = NO;
+    
+    [self.txtSortBy removeInputAssistant];
 }
 
 - (void) onDoneSelectedSortBy:(id) sender

@@ -48,6 +48,10 @@
     
     self.txtTime.inputAccessoryView = keyboardToolbar;
     [IQKeyboardManager sharedManager].enable = YES;
+    
+    [self.txtTime removeInputAssistant];
+    [self.txtBibNumber removeInputAssistant];
+    [self.txtDate removeInputAssistant];
 }
 
 - (void) onDoneSelectedTime:(id) sender

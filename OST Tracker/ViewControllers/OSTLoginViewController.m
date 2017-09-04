@@ -74,6 +74,9 @@
                      target:self action:@selector(onDoneInKeyboard)];
     keyboardToolbar.items = @[flexBarButton, doneBarButton];
     self.txtPassword.inputAccessoryView = keyboardToolbar;
+    
+    [self.txtEmail removeInputAssistant];
+    [self.txtPassword removeInputAssistant];
 }
 
 -(void)onDoneInKeyboard

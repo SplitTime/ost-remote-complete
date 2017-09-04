@@ -69,6 +69,8 @@
     
     [self.window makeKeyAndVisible];
     [Fabric with:@[[Crashlytics class]]];
+    
+    [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
 
     return YES;
 }

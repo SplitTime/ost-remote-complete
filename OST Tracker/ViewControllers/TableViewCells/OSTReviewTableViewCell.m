@@ -34,6 +34,10 @@
     else self.lblNumber.text = @"";
     self.lblInOrOut.text = [entry.bitKey capitalizedString];
     
+    UIFont *currentFont = self.lblName.font;
+    UIFont *newFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@",[currentFont.fontName stringByReplacingOccurrencesOfString:@"-Bold" withString:@""]] size:currentFont.pointSize];
+    self.lblName.font = newFont;
+    
     if (entry.submitted.boolValue)
     {
         self.lblTime.textColor = [UIColor colorWithRed:28.0/255 green:186.0/255 blue:51.0/255 alpha:1];
@@ -43,11 +47,30 @@
         
         self.imgPacer.image = [UIImage imageNamed:@"Pacer Symbol Green"];
         self.imgStopped.image = [UIImage imageNamed:@"Green Hand"];
+        
+        if ([self.lblName.text isEqualToString:@"Bib not found"])
+        {
+            UIFont *currentFont = self.lblName.font;
+            UIFont *newFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@-Bold",currentFont.fontName] size:currentFont.pointSize];
+            self.lblName.font = newFont;
+        }
     }
     else
     {
+        if ([self.lblName.text isEqualToString:@"Bib not found"])
+        {
+            self.lblName.textColor = [UIColor redColor];
+            
+            UIFont *currentFont = self.lblName.font;
+            UIFont *newFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@-Bold",currentFont.fontName] size:currentFont.pointSize];
+            self.lblName.font = newFont;
+        }
+        else
+        {
+            self.lblName.textColor = [UIColor blackColor];
+        }
+        
         self.lblTime.textColor = [UIColor blackColor];
-        self.lblName.textColor = [UIColor blackColor];
         self.lblNumber.textColor = [UIColor blackColor];
         self.lblInOrOut.textColor = [UIColor blackColor];
         
