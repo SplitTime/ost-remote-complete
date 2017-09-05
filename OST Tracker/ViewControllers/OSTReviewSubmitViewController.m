@@ -159,6 +159,7 @@
 
 - (void) showLoadingScreen
 {
+    self.loadingView.size = self.view.size;
     [self.view addSubview:self.loadingView];
     [self.view bringSubviewToFront:self.loadingView];
     self.loadingView.alpha = 0;
