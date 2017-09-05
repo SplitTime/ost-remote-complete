@@ -88,6 +88,8 @@
 		6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
+		6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
+		6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
 		6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
@@ -175,6 +177,8 @@
 		6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6A549E5C1EEF8B9400783F80 /* OSTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTConstants.h; sourceTree = "<group>"; };
 		6A5E0D091EF1B25E00399EEC /* OST Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A676FDC1F5F401E0051C8CB /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
+		6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
 		6AA399791EFC1FE50097ED63 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
@@ -421,6 +425,8 @@
 				6A41AE0A1EF8D71500C9F834 /* UIView+Additions.h */,
 				6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */,
 				6ABFC1DF1EFD56E900A0F1AC /* CustomUIDatePicker.h */,
+				6A676FDC1F5F401E0051C8CB /* UIImage+ImageWithColor.h */,
+				6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */,
 				6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */,
 				6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */,
 				6A549E5C1EEF8B9400783F80 /* OSTConstants.h */,
@@ -824,6 +830,7 @@
 				6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */,
 				6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */,
 				6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
+				6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
 				6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
@@ -862,6 +869,7 @@
 				6AA399801EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */,
 				6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */,
 				6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
+				6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
 				6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);

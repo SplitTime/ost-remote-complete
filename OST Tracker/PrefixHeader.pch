@@ -31,6 +31,7 @@
 #import "DejalActivityView.h"
 #import "NSError+OSTErrors.h"
 #import "UITextField+RemoveInputAssistant.h"
+#import "UIImage+ImageWithColor.h"
 
 #endif /* PrefixHeader_pch */
 

@@ -81,6 +81,8 @@
     });
     
     [self.txtBibNumber removeInputAssistant];
+    [self.btnLeft setBackgroundImage:[UIImage imageWithColor:[UIColor darkGrayColor]] forState:UIControlStateHighlighted];
+    [self.btnRight setBackgroundImage:[UIImage imageWithColor:[UIColor darkGrayColor]] forState:UIControlStateHighlighted];
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -95,6 +97,11 @@
     self.dayString = [dateFormatter stringFromDate:date];
     
     self.entryDateTime = date;
+    
+    if ([AppDelegate getInstance].rightMenuVC.menuState != MFSideMenuStateRightMenuOpen && [AppDelegate getInstance].rightMenuVC.centerViewController == self)
+    {
+        [self.txtBibNumber becomeFirstResponder];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -178,6 +185,8 @@
 
 - (IBAction)onEntryButton:(id)sender
 {
+    [[UIDevice currentDevice] playInputClick];
+    
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
     CurrentCourse * course = [CurrentCourse MR_findFirst];
@@ -240,6 +249,14 @@
     self.txtBibNumber.text = @"";
     self.swchPaser.on = NO;
     self.swchStoppedHere.on = NO;
+}
+
+- (IBAction)didBeginEditingBibNumber:(id)sender
+{
+    if([AppDelegate getInstance].rightMenuVC.menuState == MFSideMenuStateRightMenuOpen)
+    {
+        [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

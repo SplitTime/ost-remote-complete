@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
 @property (weak, nonatomic) IBOutlet UIButton *btnReturnToLiveEntry;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtSortBy;
+@property (weak, nonatomic) IBOutlet UIButton *btnSync;
 @property (strong, nonatomic) NSMutableArray * entries;
 @property (strong, nonatomic) NSMutableArray * splitTitles;
 
@@ -74,6 +75,7 @@
     self.txtSortBy.isOptionalDropDown = NO;
     
     [self.txtSortBy removeInputAssistant];
+    [self.btnSync setBackgroundImage:[UIImage imageWithColor:[UIColor darkGrayColor]] forState:UIControlStateHighlighted];
 }
 
 - (void) onDoneSelectedSortBy:(id) sender
@@ -208,6 +210,8 @@
 
 - (IBAction)onSubmit:(id)sender
 {
+    [[UIDevice currentDevice] playInputClick];
+    
     NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     if (entries.count == 0)
     {
