@@ -38,6 +38,7 @@
 @property (assign, nonatomic) CGRect originalRightBtnFrame;
 @property (strong, nonatomic) NSDate * entryDateTime;
 @property (strong, nonatomic) EntryModel * lastEntry;
+@property (unsafe_unretained, nonatomic) BOOL stopKeyboardChecking;
 
 @end
 
@@ -98,9 +99,16 @@
     
     self.entryDateTime = date;
     
-    if ([AppDelegate getInstance].rightMenuVC.menuState != MFSideMenuStateRightMenuOpen && [AppDelegate getInstance].rightMenuVC.centerViewController == self)
+    if (!self.stopKeyboardChecking)
     {
-        [self.txtBibNumber becomeFirstResponder];
+        if ([AppDelegate getInstance].rightMenuVC.menuState == MFSideMenuStateClosed && [AppDelegate getInstance].rightMenuVC.centerViewController == self)
+        {
+            [self.txtBibNumber becomeFirstResponder];
+        }
+        else
+        {
+            [self.txtBibNumber resignFirstResponder];
+        }
     }
 }
 
@@ -166,8 +174,11 @@
 
 - (IBAction)onRight:(id)sender
 {
+    self.stopKeyboardChecking = YES;
     [self.txtBibNumber resignFirstResponder];
-    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:^{
+        self.stopKeyboardChecking = NO;
+    }];
 }
 
 - (void) cleanData
