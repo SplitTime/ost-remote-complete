@@ -11,8 +11,9 @@
 #import "IQKeyboardManager.h"
 #import "CustomUIDatePicker.h"
 #import "UIView+Additions.h"
+#import <APNumberPad/APNumberPad.h>
 
-@interface OSTEditEntryViewController ()
+@interface OSTEditEntryViewController () <APNumberPadDelegate>
 
 @property (strong, nonatomic) EntryModel * entry;
 @property (weak, nonatomic) IBOutlet UITextField *txtTime;
@@ -52,6 +53,16 @@
     [self.txtTime removeInputAssistant];
     [self.txtBibNumber removeInputAssistant];
     [self.txtDate removeInputAssistant];
+    
+    __weak OSTEditEntryViewController * weakSelf = self;
+    self.txtBibNumber.inputView = ({
+        APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:weakSelf];
+        // configure function button
+        //
+        [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
+        numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        numberPad;
+    });
 }
 
 - (void) onDoneSelectedTime:(id) sender
@@ -210,5 +221,12 @@
     [IQKeyboardManager sharedManager].enable = NO;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
+
+#pragma mark - APNumberPadDelegate
+
+- (void)numberPad:(APNumberPad *)numberPad functionButtonAction:(UIButton *)functionButton textInput:(UIResponder<UITextInput> *)textInput {
+    [textInput insertText:@"*"];
+}
+
 
 @end

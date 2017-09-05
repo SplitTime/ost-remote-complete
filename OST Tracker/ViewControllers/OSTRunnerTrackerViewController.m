@@ -47,7 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.timer = [NSTimer scheduledTimerWithTimeInterval: 0.5
+    self.timer = [NSTimer scheduledTimerWithTimeInterval: 0.1
                                                               target: self
                                                             selector:@selector(onTick:)
                                                             userInfo: nil repeats:YES];
