@@ -42,6 +42,7 @@
     // Do any additional setup after loading the view from its nib.
     [self.tableView registerNib: [UINib nibWithNibName:@"OSTReviewTableViewCell" bundle:nil] forCellReuseIdentifier:@"OSTReviewTableViewCell"];
     
+    self.txtSortBy.isOptionalDropDown = NO;
     self.txtSortBy.layer.borderColor = [UIColor whiteColor].CGColor;
     self.txtSortBy.layer.borderWidth = 1;
     self.txtSortBy.layer.cornerRadius = 3;
@@ -72,15 +73,13 @@
     keyboardToolbar.items = @[flexBarButton, doneBarButton];
     self.txtSortBy.inputAccessoryView = keyboardToolbar;
     
-    self.txtSortBy.isOptionalDropDown = NO;
-    
     [self.txtSortBy removeInputAssistant];
     [self.btnSync setBackgroundImage:[UIImage imageWithColor:[UIColor darkGrayColor]] forState:UIControlStateHighlighted];
 }
 
 - (void) onDoneSelectedSortBy:(id) sender
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@(self.txtSortBy.selectedRow+1) forKey:@"reviewScreenPicklistValue"];
+    [[NSUserDefaults standardUserDefaults] setObject:@(self.txtSortBy.selectedRow) forKey:@"reviewScreenPicklistValue"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self.txtSortBy resignFirstResponder];
