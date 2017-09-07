@@ -34,8 +34,6 @@
 @property (strong, nonatomic) NSString * dayString;
 @property (weak, nonatomic) IBOutlet UILabel *lblAdded;
 @property (strong, nonatomic) EffortModel * racer;
-@property (assign, nonatomic) CGRect originalLeftBtnFrame;
-@property (assign, nonatomic) CGRect originalRightBtnFrame;
 @property (strong, nonatomic) NSDate * entryDateTime;
 @property (strong, nonatomic) EntryModel * lastEntry;
 @property (unsafe_unretained, nonatomic) BOOL stopKeyboardChecking;
@@ -82,8 +80,8 @@
     });
     
     [self.txtBibNumber removeInputAssistant];
-    [self.btnLeft setBackgroundImage:[UIImage imageWithColor:[UIColor darkGrayColor]] forState:UIControlStateHighlighted];
-    [self.btnRight setBackgroundImage:[UIImage imageWithColor:[UIColor darkGrayColor]] forState:UIControlStateHighlighted];
+    [self.btnLeft setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
+    [self.btnRight setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -124,18 +122,11 @@
     [self.txtBibNumber becomeFirstResponder];
     self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
     
-    if (CGRectIsEmpty(self.originalLeftBtnFrame))
-    {
-        self.originalLeftBtnFrame = self.btnLeft.frame;
-    }
+    self.btnLeft.width = self.view.width/2 - 18;
+    self.btnRight.width = self.view.width/2 - 18;
     
-    if (CGRectIsEmpty(self.originalRightBtnFrame))
-    {
-        self.originalRightBtnFrame = self.btnRight.frame;
-    }
-    
-    self.btnLeft.frame = self.originalLeftBtnFrame;
-    self.btnRight.frame = self.originalRightBtnFrame;
+    self.btnLeft.left = 0;
+    self.btnRight.right = self.view.width;
     
     NSArray * entries = [CurrentCourse getCurrentCourse].splitAttributes[@"entries"];
     
@@ -162,8 +153,11 @@
         self.btnRight.hidden = NO;
         self.btnLeft.hidden = NO;
         
-        self.btnRight.frame = self.originalRightBtnFrame;
-        self.btnLeft.frame = self.originalLeftBtnFrame;
+        self.btnLeft.width = self.view.width/2 - 18;
+        self.btnRight.width = self.view.width/2 - 18;
+        
+        self.btnLeft.left = 0;
+        self.btnRight.right = self.view.width;
         
         [self.btnLeft setTitle:splitEntriesIn[0][@"label"] forState:UIControlStateNormal];
         [self.btnRight setTitle:splitEntriesOut[0][@"label"] forState:UIControlStateNormal];

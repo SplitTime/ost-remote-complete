@@ -35,19 +35,22 @@
     int height = 20;
     int offsetX = self.frame.size.width / 3;
     int offsetY = self.frame.size.height / 2 - height / 2;
-    int marginX = 42;
+    int marginX = 45;
     int width = offsetX - marginX;
     
     UILabel *hourLabel = [[UILabel alloc] initWithFrame:CGRectMake(marginX, offsetY, width, height)];
     hourLabel.text = @"hour";
     [self addSubview:hourLabel];
+    hourLabel.autoresizingMask = 0xff;
     
     UILabel *minsLabel = [[UILabel alloc] initWithFrame:CGRectMake(marginX + offsetX, offsetY, width, height)];
     minsLabel.text = @"min";
+    minsLabel.autoresizingMask = 0xff;
     [self addSubview:minsLabel];
     
     UILabel *secsLabel = [[UILabel alloc] initWithFrame:CGRectMake(marginX + offsetX * 2, offsetY, width, height)];
     secsLabel.text = @"sec";
+    secsLabel.autoresizingMask = 0xff;
     [self addSubview:secsLabel];
 }
 

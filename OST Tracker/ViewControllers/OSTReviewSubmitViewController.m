@@ -74,7 +74,7 @@
     self.txtSortBy.inputAccessoryView = keyboardToolbar;
     
     [self.txtSortBy removeInputAssistant];
-    [self.btnSync setBackgroundImage:[UIImage imageWithColor:[UIColor darkGrayColor]] forState:UIControlStateHighlighted];
+    [self.btnSync setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
 }
 
 - (void) onDoneSelectedSortBy:(id) sender

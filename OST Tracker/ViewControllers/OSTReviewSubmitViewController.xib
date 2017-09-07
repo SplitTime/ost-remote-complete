@@ -67,12 +67,16 @@
                     </subviews>
                     <color key="backgroundColor" red="0.97244364023208618" green="0.97260981798171997" blue="0.97243314981460571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RHE-00-eos">
-                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RHE-00-eos">
+                    <rect key="frame" x="0.0" y="616" width="375" height="51"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.10815345495939255" green="0.72826337814331055" blue="0.19865483045578003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title="Sync Data">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="Sync Data" backgroundImage="GreenButton">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="GrayButton">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                     </state>
                     <connections>
                         <action selector="onSubmit:" destination="-1" eventType="touchUpInside" id="3HG-9b-0T9"/>
@@ -161,6 +165,8 @@ synced.</string>
     <resources>
         <image name="Background" width="375" height="667"/>
         <image name="CheckMark" width="118" height="118"/>
+        <image name="GrayButton" width="177" height="60"/>
+        <image name="GreenButton" width="190" height="35"/>
         <image name="Menu" width="122" height="44"/>
         <image name="ReturnLiveEntry" width="210" height="40"/>
         <image name="Triangle" width="14" height="8"/>
