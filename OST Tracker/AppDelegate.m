@@ -19,6 +19,7 @@
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
+#import "Reachability.h"
 
 @interface AppDelegate ()
 
@@ -43,10 +44,62 @@
 {
     if (self.networkManager == nil)
     {
-        self.networkManager = [[OSTNetworkManager alloc] init];
+        self.networkManager = [[OSTNetworkManager alloc] initWithNetworkUrl:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"]];
         [self.networkManager.reachabilityManager startMonitoring];
     }
+        
     return self.networkManager;
+}
+
+- (void) toggleToAlternateServer
+{
+    if (self.networkManager.usingAlternateUrl == YES)
+    {
+        self.networkManager = [[OSTNetworkManager alloc] initWithNetworkUrl:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"]];
+        [self.networkManager.reachabilityManager startMonitoring];
+        
+        self.networkManager.usingAlternateUrl = NO;
+    }
+    else
+    {
+        self.networkManager = [[OSTNetworkManager alloc] initWithNetworkUrl:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"]];
+        [self.networkManager.reachabilityManager startMonitoring];
+        
+        self.networkManager.usingAlternateUrl = YES;
+    }
+}
+
+- (BOOL) checkIfCanReachNetworkManagerHost
+{
+    dispatch_semaphore_t    sem;
+    __block NSData *        result;
+    
+    result = nil;
+    
+    sem = dispatch_semaphore_create(0);
+    
+    __block bool returnedError = NO;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:self.networkManager.baseURL
+                             
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
+                             
+                                         timeoutInterval:0.5];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request
+                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                         
+                                         if (error)
+                                         {
+                                             returnedError = YES;
+                                         }
+                                         
+                                         dispatch_semaphore_signal(sem);
+                                     }] resume];
+    
+    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+    
+    return !returnedError;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

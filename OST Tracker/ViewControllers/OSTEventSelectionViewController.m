@@ -282,7 +282,9 @@
         return;
     }
     
-    self.progressLabel.text = [NSString stringWithFormat:@"Downloading %@ Data",self.txtEvent.selectedItem];
+    if (![AppDelegate getInstance].getNetworkManager.usingAlternateUrl)
+        self.progressLabel.text = [NSString stringWithFormat:@"Downloading %@ Data",self.txtEvent.selectedItem];
+    else self.progressLabel.text = [NSString stringWithFormat:@"Downloading %@ Data from alternate server",self.txtEvent.selectedItem];
     [self showLoadingFields];
     self.progressBar.progress = 0.5;
     
@@ -313,8 +315,19 @@
         
         [[AppDelegate getInstance] loadLeftMenu];
     } errorBlock:^(NSError *error) {
-        [weakSelf showSelectFields];
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get course details" dismissButton:@"Ok"];
+        
+        if ([[AppDelegate getInstance].getNetworkManager usingAlternateUrl])
+        {
+            [weakSelf showSelectFields];
+            [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get course details" dismissButton:@"Ok"];
+            
+            [[AppDelegate getInstance] toggleToAlternateServer];
+        }
+        else
+        {
+            [[AppDelegate getInstance] toggleToAlternateServer];
+            [weakSelf onNext:nil];
+        }
     }];
 }
 

@@ -140,7 +140,15 @@
     [self.txtPassword resignFirstResponder];
     [self.txtEmail resignFirstResponder];
     [self showLoadingFields];
-    self.loadingLabel.text = @"Trying to log in";
+    
+    if ([AppDelegate getInstance].getNetworkManager.usingAlternateUrl)
+    {
+        self.loadingLabel.text = @"Trying to log in to alternate server";
+    }
+    else
+    {
+        self.loadingLabel.text = @"Trying to log";
+    }
     
     __weak OSTLoginViewController * weakSelf = self;
     [[AppDelegate getInstance].getNetworkManager loginWithEmail:self.txtEmail.text password:self.txtPassword.text completionBlock:^(id object)
@@ -167,7 +175,16 @@
         }
         else
         {
-            [OHAlertView showAlertWithTitle:@"Unable to login" message:@"Please try again later when you have a data or wi-fi connection" dismissButton:@"Ok"];
+            if ([[AppDelegate getInstance].getNetworkManager usingAlternateUrl])
+            {
+                [OHAlertView showAlertWithTitle:@"Unable to login" message:@"Please try again later when you have a data or wi-fi connection" dismissButton:@"Ok"];
+                [[AppDelegate getInstance] toggleToAlternateServer];
+            }
+            else
+            {
+                [[AppDelegate getInstance] toggleToAlternateServer];
+                [weakSelf onLogin:nil];
+            }
         }
     }];
 }
@@ -215,10 +232,12 @@
     } progressBlock:^(NSProgress * _Nonnull uploadProgress) {
         
     } errorBlock:^(NSError *error) {
-        [weakSelf showLoginFields];
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get the events" cancelButton:@"Try Again" otherButtons:nil buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get the events" cancelButton:@"Cancel Login" otherButtons:@[@"Try again"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex)
+        {
+            if (buttonIndex == 1)
                 [weakSelf loadEventData];
-            }];
+            else [weakSelf showLoginFields];
+        }];
     }];
 }
 

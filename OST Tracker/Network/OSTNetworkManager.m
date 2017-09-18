@@ -17,7 +17,31 @@
     
     if (self)
     {
+        [self.reachabilityManager stopMonitoring];
         self.serviceURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"];
+        self.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        self.responseSerializer = [JSONResponseSerializerWithData serializer];
+        self.requestSerializer = [AFJSONRequestSerializer serializer];
+        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
+        [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+        
+        [self.requestSerializer setTimeoutInterval:OSTNetworkTimeout];
+        
+        [self.reachabilityManager startMonitoring];
+    }
+    
+    return self;
+}
+
+- (id) initWithNetworkUrl:(NSString*) url
+{
+    self = [[OSTNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:url]];
+    
+    if (self)
+    {
+        [self.reachabilityManager stopMonitoring];
+        self.serviceURL = url;
         self.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
         self.responseSerializer = [JSONResponseSerializerWithData serializer];
         self.requestSerializer = [AFJSONRequestSerializer serializer];

@@ -16,6 +16,7 @@
 @property (strong, nonatomic) MFSideMenuContainerViewController * rightMenuVC;
 + (AppDelegate *)getInstance;
 - (OSTNetworkManager*) getNetworkManager;
+- (void) toggleToAlternateServer;
 - (void) logout;
 - (void) loadLeftMenu;
 - (void) showTracker;
