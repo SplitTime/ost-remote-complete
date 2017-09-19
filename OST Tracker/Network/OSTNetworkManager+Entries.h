@@ -10,6 +10,6 @@
 
 @interface OSTNetworkManager (Entries)
 
-- (NSURLSessionDataTask*)submitEntries:(NSArray*)entries completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError;
+- (NSURLSessionDataTask*)submitEntries:(NSArray*)entries useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError;
 
 @end

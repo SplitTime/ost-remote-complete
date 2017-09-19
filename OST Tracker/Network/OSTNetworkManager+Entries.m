@@ -14,7 +14,7 @@
 
 @implementation OSTNetworkManager (Entries)
 
-- (NSURLSessionDataTask*)submitEntries:(NSArray*)entries completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+- (NSURLSessionDataTask*)submitEntries:(NSArray*)entries useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
 {
     NSMutableArray * entriesArrayDict = [NSMutableArray new];
     
@@ -33,6 +33,11 @@
     }
     
     NSString * endpoint = [NSString stringWithFormat:OSTSubmitEventEndpoint,[CurrentCourse getCurrentCourse].eventId];
+    
+    if (alternateServer)
+    {
+        endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
+    }
     
     NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                       {

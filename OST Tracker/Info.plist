@@ -4,8 +4,15 @@
 <dict>
 	<key>BACKEND_URL</key>
 	<string>$(BACKEND_URL)</string>
+	<key>BACKEND_ALTERNATE_URL</key>
+	<string>$(BACKEND_ALTERNATE_URL)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

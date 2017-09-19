@@ -220,17 +220,18 @@
 
 - (IBAction)onLogout:(id)sender
 {
-    if (![AppDelegate getInstance].getNetworkManager.reachabilityManager.reachable)
-    {
+    [DejalBezelActivityView activityViewForView:self.view];
+    [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id  _Nullable object) {
+        [DejalBezelActivityView removeViewAnimated:YES];
+        [OHAlertView showAlertWithTitle:@"Are you sure you would like to log out?" message:@"You will not be able to log back in or add entries until you have a data connection again." cancelButton:@"Cancel" otherButtons:@[@"Logout"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
+            if (buttonIndex == 1)
+            {
+                [[AppDelegate getInstance] logout];
+            }
+        }];
+    } errorBlock:^(NSError * _Nullable error) {
+        [DejalBezelActivityView removeViewAnimated:YES];
         [OHAlertView showAlertWithTitle:@"Logout is disabled" message:@"Please try again when you have an Internet connection" cancelButton:@"Ok" otherButtons:nil buttonHandler:nil];
-        return;
-    }
-    
-    [OHAlertView showAlertWithTitle:@"Are you sure you would like to log out?" message:@"You will not be able to log back in or add entries until you have a data connection again." cancelButton:@"Cancel" otherButtons:@[@"Logout"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
-        if (buttonIndex == 1)
-        {
-            [[AppDelegate getInstance] logout];
-        }
     }];
 }
 

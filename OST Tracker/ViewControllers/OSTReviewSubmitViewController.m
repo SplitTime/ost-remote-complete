@@ -224,7 +224,7 @@
     __weak OSTReviewSubmitViewController * weakSelf = self;
     
     [[AppDelegate getInstance].getNetworkManager autoLoginWithCompletionBlock:^(id object) {
-        [weakSelf submitEntries:entries completionBlock:^(id object) {
+        [weakSelf submitEntries:entries useAlternateServer:NO completionBlock:^(id object) {
             [weakSelf showFinishLoadingValues];
             [weakSelf loadData];
         } errorBlock:^(NSError *error) {
@@ -235,24 +235,41 @@
         }];
     } errorBlock:^(NSError *error) {
     
-        NSString * errorMessage = nil;
+        NSString * errorMessage1 = nil;
         if (error.code == -1009)
         {
-            errorMessage = @"The device is not connected to the internet.";
+            errorMessage1 = @"The device is not connected to the internet or the alternate server";
+            //[weakSelf.loadingView removeFromSuperview];
+            //[weakSelf showFinishLoadingValues];
+            
+            //[OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage1 dismissButton:@"Ok"];
+            //[weakSelf loadData];
+            //return;
         }
         else
         {
-            errorMessage = [NSString stringWithFormat:@"Error: %@",[error errorsFromDictionary]];
+            errorMessage1 = [NSString stringWithFormat:@"Error: %@",[error errorsFromDictionary]];
         }
         
-        [weakSelf.loadingView removeFromSuperview];
-        [weakSelf showFinishLoadingValues];
-        [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
-        [weakSelf loadData];
+        [weakSelf submitEntries:entries useAlternateServer:YES completionBlock:^(id object) {
+            [weakSelf showFinishLoadingValues];
+            [weakSelf loadData];
+        } errorBlock:^(NSError *error) {
+            [weakSelf.loadingView removeFromSuperview];
+            [weakSelf showFinishLoadingValues];
+            NSString * errorMessage2 = nil;
+            
+            errorMessage2 = [NSString stringWithFormat:@"Error: %@",[error errorsFromDictionary]];
+            
+            NSString * errorMessage = [NSString stringWithFormat:@"Primary server returned: %@, alternate server: %@",errorMessage1,errorMessage2];
+            
+            [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
+            [weakSelf loadData];
+        }];
     }];
 }
 
-- (void) submitEntries:(NSMutableArray*) entries completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+- (void) submitEntries:(NSMutableArray*) entries useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
 {
     NSArray * subEntries = nil;
     
@@ -276,7 +293,7 @@
     }
     
     __weak OSTReviewSubmitViewController * weakSelf = self;
-    [[AppDelegate getInstance].getNetworkManager submitEntries:subEntries completionBlock:^(id object) {
+    [[AppDelegate getInstance].getNetworkManager submitEntries:subEntries useAlternateServer:alternateServer completionBlock:^(id object) {
     
         for (EntryModel * entry in subEntries)
         {
@@ -287,7 +304,7 @@
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
         
-        [weakSelf submitEntries:entries completionBlock:onCompletion errorBlock:onError];
+        [weakSelf submitEntries:entries useAlternateServer:alternateServer completionBlock:onCompletion errorBlock:onError];
         
     } errorBlock:^(NSError *error) {
         onError(error);
