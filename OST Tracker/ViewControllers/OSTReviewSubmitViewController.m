@@ -179,16 +179,6 @@
     
     [self.activityIndicator startAnimating];
     self.lblSyncing.hidden = NO;
-    
-    if ([AppDelegate getInstance].getNetworkManager.usingAlternateUrl)
-    {
-        self.lblSyncing.text = @"Syncing data to OpenSplitTime.org alternate server\nPlease don’t disconnect from the internet.";
-    }
-    else
-    {
-        self.lblSyncing.text = @"Syncing data to OpenSplitTime.org\nPlease don’t disconnect from the internet.";
-    }
-    
     self.progressBar.hidden = NO;
 }
 
@@ -219,8 +209,7 @@
 
 - (IBAction)onSubmit:(id)sender
 {
-    if(sender != nil)
-        [[UIDevice currentDevice] playInputClick];
+    [[UIDevice currentDevice] playInputClick];
     
     NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     if (entries.count == 0)
@@ -256,19 +245,10 @@
             errorMessage = [NSString stringWithFormat:@"Error: %@",[error errorsFromDictionary]];
         }
         
-        if ([[AppDelegate getInstance].getNetworkManager usingAlternateUrl])
-        {
-            [weakSelf.loadingView removeFromSuperview];
-            [weakSelf showFinishLoadingValues];
-            [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
-            [weakSelf loadData];
-            [[AppDelegate getInstance] toggleToAlternateServer];
-        }
-        else
-        {
-            [[AppDelegate getInstance] toggleToAlternateServer];
-            [weakSelf onSubmit:nil];
-        }
+        [weakSelf.loadingView removeFromSuperview];
+        [weakSelf showFinishLoadingValues];
+        [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
+        [weakSelf loadData];
     }];
 }
 

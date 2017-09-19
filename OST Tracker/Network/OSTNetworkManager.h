@@ -38,9 +38,7 @@ typedef void (^OSTErrorBlock)(NSError* _Nullable error);
 @interface OSTNetworkManager : AFHTTPSessionManager
 
 @property (nonatomic,strong) NSString * _Nullable serviceURL;
-@property (nonatomic,unsafe_unretained) BOOL usingAlternateUrl;
 
-- (void) addTokenToHeader: (NSString*_Nullable) token;
-- (id _Nullable ) initWithNetworkUrl:(NSString*_Nullable) url;
+- (void)addTokenToHeader: (NSString*_Nullable) token;
 
 @end
