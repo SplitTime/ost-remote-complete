@@ -17,6 +17,8 @@
 
 @property (strong, nonatomic) EntryModel * entry;
 @property (weak, nonatomic) IBOutlet UITextField *txtTime;
+@property (weak, nonatomic) IBOutlet UIButton *btnDelete;
+@property (weak, nonatomic) IBOutlet UIButton *btnUpdate;
 @property (strong, nonatomic) CustomUIDatePicker * customPicker;
 @property (strong, nonatomic) EffortModel * effort;
 
@@ -53,6 +55,15 @@
     [self.txtTime removeInputAssistant];
     [self.txtBibNumber removeInputAssistant];
     [self.txtDate removeInputAssistant];
+    
+    if (self.creatingNew)
+    {
+        self.btnDelete.hidden = YES;
+        self.btnUpdate.left = 0;
+        self.btnUpdate.width = self.view.width;
+        self.btnUpdate.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        [self.btnUpdate setTitle:@"Create new entry" forState:UIControlStateNormal];
+    }
     
     __weak OSTEditEntryViewController * weakSelf = self;
     self.txtBibNumber.inputView = ({
@@ -92,6 +103,71 @@
 
 - (IBAction)onUpdate:(id)sender
 {
+    if (self.creatingNew)
+    {
+        EntryModel * newEntry = [EntryModel MR_createEntity];
+        
+        if (self.txtBibNumber.text.length == 0)
+        {
+            newEntry.bibNumber = @"-1";
+        }
+        else newEntry.bibNumber = self.txtBibNumber.text;
+        newEntry.bitKey = self.entry.bitKey;
+
+        newEntry.splitId = self.entry.splitId;
+        
+        newEntry.courseName = self.entry.courseName;
+        newEntry.splitName = self.entry.splitName;
+        newEntry.courseId = self.entry.courseId;
+        newEntry.splitId = self.entry.splitId;
+        
+        [self onDoneSelectedTime:nil];
+        
+        if (self.txtBibNumber.text.length)
+            newEntry.bibNumber = self.txtBibNumber.text;
+        
+        if (self.effort)
+        {
+            newEntry.fullName = self.effort.fullName;
+        }
+        else
+        {
+            newEntry.fullName = nil;
+        }
+        
+        newEntry.entryTime = [self.txtDate.date dateByAddingTimeInterval:self.customPicker.getPickerTimeInMS/1000];
+        
+        newEntry.displayTime = self.txtTime.text;
+        NSString * dayString;
+        
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        dayString = [dateFormatter stringFromDate:self.txtDate.date];
+        
+        int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
+        newEntry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",dayString, self.txtTime.text,timezoneoffset];
+        
+        newEntry.source = self.entry.source;
+        
+        if (self.swchPacer.on)
+            newEntry.withPacer = @"true";
+        else newEntry.withPacer = @"false";
+        if (self.swchStoppedHere.on)
+            newEntry.stoppedHere = @"true";
+        else newEntry.stoppedHere = @"false";
+        
+        if (self.entryHasBeenUpdatedBlock)
+        {
+            self.entryHasBeenUpdatedBlock();
+        }
+        
+        [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+        [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        return;
+    }
+    
     [self onDoneSelectedTime:nil];
     if (self.txtBibNumber.text.length)
         self.entry.bibNumber = self.txtBibNumber.text;

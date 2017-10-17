@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtDate;
 @property (nonatomic, copy) void (^entryHasBeenDeletedBlock)(void);
 @property (nonatomic, copy) void (^entryHasBeenUpdatedBlock)(void);
+@property (nonatomic, assign) BOOL creatingNew;
 
 - (IBAction)onBibNumberChanged:(id)sender;
 - (void) configureWithEntry:(EntryModel*)entry;

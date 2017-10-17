@@ -334,7 +334,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     OSTReviewTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"OSTReviewTableViewCell" forIndexPath:indexPath];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -347,6 +346,17 @@
 {
     if ([[self.entries[indexPath.section][indexPath.row] submitted] boolValue])
     {
+        __weak OSTReviewSubmitViewController * weakSelf = self;
+        [OHAlertView showAlertWithTitle:@"" message:@"Time has already been synced. Create a replacement time?" cancelButton:@"No" otherButtons:@[@"Yes"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex)
+         {
+             if (buttonIndex == 1)
+             {
+                 OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
+                 editVC.creatingNew = YES;
+                 [weakSelf presentViewController:editVC animated:YES completion:nil];
+                 [editVC configureWithEntry:weakSelf.entries[indexPath.section][indexPath.row]];
+             }
+         }];
         return;
     }
     
