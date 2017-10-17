@@ -211,6 +211,9 @@
         
         [IQKeyboardManager sharedManager].enable = NO;
         [weakSelf presentViewController:eventVC animated:YES completion:nil];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:@"reviewScreenPicklistValue"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
 
     } progressBlock:^(NSProgress * _Nonnull uploadProgress) {
         

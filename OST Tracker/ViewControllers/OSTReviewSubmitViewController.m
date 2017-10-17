@@ -59,7 +59,7 @@
     }
     else
     {
-        self.txtSortBy.selectedRow = 3;
+        self.txtSortBy.selectedRow = 2;
     }
     
     UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
