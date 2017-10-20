@@ -9,6 +9,7 @@
 #import "OSTRightMenuViewController.h"
 #import "OSTEventSelectionViewController.h"
 #import "OSTRunnerTrackerViewController.h"
+#import "OSTCrossCheckViewController.h"
 
 @interface OSTRightMenuViewController ()
 
@@ -34,6 +35,15 @@
     {
         [((OSTRunnerTrackerViewController*)([AppDelegate getInstance].rightMenuVC.centerViewController)).txtBibNumber becomeFirstResponder];
     }
+}
+
+- (IBAction)onCrossCheck:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CrossCheck" bundle:nil];
+    UIViewController *controller = [storyboard instantiateInitialViewController];
+    
+    [AppDelegate getInstance].rightMenuVC.centerViewController = controller;
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
 - (IBAction)onSubmit:(id)sender

@@ -90,6 +90,12 @@
 		6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
 		6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
 		6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
+		6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */; };
+		6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */; };
+		6A7D79621F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79611F9A64A5001149B0 /* OSTCrossCheckViewController.m */; };
+		6A7D79631F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79611F9A64A5001149B0 /* OSTCrossCheckViewController.m */; };
+		6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */; };
+		6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */; };
 		6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
@@ -179,6 +185,11 @@
 		6A5E0D091EF1B25E00399EEC /* OST Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A676FDC1F5F401E0051C8CB /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
+		6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CrossCheck.storyboard; sourceTree = "<group>"; };
+		6A7D79601F9A64A5001149B0 /* OSTCrossCheckViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckViewController.h; sourceTree = "<group>"; };
+		6A7D79611F9A64A5001149B0 /* OSTCrossCheckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckViewController.m; sourceTree = "<group>"; };
+		6A7D79641F9A6946001149B0 /* OSTCrossCheckCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckCell.h; sourceTree = "<group>"; };
+		6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckCell.m; sourceTree = "<group>"; };
 		6AA399791EFC1FE50097ED63 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
@@ -328,6 +339,11 @@
 				6A5005E81EFA187F00FA1751 /* OSTReviewSectionHeader.h */,
 				6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */,
 				6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */,
+				6A7D79601F9A64A5001149B0 /* OSTCrossCheckViewController.h */,
+				6A7D79611F9A64A5001149B0 /* OSTCrossCheckViewController.m */,
+				6A7D79641F9A6946001149B0 /* OSTCrossCheckCell.h */,
+				6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */,
+				6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -583,6 +599,7 @@
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
+				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
@@ -600,6 +617,7 @@
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
+				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
@@ -811,6 +829,7 @@
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
+				6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A11A05C1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */,
@@ -831,6 +850,7 @@
 				6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */,
 				6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
+				6A7D79621F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
 				6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
@@ -850,6 +870,7 @@
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
+				6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A11A05D1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.m in Sources */,
 				6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */,
@@ -870,6 +891,7 @@
 				6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */,
 				6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
+				6A7D79631F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
 				6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
