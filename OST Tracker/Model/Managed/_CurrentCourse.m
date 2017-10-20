@@ -38,6 +38,8 @@
 	return keyPaths;
 }
 
+@dynamic combinedSplitAttributes;
+
 @dynamic eventId;
 
 @dynamic eventName;
@@ -73,6 +75,9 @@
 @end
 
 @implementation CurrentCourseAttributes 
++ (NSString *)combinedSplitAttributes {
+	return @"combinedSplitAttributes";
+}
 + (NSString *)eventId {
 	return @"eventId";
 }

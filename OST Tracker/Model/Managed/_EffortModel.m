@@ -36,6 +36,8 @@
 
 @dynamic effortId;
 
+@dynamic eventId;
+
 @dynamic fullName;
 
 @end
@@ -46,6 +48,9 @@
 }
 + (NSString *)effortId {
 	return @"effortId";
+}
++ (NSString *)eventId {
+	return @"eventId";
 }
 + (NSString *)fullName {
 	return @"fullName";

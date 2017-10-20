@@ -9,7 +9,8 @@
 #import "OSTNetworkManager+Events.h"
 
 #define OSTEventsEndpoint @"events?filter[editable]=true&filter[availableLive]=true"
-#define OSTEventDetailsEndpoint @"events/%@?include=efforts"
+#define OSTEventDetailsEndpoint @"events/%@?include=efforts,eventGroup"
+#define OSTEventGroupEndpoint @"event_groups/%@?include=events.efforts,events.splits"
 
 @implementation OSTNetworkManager (Events)
 
@@ -35,6 +36,23 @@
                                           } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                               onError(error);
                                           }];
+    } errorBlock:^(NSError *error) {
+        onError(error);
+    }];
+    
+    [dataTask resume];
+    return dataTask;
+}
+
+- (NSURLSessionDataTask*)getEventGroup:(NSString*)eventId completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+{
+    NSURLSessionDataTask *dataTask = [self autoLoginWithCompletionBlock:^(id object) {
+        [self GET:[NSString stringWithFormat:OSTEventGroupEndpoint,eventId] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+         {
+             onCompletion(responseObject);
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             onError(error);
+         }];
     } errorBlock:^(NSError *error) {
         onError(error);
     }];

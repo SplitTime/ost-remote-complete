@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* effortId;
 
+@property (nonatomic, strong, nullable) NSDecimalNumber* eventId;
+
 @property (nonatomic, strong, nullable) NSString* fullName;
 
 @end
@@ -36,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveEffortId;
 - (void)setPrimitiveEffortId:(NSString*)value;
 
+- (NSDecimalNumber*)primitiveEventId;
+- (void)setPrimitiveEventId:(NSDecimalNumber*)value;
+
 - (NSString*)primitiveFullName;
 - (void)setPrimitiveFullName:(NSString*)value;
 
@@ -44,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface EffortModelAttributes: NSObject 
 + (NSString *)bibNumber;
 + (NSString *)effortId;
++ (NSString *)eventId;
 + (NSString *)fullName;
 @end
 

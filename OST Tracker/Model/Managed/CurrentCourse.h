@@ -4,5 +4,7 @@
 // Custom logic goes here.
 
 + (CurrentCourse*) getCurrentCourse;
+- (NSArray*) getSplitInIds;
+- (NSArray*) getSplitOutIds;
 
 @end

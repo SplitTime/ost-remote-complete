@@ -300,9 +300,14 @@
             {
                 [EffortModel MR_importFromObject:dataObject];
             }
+            else if ([dataObject[@"type"] isEqualToString:@"eventGroups"])
+            {
+                currentCourse.combinedSplitAttributes = dataObject[@"attributes"][@"combinedSplitAttributes"];
+            }
         }
-        currentCourse.splitId = [firstFoundObject[@"entries"][0][@"splitId"] stringValue];
+        
         currentCourse.eventId = weakSelf.selectedEvent.eventId;
+        currentCourse.splitId = [firstFoundObject[@"entries"][0][@"splitId"] stringValue];
         currentCourse.splitName = firstFoundObject[@"title"];
         currentCourse.eventName = weakSelf.selectedEvent.name;
         currentCourse.multiLap = weakSelf.selectedEvent.multiLap;

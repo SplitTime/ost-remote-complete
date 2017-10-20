@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) id splits;
 
+@property (nonatomic, strong, nullable) NSDate* startTime;
+
 @end
 
 @interface _EventModel (CoreDataGeneratedPrimitiveAccessors)
@@ -65,6 +67,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)primitiveSplits;
 - (void)setPrimitiveSplits:(id)value;
 
+- (NSDate*)primitiveStartTime;
+- (void)setPrimitiveStartTime:(NSDate*)value;
+
 @end
 
 @interface EventModelAttributes: NSObject 
@@ -74,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)name;
 + (NSString *)slug;
 + (NSString *)splits;
++ (NSString *)startTime;
 @end
 
 @interface EventModelUserInfo: NSObject 

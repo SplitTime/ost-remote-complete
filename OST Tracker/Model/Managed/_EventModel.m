@@ -68,6 +68,8 @@
 
 @dynamic splits;
 
+@dynamic startTime;
+
 @end
 
 @implementation EventModelAttributes 
@@ -88,6 +90,9 @@
 }
 + (NSString *)splits {
 	return @"splits";
+}
++ (NSString *)startTime {
+	return @"startTime";
 }
 @end
 
