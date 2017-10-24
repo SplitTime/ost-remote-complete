@@ -96,6 +96,10 @@
 		6A7D79631F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79611F9A64A5001149B0 /* OSTCrossCheckViewController.m */; };
 		6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */; };
 		6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */; };
+		6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */; };
+		6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */; };
+		6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */; };
+		6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */; };
 		6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
@@ -190,6 +194,10 @@
 		6A7D79611F9A64A5001149B0 /* OSTCrossCheckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckViewController.m; sourceTree = "<group>"; };
 		6A7D79641F9A6946001149B0 /* OSTCrossCheckCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckCell.h; sourceTree = "<group>"; };
 		6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckCell.m; sourceTree = "<group>"; };
+		6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CrossCheckEntriesModel.m; sourceTree = "<group>"; };
+		6A95F5501F9ED0BA00E87570 /* CrossCheckEntriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossCheckEntriesModel.h; sourceTree = "<group>"; };
+		6A95F5511F9ED0BA00E87570 /* _CrossCheckEntriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CrossCheckEntriesModel.h; sourceTree = "<group>"; };
+		6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossCheckEntriesModel.m; sourceTree = "<group>"; };
 		6AA399791EFC1FE50097ED63 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
@@ -388,6 +396,10 @@
 				6A11A0701EF372DE00D6D2CA /* _CourseSplits.m */,
 				6A41ADFA1EF7F2BF00C9F834 /* _EffortModel.h */,
 				6A41ADFB1EF7F2BF00C9F834 /* _EffortModel.m */,
+				6A95F5511F9ED0BA00E87570 /* _CrossCheckEntriesModel.h */,
+				6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */,
+				6A95F5501F9ED0BA00E87570 /* CrossCheckEntriesModel.h */,
+				6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */,
 				6A41ADFC1EF7F2BF00C9F834 /* EffortModel.h */,
 				6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */,
 				6A11A0711EF372DE00D6D2CA /* CourseSplits.h */,
@@ -644,13 +656,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OST TrackerTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		0D6228B41B66B329FB31FBFC /* [CP] Embed Pods Frameworks */ = {
@@ -659,9 +674,36 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/APNumberPad/APNumberPad.framework",
+				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
+				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JTObjectMapping/JTObjectMapping.framework",
+				"${BUILT_PRODUCTS_DIR}/MFSideMenu/MFSideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/NSDate+Helper/NSDate_Helper.framework",
+				"${BUILT_PRODUCTS_DIR}/OHAlertView/OHAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APNumberPad.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTObjectMapping.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFSideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_Helper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -674,13 +716,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OST Remote Dev-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2295FA4181504AF3AA0071DF /* [CP] Copy Pods Resources */ = {
@@ -704,13 +749,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OST Remote-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6A5E0D041EF1B25E00399EEC /* [CP] Embed Pods Frameworks */ = {
@@ -719,9 +767,36 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/APNumberPad/APNumberPad.framework",
+				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
+				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JTObjectMapping/JTObjectMapping.framework",
+				"${BUILT_PRODUCTS_DIR}/MFSideMenu/MFSideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/NSDate+Helper/NSDate_Helper.framework",
+				"${BUILT_PRODUCTS_DIR}/OHAlertView/OHAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APNumberPad.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTObjectMapping.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFSideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_Helper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -762,9 +837,36 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/APNumberPad/APNumberPad.framework",
+				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
+				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JTObjectMapping/JTObjectMapping.framework",
+				"${BUILT_PRODUCTS_DIR}/MFSideMenu/MFSideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/NSDate+Helper/NSDate_Helper.framework",
+				"${BUILT_PRODUCTS_DIR}/OHAlertView/OHAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/APNumberPad.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTObjectMapping.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFSideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_Helper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -824,6 +926,7 @@
 				6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
 				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
+				6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
@@ -852,6 +955,7 @@
 				6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6A7D79621F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
+				6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -865,6 +969,7 @@
 				6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
+				6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
@@ -893,6 +998,7 @@
 				6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6A7D79631F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
+				6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,11 @@
             <entry key="relatedByAttribute" value="baseName"/>
         </userInfo>
     </entity>
+    <entity name="CrossCheckEntriesModel" representedClassName="CrossCheckEntriesModel" syncable="YES">
+        <attribute name="bibNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="splitName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CurrentCourse" representedClassName="CurrentCourse" syncable="YES">
         <attribute name="combinedSplitAttributes" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
@@ -121,6 +126,7 @@
     </entity>
     <elements>
         <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="75"/>
+        <element name="CrossCheckEntriesModel" positionX="-54" positionY="108" width="128" height="90"/>
         <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="165"/>
         <element name="EffortModel" positionX="-54" positionY="54" width="128" height="105"/>
         <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="285"/>
