@@ -8,6 +8,7 @@
 
 @implementation EffortModel
 
+@synthesize bulkSelected = _bulkSelected;
 // Custom logic goes here.
 
 @end

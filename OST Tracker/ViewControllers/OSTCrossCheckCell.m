@@ -47,19 +47,39 @@
     else
     {
         [self setAsRecorded];
-        for (EntryModel * entry in entries)
+        EntryModel * entry = entries.lastObject;
+        
+        NSArray * entries = [CurrentCourse getCurrentCourse].splitAttributes[@"entries"];
+        
+        NSArray * splitEntriesIn = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"subSplitKind == %@",@"in"]];
+        NSArray * splitEntriesOut = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"subSplitKind == %@",@"out"]];
+        
+        BOOL onlyIn = NO;
+        
+        if (splitEntriesIn.count != 0 && splitEntriesOut.count == 0)
         {
-            if ([entry.stoppedHere isEqualToString:@"true"])
-            {
-                [self setAsDroppedHere];
-                break;
-            }
-            else if ([entry.withPacer isEqualToString:@"true"])
-            {
-                [self setAsWithAid];
-                break;
-            }
+            onlyIn = YES;
         }
+        
+        if ([entry.stoppedHere isEqualToString:@"true"])
+        {
+            [self setAsDroppedHere];
+        }
+        else if ([entry.bitKey isEqualToString:@"in"] && onlyIn == NO)
+        {
+            [self setAsWithAid];
+        }
+    }
+    
+    if (effort.bulkSelected)
+    {
+        self.noBulkSelectView.hidden = NO;
+        self.imgBulkSelectCheckmark.hidden = NO;
+    }
+    else
+    {
+        self.noBulkSelectView.hidden = YES;
+        self.imgBulkSelectCheckmark.hidden = YES;
     }
 }
 

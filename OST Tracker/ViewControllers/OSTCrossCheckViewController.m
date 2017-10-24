@@ -12,6 +12,7 @@
 #import "CrossCheckEntriesModel.h"
 #import "UIView+Additions.h"
 #import "CurrentCourse.h"
+#import "OSTCrossCheckHeader.h"
 
 @interface OSTCrossCheckViewController ()
 @property (weak, nonatomic) IBOutlet UIView *popupOverlay;
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnReviewEntries;
 @property (strong, nonatomic) NSArray* efforts;
 @property (weak, nonatomic) IBOutlet UILabel *lblPupupEntryName;
+@property (weak, nonatomic) IBOutlet UIView *bulkSelectMenuView;
+@property (weak, nonatomic) IBOutlet UIButton *btnBulkSelect;
 @property (weak, nonatomic) IBOutlet UISwitch *swchPopupExpected;
 @property (weak, nonatomic) IBOutlet UIView *popupCrossCheckContainer;
 @property (weak, nonatomic) IBOutlet UIView *popupSegmentedView;
@@ -30,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *popupBibNumber;
 @property (weak, nonatomic) IBOutlet UIImageView *popupDroppedHereIcon;
 @property (strong, nonatomic) CrossCheckEntriesModel * popupCrossCheckModel;
+@property (assign, nonatomic) BOOL bulkSelect;
 
 @end
 
@@ -68,11 +72,45 @@
     
     [cell configureWithEffort:self.efforts[indexPath.row]];
     
+    if (self.bulkSelect)
+    {
+        if (![cell.lblStatus.text isEqualToString:@"Expected"] &&
+            ![cell.lblStatus.text isEqualToString:@"Not Expected"])
+        {
+            cell.noBulkSelectView.hidden = NO;
+        }
+        else
+        {
+            cell.noBulkSelectView.hidden = YES;
+        }
+    }
+    
+    if ([self.efforts[indexPath.row] bulkSelected])
+    {
+        cell.noBulkSelectView.hidden = NO;
+    }
+    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.bulkSelect)
+    {
+        EffortModel * effort = self.efforts[indexPath.row];
+        OSTCrossCheckCell *cell = (OSTCrossCheckCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        
+        if (![cell.lblStatus.text isEqualToString:@"Expected"] && ![cell.lblStatus.text isEqualToString:@"Not Expected"])
+        {
+            return;
+        }
+        
+        effort.bulkSelected = !effort.bulkSelected;
+        
+        [cell configureWithEffort:effort];
+        
+        return;
+    }
     self.popupEffort = self.efforts[indexPath.row];
     self.lblPupupEntryName.text = self.popupEffort.fullName;
     
@@ -109,9 +147,11 @@
     UICollectionReusableView *reusableview = nil;
     
     if (kind == UICollectionElementKindSectionHeader) {
-        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"OSTCrossCheckHeader" forIndexPath:indexPath];
+        OSTCrossCheckHeader *headerView = (OSTCrossCheckHeader*)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"OSTCrossCheckHeader" forIndexPath:indexPath];
         
         reusableview = headerView;
+        
+        headerView.lblStationName.text = [CurrentCourse getCurrentCourse].splitName;
     }
     
     if (kind == UICollectionElementKindSectionFooter) {
@@ -135,7 +175,25 @@
 
 - (IBAction)onBulkSelect:(id)sender
 {
+    for (EffortModel * effort in self.efforts)
+    {
+        effort.bulkSelected = NO;
+    }
     
+    if (self.bulkSelect)
+    {
+        self.bulkSelect = NO;
+        [self.btnBulkSelect setTitle:@"Bulk Select" forState:UIControlStateNormal];
+        self.bulkSelectMenuView.hidden = YES;
+    }
+    else
+    {
+        self.bulkSelect = YES;
+        [self.btnBulkSelect setTitle:@"Cancel" forState:UIControlStateNormal];
+        self.bulkSelectMenuView.hidden = NO;
+    }
+    
+    [self reloadData];
 }
 
 - (IBAction)onClosePopup:(id)sender
@@ -178,6 +236,54 @@
         weakSelf.popupView.top = self.view.bottom;
         weakSelf.popupOverlay.alpha = 0;
     }];
+}
+- (IBAction)onBulkExpected:(id)sender
+{
+    CrossCheckEntriesModel * crossCheckEntry;
+    for (EffortModel * effort in self.efforts)
+    {
+        if (effort.bulkSelected)
+        {
+            crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
+            if (crossCheckEntry)
+            {
+                [crossCheckEntry MR_deleteEntity];
+                
+                [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+                [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+            }
+        }
+    }
+    
+    [self onBulkSelect:nil];
+}
+
+- (IBAction)onBulkNotExpected:(id)sender
+{
+    CrossCheckEntriesModel * crossCheckEntry;
+    for (EffortModel * effort in self.efforts)
+    {
+        if (effort.bulkSelected)
+        {
+            crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
+            if (!crossCheckEntry)
+            {
+                crossCheckEntry = [CrossCheckEntriesModel MR_createEntity];
+                crossCheckEntry.bibNumber = [effort.bibNumber stringValue];
+                crossCheckEntry.splitName = [CurrentCourse getCurrentCourse].splitName;
+                crossCheckEntry.courseId = [CurrentCourse getCurrentCourse].eventId;
+                
+                [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+                [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+            }
+        }
+    }
+    [self onBulkSelect:nil];
+}
+
+- (IBAction)onReviewEntries:(id)sender
+{
+    [[AppDelegate getInstance] showReview];
 }
 
 - (void) showPopup

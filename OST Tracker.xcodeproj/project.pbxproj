@@ -100,6 +100,10 @@
 		6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */; };
 		6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */; };
 		6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */; };
+		6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */; };
+		6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */; };
+		6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */; };
+		6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */; };
 		6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
@@ -198,6 +202,10 @@
 		6A95F5501F9ED0BA00E87570 /* CrossCheckEntriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossCheckEntriesModel.h; sourceTree = "<group>"; };
 		6A95F5511F9ED0BA00E87570 /* _CrossCheckEntriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CrossCheckEntriesModel.h; sourceTree = "<group>"; };
 		6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossCheckEntriesModel.m; sourceTree = "<group>"; };
+		6A95F5571F9F013B00E87570 /* OSTCrossCheckFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckFooter.h; sourceTree = "<group>"; };
+		6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckFooter.m; sourceTree = "<group>"; };
+		6A95F55B1F9F019F00E87570 /* OSTCrossCheckHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckHeader.h; sourceTree = "<group>"; };
+		6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckHeader.m; sourceTree = "<group>"; };
 		6AA399791EFC1FE50097ED63 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
@@ -351,6 +359,10 @@
 				6A7D79611F9A64A5001149B0 /* OSTCrossCheckViewController.m */,
 				6A7D79641F9A6946001149B0 /* OSTCrossCheckCell.h */,
 				6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */,
+				6A95F5571F9F013B00E87570 /* OSTCrossCheckFooter.h */,
+				6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */,
+				6A95F55B1F9F019F00E87570 /* OSTCrossCheckHeader.h */,
+				6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */,
 				6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */,
 			);
 			path = ViewControllers;
@@ -922,12 +934,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A41AE061EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
+				6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
 				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
+				6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
@@ -965,12 +979,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A41AE071EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
+				6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
+				6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,

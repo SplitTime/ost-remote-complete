@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgAid;
 @property (weak, nonatomic) IBOutlet UIImageView *imgDroppedHere;
 @property (weak, nonatomic) IBOutlet UILabel *lblBibNumber;
+@property (weak, nonatomic) IBOutlet UIView *noBulkSelectView;
+@property (weak, nonatomic) IBOutlet UIImageView *imgBulkSelectCheckmark;
 
 - (void) configureWithEffort:(EffortModel*)effort;
 
