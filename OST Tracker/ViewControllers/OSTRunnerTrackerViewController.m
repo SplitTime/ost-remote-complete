@@ -237,6 +237,12 @@
                         entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][[self.racer.eventId stringValue]]];
                         entry.entryCourseId = [self.racer.eventId stringValue];
                     }
+                    else
+                    {
+                        NSNumber * key = [[subEntry[@"eventSplitIds"] allKeys] firstObject];
+                        entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
+                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][key]];
+                    }
                 }
             }
         }
