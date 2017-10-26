@@ -120,7 +120,7 @@
         CurrentCourse * course = [CurrentCourse getCurrentCourse];
         self.txtEvent.userInteractionEnabled = NO;
         [self.txtEvent setItemList:@[course.eventName]];
-        NSArray * stations = course.liveAttributes;
+        NSArray * stations = course.combinedSplitAttributes;
         NSMutableArray * stationStrings = [NSMutableArray new];
         for (NSDictionary * split in stations)
         {
@@ -131,7 +131,7 @@
         
         self.btnNext.alpha = 1;
         self.txtStation.alpha = 1;
-        self.liveAttributes = course.liveAttributes;
+        self.combinedSplitAttributes = course.combinedSplitAttributes;
         return;
     }
     
@@ -163,7 +163,7 @@
     
     self.selectedEvent = firstFoundObject;
     
-    for (NSDictionary * liveEntry in self.selectedEvent.liveEntryAttributes)
+    for (NSDictionary * liveEntry in self.selectedEvent.combinedSplitAttributes)
     {
         [splitStrings addObject:liveEntry[@"title"]];
     }
@@ -245,13 +245,13 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", self.txtStation.selectedItem];
     NSArray *filteredArray = nil;
     
-    if (!self.liveAttributes)
+    if (!self.combinedSplitAttributes)
     {
-        filteredArray = [self.selectedEvent.liveEntryAttributes filteredArrayUsingPredicate:predicate];
+        filteredArray = [self.selectedEvent.combinedSplitAttributes filteredArrayUsingPredicate:predicate];
     }
     else
     {
-        filteredArray = [self.liveAttributes filteredArrayUsingPredicate:predicate];
+        filteredArray = [self.combinedSplitAttributes filteredArrayUsingPredicate:predicate];
     }
     
     NSDictionary * firstFoundObject = nil;
@@ -294,15 +294,13 @@
         [weakSelf.activityIndicator stopAnimating];
         CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
         
+        currentCourse.combinedSplitAttributes = object[@"data"][@"attributes"][@"combinedSplitAttributes"];
+        
         for (id dataObject in object[@"included"])
         {
             if ([dataObject[@"type"] isEqualToString:@"efforts"])
             {
                 [EffortModel MR_importFromObject:dataObject];
-            }
-            else if ([dataObject[@"type"] isEqualToString:@"eventGroups"])
-            {
-                currentCourse.combinedSplitAttributes = dataObject[@"attributes"][@"combinedSplitAttributes"];
             }
         }
         

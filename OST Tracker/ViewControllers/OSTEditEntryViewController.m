@@ -118,7 +118,8 @@
         
         newEntry.courseName = self.entry.courseName;
         newEntry.splitName = self.entry.splitName;
-        newEntry.courseId = self.entry.courseId;
+        newEntry.entryCourseId = self.entry.entryCourseId;
+        newEntry.combinedCourseId = self.entry.combinedCourseId;
         newEntry.splitId = self.entry.splitId;
         
         [self onDoneSelectedTime:nil];

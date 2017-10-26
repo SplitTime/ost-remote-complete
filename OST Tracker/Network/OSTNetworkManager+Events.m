@@ -8,8 +8,8 @@
 
 #import "OSTNetworkManager+Events.h"
 
-#define OSTEventsEndpoint @"events?filter[editable]=true&filter[availableLive]=true"
-#define OSTEventDetailsEndpoint @"events/%@?include=efforts,eventGroup"
+#define OSTEventsEndpoint @"event_groups?filter[editable]=true&filter[availableLive]=true"
+#define OSTEventDetailsEndpoint @"event_groups/%@?include=events.efforts"
 #define OSTEventGroupEndpoint @"event_groups/%@?include=events.efforts,events.splits"
 
 @implementation OSTNetworkManager (Events)

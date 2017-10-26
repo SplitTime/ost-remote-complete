@@ -222,7 +222,7 @@
     
     entry.courseName = course.eventName;
     entry.splitName = course.splitName;
-    entry.courseId = course.eventId;
+    entry.combinedCourseId = course.eventId;
     
     for (NSDictionary * dict in course.combinedSplitAttributes)
     {
@@ -232,7 +232,11 @@
             {
                 if ([subEntry[@"subSplitKind"] isEqualToString:entry.bitKey])
                 {
-                    entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][entry.courseId]];
+                    if (self.racer)
+                    {
+                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][[self.racer.eventId stringValue]]];
+                        entry.entryCourseId = [self.racer.eventId stringValue];
+                    }
                 }
             }
         }
@@ -352,12 +356,12 @@
             self.lblRunnerInfo.text = [NSString stringWithFormat:@"Bib Found: %@",effort.fullName];
             self.racer = effort;
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId in (%@)",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitInIds]]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitInIds]]] count])
             {
                 self.lblInTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId in (%@)",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitInIds]]] count]];
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitInIds]]] count]];
                 }
                 else
                 {
@@ -365,12 +369,12 @@
                 }
             }
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId in (%@)",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitOutIds]]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitOutIds]]] count])
             {
                 self.lblOutTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && courseId == %@ && splitId in (%@)",@"out",self.txtBibNumber.text,[[CurrentCourse getCurrentCourse] getSplitOutIds]]] count]];
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"out",self.txtBibNumber.text,[[CurrentCourse getCurrentCourse] getSplitOutIds]]] count]];
                 }
                 else
                 {

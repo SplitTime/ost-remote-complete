@@ -44,11 +44,13 @@
 
 @dynamic bitKey;
 
-@dynamic courseId;
+@dynamic combinedCourseId;
 
 @dynamic courseName;
 
 @dynamic displayTime;
+
+@dynamic entryCourseId;
 
 @dynamic entryId;
 
@@ -100,14 +102,17 @@
 + (NSString *)bitKey {
 	return @"bitKey";
 }
-+ (NSString *)courseId {
-	return @"courseId";
++ (NSString *)combinedCourseId {
+	return @"combinedCourseId";
 }
 + (NSString *)courseName {
 	return @"courseName";
 }
 + (NSString *)displayTime {
 	return @"displayTime";
+}
++ (NSString *)entryCourseId {
+	return @"entryCourseId";
 }
 + (NSString *)entryId {
 	return @"entryId";

@@ -26,11 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* bitKey;
 
-@property (nonatomic, strong, nullable) NSString* courseId;
+@property (nonatomic, strong, nullable) NSString* combinedCourseId;
 
 @property (nonatomic, strong, nullable) NSString* courseName;
 
 @property (nonatomic, strong, nullable) NSString* displayTime;
+
+@property (nonatomic, strong, nullable) NSString* entryCourseId;
 
 @property (nonatomic, strong, nullable) NSDecimalNumber* entryId;
 
@@ -69,14 +71,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveBitKey;
 - (void)setPrimitiveBitKey:(NSString*)value;
 
-- (NSString*)primitiveCourseId;
-- (void)setPrimitiveCourseId:(NSString*)value;
+- (NSString*)primitiveCombinedCourseId;
+- (void)setPrimitiveCombinedCourseId:(NSString*)value;
 
 - (NSString*)primitiveCourseName;
 - (void)setPrimitiveCourseName:(NSString*)value;
 
 - (NSString*)primitiveDisplayTime;
 - (void)setPrimitiveDisplayTime:(NSString*)value;
+
+- (NSString*)primitiveEntryCourseId;
+- (void)setPrimitiveEntryCourseId:(NSString*)value;
 
 - (NSDecimalNumber*)primitiveEntryId;
 - (void)setPrimitiveEntryId:(NSDecimalNumber*)value;
@@ -117,9 +122,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)absoluteTime;
 + (NSString *)bibNumber;
 + (NSString *)bitKey;
-+ (NSString *)courseId;
++ (NSString *)combinedCourseId;
 + (NSString *)courseName;
 + (NSString *)displayTime;
++ (NSString *)entryCourseId;
 + (NSString *)entryId;
 + (NSString *)entryTime;
 + (NSString *)fullName;

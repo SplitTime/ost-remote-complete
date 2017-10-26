@@ -38,6 +38,8 @@
 	return keyPaths;
 }
 
+@dynamic combinedSplitAttributes;
+
 @dynamic eventId;
 
 @dynamic liveEntryAttributes;
@@ -73,6 +75,9 @@
 @end
 
 @implementation EventModelAttributes 
++ (NSString *)combinedSplitAttributes {
+	return @"combinedSplitAttributes";
+}
 + (NSString *)eventId {
 	return @"eventId";
 }

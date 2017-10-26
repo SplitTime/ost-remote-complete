@@ -101,7 +101,7 @@
 - (void) loadData
 {
     self.entries = [NSMutableArray new];
-    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@",[CurrentCourse getCurrentCourse].eventId]];
+    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@",[CurrentCourse getCurrentCourse].eventId]];
     
     NSMutableSet * set = [NSMutableSet new];
     
@@ -147,7 +147,7 @@
     
     for (NSString * title in self.splitTitles)
     {
-        splitEntries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && splitName == %@",[CurrentCourse getCurrentCourse].eventId,title]].mutableCopy;
+        splitEntries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && splitName == %@",[CurrentCourse getCurrentCourse].eventId,title]].mutableCopy;
         [splitEntries sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending]]];
         [self.entries addObject:splitEntries];
     }
@@ -211,7 +211,7 @@
 {
     [[UIDevice currentDevice] playInputClick];
     
-    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"courseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     if (entries.count == 0)
     {
         [OHAlertView showAlertWithTitle:@"Error" message:@"Nothing to send" dismissButton:@"Ok"];
@@ -293,7 +293,7 @@
     }
     
     __weak OSTReviewSubmitViewController * weakSelf = self;
-    [[AppDelegate getInstance].getNetworkManager submitEntries:subEntries useAlternateServer:alternateServer completionBlock:^(id object) {
+    [[AppDelegate getInstance].getNetworkManager submitGroupedEntries:subEntries useAlternateServer:alternateServer completionBlock:^(id object) {
     
         for (EntryModel * entry in subEntries)
         {

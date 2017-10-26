@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSObject;
 
+@class NSObject;
+
 @interface EventModelID : NSManagedObjectID {}
 @end
 
@@ -23,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) EventModelID *objectID;
+
+@property (nonatomic, strong, nullable) id combinedSplitAttributes;
 
 @property (nonatomic, strong, nullable) NSString* eventId;
 
@@ -45,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface _EventModel (CoreDataGeneratedPrimitiveAccessors)
+
+- (id)primitiveCombinedSplitAttributes;
+- (void)setPrimitiveCombinedSplitAttributes:(id)value;
 
 - (NSString*)primitiveEventId;
 - (void)setPrimitiveEventId:(NSString*)value;
@@ -73,6 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface EventModelAttributes: NSObject 
++ (NSString *)combinedSplitAttributes;
 + (NSString *)eventId;
 + (NSString *)liveEntryAttributes;
 + (NSString *)multiLap;

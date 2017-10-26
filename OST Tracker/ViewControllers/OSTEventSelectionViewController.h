@@ -20,7 +20,7 @@
 @property (strong, nonatomic) NSMutableArray * events;
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 @property (strong, nonatomic) EventModel * selectedEvent;
-@property (strong, nonatomic) NSArray * liveAttributes;
+@property (strong, nonatomic) NSArray * combinedSplitAttributes;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTriangleAidStation;
 @property (assign, nonatomic) BOOL eventsLoaded;
 @property (nonatomic, strong) NSMutableArray * eventStrings;

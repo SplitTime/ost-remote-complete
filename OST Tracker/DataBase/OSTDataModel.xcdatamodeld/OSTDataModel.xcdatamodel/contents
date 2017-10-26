@@ -66,9 +66,10 @@
         <attribute name="absoluteTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bibNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bitKey" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="courseId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="combinedCourseId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="entryCourseId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="entryId" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="entryTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
@@ -84,6 +85,11 @@
         </fetchIndex>
     </entity>
     <entity name="EventModel" representedClassName="EventModel" syncable="YES">
+        <attribute name="combinedSplitAttributes" optional="YES" attributeType="Transformable" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.combinedSplitAttributes"/>
+            </userInfo>
+        </attribute>
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
@@ -129,7 +135,7 @@
         <element name="CrossCheckEntriesModel" positionX="-54" positionY="108" width="128" height="90"/>
         <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="165"/>
         <element name="EffortModel" positionX="-54" positionY="54" width="128" height="105"/>
-        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="285"/>
-        <element name="EventModel" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="300"/>
+        <element name="EventModel" positionX="-63" positionY="-18" width="128" height="165"/>
     </elements>
 </model>
