@@ -359,8 +359,16 @@
         
         if (effort)
         {
-            self.lblRunnerInfo.text = [NSString stringWithFormat:@"Bib Found: %@",effort.fullName];
-            self.racer = effort;
+            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+            {
+                self.racer = effort;
+                self.lblRunnerInfo.text = [NSString stringWithFormat:@"Bib Found: %@",effort.fullName];
+            }
+            else
+            {
+                self.lblRunnerInfo.text = @"Bib Not Found";
+                self.lblRunnerInfo.textColor = [UIColor redColor];
+            }
             
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitInIds]]] count])
             {

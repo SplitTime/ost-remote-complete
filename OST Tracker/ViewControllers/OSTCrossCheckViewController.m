@@ -51,7 +51,19 @@
 
 - (void) reloadData
 {
+    NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
     self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
+    
+    for (EffortModel * effort in self.efforts)
+    {
+        if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+        {
+            [entriesThatShouldBeHere addObject:effort];
+        }
+    }
+    
+    self.efforts = entriesThatShouldBeHere;
+    
     [self.crossCheckCollection reloadData];
 }
 

@@ -12,6 +12,7 @@
 #import "CustomUIDatePicker.h"
 #import "UIView+Additions.h"
 #import <APNumberPad/APNumberPad.h>
+#import "CurrentCourse.h"
 
 @interface OSTEditEntryViewController () <APNumberPadDelegate>
 
@@ -278,6 +279,9 @@
     else
     {
         EffortModel * effort = [EffortModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber == %@", [NSDecimalNumber decimalNumberWithString:self.txtBibNumber.text]]];
+        
+        if (![effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+            effort = nil;
         
         if (effort)
         {
