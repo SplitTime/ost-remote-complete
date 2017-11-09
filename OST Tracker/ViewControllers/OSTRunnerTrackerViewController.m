@@ -199,7 +199,6 @@
     CurrentCourse * course = [CurrentCourse MR_findFirst];
 
     EntryModel * entry = [EntryModel MR_createEntity];
-    entry.uniqueKey = [[NSUUID UUID] UUIDString];
     
     if (self.txtBibNumber.text.length == 0)
     {

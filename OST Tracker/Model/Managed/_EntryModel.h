@@ -56,8 +56,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSDate* timeEntered;
 
-@property (nonatomic, strong, nullable) NSString* uniqueKey;
-
 @property (nonatomic, strong, nullable) NSString* withPacer;
 
 @end
@@ -115,9 +113,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDate*)primitiveTimeEntered;
 - (void)setPrimitiveTimeEntered:(NSDate*)value;
 
-- (NSString*)primitiveUniqueKey;
-- (void)setPrimitiveUniqueKey:(NSString*)value;
-
 - (NSString*)primitiveWithPacer;
 - (void)setPrimitiveWithPacer:(NSString*)value;
 
@@ -140,7 +135,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)stoppedHere;
 + (NSString *)submitted;
 + (NSString *)timeEntered;
-+ (NSString *)uniqueKey;
 + (NSString *)withPacer;
 @end
 

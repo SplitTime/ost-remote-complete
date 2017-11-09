@@ -59,7 +59,6 @@
     {
         [entriesArrayDict addObject:@{@"type": @"live_time",
                                      @"attributes": @{
-                                         @"uniqueKey": entry.uniqueKey,
                                          @"bibNumber": entry.bibNumber,
                                          @"splitId": entry.splitId,
                                          @"subSplitKind": entry.bitKey,
@@ -77,7 +76,7 @@
         endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
     }
     
-    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"uniqueKey": @[@"absoluteTime", @"splitId", @"bitkey", @"bibNumber", @"source", @"withPacer", @"stoppedHere"],@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                       {
                                           onCompletion(responseObject);
                                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
