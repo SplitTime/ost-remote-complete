@@ -59,6 +59,7 @@
     {
         [entriesArrayDict addObject:@{@"type": @"live_time",
                                      @"attributes": @{
+                                         @"uniqueKey": entry.uniqueKey,
                                          @"bibNumber": entry.bibNumber,
                                          @"splitId": entry.splitId,
                                          @"subSplitKind": entry.bitKey,

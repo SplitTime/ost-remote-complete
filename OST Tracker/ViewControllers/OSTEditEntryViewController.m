@@ -107,6 +107,7 @@
     if (self.creatingNew)
     {
         EntryModel * newEntry = [EntryModel MR_createEntity];
+        newEntry.uniqueKey = [[NSUUID UUID] UUIDString];
         
         if (self.txtBibNumber.text.length == 0)
         {

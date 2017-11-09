@@ -244,7 +244,7 @@
 - (void) hidePopup
 {
     __weak OSTCrossCheckViewController * weakSelf = self;
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         weakSelf.popupView.top = self.view.bottom;
         weakSelf.popupOverlay.alpha = 0;
     }];
@@ -302,7 +302,7 @@
 {
     self.popupCrossCheckModel = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[self.popupEffort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
     __weak OSTCrossCheckViewController * weakSelf = self;
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         weakSelf.popupView.top = self.view.bottom - self.popupView.height;
         weakSelf.popupOverlay.alpha = 0.3;
     }];

@@ -88,6 +88,8 @@
 
 @dynamic timeEntered;
 
+@dynamic uniqueKey;
+
 @dynamic withPacer;
 
 @end
@@ -140,6 +142,9 @@
 }
 + (NSString *)timeEntered {
 	return @"timeEntered";
+}
++ (NSString *)uniqueKey {
+	return @"uniqueKey";
 }
 + (NSString *)withPacer {
 	return @"withPacer";

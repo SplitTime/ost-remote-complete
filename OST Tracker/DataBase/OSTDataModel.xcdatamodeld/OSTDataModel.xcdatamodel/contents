@@ -79,6 +79,7 @@
         <attribute name="stoppedHere" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="submitted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="timeEntered" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="uniqueKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="withPacer" optional="YES" attributeType="String" syncable="YES"/>
         <fetchIndex name="byEntryIdIndex">
             <fetchIndexElement property="entryId" type="Binary" order="ascending"/>
@@ -135,7 +136,7 @@
         <element name="CrossCheckEntriesModel" positionX="-54" positionY="108" width="128" height="90"/>
         <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="165"/>
         <element name="EffortModel" positionX="-54" positionY="54" width="128" height="105"/>
-        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="300"/>
+        <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="315"/>
         <element name="EventModel" positionX="-63" positionY="-18" width="128" height="165"/>
     </elements>
 </model>
