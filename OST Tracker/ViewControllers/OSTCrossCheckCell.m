@@ -29,13 +29,11 @@
 {
     self.lblBibNumber.text = [NSString stringWithFormat:@"%@",effort.bibNumber];
     
-    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && combinedCourseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
+    NSArray * entries = effort.entries;
     
     if (entries.count == 0)
     {
-        NSArray * crossCheckEntries = [CrossCheckEntriesModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
-        
-        if (crossCheckEntries.count != 0)
+        if (effort.expected && [effort.expected isEqualToNumber:@(NO)])
         {
             [self setAsNotExpected];
         }

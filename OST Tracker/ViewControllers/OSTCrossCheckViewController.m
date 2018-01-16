@@ -19,7 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *popupView;
 @property (weak, nonatomic) IBOutlet UIButton *btnReviewEntries;
-@property (strong, nonatomic) NSArray* efforts;
+@property (strong, atomic) NSArray* efforts;
 @property (weak, nonatomic) IBOutlet UILabel *lblPupupEntryName;
 @property (weak, nonatomic) IBOutlet UIView *bulkSelectMenuView;
 @property (weak, nonatomic) IBOutlet UIButton *btnBulkSelect;
@@ -51,20 +51,24 @@
 
 - (void) reloadData
 {
-    NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
     self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
-    
-    for (EffortModel * effort in self.efforts)
-    {
-        if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+    __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        for (EffortModel * effort in self.efforts)
         {
-            [entriesThatShouldBeHere addObject:effort];
+            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+            {
+                effort.expected;
+                [entriesThatShouldBeHere addObject:effort];
+            }
         }
-    }
     
-    self.efforts = entriesThatShouldBeHere;
-    
-    [self.crossCheckCollection reloadData];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            self.efforts = entriesThatShouldBeHere;
+            [self.crossCheckCollection reloadData];
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -205,7 +209,7 @@
         self.bulkSelectMenuView.hidden = NO;
     }
     
-    [self reloadData];
+    [self.crossCheckCollection reloadData];
 }
 
 - (IBAction)onClosePopup:(id)sender
@@ -219,6 +223,7 @@
                 [self.popupCrossCheckModel MR_deleteEntity];
                 [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
                 [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+                self.popupEffort.expected = @(YES);
             }
         }
         else
@@ -232,11 +237,12 @@
                 
                 [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
                 [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+                self.popupEffort.expected = @(NO);
             }
         }
     }
     
-    [self reloadData];
+    [self.crossCheckCollection reloadData];
     
     [self hidePopup];
 }
@@ -264,6 +270,7 @@
                 [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
                 [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
             }
+            effort.expected = @(YES);
         }
     }
     
@@ -287,6 +294,7 @@
                 
                 [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
                 [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+                effort.expected = @(NO);
             }
         }
     }
