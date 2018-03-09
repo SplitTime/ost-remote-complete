@@ -15,40 +15,43 @@
     return [CurrentCourse MR_findFirst];
 }
 
-- (NSArray*) getSplitInIds
+- (NSArray*) getSplitLeftIds
 {
     NSMutableArray * splitIdsArray = [NSMutableArray new];
     for (NSDictionary * dict in self.combinedSplitAttributes)
     {
         if ([dict[@"title"] isEqualToString:self.splitName])
         {
-            for (NSDictionary * subDict in dict[@"entries"])
-            {
-                if ([subDict[@"subSplitKind"] isEqualToString:@"in"])
-                {
-                    [splitIdsArray addObjectsFromArray:[subDict[@"eventSplitIds"] allValues]];
-                }
-            }
+//            for (NSDictionary * subDict in dict[@"entries"])
+//            {
+//                if ([subDict[@"subSplitKind"] isEqualToString:@"in"])
+//                {
+//                    [splitIdsArray addObjectsFromArray:[subDict[@"eventSplitIds"] allValues]];
+//                }
+//            }
+            return [dict[@"entries"][0][@"eventSplitIds"] allValues];
         }
     }
     
     return splitIdsArray;
 }
 
-- (NSArray*) getSplitOutIds
+- (NSArray*) getSplitRightIds
 {
     NSMutableArray * splitIdsArray = [NSMutableArray new];
     for (NSDictionary * dict in self.combinedSplitAttributes)
     {
         if ([dict[@"title"] isEqualToString:self.splitName])
         {
-            for (NSDictionary * subDict in dict[@"entries"])
-            {
-                if ([subDict[@"subSplitKind"] isEqualToString:@"out"])
-                {
-                    [splitIdsArray addObjectsFromArray:[subDict[@"eventSplitIds"] allValues]];
-                }
-            }
+//            for (NSDictionary * subDict in dict[@"entries"])
+//            {
+//                if ([subDict[@"subSplitKind"] isEqualToString:@"out"])
+//                {
+//                    [splitIdsArray addObjectsFromArray:[subDict[@"eventSplitIds"] allValues]];
+//                }
+//            }
+            if ([dict[@"entries"] count] >= 2)
+                return [dict[@"entries"][1][@"eventSplitIds"] allValues];
         }
     }
     

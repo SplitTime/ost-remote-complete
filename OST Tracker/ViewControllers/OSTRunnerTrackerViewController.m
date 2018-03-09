@@ -38,6 +38,8 @@
 @property (strong, nonatomic) NSDate * entryDateTime;
 @property (strong, nonatomic) EntryModel * lastEntry;
 @property (unsafe_unretained, nonatomic) BOOL stopKeyboardChecking;
+@property (strong, nonatomic) NSString * leftBitKey;
+@property (strong, nonatomic) NSString * rightBitKey;
 
 @end
 
@@ -135,22 +137,24 @@
     NSArray * splitEntriesIn = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"subSplitKind == %@",@"in"]];
     NSArray * splitEntriesOut = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"subSplitKind == %@",@"out"]];
     
-    if (splitEntriesIn.count != 0 && splitEntriesOut.count == 0)
+    if (splitEntriesIn.count == 1 && splitEntriesOut.count == 0)
     {
         self.btnLeft.width = self.btnRight.right - self.btnLeft.left;
         self.btnRight.hidden = YES;
         
         [self.btnLeft setTitle:splitEntriesIn[0][@"label"] forState:UIControlStateNormal];
+        self.leftBitKey = @"in";
     }
-    if (splitEntriesIn.count == 0 && splitEntriesOut.count != 0)
+    if (splitEntriesIn.count == 0 && splitEntriesOut.count == 1)
     {
         self.btnRight.width = self.btnRight.right - self.btnLeft.left;
         self.btnLeft.hidden = YES;
         self.btnRight.left = self.btnLeft.left;
+        self.rightBitKey = @"out";
         
         [self.btnRight setTitle:splitEntriesOut[0][@"label"] forState:UIControlStateNormal];
     }
-    else if(splitEntriesIn.count != 0 && splitEntriesOut.count != 0)
+    else if(splitEntriesIn.count == 1 && splitEntriesOut.count == 1)
     {
         self.btnRight.hidden = NO;
         self.btnLeft.hidden = NO;
@@ -163,6 +167,40 @@
         
         [self.btnLeft setTitle:splitEntriesIn[0][@"label"] forState:UIControlStateNormal];
         [self.btnRight setTitle:splitEntriesOut[0][@"label"] forState:UIControlStateNormal];
+        self.leftBitKey = @"in";
+        self.rightBitKey = @"out";
+    }
+    else if(splitEntriesIn.count == 2)
+    {
+        self.btnRight.hidden = NO;
+        self.btnLeft.hidden = NO;
+        
+        self.btnLeft.width = self.view.width/2 - 18;
+        self.btnRight.width = self.view.width/2 - 18;
+        
+        self.btnLeft.left = 0;
+        self.btnRight.right = self.view.width;
+        
+        [self.btnLeft setTitle:splitEntriesIn[0][@"label"] forState:UIControlStateNormal];
+        [self.btnRight setTitle:splitEntriesIn[1][@"label"] forState:UIControlStateNormal];
+        self.leftBitKey = @"in";
+        self.rightBitKey = @"in";
+    }
+    else if(splitEntriesOut.count == 2)
+    {
+        self.btnRight.hidden = NO;
+        self.btnLeft.hidden = NO;
+        
+        self.btnLeft.width = self.view.width/2 - 18;
+        self.btnRight.width = self.view.width/2 - 18;
+        
+        self.btnLeft.left = 0;
+        self.btnRight.right = self.view.width;
+        
+        [self.btnLeft setTitle:splitEntriesOut[0][@"label"] forState:UIControlStateNormal];
+        [self.btnRight setTitle:splitEntriesOut[1][@"label"] forState:UIControlStateNormal];
+        self.leftBitKey = @"out";
+        self.rightBitKey = @"out";
     }
     
     self.lblInTimeBadge.right = self.btnLeft.right - 5;
@@ -207,8 +245,8 @@
     }
     else entry.bibNumber = self.txtBibNumber.text;
     if (sender == self.btnLeft)
-        entry.bitKey = @"in";
-    else entry.bitKey = @"out";
+        entry.bitKey = self.leftBitKey;
+    else entry.bitKey = self.rightBitKey;
     
     int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
     entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",self.dayString, self.lblTime.text,timezoneoffset];
@@ -228,21 +266,49 @@
     {
         if ([dict[@"title"] isEqualToString:course.splitName])
         {
-            for (NSDictionary * subEntry in dict[@"entries"])
+//            for (NSDictionary * subEntry in dict[@"entries"])
+//            {
+//                if ([subEntry[@"subSplitKind"] isEqualToString:entry.bitKey])
+//                {
+//                    if (self.racer)
+//                    {
+//                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][[self.racer.eventId stringValue]]];
+//                        entry.entryCourseId = [self.racer.eventId stringValue];
+//                    }
+//                    else
+//                    {
+//                        NSNumber * key = [[subEntry[@"eventSplitIds"] allKeys] firstObject];
+//                        entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
+//                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][key]];
+//                    }
+//                }
+//            }
+            if ([sender tag] == 1)
             {
-                if ([subEntry[@"subSplitKind"] isEqualToString:entry.bitKey])
+                if (self.racer)
                 {
-                    if (self.racer)
-                    {
-                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][[self.racer.eventId stringValue]]];
-                        entry.entryCourseId = [self.racer.eventId stringValue];
-                    }
-                    else
-                    {
-                        NSNumber * key = [[subEntry[@"eventSplitIds"] allKeys] firstObject];
-                        entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][key]];
-                    }
+                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][[self.racer.eventId stringValue]]];
+                    entry.entryCourseId = [self.racer.eventId stringValue];
+                }
+                else
+                {
+                    NSNumber * key = [[dict[@"entries"][0] allKeys] firstObject];
+                    entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
+                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][key]];
+                }
+            }
+            else if ([sender tag] == 2)
+            {
+                if (self.racer)
+                {
+                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][[self.racer.eventId stringValue]]];
+                    entry.entryCourseId = [self.racer.eventId stringValue];
+                }
+                else
+                {
+                    NSNumber * key = [[dict[@"entries"][1] allKeys] firstObject];
+                    entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
+                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][key]];
                 }
             }
         }
@@ -370,12 +436,12 @@
                 self.lblRunnerInfo.textColor = [UIColor redColor];
             }
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitInIds]]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitLeftIds]]] count])
             {
                 self.lblInTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"in",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitInIds]]] count]];
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitLeftIds]]] count]];
                 }
                 else
                 {
@@ -383,12 +449,12 @@
                 }
             }
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"out",self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitOutIds]]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitRightIds]]] count])
             {
                 self.lblOutTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",@"out",self.txtBibNumber.text,[[CurrentCourse getCurrentCourse] getSplitOutIds]]] count]];
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.rightBitKey,self.txtBibNumber.text,[[CurrentCourse getCurrentCourse] getSplitRightIds]]] count]];
                 }
                 else
                 {
