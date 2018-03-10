@@ -289,12 +289,14 @@
                 {
                     entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][[self.racer.eventId stringValue]]];
                     entry.entryCourseId = [self.racer.eventId stringValue];
+                    entry.splitName = dict[@"entries"][0][@"splitName"];
                 }
                 else
                 {
                     NSNumber * key = [[dict[@"entries"][0] allKeys] firstObject];
                     entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
                     entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][key]];
+                    entry.splitName = dict[@"entries"][0][@"splitName"];
                 }
             }
             else if ([sender tag] == 2)
@@ -303,12 +305,14 @@
                 {
                     entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][[self.racer.eventId stringValue]]];
                     entry.entryCourseId = [self.racer.eventId stringValue];
+                    entry.splitName = dict[@"entries"][1][@"splitName"];
                 }
                 else
                 {
                     NSNumber * key = [[dict[@"entries"][1] allKeys] firstObject];
                     entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][key]];
+                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][key]];
+                    entry.splitName = dict[@"entries"][1][@"splitName"];
                 }
             }
         }
