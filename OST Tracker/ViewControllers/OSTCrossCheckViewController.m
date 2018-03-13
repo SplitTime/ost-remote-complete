@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *popupDroppedHereIcon;
 @property (strong, nonatomic) CrossCheckEntriesModel * popupCrossCheckModel;
 @property (assign, nonatomic) BOOL bulkSelect;
+@property (nonatomic, strong) NSString * splitName;
 
 @end
 
@@ -45,6 +46,20 @@
     self.popupView.top = self.view.bottom;
     
     self.popupCrossCheckContainer.layer.cornerRadius = 6;
+    self.splitName = [CurrentCourse getCurrentCourse].splitName;
+    for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].combinedSplitAttributes)
+    {
+        if ([entrie[@"entries"] count] == 1)
+            break;
+        if ([entrie[@"title"] isEqualToString:[CurrentCourse getCurrentCourse].splitName])
+        {
+            if (([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"in"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"in"])||
+                ([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"out"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"out"]))
+            {
+                self.splitName = entrie[@"entries"][0][@"displaySplitName"];
+            }
+        }
+    }
     
     [self reloadData];
 }
@@ -86,6 +101,7 @@
 {
     OSTCrossCheckCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OSTCrossCheckCell" forIndexPath:indexPath];
     
+    cell.splitName = self.splitName;
     [cell configureWithEffort:self.efforts[indexPath.row]];
     
     if (self.bulkSelect)
@@ -105,7 +121,7 @@
     {
         cell.noBulkSelectView.hidden = NO;
     }
-    
+
     return cell;
 }
 
@@ -161,6 +177,7 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *reusableview = nil;
+    __weak OSTCrossCheckViewController * weakSelf = self;
     
     if (kind == UICollectionElementKindSectionHeader) {
         OSTCrossCheckHeader *headerView = (OSTCrossCheckHeader*)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"OSTCrossCheckHeader" forIndexPath:indexPath];
@@ -168,6 +185,34 @@
         reusableview = headerView;
         
         headerView.lblStationName.text = [CurrentCourse getCurrentCourse].splitName;
+        
+        for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].combinedSplitAttributes)
+        {
+            if ([entrie[@"entries"] count] == 1)
+                 break;
+            if ([entrie[@"title"] isEqualToString:[CurrentCourse getCurrentCourse].splitName])
+            {
+                if (([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"in"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"in"])||
+                    ([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"out"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"out"]))
+                {
+                    headerView.segLocation.hidden = NO;
+                    headerView.lblStationName.hidden = YES;
+                    [headerView.segLocation setTitle:entrie[@"entries"][0][@"displaySplitName"] forSegmentAtIndex:0];
+                    [headerView.segLocation setTitle:entrie[@"entries"][1][@"displaySplitName"] forSegmentAtIndex:1];
+                    self.splitName = entrie[@"entries"][0][@"displaySplitName"];
+                    [headerView setSplitChange:^(NSString *newSplitName) {
+                        weakSelf.splitName = newSplitName;
+                        [weakSelf reloadData];
+                    }];
+                }
+                else
+                {
+                    headerView.segLocation.hidden = YES;
+                    headerView.lblStationName.hidden = NO;
+                }
+            }
+        }
+        
     }
     
     if (kind == UICollectionElementKindSectionFooter) {

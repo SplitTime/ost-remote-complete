@@ -56,6 +56,16 @@
     return _expected;
 }
 
+- (NSArray*) entriesForSplitName:(NSString*)splitName
+{
+    if (!_entries)
+    {
+        _entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && combinedCourseId LIKE[c] %@ && splitName LIKE[c] %@",[self.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,splitName]];
+        
+    }
+    return _entries;
+}
+
 - (NSArray*) entries
 {
     if (!_entries)

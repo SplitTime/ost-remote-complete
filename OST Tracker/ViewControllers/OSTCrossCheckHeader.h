@@ -10,5 +10,7 @@
 
 @interface OSTCrossCheckHeader : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UILabel *lblStationName;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segLocation;
+@property (nonatomic, copy) void (^splitChange)(NSString * newSplitName);
 
 @end

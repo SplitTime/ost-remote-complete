@@ -10,4 +10,9 @@
 
 @implementation OSTCrossCheckHeader
 
+- (IBAction)selectionChanged:(id)sender
+{
+    self.splitChange([self.segLocation titleForSegmentAtIndex:[self.segLocation selectedSegmentIndex]]);
+}
+
 @end

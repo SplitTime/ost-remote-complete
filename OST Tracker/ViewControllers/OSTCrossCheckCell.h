@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblBibNumber;
 @property (weak, nonatomic) IBOutlet UIView *noBulkSelectView;
 @property (weak, nonatomic) IBOutlet UIImageView *imgBulkSelectCheckmark;
+@property (strong, nonatomic) NSString * splitName;
 
 - (void) configureWithEffort:(EffortModel*)effort;
 

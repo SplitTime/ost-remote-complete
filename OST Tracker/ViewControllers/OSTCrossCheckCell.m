@@ -29,7 +29,7 @@
 {
     self.lblBibNumber.text = [NSString stringWithFormat:@"%@",effort.bibNumber];
     
-    NSArray * entries = effort.entries;
+    NSArray * entries = [effort entriesForSplitName:self.splitName];
     
     if (entries.count == 0)
     {
@@ -65,7 +65,8 @@
         }
         else if ([entry.bitKey isEqualToString:@"in"] && onlyIn == NO)
         {
-            [self setAsWithAid];
+            //[self setAsWithAid];
+            [self setAsRecorded];
         }
     }
     
