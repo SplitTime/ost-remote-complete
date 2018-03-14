@@ -68,6 +68,7 @@
 {
     self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
     __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
+    [DejalBezelActivityView activityViewForView:self.view];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         for (EffortModel * effort in self.efforts)
@@ -82,6 +83,7 @@
         dispatch_async( dispatch_get_main_queue(), ^{
             self.efforts = entriesThatShouldBeHere;
             [self.crossCheckCollection reloadData];
+            [DejalBezelActivityView removeViewAnimated:YES];
         });
     });
 }
@@ -202,6 +204,11 @@
                     self.splitName = entrie[@"entries"][0][@"displaySplitName"];
                     [headerView setSplitChange:^(NSString *newSplitName) {
                         weakSelf.splitName = newSplitName;
+                        for (EffortModel * effort in weakSelf.efforts)
+                        {
+                            //effort.expected = nil;
+                            //effort.entries = nil;
+                        }
                         [weakSelf reloadData];
                     }];
                 }
@@ -277,7 +284,7 @@
             {
                 CrossCheckEntriesModel * crossCheckEntry = [CrossCheckEntriesModel MR_createEntity];
                 crossCheckEntry.bibNumber = [self.popupEffort.bibNumber stringValue];
-                crossCheckEntry.splitName = [CurrentCourse getCurrentCourse].splitName;
+                crossCheckEntry.splitName = self.splitName;
                 crossCheckEntry.courseId = [CurrentCourse getCurrentCourse].eventId;
                 
                 [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
@@ -307,7 +314,7 @@
     {
         if (effort.bulkSelected)
         {
-            crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
+            crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
             if (crossCheckEntry)
             {
                 [crossCheckEntry MR_deleteEntity];
@@ -329,7 +336,7 @@
     {
         if (effort.bulkSelected)
         {
-            crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
+            crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
             if (!crossCheckEntry)
             {
                 crossCheckEntry = [CrossCheckEntriesModel MR_createEntity];
@@ -353,7 +360,7 @@
 
 - (void) showPopup
 {
-    self.popupCrossCheckModel = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[self.popupEffort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
+    self.popupCrossCheckModel = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[self.popupEffort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
     __weak OSTCrossCheckViewController * weakSelf = self;
     [UIView animateWithDuration:0.25 animations:^{
         weakSelf.popupView.top = self.view.bottom - self.popupView.height;

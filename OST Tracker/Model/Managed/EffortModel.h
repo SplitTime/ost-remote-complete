@@ -7,6 +7,8 @@
 @property (strong, nonatomic) NSNumber * expected;
 @property (strong, nonatomic) NSArray * entries;
 - (NSArray*) entriesForSplitName:(NSString*)splitName;
+- (NSNumber*) expectedWithSplitName:(NSString*)splitName;
 - (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split;
+- (void) clearVariables;
 
 @end

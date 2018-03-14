@@ -35,6 +35,33 @@
     return NO;
 }
 
+- (NSNumber*) expectedWithSplitName:(NSString*)splitName
+{
+    if (!_expected)
+    {
+        if (self.entries.count == 0)
+        {
+            NSArray * crossCheckEntries = [CrossCheckEntriesModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[self.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,splitName]];
+            
+            if (crossCheckEntries.count != 0)
+            {
+                _expected = @(NO);
+            }
+            else
+            {
+                _expected = @(YES);
+            }
+        }
+    }
+    return _expected;
+}
+
+- (void) clearVariables
+{
+    _expected = nil;
+    _entries = nil;
+}
+
 - (NSNumber*) expected
 {
     if (!_expected)

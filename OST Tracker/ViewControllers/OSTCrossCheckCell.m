@@ -33,7 +33,7 @@
     
     if (entries.count == 0)
     {
-        if (effort.expected && [effort.expected isEqualToNumber:@(NO)])
+        if ([effort expectedWithSplitName:self.splitName] && [[effort expectedWithSplitName:self.splitName] isEqualToNumber:@(NO)])
         {
             [self setAsNotExpected];
         }
