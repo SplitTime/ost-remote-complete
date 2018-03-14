@@ -75,7 +75,7 @@
         {
             if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
             {
-                effort.expected;
+                [effort expectedWithSplitName:self.splitName];
                 [entriesThatShouldBeHere addObject:effort];
             }
         }
@@ -201,13 +201,13 @@
                     headerView.lblStationName.hidden = YES;
                     [headerView.segLocation setTitle:entrie[@"entries"][0][@"displaySplitName"] forSegmentAtIndex:0];
                     [headerView.segLocation setTitle:entrie[@"entries"][1][@"displaySplitName"] forSegmentAtIndex:1];
-                    self.splitName = entrie[@"entries"][0][@"displaySplitName"];
                     [headerView setSplitChange:^(NSString *newSplitName) {
                         weakSelf.splitName = newSplitName;
                         for (EffortModel * effort in weakSelf.efforts)
                         {
                             //effort.expected = nil;
                             //effort.entries = nil;
+                            [effort clearVariables];
                         }
                         [weakSelf reloadData];
                     }];
@@ -341,7 +341,7 @@
             {
                 crossCheckEntry = [CrossCheckEntriesModel MR_createEntity];
                 crossCheckEntry.bibNumber = [effort.bibNumber stringValue];
-                crossCheckEntry.splitName = [CurrentCourse getCurrentCourse].splitName;
+                crossCheckEntry.splitName = self.splitName;
                 crossCheckEntry.courseId = [CurrentCourse getCurrentCourse].eventId;
                 
                 [[NSManagedObjectContext MR_defaultContext] processPendingChanges];

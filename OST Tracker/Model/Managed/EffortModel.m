@@ -39,7 +39,7 @@
 {
     if (!_expected)
     {
-        if (self.entries.count == 0)
+        if ([self entriesForSplitName:splitName].count == 0)
         {
             NSArray * crossCheckEntries = [CrossCheckEntriesModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[self.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,splitName]];
             
