@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnDelete;
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdate;
 @property (strong, nonatomic) CustomUIDatePicker * customPicker;
+@property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
 @property (strong, nonatomic) EffortModel * effort;
 
 @end
@@ -36,6 +37,12 @@
     self.customPicker = [[CustomUIDatePicker alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 200)];
 
     self.txtTime.inputView = self.customPicker;
+    
+    if (IS_IPHONE_X)
+    {
+        self.lblTitle.bottom = self.lblTitle.bottom + 7;
+        self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
+    }
     
     UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
     [keyboardToolbar sizeToFit];

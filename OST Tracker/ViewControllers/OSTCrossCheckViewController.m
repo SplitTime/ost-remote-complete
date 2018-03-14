@@ -31,10 +31,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *popupCellStatusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *popupAidIcon;
 @property (weak, nonatomic) IBOutlet UILabel *popupBibNumber;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *popupDroppedHereIcon;
 @property (strong, nonatomic) CrossCheckEntriesModel * popupCrossCheckModel;
 @property (assign, nonatomic) BOOL bulkSelect;
 @property (nonatomic, strong) NSString * splitName;
+@property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
 
 @end
 
@@ -59,6 +61,13 @@
                 self.splitName = entrie[@"entries"][0][@"displaySplitName"];
             }
         }
+    }
+    
+    if (IS_IPHONE_X)
+    {
+        self.lblTitle.bottom = self.lblTitle.bottom + 7;
+        self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
+        self.btnBulkSelect.bottom = self.btnBulkSelect.bottom + 7;
     }
     
     [self reloadData];

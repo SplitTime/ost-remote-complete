@@ -185,7 +185,7 @@
         {
             [weakSelf showLoginFields];
             [[AppDelegate getInstance].getNetworkManager addTokenToHeader:nil];
-            [OHAlertView showAlertWithTitle:@"Error" message:@"You are not authorized for any events. Please ask your race director or volunteer coordinator to add you as a steward for an event." dismissButton:@"Ok"];
+            [OHAlertView showAlertWithTitle:@"No Events Available" message:@"You are not authorized for any live events. Make sure your event is enabled for live entry and that you are authorized as a steward." dismissButton:@"Ok"];
             return;
         }
         [weakSelf.activityIndicator stopAnimating];

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +13,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="TNR-hb-vTx" id="rgf-g1-V4y"/>
                 <outlet property="btnReturnToLiveEntry" destination="HrD-fr-Pol" id="mLw-al-f8k"/>
+                <outlet property="btnRightMenu" destination="lS9-qu-24t" id="Sca-GQ-ftd"/>
                 <outlet property="btnSync" destination="RHE-00-eos" id="qGt-5u-uCA"/>
                 <outlet property="imgCheckMark" destination="TkI-rC-DQH" id="qF9-Hn-ZTM"/>
                 <outlet property="lblSuccess" destination="emD-Fn-0wP" id="uD3-vS-l55"/>
@@ -26,11 +28,11 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" id="Sau-fP-tU9">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" id="Sau-fP-tU9">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -166,14 +168,9 @@ synced.</string>
         <image name="Background" width="375" height="667"/>
         <image name="CheckMark" width="118" height="118"/>
         <image name="GrayButton" width="177" height="60"/>
-        <image name="GreenButton" width="190" height="35"/>
+        <image name="GreenButton" width="178" height="60"/>
         <image name="Menu" width="122" height="44"/>
         <image name="ReturnLiveEntry" width="210" height="40"/>
         <image name="Triangle" width="14" height="8"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

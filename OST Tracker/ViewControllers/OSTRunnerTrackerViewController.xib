@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="btnLeft" destination="fOu-hS-R9H" id="jJS-bZ-VRz"/>
                 <outlet property="btnRight" destination="Jgi-Yq-TgX" id="N5U-NC-zkX"/>
+                <outlet property="btnRightMenu" destination="tVa-2H-hUR" id="z0x-Tl-9Nr"/>
                 <outlet property="lblAdded" destination="OsX-Jc-g6K" id="YgW-9A-jup"/>
                 <outlet property="lblInTimeBadge" destination="naY-J2-LaL" id="0KX-l1-DA4"/>
                 <outlet property="lblOutTimeBadge" destination="od4-F2-CcV" id="ny0-wf-plf"/>

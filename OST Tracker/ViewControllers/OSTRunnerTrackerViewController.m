@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnRight;
 @property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
 @property (weak, nonatomic) IBOutlet UIView *pacerAndAidView;
+@property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
 @property (weak, nonatomic) IBOutlet UILabel *lblPersonAdded;
 @property (strong, nonatomic) NSString * splitId;
 @property (strong, nonatomic) NSArray * splitIds;
@@ -55,13 +56,17 @@
     
     self.splitId = [CurrentCourse getCurrentCourse].splitId;
     
-    
     if (IS_IPHONE_5)
     {
         self.pacerAndAidView.top = self.pacerAndAidView.top - 25;
         self.btnLeft.top = self.btnLeft.top - 55;
         self.btnRight.top = self.btnRight.top - 55;
         self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.lblOutTimeBadge.top - 55;
+    }
+    if (IS_IPHONE_X)
+    {
+        self.lblTitle.bottom = self.lblTitle.bottom + 7;
+        self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
     }
     
     self.lblOutTimeBadge.layer.cornerRadius = self.lblOutTimeBadge.width/2;

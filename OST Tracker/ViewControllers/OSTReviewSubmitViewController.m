@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblSyncing;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
 @property (weak, nonatomic) IBOutlet UILabel *lblYourDataIsSynced;
 @property (weak, nonatomic) IBOutlet UIImageView *imgCheckMark;
 @property (weak, nonatomic) IBOutlet UILabel *lblSuccess;
@@ -75,6 +76,11 @@
     
     [self.txtSortBy removeInputAssistant];
     [self.btnSync setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
+    if (IS_IPHONE_X)
+    {
+        self.lblTitle.bottom = self.lblTitle.bottom + 7;
+        self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
+    }
 }
 
 - (void) onDoneSelectedSortBy:(id) sender

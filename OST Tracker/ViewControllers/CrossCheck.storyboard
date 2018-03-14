@@ -147,7 +147,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3T2-R9-SZx">
-                                            <rect key="frame" x="8" y="46" width="356" height="28"/>
+                                            <rect key="frame" x="8" y="46" width="356" height="29"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <segments>
                                                 <segment title="First"/>
@@ -315,9 +315,11 @@ Line 2</string>
                     <connections>
                         <outlet property="btnBulkSelect" destination="DKX-md-IVr" id="oEw-ef-VeH"/>
                         <outlet property="btnReviewEntries" destination="hQV-tJ-WgR" id="SDG-ms-mkD"/>
+                        <outlet property="btnRightMenu" destination="5dp-e3-ju4" id="xVR-us-rfx"/>
                         <outlet property="bulkSelectMenuView" destination="QXY-u2-vIT" id="bZe-oT-aCA"/>
                         <outlet property="crossCheckCollection" destination="ugO-td-rE7" id="2aF-9R-khs"/>
                         <outlet property="lblPupupEntryName" destination="aKo-y8-GsC" id="zfF-hp-srb"/>
+                        <outlet property="lblTitle" destination="aj3-GN-vhs" id="VYV-ke-YBO"/>
                         <outlet property="popupAidIcon" destination="Pwm-rs-kXZ" id="byl-ZY-O5t"/>
                         <outlet property="popupBibNumber" destination="ujT-Xa-fOF" id="vKE-5x-b4x"/>
                         <outlet property="popupCellStatusLabel" destination="omb-67-4ZJ" id="A3y-Sf-uv4"/>
