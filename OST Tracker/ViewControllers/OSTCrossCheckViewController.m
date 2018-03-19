@@ -65,6 +65,7 @@
     
     if (IS_IPHONE_X)
     {
+        self.lblTitle.numberOfLines = 1;
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
         self.btnBulkSelect.bottom = self.btnBulkSelect.bottom + 7;
