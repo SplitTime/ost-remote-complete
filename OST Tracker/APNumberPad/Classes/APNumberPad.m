@@ -7,8 +7,10 @@
 
 #import "APNumberButton.h"
 #import "APNumberPadDefaultStyle.h"
-
 #import "APNumberPad.h"
+#import <AudioToolbox/AudioToolbox.h>
+
+#define clickSystemSoundID 1104
 
 @interface APNumberPad () {
     BOOL _clearButtonLongPressGesture;
@@ -250,7 +252,8 @@
 #pragma mark - UIResponder
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[UIDevice currentDevice] playInputClick];
+    
+    AudioServicesPlaySystemSound (clickSystemSoundID);
 
     // Perform number button action for previous `self.lastTouch`
     //
@@ -457,7 +460,7 @@
 - (void)clearButtonActionLongPress {
     if (_clearButtonLongPressGesture) {
         if ([self.textInput hasText]) {
-            [[UIDevice currentDevice] playInputClick];
+            AudioServicesPlaySystemSound (clickSystemSoundID);
 
             [self clearButtonAction];
             [self performSelector:@selector(clearButtonActionLongPress) withObject:nil afterDelay:0.1]; // delay like in iOS keyboard

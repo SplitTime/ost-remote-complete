@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///
 
-@interface APNumberPad : UIView <UIInputViewAudioFeedback>
+@interface APNumberPad : UIView
 
 + (instancetype)numberPadWithDelegate:(id<APNumberPadDelegate>)delegate;
 + (instancetype)numberPadWithDelegate:(id<APNumberPadDelegate>)delegate numberPadStyleClass:(nullable Class)styleClass;
