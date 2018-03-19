@@ -14,10 +14,11 @@
 #import "UIView+Additions.h"
 #import "OSTEditEntryViewController.h"
 #import "IQKeyboardManager.h"
-#import <APNumberPad/APNumberPad.h>
+#import "APNumberPad.h"
 
 @interface OSTRunnerTrackerViewController () <APNumberPadDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *numberPadContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
 @property (strong, nonatomic) NSTimer * timer;
@@ -38,7 +39,6 @@
 @property (strong, nonatomic) EffortModel * racer;
 @property (strong, nonatomic) NSDate * entryDateTime;
 @property (strong, nonatomic) EntryModel * lastEntry;
-@property (unsafe_unretained, nonatomic) BOOL stopKeyboardChecking;
 @property (strong, nonatomic) NSString * leftBitKey;
 @property (strong, nonatomic) NSString * rightBitKey;
 
@@ -56,17 +56,34 @@
     
     self.splitId = [CurrentCourse getCurrentCourse].splitId;
     
+    APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:self];
+    [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
+    numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    numberPad.frame = self.numberPadContainerView.bounds;
+    numberPad.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    numberPad.backgroundColor = [UIColor clearColor];
+    [self.numberPadContainerView addSubview:numberPad];
+    [numberPad setTextField:self.txtBibNumber];
+    
     if (IS_IPHONE_5)
     {
         self.pacerAndAidView.top = self.pacerAndAidView.top - 25;
         self.btnLeft.top = self.btnLeft.top - 55;
         self.btnRight.top = self.btnRight.top - 55;
         self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.lblOutTimeBadge.top - 55;
+        self.numberPadContainerView.top = self.numberPadContainerView.top - 60;
+        self.numberPadContainerView.height = self.numberPadContainerView.height + 60;
     }
     if (IS_IPHONE_X)
     {
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
+        self.numberPadContainerView.height = self.numberPadContainerView.height - 30;
+    }
+    if (IS_IPAD)
+    {
+        self.numberPadContainerView.top = self.numberPadContainerView.top + 20;
+        self.numberPadContainerView.height = self.numberPadContainerView.height - 50;
     }
     
     self.lblOutTimeBadge.layer.cornerRadius = self.lblOutTimeBadge.width/2;
@@ -77,18 +94,6 @@
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
     
-    [self.txtBibNumber sendActionsForControlEvents:UIControlEventTouchUpInside];
-    __weak OSTRunnerTrackerViewController * weakSelf = self;
-    self.txtBibNumber.inputView = ({
-        APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:weakSelf];
-        // configure function button
-        //
-        [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
-        numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        numberPad;
-    });
-    
-    [self.txtBibNumber removeInputAssistant];
     [self.btnLeft setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
     [self.btnRight setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
 }
@@ -106,17 +111,6 @@
     
     self.entryDateTime = date;
     
-    if (!self.stopKeyboardChecking)
-    {
-        if ([AppDelegate getInstance].rightMenuVC.menuState == MFSideMenuStateClosed && [AppDelegate getInstance].rightMenuVC.centerViewController == self)
-        {
-            [self.txtBibNumber becomeFirstResponder];
-        }
-        else
-        {
-            [self.txtBibNumber resignFirstResponder];
-        }
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -128,7 +122,6 @@
 {
     [super viewWillAppear:animated];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    [self.txtBibNumber becomeFirstResponder];
     self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
     
     self.btnLeft.width = self.view.width/2 - 18;
@@ -213,11 +206,7 @@
 
 - (IBAction)onRight:(id)sender
 {
-    self.stopKeyboardChecking = YES;
-    [self.txtBibNumber resignFirstResponder];
-    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:^{
-        self.stopKeyboardChecking = NO;
-    }];
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
 - (void) cleanData
@@ -355,14 +344,6 @@
     self.txtBibNumber.text = @"";
     self.swchPaser.on = NO;
     self.swchStoppedHere.on = NO;
-}
-
-- (IBAction)didBeginEditingBibNumber:(id)sender
-{
-    if([AppDelegate getInstance].rightMenuVC.menuState == MFSideMenuStateRightMenuOpen)
-    {
-        [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
-    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

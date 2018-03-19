@@ -16,6 +16,7 @@
                 <outlet property="btnUpdate" destination="sKL-md-pnu" id="bfn-MI-0G5"/>
                 <outlet property="lblRunner" destination="Y3h-Un-ajh" id="frV-f9-H0X"/>
                 <outlet property="lblTitle" destination="V9W-GY-ZSh" id="aVa-5I-XBF"/>
+                <outlet property="numberPadContainerView" destination="wuV-dd-7KI" id="2yW-hx-I4u"/>
                 <outlet property="swchPacer" destination="w9x-sF-BKr" id="2um-tk-ypn"/>
                 <outlet property="swchStoppedHere" destination="eQ3-Fk-JGC" id="iBp-Fg-7s5"/>
                 <outlet property="txtBibNumber" destination="sfc-6M-yoK" id="sI1-d8-LE8"/>
@@ -201,7 +202,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.74901960779999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="sfc-6M-yoK">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="sfc-6M-yoK">
                             <rect key="frame" x="139" y="8" width="213" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -217,6 +218,11 @@
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="HNo-Be-EPf" appends="YES" id="cAB-Ms-y0e"/>
                     </connections>
+                </view>
+                <view contentMode="scaleToFill" misplaced="YES" id="wuV-dd-7KI">
+                    <rect key="frame" x="0.0" y="395" width="375" height="272"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.9370916485786438" green="0.93694382905960083" blue="0.95754462480545044" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

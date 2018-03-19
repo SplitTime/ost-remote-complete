@@ -21,7 +21,6 @@ pod 'IQDropDownTextField', '1.1.0'
 pod 'SimpleKeychain','0.8.0'
 pod 'IQKeyboardManager','4.0.10'
 pod 'MFSideMenu','0.5.5'
-pod 'APNumberPad', '1.2.0'
 
 end
 
