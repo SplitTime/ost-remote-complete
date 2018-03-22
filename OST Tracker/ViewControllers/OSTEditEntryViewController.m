@@ -17,7 +17,6 @@
 @interface OSTEditEntryViewController () <APNumberPadDelegate>
 
 @property (strong, nonatomic) EntryModel * entry;
-@property (weak, nonatomic) IBOutlet UIView *numberPadContainerView;
 @property (weak, nonatomic) IBOutlet UITextField *txtTime;
 @property (weak, nonatomic) IBOutlet UIButton *btnDelete;
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdate;
@@ -39,26 +38,11 @@
 
     self.txtTime.inputView = self.customPicker;
     
-    APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:self];
-    [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
-    numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    numberPad.frame = self.numberPadContainerView.bounds;
-    numberPad.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    numberPad.backgroundColor = [UIColor clearColor];
-    [self.numberPadContainerView addSubview:numberPad];
-    [numberPad setTextField:self.txtBibNumber];
-    
     if (IS_IPHONE_X)
     {
         self.lblTitle.numberOfLines = 1;
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
-        self.numberPadContainerView.height = self.numberPadContainerView.height - 30;
-    }
-    if (IS_IPAD)
-    {
-        self.numberPadContainerView.top = self.numberPadContainerView.top + 20;
-        self.numberPadContainerView.height = self.numberPadContainerView.height - 50;
     }
     
     UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
@@ -78,6 +62,7 @@
     [IQKeyboardManager sharedManager].enable = YES;
     
     [self.txtTime removeInputAssistant];
+    [self.txtBibNumber removeInputAssistant];
     [self.txtDate removeInputAssistant];
     
     if (self.creatingNew)
@@ -89,6 +74,15 @@
         [self.btnUpdate setTitle:@"Create new entry" forState:UIControlStateNormal];
     }
     
+    __weak OSTEditEntryViewController * weakSelf = self;
+    self.txtBibNumber.inputView = ({
+        APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:weakSelf];
+        // configure function button
+        //
+        [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
+        numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        numberPad;
+    });
 }
 
 - (void) onDoneSelectedTime:(id) sender
@@ -108,8 +102,7 @@
 
 - (IBAction)onBibNumber:(id)sender
 {
-    [self.txtDate resignFirstResponder];
-    [self.txtTime resignFirstResponder];
+    [self.txtBibNumber becomeFirstResponder];
 }
 
 - (IBAction)onTime:(id)sender
