@@ -123,11 +123,12 @@
     int sections = 3;
 
     const UIUserInterfaceIdiom interfaceIdiom = UI_USER_INTERFACE_IDIOM();
-    const CGFloat maximumWidth = (interfaceIdiom == UIUserInterfaceIdiomPad) ? 400.0 : CGRectGetWidth(self.bounds);
+    const CGFloat maximumWidth = (interfaceIdiom == UIUserInterfaceIdiomPad) ? fmin(400.0, CGRectGetWidth(self.bounds)) : CGRectGetWidth(self.bounds);
+    const CGFloat maximumHeight = (interfaceIdiom == UIUserInterfaceIdiomPad) ? fmin(400.0, CGRectGetHeight(self.bounds)) : CGRectGetHeight(self.bounds);
 
     CGFloat sep = [self.styleClass separator];
     CGFloat left = (CGRectGetWidth(self.bounds) - maximumWidth) / 2;
-    CGFloat top = 0.f;
+    CGFloat top = (CGRectGetHeight(self.bounds) - maximumHeight) / 2;;
 
 #if defined(__LP64__) && __LP64__
     CGFloat buttonHeight = trunc((CGRectGetHeight(self.bounds) - sep * (rows - 1)) / rows) + sep;
@@ -137,6 +138,13 @@
 
     CGSize buttonSize = CGSizeMake((CGRectGetWidth(self.bounds) - sep * (sections - 1)) / sections, buttonHeight);
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+    #if defined(__LP64__) && __LP64__
+        buttonHeight = trunc((maximumHeight - sep * (rows - 1)) / rows) + sep;
+    #else
+        buttonHeight = truncf((maximumHeight - sep * (rows - 1)) / rows) + sep;
+    #endif
+        
         buttonSize = CGSizeMake((maximumWidth - sep * (sections - 1)) / sections, buttonHeight);
     }
 
