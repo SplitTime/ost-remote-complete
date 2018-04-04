@@ -52,7 +52,7 @@
     for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].combinedSplitAttributes)
     {
         if ([entrie[@"entries"] count] == 1)
-            break;
+            continue;
         if ([entrie[@"title"] isEqualToString:[CurrentCourse getCurrentCourse].splitName])
         {
             if (([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"in"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"in"])||
@@ -197,11 +197,14 @@
         reusableview = headerView;
         
         headerView.lblStationName.text = [CurrentCourse getCurrentCourse].splitName;
+        headerView.segLocation.hidden = YES;
+        headerView.lblStationName.hidden = NO;
         
         for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].combinedSplitAttributes)
         {
             if ([entrie[@"entries"] count] == 1)
-                 break;
+                 continue;
+    
             if ([entrie[@"title"] isEqualToString:[CurrentCourse getCurrentCourse].splitName])
             {
                 if (([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"in"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"in"])||

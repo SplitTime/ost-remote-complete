@@ -42,6 +42,7 @@
     }
     
     NSString * firstKey = entries.allKeys.firstObject;
+    NSLog(@"First Key: %@",firstKey);
     return [self submitEntries:entries[firstKey] toEvent:firstKey useAlternateServer:alternateServer completionBlock:^(id  _Nullable object)
     {
         [entries removeObjectForKey:firstKey];
