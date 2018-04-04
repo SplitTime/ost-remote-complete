@@ -169,7 +169,6 @@
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                             <connections>
-                                <action selector="txtBibNumberChanged:" destination="-1" eventType="editingChanged" id="2Q9-I6-rpf"/>
                                 <outlet property="delegate" destination="-1" id="zLX-bx-nb1"/>
                             </connections>
                         </textField>

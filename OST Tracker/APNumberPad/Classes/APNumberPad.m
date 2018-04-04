@@ -379,14 +379,22 @@
 
     if (_delegateFlags.textInputSupportsShouldChangeTextInRange) {
         if ([self.textInput shouldChangeTextInRange:self.textInput.selectedTextRange replacementText:text]) {
-            [self.textInput insertText:text];
+            if ([self.textInput isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)(self.textInput)).text = [NSString stringWithFormat:@"%@%@",((UITextField*)(self.textInput)).text,text];
+            }
+            else [self.textInput insertText:text];
         }
     }
     else if (_delegateFlags.delegateSupportsTextFieldShouldChangeCharactersInRange) {
         NSRange selectedRange = [[self class] selectedRange:self.textInput];
         UITextField *textField = (UITextField *)self.textInput;
         if ([textField.delegate textField:textField shouldChangeCharactersInRange:selectedRange replacementString:text]) {
-            [self.textInput insertText:text];
+            if ([self.textInput isKindOfClass:[UITextField class]])
+            {
+                ((UITextField*)(self.textInput)).text = [NSString stringWithFormat:@"%@%@",((UITextField*)(self.textInput)).text,text];
+            }
+            else [self.textInput insertText:text];
         }
     }
     else if (_delegateFlags.delegateSupportsTextViewShouldChangeTextInRange) {
@@ -413,7 +421,12 @@
             textRange = [self.textInput textRangeFromPosition:newStart toPosition:textRange.end];
         }
         if ([self.textInput shouldChangeTextInRange:textRange replacementText:@""]) {
-            [self.textInput deleteBackward];
+            if ([self.textInput isKindOfClass:[UITextField class]])
+            {
+                if (((UITextField*)(self.textInput)).text.length > 0)
+                    ((UITextField*)(self.textInput)).text = [((UITextField*)(self.textInput)).text substringToIndex:((UITextField*)(self.textInput)).text.length -1];
+            }
+            else [self.textInput deleteBackward];
         }
     }
     else if (_delegateFlags.delegateSupportsTextFieldShouldChangeCharactersInRange) {
@@ -424,7 +437,12 @@
         }
         UITextField *textField = (UITextField *)self.textInput;
         if ([textField.delegate textField:textField shouldChangeCharactersInRange:selectedRange replacementString:@""]) {
-            [self.textInput deleteBackward];
+            if ([self.textInput isKindOfClass:[UITextField class]])
+            {
+                if (((UITextField*)(self.textInput)).text.length > 0)
+                    ((UITextField*)(self.textInput)).text = [((UITextField*)(self.textInput)).text substringToIndex:((UITextField*)(self.textInput)).text.length -1];
+            }
+            else [self.textInput deleteBackward];
         }
     }
     else if (_delegateFlags.delegateSupportsTextViewShouldChangeTextInRange) {
@@ -435,7 +453,12 @@
         }
         UITextView *textView = (UITextView *)self.textInput;
         if ([textView.delegate textView:textView shouldChangeTextInRange:selectedRange replacementText:@""]) {
-            [self.textInput deleteBackward];
+            if ([self.textInput isKindOfClass:[UITextField class]])
+            {
+                if (((UITextField*)(self.textInput)).text.length > 0)
+                    ((UITextField*)(self.textInput)).text = [((UITextField*)(self.textInput)).text substringToIndex:((UITextField*)(self.textInput)).text.length -1];
+            }
+            else [self.textInput deleteBackward];
         }
     }
     else {

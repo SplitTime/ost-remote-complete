@@ -97,6 +97,10 @@
     
     [self.btnLeft setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
     [self.btnRight setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
+    
+    [self.txtBibNumber addObserver:self forKeyPath:@"text"
+                       options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                       context:nil];
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -225,6 +229,7 @@
 
 - (IBAction)onEntryButton:(id)sender
 {
+    [self.txtBibNumber removeObserver:self forKeyPath:@"text"];
     [[UIDevice currentDevice] playInputClick];
     
     self.lblOutTimeBadge.hidden = YES;
@@ -345,6 +350,9 @@
     self.txtBibNumber.text = @"";
     self.swchPaser.on = NO;
     self.swchStoppedHere.on = NO;
+    [self.txtBibNumber addObserver:self forKeyPath:@"text"
+                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                           context:nil];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -387,6 +395,12 @@
         
         [editVC configureWithEntry:self.lastEntry];
     }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context {
+    
+    [self txtBibNumberChanged:nil];
 }
 
 - (IBAction)txtBibNumberChanged:(id)sender
@@ -462,10 +476,19 @@
     }
 }
 
+- (void) dealloc
+{
+    [self.txtBibNumber removeObserver:self forKeyPath:@"text"];
+}
+
 #pragma mark - APNumberPadDelegate
 
 - (void)numberPad:(APNumberPad *)numberPad functionButtonAction:(UIButton *)functionButton textInput:(UIResponder<UITextInput> *)textInput {
-    [textInput insertText:@"*"];
+    if ([textInput isKindOfClass:[UITextField class]])
+    {
+        ((UITextField*)(textInput)).text = [NSString stringWithFormat:@"%@%@",((UITextField*)(textInput)).text,@"*"];
+    }
+    else [textInput insertText:@"*"];
 }
 
 @end
