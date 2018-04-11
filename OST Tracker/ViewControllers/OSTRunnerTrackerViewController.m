@@ -294,7 +294,7 @@
                     {
                         NSNumber * key = [[dict[@"entries"][0][@"eventSplitIds"] allKeys] firstObject];
                         entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-                        entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][key]];
+                        entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][key]];
                         entry.splitName = dict[@"entries"][0][@"displaySplitName"];
                         self.racer = nil;
                     }
