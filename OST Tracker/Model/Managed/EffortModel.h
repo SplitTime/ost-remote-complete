@@ -9,6 +9,7 @@
 - (NSArray*) entriesForSplitName:(NSString*)splitName;
 - (NSNumber*) expectedWithSplitName:(NSString*)splitName;
 - (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split;
+- (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split selectedSplitName:(NSString*)selectedSplitName;
 - (void) clearVariables;
 
 @end

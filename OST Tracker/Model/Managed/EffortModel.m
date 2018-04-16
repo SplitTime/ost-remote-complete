@@ -34,6 +34,28 @@
     
     return NO;
 }
+- (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split selectedSplitName:(NSString*)selectedSplitName
+{
+    CurrentCourse * course = [CurrentCourse getCurrentCourse];
+    for (NSDictionary * dict in course.combinedSplitAttributes)
+    {
+        if ([dict[@"title"] isEqualToString:course.splitName])
+        {
+            for (NSDictionary * subEntry in dict[@"entries"])
+            {
+                if ([subEntry[@"displaySplitName"] isEqualToString:selectedSplitName])
+                {
+                    if (subEntry[@"eventSplitIds"][[self.eventId stringValue]])
+                    {
+                        return YES;
+                    }
+                }
+            }
+        }
+    }
+    
+    return NO;
+}
 
 - (NSNumber*) expectedWithSplitName:(NSString*)splitName
 {

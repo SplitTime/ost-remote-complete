@@ -83,7 +83,7 @@
         
         for (EffortModel * effort in self.efforts)
         {
-            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
             {
                 [effort expectedWithSplitName:self.splitName];
                 [entriesThatShouldBeHere addObject:effort];
