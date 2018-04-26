@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="2.1">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="2.1">
     <entity name="CourseSplits" representedClassName="CourseSplits" syncable="YES">
         <attribute name="baseName" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -25,6 +25,7 @@
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="liveAttributes" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="monitorPacers" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="multiLap" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="splitAttributes" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="splitId" optional="YES" attributeType="String" syncable="YES">
@@ -133,7 +134,7 @@
     <elements>
         <element name="CourseSplits" positionX="-45" positionY="18" width="128" height="75"/>
         <element name="CrossCheckEntriesModel" positionX="-54" positionY="108" width="128" height="90"/>
-        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="165"/>
+        <element name="CurrentCourse" positionX="-54" positionY="9" width="128" height="180"/>
         <element name="EffortModel" positionX="-54" positionY="54" width="128" height="105"/>
         <element name="EntryModel" positionX="-54" positionY="-9" width="128" height="300"/>
         <element name="EventModel" positionX="-63" positionY="-18" width="128" height="165"/>

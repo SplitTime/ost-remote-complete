@@ -34,6 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) id liveAttributes;
 
+@property (nonatomic, strong, nullable) NSNumber* monitorPacers;
+
+@property (atomic) BOOL monitorPacersValue;
+- (BOOL)monitorPacersValue;
+- (void)setMonitorPacersValue:(BOOL)value_;
+
 @property (nonatomic, strong, nullable) NSNumber* multiLap;
 
 @property (atomic) BOOL multiLapValue;
@@ -62,6 +68,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)primitiveLiveAttributes;
 - (void)setPrimitiveLiveAttributes:(id)value;
 
+- (NSNumber*)primitiveMonitorPacers;
+- (void)setPrimitiveMonitorPacers:(NSNumber*)value;
+
+- (BOOL)primitiveMonitorPacersValue;
+- (void)setPrimitiveMonitorPacersValue:(BOOL)value_;
+
 - (NSNumber*)primitiveMultiLap;
 - (void)setPrimitiveMultiLap:(NSNumber*)value;
 
@@ -84,6 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)eventId;
 + (NSString *)eventName;
 + (NSString *)liveAttributes;
++ (NSString *)monitorPacers;
 + (NSString *)multiLap;
 + (NSString *)splitAttributes;
 + (NSString *)splitId;

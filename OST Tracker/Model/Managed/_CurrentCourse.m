@@ -29,6 +29,11 @@
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"monitorPacersValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"monitorPacers"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"multiLapValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"multiLap"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -45,6 +50,26 @@
 @dynamic eventName;
 
 @dynamic liveAttributes;
+
+@dynamic monitorPacers;
+
+- (BOOL)monitorPacersValue {
+	NSNumber *result = [self monitorPacers];
+	return [result boolValue];
+}
+
+- (void)setMonitorPacersValue:(BOOL)value_ {
+	[self setMonitorPacers:@(value_)];
+}
+
+- (BOOL)primitiveMonitorPacersValue {
+	NSNumber *result = [self primitiveMonitorPacers];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveMonitorPacersValue:(BOOL)value_ {
+	[self setPrimitiveMonitorPacers:@(value_)];
+}
 
 @dynamic multiLap;
 
@@ -86,6 +111,9 @@
 }
 + (NSString *)liveAttributes {
 	return @"liveAttributes";
+}
++ (NSString *)monitorPacers {
+	return @"monitorPacers";
 }
 + (NSString *)multiLap {
 	return @"multiLap";

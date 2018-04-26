@@ -311,6 +311,7 @@
         currentCourse.multiLap = weakSelf.selectedEvent.multiLap;
         currentCourse.splitAttributes = firstFoundObject;
         currentCourse.liveAttributes = weakSelf.selectedEvent.liveEntryAttributes;
+        currentCourse.monitorPacers = object[@"data"][@"attributes"][@"monitorPacers"];
         
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];

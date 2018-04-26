@@ -41,6 +41,8 @@
 @property (strong, nonatomic) EntryModel * lastEntry;
 @property (strong, nonatomic) NSString * leftBitKey;
 @property (strong, nonatomic) NSString * rightBitKey;
+@property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
+
 
 @end
 
@@ -101,6 +103,18 @@
     [self.txtBibNumber addObserver:self forKeyPath:@"text"
                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                        context:nil];
+    if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
+    {
+        self.lblWithPacer.hidden = YES;
+        self.swchPaser.hidden = YES;
+        self.pacerAndAidView.height = 43;
+    }
+    else
+    {
+        self.lblWithPacer.hidden = NO;
+        self.swchPaser.hidden = NO;
+        self.pacerAndAidView.height = 86;
+    }
 }
 
 -(void)onTick:(NSTimer *)timer
