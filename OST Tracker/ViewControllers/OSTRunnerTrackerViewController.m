@@ -103,18 +103,6 @@
     [self.txtBibNumber addObserver:self forKeyPath:@"text"
                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                        context:nil];
-    if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
-    {
-        self.lblWithPacer.hidden = YES;
-        self.swchPaser.hidden = YES;
-        self.pacerAndAidView.height = 43;
-    }
-    else
-    {
-        self.lblWithPacer.hidden = NO;
-        self.swchPaser.hidden = NO;
-        self.pacerAndAidView.height = 86;
-    }
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -219,7 +207,18 @@
         self.leftBitKey = @"out";
         self.rightBitKey = @"out";
     }
-    
+    if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
+    {
+        self.lblWithPacer.hidden = YES;
+        self.swchPaser.hidden = YES;
+        self.pacerAndAidView.height = 43;
+    }
+    else
+    {
+        self.lblWithPacer.hidden = NO;
+        self.swchPaser.hidden = NO;
+        self.pacerAndAidView.height = 86;
+    }
     self.lblInTimeBadge.right = self.btnLeft.right - 5;
 }
 
