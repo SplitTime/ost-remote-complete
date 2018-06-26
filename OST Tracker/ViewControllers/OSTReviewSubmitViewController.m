@@ -300,7 +300,8 @@
     }
     
     __weak OSTReviewSubmitViewController * weakSelf = self;
-    [[AppDelegate getInstance].getNetworkManager submitGroupedEntries:subEntries useAlternateServer:alternateServer completionBlock:^(id object) {
+    //[[AppDelegate getInstance].getNetworkManager submitGroupedEntries:subEntries useAlternateServer:alternateServer completionBlock:^(id object) {
+    [[AppDelegate getInstance].getNetworkManager submitEventGroupEntries:subEntries useAlternateServer:alternateServer completionBlock:^(id object) {
     
         for (EntryModel * entry in subEntries)
         {

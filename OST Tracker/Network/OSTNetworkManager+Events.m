@@ -4,7 +4,7 @@
 //
 //  Created by Luciano Castro on 6/14/17.
 //  Copyright © 2017 OST. All rights reserved.
-//
+//eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIwMiwiZXhwIjoxNTI5NzAxMjkzfQ.2LKwzwvJ6sBm-JBluzihk4WtbwV0hW-HKOwp-WvfTSw
 
 #import "OSTNetworkManager+Events.h"
 

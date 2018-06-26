@@ -45,6 +45,8 @@
 
 @dynamic combinedSplitAttributes;
 
+@dynamic eventGroupId;
+
 @dynamic eventId;
 
 @dynamic eventName;
@@ -102,6 +104,9 @@
 @implementation CurrentCourseAttributes 
 + (NSString *)combinedSplitAttributes {
 	return @"combinedSplitAttributes";
+}
++ (NSString *)eventGroupId {
+	return @"eventGroupId";
 }
 + (NSString *)eventId {
 	return @"eventId";

@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) id combinedSplitAttributes;
 
+@property (nonatomic, strong, nullable) NSString* eventGroupId;
+
 @property (nonatomic, strong, nullable) NSString* eventId;
 
 @property (nonatomic, strong, nullable) id liveEntryAttributes;
@@ -52,6 +54,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)primitiveCombinedSplitAttributes;
 - (void)setPrimitiveCombinedSplitAttributes:(id)value;
+
+- (NSString*)primitiveEventGroupId;
+- (void)setPrimitiveEventGroupId:(NSString*)value;
 
 - (NSString*)primitiveEventId;
 - (void)setPrimitiveEventId:(NSString*)value;
@@ -81,6 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EventModelAttributes: NSObject 
 + (NSString *)combinedSplitAttributes;
++ (NSString *)eventGroupId;
 + (NSString *)eventId;
 + (NSString *)liveEntryAttributes;
 + (NSString *)multiLap;

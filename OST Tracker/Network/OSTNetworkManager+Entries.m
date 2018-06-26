@@ -11,8 +11,14 @@
 #import "EntryModel.h"
 
 #define OSTSubmitEventEndpoint @"events/%@/import?data_format=jsonapi_batch"
+#define OSTSubmitEventGroupEndpoint @"event_groups/%@/import?data_format=jsonapi_batch"
 
 @implementation OSTNetworkManager (Entries)
+
+- (NSURLSessionDataTask*)submitEventGroupEntries:(NSArray*)entries useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+{
+    return [self submitEntriesToGroup:[CurrentCourse getCurrentCourse].eventGroupId entries:entries useAlternateServer:alternateServer completionBlock:onCompletion errorBlock:onError];
+}
 
 - (NSURLSessionDataTask*)submitGroupedEntries:(NSArray*)entries useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
 {
@@ -77,7 +83,43 @@
         endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
     }
     
-    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"uniqueKey": @[@"absoluteTime", @"splitId", @"bitkey", @"bibNumber", @"source", @"withPacer", @"stoppedHere"],@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"uniqueKey": @[@"absoluteTime", @"bitkey", @"bibNumber", @"source", @"withPacer", @"stoppedHere"],@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+                                      {
+                                          onCompletion(responseObject);
+                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                          onError(error);
+                                      }];
+    
+    [dataTask resume];
+    return dataTask;
+}
+
+- (NSURLSessionDataTask*)submitEntriesToGroup:(NSString*)groupId entries:(NSArray*)entries useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+{
+    NSMutableArray * entriesArrayDict = [NSMutableArray new];
+    
+    for (EntryModel * entry in entries)
+    {
+        [entriesArrayDict addObject:@{@"type": @"raw_time",
+                                      @"attributes": @{
+                                              @"bibNumber": entry.bibNumber,
+                                              @"subSplitKind": entry.bitKey,
+                                              @"absoluteTime": entry.absoluteTime,
+                                              @"withPacer": entry.withPacer,
+                                              @"stoppedHere": entry.stoppedHere,
+                                              @"source": entry.source,
+                                              @"splitName": entry.splitName
+                                              }}];
+    }
+    
+    NSString * endpoint = [NSString stringWithFormat:OSTSubmitEventGroupEndpoint,groupId];
+    
+    if (alternateServer)
+    {
+        endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
+    }
+    
+    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                       {
                                           onCompletion(responseObject);
                                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

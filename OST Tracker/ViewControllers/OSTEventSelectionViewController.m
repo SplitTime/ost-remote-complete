@@ -312,6 +312,7 @@
         currentCourse.splitAttributes = firstFoundObject;
         currentCourse.liveAttributes = weakSelf.selectedEvent.liveEntryAttributes;
         currentCourse.monitorPacers = object[@"data"][@"attributes"][@"monitorPacers"];
+        currentCourse.eventGroupId = weakSelf.selectedEvent.eventGroupId;
         
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];

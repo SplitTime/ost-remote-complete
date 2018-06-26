@@ -40,6 +40,8 @@
 
 @dynamic combinedSplitAttributes;
 
+@dynamic eventGroupId;
+
 @dynamic eventId;
 
 @dynamic liveEntryAttributes;
@@ -77,6 +79,9 @@
 @implementation EventModelAttributes 
 + (NSString *)combinedSplitAttributes {
 	return @"combinedSplitAttributes";
+}
++ (NSString *)eventGroupId {
+	return @"eventGroupId";
 }
 + (NSString *)eventId {
 	return @"eventId";
