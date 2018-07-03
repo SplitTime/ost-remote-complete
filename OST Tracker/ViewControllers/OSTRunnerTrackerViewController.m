@@ -262,7 +262,9 @@
     else entry.bitKey = self.rightBitKey;
     
     int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
-    entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",self.dayString, self.lblTime.text,timezoneoffset];
+    if (timezoneoffset < 0)
+        entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",self.dayString, self.lblTime.text,timezoneoffset];
+    else entry.absoluteTime = [NSString stringWithFormat:@"%@ %@+%02d:00",self.dayString, self.lblTime.text,timezoneoffset];
     entry.displayTime = self.lblTime.text;
     if (self.swchPaser.on)
         entry.withPacer = @"true";

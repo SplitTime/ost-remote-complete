@@ -155,7 +155,9 @@
         dayString = [dateFormatter stringFromDate:self.txtDate.date];
         
         int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
-        newEntry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",dayString, self.txtTime.text,timezoneoffset];
+        if (timezoneoffset < 0)
+            newEntry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",dayString, self.txtTime.text,timezoneoffset];
+        else newEntry.absoluteTime = [NSString stringWithFormat:@"%@ %@+%02d:00",dayString, self.txtTime.text,timezoneoffset];
         
         newEntry.source = self.entry.source;
         
@@ -201,7 +203,9 @@
     dayString = [dateFormatter stringFromDate:self.txtDate.date];
     
     int timezoneoffset = (int)([[NSTimeZone systemTimeZone] secondsFromGMT])/60/60;
-    self.entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",dayString, self.txtTime.text,timezoneoffset];
+    if (timezoneoffset < 0)
+        self.entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",dayString, self.txtTime.text,timezoneoffset];
+    else self.entry.absoluteTime = [NSString stringWithFormat:@"%@ %@+%02d:00",dayString, self.txtTime.text,timezoneoffset];
     
     if (self.swchPacer.on)
         self.entry.withPacer = @"true";
