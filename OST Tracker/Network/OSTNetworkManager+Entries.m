@@ -11,7 +11,7 @@
 #import "EntryModel.h"
 
 #define OSTSubmitEventEndpoint @"events/%@/import?data_format=jsonapi_batch"
-#define OSTSubmitEventGroupEndpoint @"event_groups/%@/import?data_format=jsonapi_batch"
+#define OSTSubmitEventGroupEndpoint @"event_groups/%@/import?data_format=jsonapi_batch&limitedResponse=true"
 
 @implementation OSTNetworkManager (Entries)
 

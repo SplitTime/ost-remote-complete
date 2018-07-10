@@ -305,14 +305,14 @@
                     entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][[self.racer.eventId stringValue]]];
                     entry.entryCourseId = [self.racer.eventId stringValue];
                     entry.splitName = dict[@"entries"][0][@"displaySplitName"];
-                    if ([entry.splitId isEqualToString:@"(null)"])
+                    /*if ([entry.splitId isEqualToString:@"(null)"])
                     {
                         NSNumber * key = [[dict[@"entries"][0][@"eventSplitIds"] allKeys] firstObject];
                         entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
                         entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][key]];
                         entry.splitName = dict[@"entries"][0][@"displaySplitName"];
                         self.racer = nil;
-                    }
+                    }*/
                 }
                 else
                 {
@@ -329,14 +329,14 @@
                     entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][[self.racer.eventId stringValue]]];
                     entry.entryCourseId = [self.racer.eventId stringValue];
                     entry.splitName = dict[@"entries"][1][@"displaySplitName"];
-                    if ([entry.splitId isEqualToString:@"(null)"])
+                    /*if ([entry.splitId isEqualToString:@"(null)"])
                     {
                         NSNumber * key = [[dict[@"entries"][1][@"eventSplitIds"] allKeys] firstObject];
                         entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
                         entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][key]];
                         entry.splitName = dict[@"entries"][1][@"displaySplitName"];
                         self.racer = nil;
-                    }
+                    }*/
                 }
                 else
                 {

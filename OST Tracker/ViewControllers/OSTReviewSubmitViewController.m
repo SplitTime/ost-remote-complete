@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSync;
 @property (strong, nonatomic) NSMutableArray * entries;
 @property (strong, nonatomic) NSMutableArray * splitTitles;
+@property (weak, nonatomic) IBOutlet UILabel *lblBadge;
 
 @end
 
@@ -82,6 +83,9 @@
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
     }
+    
+    self.lblBadge.layer.cornerRadius = self.lblBadge.width/2;
+    self.lblBadge.clipsToBounds = YES;
 }
 
 - (void) onDoneSelectedSortBy:(id) sender
@@ -103,6 +107,17 @@
     [super viewWillAppear:YES];
     self.loadingView.size = self.view.size;
     [self loadData];
+    
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    if (entries.count == 0)
+    {
+        self.lblBadge.hidden = YES;
+    }
+    else
+    {
+        self.lblBadge.hidden = NO;
+        self.lblBadge.text = [NSString stringWithFormat:@"%d",entries.count];
+    }
 }
 
 - (void) loadData
@@ -221,7 +236,9 @@
     NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     if (entries.count == 0)
     {
-        [OHAlertView showAlertWithTitle:@"Error" message:@"Nothing to send" dismissButton:@"Ok"];
+        if (self.entries.count == 0)
+            [OHAlertView showAlertWithTitle:@"" message:@"No times have been entered." dismissButton:@"Ok"];
+        else [OHAlertView showAlertWithTitle:@"" message:@"All times have been synced." dismissButton:@"Ok"];
         return;
     }
     
