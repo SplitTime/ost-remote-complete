@@ -71,11 +71,11 @@
                     <color key="backgroundColor" red="0.97244364023208618" green="0.97260981798171997" blue="0.97243314981460571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RHE-00-eos">
-                    <rect key="frame" x="0.0" y="616" width="375" height="51"/>
+                    <rect key="frame" x="0.0" y="612" width="322" height="60"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="Sync Data" backgroundImage="GreenButton">
+                    <state key="normal" title="Sync" backgroundImage="GreenButton">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="GrayButton">
@@ -102,13 +102,28 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mmg-mD-gCY">
-                    <rect key="frame" x="266" y="631" width="20" height="21"/>
+                    <rect key="frame" x="283" y="631" width="20" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zIq-Js-YnH">
+                    <rect key="frame" x="321" y="616" width="54" height="51"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.36078431372549019" green="0.63529411764705879" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" image="share-icon">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onExport:" destination="-1" eventType="touchUpInside" id="hxx-F1-Il3"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="sync-icon" id="0e3-B0-ZTp">
+                    <rect key="frame" x="184" y="621" width="36" height="43"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>
@@ -181,5 +196,7 @@ synced.</string>
         <image name="Menu" width="122" height="44"/>
         <image name="ReturnLiveEntry" width="210" height="40"/>
         <image name="Triangle" width="14" height="8"/>
+        <image name="share-icon" width="29" height="29"/>
+        <image name="sync-icon" width="38" height="32"/>
     </resources>
 </document>
