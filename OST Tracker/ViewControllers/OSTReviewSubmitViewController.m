@@ -139,13 +139,13 @@
         {
             [entriesArrayDict addObject:@{@"type": @"raw_time",
                                           @"attributes": @{
-                                                  @"bibNumber": entry.bibNumber,
+                                                  @"splitName": entry.splitName,
                                                   @"subSplitKind": entry.bitKey,
+                                                  @"bibNumber": entry.bibNumber,
                                                   @"absoluteTime": entry.absoluteTime,
                                                   @"withPacer": entry.withPacer,
                                                   @"stoppedHere": entry.stoppedHere,
-                                                  @"source": entry.source,
-                                                  @"splitName": entry.splitName
+                                                  @"source": entry.source
                                                   }}];
         }
         
@@ -158,15 +158,22 @@
         // Construct csv
         
         // Write header...
-        NSArray *keys = [entriesArrayDict[0][@"attributes"] allKeys];
+        NSArray *keys = @[@"splitName",@"subSplitKind",@"bibNumber",@"absoluteTime",@"withPacer",@"stoppedHere",@"source"];
         [writer writeLineOfFields:keys];
         
         // ...then fill the rows
         for (NSDictionary *item in entriesArrayDict) {
-            for (NSString *key in keys) {
+            /*for (NSString *key in keys) {
                 NSString *value = [item[@"attributes"] objectForKey:key];
                 [writer writeField:value];
-            }
+            }*/
+            [writer writeField:item[@"attributes"][@"splitName"]];
+            [writer writeField:item[@"attributes"][@"subSplitKind"]];
+            [writer writeField:item[@"attributes"][@"bibNumber"]];
+            [writer writeField:item[@"attributes"][@"absoluteTime"]];
+            [writer writeField:item[@"attributes"][@"withPacer"]];
+            [writer writeField:item[@"attributes"][@"stoppedHere"]];
+            [writer writeField:item[@"attributes"][@"source"]];
             
             [writer finishLine];
         }
