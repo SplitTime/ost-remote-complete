@@ -753,6 +753,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CHCSVParser/CHCSVParser.framework",
 				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
@@ -768,6 +769,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHCSVParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
@@ -829,6 +831,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CHCSVParser/CHCSVParser.framework",
 				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
@@ -844,6 +847,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHCSVParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
@@ -882,6 +886,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CHCSVParser/CHCSVParser.framework",
 				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/IQDropDownTextField/IQDropDownTextField.framework",
@@ -897,6 +902,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHCSVParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQDropDownTextField.framework",
@@ -1298,7 +1304,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "37c9161d-ba7d-496d-82f3-4d3f545efe23";
+				PROVISIONING_PROFILE = "9b38494e-5d2b-4de1-aae7-6c00eecf30da";
 				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev (Ad Hoc Cert)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1341,7 +1347,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "37c9161d-ba7d-496d-82f3-4d3f545efe23";
+				PROVISIONING_PROFILE = "9b38494e-5d2b-4de1-aae7-6c00eecf30da";
 				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev (Ad Hoc Cert)";
 				SWIFT_VERSION = 3.0;
 			};

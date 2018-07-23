@@ -16,6 +16,7 @@
 #import "IQDropDownTextField.h"
 #import "OSTReviewSectionHeader.h"
 #import "UIView+Additions.h"
+#import "CHCSVParser.h"
 
 @interface OSTReviewSubmitViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
@@ -118,6 +119,81 @@
         self.lblBadge.hidden = NO;
         self.lblBadge.text = [NSString stringWithFormat:@"%d",entries.count];
     }
+}
+
+- (IBAction)onExport:(id)sender
+{
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    if (entries.count == 0)
+    {
+        if (self.entries.count == 0)
+            [OHAlertView showAlertWithTitle:@"" message:@"No times have been entered." dismissButton:@"Ok"];
+        else [OHAlertView showAlertWithTitle:@"" message:@"All times have been synced." dismissButton:@"Ok"];
+        return;
+    }
+    
+    [OHAlertView showAlertWithTitle:@"" message:@"This feature exports data to the local device only. It does not sync with OpenSplitTime.org" cancelButton:@"Ok" otherButtons:nil buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex)
+    {
+        NSMutableArray * entriesArrayDict = [NSMutableArray new];
+        for (EntryModel * entry in entries)
+        {
+            [entriesArrayDict addObject:@{@"type": @"raw_time",
+                                          @"attributes": @{
+                                                  @"splitName": entry.splitName,
+                                                  @"subSplitKind": entry.bitKey,
+                                                  @"bibNumber": entry.bibNumber,
+                                                  @"absoluteTime": entry.absoluteTime,
+                                                  @"withPacer": entry.withPacer,
+                                                  @"stoppedHere": entry.stoppedHere,
+                                                  @"source": entry.source
+                                                  }}];
+        }
+        
+        // Create in memory writer
+        NSOutputStream *stream = [NSOutputStream outputStreamToMemory];
+        CHCSVWriter *writer = [[CHCSVWriter alloc] initWithOutputStream:stream
+                                                               encoding:NSUTF8StringEncoding
+                                                              delimiter:','];
+        
+        // Construct csv
+        
+        // Write header...
+        NSArray *keys = @[@"splitName",@"subSplitKind",@"bibNumber",@"absoluteTime",@"withPacer",@"stoppedHere",@"source"];
+        [writer writeLineOfFields:keys];
+        
+        // ...then fill the rows
+        for (NSDictionary *item in entriesArrayDict) {
+            /*for (NSString *key in keys) {
+                NSString *value = [item[@"attributes"] objectForKey:key];
+                [writer writeField:value];
+            }*/
+            [writer writeField:item[@"attributes"][@"splitName"]];
+            [writer writeField:item[@"attributes"][@"subSplitKind"]];
+            [writer writeField:item[@"attributes"][@"bibNumber"]];
+            [writer writeField:item[@"attributes"][@"absoluteTime"]];
+            [writer writeField:item[@"attributes"][@"withPacer"]];
+            [writer writeField:item[@"attributes"][@"stoppedHere"]];
+            [writer writeField:item[@"attributes"][@"source"]];
+            
+            [writer finishLine];
+        }
+        [writer closeStream];
+        
+        // Debug: Convert stream to string and print
+        NSData *contents = [stream propertyForKey:NSStreamDataWrittenToMemoryStreamKey];
+        
+        NSString *csvString = [[NSString alloc] initWithData:contents
+                                                    encoding:NSUTF8StringEncoding];
+        
+        NSArray *activityItems = @[csvString];
+        UIActivityViewController *activityViewControntroller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+        activityViewControntroller.excludedActivityTypes = @[];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            activityViewControntroller.popoverPresentationController.sourceView = self.view;
+            activityViewControntroller.popoverPresentationController.sourceRect = CGRectMake(self.view.bounds.size.width/2, self.view.bounds.size.height/4, 0, 0);
+        }
+        [self presentViewController:activityViewControntroller animated:true completion:nil];
+    }];
 }
 
 - (void) loadData

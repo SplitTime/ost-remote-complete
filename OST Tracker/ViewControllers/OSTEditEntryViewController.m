@@ -83,6 +83,19 @@
         numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         numberPad;
     });
+    
+    if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
+    {
+        self.lblWithPacer.hidden = YES;
+        self.swchPacer.hidden = YES;
+        self.pacerAndAidView.height = 43;
+    }
+    else
+    {
+        self.lblWithPacer.hidden = NO;
+        self.swchPacer.hidden = NO;
+        self.pacerAndAidView.height = 86;
+    }
 }
 
 - (void) onDoneSelectedTime:(id) sender
