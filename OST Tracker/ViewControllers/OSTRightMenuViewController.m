@@ -10,9 +10,12 @@
 #import "OSTEventSelectionViewController.h"
 #import "OSTRunnerTrackerViewController.h"
 #import "OSTCrossCheckViewController.h"
+#import "UIView+Additions.h"
 
 @interface OSTRightMenuViewController ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *rightMenuBackImage;
+@property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end
 
 @implementation OSTRightMenuViewController
@@ -20,6 +23,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.scrollView.contentSize = CGSizeMake(0, 668);
+    if(IS_IPHONE_5)
+    {
+        self.rightMenuBackImage.height = 680;
+        self.rightMenuBackImage.top = 30;
+        self.coverView.height = 800;
+        self.coverView.top = -20;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
