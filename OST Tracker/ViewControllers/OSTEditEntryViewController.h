@@ -21,6 +21,8 @@
 @property (nonatomic, copy) void (^entryHasBeenDeletedBlock)(void);
 @property (nonatomic, copy) void (^entryHasBeenUpdatedBlock)(void);
 @property (nonatomic, assign) BOOL creatingNew;
+@property (weak, nonatomic) IBOutlet UIView *pacerAndAidView;
+@property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
 
 - (IBAction)onBibNumberChanged:(id)sender;
 - (void) configureWithEntry:(EntryModel*)entry;
