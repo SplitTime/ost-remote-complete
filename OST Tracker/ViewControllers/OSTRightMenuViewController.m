@@ -26,10 +26,11 @@
     self.scrollView.contentSize = CGSizeMake(0, 668);
     if(IS_IPHONE_5)
     {
-        self.rightMenuBackImage.height = 680;
+        self.rightMenuBackImage.height = 668;
+        self.rightMenuBackImage.width = 350;
         self.rightMenuBackImage.top = 30;
-        self.coverView.height = 800;
-        self.coverView.top = -20;
+        self.coverView.top = -90;
+        self.coverView.height = 1000;
     }
 }
 
