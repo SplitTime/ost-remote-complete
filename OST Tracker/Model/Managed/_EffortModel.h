@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSDecimalNumber* eventId;
 
+@property (nonatomic, strong, nullable) NSString* flexibleGeolocation;
+
 @property (nonatomic, strong, nullable) NSString* fullName;
 
 @end
@@ -41,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDecimalNumber*)primitiveEventId;
 - (void)setPrimitiveEventId:(NSDecimalNumber*)value;
 
+- (NSString*)primitiveFlexibleGeolocation;
+- (void)setPrimitiveFlexibleGeolocation:(NSString*)value;
+
 - (NSString*)primitiveFullName;
 - (void)setPrimitiveFullName:(NSString*)value;
 
@@ -50,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)bibNumber;
 + (NSString *)effortId;
 + (NSString *)eventId;
++ (NSString *)flexibleGeolocation;
 + (NSString *)fullName;
 @end
 

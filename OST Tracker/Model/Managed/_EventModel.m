@@ -44,8 +44,6 @@
 
 @dynamic eventId;
 
-@dynamic liveEntryAttributes;
-
 @dynamic multiLap;
 
 - (BOOL)multiLapValue {
@@ -85,9 +83,6 @@
 }
 + (NSString *)eventId {
 	return @"eventId";
-}
-+ (NSString *)liveEntryAttributes {
-	return @"liveEntryAttributes";
 }
 + (NSString *)multiLap {
 	return @"multiLap";

@@ -310,7 +310,6 @@
         currentCourse.eventName = weakSelf.selectedEvent.name;
         currentCourse.multiLap = weakSelf.selectedEvent.multiLap;
         currentCourse.splitAttributes = firstFoundObject;
-        currentCourse.liveAttributes = weakSelf.selectedEvent.liveEntryAttributes;
         currentCourse.monitorPacers = object[@"data"][@"attributes"][@"monitorPacers"];
         currentCourse.eventGroupId = weakSelf.selectedEvent.eventGroupId;
         

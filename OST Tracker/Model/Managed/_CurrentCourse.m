@@ -51,8 +51,6 @@
 
 @dynamic eventName;
 
-@dynamic liveAttributes;
-
 @dynamic monitorPacers;
 
 - (BOOL)monitorPacersValue {
@@ -113,9 +111,6 @@
 }
 + (NSString *)eventName {
 	return @"eventName";
-}
-+ (NSString *)liveAttributes {
-	return @"liveAttributes";
 }
 + (NSString *)monitorPacers {
 	return @"monitorPacers";

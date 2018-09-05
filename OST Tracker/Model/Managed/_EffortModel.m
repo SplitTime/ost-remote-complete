@@ -38,6 +38,8 @@
 
 @dynamic eventId;
 
+@dynamic flexibleGeolocation;
+
 @dynamic fullName;
 
 @end
@@ -51,6 +53,9 @@
 }
 + (NSString *)eventId {
 	return @"eventId";
+}
++ (NSString *)flexibleGeolocation {
+	return @"flexibleGeolocation";
 }
 + (NSString *)fullName {
 	return @"fullName";
