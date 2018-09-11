@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSObject;
 
+@class NSObject;
+
 @interface CurrentCourseID : NSManagedObjectID {}
 @end
 
@@ -24,11 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) CurrentCourseID *objectID;
 
-@property (nonatomic, strong, nullable) id combinedSplitAttributes;
+@property (nonatomic, strong, nullable) id dataEntryGroups;
 
 @property (nonatomic, strong, nullable) NSString* eventGroupId;
 
 @property (nonatomic, strong, nullable) NSString* eventId;
+
+@property (nonatomic, strong, nullable) id eventIdsAndSplits;
 
 @property (nonatomic, strong, nullable) NSString* eventName;
 
@@ -54,14 +58,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _CurrentCourse (CoreDataGeneratedPrimitiveAccessors)
 
-- (id)primitiveCombinedSplitAttributes;
-- (void)setPrimitiveCombinedSplitAttributes:(id)value;
+- (id)primitiveDataEntryGroups;
+- (void)setPrimitiveDataEntryGroups:(id)value;
 
 - (NSString*)primitiveEventGroupId;
 - (void)setPrimitiveEventGroupId:(NSString*)value;
 
 - (NSString*)primitiveEventId;
 - (void)setPrimitiveEventId:(NSString*)value;
+
+- (id)primitiveEventIdsAndSplits;
+- (void)setPrimitiveEventIdsAndSplits:(id)value;
 
 - (NSString*)primitiveEventName;
 - (void)setPrimitiveEventName:(NSString*)value;
@@ -90,9 +97,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface CurrentCourseAttributes: NSObject 
-+ (NSString *)combinedSplitAttributes;
++ (NSString *)dataEntryGroups;
 + (NSString *)eventGroupId;
 + (NSString *)eventId;
++ (NSString *)eventIdsAndSplits;
 + (NSString *)eventName;
 + (NSString *)monitorPacers;
 + (NSString *)multiLap;

@@ -18,13 +18,13 @@
 - (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split
 {
     CurrentCourse * course = [CurrentCourse getCurrentCourse];
-    for (NSDictionary * dict in course.combinedSplitAttributes)
+    for (NSDictionary * dict in course.dataEntryGroups)
     {
         if ([dict[@"title"] isEqualToString:course.splitName])
         {
             for (NSDictionary * subEntry in dict[@"entries"])
             {
-                if (subEntry[@"eventSplitIds"][[self.eventId stringValue]])
+                if ([course.eventIdsAndSplits[[NSString stringWithFormat:@"%@",self.eventId]][0] containsObject:subEntry[@"parameterizedSplitName"]])
                 {
                     return YES;
                 }
@@ -37,15 +37,15 @@
 - (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split selectedSplitName:(NSString*)selectedSplitName
 {
     CurrentCourse * course = [CurrentCourse getCurrentCourse];
-    for (NSDictionary * dict in course.combinedSplitAttributes)
+    for (NSDictionary * dict in course.dataEntryGroups)
     {
         if ([dict[@"title"] isEqualToString:course.splitName])
         {
             for (NSDictionary * subEntry in dict[@"entries"])
             {
-                if ([subEntry[@"displaySplitName"] isEqualToString:selectedSplitName])
+                if ([subEntry[@"splitName"] isEqualToString:selectedSplitName])
                 {
-                    if (subEntry[@"eventSplitIds"][[self.eventId stringValue]])
+                    if ([course.eventIdsAndSplits[[NSString stringWithFormat:@"%@",self.eventId]][0] containsObject:subEntry[@"parameterizedSplitName"]])
                     {
                         return YES;
                     }

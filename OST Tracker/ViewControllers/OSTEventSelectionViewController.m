@@ -120,18 +120,18 @@
         CurrentCourse * course = [CurrentCourse getCurrentCourse];
         self.txtEvent.userInteractionEnabled = NO;
         [self.txtEvent setItemList:@[course.eventName]];
-        NSArray * stations = course.combinedSplitAttributes;
+        NSArray * stations = course.dataEntryGroups;
         NSMutableArray * stationStrings = [NSMutableArray new];
         for (NSDictionary * split in stations)
         {
-            [stationStrings addObject:split[@"title"]];
+            [stationStrings addObject:split[@"splitName"]];
         }
         [self.txtStation setItemList:stationStrings];
         [self.txtStation becomeFirstResponder];
         
         self.btnNext.alpha = 1;
         self.txtStation.alpha = 1;
-        self.combinedSplitAttributes = course.combinedSplitAttributes;
+        self.unpairedDataEntryGroups = course.dataEntryGroups;
         return;
     }
     
@@ -163,7 +163,7 @@
     
     self.selectedEvent = firstFoundObject;
     
-    for (NSDictionary * liveEntry in self.selectedEvent.combinedSplitAttributes)
+    for (NSDictionary * liveEntry in self.selectedEvent.dataEntryGroups)
     {
         [splitStrings addObject:liveEntry[@"title"]];
     }
@@ -245,13 +245,13 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", self.txtStation.selectedItem];
     NSArray *filteredArray = nil;
     
-    if (!self.combinedSplitAttributes)
+    if (!self.unpairedDataEntryGroups)
     {
-        filteredArray = [self.selectedEvent.combinedSplitAttributes filteredArrayUsingPredicate:predicate];
+        filteredArray = [self.selectedEvent.dataEntryGroups filteredArrayUsingPredicate:predicate];
     }
     else
     {
-        filteredArray = [self.combinedSplitAttributes filteredArrayUsingPredicate:predicate];
+        filteredArray = [self.unpairedDataEntryGroups filteredArrayUsingPredicate:predicate];
     }
     
     NSDictionary * firstFoundObject = nil;
@@ -294,8 +294,8 @@
         [weakSelf.activityIndicator stopAnimating];
         CurrentCourse * currentCourse = [CurrentCourse MR_createEntity];
         
-        currentCourse.combinedSplitAttributes = object[@"data"][@"attributes"][@"combinedSplitAttributes"];
-        
+        //currentCourse.combinedSplitAttributes = object[@"data"][@"attributes"][@"combinedSplitAttributes"];
+        currentCourse.dataEntryGroups = object[@"data"][@"attributes"][@"dataEntryGroups"];
         for (id dataObject in object[@"included"])
         {
             if ([dataObject[@"type"] isEqualToString:@"efforts"])
@@ -312,6 +312,21 @@
         currentCourse.splitAttributes = firstFoundObject;
         currentCourse.monitorPacers = object[@"data"][@"attributes"][@"monitorPacers"];
         currentCourse.eventGroupId = weakSelf.selectedEvent.eventGroupId;
+        NSMutableDictionary * eventIdsAndSplits = [NSMutableDictionary new];
+        for (NSDictionary * dict in object[@"included"])
+        {
+            if ([dict[@"type"] isEqualToString:@"events"])
+            {
+                NSMutableArray * arr = eventIdsAndSplits[dict[@"id"]];
+                if (arr == nil)
+                {
+                    arr = [NSMutableArray new];
+                }
+                [arr addObject: dict[@"attributes"][@"parameterizedSplitNames"]];
+                eventIdsAndSplits[dict[@"id"]] = arr;
+            }
+        }
+        currentCourse.eventIdsAndSplits = eventIdsAndSplits;
         
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];

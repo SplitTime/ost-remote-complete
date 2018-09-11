@@ -49,7 +49,7 @@
     
     self.popupCrossCheckContainer.layer.cornerRadius = 6;
     self.splitName = [CurrentCourse getCurrentCourse].splitName;
-    for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].combinedSplitAttributes)
+    for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].dataEntryGroups)
     {
         if ([entrie[@"entries"] count] == 1)
             continue;
@@ -58,7 +58,7 @@
             if (([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"in"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"in"])||
                 ([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"out"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"out"]))
             {
-                self.splitName = entrie[@"entries"][0][@"displaySplitName"];
+                self.splitName = entrie[@"entries"][0][@"splitName"];
             }
         }
     }
@@ -200,7 +200,7 @@
         headerView.segLocation.hidden = YES;
         headerView.lblStationName.hidden = NO;
         
-        for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].combinedSplitAttributes)
+        for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].dataEntryGroups)
         {
             if ([entrie[@"entries"] count] == 1)
                  continue;
@@ -212,8 +212,8 @@
                 {
                     headerView.segLocation.hidden = NO;
                     headerView.lblStationName.hidden = YES;
-                    [headerView.segLocation setTitle:entrie[@"entries"][0][@"displaySplitName"] forSegmentAtIndex:0];
-                    [headerView.segLocation setTitle:entrie[@"entries"][1][@"displaySplitName"] forSegmentAtIndex:1];
+                    [headerView.segLocation setTitle:entrie[@"entries"][0][@"splitName"] forSegmentAtIndex:0];
+                    [headerView.segLocation setTitle:entrie[@"entries"][1][@"splitName"] forSegmentAtIndex:1];
                     [headerView setSplitChange:^(NSString *newSplitName) {
                         weakSelf.splitName = newSplitName;
                         for (EffortModel * effort in weakSelf.efforts)

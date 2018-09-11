@@ -18,7 +18,7 @@
 - (NSArray*) getSplitLeftIds
 {
     NSMutableArray * splitIdsArray = [NSMutableArray new];
-    for (NSDictionary * dict in self.combinedSplitAttributes)
+    for (NSDictionary * dict in self.dataEntryGroups)
     {
         if ([dict[@"title"] isEqualToString:self.splitName])
         {
@@ -39,7 +39,7 @@
 - (NSArray*) getSplitRightIds
 {
     NSMutableArray * splitIdsArray = [NSMutableArray new];
-    for (NSDictionary * dict in self.combinedSplitAttributes)
+    for (NSDictionary * dict in self.dataEntryGroups)
     {
         if ([dict[@"title"] isEqualToString:self.splitName])
         {

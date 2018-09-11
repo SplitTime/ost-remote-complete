@@ -247,7 +247,7 @@
     
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
-    CurrentCourse * course = [CurrentCourse MR_findFirst];
+    CurrentCourse * course = [CurrentCourse getCurrentCourse];
 
     EntryModel * entry = [EntryModel MR_createEntity];
     
@@ -277,74 +277,19 @@
     entry.splitName = course.splitName;
     entry.combinedCourseId = course.eventId;
     
-    for (NSDictionary * dict in course.combinedSplitAttributes)
+    for (NSDictionary * dict in course.dataEntryGroups)
     {
         if ([dict[@"title"] isEqualToString:course.splitName])
         {
-//            for (NSDictionary * subEntry in dict[@"entries"])
-//            {
-//                if ([subEntry[@"subSplitKind"] isEqualToString:entry.bitKey])
-//                {
-//                    if (self.racer)
-//                    {
-//                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][[self.racer.eventId stringValue]]];
-//                        entry.entryCourseId = [self.racer.eventId stringValue];
-//                    }
-//                    else
-//                    {
-//                        NSNumber * key = [[subEntry[@"eventSplitIds"] allKeys] firstObject];
-//                        entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-//                        entry.splitId = [NSString stringWithFormat:@"%@",subEntry[@"eventSplitIds"][key]];
-//                    }
-//                }
-//            }
             if ([sender tag] == 1)
             {
-                if (self.racer)
-                {
-                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][[self.racer.eventId stringValue]]];
-                    entry.entryCourseId = [self.racer.eventId stringValue];
-                    entry.splitName = dict[@"entries"][0][@"displaySplitName"];
-                    /*if ([entry.splitId isEqualToString:@"(null)"])
-                    {
-                        NSNumber * key = [[dict[@"entries"][0][@"eventSplitIds"] allKeys] firstObject];
-                        entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-                        entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][key]];
-                        entry.splitName = dict[@"entries"][0][@"displaySplitName"];
-                        self.racer = nil;
-                    }*/
-                }
-                else
-                {
-                    NSNumber * key = [[dict[@"entries"][0][@"eventSplitIds"] allKeys] firstObject];
-                    entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][0][@"eventSplitIds"][key]];
-                    entry.splitName = dict[@"entries"][0][@"displaySplitName"];
-                }
+                entry.entryCourseId = [self.racer.eventId stringValue];
+                entry.splitName = dict[@"entries"][0][@"splitName"];
             }
             else if ([sender tag] == 2)
             {
-                if (self.racer)
-                {
-                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][[self.racer.eventId stringValue]]];
-                    entry.entryCourseId = [self.racer.eventId stringValue];
-                    entry.splitName = dict[@"entries"][1][@"displaySplitName"];
-                    /*if ([entry.splitId isEqualToString:@"(null)"])
-                    {
-                        NSNumber * key = [[dict[@"entries"][1][@"eventSplitIds"] allKeys] firstObject];
-                        entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-                        entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][key]];
-                        entry.splitName = dict[@"entries"][1][@"displaySplitName"];
-                        self.racer = nil;
-                    }*/
-                }
-                else
-                {
-                    NSNumber * key = [[dict[@"entries"][1][@"eventSplitIds"] allKeys] firstObject];
-                    entry.entryCourseId = [NSString stringWithFormat:@"%@",key];
-                    entry.splitId = [NSString stringWithFormat:@"%@",dict[@"entries"][1][@"eventSplitIds"][key]];
-                    entry.splitName = dict[@"entries"][1][@"displaySplitName"];
-                }
+                entry.entryCourseId = [self.racer.eventId stringValue];
+                entry.splitName = dict[@"entries"][1][@"splitName"];
             }
         }
     }
@@ -472,12 +417,12 @@
                 self.lblRunnerInfo.textColor = [UIColor redColor];
             }
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitLeftIds]]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count])
             {
                 self.lblInTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitLeftIds]]] count]];
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName ==  %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count]];
                 }
                 else
                 {
@@ -485,12 +430,12 @@
                 }
             }
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[[CurrentCourse getCurrentCourse] getSplitRightIds]]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnRight.titleLabel.text]] count])
             {
                 self.lblOutTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitId in (%@)",self.rightBitKey,self.txtBibNumber.text,[[CurrentCourse getCurrentCourse] getSplitRightIds]]] count]];
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,self.btnRight.titleLabel.text]] count]];
                 }
                 else
                 {

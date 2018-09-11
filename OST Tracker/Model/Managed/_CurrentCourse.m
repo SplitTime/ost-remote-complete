@@ -43,11 +43,13 @@
 	return keyPaths;
 }
 
-@dynamic combinedSplitAttributes;
+@dynamic dataEntryGroups;
 
 @dynamic eventGroupId;
 
 @dynamic eventId;
+
+@dynamic eventIdsAndSplits;
 
 @dynamic eventName;
 
@@ -100,14 +102,17 @@
 @end
 
 @implementation CurrentCourseAttributes 
-+ (NSString *)combinedSplitAttributes {
-	return @"combinedSplitAttributes";
++ (NSString *)dataEntryGroups {
+	return @"dataEntryGroups";
 }
 + (NSString *)eventGroupId {
 	return @"eventGroupId";
 }
 + (NSString *)eventId {
 	return @"eventId";
+}
++ (NSString *)eventIdsAndSplits {
+	return @"eventIdsAndSplits";
 }
 + (NSString *)eventName {
 	return @"eventName";
