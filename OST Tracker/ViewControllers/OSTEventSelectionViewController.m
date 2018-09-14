@@ -124,7 +124,7 @@
         NSMutableArray * stationStrings = [NSMutableArray new];
         for (NSDictionary * split in stations)
         {
-            [stationStrings addObject:split[@"splitName"]];
+            [stationStrings addObject:split[@"title"]];
         }
         [self.txtStation setItemList:stationStrings];
         [self.txtStation becomeFirstResponder];
