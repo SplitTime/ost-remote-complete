@@ -48,12 +48,13 @@
     self.popupView.top = self.view.bottom;
     
     self.popupCrossCheckContainer.layer.cornerRadius = 6;
-    self.splitName = [CurrentCourse getCurrentCourse].splitName;
+    NSString *currentCourseSplitName = [CurrentCourse getCurrentCourse].splitName;
+    self.splitName = currentCourseSplitName;
     for (NSDictionary * entrie in [CurrentCourse getCurrentCourse].dataEntryGroups)
     {
         if ([entrie[@"entries"] count] == 1)
             continue;
-        if ([entrie[@"title"] isEqualToString:[CurrentCourse getCurrentCourse].splitName])
+        if ([entrie[@"title"] isEqualToString:currentCourseSplitName])
         {
             if (([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"in"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"in"])||
                 ([entrie[@"entries"][0][@"subSplitKind"] isEqualToString:@"out"] && [entrie[@"entries"][1][@"subSplitKind"] isEqualToString:@"out"]))
@@ -76,11 +77,11 @@
 
 - (void) reloadData
 {
-    self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
     __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
     [DejalBezelActivityView activityViewForView:self.view];
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
+        self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
         for (EffortModel * effort in self.efforts)
         {
             if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
