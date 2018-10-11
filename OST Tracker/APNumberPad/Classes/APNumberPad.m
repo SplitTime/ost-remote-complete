@@ -261,8 +261,6 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    AudioServicesPlaySystemSound (clickSystemSoundID);
-
     // Perform number button action for previous `self.lastTouch`
     //
     if (self.lastTouch) {
@@ -346,6 +344,7 @@
     for (APNumberButton *b in self.numberButtons) {
         b.highlighted = NO;
         if (CGRectContainsPoint(b.frame, location)) {
+            AudioServicesPlaySystemSound (clickSystemSoundID);
             [self numberButtonAction:b];
         }
     }
