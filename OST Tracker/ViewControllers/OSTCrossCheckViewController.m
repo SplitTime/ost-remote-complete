@@ -79,7 +79,7 @@
 
 - (void)fetchNotExpected
 {
-    [[AppDelegate getInstance].getNetworkManager fetchNotExpected:[CurrentCourse getCurrentCourse].eventGroupId splitName:self.splitName useAlternateServer:YES completionBlock:^(id  _Nullable object) {
+    [[AppDelegate getInstance].getNetworkManager fetchNotExpected:[CurrentCourse getCurrentCourse].eventGroupId splitName:self.splitName useAlternateServer:NO completionBlock:^(id  _Nullable object) {
         
         if ([object isKindOfClass:[NSDictionary class]])
         {
