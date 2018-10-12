@@ -73,22 +73,27 @@
         self.btnBulkSelect.bottom = self.btnBulkSelect.bottom + 7;
     }
     
+    [self fetchNotExpected];
     [self reloadData];
 }
 
-- (void)fetchNotExpected:(void(^)())onCompletion
+- (void)fetchNotExpected
 {
     [[AppDelegate getInstance].getNetworkManager fetchNotExpected:[CurrentCourse getCurrentCourse].eventGroupId splitName:self.splitName useAlternateServer:YES completionBlock:^(id  _Nullable object) {
         
-        if ([object isKindOfClass:[NSArray class]])
+        if ([object isKindOfClass:[NSDictionary class]])
         {
-            [self bulkNotExpected:object];
+            id bibNumbers = [object valueForKeyPath:@"data.bib_numbers"];
+            if ([bibNumbers isKindOfClass:[NSArray class]])
+            {
+                [self bulkNotExpected:bibNumbers];
+                [self.crossCheckCollection reloadData];
+            }
         }
-        onCompletion();
         
     } errorBlock:^(NSError * _Nullable error) {
         
-        onCompletion();
+        //TODO: handle error
         
     }];
 }
@@ -98,28 +103,24 @@
     __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
     [DejalBezelActivityView activityViewForView:self.view];
     
-    [self fetchNotExpected:^{
-       
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
-            for (EffortModel * effort in self.efforts)
-            {
-                if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
-                {
-                    [effort expectedWithSplitName:self.splitName];
-                    [entriesThatShouldBeHere addObject:effort];
-                }
-            }
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                self.efforts = entriesThatShouldBeHere;
-                [self.crossCheckCollection reloadData];
-                [DejalBezelActivityView removeViewAnimated:YES];
-            });
-        });
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-    }];
+        self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
+        for (EffortModel * effort in self.efforts)
+        {
+            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
+            {
+                [effort expectedWithSplitName:self.splitName];
+                [entriesThatShouldBeHere addObject:effort];
+            }
+        }
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            self.efforts = entriesThatShouldBeHere;
+            [self.crossCheckCollection reloadData];
+            [DejalBezelActivityView removeViewAnimated:YES];
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning {

@@ -133,20 +133,26 @@
 
 - (NSURLSessionDataTask*)fetchNotExpected:(NSString*)groupId splitName:(NSString*)splitName useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
 {
-    splitName = [splitName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-    NSString * endpoint = [NSString stringWithFormat:OSTGetNotExpectedEndPoint,groupId,splitName];
-    
-    if (alternateServer)
-    {
-        endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
-    }
-    
-    NSURLSessionDataTask *dataTask = [self GET:endpoint parameters:@{} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-                                      {
-                                          onCompletion(responseObject);
-                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                          onError(error);
-                                      }];
+    NSURLSessionDataTask *dataTask = [self autoLoginWithCompletionBlock:^(id object) {
+        __block NSString *escapedSplitName = [splitName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+        NSString * endpoint = [NSString stringWithFormat:OSTGetNotExpectedEndPoint,groupId,escapedSplitName];
+        
+        if (alternateServer)
+        {
+            endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
+        }
+        
+        NSURLSessionDataTask *t = [self GET:endpoint parameters:@{} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+                                          {
+                                              onCompletion(responseObject);
+                                          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                              onError(error);
+                                          }];
+        
+        [t resume];
+    } errorBlock:^(NSError *error) {
+        onError(error);
+    }];
     
     [dataTask resume];
     return dataTask;
