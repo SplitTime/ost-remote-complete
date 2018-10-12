@@ -12,6 +12,7 @@
 
 #define OSTSubmitEventEndpoint @"events/%@/import?data_format=jsonapi_batch"
 #define OSTSubmitEventGroupEndpoint @"event_groups/%@/import?data_format=jsonapi_batch&limitedResponse=true"
+#define OSTGetNotExpectedEndPoint @"event_groups/%@/not_expected?split_name=%@"
 
 @implementation OSTNetworkManager (Entries)
 
@@ -120,6 +121,27 @@
     }
     
     NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+                                      {
+                                          onCompletion(responseObject);
+                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                          onError(error);
+                                      }];
+    
+    [dataTask resume];
+    return dataTask;
+}
+
+- (NSURLSessionDataTask*)fetchNotExpected:(NSString*)groupId splitName:(NSString*)splitName useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
+{
+    splitName = [splitName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    NSString * endpoint = [NSString stringWithFormat:OSTGetNotExpectedEndPoint,groupId,splitName];
+    
+    if (alternateServer)
+    {
+        endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
+    }
+    
+    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                       {
                                           onCompletion(responseObject);
                                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -16,4 +16,6 @@
 
 - (NSURLSessionDataTask*)submitEventGroupEntries:(NSArray*)entries useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError;
 
+- (NSURLSessionDataTask*)fetchNotExpected:(NSString*)groupId splitName:(NSString*)splitName useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError;
+
 @end

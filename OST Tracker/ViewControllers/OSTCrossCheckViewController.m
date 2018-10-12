@@ -13,6 +13,7 @@
 #import "UIView+Additions.h"
 #import "CurrentCourse.h"
 #import "OSTCrossCheckHeader.h"
+#import "OSTNetworkManager+Entries.h"
 
 @interface OSTCrossCheckViewController ()
 @property (weak, nonatomic) IBOutlet UIView *popupOverlay;
@@ -75,28 +76,50 @@
     [self reloadData];
 }
 
+- (void)fetchNotExpected:(void(^)())onCompletion
+{
+    [[AppDelegate getInstance].getNetworkManager fetchNotExpected:[CurrentCourse getCurrentCourse].eventGroupId splitName:self.splitName useAlternateServer:YES completionBlock:^(id  _Nullable object) {
+        
+        if ([object isKindOfClass:[NSArray class]])
+        {
+            [self bulkNotExpected:object];
+        }
+        onCompletion();
+        
+    } errorBlock:^(NSError * _Nullable error) {
+        
+        onCompletion();
+        
+    }];
+}
+
 - (void) reloadData
 {
     __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
     [DejalBezelActivityView activityViewForView:self.view];
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
-        for (EffortModel * effort in self.efforts)
-        {
-            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
-            {
-                [effort expectedWithSplitName:self.splitName];
-                [entriesThatShouldBeHere addObject:effort];
-            }
-        }
     
-        dispatch_async( dispatch_get_main_queue(), ^{
-            self.efforts = entriesThatShouldBeHere;
-            [self.crossCheckCollection reloadData];
-            [DejalBezelActivityView removeViewAnimated:YES];
+    [self fetchNotExpected:^{
+       
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
+            for (EffortModel * effort in self.efforts)
+            {
+                if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
+                {
+                    [effort expectedWithSplitName:self.splitName];
+                    [entriesThatShouldBeHere addObject:effort];
+                }
+            }
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                self.efforts = entriesThatShouldBeHere;
+                [self.crossCheckCollection reloadData];
+                [DejalBezelActivityView removeViewAnimated:YES];
+            });
         });
-    });
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -341,6 +364,27 @@
     }
     
     [self onBulkSelect:nil];
+}
+
+- (NSArray *)bulkNotExpected:(NSArray *)bibNumbers
+{
+    NSMutableArray *notExpected = [NSMutableArray new];
+    for (NSNumber *bibNumber in bibNumbers)
+    {
+        CrossCheckEntriesModel *crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
+        if (!crossCheckEntry)
+        {
+            crossCheckEntry = [CrossCheckEntriesModel MR_createEntity];
+            crossCheckEntry.bibNumber = [bibNumber stringValue];
+            crossCheckEntry.splitName = self.splitName;
+            crossCheckEntry.courseId = [CurrentCourse getCurrentCourse].eventId;
+            
+            [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+            [notExpected addObject:bibNumber];
+        }
+    }
+    return [notExpected copy];
 }
 
 - (IBAction)onBulkNotExpected:(id)sender
