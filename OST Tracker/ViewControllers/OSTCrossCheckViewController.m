@@ -99,10 +99,10 @@
 
 - (void) reloadData
 {
+    self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
+    
     __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
     [DejalBezelActivityView activityViewForView:self.view];
-    
-    self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
