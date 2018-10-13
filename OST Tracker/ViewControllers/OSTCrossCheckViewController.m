@@ -73,7 +73,6 @@
         self.btnBulkSelect.bottom = self.btnBulkSelect.bottom + 7;
     }
     
-    [self fetchNotExpected];
     [self reloadData];
 }
 
@@ -86,7 +85,7 @@
             id bibNumbers = [object valueForKeyPath:@"data.bib_numbers"];
             if ([bibNumbers isKindOfClass:[NSArray class]])
             {
-                [self bulkNotExpected:bibNumbers];
+                [self bulkNotExpectedBibNumbers:bibNumbers];
                 [self.crossCheckCollection reloadData];
             }
         }
@@ -103,23 +102,30 @@
     __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
     [DejalBezelActivityView activityViewForView:self.view];
     
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
-        for (EffortModel * effort in self.efforts)
-        {
-            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
+        [self fetchNotExpected];
+        
+        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            for (EffortModel * effort in self.efforts)
             {
-                [effort expectedWithSplitName:self.splitName];
-                [entriesThatShouldBeHere addObject:effort];
+                if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
+                {
+                    [effort expectedWithSplitName:self.splitName];
+                    [entriesThatShouldBeHere addObject:effort];
+                }
             }
-        }
-        
-        dispatch_async( dispatch_get_main_queue(), ^{
-            self.efforts = entriesThatShouldBeHere;
-            [self.crossCheckCollection reloadData];
-            [DejalBezelActivityView removeViewAnimated:YES];
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                self.efforts = entriesThatShouldBeHere;
+                [self.crossCheckCollection reloadData];
+                [DejalBezelActivityView removeViewAnimated:YES];
+            });
         });
+        
     });
 }
 
@@ -367,48 +373,50 @@
     [self onBulkSelect:nil];
 }
 
-- (NSArray *)bulkNotExpected:(NSArray *)bibNumbers
+- (void)bulkNotExpectedBibNumbers:(NSArray *)bibNumbers
 {
     NSMutableArray *notExpected = [NSMutableArray new];
-    for (NSNumber *bibNumber in bibNumbers)
+    for (EffortModel *effort in self.efforts)
     {
-        CrossCheckEntriesModel *crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
+        if ([bibNumbers containsObject:effort.bibNumber])
+        {
+            [notExpected addObject:effort];
+        }
+    }
+    [self bulkNotExpectedEfforts:notExpected];
+}
+
+- (void)bulkNotExpectedEfforts:(NSArray *)efforts
+{
+    CrossCheckEntriesModel * crossCheckEntry;
+    for (EffortModel * effort in efforts)
+    {
+        crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
         if (!crossCheckEntry)
         {
             crossCheckEntry = [CrossCheckEntriesModel MR_createEntity];
-            crossCheckEntry.bibNumber = [bibNumber stringValue];
+            crossCheckEntry.bibNumber = [effort.bibNumber stringValue];
             crossCheckEntry.splitName = self.splitName;
             crossCheckEntry.courseId = [CurrentCourse getCurrentCourse].eventId;
             
             [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
             [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
-            [notExpected addObject:bibNumber];
+            effort.expected = @(NO);
         }
     }
-    return [notExpected copy];
 }
 
 - (IBAction)onBulkNotExpected:(id)sender
 {
-    CrossCheckEntriesModel * crossCheckEntry;
+    NSMutableArray *notExpected = [NSMutableArray new];
     for (EffortModel * effort in self.efforts)
     {
         if (effort.bulkSelected)
         {
-            crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
-            if (!crossCheckEntry)
-            {
-                crossCheckEntry = [CrossCheckEntriesModel MR_createEntity];
-                crossCheckEntry.bibNumber = [effort.bibNumber stringValue];
-                crossCheckEntry.splitName = self.splitName;
-                crossCheckEntry.courseId = [CurrentCourse getCurrentCourse].eventId;
-                
-                [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
-                [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
-                effort.expected = @(NO);
-            }
+            [notExpected addObject:effort];
         }
     }
+    [self bulkNotExpectedEfforts:notExpected];
     [self onBulkSelect:nil];
 }
 
