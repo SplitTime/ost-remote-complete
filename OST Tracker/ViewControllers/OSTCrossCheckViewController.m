@@ -78,6 +78,7 @@
 
 - (void)fetchNotExpected
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AppDelegate getInstance].getNetworkManager fetchNotExpected:[CurrentCourse getCurrentCourse].eventGroupId splitName:self.splitName useAlternateServer:NO completionBlock:^(id  _Nullable object) {
         
         if ([object isKindOfClass:[NSDictionary class]])
@@ -85,14 +86,18 @@
             id bibNumbers = [object valueForKeyPath:@"data.bib_numbers"];
             if ([bibNumbers isKindOfClass:[NSArray class]])
             {
-                [self bulkNotExpectedBibNumbers:bibNumbers];
-                [self.crossCheckCollection reloadData];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self bulkNotExpectedBibNumbers:bibNumbers];
+                    [self.crossCheckCollection reloadData];
+                });
             }
         }
         
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
     } errorBlock:^(NSError * _Nullable error) {
         
-        //TODO: handle error
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
     }];
 }
@@ -378,9 +383,26 @@
     NSMutableArray *notExpected = [NSMutableArray new];
     for (EffortModel *effort in self.efforts)
     {
+        //Recorded/Dropped efforts should not update their current state based on the given bib numbers
+        if ([effort entriesForSplitName:self.splitName].count > 0) {
+            continue;
+        }
+        
         if ([bibNumbers containsObject:effort.bibNumber])
         {
             [notExpected addObject:effort];
+        }
+        else
+        {
+            CrossCheckEntriesModel *crossCheckEntry = [CrossCheckEntriesModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",[effort.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,self.splitName]];
+            if (crossCheckEntry)
+            {
+                [crossCheckEntry MR_deleteEntity];
+                
+                [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
+                [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
+                effort.expected = @(YES);
+            }
         }
     }
     [self bulkNotExpectedEfforts:notExpected];
