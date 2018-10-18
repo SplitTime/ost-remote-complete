@@ -86,10 +86,8 @@
             id bibNumbers = [object valueForKeyPath:@"data.bib_numbers"];
             if ([bibNumbers isKindOfClass:[NSArray class]])
             {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self bulkNotExpectedBibNumbers:bibNumbers];
-                    [self.crossCheckCollection reloadData];
-                });
+                [self bulkNotExpectedBibNumbers:bibNumbers];
+                [self.crossCheckCollection reloadData];
             }
         }
         
