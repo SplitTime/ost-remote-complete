@@ -20,15 +20,18 @@ static OSTSound* shared = nil;
 
 @implementation OSTSound
 
-+ (void)initialize {
++ (void)initialize
+{
     shared = [OSTSound new];
 }
 
-+ (instancetype)shared {
++ (instancetype)shared
+{
     return shared;
 }
 
-- (void)play:(NSString *)soundName {
+- (void)play:(NSString *)soundName
+{
 
     NSString *soundFilePath = [NSString stringWithFormat:@"%@/%@.wav", [[NSBundle mainBundle] resourcePath], soundName];
     NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
