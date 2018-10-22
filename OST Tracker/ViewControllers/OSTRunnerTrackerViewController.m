@@ -15,6 +15,7 @@
 #import "OSTEditEntryViewController.h"
 #import "IQKeyboardManager.h"
 #import "APNumberPad.h"
+#import "OSTSound.h"
 
 @interface OSTRunnerTrackerViewController () <APNumberPadDelegate>
 
@@ -242,6 +243,8 @@
 
 - (IBAction)onEntryButton:(id)sender
 {
+    [[OSTSound shared] play:@"click"];
+    
     [self.txtBibNumber removeObserver:self forKeyPath:@"text"];
     [[UIDevice currentDevice] playInputClick];
     
