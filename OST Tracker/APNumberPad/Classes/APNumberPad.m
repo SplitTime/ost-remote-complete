@@ -9,6 +9,7 @@
 #import "APNumberPadDefaultStyle.h"
 #import "APNumberPad.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "OSTSound.h"
 
 #define clickSystemSoundID 1104
 
@@ -344,7 +345,7 @@
     for (APNumberButton *b in self.numberButtons) {
         b.highlighted = NO;
         if (CGRectContainsPoint(b.frame, location)) {
-            AudioServicesPlaySystemSound (clickSystemSoundID);
+            [[OSTSound shared] play:@"input_click"];
             [self numberButtonAction:b];
         }
     }
@@ -491,7 +492,6 @@
     if (_clearButtonLongPressGesture) {
         if ([self.textInput hasText]) {
             AudioServicesPlaySystemSound (clickSystemSoundID);
-
             [self clearButtonAction];
             [self performSelector:@selector(clearButtonActionLongPress) withObject:nil afterDelay:0.1]; // delay like in iOS keyboard
         }

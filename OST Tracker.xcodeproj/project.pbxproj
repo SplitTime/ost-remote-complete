@@ -139,6 +139,14 @@
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
 		6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */; };
+		D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4A217E0AE70071D6CF /* input_click.wav */; };
+		D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4A217E0AE70071D6CF /* input_click.wav */; };
+		D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4B217E0AE70071D6CF /* click.wav */; };
+		D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4B217E0AE70071D6CF /* click.wav */; };
+		D5C5BC51217E0B480071D6CF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C5BC50217E0B480071D6CF /* AudioToolbox.framework */; };
+		D5C5BC53217E0B550071D6CF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C5BC52217E0B550071D6CF /* AVFoundation.framework */; };
+		D5C5BC56217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
+		D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,6 +276,12 @@
 		AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5C5BC4A217E0AE70071D6CF /* input_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = input_click.wav; sourceTree = "<group>"; };
+		D5C5BC4B217E0AE70071D6CF /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		D5C5BC50217E0B480071D6CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D5C5BC52217E0B550071D6CF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D5C5BC54217E0B980071D6CF /* OSTSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSound.h; sourceTree = "<group>"; };
+		D5C5BC55217E0B980071D6CF /* OSTSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTSound.m; sourceTree = "<group>"; };
 		DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,6 +300,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5C5BC53217E0B550071D6CF /* AVFoundation.framework in Frameworks */,
+				D5C5BC51217E0B480071D6CF /* AudioToolbox.framework in Frameworks */,
 				6A2F2D6D1EF1BD49007CA921 /* Security.framework in Frameworks */,
 				396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */,
 			);
@@ -340,6 +356,8 @@
 		0DF73CC3B87086394F68562D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D5C5BC52217E0B550071D6CF /* AVFoundation.framework */,
+				D5C5BC50217E0B480071D6CF /* AudioToolbox.framework */,
 				6A2F2D6B1EF1BD42007CA921 /* Security.framework */,
 				3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */,
 				DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */,
@@ -517,6 +535,7 @@
 				6AA6E9D81EF0E7D70061EEB0 /* Model */,
 				6A549E491EEF865100783F80 /* ViewControllers */,
 				033E71B2206001FD00CB9BD8 /* APNumberPad */,
+				D5C5BC49217E0ACA0071D6CF /* Sound */,
 				6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */,
 				6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */,
 				6AA7C2F31F5DE58300D9F952 /* UITextField+RemoveInputAssistant.h */,
@@ -552,6 +571,17 @@
 				6AEFFC241EEF83DA009EEE21 /* Info.plist */,
 			);
 			path = "OST TrackerTests";
+			sourceTree = "<group>";
+		};
+		D5C5BC49217E0ACA0071D6CF /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				D5C5BC54217E0B980071D6CF /* OSTSound.h */,
+				D5C5BC55217E0B980071D6CF /* OSTSound.m */,
+				D5C5BC4A217E0AE70071D6CF /* input_click.wav */,
+				D5C5BC4B217E0AE70071D6CF /* click.wav */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -686,11 +716,13 @@
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
+				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
 				033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
 				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */,
+				D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */,
 				033E71C9206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -707,11 +739,13 @@
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
+				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
 				033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */,
+				D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */,
 				033E71CA206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -992,6 +1026,7 @@
 				6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6A7D79621F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
+				D5C5BC56217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
@@ -1041,6 +1076,7 @@
 				6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6A7D79631F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
+				D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */,
 			);
