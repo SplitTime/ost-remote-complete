@@ -637,7 +637,6 @@
 					};
 					6AEFFC041EEF83DA009EEE21 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = MEL2GJ9CJX;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -1280,7 +1279,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = MEL2GJ9CJX;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1306,7 +1305,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f864c82c-41d0-4d90-acf6-f827073de28c";
-				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1349,7 +1348,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "f864c82c-41d0-4d90-acf6-f827073de28c";
-				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev (Ad Hoc Cert)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
