@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class OSTSyncManager;
+@class EntryModel;
 
 @protocol OSTSyncManagerDelegate
 
@@ -29,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 - (void)syncEntries:(NSArray *)records;
+- (BOOL)isSyncingEntry:(EntryModel *)entry;
 
 @end
 

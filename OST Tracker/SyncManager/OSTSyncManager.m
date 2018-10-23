@@ -14,6 +14,12 @@
 
 static OSTSyncManager *shared = nil;
 
+@interface OSTSyncManager ()
+
+@property (nonatomic,strong) NSArray *syncingEntries;
+
+@end
+
 @implementation OSTSyncManager
 
 + (void)initialize
@@ -32,6 +38,7 @@ static OSTSyncManager *shared = nil;
     {
         self.isSyncing = NO;
         self.progress = 0;
+        self.syncingEntries = @[];
         self.delegates = [NSMutableArray new];
     }
     return self;
@@ -39,7 +46,13 @@ static OSTSyncManager *shared = nil;
 
 - (void)syncEntries:(NSArray *)records
 {
+    if (self.isSyncing) {
+        return;
+    }
+    
     NSMutableArray * entries = [records mutableCopy];
+    
+    self.syncingEntries = records;
     
     [self notifySynchronizationStart];
     
@@ -134,6 +147,18 @@ static OSTSyncManager *shared = nil;
     {
         [delegate syncManager:self didFinishSynchronizationWithErrors:errors alternateServer:alternateServer];
     }
+}
+
+- (BOOL)isSyncingEntry:(EntryModel *)entry
+{
+    for (EntryModel *syncingEntry in self.syncingEntries)
+    {
+        if ([syncingEntry.entryId isEqualToNumber:entry.entryId])
+        {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end

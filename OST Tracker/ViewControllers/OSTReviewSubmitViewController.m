@@ -275,7 +275,7 @@
     self.imgCheckMark.hidden = YES;
     self.lblSuccess.hidden = YES;
     self.lblYourDataIsSynced.hidden = YES;
-    self.btnReturnToLiveEntry.hidden = YES;
+    self.btnReturnToLiveEntry.top = self.progressBar.bottom + 20;
     
     [self.activityIndicator startAnimating];
     self.lblSyncing.hidden = NO;
@@ -287,7 +287,7 @@
     self.imgCheckMark.hidden = NO;
     self.lblSuccess.hidden = NO;
     self.lblYourDataIsSynced.hidden = NO;
-    self.btnReturnToLiveEntry.hidden = NO;
+    self.btnReturnToLiveEntry.top = self.lblSuccess.bottom + 50;
     
     [self.activityIndicator stopAnimating];
     self.lblSyncing.hidden = YES;
@@ -352,6 +352,11 @@
 {
     [self updateSyncButtonState];
     [self updateSyncBadge];
+    
+    if (self.loadingView.superview != nil) {
+        [self showFinishLoadingValues];
+    }
+    
     [self loadData];
 }
 
@@ -385,6 +390,8 @@
         [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
     }
     
+    [self.loadingView removeFromSuperview];
+    [self showFinishLoadingValues];
     [self loadData];
 }
 
@@ -402,6 +409,9 @@
     }
     
     [[OSTSyncManager shared] syncEntries:entries];
+    
+    [self showLoadingScreen];
+    [self showLoadingValues];
 }
 
 - (IBAction)onSubmit_old:(id)sender
@@ -544,6 +554,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    if ([[OSTSyncManager shared] isSyncingEntry:self.entries[indexPath.section][indexPath.row]]) {
+        [OHAlertView showAlertWithTitle:@"Unable to edit time" message:@"Time is been synced." dismissButton:@"Ok"];
+        return;
+    }
+    
     if ([[self.entries[indexPath.section][indexPath.row] submitted] boolValue])
     {
         __weak OSTReviewSubmitViewController * weakSelf = self;
