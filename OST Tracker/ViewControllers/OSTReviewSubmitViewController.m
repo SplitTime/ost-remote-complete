@@ -97,6 +97,7 @@
     self.lblBadge.clipsToBounds = YES;
     
     [[[OSTSyncManager shared] delegates] addObject:self];
+    [[OSTSyncManager shared] setShowToastOnCompletion:YES];
     
     [self updateSyncButtonState];
 }
@@ -121,6 +122,12 @@
     self.loadingView.size = self.view.size;
     [self loadData];
     [self updateSyncBadge];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[OSTSyncManager shared] setShowToastOnCompletion:YES];
 }
 
 - (IBAction)onExport:(id)sender
@@ -280,6 +287,8 @@
     [self.activityIndicator startAnimating];
     self.lblSyncing.hidden = NO;
     self.progressBar.hidden = NO;
+    
+    [[OSTSyncManager shared] setShowToastOnCompletion:NO];
 }
 
 - (void) showFinishLoadingValues

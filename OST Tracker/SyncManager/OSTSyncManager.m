@@ -11,6 +11,7 @@
 #import "EntryModel.h"
 #import "OSTNetworkManager+Login.h"
 #import "OSTNetworkManager+Entries.h"
+#import "UIView+Toast.h"
 
 static OSTSyncManager *shared = nil;
 
@@ -38,6 +39,7 @@ static OSTSyncManager *shared = nil;
     {
         self.isSyncing = NO;
         self.progress = 0;
+        self.showToastOnCompletion = YES;
         self.syncingEntries = @[];
         self.delegates = [NSMutableArray new];
     }
@@ -137,6 +139,7 @@ static OSTSyncManager *shared = nil;
     for (id<OSTSyncManagerDelegate> delegate in self.delegates) {
         [delegate syncManagerDidFinishSynchronization:self];
     }
+    [self showToastIfAppropriateWithErrors:@[]];
 }
 
 - (void)notifySynchronizationDidFinishWithErrors:(NSArray<NSError *>*)errors alternateServer:(BOOL)alternateServer
@@ -147,6 +150,7 @@ static OSTSyncManager *shared = nil;
     {
         [delegate syncManager:self didFinishSynchronizationWithErrors:errors alternateServer:alternateServer];
     }
+    [self showToastIfAppropriateWithErrors:errors];
 }
 
 - (BOOL)isSyncingEntry:(EntryModel *)entry
@@ -159,6 +163,28 @@ static OSTSyncManager *shared = nil;
         }
     }
     return NO;
+}
+
+- (void)showToastIfAppropriateWithErrors:(NSArray<NSError *>*)errors
+{
+    if (self.showToastOnCompletion) {
+        [CSToastManager setTapToDismissEnabled:YES];
+        
+        UIWindow *window = [[AppDelegate getInstance] window];
+        BOOL finishedWithError = (errors != nil && errors.count > 0);
+        
+        CSToastStyle *style = [[CSToastStyle alloc] initWithDefaultStyle];
+        style.messageColor = [UIColor whiteColor];
+        style.backgroundColor = (finishedWithError) ? [UIColor redColor] : [UIColor greenColor];
+        
+        NSString *successfulMessage = @"Times synced successfully.";
+        NSString *errorMessage = @"Failed to sync times.";
+        
+        NSString *message = (finishedWithError) ? errorMessage : successfulMessage;
+        
+        // present the toast with the new style
+        [window makeToast:message duration:3.0 position:CSToastPositionTop style:style];
+    }
 }
 
 @end

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSMutableArray<id<OSTSyncManagerDelegate>>* delegates;
 @property (nonatomic,assign) CGFloat progress;
 @property (nonatomic,assign) BOOL isSyncing;
+@property (nonatomic,assign) BOOL showToastOnCompletion;
 
 + (instancetype)shared;
 - (void)syncEntries:(NSArray *)records;
