@@ -11,17 +11,28 @@
 #import "OSTRunnerTrackerViewController.h"
 #import "OSTCrossCheckViewController.h"
 #import "UIView+Additions.h"
+#import "OSTSyncManager.h"
+#import "CurrentCourse.h"
+#import "EntryModel.h"
 
-@interface OSTRightMenuViewController ()
+@interface OSTRightMenuViewController () <OSTSyncManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *rightMenuBackImage;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *syncIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *lblBadge;
 @end
 
 @implementation OSTRightMenuViewController
 
+- (void)dealloc
+{
+    [[[OSTSyncManager shared] delegates] removeObject:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[[OSTSyncManager shared] delegates] addObject:self];
     // Do any additional setup after loading the view from its nib.
     self.scrollView.contentSize = CGSizeMake(0, 668);
     if(IS_IPHONE_5)
@@ -32,6 +43,16 @@
         self.coverView.top = -90;
         self.coverView.height = 1000;
     }
+    
+    self.lblBadge.layer.cornerRadius = self.lblBadge.width/2;
+    self.lblBadge.clipsToBounds = YES;
+    [self updateSyncBadge];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.syncIndicator setHidden:![[OSTSyncManager shared] isSyncing]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +114,45 @@
             [[AppDelegate getInstance] logout];
         }
     }];
+}
+
+#pragma mark - OSTSyncManagerDelegate
+
+- (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager
+{
+    [self.syncIndicator setHidden:NO];
+    [self updateSyncBadge];
+}
+
+- (void)syncManager:(OSTSyncManager *)manager progress:(CGFloat)progress
+{
+    
+}
+
+- (void)syncManagerDidFinishSynchronization:(OSTSyncManager *)manager
+{
+    [self.syncIndicator setHidden:YES];
+    [self updateSyncBadge];
+}
+
+- (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
+{
+    [self.syncIndicator setHidden:YES];
+    [self updateSyncBadge];
+}
+
+- (void)updateSyncBadge
+{
+    NSArray * entries = [[OSTSyncManager shared] syncingEntries];
+    if (entries.count == 0)
+    {
+        self.lblBadge.hidden = YES;
+    }
+    else
+    {
+        self.lblBadge.hidden = NO;
+        self.lblBadge.text = [NSString stringWithFormat:@"%@",@(entries.count)];
+    }
 }
 
 /*

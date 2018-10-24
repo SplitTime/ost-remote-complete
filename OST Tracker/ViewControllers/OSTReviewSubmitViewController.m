@@ -17,8 +17,9 @@
 #import "OSTReviewSectionHeader.h"
 #import "UIView+Additions.h"
 #import "CHCSVParser.h"
+#import "OSTSyncManager.h"
 
-@interface OSTReviewSubmitViewController ()
+@interface OSTReviewSubmitViewController () <OSTSyncManagerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblSyncing;
 @property (strong, nonatomic) IBOutlet UIView *loadingView;
@@ -35,13 +36,20 @@
 @property (strong, nonatomic) NSMutableArray * entries;
 @property (strong, nonatomic) NSMutableArray * splitTitles;
 @property (weak, nonatomic) IBOutlet UILabel *lblBadge;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *syncIndicator;
 
 @end
 
 @implementation OSTReviewSubmitViewController
 
+- (void)dealloc
+{
+    [[[OSTSyncManager shared] delegates] removeObject:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     [self.tableView registerNib: [UINib nibWithNibName:@"OSTReviewTableViewCell" bundle:nil] forCellReuseIdentifier:@"OSTReviewTableViewCell"];
     
@@ -87,6 +95,11 @@
     
     self.lblBadge.layer.cornerRadius = self.lblBadge.width/2;
     self.lblBadge.clipsToBounds = YES;
+    
+    [[[OSTSyncManager shared] delegates] addObject:self];
+    [[OSTSyncManager shared] setShowToastOnCompletion:YES];
+    
+    [self updateSyncButtonState];
 }
 
 - (void) onDoneSelectedSortBy:(id) sender
@@ -108,17 +121,13 @@
     [super viewWillAppear:YES];
     self.loadingView.size = self.view.size;
     [self loadData];
-    
-    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
-    if (entries.count == 0)
-    {
-        self.lblBadge.hidden = YES;
-    }
-    else
-    {
-        self.lblBadge.hidden = NO;
-        self.lblBadge.text = [NSString stringWithFormat:@"%d",entries.count];
-    }
+    [self updateSyncBadge];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[OSTSyncManager shared] setShowToastOnCompletion:YES];
 }
 
 - (IBAction)onExport:(id)sender
@@ -273,11 +282,13 @@
     self.imgCheckMark.hidden = YES;
     self.lblSuccess.hidden = YES;
     self.lblYourDataIsSynced.hidden = YES;
-    self.btnReturnToLiveEntry.hidden = YES;
+    self.btnReturnToLiveEntry.top = self.progressBar.bottom + 20;
     
     [self.activityIndicator startAnimating];
     self.lblSyncing.hidden = NO;
     self.progressBar.hidden = NO;
+    
+    [[OSTSyncManager shared] setShowToastOnCompletion:NO];
 }
 
 - (void) showFinishLoadingValues
@@ -285,7 +296,7 @@
     self.imgCheckMark.hidden = NO;
     self.lblSuccess.hidden = NO;
     self.lblYourDataIsSynced.hidden = NO;
-    self.btnReturnToLiveEntry.hidden = NO;
+    self.btnReturnToLiveEntry.top = self.lblSuccess.bottom + 50;
     
     [self.activityIndicator stopAnimating];
     self.lblSyncing.hidden = YES;
@@ -305,7 +316,114 @@
     [[AppDelegate getInstance] showTracker];
 }
 
+- (void)updateSyncButtonState
+{
+    BOOL isSyncing = [[OSTSyncManager shared] isSyncing];
+    [self.btnSync setEnabled:!isSyncing];
+    [self.btnSync setAlpha:(isSyncing) ? 0.7 : 1];
+    [self.syncIndicator setHidden:!isSyncing];
+    
+    if (isSyncing)
+    {
+        [self showLoadingValues];
+    }
+    else
+    {
+        [self showFinishLoadingValues];
+    }
+}
+
+- (void)updateSyncBadge
+{
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    if (entries.count == 0)
+    {
+        self.lblBadge.hidden = YES;
+    }
+    else
+    {
+        self.lblBadge.hidden = NO;
+        self.lblBadge.text = [NSString stringWithFormat:@"%d",entries.count];
+    }
+}
+
+- (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager
+{
+    [self updateSyncButtonState];
+}
+
+- (void)syncManager:(OSTSyncManager *)manager progress:(CGFloat)progress
+{
+    self.progressBar.progress = progress;
+}
+
+- (void)syncManagerDidFinishSynchronization:(OSTSyncManager *)manager
+{
+    [self updateSyncButtonState];
+    [self updateSyncBadge];
+    
+    if (self.loadingView.superview != nil) {
+        [self showFinishLoadingValues];
+    }
+    
+    [self loadData];
+}
+
+- (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
+{
+    [self updateSyncButtonState];
+    [self updateSyncBadge];
+    
+    if (!alternateServer)
+    {
+        NSError *error = [errors firstObject];
+        [OHAlertView showAlertWithTitle:@"Unable to sync" message:[NSString stringWithFormat:@"%@",[error errorsFromDictionary]] dismissButton:@"Ok"];
+    }
+    else
+    {
+        NSError *error1 = [errors objectAtIndex:0];
+        NSString * errorMessage1 = nil;
+        if (error1.code == -1009)
+        {
+            errorMessage1 = @"The device is not connected";
+        }
+        else
+        {
+            errorMessage1 = [NSString stringWithFormat:@"Error: %@",[error1 errorsFromDictionary]];
+        }
+        
+        NSError *error2 = [errors objectAtIndex:1];
+        NSString *errorMessage2 = [NSString stringWithFormat:@"Error: %@",[error2 errorsFromDictionary]];
+        NSString * errorMessage = [NSString stringWithFormat:@"Primary server returned: %@, alternate server: %@",errorMessage1,errorMessage2];
+        
+        [OHAlertView showAlertWithTitle:@"Unable to sync" message:errorMessage dismissButton:@"Ok"];
+    }
+    
+    [self.loadingView removeFromSuperview];
+    [self showFinishLoadingValues];
+    [self loadData];
+}
+
 - (IBAction)onSubmit:(id)sender
+{
+    [[UIDevice currentDevice] playInputClick];
+    
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    if (entries.count == 0)
+    {
+        if (self.entries.count == 0)
+            [OHAlertView showAlertWithTitle:@"" message:@"No times have been entered." dismissButton:@"Ok"];
+        else [OHAlertView showAlertWithTitle:@"" message:@"All times have been synced." dismissButton:@"Ok"];
+        return;
+    }
+    
+    [[OSTSyncManager shared] syncEntries:entries];
+    
+    [self showLoadingScreen];
+    [self showLoadingValues];
+}
+
+- (IBAction)onSubmit_old:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
     
@@ -445,6 +563,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    if ([[OSTSyncManager shared] isSyncingEntry:self.entries[indexPath.section][indexPath.row]]) {
+        [OHAlertView showAlertWithTitle:@"Unable to edit time" message:@"Time is been synced." dismissButton:@"Ok"];
+        return;
+    }
+    
     if ([[self.entries[indexPath.section][indexPath.row] submitted] boolValue])
     {
         __weak OSTReviewSubmitViewController * weakSelf = self;
