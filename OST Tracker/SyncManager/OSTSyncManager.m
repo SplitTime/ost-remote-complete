@@ -15,12 +15,6 @@
 
 static OSTSyncManager *shared = nil;
 
-@interface OSTSyncManager ()
-
-@property (nonatomic,strong) NSArray *syncingEntries;
-
-@end
-
 @implementation OSTSyncManager
 
 + (void)initialize
@@ -135,6 +129,7 @@ static OSTSyncManager *shared = nil;
 - (void)notifySynchronizationDidFinish
 {
     self.isSyncing = NO;
+    self.syncingEntries = @[];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     for (id<OSTSyncManagerDelegate> delegate in self.delegates) {
         [delegate syncManagerDidFinishSynchronization:self];
@@ -145,6 +140,7 @@ static OSTSyncManager *shared = nil;
 - (void)notifySynchronizationDidFinishWithErrors:(NSArray<NSError *>*)errors alternateServer:(BOOL)alternateServer
 {
     self.isSyncing = NO;
+    self.syncingEntries = @[];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     for (id<OSTSyncManagerDelegate> delegate in self.delegates)
     {

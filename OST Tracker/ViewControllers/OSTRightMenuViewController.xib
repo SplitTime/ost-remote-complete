@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTRightMenuViewController">
             <connections>
                 <outlet property="coverView" destination="N4s-yz-qDC" id="iC2-lZ-M0d"/>
+                <outlet property="lblBadge" destination="bbP-yp-suy" id="kVY-xa-faX"/>
                 <outlet property="rightMenuBackImage" destination="Gva-tf-SLg" id="d9O-aF-zNd"/>
                 <outlet property="scrollView" destination="bKs-nx-6ca" id="CEc-tS-pnW"/>
                 <outlet property="syncIndicator" destination="zfB-rF-9n0" id="NeJ-o1-PRL"/>
@@ -94,6 +95,14 @@
                                 <action selector="onReviewSync:" destination="-1" eventType="touchUpInside" id="6rq-OE-UjJ"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bbP-yp-suy">
+                            <rect key="frame" x="53" y="316" width="20" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Small Logo" id="weL-P2-YIN">
                             <rect key="frame" x="74" y="98" width="64" height="51"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>

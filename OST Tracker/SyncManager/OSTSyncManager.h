@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign) CGFloat progress;
 @property (nonatomic,assign) BOOL isSyncing;
 @property (nonatomic,assign) BOOL showToastOnCompletion;
+@property (nonatomic,strong) NSArray *syncingEntries;
 
 + (instancetype)shared;
 - (void)syncEntries:(NSArray *)records;
