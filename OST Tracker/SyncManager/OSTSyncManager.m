@@ -171,7 +171,7 @@ static OSTSyncManager *shared = nil;
         
         CSToastStyle *style = [[CSToastStyle alloc] initWithDefaultStyle];
         style.messageColor = [UIColor whiteColor];
-        style.backgroundColor = (finishedWithError) ? [UIColor redColor] : [UIColor greenColor];
+        style.backgroundColor = (finishedWithError) ? [UIColor colorWithRed:247/255.f green:45/255.f blue:0 alpha:1] : [UIColor colorWithRed:88/255.f green:182/255.f blue:73/255.f alpha:1];
         
         NSString *successfulMessage = @"Times synced successfully.";
         NSString *errorMessage = @"Failed to sync times.";
