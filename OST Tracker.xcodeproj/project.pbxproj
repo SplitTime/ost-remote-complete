@@ -139,6 +139,8 @@
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
 		6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */; };
+		D529FA0E2190AE5800454448 /* delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = D529FA0D2190AE5800454448 /* delete.wav */; };
+		D529FA0F2190AE5800454448 /* delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = D529FA0D2190AE5800454448 /* delete.wav */; };
 		D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4A217E0AE70071D6CF /* input_click.wav */; };
 		D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4A217E0AE70071D6CF /* input_click.wav */; };
 		D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4B217E0AE70071D6CF /* click.wav */; };
@@ -278,6 +280,7 @@
 		AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D529FA0D2190AE5800454448 /* delete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = delete.wav; sourceTree = "<group>"; };
 		D5C5BC4A217E0AE70071D6CF /* input_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = input_click.wav; sourceTree = "<group>"; };
 		D5C5BC4B217E0AE70071D6CF /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 		D5C5BC50217E0B480071D6CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -583,6 +586,7 @@
 			children = (
 				D5C5BC54217E0B980071D6CF /* OSTSound.h */,
 				D5C5BC55217E0B980071D6CF /* OSTSound.m */,
+				D529FA0D2190AE5800454448 /* delete.wav */,
 				D5C5BC4A217E0AE70071D6CF /* input_click.wav */,
 				D5C5BC4B217E0AE70071D6CF /* click.wav */,
 			);
@@ -734,6 +738,7 @@
 				033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
 				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
+				D529FA0E2190AE5800454448 /* delete.wav in Resources */,
 				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */,
 				D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */,
@@ -757,6 +762,7 @@
 				033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
+				D529FA0F2190AE5800454448 /* delete.wav in Resources */,
 				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */,
 				D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */,

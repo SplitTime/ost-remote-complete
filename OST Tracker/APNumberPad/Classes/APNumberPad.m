@@ -413,6 +413,10 @@
     if (!self.textInput) {
         return;
     }
+    
+    if (((UITextField *)self.textInput).text.length > 0) {
+        [[OSTSound shared] play:@"delete"];
+    }
 
     if (_delegateFlags.textInputSupportsShouldChangeTextInRange) {
         UITextRange *textRange = self.textInput.selectedTextRange;
@@ -473,6 +477,7 @@
 
     if ([self.delegate respondsToSelector:@selector(numberPad:functionButtonAction:textInput:)]) {
         [self.delegate numberPad:self functionButtonAction:sender textInput:self.textInput];
+        [[OSTSound shared] play:@"input_click"];
     }
 }
 
