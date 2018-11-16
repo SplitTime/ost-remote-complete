@@ -14,6 +14,17 @@
 #import "CurrentCourse.h"
 #import "OSTCrossCheckHeader.h"
 #import "OSTNetworkManager+Entries.h"
+#import "EntryModel.h"
+
+typedef enum {
+    
+    OSTCrossCheckFilterRecorded,
+    OSTCrossCheckFilterDroppedHere,
+    OSTCrossCheckFilterExpected,
+    OSTCrossCheckFilterNotExpected,
+    OSTCrossCheckFilterAll
+    
+}OSTCrossCheckFilter;
 
 @interface OSTCrossCheckViewController ()
 @property (weak, nonatomic) IBOutlet UIView *popupOverlay;
@@ -38,6 +49,8 @@
 @property (assign, nonatomic) BOOL bulkSelect;
 @property (nonatomic, strong) NSString * splitName;
 @property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
+@property (nonatomic,assign) OSTCrossCheckFilter filter;
+@property (nonatomic,strong) NSArray *currentEfforts;
 
 @end
 
@@ -47,6 +60,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.popupView.top = self.view.bottom;
+    
+    self.filter = OSTCrossCheckFilterAll;
     
     self.popupCrossCheckContainer.layer.cornerRadius = 6;
     NSString *currentCourseSplitName = [CurrentCourse getCurrentCourse].splitName;
@@ -124,12 +139,88 @@
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 self.efforts = entriesThatShouldBeHere;
-                [self.crossCheckCollection reloadData];
+                [self applyFilter];
                 [DejalBezelActivityView removeViewAnimated:YES];
             });
         });
         
     });
+}
+
+- (NSArray *)recordedEffortsDroppedHereOnly:(BOOL)onlyDroppedHere
+{
+    NSMutableArray *filteredEfforts = [NSMutableArray new];
+    
+    for (EffortModel *effort in self.efforts)
+    {
+        NSArray * entries = [effort entriesForSplitName:self.splitName];
+        if (entries.count > 0)
+        {
+            if (onlyDroppedHere)
+            {
+                EntryModel * entry = entries.lastObject;
+                if ([entry.stoppedHere isEqualToString:@"true"])
+                {
+                    [filteredEfforts addObject:effort];
+                }
+            }
+            else
+            {
+                [filteredEfforts addObject:effort];
+            }
+        }
+    }
+    
+    return filteredEfforts;
+}
+
+- (NSArray *)nonRecordedEffortsExpected:(BOOL)includeExpected
+{
+    NSMutableArray *filteredEfforts = [NSMutableArray new];
+    
+    for (EffortModel *effort in self.efforts)
+    {
+        NSArray * entries = [effort entriesForSplitName:self.splitName];
+        
+        if (entries.count == 0)
+        {
+            BOOL expected = [effort expectedWithSplitName:self.splitName] == nil || [[effort expectedWithSplitName:self.splitName] isEqualToNumber:@(YES)];
+            if ((includeExpected && expected) || (!includeExpected && !expected))
+            {
+                [filteredEfforts addObject:effort];
+            }
+        }
+    }
+    
+    return filteredEfforts;
+}
+
+- (void)applyFilter
+{
+    switch (self.filter)
+    {
+        case OSTCrossCheckFilterAll:
+            self.currentEfforts = self.efforts;
+            break;
+            
+        case OSTCrossCheckFilterRecorded:
+            self.currentEfforts = [self recordedEffortsDroppedHereOnly:NO];
+            break;
+            
+        case OSTCrossCheckFilterDroppedHere:
+            self.currentEfforts = [self recordedEffortsDroppedHereOnly:YES];
+            break;
+            
+        case OSTCrossCheckFilterExpected:
+            self.currentEfforts = [self nonRecordedEffortsExpected:YES];
+            break;
+            
+        case OSTCrossCheckFilterNotExpected:
+            self.currentEfforts = [self nonRecordedEffortsExpected:NO];
+            break;
+    }
+    
+    [self.crossCheckCollection reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,7 +231,7 @@
 #pragma mark - UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.efforts.count;
+    return self.currentEfforts.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -148,7 +239,7 @@
     OSTCrossCheckCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OSTCrossCheckCell" forIndexPath:indexPath];
     
     cell.splitName = self.splitName;
-    [cell configureWithEffort:self.efforts[indexPath.row]];
+    [cell configureWithEffort:self.currentEfforts[indexPath.row]];
     
     if (self.bulkSelect)
     {
@@ -163,7 +254,7 @@
         }
     }
     
-    if ([self.efforts[indexPath.row] bulkSelected])
+    if ([self.currentEfforts[indexPath.row] bulkSelected])
     {
         cell.noBulkSelectView.hidden = NO;
     }
@@ -175,7 +266,7 @@
 {
     if (self.bulkSelect)
     {
-        EffortModel * effort = self.efforts[indexPath.row];
+        EffortModel * effort = self.currentEfforts[indexPath.row];
         OSTCrossCheckCell *cell = (OSTCrossCheckCell*)[collectionView cellForItemAtIndexPath:indexPath];
         
         if (![cell.lblStatus.text isEqualToString:@"Expected"] && ![cell.lblStatus.text isEqualToString:@"Not Expected"])
@@ -189,7 +280,7 @@
         
         return;
     }
-    self.popupEffort = self.efforts[indexPath.row];
+    self.popupEffort = self.currentEfforts[indexPath.row];
     self.lblPupupEntryName.text = self.popupEffort.fullName;
     
     OSTCrossCheckCell *cell = (OSTCrossCheckCell*)[collectionView cellForItemAtIndexPath:indexPath];
