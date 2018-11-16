@@ -18,11 +18,11 @@
 
 typedef enum {
     
-    OSTCrossCheckFilterRecorded,
-    OSTCrossCheckFilterDroppedHere,
-    OSTCrossCheckFilterExpected,
-    OSTCrossCheckFilterNotExpected,
-    OSTCrossCheckFilterAll
+    OSTCrossCheckFilterRecorded = 1,
+    OSTCrossCheckFilterDroppedHere = 2,
+    OSTCrossCheckFilterExpected = 3,
+    OSTCrossCheckFilterNotExpected = 4,
+    OSTCrossCheckFilterAll = 0
     
 }OSTCrossCheckFilter;
 
@@ -49,6 +49,7 @@ typedef enum {
 @property (assign, nonatomic) BOOL bulkSelect;
 @property (nonatomic, strong) NSString * splitName;
 @property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (nonatomic,assign) OSTCrossCheckFilter filter;
 @property (nonatomic,strong) NSArray *currentEfforts;
 
@@ -60,6 +61,8 @@ typedef enum {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.popupView.top = self.view.bottom;
+    
+    [self adjustCrossCheckCollectionBottomInset];
     
     self.filter = OSTCrossCheckFilterAll;
     
@@ -369,6 +372,12 @@ typedef enum {
     return reusableview;
 }
 
+- (IBAction)onFilter:(UIButton *)sender
+{
+    self.filter = (OSTCrossCheckFilter)sender.tag;
+    [self applyFilter];
+}
+
 - (IBAction)changedSwich:(id)sender
 {
     
@@ -389,17 +398,26 @@ typedef enum {
     if (self.bulkSelect)
     {
         self.bulkSelect = NO;
+        self.footerView.height = 70;
         [self.btnBulkSelect setTitle:@"Bulk Select" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = YES;
     }
     else
     {
         self.bulkSelect = YES;
+        self.footerView.height = 120;
         [self.btnBulkSelect setTitle:@"Cancel" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = NO;
     }
     
+    self.footerView.top = self.view.height - self.footerView.height;
+    [self adjustCrossCheckCollectionBottomInset];
     [self.crossCheckCollection reloadData];
+}
+
+- (void)adjustCrossCheckCollectionBottomInset
+{
+    self.crossCheckCollection.contentInset = UIEdgeInsetsMake(0, 0, self.footerView.height, 0);
 }
 
 - (IBAction)onClosePopup:(id)sender
@@ -464,6 +482,7 @@ typedef enum {
         }
     }
     
+    [self applyFilter];
     [self onBulkSelect:nil];
 }
 
@@ -528,6 +547,7 @@ typedef enum {
         }
     }
     [self bulkNotExpectedEfforts:notExpected];
+    [self applyFilter];
     [self onBulkSelect:nil];
 }
 
