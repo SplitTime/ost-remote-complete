@@ -19,9 +19,14 @@
 @property (nonatomic) CGPoint origin;
 @property (nonatomic) CGSize size;
 
+@property (nonatomic) IBInspectable CGFloat cornerRadius;
+@property (nonatomic) IBInspectable UIColor *borderColor;
+@property (nonatomic) IBInspectable CGFloat borderWidth;
+
 + (id)instanceFromNib;
 + (id)instanceFromNibWithName:(NSString *)nibName;
 
+- (void)setupXib;
 - (UIView *)findFirstResponder;
 
 - (UIView *)findTopMostViewForPoint:(CGPoint)point;

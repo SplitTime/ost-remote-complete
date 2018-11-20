@@ -139,6 +139,10 @@
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
 		6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */; };
+		D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
+		D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
+		D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */; };
+		D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */; };
 		D529FA0E2190AE5800454448 /* delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = D529FA0D2190AE5800454448 /* delete.wav */; };
 		D529FA0F2190AE5800454448 /* delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = D529FA0D2190AE5800454448 /* delete.wav */; };
 		D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4A217E0AE70071D6CF /* input_click.wav */; };
@@ -280,6 +284,9 @@
 		AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D524F05A21A443B6006DF352 /* OSTCheckmarkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCheckmarkView.h; sourceTree = "<group>"; };
+		D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCheckmarkView.m; sourceTree = "<group>"; };
+		D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTCheckmarkView.xib; sourceTree = "<group>"; };
 		D529FA0D2190AE5800454448 /* delete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = delete.wav; sourceTree = "<group>"; };
 		D5C5BC4A217E0AE70071D6CF /* input_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = input_click.wav; sourceTree = "<group>"; };
 		D5C5BC4B217E0AE70071D6CF /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
@@ -543,6 +550,7 @@
 				6AA6E9D81EF0E7D70061EEB0 /* Model */,
 				6A549E491EEF865100783F80 /* ViewControllers */,
 				033E71B2206001FD00CB9BD8 /* APNumberPad */,
+				D524F05921A44391006DF352 /* CheckButton */,
 				D5C5BC49217E0ACA0071D6CF /* Sound */,
 				6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */,
 				6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */,
@@ -579,6 +587,16 @@
 				6AEFFC241EEF83DA009EEE21 /* Info.plist */,
 			);
 			path = "OST TrackerTests";
+			sourceTree = "<group>";
+		};
+		D524F05921A44391006DF352 /* CheckButton */ = {
+			isa = PBXGroup;
+			children = (
+				D524F05A21A443B6006DF352 /* OSTCheckmarkView.h */,
+				D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */,
+				D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */,
+			);
+			path = CheckButton;
 			sourceTree = "<group>";
 		};
 		D5C5BC49217E0ACA0071D6CF /* Sound */ = {
@@ -729,6 +747,7 @@
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
 				033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
+				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
@@ -753,6 +772,7 @@
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
+				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
@@ -1052,6 +1072,7 @@
 				6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6A7D79621F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
+				D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
 				D5C5BC56217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
@@ -1103,6 +1124,7 @@
 				6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				6A7D79631F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
+				D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
 				D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,

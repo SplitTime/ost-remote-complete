@@ -15,6 +15,7 @@
 #import "OSTCrossCheckHeader.h"
 #import "OSTNetworkManager+Entries.h"
 #import "EntryModel.h"
+#import "OSTCheckmarkView.h"
 
 typedef enum {
     
@@ -50,6 +51,7 @@ typedef enum {
 @property (nonatomic, strong) NSString * splitName;
 @property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet OSTCheckmarkView *selectedFilterView;
 @property (nonatomic,assign) OSTCrossCheckFilter filter;
 @property (nonatomic,strong) NSArray *currentEfforts;
 
@@ -64,7 +66,8 @@ typedef enum {
     
     [self adjustCrossCheckCollectionBottomInset];
     
-    self.filter = OSTCrossCheckFilterAll;
+    self.filter = (OSTCrossCheckFilter)self.selectedFilterView.tag;
+    self.selectedFilterView.selected = YES;
     
     self.popupCrossCheckContainer.layer.cornerRadius = 6;
     NSString *currentCourseSplitName = [CurrentCourse getCurrentCourse].splitName;
@@ -372,10 +375,15 @@ typedef enum {
     return reusableview;
 }
 
-- (IBAction)onFilter:(UIButton *)sender
+- (IBAction)onFilter:(OSTCheckmarkView *)checkmark
 {
-    self.filter = (OSTCrossCheckFilter)sender.tag;
+    if (self.selectedFilterView != nil)
+    {
+        self.selectedFilterView.selected = NO;
+    }
+    self.filter = (OSTCrossCheckFilter)checkmark.tag;
     [self applyFilter];
+    self.selectedFilterView = checkmark;
 }
 
 - (IBAction)changedSwich:(id)sender
@@ -398,14 +406,14 @@ typedef enum {
     if (self.bulkSelect)
     {
         self.bulkSelect = NO;
-        self.footerView.height = 70;
+        self.footerView.height = 82;
         [self.btnBulkSelect setTitle:@"Bulk Select" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = YES;
     }
     else
     {
         self.bulkSelect = YES;
-        self.footerView.height = 120;
+        self.footerView.height = 132;
         [self.btnBulkSelect setTitle:@"Cancel" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = NO;
     }
