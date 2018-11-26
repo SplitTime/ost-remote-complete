@@ -6,6 +6,7 @@
 @property (assign, nonatomic) BOOL bulkSelected;
 @property (strong, nonatomic) NSNumber * expected;
 @property (strong, nonatomic) NSArray * entries;
+@property (assign, nonatomic) NSNumber * stoppedHere;
 - (NSArray*) entriesForSplitName:(NSString*)splitName;
 - (NSNumber*) expectedWithSplitName:(NSString*)splitName;
 - (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split;

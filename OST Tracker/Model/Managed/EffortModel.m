@@ -13,6 +13,8 @@
 @synthesize bulkSelected = _bulkSelected;
 @synthesize expected = _expected;
 @synthesize entries = _entries;
+@synthesize stoppedHere = _stoppedHere;
+
 // Custom logic goes here.
 
 - (BOOL) checkIfEffortShouldBeInSplit:(NSString*)split
@@ -110,7 +112,12 @@
     if (!_entries)
     {
         _entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && combinedCourseId LIKE[c] %@ && splitName LIKE[c] %@",[self.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,splitName]];
-        
+        self.stoppedHere = @(NO);
+        if (_entries.lastObject != nil)
+        {
+            EntryModel *entry = _entries.lastObject;
+            _stoppedHere = @([entry.stoppedHere isEqualToString:@"true"]);
+        }
     }
     return _entries;
 }

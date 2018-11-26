@@ -59,7 +59,7 @@
             onlyIn = YES;
         }
         
-        if ([entry.stoppedHere isEqualToString:@"true"])
+        if (effort.stoppedHere != nil && [effort.stoppedHere boolValue] == YES)
         {
             [self setAsDroppedHere];
         }

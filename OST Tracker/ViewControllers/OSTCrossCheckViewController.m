@@ -153,7 +153,7 @@ typedef enum {
     });
 }
 
-- (NSArray *)recordedEffortsDroppedHereOnly:(BOOL)onlyDroppedHere
+- (NSArray *)recordedEffortsDroppedHere:(BOOL)droppedHere
 {
     NSMutableArray *filteredEfforts = [NSMutableArray new];
     
@@ -162,17 +162,19 @@ typedef enum {
         NSArray * entries = [effort entriesForSplitName:self.splitName];
         if (entries.count > 0)
         {
-            if (onlyDroppedHere)
+            if (effort.stoppedHere != nil && [effort.stoppedHere boolValue] == YES)
             {
-                EntryModel * entry = entries.lastObject;
-                if ([entry.stoppedHere isEqualToString:@"true"])
+                if (droppedHere)
                 {
                     [filteredEfforts addObject:effort];
                 }
             }
             else
             {
-                [filteredEfforts addObject:effort];
+                if (!droppedHere)
+                {
+                    [filteredEfforts addObject:effort];
+                }
             }
         }
     }
@@ -210,11 +212,11 @@ typedef enum {
             break;
             
         case OSTCrossCheckFilterRecorded:
-            self.currentEfforts = [self recordedEffortsDroppedHereOnly:NO];
+            self.currentEfforts = [self recordedEffortsDroppedHere:NO];
             break;
             
         case OSTCrossCheckFilterDroppedHere:
-            self.currentEfforts = [self recordedEffortsDroppedHereOnly:YES];
+            self.currentEfforts = [self recordedEffortsDroppedHere:YES];
             break;
             
         case OSTCrossCheckFilterExpected:
