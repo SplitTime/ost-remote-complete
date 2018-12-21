@@ -322,8 +322,8 @@
         entryName = @"Bib not found";
     }
     
-    self.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@ (%@)", [entry.bibNumber isEqualToString:@"-1"]?@"":entry.bibNumber, entryName, entry.displayTime];
-    
+    self.lblPersonAdded.text = [NSString stringWithFormat:@"%@ (%@)", entryName, entry.displayTime];
+    self.lblAdded.text = self.racer.flexibleGeolocation ? : @"";
     self.lastEntry = entry;
     
     self.txtBibNumber.text = @"";
