@@ -88,6 +88,9 @@
     {
         self.numberPadContainerView.top = self.numberPadContainerView.top + 20;
         self.numberPadContainerView.height = self.numberPadContainerView.height - 50;
+        self.lblPersonAdded.font = [UIFont fontWithName:self.lblPersonAdded.font.familyName size:20];
+        self.lblAdded.font = [UIFont fontWithName:self.lblAdded.font.familyName size:20];
+        self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:20];
     }
     
     self.lblOutTimeBadge.layer.cornerRadius = self.lblOutTimeBadge.width/2;
