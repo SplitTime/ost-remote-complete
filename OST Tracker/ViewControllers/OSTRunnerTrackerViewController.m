@@ -412,7 +412,11 @@
             if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
             {
                 self.racer = effort;
-                self.lblRunnerInfo.text = [NSString stringWithFormat:@"Bib Found: %@",effort.fullName];
+                self.lblPersonAdded.hidden = NO;
+                self.lblAdded.hidden = NO;
+                self.lblPersonAdded.text = effort.fullName;
+                self.lblAdded.text = effort.flexibleGeolocation;
+                self.lblRunnerInfo.text = @"";
             }
             else
             {
