@@ -412,7 +412,7 @@
         
         if (effort)
         {
-            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+            //if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
             {
                 self.racer = effort;
                 self.lblPersonAdded.hidden = NO;
@@ -421,11 +421,13 @@
                 self.lblAdded.text = effort.flexibleGeolocation;
                 self.lblRunnerInfo.text = @"";
             }
+            /*
             else
             {
                 self.lblRunnerInfo.text = @"Bib Not Found";
                 self.lblRunnerInfo.textColor = [UIColor redColor];
             }
+            */
             
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count])
             {

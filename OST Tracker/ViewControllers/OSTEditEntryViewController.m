@@ -307,8 +307,8 @@
     {
         EffortModel * effort = [EffortModel MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber == %@", [NSDecimalNumber decimalNumberWithString:self.txtBibNumber.text]]];
         
-        if (![effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
-            effort = nil;
+        //if (![effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+        //    effort = nil;
         
         if (effort)
         {
