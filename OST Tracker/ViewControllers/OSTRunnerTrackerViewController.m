@@ -43,7 +43,7 @@
 @property (strong, nonatomic) NSString * leftBitKey;
 @property (strong, nonatomic) NSString * rightBitKey;
 @property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
-
+@property (weak, nonatomic) IBOutlet UIView *timeContainerView;
 
 @end
 
@@ -86,11 +86,20 @@
     }
     if (IS_IPAD)
     {
-        self.numberPadContainerView.top = self.numberPadContainerView.top + 20;
+        self.numberPadContainerView.top = self.numberPadContainerView.top + 90;
         self.numberPadContainerView.height = self.numberPadContainerView.height - 50;
-        self.lblPersonAdded.font = [UIFont fontWithName:self.lblPersonAdded.font.familyName size:20];
-        self.lblAdded.font = [UIFont fontWithName:self.lblAdded.font.familyName size:20];
-        self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:20];
+        self.lblPersonAdded.height = 50;
+        self.lblAdded.height = 50;
+        self.lblRunnerInfo.height = 50;
+        self.lblPersonAdded.top += 20;
+        self.lblAdded.top = self.lblPersonAdded.bottom + 20;
+        self.timeContainerView.top = self.lblAdded.bottom + 40;
+        self.pacerAndAidView.top = self.timeContainerView.bottom + 40;
+        self.btnLeft.top = self.pacerAndAidView.bottom + 40;
+        self.btnRight.top = self.btnLeft.top;
+        self.lblPersonAdded.font = [UIFont fontWithName:self.lblPersonAdded.font.familyName size:45];
+        self.lblAdded.font = [UIFont fontWithName:self.lblAdded.font.familyName size:45];
+        self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:45];
     }
     
     self.lblOutTimeBadge.layer.cornerRadius = self.lblOutTimeBadge.width/2;
