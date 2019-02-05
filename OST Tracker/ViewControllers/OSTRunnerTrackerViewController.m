@@ -97,6 +97,8 @@
         self.pacerAndAidView.top = self.timeContainerView.bottom + 40;
         self.btnLeft.top = self.pacerAndAidView.bottom + 40;
         self.btnRight.top = self.btnLeft.top;
+        self.lblInTimeBadge.top = self.btnLeft.top;
+        self.lblOutTimeBadge.top = self.btnLeft.top;
         self.lblPersonAdded.font = [UIFont fontWithName:self.lblPersonAdded.font.familyName size:45];
         self.lblAdded.font = [UIFont fontWithName:self.lblAdded.font.familyName size:45];
         self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:45];
