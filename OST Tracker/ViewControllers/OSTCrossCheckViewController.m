@@ -128,7 +128,7 @@ typedef enum {
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES];
+        self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"bibNumber != nil"]];
         
         [self fetchNotExpected];
         
