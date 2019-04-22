@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OSTBaseViewController.h"
 
-@interface OSTCrossCheckViewController : UIViewController
+@interface OSTCrossCheckViewController : OSTBaseViewController
 
 @end

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OSTBaseViewController.h"
 
-@interface OSTRunnerTrackerViewController : UIViewController
+@interface OSTRunnerTrackerViewController : OSTBaseViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *txtBibNumber;
 

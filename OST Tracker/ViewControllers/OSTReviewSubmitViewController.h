@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OSTBaseViewController.h"
 
-@interface OSTReviewSubmitViewController : UIViewController
+@interface OSTReviewSubmitViewController : OSTBaseViewController
 
 @end

@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *syncIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *lblBadge;
+@property (nonatomic,strong) IBOutletCollection(UIView) NSArray *buttonViews;
+@property (nonatomic,strong) IBOutletCollection(UIView) NSArray *separatorViews;
 @end
 
 @implementation OSTRightMenuViewController
@@ -32,16 +34,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.buttonViews = [self sortOutletCollectionByTag:self.buttonViews];
+    self.separatorViews = [self sortOutletCollectionByTag:self.separatorViews];
+    
     [[[OSTSyncManager shared] delegates] addObject:self];
     // Do any additional setup after loading the view from its nib.
     self.scrollView.contentSize = CGSizeMake(0, 668);
     if(IS_IPHONE_5)
     {
-        self.rightMenuBackImage.height = 668;
-        self.rightMenuBackImage.width = 350;
-        self.rightMenuBackImage.top = 30;
-        self.coverView.top = -90;
-        self.coverView.height = 1000;
+        [self rearrangeViews];
     }
     
     self.lblBadge.layer.cornerRadius = self.lblBadge.width/2;
@@ -58,6 +60,59 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)rearrangeViews
+{
+    self.rightMenuBackImage.height = 668;
+    self.rightMenuBackImage.width = 350;
+    self.rightMenuBackImage.top = 30;
+    self.coverView.top = -90;
+    self.coverView.height = 1000;
+    
+    CGFloat margin = 10;
+    CGFloat nextY = 0;
+    
+    for (int i = 0; i<self.buttonViews.count; i++)
+    {
+        UIView *buttonView = self.buttonViews[i];
+        UIButton *button;
+        if ([buttonView isKindOfClass:[UIButton class]])
+        {
+            button = (UIButton *)buttonView;
+        }
+        else
+        {
+            for (UIView *view in buttonView.subviews)
+            {
+                if ([view isKindOfClass:[UIButton class]])
+                {
+                    button = (UIButton *)view;
+                    break;
+                }
+            }
+        }
+        
+        if (button != nil)
+        {
+            [button.titleLabel setFont:[UIFont fontWithName:button.titleLabel.font.familyName size:25]];
+        }
+        
+        if (i > 0)
+        {
+            buttonView.top = nextY;
+        }
+        
+        if (i < self.separatorViews.count)
+        {
+            UIView *separator = self.separatorViews[i];
+            separator.top = buttonView.bottom + margin;
+            nextY = separator.bottom + margin;
+        }
+        
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, nextY);
 }
 
 - (IBAction)onClose:(id)sender
@@ -164,5 +219,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSArray *)sortOutletCollectionByTag:(NSArray *)views
+{
+    return [views sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES]]];
+}
 
 @end

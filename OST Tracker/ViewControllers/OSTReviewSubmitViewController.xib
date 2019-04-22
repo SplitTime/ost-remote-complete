@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTReviewSubmitViewController">
             <connections>
                 <outlet property="activityIndicator" destination="TNR-hb-vTx" id="rgf-g1-V4y"/>
+                <outlet property="badgeLabel" destination="QfZ-rL-ZN3" id="Xf9-AL-nWu"/>
                 <outlet property="btnReturnToLiveEntry" destination="HrD-fr-Pol" id="mLw-al-f8k"/>
                 <outlet property="btnRightMenu" destination="lS9-qu-24t" id="Sca-GQ-ftd"/>
                 <outlet property="btnSync" destination="RHE-00-eos" id="qGt-5u-uCA"/>
@@ -22,6 +23,7 @@
                 <outlet property="lblTitle" destination="5m0-xf-Q54" id="yBp-xN-DVm"/>
                 <outlet property="lblYourDataIsSynced" destination="NuV-Id-hUK" id="mRd-xe-QFi"/>
                 <outlet property="loadingView" destination="JYn-B8-KTs" id="hHo-Sn-bHJ"/>
+                <outlet property="menuButton" destination="lS9-qu-24t" id="02w-or-BS4"/>
                 <outlet property="progressBar" destination="yrZ-3h-z8v" id="wdj-NJ-YcD"/>
                 <outlet property="syncIndicator" destination="XWM-CF-Q9a" id="VjE-kK-sDG"/>
                 <outlet property="tableView" destination="a7i-U9-acx" id="Qso-AB-LRp"/>
@@ -66,6 +68,14 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QfZ-rL-ZN3">
+                            <rect key="frame" x="332" y="21" width="20" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

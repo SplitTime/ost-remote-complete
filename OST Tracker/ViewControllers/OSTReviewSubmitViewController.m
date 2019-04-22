@@ -42,11 +42,6 @@
 
 @implementation OSTReviewSubmitViewController
 
-- (void)dealloc
-{
-    [[[OSTSyncManager shared] delegates] removeObject:self];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -96,7 +91,6 @@
     self.lblBadge.layer.cornerRadius = self.lblBadge.width/2;
     self.lblBadge.clipsToBounds = YES;
     
-    [[[OSTSyncManager shared] delegates] addObject:self];
     [[OSTSyncManager shared] setShowToastOnCompletion:YES];
     
     [self updateSyncButtonState];
@@ -335,32 +329,27 @@
 
 - (void)updateSyncBadge
 {
-    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
-    if (entries.count == 0)
-    {
-        self.lblBadge.hidden = YES;
-    }
-    else
-    {
-        self.lblBadge.hidden = NO;
-        self.lblBadge.text = [NSString stringWithFormat:@"%d",entries.count];
-    }
+    [super updateSyncBadge];
+    self.lblBadge.hidden = self.badgeLabel.hidden;
+    self.lblBadge.text = self.badgeLabel.text;
 }
 
 - (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager
 {
+    [super syncManagerDidStartSynchronization:manager];
     [self updateSyncButtonState];
 }
 
 - (void)syncManager:(OSTSyncManager *)manager progress:(CGFloat)progress
 {
+    [super syncManager:manager progress:progress];
     self.progressBar.progress = progress;
 }
 
 - (void)syncManagerDidFinishSynchronization:(OSTSyncManager *)manager
 {
+    [super syncManagerDidFinishSynchronization:manager];
     [self updateSyncButtonState];
-    [self updateSyncBadge];
     
     if (self.loadingView.superview != nil) {
         [self showFinishLoadingValues];
@@ -371,8 +360,8 @@
 
 - (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
 {
+    [super syncManager:manager didFinishSynchronizationWithErrors:errors alternateServer:alternateServer];
     [self updateSyncButtonState];
-    [self updateSyncBadge];
     
     if (!alternateServer)
     {

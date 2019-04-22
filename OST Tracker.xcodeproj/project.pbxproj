@@ -139,6 +139,8 @@
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
 		6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */; };
+		D50DFA8D226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
+		D50DFA8E226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
 		D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */; };
@@ -284,6 +286,8 @@
 		AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
+		D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTBaseViewController.m; sourceTree = "<group>"; };
 		D524F05A21A443B6006DF352 /* OSTCheckmarkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCheckmarkView.h; sourceTree = "<group>"; };
 		D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCheckmarkView.m; sourceTree = "<group>"; };
 		D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTCheckmarkView.xib; sourceTree = "<group>"; };
@@ -457,6 +461,8 @@
 				6A95F55B1F9F019F00E87570 /* OSTCrossCheckHeader.h */,
 				6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */,
 				6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */,
+				D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */,
+				D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -723,6 +729,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1058,6 +1065,7 @@
 				6A5E0CF51EF1B25E00399EEC /* OSTRunnerTrackerViewController.m in Sources */,
 				6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */,
 				6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */,
+				D50DFA8D226DF867002F5FBF /* OSTBaseViewController.m in Sources */,
 				6ABFC1E11EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */,
 				6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */,
 				6A11A0791EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
@@ -1110,6 +1118,7 @@
 				6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */,
 				6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */,
 				6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */,
+				D50DFA8E226DF867002F5FBF /* OSTBaseViewController.m in Sources */,
 				6ABFC1E21EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */,
 				6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */,
 				6A11A07A1EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
