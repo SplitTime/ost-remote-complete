@@ -97,8 +97,8 @@
 @end
 
 @implementation EffortModelUserInfo 
-+ (NSString *)mappedKeyName {
-	return @"attributes.bibNumber";
++ (NSString *)relatedByAttribute {
+	return @"effortId";
 }
 @end
 

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface _EffortModel : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) EffortModelID *objectID;
 
 @property (nonatomic, strong, nullable) NSNumber* age;
@@ -42,29 +42,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _EffortModel (CoreDataGeneratedPrimitiveAccessors)
 
-- (nullable NSNumber*)primitiveAge;
-- (void)setPrimitiveAge:(nullable NSNumber*)value;
+- (NSNumber*)primitiveAge;
+- (void)setPrimitiveAge:(NSNumber*)value;
 
 - (int16_t)primitiveAgeValue;
 - (void)setPrimitiveAgeValue:(int16_t)value_;
 
-- (nullable NSDecimalNumber*)primitiveBibNumber;
-- (void)setPrimitiveBibNumber:(nullable NSDecimalNumber*)value;
+- (NSDecimalNumber*)primitiveBibNumber;
+- (void)setPrimitiveBibNumber:(NSDecimalNumber*)value;
 
-- (nullable NSString*)primitiveEffortId;
-- (void)setPrimitiveEffortId:(nullable NSString*)value;
+- (NSString*)primitiveEffortId;
+- (void)setPrimitiveEffortId:(NSString*)value;
 
-- (nullable NSDecimalNumber*)primitiveEventId;
-- (void)setPrimitiveEventId:(nullable NSDecimalNumber*)value;
+- (NSDecimalNumber*)primitiveEventId;
+- (void)setPrimitiveEventId:(NSDecimalNumber*)value;
 
-- (nullable NSString*)primitiveFlexibleGeolocation;
-- (void)setPrimitiveFlexibleGeolocation:(nullable NSString*)value;
+- (NSString*)primitiveFlexibleGeolocation;
+- (void)setPrimitiveFlexibleGeolocation:(NSString*)value;
 
-- (nullable NSString*)primitiveFullName;
-- (void)setPrimitiveFullName:(nullable NSString*)value;
+- (NSString*)primitiveFullName;
+- (void)setPrimitiveFullName:(NSString*)value;
 
-- (nullable NSString*)primitiveGender;
-- (void)setPrimitiveGender:(nullable NSString*)value;
+- (NSString*)primitiveGender;
+- (void)setPrimitiveGender:(NSString*)value;
 
 @end
 
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface EffortModelUserInfo: NSObject 
-+ (NSString *)mappedKeyName;
++ (NSString *)relatedByAttribute;
 @end
 
 NS_ASSUME_NONNULL_END

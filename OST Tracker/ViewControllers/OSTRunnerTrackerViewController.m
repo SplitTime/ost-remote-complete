@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPacer;
 @property (strong, nonatomic) NSString * rightBitKey;
 @property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
+@property (weak, nonatomic) IBOutlet UILabel *lblSecondaryInfo;
 @property (weak, nonatomic) IBOutlet UIView *timeContainerView;
 
 @end
@@ -146,8 +147,8 @@
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
     
-    self.btnLeft.width = self.view.width/2 - 18;
-    self.btnRight.width = self.view.width/2 - 18;
+    self.btnLeft.width = self.view.width/2 - 4;
+    self.btnRight.width = self.view.width/2 - 4;
     
     self.btnLeft.left = 0;
     self.btnRight.right = self.view.width;
@@ -179,8 +180,8 @@
         self.btnRight.hidden = NO;
         self.btnLeft.hidden = NO;
         
-        self.btnLeft.width = self.view.width/2 - 18;
-        self.btnRight.width = self.view.width/2 - 18;
+        self.btnLeft.width = self.view.width/2 - 4;
+        self.btnRight.width = self.view.width/2 - 4;
         
         self.btnLeft.left = 0;
         self.btnRight.right = self.view.width;
@@ -195,8 +196,8 @@
         self.btnRight.hidden = NO;
         self.btnLeft.hidden = NO;
         
-        self.btnLeft.width = self.view.width/2 - 18;
-        self.btnRight.width = self.view.width/2 - 18;
+        self.btnLeft.width = self.view.width/2 - 4;
+        self.btnRight.width = self.view.width/2 - 4;
         
         self.btnLeft.left = 0;
         self.btnRight.right = self.view.width;
@@ -211,8 +212,8 @@
         self.btnRight.hidden = NO;
         self.btnLeft.hidden = NO;
         
-        self.btnLeft.width = self.view.width/2 - 18;
-        self.btnRight.width = self.view.width/2 - 18;
+        self.btnLeft.width = self.view.width/2 - 4;
+        self.btnRight.width = self.view.width/2 - 4;
         
         self.btnLeft.left = 0;
         self.btnRight.right = self.view.width;
@@ -225,7 +226,7 @@
     if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
     {
         self.lblWithPacer.hidden = YES;
-        self.btnPacer.hidden = YES;
+        //self.btnPacer.hidden = YES;
     }
     else
     {
@@ -416,9 +417,13 @@
     self.lblInTimeBadge.hidden = YES;
     self.racer = nil;
     self.lblRunnerInfo.textColor = [UIColor darkGrayColor];
+    self.txtBibNumber.textColor = [UIColor blackColor];
     if (self.txtBibNumber.text.length == 0)
     {
         self.lblPersonAdded.text = @"Enter Bib Number";
+        self.lblRunnerInfo.text = @"";
+        self.lblSecondaryInfo.text = @"";
+        self.lblAdded.text = @"";
     }
     else
     {
@@ -437,7 +442,9 @@
                 self.lblAdded.hidden = NO;
                 self.lblPersonAdded.text = effort.fullName;
                 self.lblAdded.text = effort.flexibleGeolocation;
+                //self.lblAdded.text = "
                 self.lblRunnerInfo.text = @"";
+                self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@, %@", [effort.gender capitalizedString],effort.age];
             }
             /*
             else
@@ -477,7 +484,10 @@
         else
         {
             self.lblRunnerInfo.text = @"Bib Not Found";
-            self.lblRunnerInfo.textColor = [UIColor redColor];
+            self.lblRunnerInfo.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
+            self.txtBibNumber.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
+            self.lblPersonAdded.text = @"";
+            self.lblSecondaryInfo.text = @"";
         }
     }
 }

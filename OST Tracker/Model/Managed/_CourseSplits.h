@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface _CourseSplits : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) CourseSplitsID *objectID;
 
 @property (nonatomic, strong, nullable) NSString* baseName;
@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _CourseSplits (CoreDataGeneratedPrimitiveAccessors)
 
-- (nullable NSString*)primitiveBaseName;
-- (void)setPrimitiveBaseName:(nullable NSString*)value;
+- (NSString*)primitiveBaseName;
+- (void)setPrimitiveBaseName:(NSString*)value;
 
-- (nullable id)primitiveEntries;
-- (void)setPrimitiveEntries:(nullable id)value;
+- (id)primitiveEntries;
+- (void)setPrimitiveEntries:(id)value;
 
 @end
 
