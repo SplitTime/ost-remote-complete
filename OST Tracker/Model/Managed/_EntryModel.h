@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface _EntryModel : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) EntryModelID *objectID;
 
 @property (nonatomic, strong, nullable) NSString* absoluteTime;
@@ -62,59 +62,59 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _EntryModel (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString*)primitiveAbsoluteTime;
-- (void)setPrimitiveAbsoluteTime:(NSString*)value;
+- (nullable NSString*)primitiveAbsoluteTime;
+- (void)setPrimitiveAbsoluteTime:(nullable NSString*)value;
 
-- (NSString*)primitiveBibNumber;
-- (void)setPrimitiveBibNumber:(NSString*)value;
+- (nullable NSString*)primitiveBibNumber;
+- (void)setPrimitiveBibNumber:(nullable NSString*)value;
 
-- (NSString*)primitiveBitKey;
-- (void)setPrimitiveBitKey:(NSString*)value;
+- (nullable NSString*)primitiveBitKey;
+- (void)setPrimitiveBitKey:(nullable NSString*)value;
 
-- (NSString*)primitiveCombinedCourseId;
-- (void)setPrimitiveCombinedCourseId:(NSString*)value;
+- (nullable NSString*)primitiveCombinedCourseId;
+- (void)setPrimitiveCombinedCourseId:(nullable NSString*)value;
 
-- (NSString*)primitiveCourseName;
-- (void)setPrimitiveCourseName:(NSString*)value;
+- (nullable NSString*)primitiveCourseName;
+- (void)setPrimitiveCourseName:(nullable NSString*)value;
 
-- (NSString*)primitiveDisplayTime;
-- (void)setPrimitiveDisplayTime:(NSString*)value;
+- (nullable NSString*)primitiveDisplayTime;
+- (void)setPrimitiveDisplayTime:(nullable NSString*)value;
 
-- (NSString*)primitiveEntryCourseId;
-- (void)setPrimitiveEntryCourseId:(NSString*)value;
+- (nullable NSString*)primitiveEntryCourseId;
+- (void)setPrimitiveEntryCourseId:(nullable NSString*)value;
 
-- (NSDecimalNumber*)primitiveEntryId;
-- (void)setPrimitiveEntryId:(NSDecimalNumber*)value;
+- (nullable NSDecimalNumber*)primitiveEntryId;
+- (void)setPrimitiveEntryId:(nullable NSDecimalNumber*)value;
 
-- (NSDate*)primitiveEntryTime;
-- (void)setPrimitiveEntryTime:(NSDate*)value;
+- (nullable NSDate*)primitiveEntryTime;
+- (void)setPrimitiveEntryTime:(nullable NSDate*)value;
 
-- (NSString*)primitiveFullName;
-- (void)setPrimitiveFullName:(NSString*)value;
+- (nullable NSString*)primitiveFullName;
+- (void)setPrimitiveFullName:(nullable NSString*)value;
 
-- (NSString*)primitiveSource;
-- (void)setPrimitiveSource:(NSString*)value;
+- (nullable NSString*)primitiveSource;
+- (void)setPrimitiveSource:(nullable NSString*)value;
 
-- (NSString*)primitiveSplitId;
-- (void)setPrimitiveSplitId:(NSString*)value;
+- (nullable NSString*)primitiveSplitId;
+- (void)setPrimitiveSplitId:(nullable NSString*)value;
 
-- (NSString*)primitiveSplitName;
-- (void)setPrimitiveSplitName:(NSString*)value;
+- (nullable NSString*)primitiveSplitName;
+- (void)setPrimitiveSplitName:(nullable NSString*)value;
 
-- (NSString*)primitiveStoppedHere;
-- (void)setPrimitiveStoppedHere:(NSString*)value;
+- (nullable NSString*)primitiveStoppedHere;
+- (void)setPrimitiveStoppedHere:(nullable NSString*)value;
 
-- (NSNumber*)primitiveSubmitted;
-- (void)setPrimitiveSubmitted:(NSNumber*)value;
+- (nullable NSNumber*)primitiveSubmitted;
+- (void)setPrimitiveSubmitted:(nullable NSNumber*)value;
 
 - (BOOL)primitiveSubmittedValue;
 - (void)setPrimitiveSubmittedValue:(BOOL)value_;
 
-- (NSDate*)primitiveTimeEntered;
-- (void)setPrimitiveTimeEntered:(NSDate*)value;
+- (nullable NSDate*)primitiveTimeEntered;
+- (void)setPrimitiveTimeEntered:(nullable NSDate*)value;
 
-- (NSString*)primitiveWithPacer;
-- (void)setPrimitiveWithPacer:(NSString*)value;
+- (nullable NSString*)primitiveWithPacer;
+- (void)setPrimitiveWithPacer:(nullable NSString*)value;
 
 @end
 

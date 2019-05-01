@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface _EventModel : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) EventModelID *objectID;
 
 @property (nonatomic, strong, nullable) id dataEntryGroups;
@@ -48,32 +48,32 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _EventModel (CoreDataGeneratedPrimitiveAccessors)
 
-- (id)primitiveDataEntryGroups;
-- (void)setPrimitiveDataEntryGroups:(id)value;
+- (nullable id)primitiveDataEntryGroups;
+- (void)setPrimitiveDataEntryGroups:(nullable id)value;
 
-- (NSString*)primitiveEventGroupId;
-- (void)setPrimitiveEventGroupId:(NSString*)value;
+- (nullable NSString*)primitiveEventGroupId;
+- (void)setPrimitiveEventGroupId:(nullable NSString*)value;
 
-- (NSString*)primitiveEventId;
-- (void)setPrimitiveEventId:(NSString*)value;
+- (nullable NSString*)primitiveEventId;
+- (void)setPrimitiveEventId:(nullable NSString*)value;
 
-- (NSNumber*)primitiveMultiLap;
-- (void)setPrimitiveMultiLap:(NSNumber*)value;
+- (nullable NSNumber*)primitiveMultiLap;
+- (void)setPrimitiveMultiLap:(nullable NSNumber*)value;
 
 - (BOOL)primitiveMultiLapValue;
 - (void)setPrimitiveMultiLapValue:(BOOL)value_;
 
-- (NSString*)primitiveName;
-- (void)setPrimitiveName:(NSString*)value;
+- (nullable NSString*)primitiveName;
+- (void)setPrimitiveName:(nullable NSString*)value;
 
-- (NSString*)primitiveSlug;
-- (void)setPrimitiveSlug:(NSString*)value;
+- (nullable NSString*)primitiveSlug;
+- (void)setPrimitiveSlug:(nullable NSString*)value;
 
-- (id)primitiveSplits;
-- (void)setPrimitiveSplits:(id)value;
+- (nullable id)primitiveSplits;
+- (void)setPrimitiveSplits:(nullable id)value;
 
-- (NSDate*)primitiveStartTime;
-- (void)setPrimitiveStartTime:(NSDate*)value;
+- (nullable NSDate*)primitiveStartTime;
+- (void)setPrimitiveStartTime:(nullable NSDate*)value;
 
 @end
 

@@ -141,6 +141,10 @@
 		6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */; };
 		D50DFA8D226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
 		D50DFA8E226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
+		D50DFA9222786B5D002F5FBF /* OSTSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA9122786B5D002F5FBF /* OSTSlider.m */; };
+		D50DFA9322786B5D002F5FBF /* OSTSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA9122786B5D002F5FBF /* OSTSlider.m */; };
+		D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50DFA9422786B67002F5FBF /* OSTSlider.xib */; };
+		D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50DFA9422786B67002F5FBF /* OSTSlider.xib */; };
 		D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */; };
@@ -288,6 +292,9 @@
 		BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
 		D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTBaseViewController.m; sourceTree = "<group>"; };
+		D50DFA9022786B5D002F5FBF /* OSTSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSlider.h; sourceTree = "<group>"; };
+		D50DFA9122786B5D002F5FBF /* OSTSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTSlider.m; sourceTree = "<group>"; };
+		D50DFA9422786B67002F5FBF /* OSTSlider.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTSlider.xib; sourceTree = "<group>"; };
 		D524F05A21A443B6006DF352 /* OSTCheckmarkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCheckmarkView.h; sourceTree = "<group>"; };
 		D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCheckmarkView.m; sourceTree = "<group>"; };
 		D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTCheckmarkView.xib; sourceTree = "<group>"; };
@@ -557,6 +564,7 @@
 				6A549E491EEF865100783F80 /* ViewControllers */,
 				033E71B2206001FD00CB9BD8 /* APNumberPad */,
 				D524F05921A44391006DF352 /* CheckButton */,
+				D50DFA8F22786B3D002F5FBF /* Slider */,
 				D5C5BC49217E0ACA0071D6CF /* Sound */,
 				6AEFFC0B1EEF83DA009EEE21 /* AppDelegate.h */,
 				6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */,
@@ -593,6 +601,16 @@
 				6AEFFC241EEF83DA009EEE21 /* Info.plist */,
 			);
 			path = "OST TrackerTests";
+			sourceTree = "<group>";
+		};
+		D50DFA8F22786B3D002F5FBF /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				D50DFA9022786B5D002F5FBF /* OSTSlider.h */,
+				D50DFA9122786B5D002F5FBF /* OSTSlider.m */,
+				D50DFA9422786B67002F5FBF /* OSTSlider.xib */,
+			);
+			path = Slider;
 			sourceTree = "<group>";
 		};
 		D524F05921A44391006DF352 /* CheckButton */ = {
@@ -766,6 +784,7 @@
 				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0E2190AE5800454448 /* delete.wav in Resources */,
 				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
+				D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */,
 				6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */,
 				D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */,
 				033E71C9206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
@@ -791,6 +810,7 @@
 				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0F2190AE5800454448 /* delete.wav in Resources */,
 				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
+				D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */,
 				6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */,
 				D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */,
 				033E71CA206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
@@ -1053,6 +1073,7 @@
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
+				D50DFA9222786B5D002F5FBF /* OSTSlider.m in Sources */,
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
 				6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
@@ -1106,6 +1127,7 @@
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
+				D50DFA9322786B5D002F5FBF /* OSTSlider.m in Sources */,
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
 				6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,

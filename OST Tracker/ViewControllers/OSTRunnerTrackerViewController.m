@@ -332,6 +332,10 @@
     {
         entryName = @"Bib not found";
     }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
+    }
     
     self.lblPersonAdded.text = [NSString stringWithFormat:@"%@", entryName];
     self.lblAdded.text = self.racer.flexibleGeolocation ? : @"";
