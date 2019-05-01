@@ -10,6 +10,7 @@
 #import "UIView+Additions.h"
 #import "EntryModel.h"
 #import "CurrentCourse.h"
+#import "OSTRunnerTrackerViewController.h"
 
 @interface OSTBaseViewController ()
 
@@ -19,6 +20,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
     [[[OSTSyncManager shared] delegates] removeObject:self];
 }
 
@@ -27,6 +29,8 @@
     [[[OSTSyncManager shared] delegates] addObject:self];
     self.badgeLabel.layer.cornerRadius = self.badgeLabel.width/2;
     self.badgeLabel.clipsToBounds = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRunnerTrackerDidRegisterBib) name:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,6 +57,11 @@
 }
 
 - (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
+{
+    [self updateSyncBadge];
+}
+
+- (void)onRunnerTrackerDidRegisterBib
 {
     [self updateSyncBadge];
 }

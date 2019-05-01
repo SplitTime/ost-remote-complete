@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OSTBaseViewController.h"
 
+#define OSTRunnerTrackerViewControllerDidRegisterBibNotification    @"OSTRunnerTrackerViewControllerDidRegisterBibNotification"
+
 @interface OSTRunnerTrackerViewController : OSTBaseViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *txtBibNumber;
