@@ -17,8 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface _EffortModel : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) EffortModelID *objectID;
+
+@property (nonatomic, strong, nullable) NSNumber* age;
+
+@property (atomic) int16_t ageValue;
+- (int16_t)ageValue;
+- (void)setAgeValue:(int16_t)value_;
 
 @property (nonatomic, strong, nullable) NSDecimalNumber* bibNumber;
 
@@ -30,37 +36,50 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* fullName;
 
+@property (nonatomic, strong, nullable) NSString* gender;
+
 @end
 
 @interface _EffortModel (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSDecimalNumber*)primitiveBibNumber;
-- (void)setPrimitiveBibNumber:(NSDecimalNumber*)value;
+- (nullable NSNumber*)primitiveAge;
+- (void)setPrimitiveAge:(nullable NSNumber*)value;
 
-- (NSString*)primitiveEffortId;
-- (void)setPrimitiveEffortId:(NSString*)value;
+- (int16_t)primitiveAgeValue;
+- (void)setPrimitiveAgeValue:(int16_t)value_;
 
-- (NSDecimalNumber*)primitiveEventId;
-- (void)setPrimitiveEventId:(NSDecimalNumber*)value;
+- (nullable NSDecimalNumber*)primitiveBibNumber;
+- (void)setPrimitiveBibNumber:(nullable NSDecimalNumber*)value;
 
-- (NSString*)primitiveFlexibleGeolocation;
-- (void)setPrimitiveFlexibleGeolocation:(NSString*)value;
+- (nullable NSString*)primitiveEffortId;
+- (void)setPrimitiveEffortId:(nullable NSString*)value;
 
-- (NSString*)primitiveFullName;
-- (void)setPrimitiveFullName:(NSString*)value;
+- (nullable NSDecimalNumber*)primitiveEventId;
+- (void)setPrimitiveEventId:(nullable NSDecimalNumber*)value;
+
+- (nullable NSString*)primitiveFlexibleGeolocation;
+- (void)setPrimitiveFlexibleGeolocation:(nullable NSString*)value;
+
+- (nullable NSString*)primitiveFullName;
+- (void)setPrimitiveFullName:(nullable NSString*)value;
+
+- (nullable NSString*)primitiveGender;
+- (void)setPrimitiveGender:(nullable NSString*)value;
 
 @end
 
 @interface EffortModelAttributes: NSObject 
++ (NSString *)age;
 + (NSString *)bibNumber;
 + (NSString *)effortId;
 + (NSString *)eventId;
 + (NSString *)flexibleGeolocation;
 + (NSString *)fullName;
++ (NSString *)gender;
 @end
 
 @interface EffortModelUserInfo: NSObject 
-+ (NSString *)relatedByAttribute;
++ (NSString *)mappedKeyName;
 @end
 
 NS_ASSUME_NONNULL_END
