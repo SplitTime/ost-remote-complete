@@ -27,6 +27,11 @@
     [[[OSTSyncManager shared] delegates] addObject:self];
     self.badgeLabel.layer.cornerRadius = self.badgeLabel.width/2;
     self.badgeLabel.clipsToBounds = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self updateSyncBadge];
 }
 
