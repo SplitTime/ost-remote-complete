@@ -76,7 +76,7 @@
             </userInfo>
         </attribute>
         <userInfo>
-            <entry key="mappedKeyName" value="attributes.bibNumber"/>
+            <entry key="relatedByAttribute" value="effortId"/>
         </userInfo>
     </entity>
     <entity name="EntryModel" representedClassName="EntryModel" syncable="YES">
