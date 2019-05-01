@@ -23,10 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblTime;
 @property (strong, nonatomic) NSTimer * timer;
-@property (weak, nonatomic) IBOutlet UISwitch *swchPaser;
 @property (weak, nonatomic) IBOutlet UIButton *btnLeft;
 @property (weak, nonatomic) IBOutlet UIButton *btnRight;
-@property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
 @property (weak, nonatomic) IBOutlet UIView *pacerAndAidView;
 @property (weak, nonatomic) IBOutlet UIButton *btnRightMenu;
 @property (weak, nonatomic) IBOutlet UILabel *lblPersonAdded;
@@ -41,6 +39,8 @@
 @property (strong, nonatomic) NSDate * entryDateTime;
 @property (strong, nonatomic) EntryModel * lastEntry;
 @property (strong, nonatomic) NSString * leftBitKey;
+@property (weak, nonatomic) IBOutlet UIButton *btnStopped;
+@property (weak, nonatomic) IBOutlet UIButton *btnPacer;
 @property (strong, nonatomic) NSString * rightBitKey;
 @property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
 @property (weak, nonatomic) IBOutlet UIView *timeContainerView;
@@ -225,14 +225,12 @@
     if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
     {
         self.lblWithPacer.hidden = YES;
-        self.swchPaser.hidden = YES;
-        self.pacerAndAidView.height = 43;
+        self.btnPacer.hidden = YES;
     }
     else
     {
         self.lblWithPacer.hidden = NO;
-        self.swchPaser.hidden = NO;
-        self.pacerAndAidView.height = 86;
+        self.btnPacer.hidden = NO;
     }
     self.lblInTimeBadge.right = self.btnLeft.right - 5;
 }
@@ -246,10 +244,9 @@
 {
     self.lastEntry = nil;
     self.lblAdded.hidden = YES;
-    self.lblPersonAdded.hidden = YES;
     self.lblRunnerInfo.hidden = YES;
-    self.swchPaser.on = NO;
-    self.swchStoppedHere.on = NO;
+    self.btnPacer.selected = NO;
+    self.btnStopped.selected = NO;
     self.txtBibNumber.text = nil;
     self.lblInTimeBadge.hidden = YES;
     self.lblOutTimeBadge.hidden = YES;
@@ -283,10 +280,10 @@
         entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",self.dayString, self.lblTime.text,timezoneoffset];
     else entry.absoluteTime = [NSString stringWithFormat:@"%@ %@+%02d:00",self.dayString, self.lblTime.text,timezoneoffset];
     entry.displayTime = self.lblTime.text;
-    if (self.swchPaser.on)
+    if (self.btnPacer.selected)
         entry.withPacer = @"true";
     else entry.withPacer = @"false";
-    if (self.swchStoppedHere.on)
+    if (self.btnStopped.selected)
         entry.stoppedHere = @"true";
     else entry.stoppedHere = @"false";
     
@@ -336,13 +333,13 @@
         entryName = @"Bib not found";
     }
     
-    self.lblPersonAdded.text = [NSString stringWithFormat:@"%@ (%@)", entryName, entry.displayTime];
+    self.lblPersonAdded.text = [NSString stringWithFormat:@"%@", entryName];
     self.lblAdded.text = self.racer.flexibleGeolocation ? : @"";
     self.lastEntry = entry;
     
     self.txtBibNumber.text = @"";
-    self.swchPaser.on = NO;
-    self.swchStoppedHere.on = NO;
+    self.btnPacer.selected = NO;
+    self.btnStopped.selected = NO;
     [self.txtBibNumber addObserver:self forKeyPath:@"text"
                            options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                            context:nil];
@@ -369,7 +366,6 @@
         editVC.entryHasBeenDeletedBlock = ^
         {
             weakSelf.lastEntry = nil;
-            weakSelf.lblPersonAdded.hidden = YES;
             weakSelf.lblAdded.hidden = YES;
         };
         
@@ -382,12 +378,21 @@
                 entryName = @"Bib not found";
             }
             
-            weakSelf.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@ (%@)", [weakSelf.lastEntry.bibNumber isEqualToString:@"-1"]?@"":weakSelf.lastEntry.bibNumber, entryName, weakSelf.lastEntry.displayTime];
+            weakSelf.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@", [weakSelf.lastEntry.bibNumber isEqualToString:@"-1"]?@"":weakSelf.lastEntry.bibNumber, entryName];
             
         };
         
         [editVC configureWithEntry:self.lastEntry];
     }
+}
+- (IBAction)onButtonPacer:(id)sender
+{
+   self.btnPacer.selected = !self.btnPacer.selected;
+}
+
+- (IBAction)onBtnStopped:(id)sender
+{
+    self.btnStopped.selected = !self.btnStopped.selected;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
@@ -402,7 +407,6 @@
     self.lastEntry = nil;
     
     self.lblAdded.hidden = YES;
-    self.lblPersonAdded.hidden = YES;
     
     self.lblOutTimeBadge.hidden = YES;
     self.lblInTimeBadge.hidden = YES;
@@ -410,7 +414,7 @@
     self.lblRunnerInfo.textColor = [UIColor darkGrayColor];
     if (self.txtBibNumber.text.length == 0)
     {
-        self.lblRunnerInfo.text = @"";
+        self.lblPersonAdded.text = @"Enter Bib Number";
     }
     else
     {
@@ -426,7 +430,6 @@
             //if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
             {
                 self.racer = effort;
-                self.lblPersonAdded.hidden = NO;
                 self.lblAdded.hidden = NO;
                 self.lblPersonAdded.text = effort.fullName;
                 self.lblAdded.text = effort.flexibleGeolocation;
