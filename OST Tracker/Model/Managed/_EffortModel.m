@@ -98,7 +98,7 @@
 
 @implementation EffortModelUserInfo 
 + (NSString *)mappedKeyName {
-	return @"attributes.age";
+	return @"attributes.bibNumber";
 }
 @end
 

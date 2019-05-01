@@ -40,7 +40,11 @@
         </userInfo>
     </entity>
     <entity name="EffortModel" representedClassName="EffortModel" syncable="YES">
-        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="attributes.age"/>
+            </userInfo>
+        </attribute>
         <attribute name="bibNumber" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="attributes.bibNumber"/>
@@ -72,7 +76,7 @@
             </userInfo>
         </attribute>
         <userInfo>
-            <entry key="mappedKeyName" value="attributes.age"/>
+            <entry key="mappedKeyName" value="attributes.bibNumber"/>
         </userInfo>
     </entity>
     <entity name="EntryModel" representedClassName="EntryModel" syncable="YES">
