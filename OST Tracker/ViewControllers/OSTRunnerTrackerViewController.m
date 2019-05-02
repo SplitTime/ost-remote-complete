@@ -63,6 +63,17 @@
     self.btnLeft.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.btnRight.titleLabel.textAlignment = NSTextAlignmentCenter;
     
+    [self.lblInTimeBadge removeFromSuperview];
+    [self.lblOutTimeBadge removeFromSuperview];
+    
+    [self.btnLeft addSubview:self.lblInTimeBadge];
+    [self.btnRight addSubview:self.lblOutTimeBadge];
+    
+    self.lblInTimeBadge.top = 0;
+    self.lblInTimeBadge.right = self.btnLeft.width;
+    self.lblOutTimeBadge.top = 0;
+    self.lblOutTimeBadge.right = self.btnRight.width;
+    
     if (IS_IPHONE_5)
     {
         self.numberPadContainerView.height=220;
@@ -97,7 +108,7 @@
         self.lblTitle.numberOfLines = 1;
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
-        self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+        self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
         self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:75];
     }
     if (IS_IPAD)
@@ -108,7 +119,7 @@
         self.headerContainerView.height = 210;
         self.pacerAndAidView.top = self.headerContainerView.bottom;
         self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:75];
-        self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+        self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
         self.btnRight.height = self.btnLeft.height = 143;
         
         /*self.numberPadContainerView.top = self.numberPadContainerView.top + 90;
@@ -271,7 +282,6 @@
         self.btnStopped.center = CGPointMake(self.pacerAndAidView.width/4, self.pacerAndAidView.height/2);
         self.btnPacer.center = CGPointMake(self.pacerAndAidView.width/4*3, self.pacerAndAidView.height/2);
     }
-    self.lblInTimeBadge.right = self.btnLeft.right - 5;
     
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
@@ -598,7 +608,7 @@
     {
         if (self.btnRight.hidden)
         {
-            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
             self.btnRight.width = self.btnLeft.width = self.view.height;
             self.btnRight.right = self.view.right;
             self.btnLeft.left = self.view.left;
@@ -606,7 +616,7 @@
         }
         else if (self.btnLeft.hidden)
         {
-            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
             self.btnRight.width = self.btnLeft.width = self.view.height;
             self.btnRight.right = self.view.right;
             self.btnLeft.left = self.view.left;
@@ -614,12 +624,13 @@
         }
         else
         {
-            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
             self.btnRight.width = self.btnLeft.width = self.view.height/2 - 4;
             self.btnRight.right = self.view.right;
             self.btnLeft.left = self.view.left;
             self.btnRight.height = self.btnLeft.height = 143;
         }
+        
     }
 }
 
