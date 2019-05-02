@@ -81,7 +81,7 @@
     
     [self.txtSortBy removeInputAssistant];
     [self.btnSync setBackgroundImage:[UIImage imageNamed:@"GrayButton"] forState:UIControlStateHighlighted];
-    if (IS_IPHONE_X)
+    if (IS_IPHONE_X || IS_IPHONE_XR)
     {
         self.lblTitle.numberOfLines = 1;
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
