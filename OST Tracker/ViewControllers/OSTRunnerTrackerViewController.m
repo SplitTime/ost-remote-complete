@@ -482,11 +482,11 @@
                 self.lblRunnerInfo.text = @"";
                 if(effort.age == nil)
                 {
-                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@ (%@)", [effort.gender capitalizedString],effort.age];
+                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@", [effort.gender capitalizedString]];
                 }
                 else
                 {
-                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@", [effort.gender capitalizedString]];
+                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@ (%@)", [effort.gender capitalizedString],effort.age];
                 }
             }
             /*
