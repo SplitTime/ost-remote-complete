@@ -60,7 +60,8 @@
                                                             userInfo: nil repeats:YES];
     
     self.splitId = [CurrentCourse getCurrentCourse].splitId;
-    
+    self.btnLeft.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.btnRight.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     if (IS_IPHONE_5)
     {
