@@ -249,13 +249,25 @@
     for (NSString * title in self.splitTitles)
     {
         splitEntries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && splitName == %@",[CurrentCourse getCurrentCourse].eventId,title]].mutableCopy;
-        [splitEntries sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending]]];
+        [splitEntries sortUsingComparator:^NSComparisonResult(EntryModel *  _Nonnull obj1, EntryModel *  _Nonnull obj2) {
+            
+            if (obj1.bibNumber == nil) {
+                return NSOrderedDescending;
+            }
+            
+            if (obj2.bibNumber == nil) {
+                return NSOrderedAscending;
+            }
+            
+            return [[NSNumber numberWithInt:[obj1.bibNumber integerValue]] compare:[NSNumber numberWithInt:[obj2.bibNumber integerValue]]];
+            
+        }];
         [self.entries addObject:splitEntries];
     }
     
     
     self.lblTitle.text = [CurrentCourse getCurrentCourse].eventName;
-    
+
     [self.tableView reloadData];
 }
 
