@@ -17,13 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSObject;
 
+@class NSObject;
+
 @interface CurrentCourseID : NSManagedObjectID {}
 @end
 
 @interface _CurrentCourse : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) CurrentCourseID *objectID;
 
 @property (nonatomic, strong, nullable) id dataEntryGroups;
@@ -35,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) id eventIdsAndSplits;
 
 @property (nonatomic, strong, nullable) NSString* eventName;
+
+@property (nonatomic, strong, nullable) id eventShortNames;
 
 @property (nonatomic, strong, nullable) NSNumber* monitorPacers;
 
@@ -58,41 +62,44 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _CurrentCourse (CoreDataGeneratedPrimitiveAccessors)
 
-- (id)primitiveDataEntryGroups;
-- (void)setPrimitiveDataEntryGroups:(id)value;
+- (nullable id)primitiveDataEntryGroups;
+- (void)setPrimitiveDataEntryGroups:(nullable id)value;
 
-- (NSString*)primitiveEventGroupId;
-- (void)setPrimitiveEventGroupId:(NSString*)value;
+- (nullable NSString*)primitiveEventGroupId;
+- (void)setPrimitiveEventGroupId:(nullable NSString*)value;
 
-- (NSString*)primitiveEventId;
-- (void)setPrimitiveEventId:(NSString*)value;
+- (nullable NSString*)primitiveEventId;
+- (void)setPrimitiveEventId:(nullable NSString*)value;
 
-- (id)primitiveEventIdsAndSplits;
-- (void)setPrimitiveEventIdsAndSplits:(id)value;
+- (nullable id)primitiveEventIdsAndSplits;
+- (void)setPrimitiveEventIdsAndSplits:(nullable id)value;
 
-- (NSString*)primitiveEventName;
-- (void)setPrimitiveEventName:(NSString*)value;
+- (nullable NSString*)primitiveEventName;
+- (void)setPrimitiveEventName:(nullable NSString*)value;
 
-- (NSNumber*)primitiveMonitorPacers;
-- (void)setPrimitiveMonitorPacers:(NSNumber*)value;
+- (nullable id)primitiveEventShortNames;
+- (void)setPrimitiveEventShortNames:(nullable id)value;
+
+- (nullable NSNumber*)primitiveMonitorPacers;
+- (void)setPrimitiveMonitorPacers:(nullable NSNumber*)value;
 
 - (BOOL)primitiveMonitorPacersValue;
 - (void)setPrimitiveMonitorPacersValue:(BOOL)value_;
 
-- (NSNumber*)primitiveMultiLap;
-- (void)setPrimitiveMultiLap:(NSNumber*)value;
+- (nullable NSNumber*)primitiveMultiLap;
+- (void)setPrimitiveMultiLap:(nullable NSNumber*)value;
 
 - (BOOL)primitiveMultiLapValue;
 - (void)setPrimitiveMultiLapValue:(BOOL)value_;
 
-- (id)primitiveSplitAttributes;
-- (void)setPrimitiveSplitAttributes:(id)value;
+- (nullable id)primitiveSplitAttributes;
+- (void)setPrimitiveSplitAttributes:(nullable id)value;
 
-- (NSString*)primitiveSplitId;
-- (void)setPrimitiveSplitId:(NSString*)value;
+- (nullable NSString*)primitiveSplitId;
+- (void)setPrimitiveSplitId:(nullable NSString*)value;
 
-- (NSString*)primitiveSplitName;
-- (void)setPrimitiveSplitName:(NSString*)value;
+- (nullable NSString*)primitiveSplitName;
+- (void)setPrimitiveSplitName:(nullable NSString*)value;
 
 @end
 
@@ -102,6 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)eventId;
 + (NSString *)eventIdsAndSplits;
 + (NSString *)eventName;
++ (NSString *)eventShortNames;
 + (NSString *)monitorPacers;
 + (NSString *)multiLap;
 + (NSString *)splitAttributes;

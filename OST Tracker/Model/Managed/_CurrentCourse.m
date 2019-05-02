@@ -53,6 +53,8 @@
 
 @dynamic eventName;
 
+@dynamic eventShortNames;
+
 @dynamic monitorPacers;
 
 - (BOOL)monitorPacersValue {
@@ -116,6 +118,9 @@
 }
 + (NSString *)eventName {
 	return @"eventName";
+}
++ (NSString *)eventShortNames {
+	return @"eventShortNames";
 }
 + (NSString *)monitorPacers {
 	return @"monitorPacers";

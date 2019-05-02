@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface _CrossCheckEntriesModel : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) CrossCheckEntriesModelID *objectID;
 
 @property (nonatomic, strong, nullable) NSString* bibNumber;
@@ -30,14 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _CrossCheckEntriesModel (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString*)primitiveBibNumber;
-- (void)setPrimitiveBibNumber:(NSString*)value;
+- (nullable NSString*)primitiveBibNumber;
+- (void)setPrimitiveBibNumber:(nullable NSString*)value;
 
-- (NSString*)primitiveCourseId;
-- (void)setPrimitiveCourseId:(NSString*)value;
+- (nullable NSString*)primitiveCourseId;
+- (void)setPrimitiveCourseId:(nullable NSString*)value;
 
-- (NSString*)primitiveSplitName;
-- (void)setPrimitiveSplitName:(NSString*)value;
+- (nullable NSString*)primitiveSplitName;
+- (void)setPrimitiveSplitName:(nullable NSString*)value;
 
 @end
 

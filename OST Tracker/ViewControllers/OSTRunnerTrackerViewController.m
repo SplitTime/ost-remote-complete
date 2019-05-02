@@ -535,6 +535,11 @@
     }
 }
 
+- (NSString *)getEffortEventShortName:(EffortModel *)effort
+{
+    return [CurrentCourse getCurrentCourse].eventShortNames[[NSString stringWithFormat:@"%@", effort.eventId]];
+}
+
 - (void) dealloc
 {
     [self.txtBibNumber removeObserver:self forKeyPath:@"text"];

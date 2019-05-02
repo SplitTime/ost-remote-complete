@@ -313,10 +313,16 @@
         currentCourse.monitorPacers = object[@"data"][@"attributes"][@"monitorPacers"];
         currentCourse.eventGroupId = weakSelf.selectedEvent.eventGroupId;
         NSMutableDictionary * eventIdsAndSplits = [NSMutableDictionary new];
+        NSMutableDictionary * eventShortNames = [NSMutableDictionary new];
         for (NSDictionary * dict in object[@"included"])
         {
             if ([dict[@"type"] isEqualToString:@"events"])
             {
+                NSString *shortName = dict[@"attributes"][@"shortName"];
+                if (shortName != nil && [shortName isKindOfClass:[NSString class]])
+                {
+                    eventShortNames[dict[@"id"]] = shortName;
+                }
                 NSMutableArray * arr = eventIdsAndSplits[dict[@"id"]];
                 if (arr == nil)
                 {
@@ -327,6 +333,7 @@
             }
         }
         currentCourse.eventIdsAndSplits = eventIdsAndSplits;
+        currentCourse.eventShortNames = eventShortNames;
         
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
         [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
