@@ -480,14 +480,23 @@
                 self.lblAdded.text = effort.flexibleGeolocation;
                 //self.lblAdded.text = "
                 self.lblRunnerInfo.text = @"";
-                if(effort.age == nil)
+                
+                NSMutableString *secondaryInfo = [NSMutableString new];
+                NSString *eventShortName = [self getEffortEventShortName:effort];
+                
+                if (eventShortName != nil)
                 {
-                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@", [effort.gender capitalizedString]];
+                    [secondaryInfo appendFormat:@"%@\n", eventShortName];
                 }
-                else
+                
+                [secondaryInfo appendString:[effort.gender capitalizedString]];
+                
+                if(effort.age != nil)
                 {
-                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@ (%@)", [effort.gender capitalizedString],effort.age];
+                    [secondaryInfo appendFormat:@" (%@)", effort.age];
                 }
+                
+                self.lblSecondaryInfo.text = secondaryInfo;
             }
             /*
             else
