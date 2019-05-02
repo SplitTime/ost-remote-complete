@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,10 +25,12 @@
                 <outlet property="lblRunnerInfo" destination="BN5-h1-nq1" id="BrY-PG-36G"/>
                 <outlet property="lblSecondaryInfo" destination="ee2-Ee-mFk" id="E7b-u1-Uck"/>
                 <outlet property="lblTime" destination="pdE-tx-zbe" id="Lxz-df-fPe"/>
+                <outlet property="lblTimeOfTheDay" destination="2ZI-kW-QRV" id="9aH-GE-qlb"/>
                 <outlet property="lblTitle" destination="DGN-GA-gMc" id="M5O-bp-cZH"/>
                 <outlet property="menuButton" destination="tVa-2H-hUR" id="ZfG-Ld-psX"/>
                 <outlet property="numberPadContainerView" destination="ePO-Sn-Tm1" id="uJB-lf-lvg"/>
                 <outlet property="pacerAndAidView" destination="7Pm-W7-8Ej" id="XXJ-iU-nkM"/>
+                <outlet property="separatoryLine" destination="aD2-OA-fsX" id="cJ5-aF-LDH"/>
                 <outlet property="txtBibNumber" destination="eLm-05-491" id="HbS-2d-bSk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

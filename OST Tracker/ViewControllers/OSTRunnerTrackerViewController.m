@@ -46,6 +46,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
 @property (weak, nonatomic) IBOutlet UILabel *lblSecondaryInfo;
 @property (weak, nonatomic) IBOutlet UIView *timeContainerView;
+@property (weak, nonatomic) IBOutlet UIView *separatoryLine;
+@property (weak, nonatomic) IBOutlet UILabel *lblTimeOfTheDay;
 
 @end
 
@@ -122,22 +124,26 @@
         self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
         self.btnRight.height = self.btnLeft.height = 143;
         
-        /*self.numberPadContainerView.top = self.numberPadContainerView.top + 90;
-        self.numberPadContainerView.height = self.numberPadContainerView.height - 50;
-        self.lblPersonAdded.height = 50;
-        self.lblAdded.height = 50;
-        self.lblRunnerInfo.height = 50;
-        self.lblPersonAdded.top += 20;
-        self.lblAdded.top = self.lblPersonAdded.bottom + 20;
-        self.timeContainerView.top = self.lblAdded.bottom + 40;
-        self.pacerAndAidView.top = self.timeContainerView.bottom + 40;
-        self.btnLeft.top = self.pacerAndAidView.bottom + 40;
-        self.btnRight.top = self.btnLeft.top;
-        self.lblInTimeBadge.top = self.btnLeft.top;
-        self.lblOutTimeBadge.top = self.btnLeft.top;
-        self.lblPersonAdded.font = [UIFont fontWithName:self.lblPersonAdded.font.familyName size:45];
-        self.lblAdded.font = [UIFont fontWithName:self.lblAdded.font.familyName size:45];
-        self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:45];*/
+        self.btnRight.titleLabel.font = self.btnLeft.titleLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:33];
+        self.lblPersonAdded.font = [UIFont fontWithName:@"Helvetica Bold" size:36];
+        self.lblAdded.font = [UIFont fontWithName:@"Helvetica" size:28];
+        self.lblSecondaryInfo.font = [UIFont fontWithName:@"Helvetica" size:28];
+        self.lblAdded.top = self.lblAdded.top + 12;
+        self.lblTime.font = [UIFont fontWithName:@"Helvetica Bold" size:36];
+        self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:100];
+        self.lblTimeOfTheDay.font = [UIFont fontWithName:@"Helvetica Bold" size:20];
+        self.separatoryLine.right += 50;
+        self.lblTimeOfTheDay.width += 30;
+        self.lblTimeOfTheDay.height += 6;
+        self.lblTimeOfTheDay.top-=10;
+        self.lblTimeOfTheDay.left+=5;
+        self.lblTime.width +=50;
+        self.txtBibNumber.width += 50;
+        self.lblTime.height += 15;
+        self.btnPacer.width = self.btnStopped.width = 174;
+        self.btnPacer.height = self.btnStopped.height = 56;
+        self.lblSecondaryInfo.top -= 50;
+        self.lblSecondaryInfo.height += 30;
     }
     
     APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:self];
