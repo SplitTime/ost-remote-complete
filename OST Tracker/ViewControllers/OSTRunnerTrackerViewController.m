@@ -41,6 +41,7 @@
 @property (strong, nonatomic) NSString * leftBitKey;
 @property (weak, nonatomic) IBOutlet UIButton *btnStopped;
 @property (weak, nonatomic) IBOutlet UIButton *btnPacer;
+@property (weak, nonatomic) IBOutlet UIView *headerContainerView;
 @property (strong, nonatomic) NSString * rightBitKey;
 @property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
 @property (weak, nonatomic) IBOutlet UILabel *lblSecondaryInfo;
@@ -60,34 +61,43 @@
     
     self.splitId = [CurrentCourse getCurrentCourse].splitId;
     
-    APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:self];
-    [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
-    numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    numberPad.frame = self.numberPadContainerView.bounds;
-    numberPad.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    numberPad.backgroundColor = [UIColor clearColor];
-    [self.numberPadContainerView addSubview:numberPad];
-    [numberPad setTextField:self.txtBibNumber];
     
     if (IS_IPHONE_5)
     {
-        self.pacerAndAidView.top = self.pacerAndAidView.top - 25;
+        self.numberPadContainerView.height=220;
+        self.numberPadContainerView.bottom = self.view.bottom;
+        /*self.pacerAndAidView.top = self.pacerAndAidView.top - 25;
         self.btnLeft.top = self.btnLeft.top - 55;
         self.btnRight.top = self.btnRight.top - 55;
         self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.lblOutTimeBadge.top - 55;
         self.numberPadContainerView.top = self.numberPadContainerView.top - 60;
-        self.numberPadContainerView.height = self.numberPadContainerView.height + 60;
+        self.numberPadContainerView.height = self.numberPadContainerView.height + 60;*/
     }
-    if (IS_IPHONE_X)
+    if (IS_IPHONE_X || IS_IPHONE_XR)
     {
+        self.headerContainerView.height = 190;
+        if (IS_IPHONE_XR)
+            self.headerContainerView.height = 210;
+        self.pacerAndAidView.top = self.headerContainerView.bottom;
         self.lblTitle.numberOfLines = 1;
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
         self.numberPadContainerView.height = self.numberPadContainerView.height - 30;
+        self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+        self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:75];
     }
     if (IS_IPAD)
     {
-        self.numberPadContainerView.top = self.numberPadContainerView.top + 90;
+        self.numberPadContainerView.height=self.view.height/2;
+        self.numberPadContainerView.top = self.view.height/2;
+        
+        self.headerContainerView.height = 210;
+        self.pacerAndAidView.top = self.headerContainerView.bottom;
+        self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:75];
+        self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+        self.btnRight.height = self.btnLeft.height = 143;
+        
+        /*self.numberPadContainerView.top = self.numberPadContainerView.top + 90;
         self.numberPadContainerView.height = self.numberPadContainerView.height - 50;
         self.lblPersonAdded.height = 50;
         self.lblAdded.height = 50;
@@ -102,8 +112,18 @@
         self.lblOutTimeBadge.top = self.btnLeft.top;
         self.lblPersonAdded.font = [UIFont fontWithName:self.lblPersonAdded.font.familyName size:45];
         self.lblAdded.font = [UIFont fontWithName:self.lblAdded.font.familyName size:45];
-        self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:45];
+        self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:45];*/
     }
+    
+    APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:self];
+    [numberPad.leftFunctionButton setTitle:@"*" forState:UIControlStateNormal];
+    numberPad.leftFunctionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    numberPad.frame = self.numberPadContainerView.bounds;
+    numberPad.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    numberPad.backgroundColor = [UIColor clearColor];
+    [self.numberPadContainerView addSubview:numberPad];
+    [numberPad setTextField:self.txtBibNumber];
+    
     
     self.lblOutTimeBadge.layer.cornerRadius = self.lblOutTimeBadge.width/2;
     self.lblInTimeBadge.layer.cornerRadius = self.lblInTimeBadge.width/2;
@@ -119,6 +139,7 @@
     [self.txtBibNumber addObserver:self forKeyPath:@"text"
                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                        context:nil];
+    
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -226,14 +247,29 @@
     if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
     {
         self.lblWithPacer.hidden = YES;
-        //self.btnPacer.hidden = YES;
+        self.btnPacer.hidden = YES;
+        self.btnStopped.center = CGPointMake(self.pacerAndAidView.width/2, self.pacerAndAidView.height/2);
     }
     else
     {
         self.lblWithPacer.hidden = NO;
         self.btnPacer.hidden = NO;
+        self.btnStopped.center = CGPointMake(self.pacerAndAidView.width/4, self.pacerAndAidView.height/2);
+        self.btnPacer.center = CGPointMake(self.pacerAndAidView.width/4*3, self.pacerAndAidView.height/2);
     }
     self.lblInTimeBadge.right = self.btnLeft.right - 5;
+    
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+    {
+        self.btnRight.width = self.btnLeft.width = self.view.height/2.7;
+        self.btnLeft.left = 10;
+        self.btnLeft.top = self.view.width/2.5;
+        
+        self.btnRight.right = self.view.right-10;
+        self.btnRight.top = self.btnLeft.top;
+    }
 }
 
 - (IBAction)onRight:(id)sender
@@ -444,7 +480,14 @@
                 self.lblAdded.text = effort.flexibleGeolocation;
                 //self.lblAdded.text = "
                 self.lblRunnerInfo.text = @"";
-                self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@, %@", [effort.gender capitalizedString],effort.age];
+                if(effort.age == nil)
+                {
+                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@ (%@)", [effort.gender capitalizedString],effort.age];
+                }
+                else
+                {
+                    self.lblSecondaryInfo.text = [NSString stringWithFormat:@"%@", [effort.gender capitalizedString]];
+                }
             }
             /*
             else
@@ -505,6 +548,51 @@
         ((UITextField*)(textInput)).text = [NSString stringWithFormat:@"%@%@",((UITextField*)(textInput)).text,@"*"];
     }
     else [textInput insertText:@"*"];
+}
+
+#pragma mark - Rotation
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
+    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
+    {
+        self.btnRight.width = self.btnLeft.width = self.view.width/2.7;
+        self.btnLeft.left = 10;
+        self.btnLeft.top = self.view.height/2.5;
+        
+        self.btnRight.right = self.view.right-10;
+        self.btnRight.top = self.btnLeft.top;
+    }
+    else
+    {
+        if (self.btnRight.hidden)
+        {
+            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.width = self.btnLeft.width = self.view.height;
+            self.btnRight.right = self.view.right;
+            self.btnLeft.left = self.view.left;
+            self.btnRight.height = self.btnLeft.height = 143;
+        }
+        else if (self.btnLeft.hidden)
+        {
+            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.width = self.btnLeft.width = self.view.height;
+            self.btnRight.right = self.view.right;
+            self.btnLeft.left = self.view.left;
+            self.btnRight.height = self.btnLeft.height = 143;
+        }
+        else
+        {
+            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.width = self.btnLeft.width = self.view.height/2 - 4;
+            self.btnRight.right = self.view.right;
+            self.btnLeft.left = self.view.left;
+            self.btnRight.height = self.btnLeft.height = 143;
+        }
+    }
 }
 
 @end
