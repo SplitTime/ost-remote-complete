@@ -74,16 +74,29 @@
         self.numberPadContainerView.top = self.numberPadContainerView.top - 60;
         self.numberPadContainerView.height = self.numberPadContainerView.height + 60;*/
     }
+    if (IS_IPHONE_6P)
+    {
+        self.numberPadContainerView.height = self.view.height/2-17;
+        self.numberPadContainerView.top = self.view.height/2+17;
+    }
     if (IS_IPHONE_X || IS_IPHONE_XR)
     {
         self.headerContainerView.height = 190;
         if (IS_IPHONE_XR)
+        {
             self.headerContainerView.height = 210;
+            self.numberPadContainerView.height = self.view.height/2-18;
+            self.numberPadContainerView.top = self.view.height/2+1;
+        }
+        else
+        {
+            self.numberPadContainerView.height = self.view.height/2 - 40;
+            self.numberPadContainerView.top = self.view.height/2 + 15;
+        }
         self.pacerAndAidView.top = self.headerContainerView.bottom;
         self.lblTitle.numberOfLines = 1;
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
-        self.numberPadContainerView.height = self.numberPadContainerView.height - 30;
         self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
         self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:75];
     }
