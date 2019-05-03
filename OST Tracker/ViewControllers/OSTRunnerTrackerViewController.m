@@ -46,6 +46,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;
 @property (weak, nonatomic) IBOutlet UILabel *lblSecondaryInfo;
 @property (weak, nonatomic) IBOutlet UIView *timeContainerView;
+@property (weak, nonatomic) IBOutlet UIView *separatoryLine;
+@property (weak, nonatomic) IBOutlet UILabel *lblTimeOfTheDay;
 
 @end
 
@@ -63,6 +65,17 @@
     self.btnLeft.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.btnRight.titleLabel.textAlignment = NSTextAlignmentCenter;
     
+    [self.lblInTimeBadge removeFromSuperview];
+    [self.lblOutTimeBadge removeFromSuperview];
+    
+    [self.btnLeft addSubview:self.lblInTimeBadge];
+    [self.btnRight addSubview:self.lblOutTimeBadge];
+    
+    self.lblInTimeBadge.top = 0;
+    self.lblInTimeBadge.right = self.btnLeft.width;
+    self.lblOutTimeBadge.top = 0;
+    self.lblOutTimeBadge.right = self.btnRight.width;
+    
     if (IS_IPHONE_5)
     {
         self.numberPadContainerView.height=220;
@@ -74,17 +87,30 @@
         self.numberPadContainerView.top = self.numberPadContainerView.top - 60;
         self.numberPadContainerView.height = self.numberPadContainerView.height + 60;*/
     }
+    if (IS_IPHONE_6P)
+    {
+        self.numberPadContainerView.height = self.view.height/2-17;
+        self.numberPadContainerView.top = self.view.height/2+17;
+    }
     if (IS_IPHONE_X || IS_IPHONE_XR)
     {
         self.headerContainerView.height = 190;
         if (IS_IPHONE_XR)
+        {
             self.headerContainerView.height = 210;
+            self.numberPadContainerView.height = self.view.height/2-18;
+            self.numberPadContainerView.top = self.view.height/2+1;
+        }
+        else
+        {
+            self.numberPadContainerView.height = self.view.height/2 - 40;
+            self.numberPadContainerView.top = self.view.height/2 + 15;
+        }
         self.pacerAndAidView.top = self.headerContainerView.bottom;
         self.lblTitle.numberOfLines = 1;
         self.lblTitle.bottom = self.lblTitle.bottom + 7;
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
-        self.numberPadContainerView.height = self.numberPadContainerView.height - 30;
-        self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+        self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
         self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:75];
     }
     if (IS_IPAD)
@@ -95,25 +121,29 @@
         self.headerContainerView.height = 210;
         self.pacerAndAidView.top = self.headerContainerView.bottom;
         self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:75];
-        self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+        self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
         self.btnRight.height = self.btnLeft.height = 143;
         
-        /*self.numberPadContainerView.top = self.numberPadContainerView.top + 90;
-        self.numberPadContainerView.height = self.numberPadContainerView.height - 50;
-        self.lblPersonAdded.height = 50;
-        self.lblAdded.height = 50;
-        self.lblRunnerInfo.height = 50;
-        self.lblPersonAdded.top += 20;
-        self.lblAdded.top = self.lblPersonAdded.bottom + 20;
-        self.timeContainerView.top = self.lblAdded.bottom + 40;
-        self.pacerAndAidView.top = self.timeContainerView.bottom + 40;
-        self.btnLeft.top = self.pacerAndAidView.bottom + 40;
-        self.btnRight.top = self.btnLeft.top;
-        self.lblInTimeBadge.top = self.btnLeft.top;
-        self.lblOutTimeBadge.top = self.btnLeft.top;
-        self.lblPersonAdded.font = [UIFont fontWithName:self.lblPersonAdded.font.familyName size:45];
-        self.lblAdded.font = [UIFont fontWithName:self.lblAdded.font.familyName size:45];
-        self.lblRunnerInfo.font = [UIFont fontWithName:self.lblRunnerInfo.font.familyName size:45];*/
+        self.btnRight.titleLabel.font = self.btnLeft.titleLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:33];
+        self.lblPersonAdded.font = [UIFont fontWithName:@"Helvetica Bold" size:36];
+        self.lblAdded.font = [UIFont fontWithName:@"Helvetica" size:28];
+        self.lblSecondaryInfo.font = [UIFont fontWithName:@"Helvetica" size:28];
+        self.lblAdded.top = self.lblAdded.top + 12;
+        self.lblTime.font = [UIFont fontWithName:@"Helvetica Bold" size:36];
+        self.txtBibNumber.font = [UIFont fontWithName:@"Helvetica Bold" size:100];
+        self.lblTimeOfTheDay.font = [UIFont fontWithName:@"Helvetica Bold" size:20];
+        self.separatoryLine.right += 50;
+        self.lblTimeOfTheDay.width += 30;
+        self.lblTimeOfTheDay.height += 6;
+        self.lblTimeOfTheDay.top-=10;
+        self.lblTimeOfTheDay.left+=5;
+        self.lblTime.width +=50;
+        self.txtBibNumber.width += 50;
+        self.lblTime.height += 15;
+        self.btnPacer.width = self.btnStopped.width = 174;
+        self.btnPacer.height = self.btnStopped.height = 56;
+        self.lblSecondaryInfo.top -= 50;
+        self.lblSecondaryInfo.height += 30;
     }
     
     APNumberPad *numberPad = [APNumberPad numberPadWithDelegate:self];
@@ -258,7 +288,6 @@
         self.btnStopped.center = CGPointMake(self.pacerAndAidView.width/4, self.pacerAndAidView.height/2);
         self.btnPacer.center = CGPointMake(self.pacerAndAidView.width/4*3, self.pacerAndAidView.height/2);
     }
-    self.lblInTimeBadge.right = self.btnLeft.right - 5;
     
     UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     
@@ -507,12 +536,12 @@
             }
             */
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count])
             {
                 self.lblInTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName ==  %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count]];
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName ==  %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count]];
                 }
                 else
                 {
@@ -520,12 +549,12 @@
                 }
             }
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnRight.titleLabel.text]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count])
             {
                 self.lblOutTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,self.btnRight.titleLabel.text]] count]];
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].splitName]] count]];
                 }
                 else
                 {
@@ -585,7 +614,7 @@
     {
         if (self.btnRight.hidden)
         {
-            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
             self.btnRight.width = self.btnLeft.width = self.view.height;
             self.btnRight.right = self.view.right;
             self.btnLeft.left = self.view.left;
@@ -593,7 +622,7 @@
         }
         else if (self.btnLeft.hidden)
         {
-            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
             self.btnRight.width = self.btnLeft.width = self.view.height;
             self.btnRight.right = self.view.right;
             self.btnLeft.left = self.view.left;
@@ -601,12 +630,13 @@
         }
         else
         {
-            self.btnRight.top = self.btnLeft.top = self.lblInTimeBadge.top = self.lblOutTimeBadge.top = self.pacerAndAidView.bottom + 10;
+            self.btnRight.top = self.btnLeft.top = self.pacerAndAidView.bottom + 10;
             self.btnRight.width = self.btnLeft.width = self.view.height/2 - 4;
             self.btnRight.right = self.view.right;
             self.btnLeft.left = self.view.left;
             self.btnRight.height = self.btnLeft.height = 143;
         }
+        
     }
 }
 
