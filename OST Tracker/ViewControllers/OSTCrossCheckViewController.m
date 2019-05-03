@@ -93,7 +93,11 @@ typedef enum {
         self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
         self.btnBulkSelect.bottom = self.btnBulkSelect.bottom + 7;
     }
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self reloadData];
 }
 

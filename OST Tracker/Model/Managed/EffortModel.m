@@ -109,8 +109,8 @@
 
 - (NSArray*) entriesForSplitName:(NSString*)splitName
 {
-    if (!_entries)
-    {
+//    if (!_entries)
+//    {
         _entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && combinedCourseId LIKE[c] %@ && splitName LIKE[c] %@",[self.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,splitName]];
         self.stoppedHere = @(NO);
         if (_entries.lastObject != nil)
@@ -118,17 +118,17 @@
             EntryModel *entry = _entries.lastObject;
             _stoppedHere = @([entry.stoppedHere isEqualToString:@"true"]);
         }
-    }
+    //}
     return _entries;
 }
 
 - (NSArray*) entries
 {
-    if (!_entries)
-    {
+//    if (!_entries)
+//    {
         _entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bibNumber LIKE[c] %@ && combinedCourseId LIKE[c] %@ && splitName LIKE[c] %@",[self.bibNumber stringValue],[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]];
         
-    }
+   // }
     return _entries;
 }
 
