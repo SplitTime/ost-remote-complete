@@ -536,12 +536,12 @@
             }
             */
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count])
             {
                 self.lblInTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName ==  %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count]];
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName ==  %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count]];
                 }
                 else
                 {
@@ -549,12 +549,12 @@
                 }
             }
             
-            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnRight.titleLabel.text]] count])
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count])
             {
                 self.lblOutTimeBadge.hidden = NO;
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
-                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,self.btnRight.titleLabel.text]] count]];
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].splitName]] count]];
                 }
                 else
                 {
