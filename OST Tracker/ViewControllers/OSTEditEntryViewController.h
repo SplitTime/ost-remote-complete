@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IQDropDownTextField.h"
 #import "EntryModel.h"
+#import "EffortModel.h"
 
 @interface OSTEditEntryViewController : UIViewController
 
@@ -19,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtDate;
 @property (nonatomic, copy) void (^entryHasBeenDeletedBlock)(void);
-@property (nonatomic, copy) void (^entryHasBeenUpdatedBlock)(void);
+@property (nonatomic, copy) void (^entryHasBeenUpdatedBlock)(EffortModel * effort);
 @property (nonatomic, assign) BOOL creatingNew;
 @property (weak, nonatomic) IBOutlet UIView *pacerAndAidView;
 @property (weak, nonatomic) IBOutlet UILabel *lblWithPacer;

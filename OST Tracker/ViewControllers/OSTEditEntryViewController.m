@@ -183,7 +183,7 @@
         
         if (self.entryHasBeenUpdatedBlock)
         {
-            self.entryHasBeenUpdatedBlock();
+            self.entryHasBeenUpdatedBlock(self.effort);
         }
         
         [[NSManagedObjectContext MR_defaultContext] processPendingChanges];
@@ -233,7 +233,7 @@
     
     if (self.entryHasBeenUpdatedBlock)
     {
-        self.entryHasBeenUpdatedBlock();
+        self.entryHasBeenUpdatedBlock(self.effort);
     }
 }
 

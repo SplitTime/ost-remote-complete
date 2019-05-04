@@ -438,19 +438,53 @@
         {
             weakSelf.lastEntry = nil;
             weakSelf.lblAdded.hidden = YES;
+
+            weakSelf.lblPersonAdded.text = @"Enter Bib Number";
+            weakSelf.lblRunnerInfo.text = @"";
+            weakSelf.lblSecondaryInfo.text = @"";
+            weakSelf.lblAdded.text = @"";
+            weakSelf.lblRunnerInfo.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
+            weakSelf.txtBibNumber.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
         };
         
-        editVC.entryHasBeenUpdatedBlock = ^
+        editVC.entryHasBeenUpdatedBlock = ^ (EffortModel* effort)
         {
             NSString * entryName = weakSelf.lastEntry.fullName;
             
             if (entryName.length == 0)
             {
-                entryName = @"Bib not found";
+                weakSelf.lblPersonAdded.text = @"Bib not found";
+                weakSelf.lblRunnerInfo.text = @"";
+                weakSelf.lblSecondaryInfo.text = @"";
+                weakSelf.lblAdded.text = @"";
+                weakSelf.lblRunnerInfo.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
+                weakSelf.txtBibNumber.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
             }
-            
-            weakSelf.lblPersonAdded.text = [NSString stringWithFormat:@"#%@ %@", [weakSelf.lastEntry.bibNumber isEqualToString:@"-1"]?@"":weakSelf.lastEntry.bibNumber, entryName];
-            
+            else
+            {
+                weakSelf.lblAdded.hidden = NO;
+                weakSelf.lblPersonAdded.text = effort.fullName;
+                weakSelf.lblAdded.text = effort.flexibleGeolocation;
+                
+                self.lblRunnerInfo.text = @"";
+                
+                NSMutableString *secondaryInfo = [NSMutableString new];
+                NSString *eventShortName = [self getEffortEventShortName:effort];
+                
+                if (eventShortName != nil)
+                {
+                    [secondaryInfo appendFormat:@"%@\n", eventShortName];
+                }
+                
+                [secondaryInfo appendString:[effort.gender capitalizedString]];
+                
+                if(effort.age != nil)
+                {
+                    [secondaryInfo appendFormat:@" (%@)", effort.age];
+                }
+                
+                weakSelf.lblSecondaryInfo.text = secondaryInfo;
+            }
         };
         
         [editVC configureWithEntry:self.lastEntry];
@@ -548,6 +582,18 @@
                     self.lblInTimeBadge.text = @"!";
                 }
             }
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count])
+            {
+                self.lblInTimeBadge.hidden = NO;
+                if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
+                {
+                    self.lblInTimeBadge.text = [NSString stringWithFormat:@"%ld",(unsigned long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName ==  %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count]];
+                }
+                else
+                {
+                    self.lblInTimeBadge.text = @"!";
+                }
+            }
             
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count])
             {
@@ -555,6 +601,18 @@
                 if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
                 {
                     self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].splitName]] count]];
+                }
+                else
+                {
+                    self.lblOutTimeBadge.text = @"!";
+                }
+            }
+            if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnRight.titleLabel.text]] count])
+            {
+                self.lblOutTimeBadge.hidden = NO;
+                if ([CurrentCourse getCurrentCourse].multiLap.boolValue)
+                {
+                    self.lblOutTimeBadge.text =  [NSString stringWithFormat:@"%ld",(long)[[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,self.btnRight.titleLabel.text]] count]];
                 }
                 else
                 {
