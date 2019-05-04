@@ -69,15 +69,29 @@
 - (void)updateSyncBadge
 {
     NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    CGFloat badgeRightEdge = self.badgeLabel.right;
     if (entries.count == 0)
     {
         self.badgeLabel.hidden = YES;
     }
     else
     {
+        NSString *badge = [NSString stringWithFormat:@"%@",@(entries.count)];
         self.badgeLabel.hidden = NO;
-        self.badgeLabel.text = [NSString stringWithFormat:@"%@",@(entries.count)];
+        self.badgeLabel.text = badge;
+        
+        if (badge.length == 1)
+        {
+            self.badgeLabel.width = self.badgeLabel.height;
+        }
+        else
+        {
+            CGRect badgeSize = [badge boundingRectWithSize:CGSizeMake(FLT_MAX, self.badgeLabel.height) options:0 attributes:@{NSFontAttributeName:self.badgeLabel.font} context:nil];
+            CGFloat padding = 8;
+            self.badgeLabel.width = badgeSize.size.width + padding * 2;
+        }
     }
+    self.badgeLabel.right = badgeRightEdge;
 }
 
 @end

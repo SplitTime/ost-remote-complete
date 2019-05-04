@@ -496,11 +496,13 @@
 - (IBAction)onButtonPacer:(id)sender
 {
    self.btnPacer.selected = !self.btnPacer.selected;
+    [[OSTSound shared] play:@"ost-remote-switch-1"];
 }
 
 - (IBAction)onBtnStopped:(id)sender
 {
     self.btnStopped.selected = !self.btnStopped.selected;
+    [[OSTSound shared] play:@"ost-remote-switch-1"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
@@ -586,6 +588,7 @@
                 else
                 {
                     self.lblInTimeBadge.text = @"!";
+                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count])
@@ -598,6 +601,7 @@
                 else
                 {
                     self.lblInTimeBadge.text = @"!";
+                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
             
@@ -611,6 +615,7 @@
                 else
                 {
                     self.lblOutTimeBadge.text = @"!";
+                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnRight.titleLabel.text]] count])
@@ -623,6 +628,7 @@
                 else
                 {
                     self.lblOutTimeBadge.text = @"!";
+                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
 
@@ -634,6 +640,7 @@
             self.txtBibNumber.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
             self.lblPersonAdded.text = @"";
             self.lblSecondaryInfo.text = @"";
+            [[OSTSound shared] play:@"ost-remote-bib-not-found"];
         }
     }
 }

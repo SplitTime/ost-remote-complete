@@ -151,6 +151,14 @@
 		D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */; };
 		D529FA0E2190AE5800454448 /* delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = D529FA0D2190AE5800454448 /* delete.wav */; };
 		D529FA0F2190AE5800454448 /* delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = D529FA0D2190AE5800454448 /* delete.wav */; };
+		D52BBFCC227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFC8227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav */; };
+		D52BBFCD227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFC8227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav */; };
+		D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFC9227E0B360035FE07 /* ost-remote-bib-not-found.wav */; };
+		D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFC9227E0B360035FE07 /* ost-remote-bib-not-found.wav */; };
+		D52BBFD0227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFCA227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav */; };
+		D52BBFD1227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFCA227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav */; };
+		D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFCB227E0B360035FE07 /* ost-remote-switch-1.wav */; };
+		D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52BBFCB227E0B360035FE07 /* ost-remote-switch-1.wav */; };
 		D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4A217E0AE70071D6CF /* input_click.wav */; };
 		D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4A217E0AE70071D6CF /* input_click.wav */; };
 		D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5C5BC4B217E0AE70071D6CF /* click.wav */; };
@@ -299,6 +307,10 @@
 		D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCheckmarkView.m; sourceTree = "<group>"; };
 		D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTCheckmarkView.xib; sourceTree = "<group>"; };
 		D529FA0D2190AE5800454448 /* delete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = delete.wav; sourceTree = "<group>"; };
+		D52BBFC8227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ost-remote-bib-wrong-event-2.wav"; sourceTree = "<group>"; };
+		D52BBFC9227E0B360035FE07 /* ost-remote-bib-not-found.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ost-remote-bib-not-found.wav"; sourceTree = "<group>"; };
+		D52BBFCA227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ost-remote-bib-wrong-event-1.wav"; sourceTree = "<group>"; };
+		D52BBFCB227E0B360035FE07 /* ost-remote-switch-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ost-remote-switch-1.wav"; sourceTree = "<group>"; };
 		D5C5BC4A217E0AE70071D6CF /* input_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = input_click.wav; sourceTree = "<group>"; };
 		D5C5BC4B217E0AE70071D6CF /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
 		D5C5BC50217E0B480071D6CF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -626,6 +638,10 @@
 		D5C5BC49217E0ACA0071D6CF /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				D52BBFC9227E0B360035FE07 /* ost-remote-bib-not-found.wav */,
+				D52BBFCA227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav */,
+				D52BBFC8227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav */,
+				D52BBFCB227E0B360035FE07 /* ost-remote-switch-1.wav */,
 				D5C5BC54217E0B980071D6CF /* OSTSound.h */,
 				D5C5BC55217E0B980071D6CF /* OSTSound.m */,
 				D529FA0D2190AE5800454448 /* delete.wav */,
@@ -772,18 +788,22 @@
 			files = (
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
+				D52BBFD0227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
+				D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
+				D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
 				033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
 				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0E2190AE5800454448 /* delete.wav in Resources */,
+				D52BBFCC227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */,
 				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */,
 				6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */,
@@ -798,18 +818,22 @@
 			files = (
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
+				D52BBFD1227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
+				D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
+				D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
 				033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0F2190AE5800454448 /* delete.wav in Resources */,
+				D52BBFCD227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */,
 				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */,
 				6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */,
