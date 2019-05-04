@@ -476,11 +476,14 @@
                     [secondaryInfo appendFormat:@"%@\n", eventShortName];
                 }
                 
-                [secondaryInfo appendString:[effort.gender capitalizedString]];
+                if (effort.gender)
+                    [secondaryInfo appendString:[effort.gender capitalizedString]];
                 
                 if(effort.age != nil)
                 {
-                    [secondaryInfo appendFormat:@" (%@)", effort.age];
+                    if (effort.gender)
+                        [secondaryInfo appendFormat:@" (%@)", effort.age];
+                    else [secondaryInfo appendFormat:@"%@", effort.age];
                 }
                 
                 weakSelf.lblSecondaryInfo.text = secondaryInfo;
@@ -553,11 +556,14 @@
                     [secondaryInfo appendFormat:@"%@\n", eventShortName];
                 }
                 
-                [secondaryInfo appendString:[effort.gender capitalizedString]];
+                if (effort.gender)
+                    [secondaryInfo appendString:[effort.gender capitalizedString]];
                 
                 if(effort.age != nil)
                 {
-                    [secondaryInfo appendFormat:@" (%@)", effort.age];
+                    if (effort.gender)
+                        [secondaryInfo appendFormat:@" (%@)", effort.age];
+                    else [secondaryInfo appendFormat:@"%@", effort.age];
                 }
                 
                 self.lblSecondaryInfo.text = secondaryInfo;
