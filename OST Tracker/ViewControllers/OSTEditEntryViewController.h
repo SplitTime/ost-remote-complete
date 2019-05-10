@@ -14,10 +14,10 @@
 @interface OSTEditEntryViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *txtBibNumber;
-@property (weak, nonatomic) IBOutlet UISwitch *swchPacer;
+@property (weak, nonatomic) IBOutlet UIButton *swchPacer;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblRunner;
-@property (weak, nonatomic) IBOutlet UISwitch *swchStoppedHere;
+@property (weak, nonatomic) IBOutlet UIButton *swchStoppedHere;
 @property (weak, nonatomic) IBOutlet IQDropDownTextField *txtDate;
 @property (nonatomic, copy) void (^entryHasBeenDeletedBlock)(void);
 @property (nonatomic, copy) void (^entryHasBeenUpdatedBlock)(EffortModel * effort);

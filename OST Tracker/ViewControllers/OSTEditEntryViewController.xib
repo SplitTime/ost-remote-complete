@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,10 +16,9 @@
                 <outlet property="btnUpdate" destination="sKL-md-pnu" id="bfn-MI-0G5"/>
                 <outlet property="lblRunner" destination="Y3h-Un-ajh" id="frV-f9-H0X"/>
                 <outlet property="lblTitle" destination="V9W-GY-ZSh" id="aVa-5I-XBF"/>
-                <outlet property="lblWithPacer" destination="0Vk-zN-zAP" id="nh9-hU-KFR"/>
                 <outlet property="pacerAndAidView" destination="cab-xC-R6Y" id="7dp-iO-zFN"/>
-                <outlet property="swchPacer" destination="w9x-sF-BKr" id="2um-tk-ypn"/>
-                <outlet property="swchStoppedHere" destination="eQ3-Fk-JGC" id="iBp-Fg-7s5"/>
+                <outlet property="swchPacer" destination="THs-bJ-HqY" id="mzl-gK-kHq"/>
+                <outlet property="swchStoppedHere" destination="ued-GK-UcS" id="V7W-bN-Dhm"/>
                 <outlet property="txtBibNumber" destination="sfc-6M-yoK" id="sI1-d8-LE8"/>
                 <outlet property="txtDate" destination="ZwX-pG-ZTw" id="RUi-w0-fWZ"/>
                 <outlet property="txtTime" destination="dMQ-UJ-B8b" id="cJw-DK-uSh"/>
@@ -31,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" misplaced="YES" id="dyC-2g-n0q">
+                <view contentMode="scaleToFill" id="dyC-2g-n0q">
                     <rect key="frame" x="0.0" y="-5" width="375" height="61"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -42,7 +41,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7mq-cv-80S">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7mq-cv-80S">
                             <rect key="frame" x="288" y="21" width="79" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Cancel"/>
@@ -53,14 +52,14 @@
                     </subviews>
                     <color key="backgroundColor" red="0.97244364019999996" green="0.97260981800000001" blue="0.97243314979999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bib" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y3h-Un-ajh">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bib" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y3h-Un-ajh">
                     <rect key="frame" x="23" y="111" width="343" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="08F-MF-9zo">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="08F-MF-9zo">
                     <rect key="frame" x="0.0" y="323" width="170" height="52"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.96757537126541138" green="0.17743164300918579" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -72,7 +71,7 @@
                         <action selector="onDelete:" destination="-1" eventType="touchUpInside" id="c1U-j7-RFZ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sKL-md-pnu">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sKL-md-pnu">
                     <rect key="frame" x="205" y="323" width="170" height="52"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.20133420830000001" green="0.61206537490000001" blue="0.82850140329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,46 +83,51 @@
                         <action selector="onUpdate:" destination="-1" eventType="touchUpInside" id="ONl-ka-HoV"/>
                     </connections>
                 </button>
-                <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="cab-xC-R6Y">
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="cab-xC-R6Y">
                     <rect key="frame" x="0.0" y="231" width="375" height="88"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="With Pacer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Vk-zN-zAP">
-                            <rect key="frame" x="24" y="54" width="102" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <view contentMode="scaleToFill" id="S9E-OS-TSq">
-                            <rect key="frame" x="14" y="42" width="359" height="1"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.74901960779999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
-                        </view>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ued-GK-UcS">
+                            <rect key="frame" x="24" y="23" width="120" height="41"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                            <state key="normal" image="btn_continue_1x">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="btn_stopped"/>
+                            <state key="highlighted">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="onSwitch:" destination="-1" eventType="touchUpInside" id="e2E-iZ-ogS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="THs-bJ-HqY">
+                            <rect key="frame" x="224" y="23" width="120" height="41"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                            <state key="normal" image="btn_noPace">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="btn_pacer"/>
+                            <state key="highlighted">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="onSwitch:" destination="-1" eventType="touchUpInside" id="Jnh-BH-cX0"/>
+                            </connections>
+                        </button>
                         <view contentMode="scaleToFill" id="VmD-GA-PUn">
                             <rect key="frame" x="14" y="87" width="359" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.74901960779999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="w9x-sF-BKr">
-                            <rect key="frame" x="294" y="49" width="51" height="31"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        </switch>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Stopped Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AKP-rx-eTD">
-                            <rect key="frame" x="24" y="11" width="126" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="eQ3-Fk-JGC">
-                            <rect key="frame" x="294" y="6" width="51" height="31"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        </switch>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" id="sFf-sW-Hpc">
+                <view contentMode="scaleToFill" id="sFf-sW-Hpc">
                     <rect key="frame" x="0.0" y="138" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -139,7 +143,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.74901960779999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="ZwX-pG-ZTw" customClass="IQDropDownTextField">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="ZwX-pG-ZTw" customClass="IQDropDownTextField">
                             <rect key="frame" x="139" y="7" width="213" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -153,7 +157,7 @@
                         <outletCollection property="gestureRecognizers" destination="1f1-qV-RiX" appends="YES" id="GqM-5h-W8c"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" id="fZw-te-UdC">
+                <view contentMode="scaleToFill" id="fZw-te-UdC">
                     <rect key="frame" x="0.0" y="182" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -187,7 +191,7 @@
                         <outletCollection property="gestureRecognizers" destination="j15-Vh-RF9" appends="YES" id="tnI-Nt-eDh"/>
                     </connections>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" id="9Sy-eY-300">
+                <view contentMode="scaleToFill" id="9Sy-eY-300">
                     <rect key="frame" x="0.0" y="59" width="375" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -203,7 +207,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.74901960779999999" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="sfc-6M-yoK">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="sfc-6M-yoK">
                             <rect key="frame" x="139" y="8" width="213" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -222,7 +226,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.9370916485786438" green="0.93694382905960083" blue="0.95754462480545044" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="48.550724637681164" y="35.825892857142854"/>
         </view>
         <tapGestureRecognizer id="HNo-Be-EPf">
             <connections>
@@ -240,4 +244,10 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="btn_continue_1x" width="173" height="56"/>
+        <image name="btn_noPace" width="173" height="56"/>
+        <image name="btn_pacer" width="173" height="56"/>
+        <image name="btn_stopped" width="173" height="56"/>
+    </resources>
 </document>

@@ -174,10 +174,10 @@
         
         newEntry.source = self.entry.source;
         
-        if (self.swchPacer.on)
+        if (self.swchPacer.selected)
             newEntry.withPacer = @"true";
         else newEntry.withPacer = @"false";
-        if (self.swchStoppedHere.on)
+        if (self.swchStoppedHere.selected)
             newEntry.stoppedHere = @"true";
         else newEntry.stoppedHere = @"false";
         
@@ -220,10 +220,10 @@
         self.entry.absoluteTime = [NSString stringWithFormat:@"%@ %@%02d:00",dayString, self.txtTime.text,timezoneoffset];
     else self.entry.absoluteTime = [NSString stringWithFormat:@"%@ %@+%02d:00",dayString, self.txtTime.text,timezoneoffset];
     
-    if (self.swchPacer.on)
+    if (self.swchPacer.selected)
         self.entry.withPacer = @"true";
     else self.entry.withPacer = @"false";
-    if (self.swchStoppedHere.on)
+    if (self.swchStoppedHere.selected)
         self.entry.stoppedHere = @"true";
     else self.entry.stoppedHere = @"false";
     
@@ -270,6 +270,11 @@
     [self.txtTime becomeFirstResponder];
 }
 
+- (IBAction)onSwitch:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+}
+
 - (void) configureWithEntry:(EntryModel*)entry
 {
     self.entry = entry;
@@ -279,8 +284,8 @@
         self.txtBibNumber.selectedTextRange = [self.txtBibNumber textRangeFromPosition:self.txtBibNumber.endOfDocument toPosition:self.txtBibNumber.endOfDocument];
     }
     self.lblTitle.text = entry.courseName;
-    self.swchPacer.on = entry.withPacer.boolValue;
-    self.swchStoppedHere.on = entry.stoppedHere.boolValue;
+    self.swchPacer.selected = entry.withPacer.boolValue;
+    self.swchStoppedHere.selected = entry.stoppedHere.boolValue;
     
     self.txtDate.date = entry.entryTime;
     
