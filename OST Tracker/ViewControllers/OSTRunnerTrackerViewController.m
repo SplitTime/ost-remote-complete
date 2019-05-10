@@ -16,6 +16,7 @@
 #import "IQKeyboardManager.h"
 #import "APNumberPad.h"
 #import "OSTSound.h"
+#import "OSTRunnerBadge.h"
 
 @interface OSTRunnerTrackerViewController () <APNumberPadDelegate>
 
@@ -48,6 +49,7 @@
 @property (weak, nonatomic) IBOutlet UIView *timeContainerView;
 @property (weak, nonatomic) IBOutlet UIView *separatoryLine;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeOfTheDay;
+@property (weak, nonatomic) IBOutlet OSTRunnerBadge *runnerBadge;
 
 @end
 
@@ -310,6 +312,7 @@
 - (void) cleanData
 {
     self.lastEntry = nil;
+    self.runnerBadge.hidden = YES;
     self.lblAdded.hidden = YES;
     self.lblRunnerInfo.hidden = YES;
     self.btnPacer.selected = NO;
@@ -407,6 +410,12 @@
     self.lblPersonAdded.text = [NSString stringWithFormat:@"%@", entryName];
     self.lblAdded.text = self.racer.flexibleGeolocation ? : @"";
     self.lastEntry = entry;
+    self.runnerBadge.hidden = entry == nil;
+    
+    if (!self.runnerBadge.hidden)
+    {
+        [self.runnerBadge updateWithModel:[self runnerBadgeViewModel]];
+    }
     
     self.txtBibNumber.text = @"";
     self.btnPacer.selected = NO;
@@ -437,6 +446,7 @@
         editVC.entryHasBeenDeletedBlock = ^
         {
             weakSelf.lastEntry = nil;
+            weakSelf.runnerBadge.hidden = YES;
             weakSelf.lblAdded.hidden = YES;
 
             weakSelf.lblPersonAdded.text = @"Enter Bib Number";
@@ -515,6 +525,7 @@
 {
     self.lblRunnerInfo.hidden = NO;
     self.lastEntry = nil;
+    self.runnerBadge.hidden = YES;
     
     self.lblAdded.hidden = YES;
     
@@ -709,6 +720,30 @@
         }
         
     }
+}
+
+- (OSTRunnerBadgeViewModel *)runnerBadgeViewModel
+{
+    OSTRunnerBadgeViewModel *viewModel = [OSTRunnerBadgeViewModel new];
+    
+    viewModel.bibNumber = [NSString stringWithFormat:@"%@", self.racer.bibNumber];
+    viewModel.time = self.lblTime.text;
+    
+    NSMutableString *caption = [NSMutableString new];
+    
+    if (self.racer.gender)
+        [caption appendString:[self.racer.gender capitalizedString]];
+    
+    if(self.racer.age != nil)
+    {
+        if (self.racer.gender)
+            [caption appendFormat:@" (%@)", self.racer.age];
+        else [caption appendFormat:@"%@", self.racer.age];
+    }
+    
+    viewModel.caption = caption;
+    
+    return viewModel;
 }
 
 @end

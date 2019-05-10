@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -30,6 +30,7 @@
                 <outlet property="menuButton" destination="tVa-2H-hUR" id="ZfG-Ld-psX"/>
                 <outlet property="numberPadContainerView" destination="ePO-Sn-Tm1" id="uJB-lf-lvg"/>
                 <outlet property="pacerAndAidView" destination="7Pm-W7-8Ej" id="XXJ-iU-nkM"/>
+                <outlet property="runnerBadge" destination="aN4-dC-qBc" id="cEP-ZA-tNf"/>
                 <outlet property="separatoryLine" destination="aD2-OA-fsX" id="cJ5-aF-LDH"/>
                 <outlet property="txtBibNumber" destination="eLm-05-491" id="HbS-2d-bSk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -37,12 +38,15 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="gPY-32-JMQ">
-                    <rect key="frame" x="0.0" y="66" width="375" height="156"/>
+                    <rect key="frame" x="0.0" y="66" width="320" height="156"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <userGuides>
+                        <userLayoutGuide location="229" affinity="minX"/>
+                    </userGuides>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" id="aD2-OA-fsX">
                             <rect key="frame" x="137" y="14" width="2" height="133"/>
@@ -50,22 +54,15 @@
                             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BN5-h1-nq1">
-                            <rect key="frame" x="156" y="72" width="208" height="21"/>
+                            <rect key="frame" x="156" y="72" width="153" height="21"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <gestureRecognizers/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mNM-fg-4K6">
-                            <rect key="frame" x="156" y="20" width="208" height="136"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <connections>
-                                <action selector="onRunnerInfo:" destination="-1" eventType="touchUpInside" id="HeN-MX-HEy"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Bib Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsFontForContentSizeCategory="YES" id="AS8-LV-odn">
-                            <rect key="frame" x="156" y="5" width="208" height="47"/>
+                            <rect key="frame" x="153" y="5" width="153" height="47"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="28"/>
                             <nil key="highlightedColor"/>
@@ -89,14 +86,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OsX-Jc-g6K">
-                            <rect key="frame" x="156" y="40" width="208" height="30"/>
+                            <rect key="frame" x="156" y="40" width="153" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                             <color key="textColor" red="0.33969086408615112" green="0.57548272609710693" blue="0.76473098993301392" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ee2-Ee-mFk">
-                            <rect key="frame" x="156" y="94" width="208" height="59"/>
+                            <rect key="frame" x="156" y="94" width="153" height="59"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="23"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -109,11 +106,23 @@
                             <color key="textColor" red="0.30600780248641968" green="0.60815733671188354" blue="0.3175932765007019" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view hidden="YES" contentMode="scaleToFill" id="aN4-dC-qBc" customClass="OSTRunnerBadge">
+                            <rect key="frame" x="146" y="46" width="167" height="105"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mNM-fg-4K6">
+                            <rect key="frame" x="156" y="20" width="153" height="136"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <connections>
+                                <action selector="onRunnerInfo:" destination="-1" eventType="touchUpInside" id="HeN-MX-HEy"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" id="ePO-Sn-Tm1">
-                    <rect key="frame" x="0.0" y="387" width="375" height="280"/>
+                    <rect key="frame" x="0.0" y="330" width="320" height="238"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </view>
@@ -134,7 +143,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" id="Jgi-Yq-TgX">
-                    <rect key="frame" x="190" y="295" width="185" height="84"/>
+                    <rect key="frame" x="135" y="295" width="185" height="84"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
@@ -150,23 +159,23 @@
                     </connections>
                 </button>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="uyk-13-lFs">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" id="DGN-GA-gMc">
-                            <rect key="frame" x="88" y="18" width="199" height="44"/>
+                            <rect key="frame" x="88" y="18" width="144" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" id="3UJ-ht-rGJ">
-                            <rect key="frame" x="0.0" y="64" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="64" width="320" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.69796198606491089" green="0.69808381795883179" blue="0.69795435667037964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tVa-2H-hUR">
-                            <rect key="frame" x="253" y="18" width="122" height="44"/>
+                            <rect key="frame" x="198" y="18" width="122" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="Menu"/>
                             <connections>
@@ -174,7 +183,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0cT-Gr-hTl">
-                            <rect key="frame" x="353" y="20" width="20" height="21"/>
+                            <rect key="frame" x="298" y="20" width="20" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -185,11 +194,11 @@
                     <color key="backgroundColor" red="0.95283776521682739" green="0.95300072431564331" blue="0.95282751321792603" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="7Pm-W7-8Ej">
-                    <rect key="frame" x="0.0" y="218" width="375" height="70"/>
+                    <rect key="frame" x="0.0" y="218" width="320" height="70"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YPA-9z-vhT">
-                            <rect key="frame" x="40" y="15" width="120" height="41"/>
+                            <rect key="frame" x="31" y="15" width="120" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
@@ -205,7 +214,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Vx-At-Y5w">
-                            <rect key="frame" x="214" y="15" width="120" height="41"/>
+                            <rect key="frame" x="168" y="15" width="120" height="41"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="23"/>
@@ -224,7 +233,7 @@
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="naY-J2-LaL">
-                    <rect key="frame" x="162" y="296" width="20" height="21"/>
+                    <rect key="frame" x="137" y="296" width="20" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -232,7 +241,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="od4-F2-CcV">
-                    <rect key="frame" x="352" y="296" width="20" height="21"/>
+                    <rect key="frame" x="297" y="296" width="20" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -241,7 +250,7 @@
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <point key="canvasLocation" x="437.60000000000002" y="-10.344827586206897"/>
+            <point key="canvasLocation" x="436.875" y="-11.25"/>
         </view>
     </objects>
     <resources>
