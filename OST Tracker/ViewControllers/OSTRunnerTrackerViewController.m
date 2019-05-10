@@ -415,6 +415,8 @@
     if (!self.runnerBadge.hidden)
     {
         [self.runnerBadge updateWithModel:[self runnerBadgeViewModel]];
+        self.lblAdded.text = @"";
+        self.lblSecondaryInfo.text = @"";
     }
     
     self.txtBibNumber.text = @"";
