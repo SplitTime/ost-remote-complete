@@ -128,6 +128,7 @@
         
         self.btnRight.titleLabel.font = self.btnLeft.titleLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:33];
         self.lblPersonAdded.font = [UIFont fontWithName:@"Helvetica Bold" size:36];
+        self.lblRunnerInfo.font = self.lblPersonAdded.font;
         self.lblAdded.font = [UIFont fontWithName:@"Helvetica" size:28];
         self.lblSecondaryInfo.font = [UIFont fontWithName:@"Helvetica" size:28];
         self.lblAdded.top = self.lblAdded.top + 12;
@@ -173,6 +174,14 @@
                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                        context:nil];
     
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.runnerBadge.width = fminf(0.58 * self.view.width, 350);
+    self.runnerBadge.centerX = self.lblPersonAdded.centerX;
+     [self.runnerBadge adjustFontSizes];
 }
 
 -(void)onTick:(NSTimer *)timer
@@ -414,7 +423,7 @@
     
     if (!self.runnerBadge.hidden)
     {
-        [self.runnerBadge updateWithModel:[self runnerBadgeViewModel]];
+        [self.runnerBadge updateWithModel:[self runnerBadgeViewModelWithRacer:self.racer time:self.lblTime.text]];
         self.lblAdded.text = @"";
         self.lblSecondaryInfo.text = @"";
     }
@@ -471,34 +480,13 @@
                 weakSelf.lblAdded.text = @"";
                 weakSelf.lblRunnerInfo.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
                 weakSelf.txtBibNumber.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
+                weakSelf.runnerBadge.hidden = YES;
             }
             else
             {
-                weakSelf.lblAdded.hidden = NO;
                 weakSelf.lblPersonAdded.text = effort.fullName;
-                weakSelf.lblAdded.text = effort.flexibleGeolocation;
-                
+                [weakSelf.runnerBadge updateWithModel:[self runnerBadgeViewModelWithRacer:effort time:self.lastEntry.displayTime]];
                 self.lblRunnerInfo.text = @"";
-                
-                NSMutableString *secondaryInfo = [NSMutableString new];
-                NSString *eventShortName = [self getEffortEventShortName:effort];
-                
-                if (eventShortName != nil)
-                {
-                    [secondaryInfo appendFormat:@"%@\n", eventShortName];
-                }
-                
-                if (effort.gender)
-                    [secondaryInfo appendString:[effort.gender capitalizedString]];
-                
-                if(effort.age != nil)
-                {
-                    if (effort.gender)
-                        [secondaryInfo appendFormat:@" (%@)", effort.age];
-                    else [secondaryInfo appendFormat:@"%@", effort.age];
-                }
-                
-                weakSelf.lblSecondaryInfo.text = secondaryInfo;
             }
         };
         
@@ -724,23 +712,23 @@
     }
 }
 
-- (OSTRunnerBadgeViewModel *)runnerBadgeViewModel
+- (OSTRunnerBadgeViewModel *)runnerBadgeViewModelWithRacer:(EffortModel *)racer time:(NSString *)time
 {
     OSTRunnerBadgeViewModel *viewModel = [OSTRunnerBadgeViewModel new];
     
-    viewModel.bibNumber = [NSString stringWithFormat:@"%@", self.racer.bibNumber];
-    viewModel.time = self.lblTime.text;
+    viewModel.bibNumber = [NSString stringWithFormat:@"%@", racer.bibNumber];
+    viewModel.time = time;
     
     NSMutableString *caption = [NSMutableString new];
     
-    if (self.racer.gender)
-        [caption appendString:[self.racer.gender capitalizedString]];
+    if (racer.gender)
+        [caption appendString:[racer.gender capitalizedString]];
     
-    if(self.racer.age != nil)
+    if(racer.age != nil)
     {
-        if (self.racer.gender)
-            [caption appendFormat:@" (%@)", self.racer.age];
-        else [caption appendFormat:@"%@", self.racer.age];
+        if (racer.gender)
+            [caption appendFormat:@" (%@)", racer.age];
+        else [caption appendFormat:@"%@", racer.age];
     }
     
     viewModel.caption = caption;

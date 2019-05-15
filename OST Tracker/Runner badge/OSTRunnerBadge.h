@@ -15,6 +15,7 @@ IB_DESIGNABLE
 @interface OSTRunnerBadge : UIView
 
 - (void)updateWithModel:(OSTRunnerBadgeViewModel *)viewModel;
+- (void)adjustFontSizes;
 
 @end
 
