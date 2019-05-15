@@ -542,42 +542,36 @@
         
         if (effort)
         {
-            //if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+            self.racer = effort;
+            self.lblAdded.hidden = NO;
+            self.lblPersonAdded.text = effort.fullName;
+            self.lblAdded.text = effort.flexibleGeolocation;
+            //self.lblAdded.text = "
+            self.lblRunnerInfo.text = @"";
+            
+            NSMutableString *secondaryInfo = [NSMutableString new];
+            NSString *eventShortName = [self getEffortEventShortName:effort];
+            
+            if (eventShortName != nil)
             {
-                self.racer = effort;
-                self.lblAdded.hidden = NO;
-                self.lblPersonAdded.text = effort.fullName;
-                self.lblAdded.text = effort.flexibleGeolocation;
-                //self.lblAdded.text = "
-                self.lblRunnerInfo.text = @"";
-                
-                NSMutableString *secondaryInfo = [NSMutableString new];
-                NSString *eventShortName = [self getEffortEventShortName:effort];
-                
-                if (eventShortName != nil)
-                {
-                    [secondaryInfo appendFormat:@"%@\n", eventShortName];
-                }
-                
+                [secondaryInfo appendFormat:@"%@\n", eventShortName];
+            }
+            
+            if (effort.gender)
+            [secondaryInfo appendString:[effort.gender capitalizedString]];
+            
+            if(effort.age != nil)
+            {
                 if (effort.gender)
-                    [secondaryInfo appendString:[effort.gender capitalizedString]];
-                
-                if(effort.age != nil)
-                {
-                    if (effort.gender)
-                        [secondaryInfo appendFormat:@" (%@)", effort.age];
-                    else [secondaryInfo appendFormat:@"%@", effort.age];
-                }
-                
-                self.lblSecondaryInfo.text = secondaryInfo;
+                [secondaryInfo appendFormat:@" (%@)", effort.age];
+                else [secondaryInfo appendFormat:@"%@", effort.age];
             }
-            /*
-            else
+            
+            self.lblSecondaryInfo.text = secondaryInfo;
+            if (![effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
             {
-                self.lblRunnerInfo.text = @"Bib Not Found";
-                self.lblRunnerInfo.textColor = [UIColor redColor];
+                [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
             }
-            */
             
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count])
             {
@@ -589,7 +583,6 @@
                 else
                 {
                     self.lblInTimeBadge.text = @"!";
-                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnLeft.titleLabel.text]] count])
@@ -602,7 +595,6 @@
                 else
                 {
                     self.lblInTimeBadge.text = @"!";
-                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
             
@@ -616,7 +608,6 @@
                 else
                 {
                     self.lblOutTimeBadge.text = @"!";
-                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.rightBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,self.btnRight.titleLabel.text]] count])
@@ -629,7 +620,6 @@
                 else
                 {
                     self.lblOutTimeBadge.text = @"!";
-                    [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
                 }
             }
 
