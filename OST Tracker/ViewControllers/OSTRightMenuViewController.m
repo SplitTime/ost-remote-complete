@@ -55,6 +55,7 @@
 {
     [super viewWillAppear:animated];
     [self.syncIndicator setHidden:![[OSTSyncManager shared] isSyncing]];
+    [self updateSyncBadge];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -207,6 +208,10 @@
     {
         self.lblBadge.hidden = NO;
         self.lblBadge.text = [NSString stringWithFormat:@"%@",@(entries.count)];
+        
+        CGRect badgeSize = [self.lblBadge.text boundingRectWithSize:CGSizeMake(FLT_MAX, self.lblBadge.height) options:0 attributes:@{NSFontAttributeName:self.lblBadge.font} context:nil];
+        CGFloat padding = 8;
+        self.lblBadge.width = badgeSize.size.width + padding * 2;
     }
 }
 

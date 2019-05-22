@@ -333,8 +333,6 @@
 
 - (IBAction)onEntryButton:(id)sender
 {
-    [[OSTSound shared] play:@"click"];
-    
     [self.txtBibNumber removeObserver:self forKeyPath:@"text"];
     [[UIDevice currentDevice] playInputClick];
     
@@ -406,27 +404,35 @@
     self.lblPersonAdded.hidden = NO;
     
     NSString * entryName = entry.fullName;
+    BOOL bibFound = entryName.length > 0;
     
-    if (entryName.length == 0)
+    if (!bibFound)
     {
         entryName = @"Bib not found";
+        [[OSTSound shared] play:@"ost-remote-bib-not-found"];
     }
     else
     {
+        if ([self.racer checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
+        {
+            [[OSTSound shared] play:@"click"];
+        }
+        else
+        {
+            [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
+        }
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
     }
     
     self.lblPersonAdded.text = [NSString stringWithFormat:@"%@", entryName];
     self.lblAdded.text = self.racer.flexibleGeolocation ? : @"";
     self.lastEntry = entry;
-    self.runnerBadge.hidden = entry == nil;
+    self.runnerBadge.hidden = NO;
     
-    if (!self.runnerBadge.hidden)
-    {
-        [self.runnerBadge updateWithModel:[self runnerBadgeViewModelWithRacer:self.racer time:self.lblTime.text]];
-        self.lblAdded.text = @"";
-        self.lblSecondaryInfo.text = @"";
-    }
+    [self.runnerBadge updateWithModel:[self runnerBadgeViewModelWithRacer:self.racer time:self.lblTime.text bibNumber:self.txtBibNumber.text]];
+    self.lblAdded.text = @"";
+    self.lblSecondaryInfo.text = @"";
     
     self.txtBibNumber.text = @"";
     self.btnPacer.selected = NO;
@@ -438,13 +444,26 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    
     if ([string rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet].invertedSet].location != NSNotFound)
     {
         return NO;
     }
     
-    return YES;
+    // Prevent crashing undo bug
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    BOOL entryAccepted = newLength <= 4;
+    
+    if (!entryAccepted)
+    {
+        [[OSTSound shared] play:@"ost-remote-keypress-negative"];
+    }
+    
+    return entryAccepted;
 }
 
 - (IBAction)onRunnerInfo:(id)sender
@@ -475,19 +494,13 @@
             if (entryName.length == 0)
             {
                 weakSelf.lblPersonAdded.text = @"Bib not found";
-                weakSelf.lblRunnerInfo.text = @"";
-                weakSelf.lblSecondaryInfo.text = @"";
-                weakSelf.lblAdded.text = @"";
-                weakSelf.lblRunnerInfo.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
-                weakSelf.txtBibNumber.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
-                weakSelf.runnerBadge.hidden = YES;
             }
             else
             {
                 weakSelf.lblPersonAdded.text = effort.fullName;
-                [weakSelf.runnerBadge updateWithModel:[self runnerBadgeViewModelWithRacer:effort time:self.lastEntry.displayTime]];
-                self.lblRunnerInfo.text = @"";
             }
+            
+            [weakSelf.runnerBadge updateWithModel:[self runnerBadgeViewModelWithRacer:effort time:self.lastEntry.displayTime bibNumber:self.lastEntry.bibNumber]];
         };
         
         [editVC configureWithEntry:self.lastEntry];
@@ -568,10 +581,6 @@
             }
             
             self.lblSecondaryInfo.text = secondaryInfo;
-            if (![effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName])
-            {
-                [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
-            }
             
             if ([[EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"bitKey == %@ && bibNumber == %@ && combinedCourseId == %@ && splitName == %@",self.leftBitKey,self.txtBibNumber.text,[CurrentCourse getCurrentCourse].eventId,[CurrentCourse getCurrentCourse].splitName]] count])
             {
@@ -631,7 +640,6 @@
             self.txtBibNumber.textColor = [UIColor colorWithRed:159.0/255 green:34.0/255 blue:40.0/255 alpha:1];
             self.lblPersonAdded.text = @"";
             self.lblSecondaryInfo.text = @"";
-            [[OSTSound shared] play:@"ost-remote-bib-not-found"];
         }
     }
 }
@@ -702,11 +710,11 @@
     }
 }
 
-- (OSTRunnerBadgeViewModel *)runnerBadgeViewModelWithRacer:(EffortModel *)racer time:(NSString *)time
+- (OSTRunnerBadgeViewModel *)runnerBadgeViewModelWithRacer:(EffortModel *)racer time:(NSString *)time bibNumber:(NSString *)bibNumber
 {
     OSTRunnerBadgeViewModel *viewModel = [OSTRunnerBadgeViewModel new];
     
-    viewModel.bibNumber = [NSString stringWithFormat:@"%@", racer.bibNumber];
+    viewModel.bibNumber = bibNumber;
     viewModel.time = time;
     
     NSMutableString *caption = [NSMutableString new];

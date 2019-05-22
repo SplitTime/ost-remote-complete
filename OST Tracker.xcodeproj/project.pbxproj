@@ -145,6 +145,8 @@
 		D50DFA9322786B5D002F5FBF /* OSTSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA9122786B5D002F5FBF /* OSTSlider.m */; };
 		D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50DFA9422786B67002F5FBF /* OSTSlider.xib */; };
 		D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50DFA9422786B67002F5FBF /* OSTSlider.xib */; };
+		D51C2E9D2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */ = {isa = PBXBuildFile; fileRef = D51C2E9C2295CE2D00880465 /* ost-remote-keypress-negative.wav */; };
+		D51C2E9E2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */ = {isa = PBXBuildFile; fileRef = D51C2E9C2295CE2D00880465 /* ost-remote-keypress-negative.wav */; };
 		D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */; };
@@ -309,6 +311,7 @@
 		D50DFA9022786B5D002F5FBF /* OSTSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSlider.h; sourceTree = "<group>"; };
 		D50DFA9122786B5D002F5FBF /* OSTSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTSlider.m; sourceTree = "<group>"; };
 		D50DFA9422786B67002F5FBF /* OSTSlider.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTSlider.xib; sourceTree = "<group>"; };
+		D51C2E9C2295CE2D00880465 /* ost-remote-keypress-negative.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ost-remote-keypress-negative.wav"; sourceTree = "<group>"; };
 		D524F05A21A443B6006DF352 /* OSTCheckmarkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCheckmarkView.h; sourceTree = "<group>"; };
 		D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCheckmarkView.m; sourceTree = "<group>"; };
 		D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTCheckmarkView.xib; sourceTree = "<group>"; };
@@ -662,6 +665,7 @@
 		D5C5BC49217E0ACA0071D6CF /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				D51C2E9C2295CE2D00880465 /* ost-remote-keypress-negative.wav */,
 				D52BBFC9227E0B360035FE07 /* ost-remote-bib-not-found.wav */,
 				D52BBFCA227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav */,
 				D52BBFC8227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav */,
@@ -823,6 +827,7 @@
 				D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
+				D51C2E9D2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
 				033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
 				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
@@ -854,6 +859,7 @@
 				D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
+				D51C2E9E2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
 				033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,

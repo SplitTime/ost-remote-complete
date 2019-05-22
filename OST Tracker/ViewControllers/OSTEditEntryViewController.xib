@@ -111,7 +111,7 @@
                             <state key="normal" image="btn_noPace">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="selected" image="btn_pacer"/>
+                            <state key="selected" image="with_pacer_toggle"/>
                             <state key="highlighted">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
@@ -247,7 +247,7 @@
     <resources>
         <image name="btn_continue_1x" width="173" height="56"/>
         <image name="btn_noPace" width="173" height="56"/>
-        <image name="btn_pacer" width="173" height="56"/>
         <image name="btn_stopped" width="173" height="56"/>
+        <image name="with_pacer_toggle" width="173" height="56"/>
     </resources>
 </document>

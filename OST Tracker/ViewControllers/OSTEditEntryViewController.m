@@ -13,6 +13,7 @@
 #import "UIView+Additions.h"
 #import "APNumberPad.h"
 #import "CurrentCourse.h"
+#import "OSTSound.h"
 
 @interface OSTEditEntryViewController () <APNumberPadDelegate>
 
@@ -84,17 +85,35 @@
         numberPad;
     });
     
+    self.pacerAndAidView.height = 70;
+    
     if (![CurrentCourse getCurrentCourse].monitorPacers.boolValue)
     {
         self.lblWithPacer.hidden = YES;
         self.swchPacer.hidden = YES;
-        self.pacerAndAidView.height = 43;
     }
     else
     {
         self.lblWithPacer.hidden = NO;
         self.swchPacer.hidden = NO;
-        self.pacerAndAidView.height = 86;
+    }
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    CGFloat viewCenter = self.view.width * 0.5;
+    CGFloat switchSeparation = 80;
+    
+    if (self.swchPacer.hidden)
+    {
+        self.swchStoppedHere.centerX = viewCenter;
+    }
+    else
+    {
+        self.swchStoppedHere.centerX = viewCenter - switchSeparation;
+        self.swchPacer.centerX = viewCenter + switchSeparation;
     }
 }
 
@@ -273,6 +292,7 @@
 - (IBAction)onSwitch:(UIButton *)sender
 {
     sender.selected = !sender.selected;
+    [[OSTSound shared] play:@"ost-remote-switch-1"];
 }
 
 - (void) configureWithEntry:(EntryModel*)entry
