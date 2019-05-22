@@ -333,9 +333,16 @@
     self.lblBadge.hidden = self.badgeLabel.hidden;
     self.lblBadge.text = self.badgeLabel.text;
     
-    CGRect badgeSize = [self.lblBadge.text boundingRectWithSize:CGSizeMake(FLT_MAX, self.lblBadge.height) options:0 attributes:@{NSFontAttributeName:self.lblBadge.font} context:nil];
-    CGFloat padding = 8;
-    self.lblBadge.width = badgeSize.size.width + padding * 2;
+    if (self.lblBadge.text.length == 1)
+    {
+        self.lblBadge.width = self.lblBadge.height;
+    }
+    else
+    {
+        CGRect badgeSize = [self.lblBadge.text boundingRectWithSize:CGSizeMake(FLT_MAX, self.lblBadge.height) options:0 attributes:@{NSFontAttributeName:self.lblBadge.font} context:nil];
+        CGFloat padding = 8;
+        self.lblBadge.width = badgeSize.size.width + padding * 2;
+    }
 }
 
 - (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager

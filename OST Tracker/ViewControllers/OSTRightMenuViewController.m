@@ -199,7 +199,7 @@
 
 - (void)updateSyncBadge
 {
-    NSArray * entries = [[OSTSyncManager shared] syncingEntries];
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     if (entries.count == 0)
     {
         self.lblBadge.hidden = YES;
@@ -209,9 +209,16 @@
         self.lblBadge.hidden = NO;
         self.lblBadge.text = [NSString stringWithFormat:@"%@",@(entries.count)];
         
-        CGRect badgeSize = [self.lblBadge.text boundingRectWithSize:CGSizeMake(FLT_MAX, self.lblBadge.height) options:0 attributes:@{NSFontAttributeName:self.lblBadge.font} context:nil];
-        CGFloat padding = 8;
-        self.lblBadge.width = badgeSize.size.width + padding * 2;
+        if (self.lblBadge.text.length == 1)
+        {
+            self.lblBadge.width = self.lblBadge.height;
+        }
+        else
+        {
+            CGRect badgeSize = [self.lblBadge.text boundingRectWithSize:CGSizeMake(FLT_MAX, self.lblBadge.height) options:0 attributes:@{NSFontAttributeName:self.lblBadge.font} context:nil];
+            CGFloat padding = 8;
+            self.lblBadge.width = badgeSize.size.width + padding * 2;
+        }
     }
 }
 
