@@ -11,12 +11,15 @@
 #import "EntryModel.h"
 #import "CurrentCourse.h"
 #import "OSTRunnerTrackerViewController.h"
+#import "UILabel+Extension.h"
 
 @interface OSTBaseViewController ()
 
 @end
 
 @implementation OSTBaseViewController
+
+@synthesize shouldShowBadge;
 
 - (void)dealloc
 {
@@ -73,23 +76,16 @@
     if (entries.count == 0)
     {
         self.badgeLabel.hidden = YES;
+        shouldShowBadge = NO;
     }
     else
     {
         NSString *badge = [NSString stringWithFormat:@"%@",@(entries.count)];
+        shouldShowBadge = YES;
+        self.badge = badge;
         self.badgeLabel.hidden = NO;
         self.badgeLabel.text = badge;
-        
-        if (badge.length == 1)
-        {
-            self.badgeLabel.width = self.badgeLabel.height;
-        }
-        else
-        {
-            CGRect badgeSize = [badge boundingRectWithSize:CGSizeMake(FLT_MAX, self.badgeLabel.height) options:0 attributes:@{NSFontAttributeName:self.badgeLabel.font} context:nil];
-            CGFloat padding = 8;
-            self.badgeLabel.width = badgeSize.size.width + padding * 2;
-        }
+        [self.badgeLabel updateBadgeShape];
     }
     self.badgeLabel.right = badgeRightEdge;
 }

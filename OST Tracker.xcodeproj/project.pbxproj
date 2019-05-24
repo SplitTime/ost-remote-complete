@@ -147,6 +147,8 @@
 		D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50DFA9422786B67002F5FBF /* OSTSlider.xib */; };
 		D51C2E9D2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */ = {isa = PBXBuildFile; fileRef = D51C2E9C2295CE2D00880465 /* ost-remote-keypress-negative.wav */; };
 		D51C2E9E2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */ = {isa = PBXBuildFile; fileRef = D51C2E9C2295CE2D00880465 /* ost-remote-keypress-negative.wav */; };
+		D51C2EA12298186100880465 /* UILabel+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C2EA02298186100880465 /* UILabel+Extension.m */; };
+		D51C2EA22298186100880465 /* UILabel+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D51C2EA02298186100880465 /* UILabel+Extension.m */; };
 		D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */; };
 		D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */; };
@@ -312,6 +314,8 @@
 		D50DFA9122786B5D002F5FBF /* OSTSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTSlider.m; sourceTree = "<group>"; };
 		D50DFA9422786B67002F5FBF /* OSTSlider.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTSlider.xib; sourceTree = "<group>"; };
 		D51C2E9C2295CE2D00880465 /* ost-remote-keypress-negative.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ost-remote-keypress-negative.wav"; sourceTree = "<group>"; };
+		D51C2E9F2298186100880465 /* UILabel+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extension.h"; sourceTree = "<group>"; };
+		D51C2EA02298186100880465 /* UILabel+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extension.m"; sourceTree = "<group>"; };
 		D524F05A21A443B6006DF352 /* OSTCheckmarkView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCheckmarkView.h; sourceTree = "<group>"; };
 		D524F05B21A443B6006DF352 /* OSTCheckmarkView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCheckmarkView.m; sourceTree = "<group>"; };
 		D524F05E21A443C1006DF352 /* OSTCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTCheckmarkView.xib; sourceTree = "<group>"; };
@@ -602,6 +606,8 @@
 				6AEFFC191EEF83DA009EEE21 /* Info.plist */,
 				6A41AE0A1EF8D71500C9F834 /* UIView+Additions.h */,
 				6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */,
+				D51C2E9F2298186100880465 /* UILabel+Extension.h */,
+				D51C2EA02298186100880465 /* UILabel+Extension.m */,
 				6ABFC1DF1EFD56E900A0F1AC /* CustomUIDatePicker.h */,
 				6A676FDC1F5F401E0051C8CB /* UIImage+ImageWithColor.h */,
 				6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */,
@@ -1129,6 +1135,7 @@
 				033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
+				D51C2EA12298186100880465 /* UILabel+Extension.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
 				D52BBFDA22852B7C0035FE07 /* OSTRunnerBadge.m in Sources */,
 				D50DFA9222786B5D002F5FBF /* OSTSlider.m in Sources */,
@@ -1185,6 +1192,7 @@
 				033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
+				D51C2EA22298186100880465 /* UILabel+Extension.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
 				D52BBFDB22852B7C0035FE07 /* OSTRunnerBadge.m in Sources */,
 				D50DFA9322786B5D002F5FBF /* OSTSlider.m in Sources */,

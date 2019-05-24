@@ -18,6 +18,7 @@
 #import "UIView+Additions.h"
 #import "CHCSVParser.h"
 #import "OSTSyncManager.h"
+#import "UILabel+Extension.h"
 
 @interface OSTReviewSubmitViewController () <OSTSyncManagerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
@@ -330,19 +331,9 @@
 - (void)updateSyncBadge
 {
     [super updateSyncBadge];
-    self.lblBadge.hidden = self.badgeLabel.hidden;
-    self.lblBadge.text = self.badgeLabel.text;
-    
-    if (self.lblBadge.text.length == 1)
-    {
-        self.lblBadge.width = self.lblBadge.height;
-    }
-    else
-    {
-        CGRect badgeSize = [self.lblBadge.text boundingRectWithSize:CGSizeMake(FLT_MAX, self.lblBadge.height) options:0 attributes:@{NSFontAttributeName:self.lblBadge.font} context:nil];
-        CGFloat padding = 8;
-        self.lblBadge.width = badgeSize.size.width + padding * 2;
-    }
+    self.lblBadge.hidden = !super.shouldShowBadge;
+    self.lblBadge.text = super.badge;
+    [self.lblBadge updateBadgeShape];
 }
 
 - (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager

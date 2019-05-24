@@ -14,8 +14,9 @@
 #import "OSTSyncManager.h"
 #import "CurrentCourse.h"
 #import "EntryModel.h"
+#import "UILabel+Extension.h"
 
-@interface OSTRightMenuViewController () <OSTSyncManagerDelegate>
+@interface OSTRightMenuViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *rightMenuBackImage;
 @property (weak, nonatomic) IBOutlet UIView *coverView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -27,18 +28,12 @@
 
 @implementation OSTRightMenuViewController
 
-- (void)dealloc
-{
-    [[[OSTSyncManager shared] delegates] removeObject:self];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.buttonViews = [self sortOutletCollectionByTag:self.buttonViews];
     self.separatorViews = [self sortOutletCollectionByTag:self.separatorViews];
     
-    [[[OSTSyncManager shared] delegates] addObject:self];
     // Do any additional setup after loading the view from its nib.
     self.scrollView.contentSize = CGSizeMake(0, 668);
     if(IS_IPHONE_5)
@@ -48,14 +43,12 @@
     
     self.lblBadge.layer.cornerRadius = self.lblBadge.width/2;
     self.lblBadge.clipsToBounds = YES;
-    [self updateSyncBadge];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.syncIndicator setHidden:![[OSTSyncManager shared] isSyncing]];
-    [self updateSyncBadge];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -176,50 +169,28 @@
 
 - (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager
 {
+    [super syncManagerDidStartSynchronization:manager];
     [self.syncIndicator setHidden:NO];
-    [self updateSyncBadge];
-}
-
-- (void)syncManager:(OSTSyncManager *)manager progress:(CGFloat)progress
-{
-    
 }
 
 - (void)syncManagerDidFinishSynchronization:(OSTSyncManager *)manager
 {
+    [super syncManagerDidFinishSynchronization:manager];
     [self.syncIndicator setHidden:YES];
-    [self updateSyncBadge];
 }
 
 - (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
 {
+    [super syncManager:manager didFinishSynchronizationWithErrors:errors alternateServer:alternateServer];
     [self.syncIndicator setHidden:YES];
-    [self updateSyncBadge];
 }
 
 - (void)updateSyncBadge
 {
-    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
-    if (entries.count == 0)
-    {
-        self.lblBadge.hidden = YES;
-    }
-    else
-    {
-        self.lblBadge.hidden = NO;
-        self.lblBadge.text = [NSString stringWithFormat:@"%@",@(entries.count)];
-        
-        if (self.lblBadge.text.length == 1)
-        {
-            self.lblBadge.width = self.lblBadge.height;
-        }
-        else
-        {
-            CGRect badgeSize = [self.lblBadge.text boundingRectWithSize:CGSizeMake(FLT_MAX, self.lblBadge.height) options:0 attributes:@{NSFontAttributeName:self.lblBadge.font} context:nil];
-            CGFloat padding = 8;
-            self.lblBadge.width = badgeSize.size.width + padding * 2;
-        }
-    }
+    [super updateSyncBadge];
+    self.lblBadge.hidden = !super.shouldShowBadge;
+    self.lblBadge.text = super.badge;
+    [self.lblBadge updateBadgeShape];
 }
 
 /*

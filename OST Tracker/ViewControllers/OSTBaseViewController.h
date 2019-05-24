@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,weak) IBOutlet UIButton *menuButton;
 @property (nonatomic,weak) IBOutlet UILabel *badgeLabel;
+@property (nonatomic,weak) NSString *badge;
+@property (nonatomic,readonly) BOOL shouldShowBadge;
 
 - (void)updateSyncBadge;
 

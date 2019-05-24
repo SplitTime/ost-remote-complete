@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OSTBaseViewController.h"
 
-@interface OSTRightMenuViewController : UIViewController
+@interface OSTRightMenuViewController : OSTBaseViewController
 
 @end
