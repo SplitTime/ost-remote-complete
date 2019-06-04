@@ -71,6 +71,42 @@
 
 - (void)updateSyncBadge
 {
+    NSInteger entriesCount = 0;
+    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]];
+    
+    NSMutableSet * set = [NSMutableSet new];
+    for (EntryModel * entry in entries)
+    {
+        [set addObject:entry.splitName];
+    }
+    NSArray *splitTitles = set.allObjects;
+    
+    for (NSString * title in splitTitles)
+    {
+        NSArray *splitEntries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && splitName == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId,title]];
+        entriesCount += splitEntries.count;
+    }
+    
+    CGFloat badgeRightEdge = self.badgeLabel.right;
+    if (entriesCount == 0)
+    {
+        self.badgeLabel.hidden = YES;
+        shouldShowBadge = NO;
+    }
+    else
+    {
+        NSString *badge = [NSString stringWithFormat:@"%@",@(entriesCount)];
+        shouldShowBadge = YES;
+        self.badge = badge;
+        self.badgeLabel.hidden = NO;
+        self.badgeLabel.text = badge;
+        [self.badgeLabel updateBadgeShape];
+    }
+    self.badgeLabel.right = badgeRightEdge;
+}
+
+- (void)updateSyncBadge_old
+{
     NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     CGFloat badgeRightEdge = self.badgeLabel.right;
     if (entries.count == 0)
