@@ -421,9 +421,9 @@
         {
             [[OSTSound shared] play:@"ost-remote-bib-wrong-event-1"];
         }
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
     
     self.lblPersonAdded.text = [NSString stringWithFormat:@"%@", entryName];
     self.lblAdded.text = self.racer.flexibleGeolocation ? : @"";
