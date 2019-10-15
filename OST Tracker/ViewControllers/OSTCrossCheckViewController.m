@@ -55,6 +55,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet OSTCheckmarkView *selectedFilterView;
 @property (nonatomic,assign) OSTCrossCheckFilter filter;
 @property (nonatomic,strong) NSArray *currentEfforts;
+@property (strong, nonatomic) IBOutletCollection(OSTCheckmarkView) NSArray *checkMarkFilters;
 
 @end
 
@@ -135,7 +136,7 @@ typedef enum {
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"bibNumber != nil"]];
-        
+        [self setFiltersQuantities];
         [self fetchNotExpected];
         
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -152,6 +153,7 @@ typedef enum {
             dispatch_async( dispatch_get_main_queue(), ^{
                 self.efforts = entriesThatShouldBeHere;
                 [self applyFilter];
+                [self setFiltersQuantities];
                 [DejalBezelActivityView removeViewAnimated:YES];
             });
         });
@@ -209,6 +211,38 @@ typedef enum {
     return filteredEfforts;
 }
 
+- (void)setFiltersQuantities
+{
+    for (OSTCheckmarkView * checkMark in self.checkMarkFilters){
+    switch (checkMark.tag)
+    {
+        case OSTCrossCheckFilterAll:
+            checkMark.number = [NSString stringWithFormat:@"(%ld)", self.efforts.count];
+            break;
+            
+        case OSTCrossCheckFilterRecorded:
+             checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self recordedEffortsDroppedHere:NO].count];
+            
+            break;
+            
+        case OSTCrossCheckFilterDroppedHere:
+             checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self recordedEffortsDroppedHere:YES].count];
+           
+            break;
+            
+        case OSTCrossCheckFilterExpected:
+            checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self nonRecordedEffortsExpected:YES].count];
+            
+            break;
+            
+        case OSTCrossCheckFilterNotExpected:
+            checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self nonRecordedEffortsExpected:NO].count];
+            break;
+    }
+    }
+    
+}
+
 - (void)applyFilter
 {
     switch (self.filter)
@@ -236,7 +270,6 @@ typedef enum {
     
     [self.crossCheckCollection reloadData];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -501,6 +534,7 @@ typedef enum {
     }
     
     [self applyFilter];
+    [self setFiltersQuantities];
     [self onBulkSelect:nil];
 }
 
@@ -565,6 +599,7 @@ typedef enum {
         }
     }
     [self bulkNotExpectedEfforts:notExpected];
+    [self setFiltersQuantities];
     [self applyFilter];
     [self onBulkSelect:nil];
 }

@@ -453,6 +453,11 @@ All</string>
                         <outlet property="popupView" destination="djm-Ll-wBP" id="q8N-HC-VIN"/>
                         <outlet property="selectedFilterView" destination="yWV-nZ-heG" id="hHR-IO-hHW"/>
                         <outlet property="swchPopupExpected" destination="2h8-Tj-t85" id="mcB-xa-3Tw"/>
+                        <outletCollection property="checkMarkFilters" destination="NX3-kg-zbB" id="qNe-NE-bEJ"/>
+                        <outletCollection property="checkMarkFilters" destination="xqx-DT-d2D" id="4dY-xm-0sj"/>
+                        <outletCollection property="checkMarkFilters" destination="piZ-31-0nx" id="ZQS-xA-1kV"/>
+                        <outletCollection property="checkMarkFilters" destination="VTh-tM-sJI" id="hC9-bC-Js8"/>
+                        <outletCollection property="checkMarkFilters" destination="yWV-nZ-heG" id="3Uk-X3-42J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sku-nD-d5l" userLabel="First Responder" sceneMemberID="firstResponder"/>

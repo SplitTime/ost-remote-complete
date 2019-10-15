@@ -108,5 +108,6 @@
 
 -(void) setNumber:(NSString *)number{
     self.numberLabel.text = number;
+    [self.numberLabel setNeedsLayout];
 }
 @end
