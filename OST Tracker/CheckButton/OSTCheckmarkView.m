@@ -14,6 +14,7 @@
 @property (nonatomic,weak) IBOutlet UIImageView *checkmark;
 @property (nonatomic,weak) IBOutlet UIView *circle;
 @property (nonatomic,weak) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 
 @end
 
@@ -73,6 +74,7 @@
 {
     self.circle.borderColor = color;
     self.label.textColor = color;
+    self.numberLabel.textColor = color;
 }
 
 - (NSString *)text
@@ -100,4 +102,11 @@
     }
 }
 
+- (NSString *)number{
+    return self.numberLabel.text;
+}
+
+-(void) setNumber:(NSString *)number{
+    self.numberLabel.text = number;
+}
 @end

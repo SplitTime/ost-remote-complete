@@ -52,7 +52,7 @@ DEPENDENCIES:
   - Toast (~> 4.0.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - CHCSVParser
     - Crashlytics
@@ -90,4 +90,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1db2c786786e561a87fa949adcfc20d7da3a15c7
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.3

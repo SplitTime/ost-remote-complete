@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +13,7 @@
                 <outlet property="checkmark" destination="qYZ-4Z-z6Z" id="Zes-fU-ieX"/>
                 <outlet property="circle" destination="9QJ-hw-gyA" id="qg8-xp-Iit"/>
                 <outlet property="label" destination="vn4-8G-DjF" id="9gx-dT-Zoc"/>
+                <outlet property="numberLabel" destination="Buy-AC-8wL" id="Yny-bn-BjX"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -51,16 +50,26 @@ here</string>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(0)" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Buy-AC-8wL" userLabel="Dropped here">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vn4-8G-DjF" firstAttribute="leading" secondItem="c6J-CZ-zpd" secondAttribute="leading" id="1x4-s4-W9O"/>
                 <constraint firstItem="vn4-8G-DjF" firstAttribute="leading" secondItem="c6J-CZ-zpd" secondAttribute="leading" id="3k8-uq-faG"/>
+                <constraint firstItem="Buy-AC-8wL" firstAttribute="top" secondItem="c6J-CZ-zpd" secondAttribute="top" id="4pG-tt-mXd"/>
                 <constraint firstItem="vn4-8G-DjF" firstAttribute="trailing" secondItem="c6J-CZ-zpd" secondAttribute="trailing" id="A2W-gi-aCr"/>
+                <constraint firstItem="Buy-AC-8wL" firstAttribute="leading" secondItem="c6J-CZ-zpd" secondAttribute="leading" id="AaR-FX-y24"/>
                 <constraint firstItem="qYZ-4Z-z6Z" firstAttribute="top" secondItem="c6J-CZ-zpd" secondAttribute="top" constant="20" id="EHc-M7-cPV"/>
                 <constraint firstItem="9QJ-hw-gyA" firstAttribute="top" secondItem="c6J-CZ-zpd" secondAttribute="top" constant="20" id="FPw-hA-I0U"/>
+                <constraint firstItem="9QJ-hw-gyA" firstAttribute="top" secondItem="Buy-AC-8wL" secondAttribute="bottom" constant="0.5" id="RRB-9f-fsw"/>
                 <constraint firstItem="vn4-8G-DjF" firstAttribute="top" secondItem="qYZ-4Z-z6Z" secondAttribute="bottom" constant="10" id="SLG-DT-NNL"/>
                 <constraint firstItem="vn4-8G-DjF" firstAttribute="top" secondItem="9QJ-hw-gyA" secondAttribute="bottom" constant="10" id="Vxs-gE-vyf"/>
+                <constraint firstItem="Buy-AC-8wL" firstAttribute="trailing" secondItem="c6J-CZ-zpd" secondAttribute="trailing" id="dB5-If-BqR"/>
                 <constraint firstItem="9QJ-hw-gyA" firstAttribute="centerX" secondItem="ZVO-dD-DjT" secondAttribute="centerXWithinMargins" id="kOp-WN-cWj"/>
                 <constraint firstItem="qYZ-4Z-z6Z" firstAttribute="centerX" secondItem="ZVO-dD-DjT" secondAttribute="centerXWithinMargins" id="kj6-q3-vC4"/>
                 <constraint firstItem="vn4-8G-DjF" firstAttribute="trailing" secondItem="c6J-CZ-zpd" secondAttribute="trailing" id="sOr-XD-W8S"/>

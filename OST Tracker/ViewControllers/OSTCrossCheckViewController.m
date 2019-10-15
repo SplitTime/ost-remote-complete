@@ -35,6 +35,7 @@ typedef enum {
 @property (strong, atomic) NSArray* efforts;
 @property (weak, nonatomic) IBOutlet UILabel *lblPupupEntryName;
 @property (weak, nonatomic) IBOutlet UIView *bulkSelectMenuView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *btnBulkSelect;
 @property (weak, nonatomic) IBOutlet UISwitch *swchPopupExpected;
 @property (weak, nonatomic) IBOutlet UIView *popupCrossCheckContainer;
@@ -98,6 +99,7 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+     [self adjustCrossCheckCollectionBottomInset];
     [self reloadData];
 }
 
@@ -412,14 +414,16 @@ typedef enum {
     if (self.bulkSelect)
     {
         self.bulkSelect = NO;
-        self.footerView.height = 82;
+       // self.footerView.height = 82;
+        self.footerViewHeightConstraint.constant = 82;
         [self.btnBulkSelect setTitle:@"Bulk Select" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = YES;
     }
     else
     {
         self.bulkSelect = YES;
-        self.footerView.height = 132;
+//        self.footerView.height = 132;
+         self.footerViewHeightConstraint.constant = 132;
         [self.btnBulkSelect setTitle:@"Cancel" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = NO;
     }
