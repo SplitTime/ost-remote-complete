@@ -322,7 +322,7 @@ Line 2</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqT-YR-EvK" userLabel="Filters">
                                         <rect key="frame" x="0.0" y="-11" width="414" height="82"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="usY-Tn-ej6">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="usY-Tn-ej6">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                                 <subviews>
                                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NX3-kg-zbB" customClass="OSTCheckmarkView">
@@ -410,7 +410,9 @@ All</string>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="usY-Tn-ej6" firstAttribute="centerY" secondItem="mqT-YR-EvK" secondAttribute="centerY" id="L0R-M4-QTM"/>
                                             <constraint firstAttribute="height" constant="82" id="cfe-SB-udR"/>
+                                            <constraint firstItem="usY-Tn-ej6" firstAttribute="centerX" secondItem="mqT-YR-EvK" secondAttribute="centerX" id="sHY-UO-ZNJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
