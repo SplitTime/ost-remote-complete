@@ -115,7 +115,9 @@ typedef enum {
             if ([bibNumbers isKindOfClass:[NSArray class]])
             {
                 [self bulkNotExpectedBibNumbers:bibNumbers];
+                [self setFiltersQuantities];
                 [self.crossCheckCollection reloadData];
+                
             }
         }
         
@@ -136,9 +138,9 @@ typedef enum {
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"bibNumber != nil"]];
-        [self setFiltersQuantities];
+       
         [self fetchNotExpected];
-        
+         [self setFiltersQuantities];
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             for (EffortModel * effort in self.efforts)
@@ -153,7 +155,7 @@ typedef enum {
             dispatch_async( dispatch_get_main_queue(), ^{
                 self.efforts = entriesThatShouldBeHere;
                 [self applyFilter];
-                [self setFiltersQuantities];
+               
                 [DejalBezelActivityView removeViewAnimated:YES];
             });
         });
@@ -212,7 +214,7 @@ typedef enum {
 }
 
 - (void)setFiltersQuantities
-{
+{   
     for (OSTCheckmarkView * checkMark in self.checkMarkFilters){
     switch (checkMark.tag)
     {
@@ -267,7 +269,7 @@ typedef enum {
             self.currentEfforts = [self nonRecordedEffortsExpected:NO];
             break;
     }
-    
+    [self setFiltersQuantities];
     [self.crossCheckCollection reloadData];
 }
 - (void)didReceiveMemoryWarning {
@@ -463,6 +465,7 @@ typedef enum {
     
     self.footerView.top = self.view.height - self.footerView.height;
     [self adjustCrossCheckCollectionBottomInset];
+    [self setFiltersQuantities];
     [self.crossCheckCollection reloadData];
 }
 
@@ -500,7 +503,7 @@ typedef enum {
             }
         }
     }
-    
+    [self setFiltersQuantities];
     [self.crossCheckCollection reloadData];
     
     [self hidePopup];
@@ -534,7 +537,6 @@ typedef enum {
     }
     
     [self applyFilter];
-    [self setFiltersQuantities];
     [self onBulkSelect:nil];
 }
 
@@ -599,7 +601,7 @@ typedef enum {
         }
     }
     [self bulkNotExpectedEfforts:notExpected];
-    [self setFiltersQuantities];
+    
     [self applyFilter];
     [self onBulkSelect:nil];
 }
