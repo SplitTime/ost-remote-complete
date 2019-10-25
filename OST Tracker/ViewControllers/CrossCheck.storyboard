@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -322,8 +323,8 @@ Line 2</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqT-YR-EvK" userLabel="Filters">
                                         <rect key="frame" x="0.0" y="-11" width="414" height="82"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="usY-Tn-ej6">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="usY-Tn-ej6">
+                                                <rect key="frame" x="26" y="0.0" width="362" height="82"/>
                                                 <subviews>
                                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NX3-kg-zbB" customClass="OSTCheckmarkView">
                                                         <rect key="frame" x="0.0" y="0.0" width="66" height="82"/>
@@ -344,7 +345,7 @@ Line 2</string>
                                                         </connections>
                                                     </view>
                                                     <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqx-DT-d2D" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="87" y="0.0" width="66" height="82"/>
+                                                        <rect key="frame" x="74" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -358,7 +359,7 @@ Line 2</string>
                                                         </connections>
                                                     </view>
                                                     <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="piZ-31-0nx" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="174" y="0.0" width="66" height="82"/>
+                                                        <rect key="frame" x="148" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -372,7 +373,7 @@ Line 2</string>
                                                         </connections>
                                                     </view>
                                                     <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VTh-tM-sJI" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="261" y="0.0" width="66" height="82"/>
+                                                        <rect key="frame" x="222" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -389,7 +390,7 @@ Expected</string>
                                                         </connections>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWV-nZ-heG" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="348" y="0.0" width="66" height="82"/>
+                                                        <rect key="frame" x="296" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -413,6 +414,8 @@ All</string>
                                             <constraint firstItem="usY-Tn-ej6" firstAttribute="centerY" secondItem="mqT-YR-EvK" secondAttribute="centerY" id="L0R-M4-QTM"/>
                                             <constraint firstAttribute="height" constant="82" id="cfe-SB-udR"/>
                                             <constraint firstItem="usY-Tn-ej6" firstAttribute="centerX" secondItem="mqT-YR-EvK" secondAttribute="centerX" id="sHY-UO-ZNJ"/>
+                                            <constraint firstItem="usY-Tn-ej6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mqT-YR-EvK" secondAttribute="leading" constant="10" id="tE5-x9-sbQ"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="usY-Tn-ej6" secondAttribute="trailing" constant="10" id="tFF-y3-hsm"/>
                                         </constraints>
                                     </view>
                                 </subviews>
