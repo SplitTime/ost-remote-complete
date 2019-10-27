@@ -449,7 +449,6 @@ typedef enum {
     if (self.bulkSelect)
     {
         self.bulkSelect = NO;
-       // self.footerView.height = 82;
         self.footerViewHeightConstraint.constant = 82;
         [self.btnBulkSelect setTitle:@"Bulk Select" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = YES;
@@ -457,8 +456,7 @@ typedef enum {
     else
     {
         self.bulkSelect = YES;
-//        self.footerView.height = 132;
-         self.footerViewHeightConstraint.constant = 132;
+        self.footerViewHeightConstraint.constant = 132;
         [self.btnBulkSelect setTitle:@"Cancel" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = NO;
     }
