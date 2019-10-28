@@ -35,7 +35,7 @@
     self.lblInOrOut.text = [entry.bitKey capitalizedString];
     
     UIFont *currentFont = self.lblName.font;
-    UIFont *newFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@",[currentFont.fontName stringByReplacingOccurrencesOfString:@"-Bold" withString:@""]] size:currentFont.pointSize];
+    UIFont *newFont = [UIFont systemFontOfSize:currentFont.pointSize];
     self.lblName.font = newFont;
     
     if (entry.submitted.boolValue)
@@ -51,7 +51,7 @@
         if ([self.lblName.text isEqualToString:@"Bib not found"])
         {
             UIFont *currentFont = self.lblName.font;
-            UIFont *newFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@-Bold",currentFont.fontName] size:currentFont.pointSize];
+            UIFont *newFont = [UIFont boldSystemFontOfSize:currentFont.pointSize];
             self.lblName.font = newFont;
         }
     }
@@ -62,7 +62,7 @@
             self.lblName.textColor = [UIColor redColor];
             
             UIFont *currentFont = self.lblName.font;
-            UIFont *newFont = [UIFont fontWithName:[NSString stringWithFormat:@"%@-Bold",currentFont.fontName] size:currentFont.pointSize];
+            UIFont *newFont = [UIFont boldSystemFontOfSize:currentFont.pointSize];
             self.lblName.font = newFont;
         }
         else

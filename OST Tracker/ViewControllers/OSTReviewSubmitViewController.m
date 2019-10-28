@@ -111,6 +111,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
@@ -118,7 +119,9 @@
     [self loadData];
     [self updateSyncBadge];
 }
-
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -564,19 +567,37 @@
         __weak OSTReviewSubmitViewController * weakSelf = self;
         [OHAlertView showAlertWithTitle:@"" message:@"Time has already been synced. Create a replacement time?" cancelButton:@"No" otherButtons:@[@"Yes"] buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex)
          {
-             if (buttonIndex == 1)
-             {
-                 OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
-                 editVC.creatingNew = YES;
-                 [weakSelf presentViewController:editVC animated:YES completion:nil];
-                 [editVC configureWithEntry:weakSelf.entries[indexPath.section][indexPath.row]];
-             }
-         }];
+            if (buttonIndex == 1)
+            {
+                OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
+                editVC.entryHasBeenUpdatedBlock = ^ (EffortModel* effort)
+                              {
+                                  [weakSelf loadData];
+                                  [weakSelf updateSyncBadge];
+                              };
+                editVC.creatingNew = YES;
+                [weakSelf presentViewController:editVC animated:YES completion:nil];
+                [editVC configureWithEntry:weakSelf.entries[indexPath.section][indexPath.row]];
+            }
+        }];
         return;
     }
     
     OSTEditEntryViewController * editVC = [[OSTEditEntryViewController alloc] initWithNibName:nil bundle:nil];
+    __weak OSTReviewSubmitViewController * weakSelf = self;
+    editVC.entryHasBeenDeletedBlock = ^
+    {
+        [weakSelf loadData];
+        [weakSelf updateSyncBadge];
+    };
+    
+    editVC.entryHasBeenUpdatedBlock = ^ (EffortModel* effort)
+    {
+        [weakSelf loadData];
+        [weakSelf updateSyncBadge];
+    };
     [self presentViewController:editVC animated:YES completion:nil];
+    
     [editVC configureWithEntry:self.entries[indexPath.section][indexPath.row]];
 }
 
