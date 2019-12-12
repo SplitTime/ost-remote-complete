@@ -15,6 +15,7 @@ IB_DESIGNABLE
 
 @property (nonatomic) IBInspectable UIColor *color;
 @property (nonatomic) IBInspectable NSString *text;
+@property (nonatomic) IBInspectable NSString *number;
 
 @end
 

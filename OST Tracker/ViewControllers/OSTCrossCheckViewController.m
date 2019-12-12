@@ -35,6 +35,7 @@ typedef enum {
 @property (strong, atomic) NSArray* efforts;
 @property (weak, nonatomic) IBOutlet UILabel *lblPupupEntryName;
 @property (weak, nonatomic) IBOutlet UIView *bulkSelectMenuView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *btnBulkSelect;
 @property (weak, nonatomic) IBOutlet UISwitch *swchPopupExpected;
 @property (weak, nonatomic) IBOutlet UIView *popupCrossCheckContainer;
@@ -54,6 +55,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet OSTCheckmarkView *selectedFilterView;
 @property (nonatomic,assign) OSTCrossCheckFilter filter;
 @property (nonatomic,strong) NSArray *currentEfforts;
+@property (strong, nonatomic) IBOutletCollection(OSTCheckmarkView) NSArray *checkMarkFilters;
 
 @end
 
@@ -98,6 +100,7 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+     [self adjustCrossCheckCollectionBottomInset];
     [self reloadData];
 }
 
@@ -112,7 +115,9 @@ typedef enum {
             if ([bibNumbers isKindOfClass:[NSArray class]])
             {
                 [self bulkNotExpectedBibNumbers:bibNumbers];
+                [self setFiltersQuantities];
                 [self.crossCheckCollection reloadData];
+                
             }
         }
         
@@ -133,9 +138,9 @@ typedef enum {
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"bibNumber != nil"]];
-        
+       
         [self fetchNotExpected];
-        
+         [self setFiltersQuantities];
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             for (EffortModel * effort in self.efforts)
@@ -150,6 +155,7 @@ typedef enum {
             dispatch_async( dispatch_get_main_queue(), ^{
                 self.efforts = entriesThatShouldBeHere;
                 [self applyFilter];
+               
                 [DejalBezelActivityView removeViewAnimated:YES];
             });
         });
@@ -207,6 +213,38 @@ typedef enum {
     return filteredEfforts;
 }
 
+- (void)setFiltersQuantities
+{   
+    for (OSTCheckmarkView * checkMark in self.checkMarkFilters){
+    switch (checkMark.tag)
+    {
+        case OSTCrossCheckFilterAll:
+            checkMark.number = [NSString stringWithFormat:@"(%ld)", self.efforts.count];
+            break;
+            
+        case OSTCrossCheckFilterRecorded:
+             checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self recordedEffortsDroppedHere:NO].count];
+            
+            break;
+            
+        case OSTCrossCheckFilterDroppedHere:
+             checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self recordedEffortsDroppedHere:YES].count];
+           
+            break;
+            
+        case OSTCrossCheckFilterExpected:
+            checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self nonRecordedEffortsExpected:YES].count];
+            
+            break;
+            
+        case OSTCrossCheckFilterNotExpected:
+            checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self nonRecordedEffortsExpected:NO].count];
+            break;
+    }
+    }
+    
+}
+
 - (void)applyFilter
 {
     switch (self.filter)
@@ -231,10 +269,9 @@ typedef enum {
             self.currentEfforts = [self nonRecordedEffortsExpected:NO];
             break;
     }
-    
+    [self setFiltersQuantities];
     [self.crossCheckCollection reloadData];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -412,20 +449,21 @@ typedef enum {
     if (self.bulkSelect)
     {
         self.bulkSelect = NO;
-        self.footerView.height = 82;
+        self.footerViewHeightConstraint.constant = 82;
         [self.btnBulkSelect setTitle:@"Bulk Select" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = YES;
     }
     else
     {
         self.bulkSelect = YES;
-        self.footerView.height = 132;
+        self.footerViewHeightConstraint.constant = 132;
         [self.btnBulkSelect setTitle:@"Cancel" forState:UIControlStateNormal];
         self.bulkSelectMenuView.hidden = NO;
     }
     
     self.footerView.top = self.view.height - self.footerView.height;
     [self adjustCrossCheckCollectionBottomInset];
+    [self setFiltersQuantities];
     [self.crossCheckCollection reloadData];
 }
 
@@ -463,7 +501,7 @@ typedef enum {
             }
         }
     }
-    
+    [self setFiltersQuantities];
     [self.crossCheckCollection reloadData];
     
     [self hidePopup];
@@ -561,6 +599,7 @@ typedef enum {
         }
     }
     [self bulkNotExpectedEfforts:notExpected];
+    
     [self applyFilter];
     [self onBulkSelect:nil];
 }

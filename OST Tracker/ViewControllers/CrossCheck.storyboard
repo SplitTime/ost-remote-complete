@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ohE-lE-k87">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ohE-lE-k87">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -288,9 +287,8 @@ Line 2</string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94499540328979492" green="0.94515722990036011" blue="0.94498521089553833" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAm-T8-fuD">
-                                <rect key="frame" x="0.0" y="646" width="414" height="92"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAm-T8-fuD">
+                                <rect key="frame" x="0.0" y="656" width="414" height="82"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXY-u2-vIT">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -315,24 +313,26 @@ Line 2</string>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="0.84318814212328763" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdd-X9-3CV" userLabel="Top border">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mqT-YR-EvK" userLabel="Filters">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqT-YR-EvK" userLabel="Filters">
+                                        <rect key="frame" x="0.0" y="-11" width="414" height="82"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="usY-Tn-ej6">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="usY-Tn-ej6">
+                                                <rect key="frame" x="26" y="0.0" width="362" height="82"/>
                                                 <subviews>
-                                                    <view tag="1" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NX3-kg-zbB" customClass="OSTCheckmarkView">
+                                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NX3-kg-zbB" customClass="OSTCheckmarkView">
                                                         <rect key="frame" x="0.0" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="66" id="0RS-ls-4bh"/>
+                                                            <constraint firstAttribute="height" constant="82" id="ki4-lI-baJ"/>
+                                                        </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
                                                                 <color key="value" red="0.10980392156862745" green="0.72941176470588232" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -344,8 +344,8 @@ Line 2</string>
                                                             <action selector="onFilter:" destination="ohE-lE-k87" eventType="valueChanged" id="oab-qr-VTj"/>
                                                         </connections>
                                                     </view>
-                                                    <view tag="2" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xqx-DT-d2D" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="87" y="0.0" width="66" height="82"/>
+                                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqx-DT-d2D" customClass="OSTCheckmarkView">
+                                                        <rect key="frame" x="74" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -358,8 +358,8 @@ Line 2</string>
                                                             <action selector="onFilter:" destination="ohE-lE-k87" eventType="valueChanged" id="P2y-Cq-KVk"/>
                                                         </connections>
                                                     </view>
-                                                    <view tag="3" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="piZ-31-0nx" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="174" y="0.0" width="66" height="82"/>
+                                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="piZ-31-0nx" customClass="OSTCheckmarkView">
+                                                        <rect key="frame" x="148" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -372,8 +372,8 @@ Line 2</string>
                                                             <action selector="onFilter:" destination="ohE-lE-k87" eventType="valueChanged" id="2lp-13-8hW"/>
                                                         </connections>
                                                     </view>
-                                                    <view tag="4" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VTh-tM-sJI" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="261" y="0.0" width="66" height="82"/>
+                                                    <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VTh-tM-sJI" customClass="OSTCheckmarkView">
+                                                        <rect key="frame" x="222" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -389,8 +389,8 @@ Expected</string>
                                                             <action selector="onFilter:" destination="ohE-lE-k87" eventType="valueChanged" id="eGr-hb-t6R"/>
                                                         </connections>
                                                     </view>
-                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yWV-nZ-heG" customClass="OSTCheckmarkView">
-                                                        <rect key="frame" x="348" y="0.0" width="66" height="82"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWV-nZ-heG" customClass="OSTCheckmarkView">
+                                                        <rect key="frame" x="296" y="0.0" width="66" height="82"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -410,12 +410,30 @@ All</string>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="usY-Tn-ej6" firstAttribute="centerY" secondItem="mqT-YR-EvK" secondAttribute="centerY" id="L0R-M4-QTM"/>
+                                            <constraint firstAttribute="height" constant="82" id="cfe-SB-udR"/>
+                                            <constraint firstItem="usY-Tn-ej6" firstAttribute="centerX" secondItem="mqT-YR-EvK" secondAttribute="centerX" id="sHY-UO-ZNJ"/>
+                                            <constraint firstItem="usY-Tn-ej6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mqT-YR-EvK" secondAttribute="leading" constant="10" id="tE5-x9-sbQ"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="usY-Tn-ej6" secondAttribute="trailing" constant="10" id="tFF-y3-hsm"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="82" id="G34-Yv-18r"/>
+                                    <constraint firstAttribute="bottom" secondItem="mqT-YR-EvK" secondAttribute="bottom" constant="11" id="Nul-2r-tnc"/>
+                                    <constraint firstAttribute="trailing" secondItem="mqT-YR-EvK" secondAttribute="trailing" id="PWu-rc-pf9"/>
+                                    <constraint firstItem="mqT-YR-EvK" firstAttribute="leading" secondItem="xAm-T8-fuD" secondAttribute="leading" id="m14-TH-2nP"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xAm-T8-fuD" firstAttribute="trailing" secondItem="Pe8-yL-rMO" secondAttribute="trailing" id="ads-ld-tE9"/>
+                            <constraint firstAttribute="bottom" secondItem="xAm-T8-fuD" secondAttribute="bottom" constant="-2" id="exB-yU-zXJ"/>
+                            <constraint firstItem="xAm-T8-fuD" firstAttribute="leading" secondItem="Pe8-yL-rMO" secondAttribute="leading" id="y1g-Uf-qF6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Pe8-yL-rMO"/>
                     </view>
                     <connections>
@@ -426,6 +444,7 @@ All</string>
                         <outlet property="bulkSelectMenuView" destination="QXY-u2-vIT" id="bZe-oT-aCA"/>
                         <outlet property="crossCheckCollection" destination="ugO-td-rE7" id="2aF-9R-khs"/>
                         <outlet property="footerView" destination="xAm-T8-fuD" id="C6z-8N-AHJ"/>
+                        <outlet property="footerViewHeightConstraint" destination="G34-Yv-18r" id="uro-EH-tE7"/>
                         <outlet property="lblPupupEntryName" destination="aKo-y8-GsC" id="zfF-hp-srb"/>
                         <outlet property="lblTitle" destination="aj3-GN-vhs" id="VYV-ke-YBO"/>
                         <outlet property="menuButton" destination="5dp-e3-ju4" id="F1D-Gv-thk"/>
@@ -439,6 +458,11 @@ All</string>
                         <outlet property="popupView" destination="djm-Ll-wBP" id="q8N-HC-VIN"/>
                         <outlet property="selectedFilterView" destination="yWV-nZ-heG" id="hHR-IO-hHW"/>
                         <outlet property="swchPopupExpected" destination="2h8-Tj-t85" id="mcB-xa-3Tw"/>
+                        <outletCollection property="checkMarkFilters" destination="NX3-kg-zbB" id="qNe-NE-bEJ"/>
+                        <outletCollection property="checkMarkFilters" destination="xqx-DT-d2D" id="4dY-xm-0sj"/>
+                        <outletCollection property="checkMarkFilters" destination="piZ-31-0nx" id="ZQS-xA-1kV"/>
+                        <outletCollection property="checkMarkFilters" destination="VTh-tM-sJI" id="hC9-bC-Js8"/>
+                        <outletCollection property="checkMarkFilters" destination="yWV-nZ-heG" id="3Uk-X3-42J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sku-nD-d5l" userLabel="First Responder" sceneMemberID="firstResponder"/>
