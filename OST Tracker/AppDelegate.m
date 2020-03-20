@@ -19,6 +19,7 @@
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
+#import "OSTUtilitiesViewController.h"
 
 @interface AppDelegate ()
 
@@ -115,6 +116,12 @@
 - (void) showReview
 {
     self.rightMenuVC.centerViewController = [[OSTReviewSubmitViewController alloc] initWithNibName:nil bundle:nil];
+    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
+}
+
+- (void) showUtilities
+{
+    self.rightMenuVC.centerViewController = [[OSTUtilitiesViewController alloc] initWithNibName:nil bundle:nil];
     [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
 }
 
