@@ -9,16 +9,28 @@
 #import "OSTUtilitiesViewController.h"
 #import "OSTEventSelectionViewController.h"
 #import "AppDelegate.h"
+#import "UIView+Additions.h"
 
 @interface OSTUtilitiesViewController ()
-//@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+
 @end
 
 @implementation OSTUtilitiesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+   
+     if (IS_IPHONE_X || IS_IPHONE_XR)
+       {
+           self.lblTitle.numberOfLines = 1;
+           self.lblTitle.bottom = self.lblTitle.bottom + 7;
+           self.menuButton.bottom = self.menuButton.bottom + 7;
+         
+       }
+}
+- (IBAction)onAbout:(id)sender {
+    [[AppDelegate getInstance] showAbout];
 }
 
  - (IBAction)onMenu:(id)sender

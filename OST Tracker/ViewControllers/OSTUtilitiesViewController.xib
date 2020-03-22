@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTUtilitiesViewController">
             <connections>
                 <outlet property="badgeLabel" destination="3mG-Df-Fi2" id="Qa4-cT-V9N"/>
+                <outlet property="lblTitle" destination="ilj-92-aDO" id="lRS-U3-c02"/>
                 <outlet property="menuButton" destination="HZk-7I-euB" id="Ts6-uf-W36"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -75,6 +76,9 @@
                     <state key="highlighted">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                     </state>
+                    <connections>
+                        <action selector="onAbout:" destination="-1" eventType="touchUpInside" id="LkA-BK-Pld"/>
+                    </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="huH-y9-93R">
                     <rect key="frame" x="62" y="536" width="290" height="60"/>

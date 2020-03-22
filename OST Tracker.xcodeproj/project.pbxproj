@@ -35,6 +35,10 @@
 		033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */; };
 		033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
 		033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
+		189B473A2427175300F384E8 /* OSTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B47382427175300F384E8 /* OSTAboutViewController.m */; };
+		189B473B2427175300F384E8 /* OSTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B47382427175300F384E8 /* OSTAboutViewController.m */; };
+		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
+		189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		18D41943242466C2002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
 		18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		18D4194524246CD8002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
@@ -211,6 +215,9 @@
 		033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apnumberpad_backspace_icon.png; sourceTree = "<group>"; };
 		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
 		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
+		189B47372427175300F384E8 /* OSTAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTAboutViewController.h; sourceTree = "<group>"; };
+		189B47382427175300F384E8 /* OSTAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTAboutViewController.m; sourceTree = "<group>"; };
+		189B47392427175300F384E8 /* OSTAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTAboutViewController.xib; sourceTree = "<group>"; };
 		18D41940242466C2002010E3 /* OSTUtilitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTUtilitiesViewController.h; sourceTree = "<group>"; };
 		18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTUtilitiesViewController.m; sourceTree = "<group>"; };
 		18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTUtilitiesViewController.xib; sourceTree = "<group>"; };
@@ -512,6 +519,9 @@
 				18D41940242466C2002010E3 /* OSTUtilitiesViewController.h */,
 				18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */,
 				18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */,
+				189B47372427175300F384E8 /* OSTAboutViewController.h */,
+				189B47382427175300F384E8 /* OSTAboutViewController.m */,
+				189B47392427175300F384E8 /* OSTAboutViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -838,6 +848,7 @@
 				033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
+				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */,
@@ -871,6 +882,7 @@
 				033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
+				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */,
@@ -1148,6 +1160,7 @@
 				6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */,
+				189B473A2427175300F384E8 /* OSTAboutViewController.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA12298186100880465 /* UILabel+Extension.m in Sources */,
@@ -1206,6 +1219,7 @@
 				6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */,
+				189B473B2427175300F384E8 /* OSTAboutViewController.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA22298186100880465 /* UILabel+Extension.m in Sources */,

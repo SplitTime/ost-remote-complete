@@ -20,6 +20,7 @@
 #import "EffortModel.h"
 #import "UIView+Additions.h"
 #import "OSTUtilitiesViewController.h"
+#import "OSTAboutViewController.h"
 
 @interface AppDelegate ()
 
@@ -124,7 +125,11 @@
     self.rightMenuVC.centerViewController = [[OSTUtilitiesViewController alloc] initWithNibName:nil bundle:nil];
     [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
 }
-
+- (void) showAbout
+{
+    self.rightMenuVC.centerViewController = [[OSTAboutViewController alloc] initWithNibName:nil bundle:nil];
+    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
+}
 - (void) logout
 {
     [CurrentCourse MR_truncateAll];

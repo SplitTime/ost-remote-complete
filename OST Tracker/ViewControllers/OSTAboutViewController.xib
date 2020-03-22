@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTAboutViewController">
+            <connections>
+                <outlet property="badgeLabel" destination="vzX-cj-Yb9" id="17i-SC-8HL"/>
+                <outlet property="fallBackLbl" destination="AM4-Ko-bSE" id="eu2-20-fKb"/>
+                <outlet property="lblTitle" destination="c0D-St-QQC" id="KPd-X5-8FG"/>
+                <outlet property="menuButton" destination="HUw-Xr-DhU" id="ydd-kk-JRJ"/>
+                <outlet property="primaryLbl" destination="sAs-pG-9PV" id="gHo-GG-D8d"/>
+                <outlet property="targetLbl" destination="6xk-cc-rPm" id="0Kk-Qx-61r"/>
+                <outlet property="versionLbl" destination="Zcr-Gg-bov" id="2Pa-sj-5OI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="biK-T0-L4h">
+                    <rect key="frame" x="0.0" y="0.0" width="810" height="65"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About OST" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="c0D-St-QQC">
+                            <rect key="frame" x="88" y="18" width="634" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T7Y-FR-Q6o">
+                            <rect key="frame" x="0.0" y="64" width="810" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" red="0.69796198610000004" green="0.69808381799999997" blue="0.69795435669999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUw-Xr-DhU">
+                            <rect key="frame" x="688" y="18" width="122" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="Menu"/>
+                            <connections>
+                                <action selector="onMenu:" destination="-1" eventType="touchUpOutside" id="3TC-Yq-Dqp"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="19" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzX-cj-Yb9">
+                            <rect key="frame" x="782" y="21" width="20" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <color key="backgroundColor" red="0.96757537130000004" green="0.177431643" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95283776519999996" green="0.95300072430000005" blue="0.95282751320000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OST Logo" translatesAutoresizingMaskIntoConstraints="NO" id="3Zh-pg-YAy">
+                    <rect key="frame" x="342" y="80" width="126" height="110"/>
+                    <color key="tintColor" red="0.25882352941176467" green="0.58823529411764708" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="ZxV-p4-0Pd"/>
+                        <constraint firstAttribute="width" secondItem="3Zh-pg-YAy" secondAttribute="height" multiplier="8:7" id="jGL-4R-31b"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xk-cc-rPm">
+                    <rect key="frame" x="365" y="210" width="80" height="36"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                    <color key="textColor" red="0.25882352939999997" green="0.58823529409999997" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" red="0.25882352939999997" green="0.58823529409999997" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(c) 2020 OpenSplitTime Company " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIz-Bv-Fzy">
+                    <rect key="frame" x="251.5" y="266" width="307.5" height="23.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Servers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mv2-st-zIA">
+                    <rect key="frame" x="368.5" y="353.5" width="73" height="24"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primary" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAs-pG-9PV">
+                    <rect key="frame" x="370.5" y="385.5" width="69" height="24"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fallback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AM4-Ko-bSE">
+                    <rect key="frame" x="367.5" y="417.5" width="75" height="24"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact: support@opensplittime.org " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="nL9-VV-JHO">
+                    <rect key="frame" x="8" y="466.5" width="794" height="24"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcr-Gg-bov">
+                    <rect key="frame" x="367" y="309.5" width="76.5" height="24"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go git ‘er done!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sO3-wv-fJz">
+                    <rect key="frame" x="307.5" y="515.5" width="195" height="33"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="PIz-Bv-Fzy" firstAttribute="top" secondItem="6xk-cc-rPm" secondAttribute="bottom" constant="20" id="0nf-TE-oGm"/>
+                <constraint firstItem="3Zh-pg-YAy" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="80" id="1ml-Bd-Zti"/>
+                <constraint firstItem="6xk-cc-rPm" firstAttribute="top" secondItem="3Zh-pg-YAy" secondAttribute="bottom" constant="20" id="3Ew-Ta-9X3"/>
+                <constraint firstItem="PIz-Bv-Fzy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4qJ-v5-7RX"/>
+                <constraint firstItem="sAs-pG-9PV" firstAttribute="top" secondItem="Mv2-st-zIA" secondAttribute="bottom" constant="8" id="5xb-vi-k8p"/>
+                <constraint firstItem="nL9-VV-JHO" firstAttribute="top" secondItem="AM4-Ko-bSE" secondAttribute="bottom" constant="25" id="7Mw-cZ-uem"/>
+                <constraint firstAttribute="trailing" secondItem="nL9-VV-JHO" secondAttribute="trailing" constant="8" id="7hM-g3-UWz"/>
+                <constraint firstItem="nL9-VV-JHO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="7zi-za-V3F"/>
+                <constraint firstItem="Zcr-Gg-bov" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9fQ-Ms-4kq"/>
+                <constraint firstItem="3Zh-pg-YAy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GcG-Fe-l8i"/>
+                <constraint firstItem="sO3-wv-fJz" firstAttribute="top" secondItem="nL9-VV-JHO" secondAttribute="bottom" constant="25" id="Ima-Yi-ose"/>
+                <constraint firstItem="6xk-cc-rPm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Lgb-bX-gGs"/>
+                <constraint firstItem="nL9-VV-JHO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MZC-jC-tOc"/>
+                <constraint firstItem="AM4-Ko-bSE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MyG-mE-26U"/>
+                <constraint firstItem="sO3-wv-fJz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Q50-U1-fDj"/>
+                <constraint firstItem="AM4-Ko-bSE" firstAttribute="top" secondItem="sAs-pG-9PV" secondAttribute="bottom" constant="8" id="Rcs-sp-71l"/>
+                <constraint firstItem="Mv2-st-zIA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="VfH-Vx-1n0"/>
+                <constraint firstItem="Mv2-st-zIA" firstAttribute="top" secondItem="Zcr-Gg-bov" secondAttribute="bottom" constant="20" id="atb-yK-sPp"/>
+                <constraint firstItem="Zcr-Gg-bov" firstAttribute="top" secondItem="PIz-Bv-Fzy" secondAttribute="bottom" constant="20" id="bn9-rU-jKa"/>
+                <constraint firstItem="sAs-pG-9PV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ja9-Fl-a3w"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="124.6376811594203" y="109.82142857142857"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Menu" width="122" height="44"/>
+        <image name="OST Logo" width="226" height="259"/>
+    </resources>
+</document>
