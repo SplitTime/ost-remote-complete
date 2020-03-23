@@ -58,7 +58,6 @@
     
     self.btnNext.alpha = 0;
     self.txtStation.alpha = 0;
-    [self onNext:self];
     if (self.changeStation)
     {
         self.eventTriangle.hidden = YES;
