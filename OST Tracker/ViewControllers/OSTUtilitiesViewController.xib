@@ -9,9 +9,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OSTUtilitiesViewController">
             <connections>
+                <outlet property="activityIndicator" destination="Gua-mP-m6S" id="pfB-QT-gpz"/>
                 <outlet property="badgeLabel" destination="3mG-Df-Fi2" id="Qa4-cT-V9N"/>
+                <outlet property="btnRetry" destination="xQ6-IQ-ts2" id="Ed9-TS-P8a"/>
+                <outlet property="btnReturnToLiveEntry" destination="W4Q-5D-dm3" id="30t-fz-trr"/>
+                <outlet property="imgCheckMark" destination="hFi-A5-eQL" id="a1H-Jf-c6s"/>
+                <outlet property="lblSuccess" destination="sy0-38-CgC" id="zda-qy-PaY"/>
+                <outlet property="lblSyncing" destination="tzy-VD-MYL" id="yN6-g9-PQG"/>
                 <outlet property="lblTitle" destination="ilj-92-aDO" id="lRS-U3-c02"/>
+                <outlet property="lblYourDataIsSynced" destination="8la-IS-zhi" id="uA3-Mg-WfO"/>
+                <outlet property="loadingView" destination="eiZ-sz-UHN" id="qbz-G6-uVa"/>
+                <outlet property="logoImage" destination="VYN-qD-ami" id="Gp5-p0-5ou"/>
                 <outlet property="menuButton" destination="HZk-7I-euB" id="Ts6-uf-W36"/>
+                <outlet property="progressBar" destination="K9p-Zu-lj7" id="NIh-P2-uRy"/>
+                <outlet property="remoteLbl" destination="1eO-YV-4mU" id="Yzw-RS-l4X"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -121,6 +132,9 @@
                     <state key="highlighted">
                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                     </state>
+                    <connections>
+                        <action selector="onRefreshData:" destination="-1" eventType="touchUpInside" id="2TK-iF-4XZ"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -142,10 +156,96 @@
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="137.68115942028987" y="111.68478260869566"/>
         </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="eiZ-sz-UHN">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="lhE-YU-HkV">
+                    <rect key="frame" x="-2" y="0.0" width="414" height="896"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Refreshing Entrants Data…" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="tzy-VD-MYL">
+                    <rect key="frame" x="0.0" y="385" width="414" height="77"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Gua-mP-m6S">
+                    <rect key="frame" x="187" y="340" width="37" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
+                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9p-Zu-lj7">
+                    <rect key="frame" x="30" y="460" width="351" height="2"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="progressTintColor" red="0.91284191609999998" green="0.94112306830000003" blue="0.9536196589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="trackTintColor" red="0.1234888062" green="0.36268717049999999" blue="0.48761421440000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </progressView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CheckMark" translatesAutoresizingMaskIntoConstraints="NO" id="hFi-A5-eQL">
+                    <rect key="frame" x="119" y="170" width="174" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4Q-5D-dm3">
+                    <rect key="frame" x="95" y="525" width="224" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="ReturnLiveEntry">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="onReturnToLiveEntry:" destination="-1" eventType="touchUpInside" id="wzn-qK-KCs"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQ6-IQ-ts2">
+                    <rect key="frame" x="106" y="477" width="202" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="Retry Data Refresh">
+                        <color key="titleColor" red="0.25882352939999997" green="0.58823529409999997" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onRefreshData:" destination="-1" eventType="touchUpInside" id="zJJ-wa-t7X"/>
+                        <action selector="onReturnToLiveEntry:" destination="-1" eventType="touchUpInside" id="cCq-CH-OPM"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Success!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sy0-38-CgC">
+                    <rect key="frame" x="133" y="309" width="149" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OST Remote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1eO-YV-4mU">
+                    <rect key="frame" x="83" y="332" width="249" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OST Logo" id="VYN-qD-ami">
+                    <rect key="frame" x="87" y="114" width="240" height="210"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </imageView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The entrants data has been updated" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="8la-IS-zhi">
+                    <rect key="frame" x="124" y="352" width="163" height="77"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="FPq-Px-8ht"/>
+            <point key="canvasLocation" x="990" y="105"/>
+        </view>
     </objects>
     <resources>
+        <image name="Background" width="375" height="667"/>
         <image name="Big-Logo-Bg" width="384.5" height="346.5"/>
         <image name="BlueButton" width="178" height="60"/>
+        <image name="CheckMark" width="118" height="118"/>
         <image name="Menu" width="122" height="44"/>
+        <image name="OST Logo" width="226" height="259"/>
+        <image name="ReturnLiveEntry" width="210" height="40"/>
     </resources>
 </document>
