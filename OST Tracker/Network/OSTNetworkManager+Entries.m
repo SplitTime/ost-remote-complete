@@ -70,7 +70,7 @@
                                          @"bibNumber": entry.bibNumber,
                                          @"splitId": entry.splitId,
                                          @"subSplitKind": entry.bitKey,
-                                         @"absoluteTime": entry.absoluteTime,
+                                         @"timeEntered": entry.timeEntered,
                                          @"withPacer": entry.withPacer,
                                          @"stoppedHere": entry.stoppedHere,
                                          @"source": entry.source
@@ -84,7 +84,7 @@
         endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
     }
     
-    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"uniqueKey": @[@"absoluteTime", @"bitkey", @"bibNumber", @"source", @"withPacer", @"stoppedHere"],@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"uniqueKey": @[@"timeEntered", @"bitkey", @"bibNumber", @"source", @"withPacer", @"stoppedHere"],@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                       {
                                           onCompletion(responseObject);
                                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -105,7 +105,7 @@
                                       @"attributes": @{
                                               @"bibNumber": entry.bibNumber,
                                               @"subSplitKind": entry.bitKey,
-                                              @"absoluteTime": entry.absoluteTime,
+                                              @"timeEntered": entry.timeEntered,
                                               @"withPacer": entry.withPacer,
                                               @"stoppedHere": entry.stoppedHere,
                                               @"source": entry.source,
