@@ -274,7 +274,6 @@
         [IQKeyboardManager sharedManager].enable = NO;
 
         [[AppDelegate getInstance] showTracker];
-        [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
         
         [self dismissViewControllerAnimated:YES completion:^{
             

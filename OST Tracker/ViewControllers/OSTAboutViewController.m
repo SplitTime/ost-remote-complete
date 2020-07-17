@@ -46,4 +46,9 @@
 {
     [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
+
+- (IBAction)onReturnToLiveEntry:(id)sender {
+    [[AppDelegate getInstance] showTracker];
+}
+
 @end

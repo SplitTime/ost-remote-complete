@@ -182,6 +182,7 @@
     [self.activityIndicator stopAnimating];
     self.loadingView.hidden = YES;
     [self.loadingView removeFromSuperview];
+    [[AppDelegate getInstance] showTracker];
     
 }
 

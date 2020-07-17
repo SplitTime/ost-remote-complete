@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -116,6 +116,13 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVV-qY-7Kx">
+                    <rect key="frame" x="112" y="628" width="190" height="35"/>
+                    <state key="normal" image="ReturnToLiveEntry"/>
+                    <connections>
+                        <action selector="onReturnToLiveEntry:" destination="-1" eventType="touchUpInside" id="OgQ-L8-4hS"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -136,9 +143,11 @@
                 <constraint firstItem="sO3-wv-fJz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Q50-U1-fDj"/>
                 <constraint firstItem="AM4-Ko-bSE" firstAttribute="top" secondItem="sAs-pG-9PV" secondAttribute="bottom" constant="8" id="Rcs-sp-71l"/>
                 <constraint firstItem="Mv2-st-zIA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="VfH-Vx-1n0"/>
+                <constraint firstItem="LVV-qY-7Kx" firstAttribute="top" secondItem="sO3-wv-fJz" secondAttribute="bottom" constant="35.5" id="aCg-Ae-qlo"/>
                 <constraint firstItem="Mv2-st-zIA" firstAttribute="top" secondItem="Zcr-Gg-bov" secondAttribute="bottom" constant="20" id="atb-yK-sPp"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="sAs-pG-9PV" secondAttribute="trailing" constant="8" id="bVl-Ef-z4U"/>
                 <constraint firstItem="Zcr-Gg-bov" firstAttribute="top" secondItem="PIz-Bv-Fzy" secondAttribute="bottom" constant="20" id="bn9-rU-jKa"/>
+                <constraint firstItem="LVV-qY-7Kx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ebo-Nn-WUR"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="AM4-Ko-bSE" secondAttribute="trailing" constant="8" id="ef9-JE-x8V"/>
                 <constraint firstItem="sAs-pG-9PV" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="8" id="gyC-Xq-Nry"/>
             </constraints>
@@ -149,5 +158,6 @@
     <resources>
         <image name="Menu" width="122" height="44"/>
         <image name="OST Logo" width="226" height="259"/>
+        <image name="ReturnToLiveEntry" width="190" height="35"/>
     </resources>
 </document>
