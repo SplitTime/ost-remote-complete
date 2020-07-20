@@ -25,14 +25,11 @@
     [super viewDidLoad];
    
     self.targetLbl.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
-    self.versionLbl.text = [NSString stringWithFormat:@"Version: %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
-//    if(  [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] isEqualToString:@"OST Remote Dev"]){
+    self.versionLbl.text = @"Version: 3.1.1";//[NSString stringWithFormat:@"Version: %@",[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+
         self.primaryLbl.text =  [NSString stringWithFormat: @"Primary: %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"]  ];
         self.fallBackLbl.text = [NSString stringWithFormat: @"Fallback: %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"]  ];
-//    }else{
-//        self.primaryLbl.text =  @"Primary: https://www.opensplittime.org";
-//               self.fallBackLbl.text = [NSString stringWithFormat: @"Fallback: %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"]  ];
-//    }
+
    if (IS_IPHONE_X || IS_IPHONE_XR)
     {
         self.lblTitle.numberOfLines = 1;
