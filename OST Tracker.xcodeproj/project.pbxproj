@@ -35,6 +35,16 @@
 		033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */; };
 		033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
 		033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
+		189B473A2427175300F384E8 /* OSTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B47382427175300F384E8 /* OSTAboutViewController.m */; };
+		189B473B2427175300F384E8 /* OSTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189B47382427175300F384E8 /* OSTAboutViewController.m */; };
+		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
+		189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
+		18D41943242466C2002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
+		18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
+		18D4194524246CD8002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
+		18D4194624246CD9002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
+		18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
+		18D4194824246CEA002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */; };
 		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
@@ -205,6 +215,12 @@
 		033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apnumberpad_backspace_icon.png; sourceTree = "<group>"; };
 		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
 		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
+		189B47372427175300F384E8 /* OSTAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTAboutViewController.h; sourceTree = "<group>"; };
+		189B47382427175300F384E8 /* OSTAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTAboutViewController.m; sourceTree = "<group>"; };
+		189B47392427175300F384E8 /* OSTAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTAboutViewController.xib; sourceTree = "<group>"; };
+		18D41940242466C2002010E3 /* OSTUtilitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTUtilitiesViewController.h; sourceTree = "<group>"; };
+		18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTUtilitiesViewController.m; sourceTree = "<group>"; };
+		18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTUtilitiesViewController.xib; sourceTree = "<group>"; };
 		3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.release.xcconfig"; sourceTree = "<group>"; };
@@ -500,6 +516,12 @@
 				6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */,
 				D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */,
 				D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */,
+				18D41940242466C2002010E3 /* OSTUtilitiesViewController.h */,
+				18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */,
+				18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */,
+				189B47372427175300F384E8 /* OSTAboutViewController.h */,
+				189B47382427175300F384E8 /* OSTAboutViewController.m */,
+				189B47392427175300F384E8 /* OSTAboutViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -769,7 +791,7 @@
 				TargetAttributes = {
 					6A5E0CEC1EF1B25E00399EEC = {
 						DevelopmentTeam = MEL2GJ9CJX;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					6AA6E9D31EF0E4C70061EEB0 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -779,7 +801,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = MEL2GJ9CJX;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -826,8 +848,10 @@
 				033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
+				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
+				18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */,
 				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
@@ -858,8 +882,10 @@
 				033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
+				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
+				18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */,
 				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
@@ -884,6 +910,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D4194824246CEA002010E3 /* OSTUtilitiesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1160,7 @@
 				6A11A0631EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */,
+				189B473A2427175300F384E8 /* OSTAboutViewController.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA12298186100880465 /* UILabel+Extension.m in Sources */,
@@ -1169,6 +1197,7 @@
 				6A7D79621F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */,
 				6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */,
+				18D41943242466C2002010E3 /* OSTUtilitiesViewController.m in Sources */,
 				D5C5BC56217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */,
@@ -1190,6 +1219,7 @@
 				6A11A0641EF2CB4000D6D2CA /* OSTEditEntryViewController.m in Sources */,
 				6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */,
+				189B473B2427175300F384E8 /* OSTAboutViewController.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA22298186100880465 /* UILabel+Extension.m in Sources */,
@@ -1226,6 +1256,7 @@
 				6A7D79631F9A64A5001149B0 /* OSTCrossCheckViewController.m in Sources */,
 				D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */,
 				6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */,
+				18D4194524246CD8002010E3 /* OSTUtilitiesViewController.m in Sources */,
 				D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */,
@@ -1236,6 +1267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D4194624246CD9002010E3 /* OSTUtilitiesViewController.m in Sources */,
 				6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1271,8 +1303,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_ALTERNATE_URL = "http://www.opensplittime.org/api/v1/";
 				BACKEND_URL = "https://www.opensplittime.org/api/v1/";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1296,10 +1330,10 @@
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f864c82c-41d0-4d90-acf6-f827073de28c";
-				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1313,7 +1347,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_ALTERNATE_URL = "http://www.opensplittime.org/api/v1/";
 				BACKEND_URL = "https://www.opensplittime.org/api/v1/";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1337,10 +1374,11 @@
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2b03d20e-1df9-4b74-b820-3d4fa7ffef5a";
-				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Prod (Ad Hoc)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = ostProvision;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -1462,9 +1500,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_ALTERNATE_URL = "http://ost-stage.herokuapp.com/api/v1/";
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1488,10 +1527,11 @@
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f864c82c-41d0-4d90-acf6-f827073de28c";
-				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev (Ad Hoc Cert)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1506,8 +1546,9 @@
 				BACKEND_ALTERNATE_URL = "http://ost-stage.herokuapp.com/api/v1/";
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1531,10 +1572,11 @@
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OST.OST-Remote.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f864c82c-41d0-4d90-acf6-f827073de28c";
-				PROVISIONING_PROFILE_SPECIFIER = "OST Remote Dev (Ad Hoc Cert)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

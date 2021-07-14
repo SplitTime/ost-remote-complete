@@ -58,7 +58,6 @@
     
     self.btnNext.alpha = 0;
     self.txtStation.alpha = 0;
-    
     if (self.changeStation)
     {
         self.eventTriangle.hidden = YES;
@@ -275,7 +274,6 @@
         [IQKeyboardManager sharedManager].enable = NO;
 
         [[AppDelegate getInstance] showTracker];
-        [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
         
         [self dismissViewControllerAnimated:YES completion:^{
             

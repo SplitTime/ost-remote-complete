@@ -1,24 +1,24 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - CHCSVParser (2.1.0)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
+  - Crashlytics (3.14.0):
+    - Fabric (~> 1.10.2)
   - DejalActivityView (1.2)
-  - Fabric (1.7.5)
+  - Fabric (1.10.2)
   - FXKeychain (1.5.3)
   - IQDropDownTextField (1.1.0)
   - IQKeyboardManager (4.0.10)
@@ -34,7 +34,7 @@ PODS:
   - Toast (4.0.0)
 
 DEPENDENCIES:
-  - AFNetworking (= 3.1.0)
+  - AFNetworking
   - CHCSVParser (= 2.1.0)
   - Crashlytics
   - DejalActivityView (= 1.2)
@@ -52,7 +52,7 @@ DEPENDENCIES:
   - Toast (~> 4.0.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - AFNetworking
     - CHCSVParser
     - Crashlytics
@@ -71,11 +71,11 @@ SPEC REPOS:
     - Toast
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   DejalActivityView: 94d85757728a02cbb32445fcf6dfba17dc1e7393
-  Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
   IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
@@ -88,6 +88,6 @@ SPEC CHECKSUMS:
   SimpleKeychain: 84c748463eec601dfee5e7990f55cc82edc5488d
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 1db2c786786e561a87fa949adcfc20d7da3a15c7
+PODFILE CHECKSUM: 058da8cfb338e8e048106f4fdb18b3848895b3cc
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.3

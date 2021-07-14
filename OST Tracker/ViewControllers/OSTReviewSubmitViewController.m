@@ -149,7 +149,7 @@
                                                   @"splitName": entry.splitName,
                                                   @"subSplitKind": entry.bitKey,
                                                   @"bibNumber": entry.bibNumber,
-                                                  @"absoluteTime": entry.absoluteTime,
+                                                  @"enteredTime": entry.absoluteTime,
                                                   @"withPacer": entry.withPacer,
                                                   @"stoppedHere": entry.stoppedHere,
                                                   @"source": entry.source
@@ -165,7 +165,7 @@
         // Construct csv
         
         // Write header...
-        NSArray *keys = @[@"splitName",@"subSplitKind",@"bibNumber",@"absoluteTime",@"withPacer",@"stoppedHere",@"source"];
+        NSArray *keys = @[@"splitName",@"subSplitKind",@"bibNumber",@"enteredTime",@"withPacer",@"stoppedHere",@"source"];
         [writer writeLineOfFields:keys];
         
         // ...then fill the rows
@@ -177,7 +177,7 @@
             [writer writeField:item[@"attributes"][@"splitName"]];
             [writer writeField:item[@"attributes"][@"subSplitKind"]];
             [writer writeField:item[@"attributes"][@"bibNumber"]];
-            [writer writeField:item[@"attributes"][@"absoluteTime"]];
+            [writer writeField:item[@"attributes"][@"timeEntered"]];
             [writer writeField:item[@"attributes"][@"withPacer"]];
             [writer writeField:item[@"attributes"][@"stoppedHere"]];
             [writer writeField:item[@"attributes"][@"source"]];
