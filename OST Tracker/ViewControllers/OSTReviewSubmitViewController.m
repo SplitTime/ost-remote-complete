@@ -177,7 +177,7 @@
             [writer writeField:item[@"attributes"][@"splitName"]];
             [writer writeField:item[@"attributes"][@"subSplitKind"]];
             [writer writeField:item[@"attributes"][@"bibNumber"]];
-            [writer writeField:item[@"attributes"][@"timeEntered"]];
+            [writer writeField:item[@"attributes"][@"enteredTime"]];
             [writer writeField:item[@"attributes"][@"withPacer"]];
             [writer writeField:item[@"attributes"][@"stoppedHere"]];
             [writer writeField:item[@"attributes"][@"source"]];
