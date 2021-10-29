@@ -80,7 +80,7 @@
     
     if (IS_IPHONE_5)
     {
-        self.numberPadContainerView.height=220;
+        self.numberPadContainerView.height=190;
         self.numberPadContainerView.bottom = self.view.bottom;
         /*self.pacerAndAidView.top = self.pacerAndAidView.top - 25;
         self.btnLeft.top = self.btnLeft.top - 55;
