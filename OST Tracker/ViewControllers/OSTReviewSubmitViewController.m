@@ -130,7 +130,7 @@
 
 - (IBAction)onExport:(id)sender
 {
-    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
     if (entries.count == 0)
     {
         if (self.entries.count == 0)
@@ -177,7 +177,7 @@
             [writer writeField:item[@"attributes"][@"splitName"]];
             [writer writeField:item[@"attributes"][@"subSplitKind"]];
             [writer writeField:item[@"attributes"][@"bibNumber"]];
-            [writer writeField:item[@"attributes"][@"timeEntered"]];
+            [writer writeField:item[@"attributes"][@"enteredTime"]];
             [writer writeField:item[@"attributes"][@"withPacer"]];
             [writer writeField:item[@"attributes"][@"stoppedHere"]];
             [writer writeField:item[@"attributes"][@"source"]];
