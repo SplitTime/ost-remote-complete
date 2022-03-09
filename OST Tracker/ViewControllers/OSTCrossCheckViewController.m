@@ -142,8 +142,7 @@ typedef enum {
        
         [self fetchNotExpected];
          [self setFiltersQuantities];
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
+
             for (EffortModel * effort in self.efforts)
             {
                 if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
@@ -159,8 +158,6 @@ typedef enum {
                
                 [DejalBezelActivityView removeViewAnimated:YES];
             });
-        });
-        
     });
 }
 

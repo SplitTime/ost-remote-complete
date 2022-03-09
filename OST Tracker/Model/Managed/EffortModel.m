@@ -47,9 +47,14 @@
             {
                 if ([subEntry[@"splitName"] isEqualToString:selectedSplitName])
                 {
-                    if ([course.eventIdsAndSplits[[NSString stringWithFormat:@"%@",self.eventId]][0] containsObject:subEntry[@"parameterizedSplitName"]])
+                    @try
                     {
-                        return YES;
+                        if ([course.eventIdsAndSplits[[NSString stringWithFormat:@"%@",self.eventId]][0] containsObject:subEntry[@"parameterizedSplitName"]])
+                        {
+                            return YES;
+                        }
+                    }@catch(id anException) {
+                        NSLog(anException);
                     }
                 }
             }
