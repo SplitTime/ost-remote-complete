@@ -15,10 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - CHCSVParser (2.1.0)
-  - Crashlytics (3.14.0):
-    - Fabric (~> 1.10.2)
   - DejalActivityView (1.2)
-  - Fabric (1.10.2)
   - FXKeychain (1.5.3)
   - IQDropDownTextField (1.1.0)
   - IQKeyboardManager (4.0.10)
@@ -36,9 +33,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - CHCSVParser (= 2.1.0)
-  - Crashlytics
   - DejalActivityView (= 1.2)
-  - Fabric
   - FXKeychain (~> 1.5)
   - IQDropDownTextField (= 1.1.0)
   - IQKeyboardManager (= 4.0.10)
@@ -55,9 +50,7 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - CHCSVParser
-    - Crashlytics
     - DejalActivityView
-    - Fabric
     - FXKeychain
     - IQDropDownTextField
     - IQKeyboardManager
@@ -73,9 +66,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
-  Crashlytics: 9220f5bc89e7a618df411b4f639389dbfb0e03d2
   DejalActivityView: 94d85757728a02cbb32445fcf6dfba17dc1e7393
-  Fabric: ea977e3cd9c20425516d3dafd3bf8c941c51223f
   FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
   IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
@@ -88,6 +79,6 @@ SPEC CHECKSUMS:
   SimpleKeychain: 84c748463eec601dfee5e7990f55cc82edc5488d
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 058da8cfb338e8e048106f4fdb18b3848895b3cc
+PODFILE CHECKSUM: 61b1f5c6e78b5038d96a54d214ca90908c30625f
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
