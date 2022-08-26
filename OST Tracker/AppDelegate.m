@@ -14,8 +14,6 @@
 #import "OSTReviewSubmitViewController.h"
 #import "CurrentCourse.h"
 #import "IQKeyboardManager.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
@@ -70,7 +68,6 @@
     }
     
     [self.window makeKeyAndVisible];
-    [Fabric with:@[[Crashlytics class]]];
     
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
 

@@ -728,7 +728,6 @@
 				6A5E0CFC1EF1B25E00399EEC /* Frameworks */,
 				6A5E0CFE1EF1B25E00399EEC /* Resources */,
 				6A5E0D041EF1B25E00399EEC /* [CP] Embed Pods Frameworks */,
-				D58D595C1EF31AFE004610FF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -748,7 +747,6 @@
 				6AEFFC021EEF83DA009EEE21 /* Frameworks */,
 				6AEFFC031EEF83DA009EEE21 /* Resources */,
 				7421FF7EABECE4DE01C9A1CF /* [CP] Embed Pods Frameworks */,
-				D58D595D1EF31B30004610FF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1116,32 +1114,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D58D595C1EF31AFE004610FF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 7e2b02fbd05cd402461e85c5e27b29598e491730 f4630459b55305322359babcb51284f01f3f3672a0a2a665759a7052c15dad10";
-		};
-		D58D595D1EF31B30004610FF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 7e2b02fbd05cd402461e85c5e27b29598e491730 f4630459b55305322359babcb51284f01f3f3672a0a2a665759a7052c15dad10";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1317,15 +1289,11 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/NSDate+Helper\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OHAlertView\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Reachability\"",
-					"\"${PODS_ROOT}/Crashlytics/iOS\"",
-					"\"${PODS_ROOT}/Fabric/iOS\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1361,15 +1329,11 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/NSDate+Helper\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OHAlertView\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Reachability\"",
-					"\"${PODS_ROOT}/Crashlytics/iOS\"",
-					"\"${PODS_ROOT}/Fabric/iOS\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1514,15 +1478,11 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/NSDate+Helper\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OHAlertView\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Reachability\"",
-					"\"${PODS_ROOT}/Crashlytics/iOS\"",
-					"\"${PODS_ROOT}/Fabric/iOS\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1559,15 +1519,11 @@
 					"\"$PODS_CONFIGURATION_BUILD_DIR/NSDate+Helper\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/OHAlertView\"",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/Reachability\"",
-					"\"${PODS_ROOT}/Crashlytics/iOS\"",
-					"\"${PODS_ROOT}/Fabric/iOS\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/Crashlytics\"",
-					"\"${PODS_ROOT}/Headers/Public/Fabric\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
