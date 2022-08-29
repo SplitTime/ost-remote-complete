@@ -14,11 +14,11 @@
 #import "OSTReviewSubmitViewController.h"
 #import "CurrentCourse.h"
 #import "IQKeyboardManager.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
+#import "OSTUtilitiesViewController.h"
+#import "OSTAboutViewController.h"
 
 @interface AppDelegate ()
 
@@ -68,7 +68,6 @@
     }
     
     [self.window makeKeyAndVisible];
-    [Fabric with:@[[Crashlytics class]]];
     
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
 
@@ -118,6 +117,16 @@
     [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
 }
 
+- (void) showUtilities
+{
+    self.rightMenuVC.centerViewController = [[OSTUtilitiesViewController alloc] initWithNibName:nil bundle:nil];
+    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
+}
+- (void) showAbout
+{
+    self.rightMenuVC.centerViewController = [[OSTAboutViewController alloc] initWithNibName:nil bundle:nil];
+    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
+}
 - (void) logout
 {
     [CurrentCourse MR_truncateAll];

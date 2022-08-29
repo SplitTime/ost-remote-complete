@@ -80,7 +80,7 @@
     
     if (IS_IPHONE_5)
     {
-        self.numberPadContainerView.height=220;
+        self.numberPadContainerView.height=190;
         self.numberPadContainerView.bottom = self.view.bottom;
         /*self.pacerAndAidView.top = self.pacerAndAidView.top - 25;
         self.btnLeft.top = self.btnLeft.top - 55;
@@ -173,6 +173,7 @@
     [self.txtBibNumber addObserver:self forKeyPath:@"text"
                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                        context:nil];
+     [[AppDelegate getInstance].rightMenuVC setMenuState:MFSideMenuStateClosed completion:nil];
     
 }
 
@@ -207,6 +208,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[AppDelegate getInstance].rightMenuVC setMenuState:MFSideMenuStateClosed completion:nil];
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     self.lblTitle.text = [CurrentCourse getCurrentCourse].splitName;
     

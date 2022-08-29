@@ -88,13 +88,14 @@ typedef enum {
         }
     }
     
-    if (IS_IPHONE_X || IS_IPHONE_XR)
-    {
-        self.lblTitle.numberOfLines = 1;
-        self.lblTitle.bottom = self.lblTitle.bottom + 7;
-        self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
-        self.btnBulkSelect.bottom = self.btnBulkSelect.bottom + 7;
-    }
+   if (IS_IPHONE_X || IS_IPHONE_XR)
+   {
+       self.lblTitle.numberOfLines = 1;
+       self.lblTitle.bottom = self.lblTitle.bottom + 7;
+       self.btnRightMenu.bottom = self.btnRightMenu.bottom + 7;
+       self.btnBulkSelect.bottom = self.btnBulkSelect.bottom + 7;
+   }
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -141,8 +142,7 @@ typedef enum {
        
         [self fetchNotExpected];
          [self setFiltersQuantities];
-        dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
+
             for (EffortModel * effort in self.efforts)
             {
                 if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
@@ -158,8 +158,6 @@ typedef enum {
                
                 [DejalBezelActivityView removeViewAnimated:YES];
             });
-        });
-        
     });
 }
 

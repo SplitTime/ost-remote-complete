@@ -19,6 +19,8 @@
     {
         self.serviceURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"];
         self.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        self.securityPolicy.allowInvalidCertificates = YES;
+        [self.securityPolicy setValidatesDomainName:NO];
         self.responseSerializer = [JSONResponseSerializerWithData serializer];
         self.requestSerializer = [AFJSONRequestSerializer serializer];
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
