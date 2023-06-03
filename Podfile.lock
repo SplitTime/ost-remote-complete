@@ -16,7 +16,6 @@ PODS:
     - AFNetworking/NSURLSession
   - CHCSVParser (2.1.0)
   - DejalActivityView (1.2)
-  - FXKeychain (1.5.3)
   - IQDropDownTextField (1.1.0)
   - IQKeyboardManager (4.0.10)
   - JTObjectMapping (1.1.2)
@@ -34,7 +33,6 @@ DEPENDENCIES:
   - AFNetworking
   - CHCSVParser (= 2.1.0)
   - DejalActivityView (= 1.2)
-  - FXKeychain (~> 1.5)
   - IQDropDownTextField (= 1.1.0)
   - IQKeyboardManager (= 4.0.10)
   - JTObjectMapping (= 1.1.2)
@@ -51,7 +49,6 @@ SPEC REPOS:
     - AFNetworking
     - CHCSVParser
     - DejalActivityView
-    - FXKeychain
     - IQDropDownTextField
     - IQKeyboardManager
     - JTObjectMapping
@@ -64,10 +61,9 @@ SPEC REPOS:
     - Toast
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AFNetworking: cb604b1c2bded0871f5f61f5d53653739e841d6b
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
   DejalActivityView: 94d85757728a02cbb32445fcf6dfba17dc1e7393
-  FXKeychain: 2fe54573946ffef634f4e2a2851e6c8f4ea15e76
   IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JTObjectMapping: 179cae6acadb27be5b7f5c019c216cb99d28e112
@@ -79,6 +75,6 @@ SPEC CHECKSUMS:
   SimpleKeychain: 84c748463eec601dfee5e7990f55cc82edc5488d
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 61b1f5c6e78b5038d96a54d214ca90908c30625f
+PODFILE CHECKSUM: 4101dd3bed3d23587f7805bd408e00b8e308ac57
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.3
