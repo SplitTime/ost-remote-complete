@@ -135,6 +135,10 @@
                 [EffortModel MR_importFromObject:dataObject];
             }
         }
+        //        Remove from local storage entrants that were deleted from the event 
+        NSArray *idList = [object[@"included"] valueForKey:@"id"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT(effortId IN %@)", idList];
+        [EffortModel MR_deleteAllMatchingPredicate:predicate];
         
         
         currentCourse.monitorPacers = object[@"data"][@"attributes"][@"monitorPacers"];
