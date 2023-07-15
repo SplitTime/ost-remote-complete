@@ -107,11 +107,13 @@ typedef enum {
 
 - (void)fetchNotExpected
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [DejalBezelActivityView activityViewForView: self.view];
     
     self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"bibNumber != nil"]];
     
     [[AppDelegate getInstance].getNetworkManager fetchNotExpected:[CurrentCourse getCurrentCourse].eventGroupId splitName:self.splitName useAlternateServer:NO completionBlock:^(id  _Nullable object) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [DejalBezelActivityView removeViewAnimated:YES];
         
         __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
@@ -141,6 +143,7 @@ typedef enum {
         [self applyFilter];
         
     } errorBlock:^(NSError * _Nullable error) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [DejalBezelActivityView removeViewAnimated:YES];
         
         __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
