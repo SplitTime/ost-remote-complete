@@ -108,7 +108,15 @@ typedef enum {
 - (void)fetchNotExpected
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [DejalBezelActivityView activityViewForView: self.view];
+    
+    self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"bibNumber != nil"]];
+    
     [[AppDelegate getInstance].getNetworkManager fetchNotExpected:[CurrentCourse getCurrentCourse].eventGroupId splitName:self.splitName useAlternateServer:NO completionBlock:^(id  _Nullable object) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [DejalBezelActivityView removeViewAnimated:YES];
+        
+        __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
         
         if ([object isKindOfClass:[NSDictionary class]])
         {
@@ -118,47 +126,46 @@ typedef enum {
                 [self bulkNotExpectedBibNumbers:bibNumbers];
                 [self setFiltersQuantities];
                 [self.crossCheckCollection reloadData];
-                
             }
         }
         
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [self setFiltersQuantities];
+        
+        for (EffortModel * effort in self.efforts)
+        {
+            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
+            {
+                [effort expectedWithSplitName:self.splitName];
+                [entriesThatShouldBeHere addObject:effort];
+            }
+        }
+        self.efforts = entriesThatShouldBeHere;
+        [self applyFilter];
         
     } errorBlock:^(NSError * _Nullable error) {
-        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [DejalBezelActivityView removeViewAnimated:YES];
         
+        __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
+        
+        [self setFiltersQuantities];
+        
+        for (EffortModel * effort in self.efforts)
+        {
+            if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
+            {
+                [effort expectedWithSplitName:self.splitName];
+                [entriesThatShouldBeHere addObject:effort];
+            }
+        }
+        self.efforts = entriesThatShouldBeHere;
+        [self applyFilter];
     }];
 }
 
 - (void) reloadData
 {
-    __block NSMutableArray * entriesThatShouldBeHere = [NSMutableArray new];
-    [DejalBezelActivityView activityViewForView:self.view];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        self.efforts = [EffortModel MR_findAllSortedBy:@"bibNumber" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"bibNumber != nil"]];
-       
-        [self fetchNotExpected];
-         [self setFiltersQuantities];
-
-            for (EffortModel * effort in self.efforts)
-            {
-                if ([effort checkIfEffortShouldBeInSplit:[CurrentCourse getCurrentCourse].splitName selectedSplitName:self.splitName])
-                {
-                    [effort expectedWithSplitName:self.splitName];
-                    [entriesThatShouldBeHere addObject:effort];
-                }
-            }
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                self.efforts = entriesThatShouldBeHere;
-                [self applyFilter];
-               
-                [DejalBezelActivityView removeViewAnimated:YES];
-            });
-    });
+    [self fetchNotExpected];
 }
 
 - (NSArray *)recordedEffortsDroppedHere:(BOOL)droppedHere
@@ -214,33 +221,25 @@ typedef enum {
 - (void)setFiltersQuantities
 {   
     for (OSTCheckmarkView * checkMark in self.checkMarkFilters){
-    switch (checkMark.tag)
-    {
-        case OSTCrossCheckFilterAll:
-            checkMark.number = [NSString stringWithFormat:@"(%ld)", self.efforts.count];
-            break;
-            
-        case OSTCrossCheckFilterRecorded:
-             checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self recordedEffortsDroppedHere:NO].count];
-            
-            break;
-            
-        case OSTCrossCheckFilterDroppedHere:
-             checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self recordedEffortsDroppedHere:YES].count];
-           
-            break;
-            
-        case OSTCrossCheckFilterExpected:
-            checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self nonRecordedEffortsExpected:YES].count];
-            
-            break;
-            
-        case OSTCrossCheckFilterNotExpected:
-            checkMark.number = [NSString stringWithFormat:@"(%ld)",  [self nonRecordedEffortsExpected:NO].count];
-            break;
+        switch (checkMark.tag)
+        {
+            case OSTCrossCheckFilterAll:
+                checkMark.number = [NSString stringWithFormat:@"(%ld)", self.efforts.count];
+                break;
+            case OSTCrossCheckFilterRecorded:
+                checkMark.number = [NSString stringWithFormat:@"(%ld)", [self recordedEffortsDroppedHere:NO].count];
+                break;
+            case OSTCrossCheckFilterDroppedHere:
+                checkMark.number = [NSString stringWithFormat:@"(%ld)", [self recordedEffortsDroppedHere:YES].count];
+                break;
+            case OSTCrossCheckFilterExpected:
+                checkMark.number = [NSString stringWithFormat:@"(%ld)", [self nonRecordedEffortsExpected:YES].count];
+                break;
+            case OSTCrossCheckFilterNotExpected:
+                checkMark.number = [NSString stringWithFormat:@"(%ld)", [self nonRecordedEffortsExpected:NO].count];
+                break;
+        }
     }
-    }
-    
 }
 
 - (void)applyFilter
