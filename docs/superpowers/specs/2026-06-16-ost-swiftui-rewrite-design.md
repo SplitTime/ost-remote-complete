@@ -1,7 +1,7 @@
 # OST Remote — Swift + UIKit Modernization (Design)
 
 **Date:** 2026-06-16
-**Status:** Approved design (revised)
+**Status:** Approved design (revised). **Progress:** Foundations ✅ and Login screen ✅ complete (Swift+UIKit, iOS 12, all tests green on branch `swiftui-rewrite`). **Next: Event / Aid selection** (`docs/superpowers/plans/` — write the plan, then execute).
 
 > **Revision (2026-06-16):** SwiftUI was ruled out. The fleet includes **iPad mini 2/3**, which max out at **iOS 12.5**, so the deployment target must remain **iOS 12**. SwiftUI, async/await, and Combine all require iOS 13+. We therefore modernize in **Swift + UIKit** targeting iOS 12 — same incremental, verified, screen-by-screen plan and the same "Modern iOS" visual direction and keep-the-drawer decision; only the UI technology changes. (Filename retains "swiftui" only because the resume cron references this path.)
 
@@ -56,7 +56,7 @@ Each new screen is a **Swift + UIKit `UIViewController`** that replaces one Obj-
 
 **Sequence:**
 1. **Foundations** — Swift bridging; `NSPersistentContainer` store alongside MagicalRecord; `APIClient` reproducing endpoints; verified vs live server + fixtures. No UI change. *(done; APIClient/SyncService converted to completion handlers for iOS 12)*
-2. **Login** — proves the Swift-UIKit-in-the-existing-app pattern + new auth path; safe-area correct.
+2. **Login** ✅ — Swift+UIKit `LoginViewController` replaces `OSTLoginViewController`; auth via `APIClient`, creds via `OSTSessionManager`, presents the (still Obj-C) event selection. Safe-area correct, Modern-iOS look. Tests + screenshot verified.
 3. **Event / Aid selection** — data fetch + CoreData write path.
 4. **Live Entry** (+ keypad component) — the heart; most careful verification.
 5. **Cross Check** — grid logic.
