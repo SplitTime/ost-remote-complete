@@ -8,35 +8,43 @@ final class SyncServiceTests: XCTestCase {
                                     source: "ost-remote-ios") }
     }
 
-    func test_batchesIn300sInOrder() async throws {
+    private func loginOK(_ done: @escaping (Result<Void, Error>) -> Void) { done(.success(())) }
+    private func loginFail(_ done: @escaping (Result<Void, Error>) -> Void) { done(.failure(URLError(.notConnectedToInternet))) }
+
+    func test_batchesIn300sInOrder() {
         var batchSizes: [Int] = []
-        let svc = SyncService(login: {}, submitBatch: { batch, _ in batchSizes.append(batch.count) })
-        try await svc.sync(entries(650))
+        let svc = SyncService(login: loginOK) { batch, _, done in batchSizes.append(batch.count); done(.success(())) }
+        let exp = expectation(description: "sync")
+        svc.sync(entries(650)) { _ in exp.fulfill() }
+        wait(for: [exp], timeout: 1)
         XCTAssertEqual(batchSizes, [300, 300, 50])
     }
 
-    func test_usesPrimaryServerWhenLoginSucceeds() async throws {
+    func test_usesPrimaryServerWhenLoginSucceeds() {
         var serversUsed: [Bool] = []
-        let svc = SyncService(login: {}, submitBatch: { _, alt in serversUsed.append(alt) })
-        try await svc.sync(entries(10))
+        let svc = SyncService(login: loginOK) { _, alt, done in serversUsed.append(alt); done(.success(())) }
+        let exp = expectation(description: "sync")
+        svc.sync(entries(10)) { _ in exp.fulfill() }
+        wait(for: [exp], timeout: 1)
         XCTAssertEqual(serversUsed, [false])
     }
 
-    func test_usesAlternateServerWhenLoginFails() async throws {
+    func test_usesAlternateServerWhenLoginFails() {
         var serversUsed: [Bool] = []
-        let svc = SyncService(login: { throw URLError(.notConnectedToInternet) },
-                              submitBatch: { _, alt in serversUsed.append(alt) })
-        try await svc.sync(entries(10))
+        let svc = SyncService(login: loginFail) { _, alt, done in serversUsed.append(alt); done(.success(())) }
+        let exp = expectation(description: "sync")
+        svc.sync(entries(10)) { _ in exp.fulfill() }
+        wait(for: [exp], timeout: 1)
         XCTAssertEqual(serversUsed, [true])
     }
 
-    func test_propagatesSubmitError() async {
-        let svc = SyncService(login: {}, submitBatch: { _, _ in throw URLError(.badServerResponse) })
-        do {
-            try await svc.sync(entries(5))
-            XCTFail("expected error")
-        } catch {
-            XCTAssertTrue(error is URLError)
+    func test_propagatesSubmitError() {
+        let svc = SyncService(login: loginOK) { _, _, done in done(.failure(URLError(.badServerResponse))) }
+        let exp = expectation(description: "sync")
+        svc.sync(entries(5)) { result in
+            if case .failure(let e) = result { XCTAssertTrue(e is URLError) } else { XCTFail("expected error") }
+            exp.fulfill()
         }
+        wait(for: [exp], timeout: 1)
     }
 }
