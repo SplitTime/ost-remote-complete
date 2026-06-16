@@ -149,6 +149,7 @@
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
 		6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */; };
+		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 		D50DFA8D226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
 		D50DFA8E226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
 		D50DFA9222786B5D002F5FBF /* OSTSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA9122786B5D002F5FBF /* OSTSlider.m */; };
@@ -189,6 +190,7 @@
 		D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		D5C5BC5B217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
 		D5C5BC5C217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
+		F88DCA28419AC14B875704BB /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -215,12 +217,14 @@
 		033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apnumberpad_backspace_icon.png; sourceTree = "<group>"; };
 		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
 		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
+		177BC33990DA88662548DD92 /* OST Tracker-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OST Tracker-Bridging-Header.h"; path = "OST Tracker/OST Tracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		189B47372427175300F384E8 /* OSTAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTAboutViewController.h; sourceTree = "<group>"; };
 		189B47382427175300F384E8 /* OSTAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTAboutViewController.m; sourceTree = "<group>"; };
 		189B47392427175300F384E8 /* OSTAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTAboutViewController.xib; sourceTree = "<group>"; };
 		18D41940242466C2002010E3 /* OSTUtilitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTUtilitiesViewController.h; sourceTree = "<group>"; };
 		18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTUtilitiesViewController.m; sourceTree = "<group>"; };
 		18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTUtilitiesViewController.xib; sourceTree = "<group>"; };
+		3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSmoke.swift; path = "OST Tracker/Swift/SwiftSmoke.swift"; sourceTree = "<group>"; };
 		3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.release.xcconfig"; sourceTree = "<group>"; };
@@ -438,6 +442,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2642D7360B1335B5908AFA8F /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */,
+			);
+			name = Swift;
+			sourceTree = SOURCE_ROOT;
+		};
 		4B37AA18875D02B81B9F9A2B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +649,8 @@
 				6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */,
 				6A549E5C1EEF8B9400783F80 /* OSTConstants.h */,
 				6AEFFC081EEF83DA009EEE21 /* Supporting Files */,
+				2642D7360B1335B5908AFA8F /* Swift */,
+				177BC33990DA88662548DD92 /* OST Tracker-Bridging-Header.h */,
 			);
 			path = "OST Tracker";
 			sourceTree = "<group>";
@@ -1173,6 +1187,7 @@
 				D5C5BC56217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */,
+				A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1232,6 +1247,7 @@
 				D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */,
 				6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */,
 				6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */,
+				F88DCA28419AC14B875704BB /* SwiftSmoke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1291,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_ALTERNATE_URL = "http://www.opensplittime.org/api/v1/";
 				BACKEND_URL = "https://www.opensplittime.org/api/v1/";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1302,7 +1319,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1315,6 +1333,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_ALTERNATE_URL = "http://www.opensplittime.org/api/v1/";
 				BACKEND_URL = "https://www.opensplittime.org/api/v1/";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -1343,7 +1362,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "ost distribution guille";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1464,6 +1484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_ALTERNATE_URL = "http://ost-stage.herokuapp.com/api/v1/";
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1492,7 +1513,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "ost development";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1505,6 +1527,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BACKEND_ALTERNATE_URL = "http://ost-stage.herokuapp.com/api/v1/";
 				BACKEND_URL = "https://ost-stage.herokuapp.com/api/v1/";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1533,7 +1556,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "ost development";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1546,6 +1570,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Tracker.app/OST Tracker";
 			};
 			name = Debug;
@@ -1559,6 +1584,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Tracker.app/OST Tracker";
 			};
 			name = Release;
