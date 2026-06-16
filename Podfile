@@ -1,7 +1,7 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios
 
-platform :ios, '9.0'
+platform :ios, '12.0'
 inhibit_all_warnings!
 use_frameworks!
 
@@ -41,7 +41,7 @@ pre_install do |installer|
     dir_af = File.join(installer.sandbox.pod_dir('AFNetworking'), 'UIKit+AFNetworking')
     Dir.foreach(dir_af) {|x|
       real_path = File.join(dir_af, x)
-      if (!File.directory?(real_path) && File.exists?(real_path))
+      if (!File.directory?(real_path) && File.exist?(real_path))
         if((x.start_with?('UIWebView') || x == 'UIKit+AFNetworking.h'))
           File.delete(real_path)
           puts 'delete:'+ x
@@ -49,4 +49,14 @@ pre_install do |installer|
       end
     }
     puts 'end pre_install.'
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+            # Old pods aren't audited for the modern strict checks Xcode 26 enables.
+            config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
+        end
+    end
 end
