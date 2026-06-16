@@ -165,6 +165,7 @@
 		8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		99517852C35EF5C3914336BF /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
+		9CF9FB3B3E1F8787224192B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
 		9DABDD777FB885613F1F99DC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = A802EAD220AFB69CF7A7E5BF /* fixtures */; };
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 		BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
@@ -210,6 +211,7 @@
 		D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		D5C5BC5B217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
 		D5C5BC5C217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
+		E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
 		E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		F88DCA28419AC14B875704BB /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 /* End PBXBuildFile section */
@@ -248,6 +250,7 @@
 		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		149C18108290E0987474D395 /* LiveTimeEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeEntry.swift; path = "OST Tracker/Swift/LiveTimeEntry.swift"; sourceTree = "<group>"; };
 		14C24566B72849E7915F9603 /* APIModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIModels.swift; path = "OST Tracker/Swift/APIModels.swift"; sourceTree = "<group>"; };
+		16BAED92F7B8A3B859B03965 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "OST Tracker/Swift/LoginViewController.swift"; sourceTree = "<group>"; };
 		177BC33990DA88662548DD92 /* OST Tracker-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OST Tracker-Bridging-Header.h"; path = "OST Tracker/OST Tracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		189B47372427175300F384E8 /* OSTAboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTAboutViewController.h; sourceTree = "<group>"; };
 		189B47382427175300F384E8 /* OSTAboutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTAboutViewController.m; sourceTree = "<group>"; };
@@ -495,6 +498,7 @@
 				149C18108290E0987474D395 /* LiveTimeEntry.swift */,
 				1EF24CABF2B5EAD65649ACBC /* SyncService.swift */,
 				7FC88DAF080C3B90276428C3 /* LoginController.swift */,
+				16BAED92F7B8A3B859B03965 /* LoginViewController.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1262,6 +1266,7 @@
 				BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */,
 				E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */,
 				5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */,
+				9CF9FB3B3E1F8787224192B9 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1328,6 +1333,7 @@
 				424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */,
 				99517852C35EF5C3914336BF /* SyncService.swift in Sources */,
 				8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */,
+				E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,3 +11,6 @@
 #import "CourseSplits.h"
 #import "OSTConstants.h"
 #import "OSTSessionManager.h"
+#import "OSTNetworkManager.h"
+#import "AppDelegate.h"
+#import "OSTEventSelectionViewController.h"
