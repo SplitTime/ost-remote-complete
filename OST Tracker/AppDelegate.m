@@ -9,6 +9,12 @@
 #import "AppDelegate.h"
 #import "OSTLoginViewController.h"
 #import "MFSideMenu.h"
+// Generated Swift header — module name differs between the two app targets.
+#if __has_include("OST_Remote-Swift.h")
+#import "OST_Remote-Swift.h"
+#elif __has_include("OST_Remote_Dev-Swift.h")
+#import "OST_Remote_Dev-Swift.h"
+#endif
 #import "OSTRunnerTrackerViewController.h"
 #import "OSTRightMenuViewController.h"
 #import "OSTReviewSubmitViewController.h"
@@ -76,7 +82,7 @@
 
 - (void) loadLogin
 {
-    OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
+    LoginViewController * loginVC = [[LoginViewController alloc] init];
     
     self.window.rootViewController = loginVC;
 }
@@ -136,7 +142,7 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     [[AppDelegate getInstance].getNetworkManager addTokenToHeader:nil];
     
-    OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
+    LoginViewController * loginVC = [[LoginViewController alloc] init];
     self.window.rootViewController = loginVC;
 }
 
