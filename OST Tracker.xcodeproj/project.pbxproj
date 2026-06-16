@@ -45,6 +45,7 @@
 		18D4194624246CD9002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
 		18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		18D4194824246CEA002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
+		2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */; };
 		24AB60374315832E06352A0E /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
@@ -159,6 +160,7 @@
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
+		99517852C35EF5C3914336BF /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		9DABDD777FB885613F1F99DC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = A802EAD220AFB69CF7A7E5BF /* fixtures */; };
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 		BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
@@ -204,6 +206,7 @@
 		D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		D5C5BC5B217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
 		D5C5BC5C217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
+		E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		F88DCA28419AC14B875704BB /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 /* End PBXBuildFile section */
 
@@ -248,6 +251,8 @@
 		18D41940242466C2002010E3 /* OSTUtilitiesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTUtilitiesViewController.h; sourceTree = "<group>"; };
 		18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTUtilitiesViewController.m; sourceTree = "<group>"; };
 		18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTUtilitiesViewController.xib; sourceTree = "<group>"; };
+		1EF24CABF2B5EAD65649ACBC /* SyncService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SyncService.swift; path = "OST Tracker/Swift/SyncService.swift"; sourceTree = "<group>"; };
+		25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SyncServiceTests.swift; path = "OST TrackerTests/Swift/SyncServiceTests.swift"; sourceTree = "<group>"; };
 		3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSmoke.swift; path = "OST Tracker/Swift/SwiftSmoke.swift"; sourceTree = "<group>"; };
 		3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -481,6 +486,7 @@
 				14C24566B72849E7915F9603 /* APIModels.swift */,
 				809E391C45FA035A2E0209DC /* APIClient.swift */,
 				149C18108290E0987474D395 /* LiveTimeEntry.swift */,
+				1EF24CABF2B5EAD65649ACBC /* SyncService.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -493,6 +499,7 @@
 				68F2986C3890234A3A81A335 /* FixtureLoader.swift */,
 				F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */,
 				02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */,
+				25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1243,6 +1250,7 @@
 				24AB60374315832E06352A0E /* APIModels.swift in Sources */,
 				83858563EB432C038511CCE2 /* APIClient.swift in Sources */,
 				BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */,
+				E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,6 +1315,7 @@
 				5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */,
 				8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */,
 				424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */,
+				99517852C35EF5C3914336BF /* SyncService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,6 +1330,7 @@
 				7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */,
 				73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */,
 				C261404CBC1C810470E0C24A /* SubmitPayloadGoldenTests.swift in Sources */,
+				2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
