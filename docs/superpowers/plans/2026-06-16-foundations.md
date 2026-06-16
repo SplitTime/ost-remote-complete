@@ -10,6 +10,14 @@
 
 ---
 
+## Progress log (for the resuming cron)
+
+- ✅ **Task 1 — Swift enabled** (commit `84fba4c`): bridging header, `SwiftSmoke.swift`, `SWIFT_VERSION=5.0`, bridging header on both app targets. Build green. Project edited via the `xcodeproj` gem (load it with `RUBYLIB=$(ls -d /opt/homebrew/Cellar/cocoapods/*/libexec/gems/*/lib | tr '\n' ':')`).
+- ✅ **Task 1.5 — XCTest harness repaired** (commit `ad766fd`, discovered during execution): the test target's `TEST_HOST` referenced the long-renamed `OST Tracker.app`; repointed to `OST Remote`, set `TestTargetID` + dependency, bumped test target to iOS 12, and wired `OST TrackerTests` into the `OST Remote` scheme (its `<Testables>` was empty). `HarnessSmokeTests` proves `@testable import OST_Remote` runs green. **Run gate:** `xcodebuild test -workspace "OST Tracker.xcworkspace" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPhone 17' -only-testing:"OST TrackerTests/..." CODE_SIGNING_ALLOWED=NO`.
+- ⏭️ **NEXT: Task 2 — CoreDataStack.** Note corrections vs. the draft below: the CoreData store name is **`OSTDataModel`** (from `OSTCoredataFile`), not `OSTCoredataFile.sqlite`; the model resource is `OSTDataModel`. Module is `OST_Remote`. Add new Swift test files to the test target via the `xcodeproj` gem (same pattern as Task 1.5).
+
+---
+
 ## File Structure
 
 - `OST Tracker/Swift/` — new Swift sources
