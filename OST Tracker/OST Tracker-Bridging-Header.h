@@ -10,3 +10,4 @@
 #import "EffortModel.h"
 #import "CourseSplits.h"
 #import "OSTConstants.h"
+#import "OSTSessionManager.h"
