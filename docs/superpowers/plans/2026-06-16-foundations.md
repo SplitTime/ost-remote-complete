@@ -25,7 +25,9 @@
 
 ## ✅ FOUNDATIONS MILESTONE COMPLETE (all green, committed on `swiftui-rewrite`)
 
-**NEXT MILESTONE:** write `docs/superpowers/plans/2026-06-16-login-screen.md` and execute it — the Login screen in SwiftUI, hosted in the existing app via `UIHostingController`, using the new `APIClient` for auth and replacing `OSTLoginViewController`. Verify against the running old app + the live test account. Then proceed per the design doc (Event selection → Live Entry → Cross Check → Review/Sync → Utilities → drawer → cleanup), stopping at the human checkpoint after Review/Sync.
+**⚠️ DIRECTION PIVOT (2026-06-16):** SwiftUI ruled out — fleet has **iPad mini 2/3 (iOS 12.5 max)**. Deployment target reverted **15 → 12**; `APIClient`/`SyncService` converted from async/await to **completion handlers** (Result-based). All else in Foundations stands. UI work is now **Swift + UIKit**, safe area via Auto Layout. See the revised design doc + memory `ost-modernization-decision`.
+
+**NEXT MILESTONE:** write `docs/superpowers/plans/2026-06-16-login-screen.md` and execute it — the Login screen as a **Swift + UIKit `UIViewController`** (iOS 12), Modern-iOS style, safe-area correct, using the new `APIClient` for auth, replacing `OSTLoginViewController`. Verify against the old app + live test account. Then proceed per the design doc (Event selection → Live Entry → Cross Check → Review/Sync → Utilities → drawer → cleanup), stopping at the human checkpoint after Review/Sync.
 
 ---
 
