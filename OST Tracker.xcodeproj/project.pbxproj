@@ -45,6 +45,7 @@
 		18D4194624246CD9002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
 		18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		18D4194824246CEA002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
+		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
 		396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */; };
 		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
@@ -200,6 +201,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6AEFFC041EEF83DA009EEE21;
 			remoteInfo = "OST Tracker";
+		};
+		DD5DFB8804C4CDCA5B2D0873 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6AEFFBFD1EEF83DA009EEE21 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6A5E0CEC1EF1B25E00399EEC;
+			remoteInfo = "OST Remote";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -359,6 +367,7 @@
 		D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTSyncManager.m; sourceTree = "<group>"; };
 		DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.release.xcconfig"; sourceTree = "<group>"; };
+		EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HarnessSmokeTests.swift; path = "OST TrackerTests/Swift/HarnessSmokeTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +455,14 @@
 			isa = PBXGroup;
 			children = (
 				3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */,
+			);
+			name = Swift;
+			sourceTree = SOURCE_ROOT;
+		};
+		268A8A23FD6B591E5BF81B31 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -668,6 +685,7 @@
 			children = (
 				6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */,
 				6AEFFC241EEF83DA009EEE21 /* Info.plist */,
+				268A8A23FD6B591E5BF81B31 /* Swift */,
 			);
 			path = "OST TrackerTests";
 			sourceTree = "<group>";
@@ -785,6 +803,7 @@
 			);
 			dependencies = (
 				6AEFFC201EEF83DA009EEE21 /* PBXTargetDependency */,
+				851FE1CA0B3E86C940397F51 /* PBXTargetDependency */,
 			);
 			name = "OST TrackerTests";
 			productName = "OST TrackerTests";
@@ -823,7 +842,7 @@
 					6AEFFC1D1EEF83DA009EEE21 = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 6AEFFC041EEF83DA009EEE21;
+						TestTargetID = 6A5E0CEC1EF1B25E00399EEC;
 					};
 				};
 			};
@@ -1257,6 +1276,7 @@
 			files = (
 				18D4194624246CD9002010E3 /* OSTUtilitiesViewController.m in Sources */,
 				6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */,
+				2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,6 +1287,12 @@
 			isa = PBXTargetDependency;
 			target = 6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */;
 			targetProxy = 6AEFFC1F1EEF83DA009EEE21 /* PBXContainerItemProxy */;
+		};
+		851FE1CA0B3E86C940397F51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "OST Remote";
+			target = 6A5E0CEC1EF1B25E00399EEC /* OST Remote */;
+			targetProxy = DD5DFB8804C4CDCA5B2D0873 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1567,11 +1593,12 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "OST TrackerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Tracker.app/OST Tracker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Remote.app/OST Remote";
 			};
 			name = Debug;
 		};
@@ -1581,11 +1608,12 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "OST TrackerTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Tracker.app/OST Tracker";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Remote.app/OST Remote";
 			};
 			name = Release;
 		};
