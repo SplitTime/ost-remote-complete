@@ -1,0 +1,17 @@
+{
+  "uniqueKey": ["enteredTime", "bitkey", "bibNumber", "source", "withPacer", "stoppedHere"],
+  "data": [
+    {
+      "type": "live_time",
+      "attributes": {
+        "bibNumber": "42",
+        "splitId": "900",
+        "subSplitKind": "in",
+        "enteredTime": "2026-06-16T10:14:22-06:00",
+        "withPacer": "false",
+        "stoppedHere": "false",
+        "source": "ost-remote-ios"
+      }
+    }
+  ]
+}
