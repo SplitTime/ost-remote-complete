@@ -17,7 +17,15 @@
 - ✅ **Task 2 — CoreDataStack** (commit `8523d39`): `NSPersistentContainer` over `OSTDataModel`, store name `OSTDataModel`, in-memory for tests. Round-trip `EntryModel` test green. Entities confirmed: CourseSplits, CrossCheckEntriesModel, CurrentCourse, EffortModel, EntryModel, EventModel.
 - ✅ **Task 3 — APIClient + Codable models** (commit pending): `APIClient` (async URLSession, bearer auth), minimal JSON:API `Decodable` models, 3 parse tests green against fixtures (event groups list, splits, auth shape). Fixtures added to the test target as a folder reference.
 - ⚠️ **DEPLOYMENT-TARGET DECISION (flag for human checkpoint):** async/await and SwiftUI both require **iOS 13+**, so the app's old **iOS 12** floor made the approved architecture impossible. Bumped `IPHONEOS_DEPLOYMENT_TARGET` to **15.0** on `OST Remote`, `OST Remote Dev`, `OST TrackerTests` (iOS 15 covers ~all in-use devices and gives native `URLSession.data(for:)`). **User can change this floor** (13 minimum for the architecture; 16 enables `NavigationStack`). This is the one product decision made autonomously.
-- ⏭️ **NEXT: Task 4 — submit-payload golden master.** See Task 4 below; hand-derive `submit_live_time_golden.json` from `OSTNetworkManager+Entries.m:62-90` (already in the design notes). Module `OST_Remote`; add files via the `xcodeproj` gem.
+- ✅ **Task 4 — submit-payload golden master** (commit `fd880cd`+): `LiveTimeEntry` + `eventImportPayload`. Fidelity correction: `withPacer`/`stoppedHere` are the **strings** `"true"`/`"false"` (set in `OSTRunnerTrackerViewController.m:363-367`), not bools. Golden test green.
+- ✅ **Task 5 — SyncService** : faithful port — alternate server chosen by **auto-login outcome** (not submit failure), 300-batching in order. 4 tests green.
+- ✅ **Task 6 — verification harness** : `Verification/run-verification.sh` runs the offline gate (13 tests, 1 skipped, 0 fail). `LiveAPITests` gated behind `OST_LIVE_TESTS`; run from Xcode with scheme env (shell env does not reach the sim test host). Live API independently validated via curl against event 437.
+
+---
+
+## ✅ FOUNDATIONS MILESTONE COMPLETE (all green, committed on `swiftui-rewrite`)
+
+**NEXT MILESTONE:** write `docs/superpowers/plans/2026-06-16-login-screen.md` and execute it — the Login screen in SwiftUI, hosted in the existing app via `UIHostingController`, using the new `APIClient` for auth and replacing `OSTLoginViewController`. Verify against the running old app + the live test account. Then proceed per the design doc (Event selection → Live Entry → Cross Check → Review/Sync → Utilities → drawer → cleanup), stopping at the human checkpoint after Review/Sync.
 
 ---
 
