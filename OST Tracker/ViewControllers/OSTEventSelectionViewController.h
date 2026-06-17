@@ -25,4 +25,11 @@
 @property (assign, nonatomic) BOOL eventsLoaded;
 @property (nonatomic, strong) NSMutableArray * eventStrings;
 
+/// Loads the live events list (network + CoreData import) and presents a fresh
+/// event-selection screen from `presenter`. Moved out of the (now Swift) login
+/// VC so the event screen owns its own data loading. `completion` is called with
+/// nil on success (after presenting) or an error (alerts are shown internally).
++ (void)loadEventDataAndPresentFrom:(UIViewController *)presenter
+                         completion:(void (^ _Nullable)(NSError * _Nullable error))completion;
+
 @end

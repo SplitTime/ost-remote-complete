@@ -29,6 +29,53 @@
 
 @implementation OSTEventSelectionViewController
 
++ (void)loadEventDataAndPresentFrom:(UIViewController *)presenter
+                         completion:(void (^ _Nullable)(NSError * _Nullable error))completion
+{
+    OSTEventSelectionViewController * eventVC = [[OSTEventSelectionViewController alloc] initWithNibName:nil bundle:nil];
+    eventVC.tempContext = [NSManagedObjectContext MR_contextWithParent:[NSManagedObjectContext MR_defaultContext]];
+
+    [[AppDelegate getInstance].getNetworkManager getAllEventsWithCompletionBlock:^(id object)
+    {
+        if ([object[@"data"] count] == 0)
+        {
+            [[AppDelegate getInstance].getNetworkManager addTokenToHeader:nil];
+            [OHAlertView showAlertWithTitle:@"No Events Available" message:@"You are not authorized for any live events. Make sure your event is enabled for live entry and that you are authorized as a steward." dismissButton:@"Ok"];
+            if (completion) completion([NSError errorWithDomain:@"OST" code:1 userInfo:@{NSLocalizedDescriptionKey: @"No events available"}]);
+            return;
+        }
+
+        NSMutableArray * pickerEvents = [NSMutableArray new];
+        for (id dataObject in object[@"data"])
+        {
+            EventModel * eventToAdd = [EventModel MR_importFromObject:dataObject inContext:eventVC.tempContext];
+            [pickerEvents addObject:eventToAdd];
+        }
+        [pickerEvents sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO]]];
+
+        eventVC.events = pickerEvents;
+        eventVC.eventStrings = [NSMutableArray new];
+        for (EventModel * event in pickerEvents)
+        {
+            [eventVC.eventStrings addObject:event.name];
+        }
+
+        eventVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        [presenter presentViewController:eventVC animated:YES completion:nil];
+
+        [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:@"reviewScreenPicklistValue"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        if (completion) completion(nil);
+    } progressBlock:^(NSProgress * _Nonnull uploadProgress) {
+    } errorBlock:^(NSError *error) {
+        [OHAlertView showAlertWithTitle:@"Error" message:@"Couldn't get the events" cancelButton:@"Try Again" otherButtons:nil buttonHandler:^(OHAlertView *alert, NSInteger buttonIndex) {
+            [OSTEventSelectionViewController loadEventDataAndPresentFrom:presenter completion:completion];
+        }];
+        if (completion) completion(error);
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

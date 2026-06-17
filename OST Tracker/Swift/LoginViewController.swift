@@ -117,16 +117,18 @@ final class LoginViewController: UIViewController {
         controller.login(email: email, password: password) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                self.setLoading(false)
                 switch result {
                 case .success(let auth):
-                    // Forward the token to the legacy network manager that the
-                    // not-yet-migrated event-selection screen still uses.
+                    // Forward the token to the legacy network manager the
+                    // event-selection screen still uses, then load events +
+                    // present (Obj-C helper reproduces the old loadEventData,
+                    // incl. the events fetch + CoreData import + alerts).
                     AppDelegate.getInstance()?.getNetworkManager()?.addToken(toHeader: auth.token)
-                    let eventVC = OSTEventSelectionViewController(nibName: nil, bundle: nil)
-                    eventVC.modalPresentationStyle = .fullScreen
-                    self.present(eventVC, animated: true)
+                    OSTEventSelectionViewController.loadEventDataAndPresent(from: self) { [weak self] _ in
+                        DispatchQueue.main.async { self?.setLoading(false) }
+                    }
                 case .failure:
+                    self.setLoading(false)
                     self.showError()
                 }
             }
