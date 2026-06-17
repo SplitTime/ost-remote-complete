@@ -1,7 +1,9 @@
 # OST Remote — Swift + UIKit Modernization (Design)
 
 **Date:** 2026-06-16
-**Status:** Approved design (revised). **Progress:** Foundations ✅ and Login screen ✅ complete (Swift+UIKit, iOS 12, all tests green on branch `swiftui-rewrite`). **Next: Event / Aid selection** (`docs/superpowers/plans/` — write the plan, then execute).
+**Status:** Approved design (revised). **Progress (branch `swiftui-rewrite`, all green):** Foundations ✅; Login ✅ (full Swift+UIKit rewrite, verified live); login→events regression ✅ (verified); Event/Aid selection ✅ **safe-area fix verified live** (kept the Obj-C screen, shifted content below the island — see below).
+
+**⚠️ Pragmatic course adjustment (2026-06-17):** Login got a full Swift rewrite, but the remaining screens (event-selection, tracker, cross-check, review/sync) are tangled fixed-frame XIBs deeply coupled to the legacy CoreData flow. Full Swift rewrites of each are large/risky; the user's concrete pain is the **safe-area bleed**. So the chosen path for the coupled screens is: **apply the verified one-time safe-area content-shift fix** (`viewDidLayoutSubviews`, see `OSTEventSelectionViewController.m`) to each bleeding screen now (fast, low-risk, verifiable), and treat full Swift rewrites as a later/opportunistic effort. **Next: tracker (Live Entry) safe-area fix** — the worst offender — reachable by completing event selection (event→aid→confirm).
 
 > **Revision (2026-06-16):** SwiftUI was ruled out. The fleet includes **iPad mini 2/3**, which max out at **iOS 12.5**, so the deployment target must remain **iOS 12**. SwiftUI, async/await, and Combine all require iOS 13+. We therefore modernize in **Swift + UIKit** targeting iOS 12 — same incremental, verified, screen-by-screen plan and the same "Modern iOS" visual direction and keep-the-drawer decision; only the UI technology changes. (Filename retains "swiftui" only because the resume cron references this path.)
 
