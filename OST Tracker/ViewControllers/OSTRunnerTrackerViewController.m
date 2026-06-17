@@ -50,6 +50,7 @@
 @property (weak, nonatomic) IBOutlet UIView *separatoryLine;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeOfTheDay;
 @property (weak, nonatomic) IBOutlet OSTRunnerBadge *runnerBadge;
+@property (nonatomic, assign) BOOL didApplySafeAreaShift;
 
 @end
 
@@ -180,9 +181,38 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    [self applySafeAreaShiftIfNeeded];
     self.runnerBadge.width = fminf(0.58 * self.view.width, 350);
     self.runnerBadge.centerX = self.lblPersonAdded.centerX;
      [self.runnerBadge adjustFontSizes];
+}
+
+// This XIB predates safe-area layout: the header bar sat at y=0, so "Menu" and
+// the bib display bled under the Dynamic Island. One-time fix: shift all content
+// (except the bottom number pad) down by the extra top inset, and grow the header
+// to fill behind the status bar with its own content pushed below the island.
+- (void)applySafeAreaShiftIfNeeded
+{
+    if (self.didApplySafeAreaShift) return;
+    CGFloat inset = self.view.safeAreaInsets.top - 20.0; // old design assumed a 20pt status bar
+    if (inset <= 0.5) return; // legacy devices (iPad mini 2/3 etc.)
+    self.didApplySafeAreaShift = YES;
+
+    for (UIView *sub in self.view.subviews)
+    {
+        if (sub == self.numberPadContainerView || sub == self.headerContainerView) continue;
+        CGRect f = sub.frame; f.origin.y += inset; sub.frame = f;
+    }
+
+    // Header stays anchored to the top, grows to cover the status-bar/island area,
+    // and its content is pushed below the island.
+    CGRect h = self.headerContainerView.frame;
+    h.size.height += inset;
+    self.headerContainerView.frame = h;
+    for (UIView *child in self.headerContainerView.subviews)
+    {
+        CGRect cf = child.frame; cf.origin.y += inset; child.frame = cf;
+    }
 }
 
 -(void)onTick:(NSTimer *)timer
