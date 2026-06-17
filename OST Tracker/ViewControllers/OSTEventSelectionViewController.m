@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *eventTriangle;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressBar;
+@property (nonatomic, assign) BOOL didApplySafeAreaShift;
 
 @end
 
@@ -143,6 +144,30 @@
     
     [self.txtStation removeInputAssistant];
     [self.txtEvent removeInputAssistant];
+}
+
+// This XIB predates safe-area layout: content was positioned for a 20pt status
+// bar, so on Dynamic Island devices the logo/Logout bled under the island.
+// One-time shift of all content (except the full-screen background) down by the
+// extra top inset. Portrait-only, so applying once is sufficient.
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    if (self.didApplySafeAreaShift) return;
+    CGFloat extraTop = self.view.safeAreaInsets.top - 20.0; // old design assumed a 20pt status bar
+    if (extraTop <= 0.5) return; // legacy devices (iPad mini 2/3 etc.): nothing to do
+    self.didApplySafeAreaShift = YES;
+    for (UIView *sub in self.view.subviews)
+    {
+        if ([sub isKindOfClass:[UIImageView class]] &&
+            CGRectEqualToRect(sub.frame, self.view.bounds))
+        {
+            continue; // skip the full-screen background image
+        }
+        CGRect f = sub.frame;
+        f.origin.y += extraTop;
+        sub.frame = f;
+    }
 }
 
 - (IBAction)onCancel:(id)sender
