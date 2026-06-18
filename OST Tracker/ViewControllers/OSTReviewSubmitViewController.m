@@ -19,6 +19,7 @@
 #import "CHCSVParser.h"
 #import "OSTSyncManager.h"
 #import "UILabel+Extension.h"
+#import "UIViewController+OSTSafeArea.h"
 
 @interface OSTReviewSubmitViewController () <OSTSyncManagerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
@@ -42,6 +43,13 @@
 @end
 
 @implementation OSTReviewSubmitViewController
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    // Keep the bottom Sync bar pinned; shift the title/list down off the island.
+    [self ostShiftContentBelowSafeAreaExcludingBottom:self.btnSync ? @[self.btnSync] : nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

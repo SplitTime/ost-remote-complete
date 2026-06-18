@@ -12,6 +12,7 @@
 #import "UIView+Additions.h"
 #import "CurrentCourse.h"
 #import "EffortModel.h"
+#import "UIViewController+OSTSafeArea.h"
 
 @interface OSTUtilitiesViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
@@ -30,6 +31,12 @@
 @end
 
 @implementation OSTUtilitiesViewController
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self ostShiftContentBelowSafeAreaExcludingBottom:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

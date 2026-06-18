@@ -9,6 +9,7 @@
 #import "OSTAboutViewController.h"
 #import "AppDelegate.h"
 #import "UIView+Additions.h"
+#import "UIViewController+OSTSafeArea.h"
 
 @interface OSTAboutViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
@@ -20,6 +21,12 @@
 @end
 
 @implementation OSTAboutViewController
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self ostShiftContentBelowSafeAreaExcludingBottom:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
