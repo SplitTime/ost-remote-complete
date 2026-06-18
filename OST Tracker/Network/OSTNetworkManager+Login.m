@@ -16,6 +16,18 @@
 
 - (NSURLSessionDataTask*)loginWithEmail:(NSString*)email password:(NSString*)password completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError
 {
+    // Guard against missing credentials: building the params dictionary with a
+    // nil value throws and crashes (e.g. autoLogin when nothing is stored).
+    if (email.length == 0 || password.length == 0)
+    {
+        if (onError)
+        {
+            onError([NSError errorWithDomain:@"OST" code:401
+                                    userInfo:@{NSLocalizedDescriptionKey: @"Missing stored credentials. Please log in again."}]);
+        }
+        return nil;
+    }
+
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
     [self.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     

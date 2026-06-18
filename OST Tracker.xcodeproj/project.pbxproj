@@ -47,6 +47,7 @@
 		18D4194824246CEA002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */; };
 		24AB60374315832E06352A0E /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
+		276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */; };
 		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		384837C7720AAB88FADDA238 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
@@ -262,6 +263,7 @@
 		25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SyncServiceTests.swift; path = "OST TrackerTests/Swift/SyncServiceTests.swift"; sourceTree = "<group>"; };
 		3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSmoke.swift; path = "OST Tracker/Swift/SwiftSmoke.swift"; sourceTree = "<group>"; };
 		3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainRoundTripTests.swift; path = "OST TrackerTests/Swift/KeychainRoundTripTests.swift"; sourceTree = "<group>"; };
 		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.release.xcconfig"; sourceTree = "<group>"; };
 		579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.debug.xcconfig"; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */,
 				9E2CE940B9754C16E1809394 /* LiveAPITests.swift */,
 				7E637BB81DCDE0328194710B /* LoginControllerTests.swift */,
+				42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1351,6 +1354,7 @@
 				2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */,
 				65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */,
 				8BE0411983BC48E1D1C14C5D /* LoginControllerTests.swift in Sources */,
+				276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
