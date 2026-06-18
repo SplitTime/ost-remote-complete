@@ -55,6 +55,7 @@
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
+		5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
@@ -171,6 +172,7 @@
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 		BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
 		C261404CBC1C810470E0C24A /* SubmitPayloadGoldenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */; };
+		C8BB3E1FB7830997009E7720 /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		D0CD28493EF297F7A492C237 /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584BEC7D7A12CC005D64BEC /* CoreDataStackTests.swift */; };
 		D50DFA8D226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
 		D50DFA8E226DF867002F5FBF /* OSTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */; };
@@ -249,6 +251,7 @@
 		033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apnumberpad_backspace_icon.png; sourceTree = "<group>"; };
 		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
 		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
+		0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OSTSafeArea.m"; sourceTree = "<group>"; };
 		149C18108290E0987474D395 /* LiveTimeEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeEntry.swift; path = "OST Tracker/Swift/LiveTimeEntry.swift"; sourceTree = "<group>"; };
 		14C24566B72849E7915F9603 /* APIModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIModels.swift; path = "OST Tracker/Swift/APIModels.swift"; sourceTree = "<group>"; };
 		16BAED92F7B8A3B859B03965 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "OST Tracker/Swift/LoginViewController.swift"; sourceTree = "<group>"; };
@@ -407,6 +410,7 @@
 		EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.release.xcconfig"; sourceTree = "<group>"; };
 		EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HarnessSmokeTests.swift; path = "OST TrackerTests/Swift/HarnessSmokeTests.swift"; sourceTree = "<group>"; };
 		F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIParsingTests.swift; path = "OST TrackerTests/Swift/APIParsingTests.swift"; sourceTree = "<group>"; };
+		F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OSTSafeArea.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,6 +609,8 @@
 				189B47372427175300F384E8 /* OSTAboutViewController.h */,
 				189B47382427175300F384E8 /* OSTAboutViewController.m */,
 				189B47392427175300F384E8 /* OSTAboutViewController.xib */,
+				0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */,
+				F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1270,6 +1276,7 @@
 				E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */,
 				5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */,
 				9CF9FB3B3E1F8787224192B9 /* LoginViewController.swift in Sources */,
+				C8BB3E1FB7830997009E7720 /* UIViewController+OSTSafeArea.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,6 +1344,7 @@
 				99517852C35EF5C3914336BF /* SyncService.swift in Sources */,
 				8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */,
 				E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */,
+				5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

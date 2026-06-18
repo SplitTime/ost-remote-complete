@@ -15,6 +15,7 @@
 #import "CurrentCourse.h"
 #import "EntryModel.h"
 #import "UILabel+Extension.h"
+#import "UIViewController+OSTSafeArea.h"
 
 @interface OSTRightMenuViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *rightMenuBackImage;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblBadge;
 @property (nonatomic,strong) IBOutletCollection(UIView) NSArray *buttonViews;
 @property (nonatomic,strong) IBOutletCollection(UIView) NSArray *separatorViews;
+@property (nonatomic, assign) BOOL didApplySafeAreaShift;
 @end
 
 @implementation OSTRightMenuViewController
@@ -49,6 +51,23 @@
 {
     [super viewWillAppear:animated];
     [self.syncIndicator setHidden:![[OSTSyncManager shared] isSyncing]];
+}
+
+// The drawer's content (Close button, logo, menu items) lives in the scrollView,
+// over a full-screen background. Shift the scrollView down by the safe-area inset
+// so its top content clears the Dynamic Island; the background stays full.
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    if (self.didApplySafeAreaShift) return;
+    CGFloat extra = [self ostExtraTopInset];
+    if (extra <= 0) return;
+    self.didApplySafeAreaShift = YES;
+
+    CGRect f = self.scrollView.frame;
+    f.origin.y += extra;
+    f.size.height -= extra;
+    self.scrollView.frame = f;
 }
 
 - (void)didReceiveMemoryWarning {
