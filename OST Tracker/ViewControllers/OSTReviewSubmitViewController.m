@@ -44,13 +44,6 @@
 
 @implementation OSTReviewSubmitViewController
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    // Keep the bottom Sync bar pinned; shift the title/list down off the island.
-    [self ostShiftContentBelowSafeAreaExcludingBottom:self.btnSync ? @[self.btnSync] : nil];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
