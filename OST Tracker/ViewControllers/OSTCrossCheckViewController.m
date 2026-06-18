@@ -16,6 +16,7 @@
 #import "OSTNetworkManager+Entries.h"
 #import "EntryModel.h"
 #import "OSTCheckmarkView.h"
+#import "UIViewController+OSTSafeArea.h"
 
 typedef enum {
     
@@ -60,6 +61,22 @@ typedef enum {
 @end
 
 @implementation OSTCrossCheckViewController
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    // Shift the fixed-frame top toolbar below the island. Exclude the full-screen
+    // popups (must stay full-screen), and the constraint-driven collection + footer
+    // (Auto Layout positions those; don't fight it with frame edits).
+    NSMutableArray *exclude = [NSMutableArray array];
+    for (UIView *v in @[self.popupOverlay, self.popupView, self.bulkSelectMenuView,
+                        self.popupCrossCheckContainer, self.popupSegmentedView,
+                        self.footerView, self.crossCheckCollection])
+    {
+        if (v) [exclude addObject:v];
+    }
+    [self ostShiftContentBelowSafeAreaExcludingBottom:exclude];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
