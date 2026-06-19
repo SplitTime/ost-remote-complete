@@ -54,8 +54,9 @@
 }
 
 // The drawer's content (Close button, logo, menu items) lives in the scrollView,
-// over a full-screen background. Shift the scrollView down by the safe-area inset
-// so its top content clears the Dynamic Island; the background stays full.
+// over the full-screen forest background image. Shift only the FOREGROUND content
+// down so it clears the Dynamic Island; keep the background image filling the top
+// (shifting it too left a black gap above the image).
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -64,10 +65,13 @@
     if (extra <= 0) return;
     self.didApplySafeAreaShift = YES;
 
-    CGRect f = self.scrollView.frame;
-    f.origin.y += extra;
-    f.size.height -= extra;
-    self.scrollView.frame = f;
+    for (UIView *sub in self.scrollView.subviews)
+    {
+        if (sub == self.rightMenuBackImage) continue; // keep the background put
+        CGRect f = sub.frame;
+        f.origin.y += extra;
+        sub.frame = f;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

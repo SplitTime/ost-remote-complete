@@ -34,4 +34,41 @@ static const char kOSTSafeAreaAppliedKey;
     return YES;
 }
 
+- (BOOL)ostGrowTopBarBelowSafeArea:(UIView *)topBar
+{
+    if ([objc_getAssociatedObject(self, &kOSTSafeAreaAppliedKey) boolValue]) return NO;
+    CGFloat extra = [self ostExtraTopInset];
+    if (extra <= 0) return NO;
+
+    if (topBar == nil)
+    {
+        // Auto-detect: a near-full-width direct subview anchored at the top that
+        // isn't the full-screen background.
+        CGFloat width = self.view.bounds.size.width;
+        for (UIView *sub in self.view.subviews)
+        {
+            CGRect f = sub.frame;
+            if (CGRectEqualToRect(f, self.view.bounds)) continue;
+            if (f.origin.y <= 1.0 && f.size.width >= width * 0.85 && f.size.height >= 28 && f.size.height <= 140)
+            {
+                topBar = sub;
+                break;
+            }
+        }
+    }
+    if (topBar == nil) return NO;
+    objc_setAssociatedObject(self, &kOSTSafeAreaAppliedKey, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+    CGRect b = topBar.frame;
+    b.size.height += extra;
+    topBar.frame = b;
+    for (UIView *child in topBar.subviews)
+    {
+        CGRect cf = child.frame;
+        cf.origin.y += extra;
+        child.frame = cf;
+    }
+    return YES;
+}
+
 @end

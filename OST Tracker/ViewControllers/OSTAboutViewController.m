@@ -25,7 +25,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self ostShiftContentBelowSafeAreaExcludingBottom:nil];
+    [self ostGrowTopBarBelowSafeArea:nil];
 }
 
 - (void)viewDidLoad {

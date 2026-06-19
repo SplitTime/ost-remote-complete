@@ -62,6 +62,12 @@ typedef enum {
 
 @implementation OSTCrossCheckViewController
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self ostGrowTopBarBelowSafeArea:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

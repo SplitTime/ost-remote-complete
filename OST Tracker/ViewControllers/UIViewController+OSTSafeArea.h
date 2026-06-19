@@ -21,4 +21,12 @@
 /// legacy devices. Returns YES if it applied.
 - (BOOL)ostShiftContentBelowSafeAreaExcludingBottom:(NSArray<UIView *> *)bottomPinned;
 
+/// One-time fix for screens with a top header/toolbar bar (the common bleed): GROWS
+/// the bar downward by `ostExtraTopInset` so its background fills behind the status
+/// bar/island, and shifts its child content down so it sits below the island.
+/// Leaves everything else (lists, grids, bottom bars) untouched — so no gaps and
+/// nothing is pushed off-screen. Pass the bar view (auto-detected if nil).
+/// Call from `viewDidLayoutSubviews`. Returns YES if it applied.
+- (BOOL)ostGrowTopBarBelowSafeArea:(UIView *)topBar;
+
 @end

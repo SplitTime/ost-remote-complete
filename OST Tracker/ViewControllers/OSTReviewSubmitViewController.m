@@ -44,6 +44,12 @@
 
 @implementation OSTReviewSubmitViewController
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self ostGrowTopBarBelowSafeArea:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
