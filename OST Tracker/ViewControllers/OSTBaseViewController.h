@@ -20,6 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateSyncBadge;
 
+/// Positions the sync-count badge at the top-left corner of the menu (hamburger)
+/// button. Call after the safe-area fix in `viewDidLayoutSubviews` so the badge
+/// stays pinned to the hamburger wherever it ends up.
+- (void)ostPositionBadgeAtMenu;
+
 @end
 
 NS_ASSUME_NONNULL_END

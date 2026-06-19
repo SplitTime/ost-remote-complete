@@ -66,6 +66,7 @@ typedef enum {
 {
     [super viewDidLayoutSubviews];
     [self ostApplySafeAreaFix];
+    [self ostPositionBadgeAtMenu];
 }
 
 - (void)viewDidLoad {

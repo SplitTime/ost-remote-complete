@@ -69,6 +69,17 @@
     [self updateSyncBadge];
 }
 
+- (void)ostPositionBadgeAtMenu
+{
+    if (!self.menuButton || !self.badgeLabel) return;
+    UIView *menuSuper = self.menuButton.superview;
+    UIView *badgeSuper = self.badgeLabel.superview;
+    if (!menuSuper || !badgeSuper) return;
+    // Center the badge on the hamburger's top-left corner.
+    CGPoint topLeft = [menuSuper convertPoint:self.menuButton.frame.origin toView:badgeSuper];
+    self.badgeLabel.center = topLeft;
+}
+
 - (void)updateSyncBadge
 {
     NSInteger entriesCount = 0;

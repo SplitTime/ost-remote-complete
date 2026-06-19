@@ -67,7 +67,8 @@
 
     for (UIView *sub in self.scrollView.subviews)
     {
-        if (sub == self.rightMenuBackImage) continue; // keep the background put
+        if (sub == self.rightMenuBackImage) continue; // keep the forest background put
+        if (sub == self.coverView) continue;          // keep the dark overlay covering the top
         CGRect f = sub.frame;
         f.origin.y += extra;
         sub.frame = f;
