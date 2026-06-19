@@ -23,8 +23,8 @@
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
-#import "OSTUtilitiesViewController.h"
-#import "OSTAboutViewController.h"
+// OSTUtilitiesViewController and OSTAboutViewController are now Swift
+// (visible via the generated OST_Remote-Swift.h imported above).
 
 @interface AppDelegate ()
 
