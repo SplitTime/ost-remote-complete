@@ -10,10 +10,10 @@ Build on Xcode 26; Swift `APIClient`/`CoreDataStack`/`SyncService`; Login screen
 **About** + **Utilities** → Swift (`@objc`, keep XIB, subclass `OSTBaseViewController`); `OHAlertView` → `UIAlertController`. Also: copyright © 2026, version 4.0.0 (dynamic).
 
 ## Phase 2 — Data-entry screens (the heart)
-Event/Aid selection ✅ → Review/Sync (next) → Cross Check → Live Entry (+ Swift reimpl of `APNumberPad`). Each Swift, still using Obj-C network + MagicalRecord via bridging, **verified per-screen** against the live test event.
+Event/Aid selection ✅ → Review/Sync ✅ (Swift; button fix pending verify) → Cross Check (next) → Live Entry (+ Swift reimpl of `APNumberPad`). Each Swift, still using Obj-C network + MagicalRecord via bridging, **verified per-screen** against the live test event.
 - **Event/Aid selection — done & verified** (Swift, commit `6d2457b`): both modes (initial + changeStation), CoreData import, logout, safe-area all confirmed on device.
+- **Review/Sync — done, pending verify** (Swift, commit `fd1f7aa`): table/sort/CSV export/sync-delegate/edit-entry ports; dropped the dead `onSubmit_old:` and the iPhone-X/XR nudge. **Sync-button off-bottom fix included** (lift in the button's own superview space — the earlier `self.view`-space frame-pin failed because the button is nested). Needs on-device confirmation.
 - **UX cleanup to fold in:** the event/aid-selection dropdowns show a floating blue circle-checkmark (`btnNext`, the "Begin Tracking" asset) above the picker — looks awkward/redundant. Redesign the dropdown confirm UX (confirm-on-select or a proper toolbar "Done"); drop the floating checkmark.
-- **Bug to fix during Review/Sync migration:** the **Sync button is off the bottom** of the Review/Sync screen (sits below the safe area / home indicator — only its top edge peeks in). The Obj-C `ostApplySafeAreaFix` bottom-lift isn't catching it; fix it properly with explicit layout in the Swift port.
 
 ## Known bug — Logout "disabled" false-positive (investigate in Phase 4 networking)
 On the event-selection screen, tapping **Logout** shows "Logout is disabled / Please try again when you have an Internet connection" on the **first** attempt every time, even when connected. This is faithful to the original Obj-C (logout runs an `autoLogin` connectivity probe first and the **first** probe errors). Likely the same network-layer flakiness as the `-999 cancelled` fix; pin down the root cause when `OSTNetworkManager` → `APIClient` in Phase 4. User asked to defer.
