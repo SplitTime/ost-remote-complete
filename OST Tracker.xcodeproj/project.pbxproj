@@ -38,7 +38,7 @@
 		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
-		18D4194624246CD9002010E3 /* OSTUtilitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D41941242466C2002010E3 /* OSTUtilitiesViewController.m */; };
+		18D4194624246CD9002010E3 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		18D4194824246CEA002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		193DC8E6351F712773C9444D /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
@@ -50,6 +50,7 @@
 		384837C7720AAB88FADDA238 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */; };
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
+		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
@@ -100,10 +101,8 @@
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
 		6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
 		6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
-		6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */; };
 		6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
-		6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */; };
 		6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
 		6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
 		6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
@@ -170,6 +169,7 @@
 		A63C9E647D0756AA05143661 /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 		BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
+		C033A9DEBCAF65E6035C75E9 /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		C1A21A365A3C880DE61C4DC7 /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
 		C261404CBC1C810470E0C24A /* SubmitPayloadGoldenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */; };
 		C8BB3E1FB7830997009E7720 /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
@@ -308,8 +308,6 @@
 		6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTLoginViewController.h; sourceTree = "<group>"; };
 		6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTLoginViewController.m; sourceTree = "<group>"; };
 		6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTLoginViewController.xib; sourceTree = "<group>"; };
-		6A549E521EEF881C00783F80 /* OSTEventSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTEventSelectionViewController.h; sourceTree = "<group>"; };
-		6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTEventSelectionViewController.m; sourceTree = "<group>"; };
 		6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTEventSelectionViewController.xib; sourceTree = "<group>"; };
 		6A549E581EEF8A5E00783F80 /* OSTNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTNetworkManager.h; sourceTree = "<group>"; };
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
@@ -408,6 +406,7 @@
 		EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.release.xcconfig"; sourceTree = "<group>"; };
 		EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HarnessSmokeTests.swift; path = "OST TrackerTests/Swift/HarnessSmokeTests.swift"; sourceTree = "<group>"; };
 		F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIParsingTests.swift; path = "OST TrackerTests/Swift/APIParsingTests.swift"; sourceTree = "<group>"; };
+		F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEventSelectionViewController.swift; sourceTree = "<group>"; };
 		F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OSTSafeArea.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -572,8 +571,6 @@
 				6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */,
 				6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */,
 				6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */,
-				6A549E521EEF881C00783F80 /* OSTEventSelectionViewController.h */,
-				6A549E531EEF881C00783F80 /* OSTEventSelectionViewController.m */,
 				6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */,
 				6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */,
 				6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */,
@@ -607,6 +604,7 @@
 				F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */,
 				440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */,
 				E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */,
+				F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1215,7 +1213,6 @@
 				6A41AE061EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
 				6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
-				6A5E0CEF1EF1B25E00399EEC /* OSTEventSelectionViewController.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
 				033E71C5206001FE00CB9BD8 /* APNumberPad.m in Sources */,
 				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
@@ -1273,6 +1270,7 @@
 				C8BB3E1FB7830997009E7720 /* UIViewController+OSTSafeArea.m in Sources */,
 				A63C9E647D0756AA05143661 /* OSTAboutViewController.swift in Sources */,
 				193DC8E6351F712773C9444D /* OSTUtilitiesViewController.swift in Sources */,
+				C033A9DEBCAF65E6035C75E9 /* OSTEventSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1283,7 +1281,6 @@
 				6A41AE071EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
 				6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
-				6A549E551EEF881C00783F80 /* OSTEventSelectionViewController.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				033E71C6206001FE00CB9BD8 /* APNumberPad.m in Sources */,
 				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
@@ -1341,6 +1338,7 @@
 				5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */,
 				515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */,
 				C1A21A365A3C880DE61C4DC7 /* OSTUtilitiesViewController.swift in Sources */,
+				4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1348,7 +1346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D4194624246CD9002010E3 /* OSTUtilitiesViewController.m in Sources */,
+				18D4194624246CD9002010E3 /* BuildFile in Sources */,
 				6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */,
 				2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */,
 				D0CD28493EF297F7A492C237 /* CoreDataStackTests.swift in Sources */,

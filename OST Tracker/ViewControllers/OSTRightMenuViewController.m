@@ -7,7 +7,6 @@
 //
 
 #import "OSTRightMenuViewController.h"
-#import "OSTEventSelectionViewController.h"
 #import "OSTRunnerTrackerViewController.h"
 #import "OSTCrossCheckViewController.h"
 #import "UIView+Additions.h"
