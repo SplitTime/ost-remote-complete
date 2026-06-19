@@ -74,7 +74,7 @@
                     <color key="textColor" red="0.25882352939999997" green="0.58823529409999997" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" red="0.25882352939999997" green="0.58823529409999997" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(c) 2020 OpenSplitTime Company " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIz-Bv-Fzy">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2026 OpenSplitTime Company " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIz-Bv-Fzy">
                     <rect key="frame" x="53.5" y="310" width="307.5" height="23.5"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <nil key="textColor"/>

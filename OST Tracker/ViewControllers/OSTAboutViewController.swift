@@ -29,7 +29,8 @@ class OSTAboutViewController: OSTBaseViewController {
 
         let info = Bundle.main.infoDictionary
         targetLbl.text = info?["CFBundleName"] as? String
-        versionLbl.text = "Version: 3.1.1"
+        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        versionLbl.text = "Version: \(appVersion)"
         if let primary = Bundle.main.object(forInfoDictionaryKey: "BACKEND_URL") {
             primaryLbl.text = "Primary: \(primary)"
         }
