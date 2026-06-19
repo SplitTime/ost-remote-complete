@@ -17,7 +17,7 @@
 #endif
 #import "OSTRunnerTrackerViewController.h"
 #import "OSTRightMenuViewController.h"
-#import "OSTReviewSubmitViewController.h"
+// OSTReviewSubmitViewController is now Swift (visible via the generated header above).
 #import "CurrentCourse.h"
 #import "IQKeyboardManager.h"
 #import "CourseSplits.h"

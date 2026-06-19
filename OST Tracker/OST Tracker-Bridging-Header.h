@@ -18,3 +18,10 @@
 #import "OSTNetworkManager+Events.h"
 #import "OSTNetworkManager+Login.h"
 #import "UITextField+RemoveInputAssistant.h"
+// Review/Sync (Phase 2) Swift screen dependencies
+#import "OSTReviewTableViewCell.h"
+#import "OSTReviewSectionHeader.h"
+#import "OSTEditEntryViewController.h"
+#import "UIView+Additions.h"
+#import "UILabel+Extension.h"
+#import "NSError+OSTErrors.h"
