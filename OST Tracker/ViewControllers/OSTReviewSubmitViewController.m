@@ -49,6 +49,23 @@
     [super viewDidLayoutSubviews];
     [self ostApplySafeAreaFix];
     [self ostPositionBadgeAtMenu];
+
+    // The shared safe-area fix only lifts *near-full-width* bottom bars. The Sync
+    // button is a centered button, so the generic pass pushes it down instead of
+    // lifting it, leaving it below the home indicator. Pin the bottom cluster
+    // (button + its overlaid spinner) just above the safe-area bottom. Modern
+    // devices only; legacy devices (no bottom inset) keep the original XIB layout.
+    CGFloat bottomInset = self.view.safeAreaInsets.bottom;
+    if (bottomInset > 0.5)
+    {
+        CGFloat desiredY = self.view.bounds.size.height - bottomInset - self.btnSync.frame.size.height - 12.0;
+        CGFloat delta = desiredY - self.btnSync.frame.origin.y;
+        if (fabs(delta) > 0.5)
+        {
+            CGRect bf = self.btnSync.frame;       bf.origin.y += delta; self.btnSync.frame = bf;
+            CGRect sf = self.syncIndicator.frame; sf.origin.y += delta; self.syncIndicator.frame = sf;
+        }
+    }
 }
 
 - (void)viewDidLoad {
