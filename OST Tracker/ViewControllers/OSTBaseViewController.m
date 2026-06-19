@@ -75,9 +75,13 @@
     UIView *menuSuper = self.menuButton.superview;
     UIView *badgeSuper = self.badgeLabel.superview;
     if (!menuSuper || !badgeSuper) return;
-    // Center the badge on the hamburger's top-left corner.
-    CGPoint topLeft = [menuSuper convertPoint:self.menuButton.frame.origin toView:badgeSuper];
-    self.badgeLabel.center = topLeft;
+    // The hamburger (≡) icon sits at the right end of the wide menu button; place
+    // the badge at its top-left, i.e. near the menu button's top-right corner.
+    CGRect mf = self.menuButton.frame;
+    CGPoint topRight = [menuSuper convertPoint:CGPointMake(CGRectGetMaxX(mf), CGRectGetMinY(mf)) toView:badgeSuper];
+    CGFloat bw = self.badgeLabel.bounds.size.width;
+    CGFloat bh = self.badgeLabel.bounds.size.height;
+    self.badgeLabel.center = CGPointMake(topRight.x - bw, topRight.y + bh / 2.0);
 }
 
 - (void)updateSyncBadge
