@@ -35,7 +35,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self ostGrowTopBarBelowSafeArea:nil];
+    [self ostApplySafeAreaFix];
 }
 
 - (void)viewDidLoad {
