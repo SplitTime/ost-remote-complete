@@ -35,6 +35,7 @@
 		033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */; };
 		033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
 		033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
+		08E4F3B8EF128D14B019FA22 /* NumberPadViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */; };
 		0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
 		0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
 		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
@@ -54,6 +55,7 @@
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
 		471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
+		4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
@@ -63,6 +65,7 @@
 		5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */; };
 		6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1BAE4B6BD10048636F490 /* OSTReachability.swift */; };
+		642A44BC6A446EC59550E028 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
@@ -364,6 +367,8 @@
 		B8904C060C056AB96E283D0F /* CoreDataStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = "OST Tracker/Swift/CoreDataStack.swift"; sourceTree = "<group>"; };
 		BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEditEntryViewController.swift; sourceTree = "<group>"; };
 		BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTBackend.swift; path = "OST Tracker/Swift/OSTBackend.swift"; sourceTree = "<group>"; };
+		C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadView.swift; path = "OST Tracker/Swift/NumberPadView.swift"; sourceTree = "<group>"; };
+		CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadViewTests.swift; path = "OST TrackerTests/Swift/NumberPadViewTests.swift"; sourceTree = "<group>"; };
 		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
 		D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTBaseViewController.m; sourceTree = "<group>"; };
 		D50DFA9022786B5D002F5FBF /* OSTSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSlider.h; sourceTree = "<group>"; };
@@ -491,6 +496,7 @@
 				BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */,
 				11F1BAE4B6BD10048636F490 /* OSTReachability.swift */,
 				55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */,
+				C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -508,6 +514,7 @@
 				7E637BB81DCDE0328194710B /* LoginControllerTests.swift */,
 				42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */,
 				30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */,
+				CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1049,6 +1056,7 @@
 				B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */,
 				0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */,
 				C99F414EAB739A70BA4BDADC /* MagicalRecordShim.swift in Sources */,
+				4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,6 +1130,7 @@
 				567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */,
 				471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */,
 				CBE1B03D1D5DAA79E7736BCE /* MagicalRecordShim.swift in Sources */,
+				642A44BC6A446EC59550E028 /* NumberPadView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,6 +1150,7 @@
 				8BE0411983BC48E1D1C14C5D /* LoginControllerTests.swift in Sources */,
 				276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */,
 				61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */,
+				08E4F3B8EF128D14B019FA22 /* NumberPadViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
