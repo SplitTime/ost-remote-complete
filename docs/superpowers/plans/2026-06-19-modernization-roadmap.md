@@ -36,7 +36,8 @@ Replace `MR_*` with typed `NSPersistentContainer` fetches/saves on the same stor
 ## Phase 6 — Retire remaining pods + drop CocoaPods (started)
 - **✅ Dropped 7 already-unused pods** (commit `e369aea`, 13→6): OHAlertView, DejalActivityView, Reachability, SimpleKeychain, JTObjectMapping, FXKeychain, NSDate+Helper — all made dead by the UI/networking migrations.
 - **✅ Dropped CHCSVParser + Toast** (commit `9b526d6`): CSV export builds the string directly (RFC-4180 escaping); the sync toast is a native fading `UILabel`.
-- **Remaining 4 pods:** `MagicalRecord` (Phase 5), `MFSideMenu` (Phase 3 drawer), `IQDropDownTextField`→`UIPickerView`, `IQKeyboardManager`→native/remove. Drop each as its usage is migrated, then delete the Podfile / move any kept deps to SPM.
+- **✅ Dropped IQKeyboardManager** (commit `ec93325`): its keyboard-avoidance was vestigial (every field sits above its bottom inputView), so just removed the enable/toolbar calls + the pod.
+- **Remaining 3 pods:** `MagicalRecord` (Phase 5 — big), `MFSideMenu` (Phase 3 drawer), `IQDropDownTextField`→`UIPickerView`. Then delete the Podfile / move any kept deps to SPM.
 
 ## Phase 7 — Optional: lift the floor
 If iPad mini 2/3 retire, bump deployment target → unlock async/await + SwiftUI for future features.
