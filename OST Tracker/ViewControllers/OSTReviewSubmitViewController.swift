@@ -137,10 +137,11 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         // 2) The shared safe-area pass treats the wide Sync button as a full-width
         //    bottom bar and lifts it, while the narrow icons get pushed down — which
         //    leaves the Sync button stranded ~70pt above the rest of the bar.
-        //    Re-align it to the bar: the XIB centers it on the share button (it's
-        //    taller and overhangs evenly), so match that vertical center.
+        //    Re-align it to the bar by matching the share button's vertical frame
+        //    (same top and height) so the two read as one unified bottom bar.
         if let shareButton = cluster.first(where: { $0 is UIButton && $0 != btnSync }) {
-            btnSync.center = CGPoint(x: btnSync.center.x, y: shareButton.center.y)
+            btnSync.frame.origin.y = shareButton.frame.origin.y
+            btnSync.frame.size.height = shareButton.frame.size.height
         } else {
             btnSync.frame.origin.y = safeBottom - btnSync.frame.height
         }
