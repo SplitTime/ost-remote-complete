@@ -36,7 +36,6 @@ class OSTEventSelectionViewController: UIViewController {
     var unpairedDataEntryGroups: [Any]?
     var eventsLoaded = false
     private var didApplySafeAreaShift = false
-    private var blockingSpinner: UIView?
 
     // MARK: - XIB outlets
     @IBOutlet weak var btnNext: UIButton!
@@ -265,10 +264,10 @@ class OSTEventSelectionViewController: UIViewController {
     }
 
     @IBAction func onLogout(_ sender: Any) {
-        showBlockingSpinner()
+        ostShowBlockingSpinner()
         AppDelegate.getInstance()?.getNetworkManager()?.autoLogin(completionBlock: { [weak self] _ in
             guard let self = self else { return }
-            self.hideBlockingSpinner()
+            self.ostHideBlockingSpinner()
             let alert = UIAlertController(title: "Are you sure you would like to log out?",
                                           message: "You will not be able to log back in or add entries until you have a data connection again.",
                                           preferredStyle: .alert)
@@ -278,7 +277,7 @@ class OSTEventSelectionViewController: UIViewController {
             })
             self.present(alert, animated: true)
         }, errorBlock: { [weak self] _ in
-            self?.hideBlockingSpinner()
+            self?.ostHideBlockingSpinner()
             self?.ostPresentAlert(title: "Logout is disabled",
                                   message: "Please try again when you have an Internet connection")
         })
@@ -373,27 +372,6 @@ class OSTEventSelectionViewController: UIViewController {
     }
 
     // MARK: - Helpers
-
-    // Native blocking spinner (replaces the Dejal bezel during the logout
-    // connectivity check) — a dimmed full-screen overlay with a centered spinner.
-    private func showBlockingSpinner() {
-        let overlay = UIView(frame: view.bounds)
-        overlay.backgroundColor = UIColor(white: 0, alpha: 0.35)
-        overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        let spinner = UIActivityIndicatorView(style: .whiteLarge)
-        spinner.center = CGPoint(x: overlay.bounds.midX, y: overlay.bounds.midY)
-        spinner.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin,
-                                    .flexibleLeftMargin, .flexibleRightMargin]
-        spinner.startAnimating()
-        overlay.addSubview(spinner)
-        view.addSubview(overlay)
-        blockingSpinner = overlay
-    }
-
-    private func hideBlockingSpinner() {
-        blockingSpinner?.removeFromSuperview()
-        blockingSpinner = nil
-    }
 
     private func makeDoneToolbar(action: Selector) -> UIToolbar {
         let toolbar = UIToolbar()

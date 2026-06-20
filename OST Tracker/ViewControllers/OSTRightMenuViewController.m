@@ -8,7 +8,8 @@
 
 #import "OSTRightMenuViewController.h"
 #import "OSTRunnerTrackerViewController.h"
-#import "OSTCrossCheckViewController.h"
+// OSTCrossCheckViewController is now Swift; loaded via CrossCheck.storyboard
+// (instantiateInitialViewController returns it as a plain UIViewController).
 #import "UIView+Additions.h"
 #import "OSTSyncManager.h"
 #import "CurrentCourse.h"
