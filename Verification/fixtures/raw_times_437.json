@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "id": "1001",
+      "type": "raw_times",
+      "attributes": {
+        "id": 1001,
+        "eventGroupId": 437,
+        "source": "ost-timing-system",
+        "absoluteTime": "2026-06-20T15:42:03.000Z",
+        "enteredTime": "10:42:03",
+        "bibNumber": "57",
+        "lap": 1,
+        "splitName": "Aid Station 1",
+        "subSplitKind": "in",
+        "dataStatus": "good",
+        "stoppedHere": false,
+        "withPacer": false,
+        "remarks": null
+      }
+    },
+    {
+      "id": "1002",
+      "type": "raw_times",
+      "attributes": {
+        "id": 1002,
+        "eventGroupId": 437,
+        "source": "ost-remote",
+        "absoluteTime": "2026-06-20T15:43:10.000Z",
+        "enteredTime": null,
+        "bibNumber": "58",
+        "lap": 2,
+        "splitName": "Aid Station 1",
+        "subSplitKind": "out",
+        "dataStatus": null,
+        "stoppedHere": true,
+        "withPacer": true,
+        "remarks": "dropped"
+      }
+    }
+  ]
+}

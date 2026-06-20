@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		08E4F3B8EF128D14B019FA22 /* NumberPadViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */; };
 		67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */; };
+		YLVDQCFGQ33Y2ZNKO4J1KVSE /* RawTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = VIW6YQ1J7WYYD24G41DKP7C9 /* RawTimeTests.swift */; };
 		0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
 		0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
 		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
@@ -44,6 +45,7 @@
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
 		413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
+		YEQOIHDHANGCO8FM7KNHGQX0 /* RawTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5KB4RMEIXZ3PDUBFGCPTVIWH /* RawTime.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
@@ -54,6 +56,7 @@
 		61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */; };
 		642A44BC6A446EC59550E028 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
 		6D70E4F0EF0645CC8298D887 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
+		ESTJBA3JU6IXXCTE8Y04P6FX /* RawTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5KB4RMEIXZ3PDUBFGCPTVIWH /* RawTime.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
@@ -345,8 +348,10 @@
 		BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTBackend.swift; path = "OST Tracker/Swift/OSTBackend.swift"; sourceTree = "<group>"; };
 		C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadView.swift; path = "OST Tracker/Swift/NumberPadView.swift"; sourceTree = "<group>"; };
 		3FC13D2600034E4CB79A1E5F /* BibEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BibEntry.swift; path = "OST Tracker/Swift/BibEntry.swift"; sourceTree = "<group>"; };
+		5KB4RMEIXZ3PDUBFGCPTVIWH /* RawTime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RawTime.swift; path = "OST Tracker/Swift/RawTime.swift"; sourceTree = "<group>"; };
 		CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadViewTests.swift; path = "OST TrackerTests/Swift/NumberPadViewTests.swift"; sourceTree = "<group>"; };
 		1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BibEntryTests.swift; path = "OST TrackerTests/Swift/BibEntryTests.swift"; sourceTree = "<group>"; };
+		VIW6YQ1J7WYYD24G41DKP7C9 /* RawTimeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RawTimeTests.swift; path = "OST TrackerTests/Swift/RawTimeTests.swift"; sourceTree = "<group>"; };
 		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
 		D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTBaseViewController.m; sourceTree = "<group>"; };
 		D50DFA9022786B5D002F5FBF /* OSTSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSlider.h; sourceTree = "<group>"; };
@@ -440,6 +445,7 @@
 				55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */,
 				C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */,
 				3FC13D2600034E4CB79A1E5F /* BibEntry.swift */,
+				5KB4RMEIXZ3PDUBFGCPTVIWH /* RawTime.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -460,6 +466,7 @@
 				30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */,
 				CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */,
 				1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */,
+				VIW6YQ1J7WYYD24G41DKP7C9 /* RawTimeTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -991,6 +998,7 @@
 				C99F414EAB739A70BA4BDADC /* MagicalRecordShim.swift in Sources */,
 				4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */,
 				413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */,
+				YEQOIHDHANGCO8FM7KNHGQX0 /* RawTime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,6 +1069,7 @@
 				CBE1B03D1D5DAA79E7736BCE /* MagicalRecordShim.swift in Sources */,
 				642A44BC6A446EC59550E028 /* NumberPadView.swift in Sources */,
 				6D70E4F0EF0645CC8298D887 /* BibEntry.swift in Sources */,
+				ESTJBA3JU6IXXCTE8Y04P6FX /* RawTime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1083,6 +1092,7 @@
 				61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */,
 				08E4F3B8EF128D14B019FA22 /* NumberPadViewTests.swift in Sources */,
 				67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */,
+				YLVDQCFGQ33Y2ZNKO4J1KVSE /* RawTimeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
