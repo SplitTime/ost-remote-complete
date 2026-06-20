@@ -109,13 +109,12 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     private func liftBottomBarAboveHomeIndicator() {
         var bottomInset = view.safeAreaInsets.bottom
         if bottomInset <= 0.5 { bottomInset = view.window?.safeAreaInsets.bottom ?? 0 }
-        NSLog("[OST] review bottom-bar check: viewInset=%.1f windowInset=%.1f boundsH=%.1f",
-              view.safeAreaInsets.bottom, view.window?.safeAreaInsets.bottom ?? -1, view.bounds.height)
         guard bottomInset > 0.5 else { return }
 
         let safeBottom = view.bounds.height - bottomInset - 8 // small gap above the indicator
         let fullScreen = view.bounds
 
+        // 1) Lift the whole bottom band so its lowest edge clears the safe area.
         var cluster: [UIView] = []
         var lowestMaxY: CGFloat = 0
         for sub in view.subviews {
@@ -127,12 +126,14 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             }
         }
         guard !cluster.isEmpty else { return }
-
         let delta = safeBottom - lowestMaxY
-        NSLog("[OST] review bottom-bar lift: count=%d lowestMaxY=%.1f safeBottom=%.1f delta=%.1f",
-              cluster.count, lowestMaxY, safeBottom, delta)
-        guard delta < -0.5 else { return } // only lift up
-        for sub in cluster { sub.frame.origin.y += delta }
+        if delta < -0.5 { for sub in cluster { sub.frame.origin.y += delta } }
+
+        // 2) The shared safe-area pass treats the wide Sync button as a full-width
+        //    bottom bar and lifts it, while the narrow icons get pushed down — which
+        //    leaves the Sync button stranded ~70pt above the rest of the bar.
+        //    Bottom-align it back onto the bar's baseline.
+        btnSync.frame.origin.y = safeBottom - btnSync.frame.height
     }
 
     // MARK: - Data
