@@ -26,4 +26,41 @@ final class SelectableOptionListTests: XCTestCase {
         list.reset()
         XCTAssertNil(list.selectedOption)
     }
+
+    func test_startsExpanded() {
+        let list = SelectableOptionList(label: "Event")
+        list.options = ["A", "B"]
+        XCTAssertTrue(list.isExpanded)
+    }
+
+    func test_select_collapsesWhenMultipleOptions() {
+        let list = SelectableOptionList(label: "Event")
+        list.options = ["A", "B"]
+        list.select("A")
+        XCTAssertFalse(list.isExpanded, "selecting one of several options collapses the list")
+    }
+
+    func test_select_staysExpandedWhenSingleOption() {
+        let list = SelectableOptionList(label: "Event")
+        list.options = ["Only"]
+        list.select("Only")
+        XCTAssertTrue(list.isExpanded, "a single-option list has nothing to collapse")
+    }
+
+    func test_expand_reExpandsAfterSelection() {
+        let list = SelectableOptionList(label: "Event")
+        list.options = ["A", "B"]
+        list.select("A")
+        list.expand()
+        XCTAssertTrue(list.isExpanded)
+        XCTAssertEqual(list.selectedOption, "A", "re-expanding keeps the current selection")
+    }
+
+    func test_reset_expands() {
+        let list = SelectableOptionList(label: "Event")
+        list.options = ["A", "B"]
+        list.select("A")
+        list.reset()
+        XCTAssertTrue(list.isExpanded)
+    }
 }

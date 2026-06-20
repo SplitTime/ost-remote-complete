@@ -43,6 +43,11 @@ class OSTEventSelectionViewController: UIViewController {
     }()
     private let eventList = SelectableOptionList(label: "Event")
     private let aidStationField = AidStationField()
+    private let eventStationDivider: UIView = {
+        let v = UIView(); v.backgroundColor = Theme.separator
+        v.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        return v
+    }()
     private let nextButton = PrimaryButton(title: "Start Tracking", role: .success)
     private let logoutButton: UIButton = {
         let b = UIButton(type: .system); b.setTitle("Log Out", for: .normal)
@@ -84,7 +89,7 @@ class OSTEventSelectionViewController: UIViewController {
         view.backgroundColor = Theme.background
 
         nextButton.alpha = 0
-        aidStationField.isHidden = true
+        setAidStationHidden(true)
         aidStationField.isEnabled = false
         nextButton.addTarget(self, action: #selector(onNext(_:)), for: .touchUpInside)
         logoutButton.addTarget(self, action: #selector(onLogout(_:)), for: .touchUpInside)
@@ -97,7 +102,7 @@ class OSTEventSelectionViewController: UIViewController {
         let loadingRow = UIStackView(arrangedSubviews: [loadingSpinner, loadingLabel])
         loadingRow.axis = .vertical; loadingRow.spacing = 10; loadingRow.alignment = .center
 
-        let stack = UIStackView(arrangedSubviews: [titleLabel, hintLabel, eventList, aidStationField,
+        let stack = UIStackView(arrangedSubviews: [titleLabel, hintLabel, eventList, eventStationDivider, aidStationField,
                                                    nextButton, loadingRow, progressLabel, progressBar, footer])
         stack.axis = .vertical
         stack.spacing = 16
@@ -124,7 +129,7 @@ class OSTEventSelectionViewController: UIViewController {
             eventList.select(course?.eventName ?? "")
             let stations = course?.dataEntryGroups as? [[String: Any]] ?? []
             aidStationOptions = stations.compactMap { $0["title"] as? String }
-            aidStationField.isHidden = false
+            setAidStationHidden(false)
             aidStationField.isEnabled = true
             unpairedDataEntryGroups = course?.dataEntryGroups as? [Any]
             eventList.isUserInteractionEnabled = false
@@ -202,9 +207,14 @@ class OSTEventSelectionViewController: UIViewController {
         let groups = found.dataEntryGroups as? [[String: Any]] ?? []
         aidStationOptions = groups.compactMap { $0["title"] as? String }
         aidStationField.value = nil
-        aidStationField.isHidden = false
+        setAidStationHidden(false)
         aidStationField.isEnabled = true
         nextButton.alpha = 0
+    }
+
+    private func setAidStationHidden(_ hidden: Bool) {
+        aidStationField.isHidden = hidden
+        eventStationDivider.isHidden = hidden
     }
 
     @objc private func openAidStationPicker() {
@@ -218,7 +228,7 @@ class OSTEventSelectionViewController: UIViewController {
 
     private func showSelectFields() {
         eventList.isHidden = false
-        aidStationField.isHidden = (selectedEvent == nil)
+        setAidStationHidden(selectedEvent == nil)
         nextButton.isHidden = false
         nextButton.alpha = (selectedEvent == nil || aidStationField.value == nil) ? 0 : 1
         progressLabel.isHidden = true
@@ -226,7 +236,7 @@ class OSTEventSelectionViewController: UIViewController {
     }
 
     private func showLoadingFields() {
-        [eventList, aidStationField, nextButton].forEach { $0.isHidden = true }
+        [eventList, aidStationField, eventStationDivider, nextButton].forEach { $0.isHidden = true }
         progressLabel.isHidden = false
         progressBar.isHidden = false
     }
@@ -360,7 +370,10 @@ private final class AidStationField: UIControl {
         caption.text = "AID STATION"; caption.font = Theme.Font.caption; caption.textColor = Theme.secondaryLabel
 
         valueLabel.text = placeholder; valueLabel.font = Theme.Font.field; valueLabel.textColor = Theme.secondaryLabel
+        valueLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)  // stretch → caret sits far right
         let chevron = UILabel(); chevron.text = "▾"; chevron.textColor = Theme.secondaryLabel
+        chevron.setContentHuggingPriority(.required, for: .horizontal)
+        chevron.setContentCompressionResistancePriority(.required, for: .horizontal)
 
         let valueRow = UIStackView(arrangedSubviews: [valueLabel, chevron])
         valueRow.alignment = .center
