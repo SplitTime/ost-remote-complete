@@ -3,7 +3,7 @@
 //  OST Tracker
 //
 //  Programmatic, themed replacement for the XIB-backed event selection screen.
-//  Uses DisclosureSelectField and PrimaryButton from the design system; no XIB,
+//  Uses SelectableOptionList and BottomSheetPicker from the design system; no XIB,
 //  no @IBOutlet/@IBAction, no full-screen background image.
 //
 //  Two modes:
@@ -28,99 +28,53 @@ class OSTEventSelectionViewController: UIViewController {
     var selectedEvent: EventModel?
     var unpairedDataEntryGroups: [Any]?
     var eventsLoaded = false
+    var aidStationOptions: [String] = []
 
     // MARK: - Programmatic views
-    private let eventField = DisclosureSelectField(label: "Event", placeholder: "Choose an event")
-    private let stationField = DisclosureSelectField(label: "Aid Station", placeholder: "Select an aid station")
+    private let titleLabel: UILabel = {
+        let l = UILabel(); l.text = "Select Event & Aid Station"
+        l.font = Theme.Font.title; l.textColor = Theme.label
+        l.numberOfLines = 0; return l
+    }()
+    private let hintLabel: UILabel = {
+        let l = UILabel(); l.text = "Choose your event, then your aid station."
+        l.font = Theme.Font.field; l.textColor = Theme.secondaryLabel
+        l.numberOfLines = 0; return l
+    }()
+    private let eventList = SelectableOptionList(label: "Event")
+    private let aidStationField = AidStationField()
     private let nextButton = PrimaryButton(title: "Start Tracking", role: .success)
     private let logoutButton: UIButton = {
-        let b = UIButton(type: .system)
-        b.setTitle("Log Out", for: .normal)
-        b.setTitleColor(Theme.destructive, for: .normal)
-        return b
+        let b = UIButton(type: .system); b.setTitle("Log Out", for: .normal)
+        b.setTitleColor(Theme.destructive, for: .normal); return b
     }()
     private let cancelButton: UIButton = {
-        let b = UIButton(type: .system)
-        b.setTitle("Cancel", for: .normal)
-        b.setTitleColor(Theme.tint, for: .normal)
-        return b
+        let b = UIButton(type: .system); b.setTitle("Cancel", for: .normal)
+        b.setTitleColor(Theme.tint, for: .normal); return b
     }()
+    private let loadingSpinner: UIActivityIndicatorView = {
+        let s = UIActivityIndicatorView(style: .gray); s.hidesWhenStopped = true; return s
+    }()
+    private let loadingLabel: UILabel = {
+        let l = UILabel(); l.text = "Loading events…"; l.textColor = Theme.secondaryLabel
+        l.font = Theme.Font.field; l.textAlignment = .center; l.isHidden = true; return l
+    }()
+    // Kept from before for the post-selection download state:
     private let progressLabel: UILabel = {
-        let l = UILabel()
-        l.textAlignment = .center
-        l.textColor = Theme.secondaryLabel
-        l.font = Theme.Font.field
-        l.isHidden = true
-        return l
+        let l = UILabel(); l.textAlignment = .center; l.textColor = Theme.secondaryLabel
+        l.font = Theme.Font.field; l.isHidden = true; return l
     }()
     private let progressBar: UIProgressView = {
-        let p = UIProgressView(progressViewStyle: .default)
-        p.isHidden = true
-        return p
-    }()
-    private let activityIndicator: UIActivityIndicatorView = {
-        let s = UIActivityIndicatorView(style: .gray)
-        s.hidesWhenStopped = true
-        return s
+        let p = UIProgressView(progressViewStyle: .default); p.isHidden = true; return p
     }()
 
-    // MARK: - Data loading + presentation
-
-    /// Loads the live events list (network + CoreData import) and presents a fresh
-    /// event-selection screen from `presenter`. Owns its own data loading so the
-    /// (Swift) login screen just calls this. `completion` is invoked with nil on
-    /// success (after presenting) or an error (alerts are shown internally).
     @objc class func loadEventDataAndPresent(from presenter: UIViewController,
                                              completion: ((Error?) -> Void)? = nil) {
         let eventVC = OSTEventSelectionViewController(nibName: nil, bundle: nil)
         eventVC.tempContext = NSManagedObjectContext.mr_context(withParent: NSManagedObjectContext.mr_default())
-
-        OSTBackend.shared.getAllEvents { object, error in
-            if let error = error {
-                let alert = UIAlertController(title: "Error",
-                                             message: "Couldn't get the events",
-                                             preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Try Again", style: .cancel) { _ in
-                    OSTEventSelectionViewController.loadEventDataAndPresent(from: presenter, completion: completion)
-                })
-                presenter.present(alert, animated: true)
-                completion?(error)
-                return
-            }
-
-            let data = (object as? [String: Any])?["data"] as? [Any]
-            if (data?.count ?? 0) == 0 {
-                AppDelegate.getInstance()?.getNetworkManager()?.addToken(toHeader: nil)
-                presenter.ostPresentAlert(title: "No Events Available",
-                                          message: "You are not authorized for any live events. Make sure your event is enabled for live entry and that you are authorized as a steward.")
-                completion?(NSError(domain: "OST", code: 1,
-                                    userInfo: [NSLocalizedDescriptionKey: "No events available"]))
-                return
-            }
-
-            let pickerEvents = NSMutableArray()
-            for dataObject in data ?? [] {
-                if let event = EventModel.mr_import(from: dataObject, in: eventVC.tempContext) as? EventModel {
-                    pickerEvents.add(event)
-                }
-            }
-            pickerEvents.sort(using: [NSSortDescriptor(key: "startTime", ascending: false)])
-
-            eventVC.events = pickerEvents
-            let strings = NSMutableArray()
-            for case let event as EventModel in pickerEvents {
-                if let name = event.name { strings.add(name) }
-            }
-            eventVC.eventStrings = strings
-
-            eventVC.modalPresentationStyle = .fullScreen
-            presenter.present(eventVC, animated: true, completion: nil)
-
-            UserDefaults.standard.set(2, forKey: "reviewScreenPicklistValue")
-            UserDefaults.standard.synchronize()
-
-            completion?(nil)
-        }
+        eventVC.modalPresentationStyle = .fullScreen
+        // Present immediately in the loading state; the VC fetches events itself.
+        presenter.present(eventVC, animated: true) { completion?(nil) }
     }
 
     // MARK: - Lifecycle
@@ -129,24 +83,26 @@ class OSTEventSelectionViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Theme.background
 
-        // In changeStation mode "Start Tracking" is intentionally hidden until the user
-        // selects a station — a deliberate UX change from the old screen, which showed it immediately.
         nextButton.alpha = 0
-        stationField.isHidden = true
+        aidStationField.isHidden = true
+        aidStationField.isEnabled = false
         nextButton.addTarget(self, action: #selector(onNext(_:)), for: .touchUpInside)
         logoutButton.addTarget(self, action: #selector(onLogout(_:)), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(onCancel(_:)), for: .touchUpInside)
+        aidStationField.addTarget(self, action: #selector(openAidStationPicker), for: .touchUpInside)
 
-        eventField.onSelect = { [weak self] _ in self?.onEventSelected() }
-        stationField.onSelect = { [weak self] _ in
-            UIView.animate(withDuration: 0.3) { self?.nextButton.alpha = 1 }
-        }
+        eventList.onSelect = { [weak self] _ in self?.onEventSelected() }
 
         let footer = changeStation ? cancelButton : logoutButton
-        let stack = UIStackView(arrangedSubviews: [eventField, stationField, nextButton,
-                                                   progressLabel, progressBar, activityIndicator, footer])
+        let loadingRow = UIStackView(arrangedSubviews: [loadingSpinner, loadingLabel])
+        loadingRow.axis = .vertical; loadingRow.spacing = 10; loadingRow.alignment = .center
+
+        let stack = UIStackView(arrangedSubviews: [titleLabel, hintLabel, eventList, aidStationField,
+                                                   nextButton, loadingRow, progressLabel, progressBar, footer])
         stack.axis = .vertical
         stack.spacing = 16
+        stack.setCustomSpacing(4, after: titleLabel)
+        stack.setCustomSpacing(22, after: hintLabel)
         stack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stack)
 
@@ -156,10 +112,6 @@ class OSTEventSelectionViewController: UIViewController {
             stack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -Theme.Metric.horizontalInset),
             stack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 24),
         ])
-
-        if changeStation {
-            eventField.isUserInteractionEnabled = false
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -168,50 +120,114 @@ class OSTEventSelectionViewController: UIViewController {
 
         if changeStation {
             let course = CurrentCourse.getCurrentCourse()
-            eventField.options = [course?.eventName ?? ""]
-            eventField.select(course?.eventName ?? "")
+            eventList.options = [course?.eventName ?? ""]
+            eventList.select(course?.eventName ?? "")
             let stations = course?.dataEntryGroups as? [[String: Any]] ?? []
-            stationField.options = stations.compactMap { $0["title"] as? String }
-            stationField.isHidden = false
+            aidStationOptions = stations.compactMap { $0["title"] as? String }
+            aidStationField.isHidden = false
+            aidStationField.isEnabled = true
             unpairedDataEntryGroups = course?.dataEntryGroups as? [Any]
+            eventList.isUserInteractionEnabled = false
+            eventsLoaded = true
             return
         }
 
-        eventField.options = (eventStrings as? [String]) ?? []
         eventsLoaded = true
-        if (eventStrings?.count ?? 0) == 1, let only = (eventStrings as? [String])?.first {
-            eventField.select(only)   // triggers onEventSelected via onSelect
+        loadEvents()
+    }
+
+    // MARK: - Event loading
+
+    /// Fetch the live events list and populate the open selector. Shows the loading
+    /// state while in flight; handles error / no-events by alerting on this screen.
+    private func loadEvents() {
+        loadingSpinner.startAnimating()
+        loadingLabel.isHidden = false
+        OSTBackend.shared.getAllEvents { [weak self] object, error in
+            guard let self = self else { return }
+            self.loadingSpinner.stopAnimating()
+            self.loadingLabel.isHidden = true
+
+            if error != nil {
+                let alert = UIAlertController(title: "Error", message: "Couldn't get the events", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Try Again", style: .default) { _ in self.loadEvents() })
+                alert.addAction(UIAlertAction(title: "Back to Login", style: .cancel) { _ in self.dismissToLogin() })
+                self.present(alert, animated: true)
+                return
+            }
+
+            let data = (object as? [String: Any])?["data"] as? [Any]
+            if (data?.count ?? 0) == 0 {
+                AppDelegate.getInstance()?.getNetworkManager()?.addToken(toHeader: nil)
+                let alert = UIAlertController(title: "No Events Available",
+                    message: "You are not authorized for any live events. Make sure your event is enabled for live entry and that you are authorized as a steward.",
+                    preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in self.dismissToLogin() })
+                self.present(alert, animated: true)
+                return
+            }
+
+            let pickerEvents = NSMutableArray()
+            for dataObject in data ?? [] {
+                if let event = EventModel.mr_import(from: dataObject, in: self.tempContext) as? EventModel {
+                    pickerEvents.add(event)
+                }
+            }
+            pickerEvents.sort(using: [NSSortDescriptor(key: "startTime", ascending: false)])
+            self.events = pickerEvents
+            let strings = NSMutableArray()
+            for case let event as EventModel in pickerEvents { if let name = event.name { strings.add(name) } }
+            self.eventStrings = strings
+
+            UserDefaults.standard.set(2, forKey: "reviewScreenPicklistValue")
+            UserDefaults.standard.synchronize()
+
+            self.eventList.options = (strings as? [String]) ?? []
+            if strings.count == 1, let only = (strings as? [String])?.first {
+                self.eventList.select(only) // fires onEventSelected
+            }
         }
+    }
+
+    private func dismissToLogin() {
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Field selection
 
     private func onEventSelected() {
         let eventModels = (events as? [EventModel]) ?? []
-        guard let found = eventModels.first(where: { $0.name == eventField.selectedOption }) else { return }
+        guard let found = eventModels.first(where: { $0.name == eventList.selectedOption }) else { return }
         selectedEvent = found
         let groups = found.dataEntryGroups as? [[String: Any]] ?? []
-        stationField.reset()
-        stationField.options = groups.compactMap { $0["title"] as? String }
-        UIView.animate(withDuration: 0.3) { self.stationField.isHidden = false }
+        aidStationOptions = groups.compactMap { $0["title"] as? String }
+        aidStationField.value = nil
+        aidStationField.isHidden = false
+        aidStationField.isEnabled = true
+        nextButton.alpha = 0
     }
 
-    // MARK: - Field visibility
+    @objc private func openAidStationPicker() {
+        BottomSheetPicker.present(from: self, title: "Aid Station",
+                                 options: aidStationOptions, selected: aidStationField.value) { [weak self] choice in
+            guard let self = self else { return }
+            self.aidStationField.value = choice
+            UIView.animate(withDuration: 0.3) { self.nextButton.alpha = 1 }
+        }
+    }
 
     private func showSelectFields() {
-        eventField.isHidden = false
+        eventList.isHidden = false
+        aidStationField.isHidden = (selectedEvent == nil)
         nextButton.isHidden = false
-        stationField.isHidden = (selectedEvent == nil)
         progressLabel.isHidden = true
         progressBar.isHidden = true
-        activityIndicator.stopAnimating()
     }
 
     private func showLoadingFields() {
-        [eventField, stationField, nextButton].forEach { $0.isHidden = true }
+        [eventList, aidStationField, nextButton].forEach { $0.isHidden = true }
         progressLabel.isHidden = false
         progressBar.isHidden = false
-        activityIndicator.startAnimating()
     }
 
     // MARK: - Actions
@@ -249,7 +265,7 @@ class OSTEventSelectionViewController: UIViewController {
             groups = selectedEvent?.dataEntryGroups as? [[String: Any]] ?? []
         }
 
-        guard let firstFound = groups.first(where: { ($0["title"] as? String) == stationField.selectedOption }) else {
+        guard let firstFound = groups.first(where: { ($0["title"] as? String) == aidStationField.value }) else {
             ostPresentAlert(title: "", message: "You need to select an aid station to continue.")
             return
         }
@@ -271,7 +287,7 @@ class OSTEventSelectionViewController: UIViewController {
             return
         }
 
-        progressLabel.text = "Downloading \(eventField.selectedOption ?? "") Data"
+        progressLabel.text = "Downloading \(eventList.selectedOption ?? "") Data"
         showLoadingFields()
         progressBar.progress = 0.5
 
@@ -284,7 +300,7 @@ class OSTEventSelectionViewController: UIViewController {
                 return
             }
             self.progressBar.progress = 1
-            self.activityIndicator.stopAnimating()
+            self.loadingSpinner.stopAnimating()
 
             guard let currentCourse = CurrentCourse.mr_createEntity() as? CurrentCourse else { return }
 
@@ -323,6 +339,56 @@ class OSTEventSelectionViewController: UIViewController {
             NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
 
             AppDelegate.getInstance()?.loadLeftMenu()
+        }
+    }
+}
+
+/// Tappable field row for the aid station: label + current value/placeholder +
+/// chevron. Opens the BottomSheetPicker on tap (wired by the VC). Theme-styled.
+private final class AidStationField: UIControl {
+    private let valueLabel = UILabel()
+    private let placeholder = "Choose an aid station"
+
+    init() {
+        super.init(frame: .zero)
+        backgroundColor = Theme.fieldFill
+        layer.cornerRadius = Theme.Metric.cornerRadius
+        layer.borderWidth = 1
+        layer.borderColor = Theme.separator.cgColor
+
+        let caption = UILabel()
+        caption.text = "AID STATION"; caption.font = Theme.Font.caption; caption.textColor = Theme.secondaryLabel
+
+        valueLabel.text = placeholder; valueLabel.font = Theme.Font.field; valueLabel.textColor = Theme.secondaryLabel
+        let chevron = UILabel(); chevron.text = "▾"; chevron.textColor = Theme.secondaryLabel
+
+        let valueRow = UIStackView(arrangedSubviews: [valueLabel, chevron])
+        valueRow.alignment = .center
+        let outer = UIStackView(arrangedSubviews: [caption, valueRow])
+        outer.axis = .vertical; outer.spacing = 4
+        outer.isUserInteractionEnabled = false
+        outer.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(outer)
+        NSLayoutConstraint.activate([
+            outer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 14),
+            outer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -14),
+            outer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            heightAnchor.constraint(greaterThanOrEqualToConstant: 56),
+        ])
+    }
+    required init?(coder: NSCoder) { fatalError("init(coder:) not used") }
+
+    var value: String? {
+        didSet {
+            valueLabel.text = value ?? placeholder
+            valueLabel.textColor = value == nil ? Theme.secondaryLabel : Theme.label
+        }
+    }
+
+    override func traitCollectionDidChange(_ previous: UITraitCollection?) {
+        super.traitCollectionDidChange(previous)
+        if #available(iOS 13.0, *), traitCollection.hasDifferentColorAppearance(comparedTo: previous) {
+            layer.borderColor = Theme.separator.cgColor
         }
     }
 }
