@@ -71,7 +71,8 @@
     }
     
     [self.window makeKeyAndVisible];
-    
+    [[AppearanceController shared] apply];
+
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
 
     return YES;
