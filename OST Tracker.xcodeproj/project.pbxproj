@@ -87,8 +87,6 @@
 		6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */; };
 		6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
 		6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
-		6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */; };
-		6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */; };
 		6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
 		6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
 		6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */; };
@@ -319,7 +317,6 @@
 		6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTRightMenuViewController.m; sourceTree = "<group>"; };
 		6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRightMenuViewController.xib; sourceTree = "<group>"; };
 		6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewSubmitViewController.xib; sourceTree = "<group>"; };
-		6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTEditEntryViewController.xib; sourceTree = "<group>"; };
 		6A11A0671EF2CE5C00D6D2CA /* _CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CurrentCourse.h; sourceTree = "<group>"; };
 		6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CurrentCourse.m; sourceTree = "<group>"; };
 		6A11A0691EF2CE5C00D6D2CA /* CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentCourse.h; sourceTree = "<group>"; };
@@ -612,7 +609,6 @@
 				6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */,
 				6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */,
 				6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */,
-				6A11A0621EF2CB4000D6D2CA /* OSTEditEntryViewController.xib */,
 				6A5005E81EFA187F00FA1751 /* OSTReviewSectionHeader.h */,
 				6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */,
 				6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */,
@@ -1000,7 +996,6 @@
 				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
-				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9D2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
@@ -1029,7 +1024,6 @@
 				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
-				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9E2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
