@@ -118,3 +118,31 @@ extension RaceStatusTests {
         XCTAssertEqual(effortStatus(none, atSplit: 2, headers: h), .notStarted)
     }
 }
+
+extension RaceStatusTests {
+    func test_sortedField_groupsAndOrders() {
+        let h = headers(4)
+        let early = Date(timeIntervalSince1970: 1000)
+        let late = Date(timeIntervalSince1970: 2000)
+        let throughLate  = effort(bib: 10, times: [[late, late], [late, late], [late, nil], [nil, nil]])
+        let throughEarly = effort(bib: 11, times: [[early, early], [early, early], [early, nil], [nil, nil]])
+        let expected     = effort(bib: 12, times: [[early, early], [early, early], [nil, nil], [nil, nil]])
+        let dropped      = effort(bib: 13, times: [[early, nil], [nil, nil], [nil, nil], [nil, nil]], dropped: true)
+        let notStarted   = effort(bib: 14, times: [[nil, nil], [nil, nil], [nil, nil], [nil, nil]])
+
+        let ordered = sortedField([dropped, expected, throughLate, notStarted, throughEarly],
+                                  atSplit: 2, headers: h)
+        XCTAssertEqual(ordered.map { $0.bibNumber }, [11, 10, 12, 13, 14])
+    }
+
+    func test_matchEfforts_bibAndName() {
+        let t = Date()
+        let raul = effort(bib: 28, times: [[t, t]])
+        let tony = EffortRow(overallRank: 2, genderRank: 2, bibNumber: 6,
+                             firstName: "Tony", lastName: "Lehner", absoluteTimes: [[t, t]])
+        let all = [tony, raul]
+        XCTAssertEqual(matchEfforts("28", in: all).map { $0.bibNumber }, [28])
+        XCTAssertEqual(matchEfforts("leh", in: all).map { $0.bibNumber }, [6])
+        XCTAssertEqual(matchEfforts("", in: all).count, 0)
+    }
+}

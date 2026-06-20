@@ -61,3 +61,39 @@ func effortStatus(_ e: EffortRow, atSplit idx: Int, headers: [SplitHeader]) -> E
     }
     return furthest >= 0 ? .expected : .notStarted
 }
+
+func sortedField(_ efforts: [EffortRow], atSplit idx: Int, headers: [SplitHeader]) -> [EffortRow] {
+    func groupRank(_ s: EffortStatus) -> Int {
+        switch s {
+        case .through:    return 0
+        case .expected:   return 1
+        case .dropped:    return 2
+        case .notStarted: return 3
+        }
+    }
+    let tagged = efforts.map { ($0, effortStatus($0, atSplit: idx, headers: headers)) }
+    return tagged.sorted { lhs, rhs in
+        let (le, ls) = lhs; let (re, rs) = rhs
+        let lg = groupRank(ls), rg = groupRank(rs)
+        if lg != rg { return lg < rg }
+        switch (ls, rs) {
+        case let (.through(la), .through(ra)):
+            if la != ra { return la < ra }
+            return le.bibNumber < re.bibNumber
+        default:
+            let lf = furthestSplitIndex(le), rf = furthestSplitIndex(re)
+            if lf != rf { return lf > rf }
+            return le.bibNumber < re.bibNumber
+        }
+    }.map { $0.0 }
+}
+
+func matchEfforts(_ query: String, in efforts: [EffortRow]) -> [EffortRow] {
+    let q = query.trimmingCharacters(in: .whitespaces).lowercased()
+    guard !q.isEmpty else { return [] }
+    return efforts.filter {
+        String($0.bibNumber).hasPrefix(q)
+            || $0.firstName.lowercased().contains(q)
+            || $0.lastName.lowercased().contains(q)
+    }.sorted { $0.overallRank < $1.overallRank }
+}
