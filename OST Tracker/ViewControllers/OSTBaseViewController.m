@@ -10,7 +10,8 @@
 #import "UIView+Additions.h"
 #import "EntryModel.h"
 #import "CurrentCourse.h"
-#import "OSTRunnerTrackerViewController.h"
+// Runner tracker is now Swift; the DidRegisterBib notification name lives in OSTConstants.
+#import "OSTConstants.h"
 #import "UILabel+Extension.h"
 
 @interface OSTBaseViewController ()

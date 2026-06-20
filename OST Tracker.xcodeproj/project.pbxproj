@@ -108,7 +108,6 @@
 		6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
 		6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
 		6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
-		6A5E0CF51EF1B25E00399EEC /* OSTRunnerTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */; };
 		6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */; };
 		6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */; };
 		6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
@@ -138,7 +137,6 @@
 		6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
 		6AA399801EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
-		6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */; };
 		6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
 		6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */; };
 		6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
@@ -168,8 +166,10 @@
 		9DABDD777FB885613F1F99DC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = A802EAD220AFB69CF7A7E5BF /* fixtures */; };
 		A63C9E647D0756AA05143661 /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
+		BD0F5B3D9588B36A254205A3 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		BD36B2CD522E4F5E7D9DCD53 /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
 		BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
+		BEF2C7720B262AB677278BD4 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		C033A9DEBCAF65E6035C75E9 /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		C0B830FF0E9EE86AE7E9348A /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
 		C1A21A365A3C880DE61C4DC7 /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
@@ -271,6 +271,7 @@
 		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTAboutViewController.swift; sourceTree = "<group>"; };
 		4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.release.xcconfig"; sourceTree = "<group>"; };
+		54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTRunnerTrackerViewController.swift; sourceTree = "<group>"; };
 		579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.debug.xcconfig"; sourceTree = "<group>"; };
 		5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTReviewSubmitViewController.swift; sourceTree = "<group>"; };
 		68F2986C3890234A3A81A335 /* FixtureLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FixtureLoader.swift; path = "OST TrackerTests/Swift/FixtureLoader.swift"; sourceTree = "<group>"; };
@@ -335,8 +336,6 @@
 		6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
 		6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+OSTErrors.m"; sourceTree = "<group>"; };
-		6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTRunnerTrackerViewController.h; sourceTree = "<group>"; };
-		6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTRunnerTrackerViewController.m; sourceTree = "<group>"; };
 		6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRunnerTrackerViewController.xib; sourceTree = "<group>"; };
 		6AA6E9D01EF0DF320061EEB0 /* OSTNetworkManager+Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Events.h"; sourceTree = "<group>"; };
 		6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Events.m"; sourceTree = "<group>"; };
@@ -576,8 +575,6 @@
 				6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */,
 				6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */,
 				6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */,
-				6AA6E9CB1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.h */,
-				6AA6E9CC1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m */,
 				6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */,
 				6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */,
 				6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */,
@@ -609,6 +606,7 @@
 				A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */,
 				D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */,
 				0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */,
+				54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1238,7 +1236,6 @@
 				6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EA1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
-				6A5E0CF51EF1B25E00399EEC /* OSTRunnerTrackerViewController.m in Sources */,
 				6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */,
 				6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */,
 				D50DFA8D226DF867002F5FBF /* OSTBaseViewController.m in Sources */,
@@ -1277,6 +1274,7 @@
 				C8529C88216D0FD12C16BEA9 /* UIViewController+OSTAlert.swift in Sources */,
 				C0B830FF0E9EE86AE7E9348A /* OSTCrossCheckViewController.swift in Sources */,
 				0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */,
+				BEF2C7720B262AB677278BD4 /* OSTRunnerTrackerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1308,7 +1306,6 @@
 				6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EB1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
-				6AA6E9CE1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.m in Sources */,
 				6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */,
 				6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */,
 				D50DFA8E226DF867002F5FBF /* OSTBaseViewController.m in Sources */,
@@ -1347,6 +1344,7 @@
 				4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */,
 				BD36B2CD522E4F5E7D9DCD53 /* OSTCrossCheckViewController.swift in Sources */,
 				8C786E44B17259466456F007 /* UIViewController+OSTSpinner.swift in Sources */,
+				BD0F5B3D9588B36A254205A3 /* OSTRunnerTrackerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

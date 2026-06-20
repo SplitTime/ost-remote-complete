@@ -7,7 +7,12 @@
 //
 
 #import "OSTRightMenuViewController.h"
-#import "OSTRunnerTrackerViewController.h"
+// OSTRunnerTrackerViewController is now Swift — reach it via the generated header.
+#if __has_include("OST_Remote-Swift.h")
+#import "OST_Remote-Swift.h"
+#elif __has_include("OST_Remote_Dev-Swift.h")
+#import "OST_Remote_Dev-Swift.h"
+#endif
 // OSTCrossCheckViewController is now Swift; loaded via CrossCheck.storyboard
 // (instantiateInitialViewController returns it as a plain UIViewController).
 #import "UIView+Additions.h"

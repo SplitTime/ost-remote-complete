@@ -15,7 +15,7 @@
 #elif __has_include("OST_Remote_Dev-Swift.h")
 #import "OST_Remote_Dev-Swift.h"
 #endif
-#import "OSTRunnerTrackerViewController.h"
+// OSTRunnerTrackerViewController is now Swift (visible via the generated header above).
 #import "OSTRightMenuViewController.h"
 // OSTReviewSubmitViewController is now Swift (visible via the generated header above).
 #import "CurrentCourse.h"
