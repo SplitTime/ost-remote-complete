@@ -11,7 +11,6 @@
 #import "EntryModel.h"
 #import "OSTNetworkManager+Login.h"
 #import "OSTNetworkManager+Entries.h"
-#import "UIView+Toast.h"
 
 static OSTSyncManager *shared = nil;
 
@@ -163,24 +162,46 @@ static OSTSyncManager *shared = nil;
 
 - (void)showToastIfAppropriateWithErrors:(NSArray<NSError *>*)errors
 {
-    if (self.showToastOnCompletion) {
-        [CSToastManager setTapToDismissEnabled:YES];
-        
-        UIWindow *window = [[AppDelegate getInstance] window];
-        BOOL finishedWithError = (errors != nil && errors.count > 0);
-        
-        CSToastStyle *style = [[CSToastStyle alloc] initWithDefaultStyle];
-        style.messageColor = [UIColor blackColor];
-        style.backgroundColor = (finishedWithError) ? [UIColor colorWithRed:247/255.f green:45/255.f blue:0 alpha:1] : [UIColor colorWithRed:88/255.f green:182/255.f blue:73/255.f alpha:1];
-        
-        NSString *successfulMessage = @"Times synced successfully.";
-        NSString *errorMessage = @"Failed to sync times.";
-        
-        NSString *message = (finishedWithError) ? errorMessage : successfulMessage;
-        
-        // present the toast with the new style
-        [window makeToast:message duration:3.0 position:CSToastPositionTop style:style];
-    }
+    if (!self.showToastOnCompletion) return;
+
+    UIWindow *window = [[AppDelegate getInstance] window];
+    if (!window) return;
+
+    BOOL finishedWithError = (errors.count > 0);
+    NSString *message = finishedWithError ? @"Failed to sync times." : @"Times synced successfully.";
+    UIColor *bg = finishedWithError ? [UIColor colorWithRed:247/255.f green:45/255.f blue:0 alpha:1]
+                                    : [UIColor colorWithRed:88/255.f green:182/255.f blue:73/255.f alpha:1];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Native toast (replaces the Toast pod): a rounded label that fades in at
+        // the top, auto-dismisses after 3s, and dismisses on tap.
+        UILabel *toast = [[UILabel alloc] init];
+        toast.text = message;
+        toast.textColor = [UIColor blackColor];
+        toast.textAlignment = NSTextAlignmentCenter;
+        toast.numberOfLines = 0;
+        toast.backgroundColor = bg;
+        toast.font = [UIFont systemFontOfSize:16];
+        toast.layer.cornerRadius = 10;
+        toast.clipsToBounds = YES;
+        toast.userInteractionEnabled = YES;
+        [toast addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:toast action:@selector(removeFromSuperview)]];
+
+        CGFloat maxWidth = window.bounds.size.width - 40;
+        CGSize fit = [toast sizeThatFits:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+        CGFloat w = MIN(fit.width + 30, maxWidth);
+        CGFloat h = fit.height + 20;
+        CGFloat top = window.safeAreaInsets.top + 10;
+        toast.frame = CGRectMake((window.bounds.size.width - w) / 2, top, w, h);
+        toast.alpha = 0;
+        [window addSubview:toast];
+
+        [UIView animateWithDuration:0.3 animations:^{ toast.alpha = 1; } completion:^(BOOL done) {
+            [UIView animateWithDuration:0.3 delay:3.0 options:0 animations:^{ toast.alpha = 0; } completion:^(BOOL d2) {
+                [toast removeFromSuperview];
+            }];
+        }];
+    });
 }
 
 @end

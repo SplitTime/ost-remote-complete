@@ -15,7 +15,6 @@ import CoreData
 import MFSideMenu
 import MagicalRecord
 import IQDropDownTextField
-import CHCSVParser
 
 @objc(OSTReviewSubmitViewController)
 class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSource, UITableViewDelegate {
@@ -336,26 +335,19 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     }
 
     private func exportCSV(_ entries: [EntryModel]) {
-        let stream = OutputStream(toMemory: ())
-        guard let writer = CHCSVWriter(outputStream: stream,
-                                       encoding: String.Encoding.utf8.rawValue,
-                                       delimiter: unichar(44)) else { return }
-
-        writer.writeLine(ofFields: ["splitName", "subSplitKind", "bibNumber", "enteredTime", "withPacer", "stoppedHere", "source"] as NSArray)
-        for entry in entries {
-            writer.writeField(entry.splitName ?? "")
-            writer.writeField(entry.bitKey ?? "")
-            writer.writeField(entry.bibNumber ?? "")
-            writer.writeField(entry.absoluteTime ?? "")
-            writer.writeField(entry.withPacer ?? "")
-            writer.writeField(entry.stoppedHere ?? "")
-            writer.writeField(entry.source ?? "")
-            writer.finishLine()
+        // RFC-4180 field escaping: quote when the value contains a comma, quote or
+        // newline, doubling any embedded quotes.
+        func csvField(_ value: String) -> String {
+            guard value.contains(",") || value.contains("\"") || value.contains("\n") else { return value }
+            return "\"" + value.replacingOccurrences(of: "\"", with: "\"\"") + "\""
         }
-        writer.closeStream()
 
-        guard let data = stream.property(forKey: .dataWrittenToMemoryStreamKey) as? Data,
-              let csv = String(data: data, encoding: .utf8) else { return }
+        var rows = [["splitName", "subSplitKind", "bibNumber", "enteredTime", "withPacer", "stoppedHere", "source"]]
+        for entry in entries {
+            rows.append([entry.splitName ?? "", entry.bitKey ?? "", entry.bibNumber ?? "",
+                         entry.absoluteTime ?? "", entry.withPacer ?? "", entry.stoppedHere ?? "", entry.source ?? ""])
+        }
+        let csv = rows.map { $0.map(csvField).joined(separator: ",") }.joined(separator: "\n")
 
         let activityVC = UIActivityViewController(activityItems: [csv], applicationActivities: nil)
         if UIDevice.current.userInterfaceIdiom == .pad {

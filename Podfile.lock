@@ -1,38 +1,30 @@
 PODS:
-  - CHCSVParser (2.1.0)
   - IQDropDownTextField (1.1.0)
   - IQKeyboardManager (4.0.10)
   - MagicalRecord (2.2):
     - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
   - MFSideMenu (0.5.5)
-  - Toast (4.0.0)
 
 DEPENDENCIES:
-  - CHCSVParser (= 2.1.0)
   - IQDropDownTextField (= 1.1.0)
   - IQKeyboardManager (= 4.0.10)
   - MagicalRecord (= 2.2)
   - MFSideMenu (= 0.5.5)
-  - Toast (~> 4.0.0)
 
 SPEC REPOS:
   trunk:
-    - CHCSVParser
     - IQDropDownTextField
     - IQKeyboardManager
     - MagicalRecord
     - MFSideMenu
-    - Toast
 
 SPEC CHECKSUMS:
-  CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
   IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   MagicalRecord: 2dc87179ae7c1f2a274442624ec65a07d4357a6f
   MFSideMenu: 268122e6894f2747fc3a2b48578100b232506c60
-  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 865be37f01f5cd28a8615baf094934cb3852ed96
+PODFILE CHECKSUM: f8e6f616ad33cb6a2cd371b313d998969178716e
 
 COCOAPODS: 1.16.2
