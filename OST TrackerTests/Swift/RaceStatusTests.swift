@@ -217,7 +217,7 @@ extension RaceStatusTests {
         let spread = try loadSpread()
         let field = stationField(splitIndex: 2, spread: spread) // Antero
         XCTAssertEqual(field.rows.count, 151)
-        XCTAssertTrue(field.countText.contains("of 151 through"))
+        XCTAssertEqual(field.countText, "147 of 151 through")
         // The first row is whoever came through Antero earliest.
         XCTAssertEqual(field.rows.first?.status, "Through")
     }
