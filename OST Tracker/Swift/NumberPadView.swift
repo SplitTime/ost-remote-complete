@@ -108,15 +108,15 @@ final class NumberPadView: UIView {
 
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(Theme.label, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 28)
-        button.backgroundColor = .white
+        button.backgroundColor = Theme.secondaryBackground
         button.layer.cornerRadius = 5
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.3
         button.layer.shadowRadius = 1
         button.layer.shadowOffset = CGSize(width: 0, height: 1)
-        button.setBackgroundImage(solidImage(UIColor(white: 0.82, alpha: 1)), for: .highlighted)
+        button.setBackgroundImage(solidImage(Theme.separator), for: .highlighted)
         button.addTarget(self, action: #selector(keyTapped(_:)), for: .touchUpInside)
         return button
     }
