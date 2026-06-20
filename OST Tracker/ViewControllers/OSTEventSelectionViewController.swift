@@ -2,11 +2,9 @@
 //  OSTEventSelectionViewController.swift
 //  OST Tracker
 //
-//  Migrated from Objective-C (Phase 2). Keeps the existing XIB; the custom class
-//  still resolves to "OSTEventSelectionViewController" via @objc. OHAlertView is
-//  replaced with native UIAlertController. Still uses the Obj-C network manager,
-//  MagicalRecord, IQDropDownTextField/IQKeyboardManager and the Dejal spinner via
-//  bridging (those layers are migrated in later phases).
+//  Programmatic, themed replacement for the XIB-backed event selection screen.
+//  Uses DisclosureSelectField and PrimaryButton from the design system; no XIB,
+//  no @IBOutlet/@IBAction, no full-screen background image.
 //
 //  Two modes:
 //   - initial event + aid-station selection (login flow, via the class method
@@ -30,21 +28,41 @@ class OSTEventSelectionViewController: UIViewController {
     var selectedEvent: EventModel?
     var unpairedDataEntryGroups: [Any]?
     var eventsLoaded = false
-    private var didApplySafeAreaShift = false
 
-    // MARK: - XIB outlets
-    @IBOutlet weak var btnNext: UIButton!
-    @IBOutlet weak var txtEvent: OSTDropDownField!
-    @IBOutlet weak var txtStation: OSTDropDownField!
-    @IBOutlet weak var btnCancel: UIButton!
-    @IBOutlet weak var imgTriangleAidStation: UIImageView!
-    @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var lblSelectEvent: UILabel!
-    @IBOutlet weak var lblSelectAidStation: UILabel!
-    @IBOutlet weak var btnLogout: UIButton!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var eventTriangle: UIImageView!
-    @IBOutlet weak var progressBar: UIProgressView!
+    // MARK: - Programmatic views
+    private let eventField = DisclosureSelectField(label: "Event", placeholder: "Choose an event")
+    private let stationField = DisclosureSelectField(label: "Aid Station", placeholder: "Select an aid station")
+    private let nextButton = PrimaryButton(title: "Start Tracking", role: .success)
+    private let logoutButton: UIButton = {
+        let b = UIButton(type: .system)
+        b.setTitle("Log Out", for: .normal)
+        b.setTitleColor(Theme.destructive, for: .normal)
+        return b
+    }()
+    private let cancelButton: UIButton = {
+        let b = UIButton(type: .system)
+        b.setTitle("Cancel", for: .normal)
+        b.setTitleColor(Theme.tint, for: .normal)
+        return b
+    }()
+    private let progressLabel: UILabel = {
+        let l = UILabel()
+        l.textAlignment = .center
+        l.textColor = Theme.secondaryLabel
+        l.font = Theme.Font.field
+        l.isHidden = true
+        return l
+    }()
+    private let progressBar: UIProgressView = {
+        let p = UIProgressView(progressViewStyle: .default)
+        p.isHidden = true
+        return p
+    }()
+    private let activityIndicator: UIActivityIndicatorView = {
+        let s = UIActivityIndicatorView(style: .gray)
+        s.hidesWhenStopped = true
+        return s
+    }()
 
     // MARK: - Data loading + presentation
 
@@ -109,155 +127,97 @@ class OSTEventSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        txtEvent.isOptionalDropDown = false
+        view.backgroundColor = Theme.background
 
-        txtEvent.inputAccessoryView = makeDoneToolbar(action: #selector(onDoneSelectedEvent))
-        txtStation.inputAccessoryView = makeDoneToolbar(action: #selector(onDoneSelectedStation))
+        nextButton.alpha = 0
+        stationField.isHidden = true
+        nextButton.addTarget(self, action: #selector(onNext(_:)), for: .touchUpInside)
+        logoutButton.addTarget(self, action: #selector(onLogout(_:)), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(onCancel(_:)), for: .touchUpInside)
 
-        btnNext.alpha = 0
-        txtStation.alpha = 0
-
-        if changeStation {
-            eventTriangle.isHidden = true
-            lblSelectEvent.textAlignment = .center
-            lblSelectEvent.text = "(Please logout to change events)"
-            imgTriangleAidStation.isHidden = false
-            txtEvent.textAlignment = .center
-            txtEvent.font = UIFont.boldSystemFont(ofSize: 16)
-            btnNext.setImage(UIImage(named: "Live Entry"), for: .normal)
-        } else {
-            btnCancel.isHidden = true
-            btnLogout.isHidden = false
-            txtEvent.layer.borderColor = UIColor.white.cgColor
-            txtEvent.layer.borderWidth = 1
-            txtEvent.layer.cornerRadius = 3
+        eventField.onSelect = { [weak self] _ in self?.onEventSelected() }
+        stationField.onSelect = { [weak self] _ in
+            UIView.animate(withDuration: 0.3) { self?.nextButton.alpha = 1 }
         }
 
-        txtStation.layer.borderColor = UIColor.white.cgColor
-        txtStation.layer.borderWidth = 1
-        txtStation.layer.cornerRadius = 3
+        let footer = changeStation ? cancelButton : logoutButton
+        let stack = UIStackView(arrangedSubviews: [eventField, stationField, nextButton,
+                                                   progressLabel, progressBar, activityIndicator, footer])
+        stack.axis = .vertical
+        stack.spacing = 16
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stack)
 
-        txtStation.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
-        txtStation.leftViewMode = .always
-        txtEvent.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
-        txtEvent.leftViewMode = .always
+        let guide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            stack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: Theme.Metric.horizontalInset),
+            stack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -Theme.Metric.horizontalInset),
+            stack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 24),
+        ])
 
-        progressBar.transform = CGAffineTransform(scaleX: 1.0, y: 3.0)
-
-
-        txtStation.removeInputAssistant()
-        txtEvent.removeInputAssistant()
-    }
-
-    // This XIB predates safe-area layout: content was positioned for a 20pt status
-    // bar, so on Dynamic Island devices the logo/Logout bled under the island. One
-    // time shift of all content (except the full-screen background) down by the
-    // extra top inset. Portrait-only, so applying once is sufficient.
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if didApplySafeAreaShift { return }
-        let extraTop = view.safeAreaInsets.top - 20.0 // old design assumed a 20pt status bar
-        if extraTop <= 0.5 { return } // legacy devices (iPad mini 2/3 etc.): nothing to do
-        didApplySafeAreaShift = true
-        for sub in view.subviews {
-            if sub is UIImageView, sub.frame == view.bounds { continue } // skip full-screen bg
-            sub.frame.origin.y += extraTop
+        if changeStation {
+            eventField.isUserInteractionEnabled = false
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         if eventsLoaded { return }
 
         if changeStation {
             let course = CurrentCourse.getCurrentCourse()
-            txtEvent.isUserInteractionEnabled = false
-            txtEvent.itemList = [course?.eventName ?? ""]
-
+            eventField.options = [course?.eventName ?? ""]
+            eventField.select(course?.eventName ?? "")
             let stations = course?.dataEntryGroups as? [[String: Any]] ?? []
-            txtStation.itemList = stations.compactMap { $0["title"] as? String }
-            txtStation.becomeFirstResponder()
-
-            btnNext.alpha = 1
-            txtStation.alpha = 1
+            stationField.options = stations.compactMap { $0["title"] as? String }
+            stationField.isHidden = false
             unpairedDataEntryGroups = course?.dataEntryGroups as? [Any]
             return
         }
 
-        txtEvent.itemList = (eventStrings as? [String]) ?? []
-        txtEvent.becomeFirstResponder()
+        eventField.options = (eventStrings as? [String]) ?? []
         eventsLoaded = true
-
-        if (eventStrings?.count ?? 0) == 1 {
-            onDoneSelectedEvent()
+        if (eventStrings?.count ?? 0) == 1, let only = (eventStrings as? [String])?.first {
+            eventField.select(only)   // triggers onEventSelected via onSelect
         }
     }
 
-    // MARK: - Dropdown selection
+    // MARK: - Field selection
 
-    @objc func onDoneSelectedEvent() {
-        txtEvent.resignFirstResponder()
-
+    private func onEventSelected() {
         let eventModels = (events as? [EventModel]) ?? []
-        guard let firstFound = eventModels.first(where: { $0.name == txtEvent.selectedItem }) else {
-            return
-        }
-        selectedEvent = firstFound
-
-        let groups = firstFound.dataEntryGroups as? [[String: Any]] ?? []
-        txtStation.itemList = groups.compactMap { $0["title"] as? String }
-
-        UIView.animate(withDuration: 0.3) {
-            self.txtStation.alpha = 1
-            self.imgTriangleAidStation.isHidden = false
-        }
-        txtStation.becomeFirstResponder()
-    }
-
-    @objc func onDoneSelectedStation() {
-        txtStation.resignFirstResponder()
-        UIView.animate(withDuration: 0.8) { self.btnNext.alpha = 1 }
+        guard let found = eventModels.first(where: { $0.name == eventField.selectedOption }) else { return }
+        selectedEvent = found
+        let groups = found.dataEntryGroups as? [[String: Any]] ?? []
+        stationField.reset()
+        stationField.options = groups.compactMap { $0["title"] as? String }
+        UIView.animate(withDuration: 0.3) { self.stationField.isHidden = false }
     }
 
     // MARK: - Field visibility
 
     private func showSelectFields() {
-        lblSelectEvent.isHidden = false
-        lblSelectAidStation.isHidden = false
-        btnNext.isHidden = false
-        txtEvent.isHidden = false
-        txtStation.isHidden = false
-        eventTriangle.isHidden = false
-        imgTriangleAidStation.isHidden = false
-
+        [eventField, stationField, nextButton].forEach { $0.isHidden = false }
         progressLabel.isHidden = true
-        activityIndicator.stopAnimating()
         progressBar.isHidden = true
+        activityIndicator.stopAnimating()
     }
 
     private func showLoadingFields() {
-        lblSelectEvent.isHidden = true
-        lblSelectAidStation.isHidden = true
-        btnNext.isHidden = true
-        txtEvent.isHidden = true
-        txtStation.isHidden = true
-        eventTriangle.isHidden = true
-        imgTriangleAidStation.isHidden = true
-
+        [eventField, stationField, nextButton].forEach { $0.isHidden = true }
         progressLabel.isHidden = false
-        activityIndicator.startAnimating()
         progressBar.isHidden = false
+        activityIndicator.startAnimating()
     }
 
     // MARK: - Actions
 
-    @IBAction func onCancel(_ sender: Any) {
+    @objc func onCancel(_ sender: Any) {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
         dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func onLogout(_ sender: Any) {
+    @objc func onLogout(_ sender: Any) {
         ostShowBlockingSpinner()
         AppDelegate.getInstance()?.getNetworkManager()?.autoLogin(completionBlock: { [weak self] _ in
             guard let self = self else { return }
@@ -277,7 +237,7 @@ class OSTEventSelectionViewController: UIViewController {
         })
     }
 
-    @IBAction func onNext(_ sender: Any) {
+    @objc func onNext(_ sender: Any) {
         let groups: [[String: Any]]
         if let unpaired = unpairedDataEntryGroups {
             groups = unpaired.compactMap { $0 as? [String: Any] }
@@ -285,7 +245,7 @@ class OSTEventSelectionViewController: UIViewController {
             groups = selectedEvent?.dataEntryGroups as? [[String: Any]] ?? []
         }
 
-        guard let firstFound = groups.first(where: { ($0["title"] as? String) == txtStation.selectedItem }) else {
+        guard let firstFound = groups.first(where: { ($0["title"] as? String) == stationField.selectedOption }) else {
             ostPresentAlert(title: "", message: "You need to select an aid station to continue.")
             return
         }
@@ -302,13 +262,12 @@ class OSTEventSelectionViewController: UIViewController {
             NSManagedObjectContext.mr_default().processPendingChanges()
             NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
 
-
             AppDelegate.getInstance()?.showTracker()
             dismiss(animated: true, completion: nil)
             return
         }
 
-        progressLabel.text = "Downloading \(txtEvent.selectedItem ?? "") Data"
+        progressLabel.text = "Downloading \(eventField.selectedOption ?? "") Data"
         showLoadingFields()
         progressBar.progress = 0.5
 
@@ -361,16 +320,5 @@ class OSTEventSelectionViewController: UIViewController {
 
             AppDelegate.getInstance()?.loadLeftMenu()
         }
-    }
-
-    // MARK: - Helpers
-
-    private func makeDoneToolbar(action: Selector) -> UIToolbar {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: action)
-        toolbar.items = [flex, done]
-        return toolbar
     }
 }
