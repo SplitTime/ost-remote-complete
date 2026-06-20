@@ -42,3 +42,43 @@ final class RaceStatusTests: XCTestCase {
         XCTAssertNotNil(beer.absoluteTimes[1][0]) // In time present
     }
 }
+
+extension RaceStatusTests {
+    private func mtZone() -> TimeZone { TimeZone(secondsFromGMT: -6 * 3600)! }
+
+    private func date(_ y: Int, _ mo: Int, _ d: Int, _ h: Int, _ mi: Int, tz: TimeZone) -> Date {
+        var c = DateComponents()
+        c.year = y; c.month = mo; c.day = d; c.hour = h; c.minute = mi
+        var cal = Calendar(identifier: .gregorian); cal.timeZone = tz
+        return cal.date(from: c)!
+    }
+
+    func test_elapsedFormatsHoursAndMinutes() {
+        let tz = mtZone()
+        let start = date(2022, 7, 22, 6, 0, tz: tz)
+        let t = date(2022, 7, 22, 9, 13, tz: tz)
+        XCTAssertEqual(RaceStatusFormat.elapsed(from: start, to: t), "3:13")
+    }
+
+    func test_elapsedExceeds24Hours() {
+        let tz = mtZone()
+        let start = date(2022, 7, 22, 6, 0, tz: tz)
+        let t = date(2022, 7, 23, 6, 20, tz: tz)
+        XCTAssertEqual(RaceStatusFormat.elapsed(from: start, to: t), "24:20")
+    }
+
+    func test_timeOfDayInEventZone() {
+        let tz = mtZone()
+        let t = date(2022, 7, 22, 9, 13, tz: tz)
+        XCTAssertEqual(RaceStatusFormat.timeOfDay(t, in: tz), "09:13")
+    }
+
+    func test_dayOffsetCrossesMidnight() {
+        let tz = mtZone()
+        let start = date(2022, 7, 22, 6, 0, tz: tz)
+        let sameDay = date(2022, 7, 22, 23, 0, tz: tz)
+        let nextDay = date(2022, 7, 23, 2, 0, tz: tz)
+        XCTAssertEqual(RaceStatusFormat.dayOffset(from: start, to: sameDay, in: tz), 0)
+        XCTAssertEqual(RaceStatusFormat.dayOffset(from: start, to: nextDay, in: tz), 1)
+    }
+}
