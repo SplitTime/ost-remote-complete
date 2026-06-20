@@ -42,6 +42,9 @@ struct LiveTimeSubmitter {
                 done(result)
             }
         }
-        service.sync(wire, completion: completion)
+        service.sync(wire) { [service] result in
+            _ = service            // keep SyncService alive until the async chain completes
+            completion(result)
+        }
     }
 }

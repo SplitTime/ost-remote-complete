@@ -69,6 +69,20 @@ final class LiveTimeSubmitterTests: XCTestCase {
         XCTAssertEqual(marked.count, 300, "only the first (succeeded) batch is marked")
     }
 
+    func test_submit_completesWhenLoginAndPostAreAsync() {
+        let entries = [makeEntry(bib: "1")]
+        let submitter = LiveTimeSubmitter(
+            login: { done in DispatchQueue.global().async { done(.success(())) } },
+            postBatch: { _, _, done in DispatchQueue.global().async { done(.success(())) } },
+            markSubmitted: { _ in })
+        let exp = expectation(description: "done")
+        submitter.submit(entries, progress: { _ in }) { result in
+            if case .failure = result { XCTFail("expected success") }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 2)
+    }
+
     func test_submit_usesAlternateServerWhenLoginFails() {
         var serversUsed: [Bool] = []
         let submitter = LiveTimeSubmitter(
