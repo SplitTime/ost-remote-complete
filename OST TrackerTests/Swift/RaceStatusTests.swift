@@ -145,4 +145,51 @@ extension RaceStatusTests {
         XCTAssertEqual(matchEfforts("leh", in: all).map { $0.bibNumber }, [6])
         XCTAssertEqual(matchEfforts("", in: all).count, 0)
     }
+
+    // Two THROUGH runners with the same arrival time must break the tie by bib ascending.
+    func test_sortedField_throughTieBreaksByBib() {
+        let h = headers(3)
+        let arrival = Date(timeIntervalSince1970: 5000)
+        // bib 20 arrives at the same time as bib 7; bib 7 should sort first.
+        let highBib = effort(bib: 20, times: [[arrival, arrival], [arrival, arrival], [arrival, nil]])
+        let lowBib  = effort(bib:  7, times: [[arrival, arrival], [arrival, arrival], [arrival, nil]])
+
+        let ordered = sortedField([highBib, lowBib], atSplit: 2, headers: h)
+        XCTAssertEqual(ordered.map { $0.bibNumber }, [7, 20])
+    }
+
+    // Within the EXPECTED group: runners sort by furthest-reached split index DESCENDING,
+    // then by bib ascending on a tie.
+    func test_sortedField_withinGroupOrdering() {
+        let h = headers(5)
+        let t = Date(timeIntervalSince1970: 1000)
+
+        // furthest idx 2 (has a time at idx 2, none at idx 3 which is the queried split)
+        let furtherA = effort(bib: 99, times: [[t, t], [t, t], [t, nil], [nil, nil], [nil, nil]])
+        // furthest idx 2 same as furtherA — tie breaks by bib: 55 < 99
+        let furtherB = effort(bib: 55, times: [[t, t], [t, t], [t, nil], [nil, nil], [nil, nil]])
+        // furthest idx 1 — should appear after both furtherA and furtherB
+        let closer   = effort(bib: 10, times: [[t, t], [t, nil], [nil, nil], [nil, nil], [nil, nil]])
+
+        let ordered = sortedField([furtherA, closer, furtherB], atSplit: 3, headers: h)
+        // All are .expected at split 3; order: furthest idx desc, then bib asc
+        XCTAssertEqual(ordered.map { $0.bibNumber }, [55, 99, 10])
+    }
+
+    // matchEfforts must return results sorted by overallRank ascending, regardless of
+    // the order they appear in the source array.
+    func test_matchEfforts_sortsByOverallRank() {
+        let t = Date()
+        // Deliberately invert natural array order vs. rank order.
+        let firstRank = EffortRow(overallRank: 1, genderRank: 1, bibNumber: 42,
+                                  firstName: "Alpha", lastName: "Smith", absoluteTimes: [[t, t]])
+        let thirdRank = EffortRow(overallRank: 3, genderRank: 2, bibNumber: 17,
+                                  firstName: "Alpha", lastName: "Jones", absoluteTimes: [[t, t]])
+        let secondRank = EffortRow(overallRank: 2, genderRank: 1, bibNumber: 99,
+                                   firstName: "Alpha", lastName: "Brown", absoluteTimes: [[t, t]])
+
+        // All three match "alpha"; supply them in rank-descending order to prove the sort.
+        let results = matchEfforts("alpha", in: [thirdRank, firstRank, secondRank])
+        XCTAssertEqual(results.map { $0.overallRank }, [1, 2, 3])
+    }
 }
