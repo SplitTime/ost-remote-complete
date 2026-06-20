@@ -26,6 +26,11 @@ class OSTUtilitiesViewController: OSTBaseViewController {
     @IBOutlet weak var remoteLbl: UILabel!
     @IBOutlet weak var btnRetry: UIButton!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if #available(iOS 13.0, *) {} else { view.viewWithTag(99)?.isHidden = true }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         ostApplySafeAreaFix()
@@ -112,9 +117,7 @@ class OSTUtilitiesViewController: OSTBaseViewController {
             currentCourse.dataEntryGroups = attributes?["dataEntryGroups"]
 
             let included = root?["included"] as? [[String: Any]] ?? []
-            for dataObject in included where (dataObject["type"] as? String) == "efforts" {
-                EffortModel.mr_import(from: dataObject)
-            }
+            EffortModel.mr_reconcile(fromIncluded: included, ofType: "efforts")
             currentCourse.monitorPacers = attributes?["monitorPacers"] as? NSNumber
 
             var eventIdsAndSplits = [String: [Any]]()
@@ -159,24 +162,74 @@ class OSTUtilitiesViewController: OSTBaseViewController {
         present(event, animated: true)
     }
 
-    @IBAction func onLogout(_ sender: Any) {
-        let app = AppDelegate.getInstance()
-        if app?.getNetworkManager()?.isReachable == false {
-            let alert = UIAlertController(title: "Logout is disabled",
-                                          message: "Please try again when you have an Internet connection",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-            present(alert, animated: true)
-            return
+    @IBAction func onAppearance(_ sender: Any) {
+        let sheet = UIAlertController(title: "Appearance", message: nil, preferredStyle: .actionSheet)
+        let choose: (String, AppearanceMode) -> UIAlertAction = { title, mode in
+            UIAlertAction(title: title, style: .default) { _ in AppearanceController.shared.mode = mode }
         }
+        sheet.addAction(choose("System", .system))
+        sheet.addAction(choose("Light", .light))
+        sheet.addAction(choose("Dark", .dark))
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        if let pop = sheet.popoverPresentationController, let v = sender as? UIView {
+            pop.sourceView = v; pop.sourceRect = v.bounds
+        }
+        present(sheet, animated: true)
+    }
+
+    @IBAction func onLogout(_ sender: Any) {
+        let checking = UIAlertController(title: "Checking connection…",
+                                         message: "\n\n",
+                                         preferredStyle: .alert)
+        let spinner = UIActivityIndicatorView(style: .gray)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        checking.view.addSubview(spinner)
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: checking.view.centerXAnchor),
+            spinner.bottomAnchor.constraint(equalTo: checking.view.bottomAnchor, constant: -16)
+        ])
+        present(checking, animated: true)
+
+        OSTBackend.shared.verifyConnection { [weak self] error in
+            guard let self = self else { return }
+            checking.dismiss(animated: true) {
+                if error == nil {
+                    self.presentLogoutConfirmation()
+                } else {
+                    self.presentLogoutOverride()
+                }
+            }
+        }
+    }
+
+    /// Online: confirm, then log out.
+    private func presentLogoutConfirmation() {
         let alert = UIAlertController(title: "Are you sure you would like to log out?",
+                                      message: "You can log back in using your current connection, but you won't be able to add entries or log back in if you lose it.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
+            self?.performLogout()
+        })
+        present(alert, animated: true)
+    }
+
+    /// Check failed: block, but allow an immediate override.
+    private func presentLogoutOverride() {
+        let alert = UIAlertController(title: "Can't reach OpenSplitTime",
                                       message: "You will not be able to log back in or add entries until you have a data connection again.",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { _ in
-            app?.rightMenuVC.toggleRightSideMenuCompletion(nil)
-            app?.logout()
+        alert.addAction(UIAlertAction(title: "Log Out Anyway", style: .destructive) { [weak self] _ in
+            self?.performLogout()
         })
         present(alert, animated: true)
+    }
+
+    private func performLogout() {
+        let app = AppDelegate.getInstance()
+        app?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+        app?.logout()
     }
 }

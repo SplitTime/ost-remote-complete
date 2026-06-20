@@ -136,6 +136,21 @@
                         <action selector="onRefreshData:" destination="-1" eventType="touchUpInside" id="2TK-iF-4XZ"/>
                     </connections>
                 </button>
+                <button opaque="NO" tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-00-bt1">
+                    <rect key="frame" x="62" y="536" width="290" height="60"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                    <state key="normal" title="Appearance" backgroundImage="BlueButton">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                    <connections>
+                        <action selector="onAppearance:" destination="-1" eventType="touchUpInside" id="Apr-00-ac1"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -143,7 +158,10 @@
                 <constraint firstItem="huH-y9-93R" firstAttribute="leading" secondItem="d7e-3n-7MG" secondAttribute="leading" id="3Ps-Bg-FMJ"/>
                 <constraint firstItem="wYc-L1-17b" firstAttribute="trailing" secondItem="w7U-yG-j1i" secondAttribute="trailing" id="7vV-us-e7Y"/>
                 <constraint firstItem="Zl7-K7-8nq" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FCQ-Zq-0VX"/>
-                <constraint firstItem="huH-y9-93R" firstAttribute="top" secondItem="d7e-3n-7MG" secondAttribute="bottom" constant="44" id="Gcc-st-y8s"/>
+                <constraint firstItem="huH-y9-93R" firstAttribute="top" secondItem="Apr-00-bt1" secondAttribute="bottom" constant="44" id="Gcc-st-y8s"/>
+                <constraint firstItem="Apr-00-bt1" firstAttribute="top" secondItem="d7e-3n-7MG" secondAttribute="bottom" constant="44" id="Apr-00-cn1"/>
+                <constraint firstItem="Apr-00-bt1" firstAttribute="leading" secondItem="d7e-3n-7MG" secondAttribute="leading" id="Apr-00-cn2"/>
+                <constraint firstItem="Apr-00-bt1" firstAttribute="trailing" secondItem="d7e-3n-7MG" secondAttribute="trailing" id="Apr-00-cn3"/>
                 <constraint firstItem="d7e-3n-7MG" firstAttribute="top" secondItem="wYc-L1-17b" secondAttribute="bottom" constant="44" id="MR7-4d-jyz"/>
                 <constraint firstItem="huH-y9-93R" firstAttribute="trailing" secondItem="d7e-3n-7MG" secondAttribute="trailing" id="doq-KE-FIy"/>
                 <constraint firstItem="d7e-3n-7MG" firstAttribute="leading" secondItem="wYc-L1-17b" secondAttribute="leading" id="eeX-tc-ZFa"/>

@@ -21,27 +21,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		013846B2926BB5BB40AC283F /* AutoSyncControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37FCC6D34931884EF6A498 /* AutoSyncControllerTests.swift */; };
-		033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B4206001FD00CB9BD8 /* APNumberButton.m */; };
-		033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B4206001FD00CB9BD8 /* APNumberButton.m */; };
-		033E71C3206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */; };
-		033E71C4206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */; };
-		033E71C5206001FE00CB9BD8 /* APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B7206001FD00CB9BD8 /* APNumberPad.m */; };
-		033E71C6206001FE00CB9BD8 /* APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B7206001FD00CB9BD8 /* APNumberPad.m */; };
-		033E71C7206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */; };
-		033E71C8206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */; };
-		033E71C9206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */; };
-		033E71CA206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */; };
-		033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */; };
-		033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */; };
-		033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
-		033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
+		08E4F3B8EF128D14B019FA22 /* NumberPadViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */; };
 		0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
 		0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
-		0E9178CF59ADF2CC7247CB37 /* OSTToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */; };
-		0F9B083BD28E4F013F81593A /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB852C200761E0B7347D354 /* AutoSyncScheduler.swift */; };
-		10EB1E547C106BA0FAF6B410 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */; };
-		13FB6B36B5859F37C82D1D9F /* AutoSyncEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F7445A94282241B11860BD /* AutoSyncEngineTests.swift */; };
+		14D8FC954F66DD98DB2706DB /* AutoSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9A8496472A25472B5BFAA9 /* AutoSyncEngine.swift */; };
+		18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA22B20B858EF2CA668A00B /* AppearanceController.swift */; };
 		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
@@ -49,31 +33,43 @@
 		18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		18D4194824246CEA002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
 		193DC8E6351F712773C9444D /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
-		1CF7D9CAD45B10AD2CF4B2B0 /* LiveTimeSubmitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A947E854625AA11C16D5C1F /* LiveTimeSubmitterTests.swift */; };
+		1F3DE375295263E939C67E6C /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A789C55C8BC256ED59935 /* AutoSyncStatus.swift */; };
 		2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */; };
+		22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA22B20B858EF2CA668A00B /* AppearanceController.swift */; };
+		23815C2FF2173716D7561366 /* DisclosureSelectField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45D2979B93934E473811C /* DisclosureSelectField.swift */; };
 		24AB60374315832E06352A0E /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
-		2555576285D9B872FF42B077 /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */; };
 		276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */; };
 		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
-		2B651D5CB30312A95CAAF677 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */; };
+		29304C5004AE7D8B6CFAE5ED /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */; };
+		2F5AB1F5E6634215E9CE16EA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */; };
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
+		3422F40C2DCA7277EFE17803 /* LiveTimeSubmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75650EB253806082028F83ED /* LiveTimeSubmitter.swift */; };
+		3743D11DFDCB486FB6D137B4 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FC0CF1F10CBC3DB63BB1B9 /* AutoSyncController.swift */; };
 		384837C7720AAB88FADDA238 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */; };
+		3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */; };
+		3C73BBB9379EBBC93814C0E6 /* AutoSyncControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97109EE77CF2B1635EDCF582 /* AutoSyncControllerTests.swift */; };
+		413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
-		4485A54D2239B31DFA467E51 /* LiveTimeSubmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDEB320285D7D1EC890CB4E /* LiveTimeSubmitter.swift */; };
+		4583A01E115F9C7F5806F903 /* OSTToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B98FF89C88B382E3740B60 /* OSTToast.swift */; };
 		471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
+		4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		532D5B3FE4BD1FB322981FF6 /* OSTEditEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */; };
+		537E4C4A45D1C44D9845CCC2 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FC0CF1F10CBC3DB63BB1B9 /* AutoSyncController.swift */; };
 		567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */; };
+		597C364A72D083E3D40B1FA5 /* DisclosureSelectFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */; };
 		5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */; };
-		6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1BAE4B6BD10048636F490 /* OSTReachability.swift */; };
+		642A44BC6A446EC59550E028 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
+		64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
-		6644D3AAE50D85A94C2D7E45 /* AutoSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E94C7F62FB900C9ECD59945 /* AutoSyncEngine.swift */; };
+		678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */; };
+		67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
 		6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
@@ -112,7 +108,6 @@
 		6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */; };
 		6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */; };
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
-		6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
 		6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
 		6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
@@ -125,7 +120,6 @@
 		6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
 		6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
-		6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
 		6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
@@ -150,7 +144,6 @@
 		6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
 		6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
 		6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
-		6AB4A6C295D91E387E2ED658 /* OSTReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1BAE4B6BD10048636F490 /* OSTReachability.swift */; };
 		6ABFC1E11EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6ABFC1E21EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
@@ -158,36 +151,44 @@
 		6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
+		6D70E4F0EF0645CC8298D887 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
 		73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */; };
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
-		7798A47732EB9FCC217FA997 /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */; };
-		79034041655DA33AFA0592FC /* OSTToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */; };
-		7922FAB16C1A315313EB9E86 /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB852C200761E0B7347D354 /* AutoSyncScheduler.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		87A8BA63C84B1968781A8A24 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
+		891D33B74B4473405882FE2A /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A789C55C8BC256ED59935 /* AutoSyncStatus.swift */; };
 		8BE0411983BC48E1D1C14C5D /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E637BB81DCDE0328194710B /* LoginControllerTests.swift */; };
 		8C786E44B17259466456F007 /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
-		8CF9BAE07760F98277BEC24C /* AutoSyncStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E5543390C6D18C53205C9D /* AutoSyncStatusTests.swift */; };
+		8CE5D7BA99830BF5279EBA04 /* AutoSyncEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C61394C139438D2AB7867F7 /* AutoSyncEngineTests.swift */; };
 		8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
+		99317695D8197AFD8F74757A /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */; };
 		99517852C35EF5C3914336BF /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		9C7CA330A1B919DC81EA2721 /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		9CF9FB3B3E1F8787224192B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
 		9DABDD777FB885613F1F99DC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = A802EAD220AFB69CF7A7E5BF /* fixtures */; };
 		A63C9E647D0756AA05143661 /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
+		A86FB32FA89463E972CCF710 /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AAA7E0E0AC24E4B72A026 /* AutoSyncScheduler.swift */; };
+		ADB809D8532707324EAB81E1 /* OSTToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B98FF89C88B382E3740B60 /* OSTToast.swift */; };
+		AEDD379833F10DBA7DDE346D /* LiveTimeSubmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75650EB253806082028F83ED /* LiveTimeSubmitter.swift */; };
 		B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */; };
-		B6CAF806BCAB59B40FA46C27 /* AutoSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E94C7F62FB900C9ECD59945 /* AutoSyncEngine.swift */; };
+		B5D52AB8B629CD420DB19243 /* LiveTimeSubmitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0239AE36BE1BD4D20095A120 /* LiveTimeSubmitterTests.swift */; };
+		B8E3F8114ACBCAE49A256BA9 /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */; };
+		B90CC0EE71010BB4DDE14B23 /* DisclosureSelectField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45D2979B93934E473811C /* DisclosureSelectField.swift */; };
 		BD0F5B3D9588B36A254205A3 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		BD36B2CD522E4F5E7D9DCD53 /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
+		BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1A7214138790605CD98F9 /* PrimaryButton.swift */; };
 		BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
 		BEF2C7720B262AB677278BD4 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		BFA683CE97A77D461E74E7CA /* OSTBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */; };
 		C033A9DEBCAF65E6035C75E9 /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
+		C0A1F1C0DE5704C7A11C3E02 /* ConnectivityCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1F1C0DE5704C7A11C3E01 /* ConnectivityCheckerTests.swift */; };
 		C0B830FF0E9EE86AE7E9348A /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
 		C1A21A365A3C880DE61C4DC7 /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
 		C261404CBC1C810470E0C24A /* SubmitPayloadGoldenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */; };
 		C6401B6575B5EC2BA6DF5564 /* OSTEditEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */; };
+		C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1A7214138790605CD98F9 /* PrimaryButton.swift */; };
 		C8529C88216D0FD12C16BEA9 /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		C8BB3E1FB7830997009E7720 /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		C99F414EAB739A70BA4BDADC /* MagicalRecordShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */; };
@@ -234,9 +235,12 @@
 		E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
 		E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
+		EC8604BA0DB2CD43FB766087 /* AutoSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9A8496472A25472B5BFAA9 /* AutoSyncEngine.swift */; };
+		F1D8797CF38ADFC5BDE80133 /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564AAA7E0E0AC24E4B72A026 /* AutoSyncScheduler.swift */; };
 		F7A6DDBC1CC23AE8E87A4B56 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
 		F88DCA28419AC14B875704BB /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
-		FEFBCD27972C4B7E6C715034 /* LiveTimeSubmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDEB320285D7D1EC890CB4E /* LiveTimeSubmitter.swift */; };
+		FBC482C7F2B2010C1EF9C35D /* StyledTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */; };
+		FDE688F1AB313BD889DCEAE1 /* AutoSyncStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAF491545E884957EE42DE7 /* AutoSyncStatusTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,40 +262,33 @@
 
 /* Begin PBXFileReference section */
 		02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SubmitPayloadGoldenTests.swift; path = "OST TrackerTests/Swift/SubmitPayloadGoldenTests.swift"; sourceTree = "<group>"; };
-		033E71B4206001FD00CB9BD8 /* APNumberButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNumberButton.m; sourceTree = "<group>"; };
-		033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNumberPadDefaultStyle.m; sourceTree = "<group>"; };
-		033E71B6206001FD00CB9BD8 /* NSBundle+APNumberPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+APNumberPad.h"; sourceTree = "<group>"; };
-		033E71B7206001FD00CB9BD8 /* APNumberPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNumberPad.m; sourceTree = "<group>"; };
-		033E71B8206001FD00CB9BD8 /* APNumberPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberPad.h; sourceTree = "<group>"; };
-		033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+APNumberPad.m"; sourceTree = "<group>"; };
-		033E71BA206001FD00CB9BD8 /* APNumberPadDefaultStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberPadDefaultStyle.h; sourceTree = "<group>"; };
-		033E71BB206001FD00CB9BD8 /* APNumberButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberButton.h; sourceTree = "<group>"; };
-		033E71BC206001FD00CB9BD8 /* APNumberPadStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberPadStyle.h; sourceTree = "<group>"; };
-		033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@2x.png"; sourceTree = "<group>"; };
-		033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apnumberpad_backspace_icon.png; sourceTree = "<group>"; };
-		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
+		0239AE36BE1BD4D20095A120 /* LiveTimeSubmitterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeSubmitterTests.swift; path = "OST TrackerTests/Swift/LiveTimeSubmitterTests.swift"; sourceTree = "<group>"; };
+		09FC0CF1F10CBC3DB63BB1B9 /* AutoSyncController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncController.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncController.swift"; sourceTree = "<group>"; };
 		0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OSTSafeArea.m"; sourceTree = "<group>"; };
 		0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTSpinner.swift"; sourceTree = "<group>"; };
-		11F1BAE4B6BD10048636F490 /* OSTReachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTReachability.swift; path = "OST Tracker/Swift/OSTReachability.swift"; sourceTree = "<group>"; };
 		149C18108290E0987474D395 /* LiveTimeEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeEntry.swift; path = "OST Tracker/Swift/LiveTimeEntry.swift"; sourceTree = "<group>"; };
 		14C24566B72849E7915F9603 /* APIModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIModels.swift; path = "OST Tracker/Swift/APIModels.swift"; sourceTree = "<group>"; };
-		15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTToast.swift; path = "OST Tracker/Swift/AutoSync/OSTToast.swift"; sourceTree = "<group>"; };
 		16BAED92F7B8A3B859B03965 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "OST Tracker/Swift/LoginViewController.swift"; sourceTree = "<group>"; };
 		177BC33990DA88662548DD92 /* OST Tracker-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OST Tracker-Bridging-Header.h"; path = "OST Tracker/OST Tracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		189B47392427175300F384E8 /* OSTAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTAboutViewController.xib; sourceTree = "<group>"; };
 		18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTUtilitiesViewController.xib; sourceTree = "<group>"; };
+		1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = "OST Tracker/Swift/DesignSystem/Theme.swift"; sourceTree = "<group>"; };
+		1BAF491545E884957EE42DE7 /* AutoSyncStatusTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncStatusTests.swift; path = "OST TrackerTests/Swift/AutoSyncStatusTests.swift"; sourceTree = "<group>"; };
+		1C61394C139438D2AB7867F7 /* AutoSyncEngineTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngineTests.swift; path = "OST TrackerTests/Swift/AutoSyncEngineTests.swift"; sourceTree = "<group>"; };
 		1EF24CABF2B5EAD65649ACBC /* SyncService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SyncService.swift; path = "OST Tracker/Swift/SyncService.swift"; sourceTree = "<group>"; };
+		1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BibEntryTests.swift; path = "OST TrackerTests/Swift/BibEntryTests.swift"; sourceTree = "<group>"; };
 		25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SyncServiceTests.swift; path = "OST TrackerTests/Swift/SyncServiceTests.swift"; sourceTree = "<group>"; };
-		2AB852C200761E0B7347D354 /* AutoSyncScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncScheduler.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncScheduler.swift"; sourceTree = "<group>"; };
 		30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MagicalRecordShimTests.swift; path = "OST TrackerTests/Swift/MagicalRecordShimTests.swift"; sourceTree = "<group>"; };
+		354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppearanceControllerTests.swift; path = "OST TrackerTests/Swift/AppearanceControllerTests.swift"; sourceTree = "<group>"; };
 		3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSmoke.swift; path = "OST Tracker/Swift/SwiftSmoke.swift"; sourceTree = "<group>"; };
-		3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncStatus.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncStatus.swift"; sourceTree = "<group>"; };
+		3FC13D2600034E4CB79A1E5F /* BibEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BibEntry.swift; path = "OST Tracker/Swift/BibEntry.swift"; sourceTree = "<group>"; };
 		42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainRoundTripTests.swift; path = "OST TrackerTests/Swift/KeychainRoundTripTests.swift"; sourceTree = "<group>"; };
 		43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDrawerContainer.swift; sourceTree = "<group>"; };
 		440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTAboutViewController.swift; sourceTree = "<group>"; };
+		49F45D2979B93934E473811C /* DisclosureSelectField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DisclosureSelectField.swift; path = "OST Tracker/Swift/DesignSystem/DisclosureSelectField.swift"; sourceTree = "<group>"; };
 		54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTRunnerTrackerViewController.swift; sourceTree = "<group>"; };
 		55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MagicalRecordShim.swift; path = "OST Tracker/Swift/MagicalRecordShim.swift"; sourceTree = "<group>"; };
-		5A947E854625AA11C16D5C1F /* LiveTimeSubmitterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeSubmitterTests.swift; path = "OST TrackerTests/Swift/LiveTimeSubmitterTests.swift"; sourceTree = "<group>"; };
+		564AAA7E0E0AC24E4B72A026 /* AutoSyncScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncScheduler.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncScheduler.swift"; sourceTree = "<group>"; };
 		5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTReviewSubmitViewController.swift; sourceTree = "<group>"; };
 		68F2986C3890234A3A81A335 /* FixtureLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FixtureLoader.swift; path = "OST TrackerTests/Swift/FixtureLoader.swift"; sourceTree = "<group>"; };
 		69B24303991152304B820254 /* OSTAuthBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTAuthBridge.swift; path = "OST Tracker/Swift/OSTAuthBridge.swift"; sourceTree = "<group>"; };
@@ -328,7 +325,6 @@
 		6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTReviewSectionHeader.m; sourceTree = "<group>"; };
 		6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewSectionHeader.xib; sourceTree = "<group>"; };
 		6A549E4B1EEF866F00783F80 /* OSTDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSTDataModel.xcdatamodel; sourceTree = "<group>"; };
-		6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTEventSelectionViewController.xib; sourceTree = "<group>"; };
 		6A549E581EEF8A5E00783F80 /* OSTNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTNetworkManager.h; sourceTree = "<group>"; };
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
 		6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -372,22 +368,29 @@
 		6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OST TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DisclosureSelectFieldTests.swift; path = "OST TrackerTests/Swift/DisclosureSelectFieldTests.swift"; sourceTree = "<group>"; };
+		75650EB253806082028F83ED /* LiveTimeSubmitter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeSubmitter.swift; path = "OST Tracker/Swift/AutoSync/LiveTimeSubmitter.swift"; sourceTree = "<group>"; };
+		79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StyledTextFieldTests.swift; path = "OST TrackerTests/Swift/StyledTextFieldTests.swift"; sourceTree = "<group>"; };
 		7E637BB81DCDE0328194710B /* LoginControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = "OST TrackerTests/Swift/LoginControllerTests.swift"; sourceTree = "<group>"; };
 		7FC88DAF080C3B90276428C3 /* LoginController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = "OST Tracker/Swift/LoginController.swift"; sourceTree = "<group>"; };
 		809E391C45FA035A2E0209DC /* APIClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = "OST Tracker/Swift/APIClient.swift"; sourceTree = "<group>"; };
+		94B98FF89C88B382E3740B60 /* OSTToast.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTToast.swift; path = "OST Tracker/Swift/AutoSync/OSTToast.swift"; sourceTree = "<group>"; };
+		97109EE77CF2B1635EDCF582 /* AutoSyncControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncControllerTests.swift; path = "OST TrackerTests/Swift/AutoSyncControllerTests.swift"; sourceTree = "<group>"; };
 		98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDropDownField.swift; sourceTree = "<group>"; };
+		98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StyledTextField.swift; path = "OST Tracker/Swift/DesignSystem/StyledTextField.swift"; sourceTree = "<group>"; };
+		9C9A8496472A25472B5BFAA9 /* AutoSyncEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngine.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncEngine.swift"; sourceTree = "<group>"; };
+		9DA22B20B858EF2CA668A00B /* AppearanceController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppearanceController.swift; path = "OST Tracker/Swift/DesignSystem/AppearanceController.swift"; sourceTree = "<group>"; };
 		9E2CE940B9754C16E1809394 /* LiveAPITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveAPITests.swift; path = "OST TrackerTests/Swift/LiveAPITests.swift"; sourceTree = "<group>"; };
-		9E94C7F62FB900C9ECD59945 /* AutoSyncEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngine.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncEngine.swift"; sourceTree = "<group>"; };
+		A2C1A7214138790605CD98F9 /* PrimaryButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimaryButton.swift; path = "OST Tracker/Swift/DesignSystem/PrimaryButton.swift"; sourceTree = "<group>"; };
 		A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTAlert.swift"; sourceTree = "<group>"; };
 		A802EAD220AFB69CF7A7E5BF /* fixtures */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fixtures; path = Verification/fixtures; sourceTree = SOURCE_ROOT; };
-		AEDEB320285D7D1EC890CB4E /* LiveTimeSubmitter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeSubmitter.swift; path = "OST Tracker/Swift/AutoSync/LiveTimeSubmitter.swift"; sourceTree = "<group>"; };
-		B0F7445A94282241B11860BD /* AutoSyncEngineTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngineTests.swift; path = "OST TrackerTests/Swift/AutoSyncEngineTests.swift"; sourceTree = "<group>"; };
+		B37A789C55C8BC256ED59935 /* AutoSyncStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncStatus.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncStatus.swift"; sourceTree = "<group>"; };
 		B8904C060C056AB96E283D0F /* CoreDataStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = "OST Tracker/Swift/CoreDataStack.swift"; sourceTree = "<group>"; };
 		BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEditEntryViewController.swift; sourceTree = "<group>"; };
 		BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTBackend.swift; path = "OST Tracker/Swift/OSTBackend.swift"; sourceTree = "<group>"; };
-		CC37FCC6D34931884EF6A498 /* AutoSyncControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncControllerTests.swift; path = "OST TrackerTests/Swift/AutoSyncControllerTests.swift"; sourceTree = "<group>"; };
-		D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncController.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncController.swift"; sourceTree = "<group>"; };
-		D369E3734621F4E93ED41607 /* AutoSyncObserver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AutoSyncObserver.h; sourceTree = "<group>"; };
+		C0A1F1C0DE5704C7A11C3E01 /* ConnectivityCheckerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConnectivityCheckerTests.swift; path = "OST TrackerTests/Swift/ConnectivityCheckerTests.swift"; sourceTree = "<group>"; };
+		C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadView.swift; path = "OST Tracker/Swift/NumberPadView.swift"; sourceTree = "<group>"; };
+		CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadViewTests.swift; path = "OST TrackerTests/Swift/NumberPadViewTests.swift"; sourceTree = "<group>"; };
 		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
 		D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTBaseViewController.m; sourceTree = "<group>"; };
 		D50DFA9022786B5D002F5FBF /* OSTSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSlider.h; sourceTree = "<group>"; };
@@ -419,10 +422,12 @@
 		E584BEC7D7A12CC005D64BEC /* CoreDataStackTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStackTests.swift; path = "OST TrackerTests/Swift/CoreDataStackTests.swift"; sourceTree = "<group>"; };
 		E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTUtilitiesViewController.swift; sourceTree = "<group>"; };
 		EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HarnessSmokeTests.swift; path = "OST TrackerTests/Swift/HarnessSmokeTests.swift"; sourceTree = "<group>"; };
+		F2B33E8C7548A6170636BF25 /* AutoSyncObserver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AutoSyncObserver.h; sourceTree = "<group>"; };
 		F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIParsingTests.swift; path = "OST TrackerTests/Swift/APIParsingTests.swift"; sourceTree = "<group>"; };
 		F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEventSelectionViewController.swift; sourceTree = "<group>"; };
 		F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OSTSafeArea.h"; sourceTree = "<group>"; };
-		F7E5543390C6D18C53205C9D /* AutoSyncStatusTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncStatusTests.swift; path = "OST TrackerTests/Swift/AutoSyncStatusTests.swift"; sourceTree = "<group>"; };
+		FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeTests.swift; path = "OST TrackerTests/Swift/ThemeTests.swift"; sourceTree = "<group>"; };
+		FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimaryButtonTests.swift; path = "OST TrackerTests/Swift/PrimaryButtonTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,41 +459,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		033E71B2206001FD00CB9BD8 /* APNumberPad */ = {
-			isa = PBXGroup;
-			children = (
-				033E71B3206001FD00CB9BD8 /* Classes */,
-				033E71BD206001FD00CB9BD8 /* Assets */,
-			);
-			path = APNumberPad;
-			sourceTree = "<group>";
-		};
-		033E71B3206001FD00CB9BD8 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				033E71B4206001FD00CB9BD8 /* APNumberButton.m */,
-				033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */,
-				033E71B6206001FD00CB9BD8 /* NSBundle+APNumberPad.h */,
-				033E71B7206001FD00CB9BD8 /* APNumberPad.m */,
-				033E71B8206001FD00CB9BD8 /* APNumberPad.h */,
-				033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */,
-				033E71BA206001FD00CB9BD8 /* APNumberPadDefaultStyle.h */,
-				033E71BB206001FD00CB9BD8 /* APNumberButton.h */,
-				033E71BC206001FD00CB9BD8 /* APNumberPadStyle.h */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		033E71BD206001FD00CB9BD8 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */,
-				033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */,
-				033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
 		0DF73CC3B87086394F68562D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +467,18 @@
 				6A2F2D6B1EF1BD42007CA921 /* Security.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19F59D3151C20881599BF039 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */,
+				9DA22B20B858EF2CA668A00B /* AppearanceController.swift */,
+				A2C1A7214138790605CD98F9 /* PrimaryButton.swift */,
+				98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */,
+				49F45D2979B93934E473811C /* DisclosureSelectField.swift */,
+			);
+			name = DesignSystem;
 			sourceTree = "<group>";
 		};
 		2642D7360B1335B5908AFA8F /* Swift */ = {
@@ -512,9 +494,16 @@
 				16BAED92F7B8A3B859B03965 /* LoginViewController.swift */,
 				69B24303991152304B820254 /* OSTAuthBridge.swift */,
 				BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */,
-				11F1BAE4B6BD10048636F490 /* OSTReachability.swift */,
 				55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */,
-				366D1B744A09CBB91967E35A /* AutoSync */,
+				C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */,
+				3FC13D2600034E4CB79A1E5F /* BibEntry.swift */,
+				19F59D3151C20881599BF039 /* DesignSystem */,
+				09FC0CF1F10CBC3DB63BB1B9 /* AutoSyncController.swift */,
+				9C9A8496472A25472B5BFAA9 /* AutoSyncEngine.swift */,
+				564AAA7E0E0AC24E4B72A026 /* AutoSyncScheduler.swift */,
+				B37A789C55C8BC256ED59935 /* AutoSyncStatus.swift */,
+				75650EB253806082028F83ED /* LiveTimeSubmitter.swift */,
+				94B98FF89C88B382E3740B60 /* OSTToast.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -530,28 +519,23 @@
 				25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */,
 				9E2CE940B9754C16E1809394 /* LiveAPITests.swift */,
 				7E637BB81DCDE0328194710B /* LoginControllerTests.swift */,
+				C0A1F1C0DE5704C7A11C3E01 /* ConnectivityCheckerTests.swift */,
 				42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */,
 				30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */,
-				F7E5543390C6D18C53205C9D /* AutoSyncStatusTests.swift */,
-				B0F7445A94282241B11860BD /* AutoSyncEngineTests.swift */,
-				5A947E854625AA11C16D5C1F /* LiveTimeSubmitterTests.swift */,
-				CC37FCC6D34931884EF6A498 /* AutoSyncControllerTests.swift */,
+				CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */,
+				1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */,
+				FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */,
+				354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */,
+				FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */,
+				79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */,
+				6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */,
+				97109EE77CF2B1635EDCF582 /* AutoSyncControllerTests.swift */,
+				1C61394C139438D2AB7867F7 /* AutoSyncEngineTests.swift */,
+				1BAF491545E884957EE42DE7 /* AutoSyncStatusTests.swift */,
+				0239AE36BE1BD4D20095A120 /* LiveTimeSubmitterTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
-		};
-		366D1B744A09CBB91967E35A /* AutoSync */ = {
-			isa = PBXGroup;
-			children = (
-				3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */,
-				2AB852C200761E0B7347D354 /* AutoSyncScheduler.swift */,
-				9E94C7F62FB900C9ECD59945 /* AutoSyncEngine.swift */,
-				AEDEB320285D7D1EC890CB4E /* LiveTimeSubmitter.swift */,
-				D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */,
-				15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */,
-			);
-			name = AutoSync;
-			sourceTree = "<group>";
 		};
 		6A2F2D6E1EF1C46B007CA921 /* SessionManager */ = {
 			isa = PBXGroup;
@@ -584,7 +568,6 @@
 			isa = PBXGroup;
 			children = (
 				6A41AE021EF8B58300C9F834 /* TableViewCells */,
-				6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */,
 				6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */,
 				6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */,
 				6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */,
@@ -706,7 +689,6 @@
 				6A549E471EEF865100783F80 /* DataBase */,
 				6AA6E9D81EF0E7D70061EEB0 /* Model */,
 				6A549E491EEF865100783F80 /* ViewControllers */,
-				033E71B2206001FD00CB9BD8 /* APNumberPad */,
 				D524F05921A44391006DF352 /* CheckButton */,
 				D52BBFD422852B580035FE07 /* Runner badge */,
 				D50DFA8F22786B3D002F5FBF /* Slider */,
@@ -805,7 +787,7 @@
 		D5C5BC58217E1CC30071D6CF /* SyncManager */ = {
 			isa = PBXGroup;
 			children = (
-				D369E3734621F4E93ED41607 /* AutoSyncObserver.h */,
+				F2B33E8C7548A6170636BF25 /* AutoSyncObserver.h */,
 			);
 			path = SyncManager;
 			sourceTree = "<group>";
@@ -932,9 +914,7 @@
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
 				D52BBFD0227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
-				033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
-				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
 				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
@@ -945,7 +925,6 @@
 				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9D2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
-				033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
 				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0E2190AE5800454448 /* delete.wav in Resources */,
@@ -954,7 +933,6 @@
 				D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */,
 				D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */,
 				D52BBFD622852B6E0035FE07 /* OSTRunnerBadge.xib in Resources */,
-				033E71C9206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -965,9 +943,7 @@
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				D52BBFD1227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
-				033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
-				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
 				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
@@ -978,7 +954,6 @@
 				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9E2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
-				033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0F2190AE5800454448 /* delete.wav in Resources */,
@@ -987,7 +962,6 @@
 				D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */,
 				D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */,
 				D52BBFD722852B6E0035FE07 /* OSTRunnerBadge.xib in Resources */,
-				033E71CA206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,11 +1001,9 @@
 				6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
-				033E71C5206001FE00CB9BD8 /* APNumberPad.m in Sources */,
 				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
-				033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA12298186100880465 /* UILabel+Extension.m in Sources */,
@@ -1041,7 +1013,6 @@
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
 				6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
-				033E71C3206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */,
 				6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EA1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
@@ -1052,7 +1023,6 @@
 				6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */,
 				6A11A0791EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
 				6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */,
-				033E71C7206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */,
 				6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				D52BBFDE22852BD30035FE07 /* OSTRunnerBadgeViewModel.m in Sources */,
 				6A41ADFE1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,
@@ -1084,16 +1054,22 @@
 				532D5B3FE4BD1FB322981FF6 /* OSTEditEntryViewController.swift in Sources */,
 				E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */,
 				BFA683CE97A77D461E74E7CA /* OSTBackend.swift in Sources */,
-				6AB4A6C295D91E387E2ED658 /* OSTReachability.swift in Sources */,
 				B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */,
 				0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */,
 				C99F414EAB739A70BA4BDADC /* MagicalRecordShim.swift in Sources */,
-				7798A47732EB9FCC217FA997 /* AutoSyncStatus.swift in Sources */,
-				0F9B083BD28E4F013F81593A /* AutoSyncScheduler.swift in Sources */,
-				B6CAF806BCAB59B40FA46C27 /* AutoSyncEngine.swift in Sources */,
-				4485A54D2239B31DFA467E51 /* LiveTimeSubmitter.swift in Sources */,
-				2B651D5CB30312A95CAAF677 /* AutoSyncController.swift in Sources */,
-				79034041655DA33AFA0592FC /* OSTToast.swift in Sources */,
+				4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */,
+				413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */,
+				2F5AB1F5E6634215E9CE16EA /* Theme.swift in Sources */,
+				18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */,
+				C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */,
+				B8E3F8114ACBCAE49A256BA9 /* StyledTextField.swift in Sources */,
+				23815C2FF2173716D7561366 /* DisclosureSelectField.swift in Sources */,
+				537E4C4A45D1C44D9845CCC2 /* AutoSyncController.swift in Sources */,
+				14D8FC954F66DD98DB2706DB /* AutoSyncEngine.swift in Sources */,
+				A86FB32FA89463E972CCF710 /* AutoSyncScheduler.swift in Sources */,
+				1F3DE375295263E939C67E6C /* AutoSyncStatus.swift in Sources */,
+				3422F40C2DCA7277EFE17803 /* LiveTimeSubmitter.swift in Sources */,
+				4583A01E115F9C7F5806F903 /* OSTToast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1105,11 +1081,9 @@
 				6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
-				033E71C6206001FE00CB9BD8 /* APNumberPad.m in Sources */,
 				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
-				033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA22298186100880465 /* UILabel+Extension.m in Sources */,
@@ -1119,7 +1093,6 @@
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
 				6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
-				033E71C4206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */,
 				6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EB1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
@@ -1130,7 +1103,6 @@
 				6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */,
 				6A11A07A1EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
-				033E71C8206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */,
 				6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				D52BBFDF22852BD30035FE07 /* OSTRunnerBadgeViewModel.m in Sources */,
 				6A41ADFF1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,
@@ -1162,16 +1134,22 @@
 				C6401B6575B5EC2BA6DF5564 /* OSTEditEntryViewController.swift in Sources */,
 				9C7CA330A1B919DC81EA2721 /* OSTAuthBridge.swift in Sources */,
 				3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */,
-				6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */,
 				567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */,
 				471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */,
 				CBE1B03D1D5DAA79E7736BCE /* MagicalRecordShim.swift in Sources */,
-				2555576285D9B872FF42B077 /* AutoSyncStatus.swift in Sources */,
-				7922FAB16C1A315313EB9E86 /* AutoSyncScheduler.swift in Sources */,
-				6644D3AAE50D85A94C2D7E45 /* AutoSyncEngine.swift in Sources */,
-				FEFBCD27972C4B7E6C715034 /* LiveTimeSubmitter.swift in Sources */,
-				10EB1E547C106BA0FAF6B410 /* AutoSyncController.swift in Sources */,
-				0E9178CF59ADF2CC7247CB37 /* OSTToast.swift in Sources */,
+				642A44BC6A446EC59550E028 /* NumberPadView.swift in Sources */,
+				6D70E4F0EF0645CC8298D887 /* BibEntry.swift in Sources */,
+				29304C5004AE7D8B6CFAE5ED /* Theme.swift in Sources */,
+				22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */,
+				BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */,
+				99317695D8197AFD8F74757A /* StyledTextField.swift in Sources */,
+				B90CC0EE71010BB4DDE14B23 /* DisclosureSelectField.swift in Sources */,
+				3743D11DFDCB486FB6D137B4 /* AutoSyncController.swift in Sources */,
+				EC8604BA0DB2CD43FB766087 /* AutoSyncEngine.swift in Sources */,
+				F1D8797CF38ADFC5BDE80133 /* AutoSyncScheduler.swift in Sources */,
+				891D33B74B4473405882FE2A /* AutoSyncStatus.swift in Sources */,
+				AEDD379833F10DBA7DDE346D /* LiveTimeSubmitter.swift in Sources */,
+				ADB809D8532707324EAB81E1 /* OSTToast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,12 +1167,20 @@
 				2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */,
 				65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */,
 				8BE0411983BC48E1D1C14C5D /* LoginControllerTests.swift in Sources */,
+				C0A1F1C0DE5704C7A11C3E02 /* ConnectivityCheckerTests.swift in Sources */,
 				276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */,
 				61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */,
-				8CF9BAE07760F98277BEC24C /* AutoSyncStatusTests.swift in Sources */,
-				13FB6B36B5859F37C82D1D9F /* AutoSyncEngineTests.swift in Sources */,
-				1CF7D9CAD45B10AD2CF4B2B0 /* LiveTimeSubmitterTests.swift in Sources */,
-				013846B2926BB5BB40AC283F /* AutoSyncControllerTests.swift in Sources */,
+				08E4F3B8EF128D14B019FA22 /* NumberPadViewTests.swift in Sources */,
+				67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */,
+				678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */,
+				64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */,
+				3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */,
+				FBC482C7F2B2010C1EF9C35D /* StyledTextFieldTests.swift in Sources */,
+				597C364A72D083E3D40B1FA5 /* DisclosureSelectFieldTests.swift in Sources */,
+				3C73BBB9379EBBC93814C0E6 /* AutoSyncControllerTests.swift in Sources */,
+				8CE5D7BA99830BF5279EBA04 /* AutoSyncEngineTests.swift in Sources */,
+				FDE688F1AB313BD889DCEAE1 /* AutoSyncStatusTests.swift in Sources */,
+				B5D52AB8B629CD420DB19243 /* LiveTimeSubmitterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

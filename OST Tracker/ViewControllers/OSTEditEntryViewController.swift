@@ -4,11 +4,11 @@
 //
 //  Migrated from Objective-C (Phase 2.5). Edit/create-entry screen shared by
 //  Review/Sync and the runner tracker. Keeps the XIB (@objc) and the Obj-C
-//  APNumberPad / CustomUIDatePicker / OSTSound / MagicalRecord via bridging.
+//  CustomUIDatePicker / OSTSound / MagicalRecord via bridging.
 //
 //  Fixes folded in during the port:
 //   - IQKeyboardManager `enableAutoToolbar` was YES, which floated a stray Done
-//     bar over the APNumberPad ("weird" toolbar) — turned off (the time field has
+//     bar over the number pad ("weird" toolbar) — turned off (the time field has
 //     its own Done/Cancel accessory; the bib field uses the number pad).
 //   - Dropped the dead iPhone-X/XR-only +7pt nudge.
 //   - `lblWithPacer` is declared but NOT wired in the XIB (silently nil in Obj-C) —
@@ -20,7 +20,7 @@ import UIKit
 import CoreData
 
 @objc(OSTEditEntryViewController)
-class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
+class OSTEditEntryViewController: UIViewController {
 
     // MARK: - Public (set by Review/Sync + tracker)
     @objc var creatingNew = false
@@ -83,9 +83,8 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
             btnUpdate.setTitle("Create new entry", for: .normal)
         }
 
-        let numberPad = APNumberPad(delegate: self)
-        numberPad.leftFunctionButton.setTitle("*", for: .normal)
-        numberPad.leftFunctionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        let numberPad = NumberPadView()
+        numberPad.attach(to: txtBibNumber)
         txtBibNumber.inputView = numberPad
 
         pacerAndAidView.height = 70
@@ -155,9 +154,18 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
 
     @IBAction func onUpdate(_ sender: Any) {
         if creatingNew {
+            if !BibEntry.isRecordable(txtBibNumber.text) {
+                let alert = UIAlertController(title: "Bib Required",
+                                              message: "Enter a bib number to create a new entry.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
+            }
+
             guard let source = entry, let newEntry = EntryModel.mr_createEntity() as? EntryModel else { return }
 
-            newEntry.bibNumber = (txtBibNumber.text?.isEmpty ?? true) ? "-1" : txtBibNumber.text
+            newEntry.bibNumber = txtBibNumber.text
             newEntry.bitKey = source.bitKey
             newEntry.splitId = source.splitId
             newEntry.courseName = source.courseName
@@ -166,7 +174,6 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
             newEntry.combinedCourseId = source.combinedCourseId
 
             onDoneSelectedTime(nil)
-            if !(txtBibNumber.text?.isEmpty ?? true) { newEntry.bibNumber = txtBibNumber.text }
             populateTimeAndFlags(newEntry)
             newEntry.source = source.source
 
@@ -225,13 +232,6 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
         txtTime.text = String(format: "%02ld:%02ld:%02ld", components.hour ?? 0, components.minute ?? 0, components.second ?? 0)
 
         onBibNumberChanged(nil)
-    }
-
-    // MARK: - APNumberPadDelegate
-
-    func numberPad(_ numberPad: APNumberPad, functionButtonAction functionButton: UIButton,
-                   textInput: UIResponder & UITextInput) {
-        textInput.insertText("*")
     }
 
     // MARK: - Helpers

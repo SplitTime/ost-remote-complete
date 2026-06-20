@@ -7,7 +7,7 @@
 //
 //  No longer an AFHTTPSessionManager — all requests now run through the Swift
 //  APIClient/OSTBackend. This class is reduced to the shared auth-token holder
-//  (set after login, read by the submit) plus native reachability.
+//  (set after login, read by the submit).
 //
 
 #import <Foundation/Foundation.h>
@@ -42,9 +42,7 @@ typedef void (^OSTErrorBlock)(NSError* _Nullable error);
 @property (nonatomic,strong) NSString * _Nullable serviceURL;
 /// Raw bearer token from the last login; the submit reads it via the request.
 @property (nonatomic,copy) NSString * _Nullable authToken;
-@property (nonatomic,readonly) BOOL isReachable;
 
 - (void)addTokenToHeader: (NSString*_Nullable) token;
-- (void)startMonitoring;
 
 @end

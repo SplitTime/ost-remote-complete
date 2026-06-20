@@ -48,7 +48,6 @@
     if (self.networkManager == nil)
     {
         self.networkManager = [[OSTNetworkManager alloc] init];
-        [self.networkManager startMonitoring];
     }
     return self.networkManager;
 }
@@ -59,9 +58,8 @@
     [self initializeCoredata];
 
     // Force lazy creation of the auto-sync controller so it begins observing
-    // Core Data saves. Runs unconditionally (incl. the unit-test host) now that
-    // there's no reachability probe; AutoSyncController itself skips any live
-    // network/Core Data submit under XCTest, so launch-time creation is safe.
+    // Core Data saves.
+    // AutoSyncController.shared starts with autoSyncEnabled = false (UserDefaults default), so no sync fires at launch.
     (void)[AutoSyncController shared];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -78,7 +76,8 @@
     }
     
     [self.window makeKeyAndVisible];
-    
+    [[AppearanceController shared] apply];
+
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
 
     return YES;
