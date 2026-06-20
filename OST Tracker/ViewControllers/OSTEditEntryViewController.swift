@@ -154,9 +154,18 @@ class OSTEditEntryViewController: UIViewController {
 
     @IBAction func onUpdate(_ sender: Any) {
         if creatingNew {
+            if !BibEntry.isRecordable(txtBibNumber.text) {
+                let alert = UIAlertController(title: "Bib Required",
+                                              message: "Enter a bib number to create a new entry.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
+                return
+            }
+
             guard let source = entry, let newEntry = EntryModel.mr_createEntity() as? EntryModel else { return }
 
-            newEntry.bibNumber = (txtBibNumber.text?.isEmpty ?? true) ? "-1" : txtBibNumber.text
+            newEntry.bibNumber = txtBibNumber.text
             newEntry.bitKey = source.bitKey
             newEntry.splitId = source.splitId
             newEntry.courseName = source.courseName
@@ -165,7 +174,6 @@ class OSTEditEntryViewController: UIViewController {
             newEntry.combinedCourseId = source.combinedCourseId
 
             onDoneSelectedTime(nil)
-            if !(txtBibNumber.text?.isEmpty ?? true) { newEntry.bibNumber = txtBibNumber.text }
             populateTimeAndFlags(newEntry)
             newEntry.source = source.source
 

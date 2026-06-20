@@ -280,17 +280,18 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         txtBibNumber.removeObserver(self, forKeyPath: "text")
         UIDevice.current.playInputClick()
 
+        if !BibEntry.isRecordable(txtBibNumber.text) {
+            OSTSound.shared().play("ost-remote-bib-not-found")
+            txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
+            return
+        }
+
         lblOutTimeBadge.isHidden = true
         lblInTimeBadge.isHidden = true
         guard let course = CurrentCourse.getCurrentCourse(),
               let entry = EntryModel.mr_createEntity() as? EntryModel else { return }
 
-        if txtBibNumber.text?.isEmpty ?? true {
-            entry.bibNumber = "-1"
-            racer = nil
-        } else {
-            entry.bibNumber = txtBibNumber.text
-        }
+        entry.bibNumber = txtBibNumber.text
         entry.bitKey = ((sender as? UIButton) == btnLeft) ? leftBitKey : rightBitKey
 
         let tzOffset = TimeZone.current.secondsFromGMT() / 60 / 60
