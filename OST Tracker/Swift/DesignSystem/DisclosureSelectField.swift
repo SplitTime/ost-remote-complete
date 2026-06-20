@@ -12,6 +12,7 @@ final class DisclosureSelectField: UIView {
     var onSelect: ((String) -> Void)?
 
     private let placeholder: String
+    private let header = UIControl()
     private let valueLabel = UILabel()
     private let chevron = UILabel()
     private let optionsStack = UIStackView()
@@ -48,8 +49,15 @@ final class DisclosureSelectField: UIView {
         updateExpansion()
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if #available(iOS 13.0, *),
+           traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            header.layer.borderColor = Theme.separator.cgColor
+        }
+    }
+
     // MARK: View construction
-    private let header = UIControl()
 
     private func buildHeader(label: String) {
         translatesAutoresizingMaskIntoConstraints = false

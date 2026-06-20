@@ -32,7 +32,6 @@ final class LoginViewController: UIViewController {
     private let titleLabel: UILabel = {
         let l = UILabel()
         l.text = "OST Remote"
-        l.font = .systemFont(ofSize: 30, weight: .bold)
         l.textAlignment = .center
         return l
     }()

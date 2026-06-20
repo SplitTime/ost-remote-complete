@@ -20,5 +20,6 @@ final class ThemeTests: XCTestCase {
         XCTAssertEqual(Theme.Metric.cornerRadius, 10)
         XCTAssertEqual(Theme.Metric.fieldHeight, 48)
         XCTAssertEqual(Theme.Metric.buttonHeight, 52)
+        XCTAssertEqual(Theme.Metric.horizontalInset, 28)
     }
 }

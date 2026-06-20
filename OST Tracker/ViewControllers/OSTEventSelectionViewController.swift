@@ -129,6 +129,8 @@ class OSTEventSelectionViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Theme.background
 
+        // In changeStation mode "Start Tracking" is intentionally hidden until the user
+        // selects a station — a deliberate UX change from the old screen, which showed it immediately.
         nextButton.alpha = 0
         stationField.isHidden = true
         nextButton.addTarget(self, action: #selector(onNext(_:)), for: .touchUpInside)
@@ -197,7 +199,9 @@ class OSTEventSelectionViewController: UIViewController {
     // MARK: - Field visibility
 
     private func showSelectFields() {
-        [eventField, stationField, nextButton].forEach { $0.isHidden = false }
+        eventField.isHidden = false
+        nextButton.isHidden = false
+        stationField.isHidden = (selectedEvent == nil)
         progressLabel.isHidden = true
         progressBar.isHidden = true
         activityIndicator.stopAnimating()
