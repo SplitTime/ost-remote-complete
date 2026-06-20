@@ -21,20 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B4206001FD00CB9BD8 /* APNumberButton.m */; };
-		033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B4206001FD00CB9BD8 /* APNumberButton.m */; };
-		033E71C3206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */; };
-		033E71C4206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */; };
-		033E71C5206001FE00CB9BD8 /* APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B7206001FD00CB9BD8 /* APNumberPad.m */; };
-		033E71C6206001FE00CB9BD8 /* APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B7206001FD00CB9BD8 /* APNumberPad.m */; };
-		033E71C7206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */; };
-		033E71C8206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */; };
-		033E71C9206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */; };
-		033E71CA206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */; };
-		033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */; };
-		033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */; };
-		033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
-		033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
 		08E4F3B8EF128D14B019FA22 /* NumberPadViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */; };
 		0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
 		0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
@@ -247,18 +233,6 @@
 
 /* Begin PBXFileReference section */
 		02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SubmitPayloadGoldenTests.swift; path = "OST TrackerTests/Swift/SubmitPayloadGoldenTests.swift"; sourceTree = "<group>"; };
-		033E71B4206001FD00CB9BD8 /* APNumberButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNumberButton.m; sourceTree = "<group>"; };
-		033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNumberPadDefaultStyle.m; sourceTree = "<group>"; };
-		033E71B6206001FD00CB9BD8 /* NSBundle+APNumberPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+APNumberPad.h"; sourceTree = "<group>"; };
-		033E71B7206001FD00CB9BD8 /* APNumberPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APNumberPad.m; sourceTree = "<group>"; };
-		033E71B8206001FD00CB9BD8 /* APNumberPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberPad.h; sourceTree = "<group>"; };
-		033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+APNumberPad.m"; sourceTree = "<group>"; };
-		033E71BA206001FD00CB9BD8 /* APNumberPadDefaultStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberPadDefaultStyle.h; sourceTree = "<group>"; };
-		033E71BB206001FD00CB9BD8 /* APNumberButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberButton.h; sourceTree = "<group>"; };
-		033E71BC206001FD00CB9BD8 /* APNumberPadStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APNumberPadStyle.h; sourceTree = "<group>"; };
-		033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@2x.png"; sourceTree = "<group>"; };
-		033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apnumberpad_backspace_icon.png; sourceTree = "<group>"; };
-		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
 		0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OSTSafeArea.m"; sourceTree = "<group>"; };
 		0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTSpinner.swift"; sourceTree = "<group>"; };
 		11F1BAE4B6BD10048636F490 /* OSTReachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTReachability.swift; path = "OST Tracker/Swift/OSTReachability.swift"; sourceTree = "<group>"; };
@@ -436,41 +410,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		033E71B2206001FD00CB9BD8 /* APNumberPad */ = {
-			isa = PBXGroup;
-			children = (
-				033E71B3206001FD00CB9BD8 /* Classes */,
-				033E71BD206001FD00CB9BD8 /* Assets */,
-			);
-			path = APNumberPad;
-			sourceTree = "<group>";
-		};
-		033E71B3206001FD00CB9BD8 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				033E71B4206001FD00CB9BD8 /* APNumberButton.m */,
-				033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */,
-				033E71B6206001FD00CB9BD8 /* NSBundle+APNumberPad.h */,
-				033E71B7206001FD00CB9BD8 /* APNumberPad.m */,
-				033E71B8206001FD00CB9BD8 /* APNumberPad.h */,
-				033E71B9206001FD00CB9BD8 /* NSBundle+APNumberPad.m */,
-				033E71BA206001FD00CB9BD8 /* APNumberPadDefaultStyle.h */,
-				033E71BB206001FD00CB9BD8 /* APNumberButton.h */,
-				033E71BC206001FD00CB9BD8 /* APNumberPadStyle.h */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		033E71BD206001FD00CB9BD8 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */,
-				033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */,
-				033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
 		0DF73CC3B87086394F68562D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,7 +611,6 @@
 				6A549E471EEF865100783F80 /* DataBase */,
 				6AA6E9D81EF0E7D70061EEB0 /* Model */,
 				6A549E491EEF865100783F80 /* ViewControllers */,
-				033E71B2206001FD00CB9BD8 /* APNumberPad */,
 				D524F05921A44391006DF352 /* CheckButton */,
 				D52BBFD422852B580035FE07 /* Runner badge */,
 				D50DFA8F22786B3D002F5FBF /* Slider */,
@@ -899,7 +837,6 @@
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
 				D52BBFD0227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
-				033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */,
 				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
@@ -912,7 +849,6 @@
 				6A11A0651EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9D2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
-				033E71CB206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
 				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0E2190AE5800454448 /* delete.wav in Resources */,
@@ -921,7 +857,6 @@
 				D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */,
 				D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */,
 				D52BBFD622852B6E0035FE07 /* OSTRunnerBadge.xib in Resources */,
-				033E71C9206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -932,7 +867,6 @@
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				D52BBFD1227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
-				033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */,
 				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
@@ -945,7 +879,6 @@
 				6A11A0661EF2CB4000D6D2CA /* OSTEditEntryViewController.xib in Resources */,
 				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9E2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
-				033E71CC206001FE00CB9BD8 /* apnumberpad_backspace_icon.png in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
 				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0F2190AE5800454448 /* delete.wav in Resources */,
@@ -954,7 +887,6 @@
 				D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */,
 				D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */,
 				D52BBFD722852B6E0035FE07 /* OSTRunnerBadge.xib in Resources */,
-				033E71CA206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -994,11 +926,9 @@
 				6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
-				033E71C5206001FE00CB9BD8 /* APNumberPad.m in Sources */,
 				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
-				033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA12298186100880465 /* UILabel+Extension.m in Sources */,
@@ -1008,7 +938,6 @@
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
 				6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
-				033E71C3206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */,
 				6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EA1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
@@ -1020,7 +949,6 @@
 				6A11A0791EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
 				D5C5BC5B217E1CE70071D6CF /* OSTSyncManager.m in Sources */,
 				6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */,
-				033E71C7206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */,
 				6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				D52BBFDE22852BD30035FE07 /* OSTRunnerBadgeViewModel.m in Sources */,
 				6A41ADFE1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,
@@ -1068,11 +996,9 @@
 				6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
-				033E71C6206001FE00CB9BD8 /* APNumberPad.m in Sources */,
 				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
-				033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA22298186100880465 /* UILabel+Extension.m in Sources */,
@@ -1082,7 +1008,6 @@
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
 				6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
-				033E71C4206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */,
 				6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EB1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
@@ -1094,7 +1019,6 @@
 				6A11A07A1EF3809B00D6D2CA /* OSTNetworkManager+Entries.m in Sources */,
 				D5C5BC5C217E1CE70071D6CF /* OSTSyncManager.m in Sources */,
 				6AEFFC0D1EEF83DA009EEE21 /* AppDelegate.m in Sources */,
-				033E71C8206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */,
 				6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				D52BBFDF22852BD30035FE07 /* OSTRunnerBadgeViewModel.m in Sources */,
 				6A41ADFF1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,

@@ -4,11 +4,11 @@
 //
 //  Migrated from Objective-C (Phase 2.5). Edit/create-entry screen shared by
 //  Review/Sync and the runner tracker. Keeps the XIB (@objc) and the Obj-C
-//  APNumberPad / CustomUIDatePicker / OSTSound / MagicalRecord via bridging.
+//  CustomUIDatePicker / OSTSound / MagicalRecord via bridging.
 //
 //  Fixes folded in during the port:
 //   - IQKeyboardManager `enableAutoToolbar` was YES, which floated a stray Done
-//     bar over the APNumberPad ("weird" toolbar) — turned off (the time field has
+//     bar over the number pad ("weird" toolbar) — turned off (the time field has
 //     its own Done/Cancel accessory; the bib field uses the number pad).
 //   - Dropped the dead iPhone-X/XR-only +7pt nudge.
 //   - `lblWithPacer` is declared but NOT wired in the XIB (silently nil in Obj-C) —

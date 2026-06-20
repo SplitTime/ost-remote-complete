@@ -3,13 +3,14 @@
 //  OST Tracker
 //
 //  Migrated from Objective-C (Phase 2). The app's core bib-entry screen. Keeps the
-//  XIB (@objc), the Obj-C APNumberPad, OSTSound, OSTRunnerBadge and MagicalRecord
-//  via bridging, and the UIView+Additions frame helpers (.top/.width/.centerX…).
+//  XIB (@objc), OSTSound, OSTRunnerBadge and MagicalRecord via bridging, and the
+//  UIView+Additions frame helpers (.top/.width/.centerX…). The native NumberPadView
+//  is embedded directly (no bridging needed).
 //  Dropped the dead iPhone-5/6P/X/XR exact-height layout hacks (none fire on the
 //  iPhone 7 / iPad mini fleet or modern sims); the iPad block + the generic
 //  safe-area shift are preserved.
 //
-//  The bib field is watched via KVO on `text` because APNumberPad mutates the text
+//  The bib field is watched via KVO on `text` because NumberPadView mutates the text
 //  programmatically (a target/action editingChanged event would not fire).
 //
 

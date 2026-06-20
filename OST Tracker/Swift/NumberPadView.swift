@@ -1,6 +1,6 @@
 import UIKit
 
-/// All-Swift replacement for the retired Obj-C `APNumberPad`.
+/// Native Swift number pad view that replaces the retired Obj-C keypad library.
 ///
 /// Renders a native-styled keypad: digits 0–9 plus a backspace key, with a
 /// blank bottom-left cell exactly like the system `.numberPad`. Edits its
@@ -29,7 +29,7 @@ final class NumberPadView: UIView {
         buildGrid()
     }
 
-    /// Connect the pad to a text field (mirrors APNumberPad's `setTextField:`).
+    /// Connect the pad to a text field so it can edit its contents.
     func attach(to textField: UITextField) {
         self.textField = textField
     }

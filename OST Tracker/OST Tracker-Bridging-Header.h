@@ -30,7 +30,6 @@
 #import "CrossCheckEntriesModel.h"
 #import "OSTNetworkManager+Entries.h"
 // Live Entry / runner tracker (Phase 2) Swift screen dependencies
-#import "APNumberPad.h"
 #import "OSTSound.h"
 #import "OSTRunnerBadge.h"
 #import "CustomUIDatePicker.h"
