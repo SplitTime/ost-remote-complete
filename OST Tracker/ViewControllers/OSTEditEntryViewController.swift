@@ -20,7 +20,7 @@ import UIKit
 import CoreData
 
 @objc(OSTEditEntryViewController)
-class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
+class OSTEditEntryViewController: UIViewController {
 
     // MARK: - Public (set by Review/Sync + tracker)
     @objc var creatingNew = false
@@ -83,9 +83,8 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
             btnUpdate.setTitle("Create new entry", for: .normal)
         }
 
-        let numberPad = APNumberPad(delegate: self)
-        numberPad.leftFunctionButton.setTitle("*", for: .normal)
-        numberPad.leftFunctionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        let numberPad = NumberPadView()
+        numberPad.attach(to: txtBibNumber)
         txtBibNumber.inputView = numberPad
 
         pacerAndAidView.height = 70
@@ -225,13 +224,6 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
         txtTime.text = String(format: "%02ld:%02ld:%02ld", components.hour ?? 0, components.minute ?? 0, components.second ?? 0)
 
         onBibNumberChanged(nil)
-    }
-
-    // MARK: - APNumberPadDelegate
-
-    func numberPad(_ numberPad: APNumberPad, functionButtonAction functionButton: UIButton,
-                   textInput: UIResponder & UITextInput) {
-        textInput.insertText("*")
     }
 
     // MARK: - Helpers
