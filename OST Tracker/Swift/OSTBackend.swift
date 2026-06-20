@@ -77,6 +77,18 @@ import Foundation
         }.resume()
     }
 
+    // MARK: - Pre-logout connectivity check
+
+    /// Active connectivity + credential check used before logout. Runs the same
+    /// `autoLogin` (POST `auth` with stored credentials) the read endpoints use.
+    /// `nil` == reachable and credentials valid (200); non-nil == blocked.
+    /// Completion is delivered on the main queue.
+    @objc func verifyConnection(completion: @escaping (Error?) -> Void) {
+        autoLogin { error in
+            DispatchQueue.main.async { completion(error) }
+        }
+    }
+
     // MARK: - Plumbing
 
     private func request(_ path: String, completion: @escaping (Any?, Error?) -> Void) {
