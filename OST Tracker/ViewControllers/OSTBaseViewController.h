@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OSTSyncManager.h"
+#import "AutoSyncObserver.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OSTBaseViewController : UIViewController<OSTSyncManagerDelegate>
+@interface OSTBaseViewController : UIViewController<AutoSyncObserver>
 
 @property (nonatomic,weak) IBOutlet UIButton *menuButton;
 @property (nonatomic,weak) IBOutlet UILabel *badgeLabel;

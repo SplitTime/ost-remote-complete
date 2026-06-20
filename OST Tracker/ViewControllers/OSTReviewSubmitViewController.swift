@@ -3,7 +3,7 @@
 //  OST Tracker
 //
 //  Migrated from Objective-C (Phase 2). Keeps the existing XIB via
-//  @objc(OSTReviewSubmitViewController). Still uses the Obj-C sync manager,
+//  @objc(OSTReviewSubmitViewController). Uses AutoSyncController,
 //  MagicalRecord and IQDropDownTextField via bridging. OHAlertView -> native
 //  UIAlertController. The dead `onSubmit_old:` / `submitEntries:` path (not wired
 //  in the XIB) and the iPhone-X/XR-only +7pt nudge (never fires on the iOS-12
@@ -84,7 +84,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         lblBadge.layer.cornerRadius = lblBadge.frame.width / 2
         lblBadge.clipsToBounds = true
 
-        OSTSyncManager.shared().showToastOnCompletion = true
+        AutoSyncController.shared.showToastOnCompletion = true
         updateSyncButtonState()
     }
 
@@ -97,7 +97,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        OSTSyncManager.shared().showToastOnCompletion = true
+        AutoSyncController.shared.showToastOnCompletion = true
     }
 
     // The XIB lays the bottom action bar (Sync button + export/sync icons + badge
@@ -208,7 +208,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         lblSyncing.isHidden = false
         progressBar.isHidden = false
 
-        OSTSyncManager.shared().showToastOnCompletion = false
+        AutoSyncController.shared.showToastOnCompletion = false
     }
 
     private func showFinishLoadingValues() {
@@ -223,7 +223,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     }
 
     private func updateSyncButtonState() {
-        let isSyncing = OSTSyncManager.shared().isSyncing
+        let isSyncing = AutoSyncController.shared.isSyncing
         btnSync.isEnabled = !isSyncing
         btnSync.alpha = isSyncing ? 0.7 : 1
         syncIndicator.isHidden = !isSyncing
@@ -241,24 +241,24 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     // MARK: - Sync manager delegate
 
-    override func syncManagerDidStartSynchronization(_ manager: OSTSyncManager) {
+    override func syncManagerDidStartSynchronization(_ manager: AutoSyncController) {
         super.syncManagerDidStartSynchronization(manager)
         updateSyncButtonState()
     }
 
-    override func syncManager(_ manager: OSTSyncManager, progress: CGFloat) {
+    override func syncManager(_ manager: AutoSyncController, progress: CGFloat) {
         super.syncManager(manager, progress: progress)
         progressBar.progress = Float(progress)
     }
 
-    override func syncManagerDidFinishSynchronization(_ manager: OSTSyncManager) {
+    override func syncManagerDidFinishSynchronization(_ manager: AutoSyncController) {
         super.syncManagerDidFinishSynchronization(manager)
         updateSyncButtonState()
         if loadingView.superview != nil { showFinishLoadingValues() }
         loadData()
     }
 
-    override func syncManager(_ manager: OSTSyncManager, didFinishSynchronizationWithErrors errors: [Error], alternateServer: Bool) {
+    override func syncManager(_ manager: AutoSyncController, didFinishSynchronizationWithErrors errors: [Error], alternateServer: Bool) {
         super.syncManager(manager, didFinishSynchronizationWithErrors: errors, alternateServer: alternateServer)
         updateSyncButtonState()
 
@@ -309,7 +309,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             return
         }
 
-        OSTSyncManager.shared().syncEntries(toSubmit)
+        AutoSyncController.shared.syncEntries(toSubmit)
         showLoadingScreen()
         showLoadingValues()
     }
@@ -380,7 +380,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let entry = entries[indexPath.section][indexPath.row]
 
-        if OSTSyncManager.shared().isSyncingEntry(entry) {
+        if AutoSyncController.shared.isSyncingEntry(entry) {
             ostPresentAlert(title: "Unable to edit time", message: "Time is been synced.")
             return
         }

@@ -1,6 +1,6 @@
 import Foundation
 
-/// Reproduces `OSTSyncManager`'s submit flow (iOS 12, completion handlers):
+/// Reproduces the legacy submit flow (iOS 12, completion handlers):
 ///  1. Attempt auto-login.
 ///  2. If login SUCCEEDS, submit to the primary server; if login FAILS, submit
 ///     to the alternate server. (The alternate is selected by login outcome —

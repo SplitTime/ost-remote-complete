@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AutoSyncController;
 
-/// Replaces OSTSyncManagerDelegate. Same callback shape so the Review pane,
+/// Replaces the legacy sync-manager delegate. Same callback shape so the Review pane,
 /// the badge base class, and the right menu keep their existing logic.
 @protocol AutoSyncObserver <NSObject>
 - (void)syncManagerDidStartSynchronization:(AutoSyncController *)manager;

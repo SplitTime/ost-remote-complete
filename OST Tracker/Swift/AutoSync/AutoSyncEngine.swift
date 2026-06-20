@@ -37,6 +37,10 @@ final class AutoSyncEngine {
     }
 
     var currentStatus: AutoSyncStatus {
+        // When disabled the state is always `.disabled` and the pending count is
+        // purely informational; skip the Core Data fetch so a reachability/lifecycle
+        // publish can never touch the store before auto-sync is turned on.
+        guard enabled else { return AutoSyncStatus(state: .disabled, pendingCount: 0, lastSyncDate: lastSyncDate) }
         let count = pendingCount()
         let state: AutoSyncState
         if !enabled { state = .disabled }

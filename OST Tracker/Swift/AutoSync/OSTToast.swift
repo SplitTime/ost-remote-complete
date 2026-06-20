@@ -2,7 +2,7 @@
 //  OSTToast.swift
 //  OST Tracker
 //
-//  Native sync-completion toast, ported verbatim from the old OSTSyncManager.m
+//  Native sync-completion toast, ported verbatim from the legacy sync manager
 //  (`showToastIfAppropriateWithErrors:`). A rounded label fades in at the top of
 //  the key window, auto-dismisses after 3s, and dismisses on tap. Same colors.
 //

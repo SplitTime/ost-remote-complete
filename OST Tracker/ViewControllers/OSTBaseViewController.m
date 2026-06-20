@@ -31,12 +31,12 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
-    [[[OSTSyncManager shared] delegates] removeObject:self];
+    [[AutoSyncController shared] removeObserver:self];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[[OSTSyncManager shared] delegates] addObject:self];
+    [[AutoSyncController shared] addObserver:self];
     self.badgeLabel.layer.cornerRadius = self.badgeLabel.width/2;
     self.badgeLabel.clipsToBounds = YES;
     
@@ -49,24 +49,24 @@
     [self updateSyncBadge];
 }
 
-#pragma mark - OSTSyncManagerDelegate
+#pragma mark - AutoSyncObserver
 
-- (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager
+- (void)syncManagerDidStartSynchronization:(AutoSyncController *)manager
 {
     [self updateSyncBadge];
 }
 
-- (void)syncManager:(OSTSyncManager *)manager progress:(CGFloat)progress
+- (void)syncManager:(AutoSyncController *)manager progress:(CGFloat)progress
 {
-    
+
 }
 
-- (void)syncManagerDidFinishSynchronization:(OSTSyncManager *)manager
+- (void)syncManagerDidFinishSynchronization:(AutoSyncController *)manager
 {
     [self updateSyncBadge];
 }
 
-- (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
+- (void)syncManager:(AutoSyncController *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
 {
     [self updateSyncBadge];
 }

@@ -16,7 +16,6 @@
 // OSTCrossCheckViewController is now Swift; loaded via CrossCheck.storyboard
 // (instantiateInitialViewController returns it as a plain UIViewController).
 #import "UIView+Additions.h"
-#import "OSTSyncManager.h"
 #import "CurrentCourse.h"
 #import "EntryModel.h"
 #import "UILabel+Extension.h"
@@ -55,7 +54,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.syncIndicator setHidden:![[OSTSyncManager shared] isSyncing]];
+    [self.syncIndicator setHidden:![[AutoSyncController shared] isSyncing]];
 }
 
 // The drawer's content (Close button, logo, menu items) lives in the scrollView,
@@ -177,21 +176,21 @@
 
 
 
-#pragma mark - OSTSyncManagerDelegate
+#pragma mark - AutoSyncObserver
 
-- (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager
+- (void)syncManagerDidStartSynchronization:(AutoSyncController *)manager
 {
     [super syncManagerDidStartSynchronization:manager];
     [self.syncIndicator setHidden:NO];
 }
 
-- (void)syncManagerDidFinishSynchronization:(OSTSyncManager *)manager
+- (void)syncManagerDidFinishSynchronization:(AutoSyncController *)manager
 {
     [super syncManagerDidFinishSynchronization:manager];
     [self.syncIndicator setHidden:YES];
 }
 
-- (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
+- (void)syncManager:(AutoSyncController *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
 {
     [super syncManager:manager didFinishSynchronizationWithErrors:errors alternateServer:alternateServer];
     [self.syncIndicator setHidden:YES];
