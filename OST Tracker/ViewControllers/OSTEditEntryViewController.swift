@@ -55,6 +55,12 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         txtDate.dropDownMode = .datePicker
+        // IQDropDownTextField wires a UIDatePicker as its inputView; on iOS 14+ that
+        // defaults to the compact "pill" style, which renders as a near-empty gray
+        // area in a keyboard-height input view. Force the classic wheels so it fills.
+        if #available(iOS 13.4, *) {
+            (txtDate.inputView as? UIDatePicker)?.preferredDatePickerStyle = .wheels
+        }
         // The bib field uses APNumberPad and the time field has its own accessory,
         // so IQ's auto-toolbar would just float a stray Done bar over the keypad.
         IQKeyboardManager.shared().isEnableAutoToolbar = false
