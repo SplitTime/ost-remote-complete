@@ -9,6 +9,12 @@
 #import "OSTNetworkManager+Entries.h"
 #import "CurrentCourse.h"
 #import "EntryModel.h"
+// OSTBackend (Swift) submits over URLSession instead of AFNetworking.
+#if __has_include("OST_Remote-Swift.h")
+#import "OST_Remote-Swift.h"
+#elif __has_include("OST_Remote_Dev-Swift.h")
+#import "OST_Remote_Dev-Swift.h"
+#endif
 
 #define OSTSubmitEventEndpoint @"events/%@/import?data_format=jsonapi_batch"
 #define OSTSubmitEventGroupEndpoint @"event_groups/%@/import?data_format=jsonapi_batch&limitedResponse=true"
@@ -114,21 +120,19 @@
     }
     
     NSString * endpoint = [NSString stringWithFormat:OSTSubmitEventGroupEndpoint,groupId];
-    
-    if (alternateServer)
+    NSString * base = [[NSBundle mainBundle] objectForInfoDictionaryKey:(alternateServer ? @"BACKEND_ALTERNATE_URL" : @"BACKEND_URL")];
+    NSString * fullURL = [NSString stringWithFormat:@"%@%@", base, endpoint];
+    // Bearer token set on the request serializer by the preceding autoLogin.
+    NSString * auth = [self.requestSerializer valueForHTTPHeaderField:@"Authorization"];
+
+    // Submit over URLSession (OSTBackend) instead of AFNetworking. The payload
+    // (entriesArrayDict) is unchanged; only the HTTP transport moves.
+    [OSTBackend postJSONToURL:fullURL authorization:auth body:@{@"data":entriesArrayDict} completion:^(id object, NSError *error)
     {
-        endpoint = [NSString stringWithFormat:@"%@%@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_ALTERNATE_URL"],endpoint];
-    }
-    
-    NSURLSessionDataTask *dataTask = [self POST:endpoint parameters:@{@"data":entriesArrayDict} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-                                      {
-                                          onCompletion(responseObject);
-                                      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                          onError(error);
-                                      }];
-    
-    [dataTask resume];
-    return dataTask;
+        if (error) { onError(error); } else { onCompletion(object); }
+    }];
+
+    return nil;
 }
 
 - (NSURLSessionDataTask*)fetchNotExpected:(NSString*)groupId splitName:(NSString*)splitName useAlternateServer:(BOOL)alternateServer completionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError

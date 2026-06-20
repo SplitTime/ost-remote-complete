@@ -41,6 +41,42 @@ import Foundation
         request("event_groups/\(groupId)/not_expected?split_name=\(escaped)", completion: completion)
     }
 
+    // MARK: - Write (entry submit) — transport only
+
+    /// POSTs an already-built JSON body to an absolute URL, off AFNetworking. The
+    /// caller (Obj-C `submitEntriesToGroup`) still builds the exact same payload
+    /// and passes its current bearer token, so behaviour is unchanged — only the
+    /// HTTP transport moves to URLSession.
+    @objc static func postJSON(toURL urlString: String,
+                               authorization: String?,
+                               body: [String: Any],
+                               completion: @escaping (Any?, Error?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil, NSError(domain: "OST", code: -1,
+                                    userInfo: [NSLocalizedDescriptionKey: "Bad submit URL"]))
+            return
+        }
+        var req = URLRequest(url: url)
+        req.httpMethod = "POST"
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.setValue("no-cache", forHTTPHeaderField: "cache-control")
+        if let authorization = authorization { req.setValue(authorization, forHTTPHeaderField: "Authorization") }
+        req.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+
+        URLSession.shared.dataTask(with: req) { data, response, error in
+            DispatchQueue.main.async {
+                if let error = error { completion(nil, error); return }
+                let json = data.flatMap { try? JSONSerialization.jsonObject(with: $0) }
+                if let http = response as? HTTPURLResponse, !(200..<300).contains(http.statusCode) {
+                    completion(nil, NSError(domain: "OST", code: http.statusCode,
+                                            userInfo: [NSLocalizedDescriptionKey: "Submit failed (\(http.statusCode))"]))
+                    return
+                }
+                completion(json, nil)
+            }
+        }.resume()
+    }
+
     // MARK: - Plumbing
 
     private func request(_ path: String, completion: @escaping (Any?, Error?) -> Void) {
