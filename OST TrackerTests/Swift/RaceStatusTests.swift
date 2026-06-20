@@ -82,3 +82,39 @@ extension RaceStatusTests {
         XCTAssertEqual(RaceStatusFormat.dayOffset(from: start, to: nextDay, in: tz), 1)
     }
 }
+
+extension RaceStatusTests {
+    private func headers(_ n: Int) -> [SplitHeader] {
+        (0..<n).map { SplitHeader(title: "S\($0)", splitName: "S\($0)",
+                                  distanceMeters: Double($0) * 1000, extensions: ["In", "Out"], lap: 1) }
+    }
+    private func effort(bib: Int, times: [[Date?]], dropped: Bool = false, finished: Bool = false) -> EffortRow {
+        EffortRow(overallRank: bib, genderRank: bib, bibNumber: bib, firstName: "F\(bib)",
+                  lastName: "L\(bib)", dropped: dropped, finished: finished, absoluteTimes: times)
+    }
+
+    func test_furthestSplitIndex() {
+        let t = Date()
+        let e = effort(bib: 1, times: [[t, t], [t, nil], [nil, nil]])
+        XCTAssertEqual(furthestSplitIndex(e), 1)
+        let none = effort(bib: 2, times: [[nil, nil], [nil, nil]])
+        XCTAssertEqual(furthestSplitIndex(none), -1)
+    }
+
+    func test_status_through_expected_dropped_notStarted() {
+        let h = headers(4)
+        let t = Date()
+        // Through idx 2 (has an In time there)
+        let through = effort(bib: 1, times: [[t, t], [t, t], [t, nil], [nil, nil]])
+        XCTAssertEqual(effortStatus(through, atSplit: 2, headers: h), .through(arrival: t))
+        // Expected at idx 2: cleared idx 1, no time at idx 2, not dropped
+        let expected = effort(bib: 2, times: [[t, t], [t, t], [nil, nil], [nil, nil]])
+        XCTAssertEqual(effortStatus(expected, atSplit: 2, headers: h), .expected)
+        // Dropped before idx 2: furthest reached is idx 1 ("S1")
+        let dropped = effort(bib: 3, times: [[t, t], [t, nil], [nil, nil], [nil, nil]], dropped: true)
+        XCTAssertEqual(effortStatus(dropped, atSplit: 2, headers: h), .dropped(atStation: "S1"))
+        // Not started: no times at all
+        let none = effort(bib: 4, times: [[nil, nil], [nil, nil], [nil, nil], [nil, nil]])
+        XCTAssertEqual(effortStatus(none, atSplit: 2, headers: h), .notStarted)
+    }
+}
