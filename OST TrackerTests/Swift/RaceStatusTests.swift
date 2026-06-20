@@ -193,3 +193,32 @@ extension RaceStatusTests {
         XCTAssertEqual(results.map { $0.overallRank }, [1, 2, 3])
     }
 }
+
+extension RaceStatusTests {
+    func test_runnerProgress_fromFixture() throws {
+        let spread = try loadSpread()
+        let beer = try XCTUnwrap(spread.efforts.first { $0.bibNumber == 28 })
+        let progress = runnerProgress(beer, spread: spread)
+        XCTAssertEqual(progress.summary.bib, "28")
+        XCTAssertEqual(progress.summary.name, "Raul Beer")
+        XCTAssertEqual(progress.rows.count, 18)
+        // Start: one line, no label.
+        XCTAssertEqual(progress.rows[0].lines.count, 1)
+        XCTAssertNil(progress.rows[0].lines[0].label)
+        XCTAssertEqual(progress.rows[0].lines[0].elapsed, "0:00")
+        // Raspberry 1: In/Out → two labelled lines.
+        XCTAssertEqual(progress.rows[1].lines.count, 2)
+        XCTAssertEqual(progress.rows[1].lines[0].label, "In")
+        XCTAssertEqual(progress.rows[1].lines[1].label, "Out")
+        XCTAssertEqual(progress.rows[1].lines[0].elapsed, "1:05")
+    }
+
+    func test_stationField_fromFixture() throws {
+        let spread = try loadSpread()
+        let field = stationField(splitIndex: 2, spread: spread) // Antero
+        XCTAssertEqual(field.rows.count, 151)
+        XCTAssertTrue(field.countText.contains("of 151 through"))
+        // The first row is whoever came through Antero earliest.
+        XCTAssertEqual(field.rows.first?.status, "Through")
+    }
+}

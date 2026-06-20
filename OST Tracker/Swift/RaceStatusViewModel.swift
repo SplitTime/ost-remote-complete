@@ -97,3 +97,97 @@ func matchEfforts(_ query: String, in efforts: [EffortRow]) -> [EffortRow] {
             || $0.lastName.lowercased().contains(q)
     }.sorted { $0.overallRank < $1.overallRank }
 }
+
+// MARK: - Runner progress
+
+struct RunnerStationLine {
+    let label: String?
+    let elapsed: String
+    let timeOfDay: String
+}
+struct RunnerStationRow {
+    let title: String
+    let lines: [RunnerStationLine]
+}
+struct RunnerSummary {
+    let name: String
+    let bib: String
+    let detail: String
+}
+struct RunnerProgress {
+    let summary: RunnerSummary
+    let rows: [RunnerStationRow]
+}
+
+private func timeOfDayWithDay(_ t: Date, start: Date, tz: TimeZone) -> String {
+    let clock = RaceStatusFormat.timeOfDay(t, in: tz)
+    let day = RaceStatusFormat.dayOffset(from: start, to: t, in: tz)
+    return day > 0 ? "\(clock) +\(day)d" : clock
+}
+
+func runnerProgress(_ e: EffortRow, spread: EventSpread) -> RunnerProgress {
+    let start = spread.eventStartTime
+    let tz = spread.eventTimeZone
+
+    let statusWord = e.finished ? "Finished" : (e.dropped ? "Dropped" : "In progress")
+    let summary = RunnerSummary(
+        name: e.fullName,
+        bib: String(e.bibNumber),
+        detail: "Overall #\(e.overallRank) · Gender #\(e.genderRank) · \(statusWord)")
+
+    let rows: [RunnerStationRow] = spread.splitHeaders.enumerated().map { idx, header in
+        let subTimes = idx < e.absoluteTimes.count ? e.absoluteTimes[idx] : []
+        let labels: [String?] = header.extensions.isEmpty ? [nil] : header.extensions.map { $0 }
+        let lines: [RunnerStationLine] = labels.enumerated().map { k, label in
+            let date = k < subTimes.count ? subTimes[k] : nil
+            if let date = date {
+                return RunnerStationLine(label: label,
+                                         elapsed: RaceStatusFormat.elapsed(from: start, to: date),
+                                         timeOfDay: timeOfDayWithDay(date, start: start, tz: tz))
+            }
+            return RunnerStationLine(label: label, elapsed: "—", timeOfDay: "")
+        }
+        return RunnerStationRow(title: header.title, lines: lines)
+    }
+    return RunnerProgress(summary: summary, rows: rows)
+}
+
+// MARK: - Aid-station field
+
+struct FieldRow {
+    let bib: String
+    let name: String
+    let status: String
+    let time: String
+}
+struct StationField {
+    let countText: String
+    let rows: [FieldRow]
+}
+
+func stationField(splitIndex idx: Int, spread: EventSpread) -> StationField {
+    let start = spread.eventStartTime
+    let ordered = sortedField(spread.efforts, atSplit: idx, headers: spread.splitHeaders)
+    var throughCount = 0
+    let rows: [FieldRow] = ordered.map { e in
+        let status = effortStatus(e, atSplit: idx, headers: spread.splitHeaders)
+        let statusText: String
+        let timeText: String
+        switch status {
+        case .through(let arrival):
+            throughCount += 1
+            statusText = "Through"
+            timeText = RaceStatusFormat.elapsed(from: start, to: arrival)
+        case .expected:
+            statusText = "Expected"; timeText = ""
+        case .dropped(let station):
+            statusText = "Dropped @\(station)"; timeText = ""
+        case .notStarted:
+            statusText = "Not started"; timeText = ""
+        }
+        return FieldRow(bib: String(e.bibNumber), name: e.fullName,
+                        status: statusText, time: timeText)
+    }
+    return StationField(countText: "\(throughCount) of \(spread.efforts.count) through",
+                        rows: rows)
+}
