@@ -27,9 +27,8 @@ private final class ManualScheduler: AutoSyncScheduler {
 final class AutoSyncEngineTests: XCTestCase {
     private var sched: ManualScheduler!
     private var pending = 0
-    private var reachable = true
     private var syncCalls = 0
-    private var pendingSyncCompletion: ((Result<Void, Error>) -> Void)?
+    private var pendingSyncCompletion: ((SyncOutcome) -> Void)?
     private var statuses: [AutoSyncStatus] = []
 
     private func makeEngine(enabled: Bool = true) -> AutoSyncEngine {
@@ -37,12 +36,14 @@ final class AutoSyncEngineTests: XCTestCase {
         return AutoSyncEngine(
             enabled: enabled, debounceSeconds: 3, scheduler: sched,
             pendingCount: { self.pending },
-            isReachable: { self.reachable },
             performSync: { completion in self.syncCalls += 1; self.pendingSyncCompletion = completion },
             onStatusChange: { self.statuses.append($0) })
     }
-    private func succeedSync() { pending = 0; pendingSyncCompletion?(.success(())); pendingSyncCompletion = nil }
-    private func failSync() { pendingSyncCompletion?(.failure(URLError(.badServerResponse))); pendingSyncCompletion = nil }
+    // Drive the engine through the injected `performSync` completion. The
+    // production wiring classifies the submit error; here we feed the outcome.
+    private func succeed() { pending = 0; pendingSyncCompletion?(.success); pendingSyncCompletion = nil }
+    private func offline() { pendingSyncCompletion?(.offline); pendingSyncCompletion = nil }
+    private func fail()    { pendingSyncCompletion?(.failed);  pendingSyncCompletion = nil }
 
     func test_enableWithPending_triggersSync() {
         pending = 2
@@ -68,7 +69,7 @@ final class AutoSyncEngineTests: XCTestCase {
         XCTAssertEqual(e.currentStatus.state, .pending)
         sched.fireAll()
         XCTAssertEqual(e.currentStatus.state, .syncing)
-        succeedSync()
+        succeed()
         XCTAssertEqual(e.currentStatus.state, .synced)
         XCTAssertNotNil(e.currentStatus.lastSyncDate)
     }
@@ -77,37 +78,38 @@ final class AutoSyncEngineTests: XCTestCase {
         pending = 1
         let e = makeEngine()
         e.noteEntriesChanged(); sched.fireAll()              // attempt 1
-        failSync(); sched.fireAll()                          // retry after 5
-        failSync(); sched.fireAll()                          // retry after 15
-        failSync(); sched.fireAll()                          // retry after 30
-        failSync(); sched.fireAll()                          // retry after 60
-        failSync()                                           // schedules retry after 60 (cap)
-        // The scheduled retry delays observed, in order:
+        fail(); sched.fireAll()                              // retry after 5
+        fail(); sched.fireAll()                              // retry after 15
+        fail(); sched.fireAll()                              // retry after 30
+        fail(); sched.fireAll()                              // retry after 60
+        fail()                                               // schedules retry after 60 (cap)
         XCTAssertEqual(observedRetryDelays(e), [5, 15, 30, 60, 60])
+        XCTAssertEqual(e.currentStatus.state, .failed)
     }
 
     func test_success_resetsBackoff() {
         pending = 1
         let e = makeEngine()
         e.noteEntriesChanged(); sched.fireAll()
-        failSync()                                           // schedules retry after 5
+        fail()                                               // schedules retry after 5
         sched.fireAll()                                      // retry attempt
-        succeedSync()                                        // success resets backoff
+        succeed()                                            // success resets backoff
         pending = 1
         e.noteEntriesChanged(); sched.fireAll()
-        failSync()                                           // next failure schedules after 5 again
+        fail()                                               // next failure schedules after 5 again
         XCTAssertEqual(lastRetryDelay(e), 5)
     }
 
-    func test_offline_whenUnreachable_doesNotCallSync() {
-        pending = 1; reachable = false
+    func test_offline_outcome_setsStateAndRetries_andAlwaysReattempts() {
+        pending = 1
         let e = makeEngine()
-        e.noteEntriesChanged(); sched.fireAll()
-        XCTAssertEqual(syncCalls, 0)
-        XCTAssertEqual(e.currentStatus.state, .offline)
-        reachable = true
-        e.reachabilityChanged()
+        e.noteEntriesChanged(); sched.fireAll()              // attempt 1
         XCTAssertEqual(syncCalls, 1)
+        offline()                                            // submit reports offline
+        XCTAssertEqual(e.currentStatus.state, .offline)
+        XCTAssertEqual(sched.delays, [5], "offline schedules a retry")
+        sched.fireAll()                                      // fire the retry
+        XCTAssertEqual(syncCalls, 2, "retry always re-attempts the sync now")
     }
 
     func test_inFlightGuard_noOverlap() {
@@ -127,6 +129,17 @@ final class AutoSyncEngineTests: XCTestCase {
         sched.fireAll()
         XCTAssertEqual(syncCalls, 0)
         XCTAssertEqual(e.currentStatus.state, .disabled)
+    }
+
+    func test_reEnable_clearsStaleFailure() {
+        pending = 1
+        let e = makeEngine()
+        e.noteEntriesChanged(); sched.fireAll()
+        fail()
+        XCTAssertEqual(e.currentStatus.state, .failed)
+        e.setEnabled(false)
+        e.setEnabled(true)                                   // fresh enable
+        XCTAssertNotEqual(e.currentStatus.state, .failed, "re-enable clears stale failure")
     }
 
     func test_background_pauses_foreground_resumes() {

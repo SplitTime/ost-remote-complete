@@ -1,13 +1,17 @@
 // OST Tracker/Swift/AutoSync/AutoSyncEngine.swift
 import Foundation
 
+/// Outcome of a sync attempt, as classified by the production wiring from the
+/// submit `Result`/error. The engine derives its `Offline`/`Failed` state from
+/// this rather than from a reachability probe.
+enum SyncOutcome { case success, offline, failed }
+
 /// Pure auto-sync state machine. No Core Data, no network, no UIKit — every
 /// side effect is an injected closure, so the whole thing is unit-testable.
 final class AutoSyncEngine {
     private let scheduler: AutoSyncScheduler
     private let pendingCount: () -> Int
-    private let isReachable: () -> Bool
-    private let performSync: (@escaping (Result<Void, Error>) -> Void) -> Void
+    private let performSync: (@escaping (SyncOutcome) -> Void) -> Void
     private let onStatusChange: (AutoSyncStatus) -> Void
     private let debounceSeconds: TimeInterval
     private let backoff: [TimeInterval] = [5, 15, 30, 60]
@@ -17,6 +21,9 @@ final class AutoSyncEngine {
     private var active = true
     private var lastSyncDate: Date?
     private var backoffIndex = 0
+    /// Kind of the last failed attempt (nil, `.offline`, or `.failed`); drives
+    /// the resting state when there are pending entries we couldn't submit.
+    private var lastFailure: AutoSyncState?
     private var debounceToken: AutoSyncCancellable?
     private var retryToken: AutoSyncCancellable?
     private var lastPublished: AutoSyncStatus?
@@ -24,14 +31,12 @@ final class AutoSyncEngine {
     init(enabled: Bool, debounceSeconds: TimeInterval = 3,
          scheduler: AutoSyncScheduler,
          pendingCount: @escaping () -> Int,
-         isReachable: @escaping () -> Bool,
-         performSync: @escaping (@escaping (Result<Void, Error>) -> Void) -> Void,
+         performSync: @escaping (@escaping (SyncOutcome) -> Void) -> Void,
          onStatusChange: @escaping (AutoSyncStatus) -> Void) {
         self.enabled = enabled
         self.debounceSeconds = debounceSeconds
         self.scheduler = scheduler
         self.pendingCount = pendingCount
-        self.isReachable = isReachable
         self.performSync = performSync
         self.onStatusChange = onStatusChange
     }
@@ -46,8 +51,8 @@ final class AutoSyncEngine {
         if !enabled { state = .disabled }
         else if isSyncing { state = .syncing }
         else if count == 0 { state = .synced }
-        else if !isReachable() { state = .offline }
-        else if backoffIndex > 0 { state = .failed }
+        else if lastFailure == .offline { state = .offline }
+        else if lastFailure == .failed { state = .failed }
         else { state = .pending }
         return AutoSyncStatus(state: state, pendingCount: count, lastSyncDate: lastSyncDate)
     }
@@ -57,6 +62,7 @@ final class AutoSyncEngine {
     func setEnabled(_ on: Bool) {
         enabled = on
         if on {
+            lastFailure = nil // re-enabling shouldn't surface a stale failure
             publish()
             if pendingCount() > 0 { attemptSync() }
         } else {
@@ -74,11 +80,6 @@ final class AutoSyncEngine {
             self?.debounceToken = nil
             self?.attemptSync()
         }
-    }
-
-    func reachabilityChanged() {
-        guard enabled, active else { publish(); return }
-        if isReachable(), pendingCount() > 0 { attemptSync() } else { publish() }
     }
 
     func enterForeground() {
@@ -100,20 +101,25 @@ final class AutoSyncEngine {
 
     private func attemptSync() {
         guard enabled, active, !isSyncing, pendingCount() > 0 else { publish(); return }
-        guard isReachable() else { publish(); return } // .offline; waits for reachability/forceRetry
         retryToken?.cancel(); retryToken = nil
         isSyncing = true
         publish()
-        performSync { [weak self] result in
+        performSync { [weak self] outcome in
             guard let self = self else { return }
             self.isSyncing = false
-            switch result {
+            switch outcome {
             case .success:
+                self.lastFailure = nil
                 self.lastSyncDate = Date()
                 self.backoffIndex = 0
                 self.publish()
                 if self.pendingCount() > 0 { self.scheduleRetry() } // more arrived mid-sync
-            case .failure:
+            case .offline:
+                self.lastFailure = .offline
+                self.publish()
+                self.scheduleRetry()
+            case .failed:
+                self.lastFailure = .failed
                 self.publish()
                 self.scheduleRetry()
             }

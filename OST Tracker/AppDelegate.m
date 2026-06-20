@@ -58,14 +58,11 @@
     
     [self initializeCoredata];
 
-    // Skip the live auto-sync wiring under the unit-test host: the test target
-    // drives AutoSyncController/OSTReachability directly with injected seams, and
-    // a launch-time sync against the test store hits the network and faults.
-    if (NSProcessInfo.processInfo.environment[@"XCTestConfigurationFilePath"] == nil)
-    {
-        [[OSTReachability shared] start];
-        (void)[AutoSyncController shared]; // force lazy creation so it begins observing saves
-    }
+    // Force lazy creation of the auto-sync controller so it begins observing
+    // Core Data saves. Runs unconditionally (incl. the unit-test host) now that
+    // there's no reachability probe; AutoSyncController itself skips any live
+    // network/Core Data submit under XCTest, so launch-time creation is safe.
+    (void)[AutoSyncController shared];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     

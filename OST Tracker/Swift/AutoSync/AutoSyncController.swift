@@ -4,8 +4,9 @@
 //
 //  Production wiring for the Auto Sync feature. Owns the pure `AutoSyncEngine`
 //  and bridges it to Core Data (pending fetch + submitted-flag save), the network
-//  (`OSTNetworkManager` via `LiveTimeSubmitter`), reachability, app lifecycle, and
-//  the legacy delegate/observer callbacks the Review pane and badges rely on.
+//  (`OSTNetworkManager` via `LiveTimeSubmitter`), app lifecycle, and the legacy
+//  delegate/observer callbacks the Review pane and badges rely on. The engine's
+//  `Offline` state is derived from the actual submit error (no reachability probe).
 //
 //  Threading: both network paths deliver their completions on the main queue —
 //  `autoLogin` resolves through `OSTAuthBridge.login` (DispatchQueue.main.async)
@@ -40,16 +41,12 @@ final class AutoSyncController: NSObject {
         engine = AutoSyncEngine(
             enabled: enabled, debounceSeconds: 3, scheduler: TimerScheduler(),
             pendingCount: { [weak self] in self?.fetchPending().count ?? 0 },
-            isReachable: { OSTReachability.shared.isReachable },
             performSync: { [weak self] completion in self?.performAutoSync(completion) },
             onStatusChange: { [weak self] status in self?.broadcast(status) })
 
         NotificationCenter.default.addObserver(
             self, selector: #selector(contextDidSave(_:)),
             name: .NSManagedObjectContextDidSave, object: nil)
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(reachabilityChanged),
-            name: OSTReachability.changedNotification, object: nil)
     }
 
     // MARK: - Main-thread funnel
@@ -86,7 +83,6 @@ final class AutoSyncController: NSObject {
         engine.noteEntriesChanged()
     }
 
-    @objc private func reachabilityChanged() { engine.reachabilityChanged() }
     @objc func applicationDidBecomeActive() { engine.enterForeground() }
     @objc func applicationDidEnterBackground() { engine.enterBackground() }
     @objc func forceRetry() { engine.forceRetry() }
@@ -125,12 +121,32 @@ final class AutoSyncController: NSObject {
         return (try? ctx.fetch(req)) ?? []
     }
 
-    /// Used by the engine's auto path: gather + sync, signalling completion to the engine.
-    private func performAutoSync(_ completion: @escaping (Result<Void, Error>) -> Void) {
-        runSync(fetchPending(), completion: completion)
+    /// Used by the engine's auto path: gather + sync, classifying the submit
+    /// `Result` into the engine's `SyncOutcome`. A "not connected to internet"
+    /// URL error (-1009) maps to `.offline` (the same test the legacy Review pane
+    /// used for "device is not connected"); any other failure maps to `.failed`.
+    private func performAutoSync(_ completion: @escaping (SyncOutcome) -> Void) {
+        runSync(fetchPending()) { result in
+            switch result {
+            case .success:
+                completion(.success)
+            case .failure(let error):
+                let ns = error as NSError
+                let offline = ns.domain == NSURLErrorDomain && ns.code == NSURLErrorNotConnectedToInternet
+                completion(offline ? .offline : .failed)
+            }
+        }
     }
 
     private func runSync(_ pending: [NSManagedObject], completion: ((Result<Void, Error>) -> Void)?) {
+        // Never fire a live network/Core Data submit inside the unit-test host.
+        // The singleton's NSManagedObjectContextDidSave observer would otherwise
+        // react to other tests' saves and submit test-store EntryModels (faults
+        // on `bibNumber` / hits the network). The engine state machine is exercised
+        // directly in AutoSyncEngineTests with an injected `performSync` seam.
+        guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else {
+            completion?(.success(())); return
+        }
         guard !isSyncing, !pending.isEmpty else { completion?(.success(())); return }
         isSyncing = true
         inFlightEntries = pending
