@@ -153,6 +153,7 @@
 		8C786E44B17259466456F007 /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
 		8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
+		99317695D8197AFD8F74757A /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */; };
 		99517852C35EF5C3914336BF /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		9C7CA330A1B919DC81EA2721 /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		9CF9FB3B3E1F8787224192B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
@@ -160,6 +161,7 @@
 		A63C9E647D0756AA05143661 /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 		B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */; };
+		B8E3F8114ACBCAE49A256BA9 /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */; };
 		BD0F5B3D9588B36A254205A3 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		BD36B2CD522E4F5E7D9DCD53 /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
 		BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1A7214138790605CD98F9 /* PrimaryButton.swift */; };
@@ -223,6 +225,7 @@
 		E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		F7A6DDBC1CC23AE8E87A4B56 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
 		F88DCA28419AC14B875704BB /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
+		FBC482C7F2B2010C1EF9C35D /* StyledTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,10 +348,12 @@
 		6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OST TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StyledTextFieldTests.swift; path = "OST TrackerTests/Swift/StyledTextFieldTests.swift"; sourceTree = "<group>"; };
 		7E637BB81DCDE0328194710B /* LoginControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = "OST TrackerTests/Swift/LoginControllerTests.swift"; sourceTree = "<group>"; };
 		7FC88DAF080C3B90276428C3 /* LoginController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = "OST Tracker/Swift/LoginController.swift"; sourceTree = "<group>"; };
 		809E391C45FA035A2E0209DC /* APIClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = "OST Tracker/Swift/APIClient.swift"; sourceTree = "<group>"; };
 		98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDropDownField.swift; sourceTree = "<group>"; };
+		98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StyledTextField.swift; path = "OST Tracker/Swift/DesignSystem/StyledTextField.swift"; sourceTree = "<group>"; };
 		9DA22B20B858EF2CA668A00B /* AppearanceController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppearanceController.swift; path = "OST Tracker/Swift/DesignSystem/AppearanceController.swift"; sourceTree = "<group>"; };
 		9E2CE940B9754C16E1809394 /* LiveAPITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveAPITests.swift; path = "OST TrackerTests/Swift/LiveAPITests.swift"; sourceTree = "<group>"; };
 		A2C1A7214138790605CD98F9 /* PrimaryButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimaryButton.swift; path = "OST Tracker/Swift/DesignSystem/PrimaryButton.swift"; sourceTree = "<group>"; };
@@ -445,6 +450,7 @@
 				1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */,
 				9DA22B20B858EF2CA668A00B /* AppearanceController.swift */,
 				A2C1A7214138790605CD98F9 /* PrimaryButton.swift */,
+				98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */,
 			);
 			name = DesignSystem;
 			sourceTree = "<group>";
@@ -489,6 +495,7 @@
 				FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */,
 				354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */,
 				FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */,
+				79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1023,6 +1030,7 @@
 				2F5AB1F5E6634215E9CE16EA /* Theme.swift in Sources */,
 				18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */,
 				C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */,
+				B8E3F8114ACBCAE49A256BA9 /* StyledTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1096,6 +1104,7 @@
 				29304C5004AE7D8B6CFAE5ED /* Theme.swift in Sources */,
 				22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */,
 				BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */,
+				99317695D8197AFD8F74757A /* StyledTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1121,6 +1130,7 @@
 				678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */,
 				64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */,
 				3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */,
+				FBC482C7F2B2010C1EF9C35D /* StyledTextFieldTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
