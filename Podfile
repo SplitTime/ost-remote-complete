@@ -7,15 +7,11 @@ use_frameworks!
 
 def used_pods
 
+# Dropped after the Swift migration (now unused): NSDate+Helper, OHAlertView,
+# JTObjectMapping, FXKeychain, Reachability (→ NWPathMonitor), DejalActivityView
+# (→ OSTSpinner), SimpleKeychain (session manager uses Security framework).
 pod 'MagicalRecord', '2.2'
-pod 'NSDate+Helper', '1.0.0'
-pod 'OHAlertView', '3.0.1'
-pod 'JTObjectMapping', '1.1.2'
-pod 'FXKeychain', '~> 1.5'
-pod 'Reachability', '~> 3.2'
-pod 'DejalActivityView', '1.2'
 pod 'IQDropDownTextField', '1.1.0'
-pod 'SimpleKeychain','0.8.0'
 pod 'IQKeyboardManager','4.0.10'
 pod 'MFSideMenu','0.5.5'
 pod 'CHCSVParser','2.1.0'
