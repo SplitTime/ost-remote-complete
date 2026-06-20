@@ -25,6 +25,7 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
     private var searchText = ""
     private var selectedSplitIndex: Int?
     private var rows: [DisplayRow] = []
+    private var isFetchingSpread = false
 
     private var groupId: String { CurrentCourse.getCurrentCourse()?.eventGroupId ?? "" }
 
@@ -74,6 +75,13 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
                 let first = refs.first
                 self.selectedEvent = first
                 if let first = first { self.eventList.select(first.name) }
+                if refs.isEmpty {
+                    self.ostHideBlockingSpinner()
+                    self.infoLabel.text = "No events available."
+                    self.rows = [.message("No events available for this group.")]
+                    self.tableView.reloadData()
+                    return
+                }
                 self.loadSpread()
             }
         }
@@ -81,9 +89,12 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
 
     private func loadSpread() {
         guard let event = selectedEvent else { ostHideBlockingSpinner(); return }
+        guard !isFetchingSpread else { return }
+        isFetchingSpread = true
         ostShowBlockingSpinner()
         OSTBackend.shared.fetchSpread(eventSlug: event.slug) { [weak self] result in
             guard let self = self else { return }
+            self.isFetchingSpread = false
             self.ostHideBlockingSpinner()
             switch result {
             case .failure:
@@ -165,7 +176,7 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
                                        : matches.map { .runnerMatch($0) }
             }
         case .station:
-            guard let idx = selectedSplitIndex else {
+            guard let idx = selectedSplitIndex, spread.splitHeaders.indices.contains(idx) else {
                 infoLabel.text = "Pick an aid station."
                 rows = [.message("Choose an aid station above.")]
                 break
@@ -281,6 +292,7 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 56
         tableView.separatorColor = Theme.separator
+        tableView.backgroundColor = .clear
         view.addSubview(tableView)
 
         let guide = view.safeAreaLayoutGuide
