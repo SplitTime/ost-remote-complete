@@ -18,7 +18,6 @@
 #import "OSTRightMenuViewController.h"
 // OSTReviewSubmitViewController is now Swift (visible via the generated header above).
 #import "CurrentCourse.h"
-#import "IQKeyboardManager.h"
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
@@ -58,8 +57,6 @@
     // Override point for customization after application launch.
     
     [self initializeCoredata];
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 80;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     

@@ -19,7 +19,6 @@ import CoreData
 import MFSideMenu
 import MagicalRecord
 import IQDropDownTextField
-import IQKeyboardManager
 
 @objc(OSTEventSelectionViewController)
 class OSTEventSelectionViewController: UIViewController {
@@ -148,7 +147,6 @@ class OSTEventSelectionViewController: UIViewController {
 
         progressBar.transform = CGAffineTransform(scaleX: 1.0, y: 3.0)
 
-        IQKeyboardManager.shared().isEnabled = true
 
         txtStation.removeInputAssistant()
         txtEvent.removeInputAssistant()
@@ -258,7 +256,6 @@ class OSTEventSelectionViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func onCancel(_ sender: Any) {
-        IQKeyboardManager.shared().isEnabled = false
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
         dismiss(animated: true, completion: nil)
     }
@@ -308,7 +305,6 @@ class OSTEventSelectionViewController: UIViewController {
             NSManagedObjectContext.mr_default().processPendingChanges()
             NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
 
-            IQKeyboardManager.shared().isEnabled = false
 
             AppDelegate.getInstance()?.showTracker()
             dismiss(animated: true, completion: nil)

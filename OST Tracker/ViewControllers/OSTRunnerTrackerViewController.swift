@@ -17,7 +17,6 @@ import UIKit
 import CoreData
 import MFSideMenu
 import MagicalRecord
-import IQKeyboardManager
 
 @objc(OSTRunnerTrackerViewController)
 class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate, UITextFieldDelegate {
@@ -184,7 +183,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppDelegate.getInstance()?.rightMenuVC.setMenuState(MFSideMenuStateClosed, completion: nil)
-        IQKeyboardManager.shared().isEnableAutoToolbar = false
         lblTitle.text = CurrentCourse.getCurrentCourse()?.splitName
 
         btnLeft.width = view.width / 2 - 4

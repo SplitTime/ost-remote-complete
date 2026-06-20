@@ -12,7 +12,6 @@ def used_pods
 # (→ OSTSpinner), SimpleKeychain (session manager uses Security framework).
 pod 'MagicalRecord', '2.2'
 pod 'IQDropDownTextField', '1.1.0'
-pod 'IQKeyboardManager','4.0.10'
 pod 'MFSideMenu','0.5.5'
 
 end

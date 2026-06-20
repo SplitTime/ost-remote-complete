@@ -19,7 +19,6 @@
 import UIKit
 import CoreData
 import MagicalRecord
-import IQKeyboardManager
 import IQDropDownTextField
 
 @objc(OSTEditEntryViewController)
@@ -61,9 +60,6 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
         if #available(iOS 13.4, *) {
             (txtDate.inputView as? UIDatePicker)?.preferredDatePickerStyle = .wheels
         }
-        // The bib field uses APNumberPad and the time field has its own accessory,
-        // so IQ's auto-toolbar would just float a stray Done bar over the keypad.
-        IQKeyboardManager.shared().isEnableAutoToolbar = false
 
         customPicker = CustomUIDatePicker(frame: CGRect(x: 0, y: 0, width: view.width, height: 200))
         txtTime.inputView = customPicker
@@ -76,7 +72,6 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
             UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneSelectedTime(_:)))
         ]
         txtTime.inputAccessoryView = toolbar
-        IQKeyboardManager.shared().isEnabled = true
 
         txtTime.removeInputAssistant()
         txtBibNumber.removeInputAssistant()
@@ -116,11 +111,6 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
 
     @objc func onDoneSelectedTime(_ sender: Any?) {
         txtTime.resignFirstResponder()
-    }
-
-    deinit {
-        IQKeyboardManager.shared().isEnabled = false
-        IQKeyboardManager.shared().isEnableAutoToolbar = false
     }
 
     // MARK: - Actions

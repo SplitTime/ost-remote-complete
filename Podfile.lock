@@ -1,6 +1,5 @@
 PODS:
   - IQDropDownTextField (1.1.0)
-  - IQKeyboardManager (4.0.10)
   - MagicalRecord (2.2):
     - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
@@ -8,23 +7,20 @@ PODS:
 
 DEPENDENCIES:
   - IQDropDownTextField (= 1.1.0)
-  - IQKeyboardManager (= 4.0.10)
   - MagicalRecord (= 2.2)
   - MFSideMenu (= 0.5.5)
 
 SPEC REPOS:
   trunk:
     - IQDropDownTextField
-    - IQKeyboardManager
     - MagicalRecord
     - MFSideMenu
 
 SPEC CHECKSUMS:
   IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
-  IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   MagicalRecord: 2dc87179ae7c1f2a274442624ec65a07d4357a6f
   MFSideMenu: 268122e6894f2747fc3a2b48578100b232506c60
 
-PODFILE CHECKSUM: f8e6f616ad33cb6a2cd371b313d998969178716e
+PODFILE CHECKSUM: a1796daaa574a3365ea8134e227abd3d8acb27c2
 
 COCOAPODS: 1.16.2
