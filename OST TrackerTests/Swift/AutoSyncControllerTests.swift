@@ -2,6 +2,27 @@ import XCTest
 @testable import OST_Remote
 
 final class AutoSyncControllerTests: XCTestCase {
+    /// Snapshot of the shared CoreData stack, restored in tearDown so these tests
+    /// don't permanently displace the on-disk store for other test classes.
+    private var savedStack: CoreDataStack!
+
+    override func setUp() {
+        super.setUp()
+        // Swap in an in-memory store so fetchPending() returns [] even when the
+        // controller is briefly enabled. This prevents setEnabled(true) →
+        // attemptSync() from reaching runSync with live production-store entries.
+        savedStack = CoreDataStack.shared
+        CoreDataStack.shared = CoreDataStack(inMemory: true)
+        AutoSyncController.shared.autoSyncEnabled = false
+    }
+
+    override func tearDown() {
+        AutoSyncController.shared.autoSyncEnabled = false
+        CoreDataStack.shared = savedStack
+        savedStack = nil
+        super.tearDown()
+    }
+
     func test_autoSyncEnabled_defaultsOff_andPersists() {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "OSTAutoSyncEnabled")

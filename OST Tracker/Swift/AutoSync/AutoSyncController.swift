@@ -139,14 +139,6 @@ final class AutoSyncController: NSObject {
     }
 
     private func runSync(_ pending: [NSManagedObject], completion: ((Result<Void, Error>) -> Void)?) {
-        // Never fire a live network/Core Data submit inside the unit-test host.
-        // The singleton's NSManagedObjectContextDidSave observer would otherwise
-        // react to other tests' saves and submit test-store EntryModels (faults
-        // on `bibNumber` / hits the network). The engine state machine is exercised
-        // directly in AutoSyncEngineTests with an injected `performSync` seam.
-        guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else {
-            completion?(.success(())); return
-        }
         guard !isSyncing, !pending.isEmpty else { completion?(.success(())); return }
         isSyncing = true
         inFlightEntries = pending

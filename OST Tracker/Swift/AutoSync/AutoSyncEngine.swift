@@ -48,8 +48,7 @@ final class AutoSyncEngine {
         guard enabled else { return AutoSyncStatus(state: .disabled, pendingCount: 0, lastSyncDate: lastSyncDate) }
         let count = pendingCount()
         let state: AutoSyncState
-        if !enabled { state = .disabled }
-        else if isSyncing { state = .syncing }
+        if isSyncing { state = .syncing }
         else if count == 0 { state = .synced }
         else if lastFailure == .offline { state = .offline }
         else if lastFailure == .failed { state = .failed }
