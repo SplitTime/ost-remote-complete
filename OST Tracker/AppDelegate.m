@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "MFSideMenu.h"
 // Generated Swift header — module name differs between the two app targets.
+// (Provides OSTDrawerContainer + the Swift screens.)
 #if __has_include("OST_Remote-Swift.h")
 #import "OST_Remote-Swift.h"
 #elif __has_include("OST_Remote_Dev-Swift.h")
@@ -87,9 +87,8 @@
 {
     if (!self.rightMenuVC)
     {
-        self.rightMenuVC = [[MFSideMenuContainerViewController alloc] init];
+        self.rightMenuVC = [[OSTDrawerContainer alloc] init];
         self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
-        self.rightMenuVC.rightMenuViewController.view.height = self.window.height;
     }
 
     if (!self.OSTTrackerVC)

@@ -36,6 +36,7 @@
 		033E71CD206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
 		033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
 		0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
+		0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
 		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D41942242466C2002010E3 /* OSTUtilitiesViewController.xib */; };
@@ -52,6 +53,7 @@
 		396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */; };
 		3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */; };
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
+		471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
@@ -270,6 +272,7 @@
 		3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainRoundTripTests.swift; path = "OST TrackerTests/Swift/KeychainRoundTripTests.swift"; sourceTree = "<group>"; };
 		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDrawerContainer.swift; sourceTree = "<group>"; };
 		440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTAboutViewController.swift; sourceTree = "<group>"; };
 		4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.release.xcconfig"; sourceTree = "<group>"; };
 		54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTRunnerTrackerViewController.swift; sourceTree = "<group>"; };
@@ -603,6 +606,7 @@
 				54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */,
 				BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */,
 				98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */,
+				43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1021,12 +1025,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/MFSideMenu/MFSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFSideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1077,12 +1079,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OST Remote/Pods-OST Remote-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/MFSideMenu/MFSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFSideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1110,12 +1110,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/MFSideMenu/MFSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MFSideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,6 +1192,7 @@
 				BFA683CE97A77D461E74E7CA /* OSTBackend.swift in Sources */,
 				6AB4A6C295D91E387E2ED658 /* OSTReachability.swift in Sources */,
 				B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */,
+				0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1265,6 +1264,7 @@
 				3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */,
 				6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */,
 				567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */,
+				471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

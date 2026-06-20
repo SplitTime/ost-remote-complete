@@ -11,7 +11,6 @@
 
 import UIKit
 import CoreData
-import MFSideMenu
 import MagicalRecord
 
 @objc(OSTCrossCheckViewController)

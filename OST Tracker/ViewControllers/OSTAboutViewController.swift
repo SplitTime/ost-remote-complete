@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MFSideMenu
 
 @objc(OSTAboutViewController)
 class OSTAboutViewController: OSTBaseViewController {

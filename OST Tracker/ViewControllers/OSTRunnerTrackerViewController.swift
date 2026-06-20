@@ -15,7 +15,6 @@
 
 import UIKit
 import CoreData
-import MFSideMenu
 import MagicalRecord
 
 @objc(OSTRunnerTrackerViewController)
@@ -136,7 +135,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
         btnRight.setBackgroundImage(UIImage(named: "GrayButton"), for: .highlighted)
 
         txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
-        AppDelegate.getInstance()?.rightMenuVC.setMenuState(MFSideMenuStateClosed, completion: nil)
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
     override func viewDidLayoutSubviews() {
@@ -182,7 +181,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AppDelegate.getInstance()?.rightMenuVC.setMenuState(MFSideMenuStateClosed, completion: nil)
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
         lblTitle.text = CurrentCourse.getCurrentCourse()?.splitName
 
         btnLeft.width = view.width / 2 - 4

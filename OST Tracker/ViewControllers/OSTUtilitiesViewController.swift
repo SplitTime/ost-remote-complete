@@ -8,7 +8,6 @@
 //
 
 import UIKit
-import MFSideMenu
 import MagicalRecord
 import CoreData
 
