@@ -48,7 +48,6 @@
     if (self.networkManager == nil)
     {
         self.networkManager = [[OSTNetworkManager alloc] init];
-        [self.networkManager startMonitoring];
     }
     return self.networkManager;
 }
