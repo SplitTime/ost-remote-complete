@@ -43,7 +43,8 @@ The last pod is gone — replaced `MR_*`/`mr_*` with native Core Data on the **s
 - **✅ Dropped CHCSVParser + Toast** (commit `9b526d6`): CSV export builds the string directly (RFC-4180 escaping); the sync toast is a native fading `UILabel`.
 - **✅ Dropped IQKeyboardManager** (commit `ec93325`): its keyboard-avoidance was vestigial (every field sits above its bottom inputView), so just removed the enable/toolbar calls + the pod.
 - **✅ Dropped IQDropDownTextField → native `OSTDropDownField`** (commit `1c1ecca`): a small UITextField + UIPickerView/UIDatePicker that reproduces the used API; swapped XIB custom classes + outlet types on event/station/sort/date fields.
-- **✅ Dropped MagicalRecord (Phase 5) — zero pods remain.** `pod install` reports 0 dependencies. The Podfile is kept (empty) so the workspace stays valid; **optional final cleanup:** fully deintegrate CocoaPods (remove the `[CP]` build phases + Pods xcconfig base settings, build the `.xcodeproj` directly, delete `Podfile`/`Pods/`/`.xcworkspace`).
+- **✅ Dropped MagicalRecord (Phase 5) — zero pods.**
+- **✅ CocoaPods fully deintegrated.** Ran `pod deintegrate` (removed the `[CP]` build phases, Pods xcconfig base configs, and the Pods group), then deleted `Podfile`, `Podfile.lock`, `Pods/`, and `OST Tracker.xcworkspace`. **The app now builds from `OST Tracker.xcodeproj` directly** (shared schemes "OST Remote" / "OST Remote Dev"). Build commands no longer use `-workspace`; use `-project "OST Tracker.xcodeproj"`. Both targets build + 19 tests green standalone. **OST Remote is now dependency-free, all-Swift UIKit on iOS 12.**
 
 ## Phase 7 — Optional: lift the floor
 If iPad mini 2/3 retire, bump deployment target → unlock async/await + SwiftUI for future features.

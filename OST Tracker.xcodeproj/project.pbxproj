@@ -50,7 +50,6 @@
 		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		384837C7720AAB88FADDA238 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
-		396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */; };
 		3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */; };
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
 		471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
@@ -60,7 +59,6 @@
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		532D5B3FE4BD1FB322981FF6 /* OSTEditEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */; };
 		567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */; };
-		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
 		5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */; };
@@ -150,7 +148,6 @@
 		6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
-		6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */; };
 		73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */; };
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
@@ -259,7 +256,6 @@
 		033E71BE206001FD00CB9BD8 /* apnumberpad_backspace_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@2x.png"; sourceTree = "<group>"; };
 		033E71BF206001FD00CB9BD8 /* apnumberpad_backspace_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apnumberpad_backspace_icon.png; sourceTree = "<group>"; };
 		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
-		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OSTSafeArea.m"; sourceTree = "<group>"; };
 		0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTSpinner.swift"; sourceTree = "<group>"; };
 		11F1BAE4B6BD10048636F490 /* OSTReachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTReachability.swift; path = "OST Tracker/Swift/OSTReachability.swift"; sourceTree = "<group>"; };
@@ -273,15 +269,11 @@
 		25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SyncServiceTests.swift; path = "OST TrackerTests/Swift/SyncServiceTests.swift"; sourceTree = "<group>"; };
 		30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MagicalRecordShimTests.swift; path = "OST TrackerTests/Swift/MagicalRecordShimTests.swift"; sourceTree = "<group>"; };
 		3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSmoke.swift; path = "OST Tracker/Swift/SwiftSmoke.swift"; sourceTree = "<group>"; };
-		3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainRoundTripTests.swift; path = "OST TrackerTests/Swift/KeychainRoundTripTests.swift"; sourceTree = "<group>"; };
-		427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDrawerContainer.swift; sourceTree = "<group>"; };
 		440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTAboutViewController.swift; sourceTree = "<group>"; };
-		4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.release.xcconfig"; sourceTree = "<group>"; };
 		54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTRunnerTrackerViewController.swift; sourceTree = "<group>"; };
 		55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MagicalRecordShim.swift; path = "OST Tracker/Swift/MagicalRecordShim.swift"; sourceTree = "<group>"; };
-		579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.debug.xcconfig"; sourceTree = "<group>"; };
 		5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTReviewSubmitViewController.swift; sourceTree = "<group>"; };
 		68F2986C3890234A3A81A335 /* FixtureLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FixtureLoader.swift; path = "OST TrackerTests/Swift/FixtureLoader.swift"; sourceTree = "<group>"; };
 		69B24303991152304B820254 /* OSTAuthBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTAuthBridge.swift; path = "OST Tracker/Swift/OSTAuthBridge.swift"; sourceTree = "<group>"; };
@@ -367,15 +359,10 @@
 		809E391C45FA035A2E0209DC /* APIClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = "OST Tracker/Swift/APIClient.swift"; sourceTree = "<group>"; };
 		98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDropDownField.swift; sourceTree = "<group>"; };
 		9E2CE940B9754C16E1809394 /* LiveAPITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveAPITests.swift; path = "OST TrackerTests/Swift/LiveAPITests.swift"; sourceTree = "<group>"; };
-		A0E751E4ADA6FD2038FFD486 /* Pods-OST Remote Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.debug.xcconfig"; sourceTree = "<group>"; };
-		A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTAlert.swift"; sourceTree = "<group>"; };
 		A802EAD220AFB69CF7A7E5BF /* fixtures */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fixtures; path = Verification/fixtures; sourceTree = SOURCE_ROOT; };
-		AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST TrackerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
-		B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		B8904C060C056AB96E283D0F /* CoreDataStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = "OST Tracker/Swift/CoreDataStack.swift"; sourceTree = "<group>"; };
 		BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEditEntryViewController.swift; sourceTree = "<group>"; };
-		BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_Remote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTBackend.swift; path = "OST Tracker/Swift/OSTBackend.swift"; sourceTree = "<group>"; };
 		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
 		D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTBaseViewController.m; sourceTree = "<group>"; };
@@ -407,10 +394,8 @@
 		D5C5BC59217E1CE70071D6CF /* OSTSyncManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSyncManager.h; sourceTree = "<group>"; };
 		D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTSyncManager.m; sourceTree = "<group>"; };
 		D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTCrossCheckViewController.swift; sourceTree = "<group>"; };
-		DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OST_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E584BEC7D7A12CC005D64BEC /* CoreDataStackTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStackTests.swift; path = "OST TrackerTests/Swift/CoreDataStackTests.swift"; sourceTree = "<group>"; };
 		E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTUtilitiesViewController.swift; sourceTree = "<group>"; };
-		EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev.release.xcconfig"; sourceTree = "<group>"; };
 		EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HarnessSmokeTests.swift; path = "OST TrackerTests/Swift/HarnessSmokeTests.swift"; sourceTree = "<group>"; };
 		F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIParsingTests.swift; path = "OST TrackerTests/Swift/APIParsingTests.swift"; sourceTree = "<group>"; };
 		F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEventSelectionViewController.swift; sourceTree = "<group>"; };
@@ -423,7 +408,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A2F2D6C1EF1BD42007CA921 /* Security.framework in Frameworks */,
-				56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +418,6 @@
 				D5C5BC53217E0B550071D6CF /* AVFoundation.framework in Frameworks */,
 				D5C5BC51217E0B480071D6CF /* AudioToolbox.framework in Frameworks */,
 				6A2F2D6D1EF1BD49007CA921 /* Security.framework in Frameworks */,
-				396DBEEF6C2BB9E4F1E571C5 /* Pods_OST_Remote_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +425,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F973D9A74959634619649C9 /* Pods_OST_TrackerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,10 +472,6 @@
 				D5C5BC52217E0B550071D6CF /* AVFoundation.framework */,
 				D5C5BC50217E0B480071D6CF /* AudioToolbox.framework */,
 				6A2F2D6B1EF1BD42007CA921 /* Security.framework */,
-				3D0D6AD5526D0018AF27F4C4 /* Pods_OST_Tracker.framework */,
-				DE3FD42F24001103B185480A /* Pods_OST_TrackerTests.framework */,
-				BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */,
-				A1FF52308D84D8373D16B013 /* Pods_OST_Remote_Dev.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -533,21 +511,6 @@
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
-		};
-		4B37AA18875D02B81B9F9A2B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */,
-				B865E2170A517AF2561CC3EF /* Pods-OST Tracker.release.xcconfig */,
-				427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */,
-				AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */,
-				579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */,
-				4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */,
-				A0E751E4ADA6FD2038FFD486 /* Pods-OST Remote Dev.debug.xcconfig */,
-				EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
 		};
 		6A2F2D6E1EF1C46B007CA921 /* SessionManager */ = {
 			isa = PBXGroup;
@@ -678,7 +641,6 @@
 				6AEFFC071EEF83DA009EEE21 /* OST Tracker */,
 				6AEFFC211EEF83DA009EEE21 /* OST TrackerTests */,
 				6AEFFC061EEF83DA009EEE21 /* Products */,
-				4B37AA18875D02B81B9F9A2B /* Pods */,
 				0DF73CC3B87086394F68562D /* Frameworks */,
 				A802EAD220AFB69CF7A7E5BF /* fixtures */,
 			);
@@ -815,7 +777,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OST Remote" */;
 			buildPhases = (
-				6A5E0CED1EF1B25E00399EEC /* [CP] Check Pods Manifest.lock */,
 				6A5E0CEE1EF1B25E00399EEC /* Sources */,
 				6A5E0CFC1EF1B25E00399EEC /* Frameworks */,
 				6A5E0CFE1EF1B25E00399EEC /* Resources */,
@@ -833,7 +794,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AEFFC271EEF83DA009EEE21 /* Build configuration list for PBXNativeTarget "OST Remote Dev" */;
 			buildPhases = (
-				1809B394149CDF9D2F9497CF /* [CP] Check Pods Manifest.lock */,
 				6AEFFC011EEF83DA009EEE21 /* Sources */,
 				6AEFFC021EEF83DA009EEE21 /* Frameworks */,
 				6AEFFC031EEF83DA009EEE21 /* Resources */,
@@ -851,7 +811,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AEFFC2A1EEF83DA009EEE21 /* Build configuration list for PBXNativeTarget "OST TrackerTests" */;
 			buildPhases = (
-				029F939C1E087B3BE333E3AE /* [CP] Check Pods Manifest.lock */,
 				6AEFFC1A1EEF83DA009EEE21 /* Sources */,
 				6AEFFC1B1EEF83DA009EEE21 /* Frameworks */,
 				6AEFFC1C1EEF83DA009EEE21 /* Resources */,
@@ -1004,60 +963,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		029F939C1E087B3BE333E3AE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OST TrackerTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1809B394149CDF9D2F9497CF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OST Remote Dev-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6A5E0CED1EF1B25E00399EEC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OST Remote-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6AA6E9D71EF0E4E30061EEB0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1269,7 +1174,6 @@
 /* Begin XCBuildConfiguration section */
 		6A5E0D071EF1B25E00399EEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1311,7 +1215,6 @@
 		};
 		6A5E0D081EF1B25E00399EEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4CF7A6D57F36DAB573148C1B /* Pods-OST Remote.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1462,7 +1365,6 @@
 		};
 		6AEFFC281EEF83DA009EEE21 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0E751E4ADA6FD2038FFD486 /* Pods-OST Remote Dev.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1505,7 +1407,6 @@
 		};
 		6AEFFC291EEF83DA009EEE21 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC360162C7A38DB3DF8C3D44 /* Pods-OST Remote Dev.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1548,7 +1449,6 @@
 		};
 		6AEFFC2B1EEF83DA009EEE21 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 427692031F92F5E88F95FFF3 /* Pods-OST TrackerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "OST TrackerTests/Info.plist";
@@ -1563,7 +1463,6 @@
 		};
 		6AEFFC2C1EEF83DA009EEE21 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AB77EAFA7F49A4F7CE36D115 /* Pods-OST TrackerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "OST TrackerTests/Info.plist";
