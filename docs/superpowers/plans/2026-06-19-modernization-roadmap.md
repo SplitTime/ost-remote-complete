@@ -20,8 +20,8 @@ Event/Aid selection ✅ → Review/Sync ✅ → Cross Check ✅ → Live Entry �
 - **Review/Sync — done & verified** (Swift, commits `fd1f7aa`..`<height fix>`): table/sort/CSV export/sync-delegate/edit-entry ports; dropped the dead `onSubmit_old:` and the iPhone-X/XR nudge. **Sync-button bug fully fixed:** it was hidden *behind the table* (the button is before the tableView in XIB z-order, so the grown table covered it on tall screens) AND split/mis-sized by the safe-area pass. Fix: insert `btnSync` above the table, match the share button's vertical frame, and inset the table so rows clear it. Confirmed on device.
 - **UX cleanup to fold in:** the event/aid-selection dropdowns show a floating blue circle-checkmark (`btnNext`, the "Begin Tracking" asset) above the picker — looks awkward/redundant. Redesign the dropdown confirm UX (confirm-on-select or a proper toolbar "Done"); drop the floating checkmark.
 
-## Phase 3 — Drawer shell → drop MFSideMenu (deferred; pure refactor, low value/high risk)
-Native Swift right-side drawer container; remove `MFSideMenu`. Deprioritized vs. Phase 4 — it's a no-user-facing-change refactor with app-wide navigation risk and is hard to verify (sim drawer driving is unreliable). Do when convenient.
+## Phase 3 — Drawer shell → drop MFSideMenu ✅ DONE
+Replaced MFSideMenu with a native `OSTDrawerContainer` (commit `64689a8`): center slides left 270pt to reveal the right menu, dimmed tap-to-dismiss overlay. Same call sites (`toggleRightSideMenuCompletion`, `centerViewController`/`rightMenuViewController`); `setMenuState(.closed)`→`closeDrawer()`. Pod dropped.
 
 ## Phase 4 — Networking: AFNetworking → `APIClient` ✅ DONE
 Routed every endpoint through the Swift `APIClient`/`OSTBackend` (URLSession) and **dropped AFNetworking** (commit `8a57249`, 14→13 pods). `OSTNetworkManager` is now a plain `NSObject` token-holder + native reachability (`OSTReachability`/`NWPathMonitor`); deleted the dead Obj-C category methods, `JSONResponseSerializerWithData`, and `OSTLoginViewController`. Golden-master payload test still green.
