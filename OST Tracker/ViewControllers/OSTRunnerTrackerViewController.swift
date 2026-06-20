@@ -53,6 +53,74 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
     private var rightBitKey: String?
     private var didApplySafeAreaShift = false
 
+    // MARK: - Auto Sync status strip
+
+    private let statusStrip: UILabel = {
+        let l = UILabel()
+        l.textAlignment = .center
+        l.font = .systemFont(ofSize: 13, weight: .semibold)
+        l.isUserInteractionEnabled = true
+        l.isHidden = true
+        return l
+    }()
+    private var statusStripHeight: CGFloat = 28
+    private var didInsertStatusStrip = false
+    private var appliedStripShift: CGFloat = 0
+
+    private func color(for state: AutoSyncState) -> (UIColor, UIColor) {
+        switch state {
+        case .synced:  return (UIColor(red: 88/255, green: 182/255, blue: 73/255, alpha: 1), .white)
+        case .pending: return (UIColor(red: 52/255, green: 120/255, blue: 200/255, alpha: 1), .white)
+        case .syncing: return (UIColor(red: 1, green: 0.85, blue: 0.30, alpha: 1), .black)
+        case .failed:  return (UIColor(red: 247/255, green: 45/255, blue: 0, alpha: 1), .white)
+        case .offline: return (UIColor(white: 0.55, alpha: 1), .white)
+        case .disabled: return (.clear, .clear)
+        }
+    }
+
+    private func renderStatus(_ status: AutoSyncStatus) {
+        let visible = status.state != .disabled
+        statusStrip.isHidden = !visible
+        guard visible else { layoutStatusStrip(); return }
+        let (bg, fg) = color(for: status.state)
+        statusStrip.backgroundColor = bg
+        statusStrip.textColor = fg
+        statusStrip.text = status.stripText
+        layoutStatusStrip()
+    }
+
+    @objc private func onStatusChanged() { renderStatus(AutoSyncController.shared.currentStatus) }
+
+    @objc private func onStripTapped() {
+        guard AutoSyncController.shared.currentStatus.isTappableForRetry else { return }
+        AutoSyncController.shared.forceRetry()
+    }
+
+    private func layoutStatusStrip() {
+        if !didInsertStatusStrip {
+            didInsertStatusStrip = true
+            view.addSubview(statusStrip)
+            statusStrip.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onStripTapped)))
+        }
+        let visible = !statusStrip.isHidden
+        let top = headerContainerView.frame.maxY
+        statusStrip.frame = CGRect(x: 0, y: top, width: view.bounds.width, height: visible ? statusStripHeight : 0)
+        view.bringSubviewToFront(statusStrip)
+
+        let shift = visible ? statusStripHeight : 0
+        applyStripShift(to: shift)
+    }
+
+    private func applyStripShift(to shift: CGFloat) {
+        let delta = shift - appliedStripShift
+        guard abs(delta) > 0.5 else { return }
+        appliedStripShift = shift
+        for sub in view.subviews {
+            if sub == numberPadContainerView || sub == headerContainerView || sub == statusStrip { continue }
+            sub.frame.origin.y += delta
+        }
+    }
+
     private static let didRegisterBibNotification = Notification.Name("OSTRunnerTrackerViewControllerDidRegisterBibNotification")
 
     // MARK: - Lifecycle
@@ -140,6 +208,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         applySafeAreaShiftIfNeeded()
+        layoutStatusStrip()
         runnerBadge.width = min(0.58 * view.width, 350)
         runnerBadge.centerX = lblPersonAdded.centerX
         runnerBadge.adjustFontSizes()
@@ -180,6 +249,9 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(onStatusChanged),
+                                               name: AutoSyncController.statusChangedNotification, object: nil)
+        renderStatus(AutoSyncController.shared.currentStatus)
         AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
         lblTitle.text = CurrentCourse.getCurrentCourse()?.splitName
 
@@ -258,6 +330,11 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
             btnRight.right = view.right - 10
             btnRight.top = btnLeft.top
         }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: AutoSyncController.statusChangedNotification, object: nil)
     }
 
     // MARK: - Actions
