@@ -15,7 +15,7 @@
 #import "OST_Remote_Dev-Swift.h"
 #endif
 // OSTRunnerTrackerViewController is now Swift (visible via the generated header above).
-#import "OSTRightMenuViewController.h"
+// OSTRightMenuViewController is now Swift (visible via the generated header above).
 // OSTReviewSubmitViewController is now Swift (visible via the generated header above).
 #import "CurrentCourse.h"
 #import "CourseSplits.h"

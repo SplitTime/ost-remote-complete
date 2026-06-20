@@ -47,6 +47,7 @@
 		2E7F8C5A9B6D4A2C8F1E3B /* LiveReadsMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B979BBF614BE8B9DD /* LiveReadsMerge.swift */; };
 		2F5AB1F5E6634215E9CE16EA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */; };
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
+		3610069709680EB51D849B85 /* OSTRightMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C32EE56853BF4E478C1CFE2 /* OSTRightMenuViewController.swift */; };
 		3656E03ADC163D6DCBBBDEC7 /* AutoSyncControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6F4B33014E05F02E69E8B3 /* AutoSyncControllerTests.swift */; };
 		3845FB45995EEA4655C28718 /* OSTRaceStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C55CF36A31CA556F5668957 /* OSTRaceStatusViewController.swift */; };
 		384837C7720AAB88FADDA238 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
@@ -63,6 +64,7 @@
 		4905C6E7B7987E3F9055BE36 /* AutoSyncObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8208D41E5E23B3B9B57D109B /* AutoSyncObserver.h */; };
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
+		4DDAC9290F0FFAE67EBBD659 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53D229A9F62EF7554F1D81 /* MenuRow.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
@@ -81,10 +83,6 @@
 		678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */; };
 		67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
-		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
-		6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
-		6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */; };
-		6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */; };
 		6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
 		6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
 		6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
@@ -167,6 +165,7 @@
 		73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */; };
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
 		7755EC044A44052A756B3C2F /* BottomSheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A710059E1088BE6106E8F2 /* BottomSheetPicker.swift */; };
+		788968DCA5FF4A27DE6CF54E /* MenuRowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9642AFAB581C9F265888D7E /* MenuRowTests.swift */; };
 		7A8DDEFE6FEB6AE0F0D5111A /* AutoSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A686F1D356962B113CE83F /* AutoSyncEngine.swift */; };
 		7D601200BB2A4398B455 /* LiveReadsMergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED544AB7CCD4472A253 /* LiveReadsMergeTests.swift */; };
 		7E43E7040188AB731BADBAE8 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234099818880084FF76C4A4 /* AutoSyncController.swift */; };
@@ -200,6 +199,7 @@
 		C0B830FF0E9EE86AE7E9348A /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
 		C1A21A365A3C880DE61C4DC7 /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
 		C261404CBC1C810470E0C24A /* SubmitPayloadGoldenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */; };
+		C31ECF7DEBAB9900DB4CD9D3 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53D229A9F62EF7554F1D81 /* MenuRow.swift */; };
 		C3D4E5F607182940B4C5D6E7 /* OSTLiveReadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6071829A3B4C5D6 /* OSTLiveReadsViewController.swift */; };
 		C4E907F13CFD479BDDB397CB /* LiveTimeSubmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6E64DBFAC6920FFD903AAD /* LiveTimeSubmitter.swift */; };
 		C564D8E315A996A5DA450C0E /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D359F175681A099706509F21 /* AutoSyncScheduler.swift */; };
@@ -249,6 +249,7 @@
 		D5C5BC56217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		DEC344A5901722DC72E4C591 /* AutoSyncEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126838CE715CD49532177CC /* AutoSyncEngineTests.swift */; };
+		E0855920D4908DBFCDA77FEF /* OSTRightMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C32EE56853BF4E478C1CFE2 /* OSTRightMenuViewController.swift */; };
 		E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
 		E7EE459C85E5B615EE627351 /* SelectableOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7797786BCBA7794199B51B1E /* SelectableOptionList.swift */; };
@@ -301,6 +302,7 @@
 		30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MagicalRecordShimTests.swift; path = "OST TrackerTests/Swift/MagicalRecordShimTests.swift"; sourceTree = "<group>"; };
 		354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppearanceControllerTests.swift; path = "OST TrackerTests/Swift/AppearanceControllerTests.swift"; sourceTree = "<group>"; };
 		3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSmoke.swift; path = "OST Tracker/Swift/SwiftSmoke.swift"; sourceTree = "<group>"; };
+		3C32EE56853BF4E478C1CFE2 /* OSTRightMenuViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTRightMenuViewController.swift; sourceTree = "<group>"; };
 		3FC13D2600034E4CB79A1E5F /* BibEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BibEntry.swift; path = "OST Tracker/Swift/BibEntry.swift"; sourceTree = "<group>"; };
 		42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainRoundTripTests.swift; path = "OST TrackerTests/Swift/KeychainRoundTripTests.swift"; sourceTree = "<group>"; };
 		43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDrawerContainer.swift; sourceTree = "<group>"; };
@@ -313,9 +315,6 @@
 		69B24303991152304B820254 /* OSTAuthBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTAuthBridge.swift; path = "OST Tracker/Swift/OSTAuthBridge.swift"; sourceTree = "<group>"; };
 		6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Login.h"; sourceTree = "<group>"; };
 		6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Login.m"; sourceTree = "<group>"; };
-		6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTRightMenuViewController.h; sourceTree = "<group>"; };
-		6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTRightMenuViewController.m; sourceTree = "<group>"; };
-		6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRightMenuViewController.xib; sourceTree = "<group>"; };
 		6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewSubmitViewController.xib; sourceTree = "<group>"; };
 		6A11A0671EF2CE5C00D6D2CA /* _CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CurrentCourse.h; sourceTree = "<group>"; };
 		6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CurrentCourse.m; sourceTree = "<group>"; };
@@ -386,6 +385,7 @@
 		6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OST TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6B53D229A9F62EF7554F1D81 /* MenuRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MenuRow.swift; path = "OST Tracker/Swift/DesignSystem/MenuRow.swift"; sourceTree = "<group>"; };
 		72465498F29B8EE0996EC60B /* RaceStatusTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RaceStatusTests.swift; path = "OST TrackerTests/Swift/RaceStatusTests.swift"; sourceTree = "<group>"; };
 		7797786BCBA7794199B51B1E /* SelectableOptionList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectableOptionList.swift; path = "OST Tracker/Swift/DesignSystem/SelectableOptionList.swift"; sourceTree = "<group>"; };
 		77A686F1D356962B113CE83F /* AutoSyncEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngine.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncEngine.swift"; sourceTree = "<group>"; };
@@ -450,6 +450,7 @@
 		D5C5BC55217E0B980071D6CF /* OSTSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTSound.m; sourceTree = "<group>"; };
 		D788CC23A1A220B2901A /* LiveReadsRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsRequest.swift; path = "OST Tracker/Swift/LiveReadsRequest.swift"; sourceTree = "<group>"; };
 		D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTCrossCheckViewController.swift; sourceTree = "<group>"; };
+		D9642AFAB581C9F265888D7E /* MenuRowTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MenuRowTests.swift; path = "OST TrackerTests/Swift/MenuRowTests.swift"; sourceTree = "<group>"; };
 		E584BEC7D7A12CC005D64BEC /* CoreDataStackTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStackTests.swift; path = "OST TrackerTests/Swift/CoreDataStackTests.swift"; sourceTree = "<group>"; };
 		E5A710059E1088BE6106E8F2 /* BottomSheetPicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BottomSheetPicker.swift; path = "OST Tracker/Swift/DesignSystem/BottomSheetPicker.swift"; sourceTree = "<group>"; };
 		E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTUtilitiesViewController.swift; sourceTree = "<group>"; };
@@ -511,6 +512,7 @@
 				98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */,
 				7797786BCBA7794199B51B1E /* SelectableOptionList.swift */,
 				E5A710059E1088BE6106E8F2 /* BottomSheetPicker.swift */,
+				6B53D229A9F62EF7554F1D81 /* MenuRow.swift */,
 			);
 			name = DesignSystem;
 			sourceTree = "<group>";
@@ -569,6 +571,7 @@
 				C126838CE715CD49532177CC /* AutoSyncEngineTests.swift */,
 				A03DBD0080108659979FB912 /* AutoSyncStatusTests.swift */,
 				7F1D7FC4F826A30098C0F452 /* LiveTimeSubmitterTests.swift */,
+				D9642AFAB581C9F265888D7E /* MenuRowTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -605,9 +608,6 @@
 			children = (
 				6A41AE021EF8B58300C9F834 /* TableViewCells */,
 				6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */,
-				6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */,
-				6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */,
-				6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */,
 				6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */,
 				6A5005E81EFA187F00FA1751 /* OSTReviewSectionHeader.h */,
 				6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */,
@@ -637,6 +637,7 @@
 				98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */,
 				43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */,
 				B2C3D4E5F6071829A3B4C5D6 /* OSTLiveReadsViewController.swift */,
+				3C32EE56853BF4E478C1CFE2 /* OSTRightMenuViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -991,7 +992,6 @@
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
-				6A11A0571EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				18D41944242466C2002010E3 /* OSTUtilitiesViewController.xib in Resources */,
 				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
@@ -1019,7 +1019,6 @@
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
-				6A11A0581EF2CAF800D6D2CA /* OSTRightMenuViewController.xib in Resources */,
 				18D4194724246CE8002010E3 /* OSTUtilitiesViewController.xib in Resources */,
 				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
@@ -1073,7 +1072,6 @@
 				6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
-				6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
@@ -1150,6 +1148,8 @@
 				4811E290E677F846AB0DD5B8 /* AutoSyncStatus.swift in Sources */,
 				C4E907F13CFD479BDDB397CB /* LiveTimeSubmitter.swift in Sources */,
 				2A374BEC0A36EEB3F16DE76C /* OSTToast.swift in Sources */,
+				C31ECF7DEBAB9900DB4CD9D3 /* MenuRow.swift in Sources */,
+				3610069709680EB51D849B85 /* OSTRightMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,7 +1161,6 @@
 				6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
-				6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */,
 				6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
 				6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
@@ -1238,6 +1237,8 @@
 				F10E9912182CC64621C21150 /* AutoSyncStatus.swift in Sources */,
 				0BE5A7A59DC68436ABD7BF3F /* LiveTimeSubmitter.swift in Sources */,
 				91E88D114224FA46787011A7 /* OSTToast.swift in Sources */,
+				4DDAC9290F0FFAE67EBBD659 /* MenuRow.swift in Sources */,
+				E0855920D4908DBFCDA77FEF /* OSTRightMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,6 +1275,7 @@
 				DEC344A5901722DC72E4C591 /* AutoSyncEngineTests.swift in Sources */,
 				561AADB59F503F338CC7E536 /* AutoSyncStatusTests.swift in Sources */,
 				009831BADDC027659B3D29C1 /* LiveTimeSubmitterTests.swift in Sources */,
+				788968DCA5FF4A27DE6CF54E /* MenuRowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
