@@ -7,45 +7,39 @@
 //
 
 #import "OSTNetworkManager.h"
-#import "JSONResponseSerializerWithData.h"
+// Generated Swift header — for OSTReachability. Module name differs per target.
+#if __has_include("OST_Remote-Swift.h")
+#import "OST_Remote-Swift.h"
+#elif __has_include("OST_Remote_Dev-Swift.h")
+#import "OST_Remote_Dev-Swift.h"
+#endif
 
 @implementation OSTNetworkManager
 
 - (id)init
 {
-    self = [[OSTNetworkManager alloc] initWithBaseURL:[NSURL URLWithString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"]]];
-    
+    self = [super init];
     if (self)
     {
         self.serviceURL = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BACKEND_URL"];
-        self.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-        self.securityPolicy.allowInvalidCertificates = YES;
-        [self.securityPolicy setValidatesDomainName:NO];
-        self.responseSerializer = [JSONResponseSerializerWithData serializer];
-        self.requestSerializer = [AFJSONRequestSerializer serializer];
-        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
-        [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-        
-        [self.requestSerializer setTimeoutInterval:OSTNetworkTimeout];
-        
-        [self.reachabilityManager startMonitoring];
+        [self startMonitoring];
     }
-    
     return self;
 }
 
-- (void)addTokenToHeader: (NSString*) token
+- (void)addTokenToHeader:(NSString*)token
 {
-    if (token.length == 0)
-    {
-        // Clear the header — without the early return this fell through and set a
-        // malformed "bearer (null)", which the server then rejected.
-        [self.requestSerializer setValue:@"" forHTTPHeaderField:@"Authorization"];
-        return;
-    }
+    self.authToken = token.length ? token : nil;
+}
 
-    [self.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",token] forHTTPHeaderField:@"Authorization"];
+- (void)startMonitoring
+{
+    [[OSTReachability shared] start];
+}
+
+- (BOOL)isReachable
+{
+    return [OSTReachability shared].isReachable;
 }
 
 @end

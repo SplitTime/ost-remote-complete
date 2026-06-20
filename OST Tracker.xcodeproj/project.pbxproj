@@ -60,6 +60,7 @@
 		56CF38085D1E176CF96D3C7B /* Pods_OST_Remote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC96FF91D68095F85B304295 /* Pods_OST_Remote.framework */; };
 		5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
+		6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1BAE4B6BD10048636F490 /* OSTReachability.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
@@ -99,26 +100,21 @@
 		6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */; };
 		6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */; };
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
-		6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
-		6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
 		6A549E561EEF881C00783F80 /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
 		6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
 		6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
 		6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
-		6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */; };
 		6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
 		6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */; };
 		6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */; };
 		6A5E0CF81EF1B25E00399EEC /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */; };
-		6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */; };
 		6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
 		6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
 		6A5E0D011EF1B25E00399EEC /* OSTEventSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */; };
 		6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
-		6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */; };
 		6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
 		6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
 		6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */; };
@@ -133,18 +129,16 @@
 		6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */; };
 		6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */; };
 		6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */; };
-		6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
-		6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
 		6AA399801EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
 		6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
-		6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */; };
 		6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
 		6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */; };
 		6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */; };
 		6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
 		6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
 		6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
+		6AB4A6C295D91E387E2ED658 /* OSTReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1BAE4B6BD10048636F490 /* OSTReachability.swift */; };
 		6ABFC1E11EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6ABFC1E21EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
@@ -261,6 +255,7 @@
 		054C4C7C5D571C9B25F73CDA /* Pods-OST Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Tracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Tracker/Pods-OST Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OSTSafeArea.m"; sourceTree = "<group>"; };
 		0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTSpinner.swift"; sourceTree = "<group>"; };
+		11F1BAE4B6BD10048636F490 /* OSTReachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTReachability.swift; path = "OST Tracker/Swift/OSTReachability.swift"; sourceTree = "<group>"; };
 		149C18108290E0987474D395 /* LiveTimeEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeEntry.swift; path = "OST Tracker/Swift/LiveTimeEntry.swift"; sourceTree = "<group>"; };
 		14C24566B72849E7915F9603 /* APIModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIModels.swift; path = "OST Tracker/Swift/APIModels.swift"; sourceTree = "<group>"; };
 		16BAED92F7B8A3B859B03965 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "OST Tracker/Swift/LoginViewController.swift"; sourceTree = "<group>"; };
@@ -313,9 +308,6 @@
 		6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTReviewSectionHeader.m; sourceTree = "<group>"; };
 		6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewSectionHeader.xib; sourceTree = "<group>"; };
 		6A549E4B1EEF866F00783F80 /* OSTDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSTDataModel.xcdatamodel; sourceTree = "<group>"; };
-		6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTLoginViewController.h; sourceTree = "<group>"; };
-		6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTLoginViewController.m; sourceTree = "<group>"; };
-		6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTLoginViewController.xib; sourceTree = "<group>"; };
 		6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTEventSelectionViewController.xib; sourceTree = "<group>"; };
 		6A549E581EEF8A5E00783F80 /* OSTNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTNetworkManager.h; sourceTree = "<group>"; };
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
@@ -335,13 +327,9 @@
 		6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckFooter.m; sourceTree = "<group>"; };
 		6A95F55B1F9F019F00E87570 /* OSTCrossCheckHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckHeader.h; sourceTree = "<group>"; };
 		6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckHeader.m; sourceTree = "<group>"; };
-		6AA399791EFC1FE50097ED63 /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
-		6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
 		6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+OSTErrors.m"; sourceTree = "<group>"; };
 		6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRunnerTrackerViewController.xib; sourceTree = "<group>"; };
-		6AA6E9D01EF0DF320061EEB0 /* OSTNetworkManager+Events.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Events.h"; sourceTree = "<group>"; };
-		6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Events.m"; sourceTree = "<group>"; };
 		6AA6E9DA1EF0E7D70061EEB0 /* _EntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EntryModel.h; sourceTree = "<group>"; };
 		6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EntryModel.m; sourceTree = "<group>"; };
 		6AA6E9DC1EF0E7D70061EEB0 /* _EventModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EventModel.h; sourceTree = "<group>"; };
@@ -512,6 +500,7 @@
 				16BAED92F7B8A3B859B03965 /* LoginViewController.swift */,
 				69B24303991152304B820254 /* OSTAuthBridge.swift */,
 				BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */,
+				11F1BAE4B6BD10048636F490 /* OSTReachability.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -578,9 +567,6 @@
 			isa = PBXGroup;
 			children = (
 				6A41AE021EF8B58300C9F834 /* TableViewCells */,
-				6A549E4D1EEF86B900783F80 /* OSTLoginViewController.h */,
-				6A549E4E1EEF86B900783F80 /* OSTLoginViewController.m */,
-				6A549E4F1EEF86B900783F80 /* OSTLoginViewController.xib */,
 				6A549E541EEF881C00783F80 /* OSTEventSelectionViewController.xib */,
 				6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */,
 				6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */,
@@ -622,14 +608,10 @@
 			children = (
 				6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */,
 				6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */,
-				6AA399791EFC1FE50097ED63 /* JSONResponseSerializerWithData.h */,
-				6AA3997A1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m */,
 				6A549E581EEF8A5E00783F80 /* OSTNetworkManager.h */,
 				6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */,
 				6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */,
 				6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */,
-				6AA6E9D01EF0DF320061EEB0 /* OSTNetworkManager+Events.h */,
-				6AA6E9D11EF0DF320061EEB0 /* OSTNetworkManager+Events.m */,
 				6A11A0771EF3809B00D6D2CA /* OSTNetworkManager+Entries.h */,
 				6A11A0781EF3809B00D6D2CA /* OSTNetworkManager+Entries.m */,
 			);
@@ -959,7 +941,6 @@
 				D52BBFCC227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */,
 				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */,
-				6A5E0D031EF1B25E00399EEC /* OSTLoginViewController.xib in Resources */,
 				D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */,
 				D52BBFD622852B6E0035FE07 /* OSTRunnerBadge.xib in Resources */,
 				033E71C9206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
@@ -993,7 +974,6 @@
 				D52BBFCD227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */,
 				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */,
-				6A549E511EEF86B900783F80 /* OSTLoginViewController.xib in Resources */,
 				D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */,
 				D52BBFD722852B6E0035FE07 /* OSTRunnerBadge.xib in Resources */,
 				033E71CA206001FE00CB9BD8 /* apnumberpad_backspace_icon@2x.png in Resources */,
@@ -1037,7 +1017,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OST TrackerTests/Pods-OST TrackerTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CHCSVParser/CHCSVParser.framework",
 				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
@@ -1054,7 +1033,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHCSVParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
@@ -1117,7 +1095,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OST Remote/Pods-OST Remote-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CHCSVParser/CHCSVParser.framework",
 				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
@@ -1134,7 +1111,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHCSVParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
@@ -1174,7 +1150,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-OST Remote Dev/Pods-OST Remote Dev-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/CHCSVParser/CHCSVParser.framework",
 				"${BUILT_PRODUCTS_DIR}/DejalActivityView/DejalActivityView.framework",
 				"${BUILT_PRODUCTS_DIR}/FXKeychain/FXKeychain.framework",
@@ -1191,7 +1166,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CHCSVParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DejalActivityView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXKeychain.framework",
@@ -1237,7 +1211,6 @@
 				6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				033E71C3206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */,
-				6A5E0CF31EF1B25E00399EEC /* OSTLoginViewController.m in Sources */,
 				6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EA1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
@@ -1252,10 +1225,8 @@
 				033E71C7206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */,
 				6A2F2D711EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				D52BBFDE22852BD30035FE07 /* OSTRunnerBadgeViewModel.m in Sources */,
-				6A5E0CFA1EF1B25E00399EEC /* OSTNetworkManager+Events.m in Sources */,
 				6A41ADFE1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,
 				6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */,
-				6AA3997B1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */,
 				6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				D524F05C21A443B6006DF352 /* OSTCheckmarkView.m in Sources */,
@@ -1283,6 +1254,7 @@
 				532D5B3FE4BD1FB322981FF6 /* OSTEditEntryViewController.swift in Sources */,
 				E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */,
 				BFA683CE97A77D461E74E7CA /* OSTBackend.swift in Sources */,
+				6AB4A6C295D91E387E2ED658 /* OSTReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1309,7 +1281,6 @@
 				6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				033E71C4206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */,
-				6A549E501EEF86B900783F80 /* OSTLoginViewController.m in Sources */,
 				6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5005EB1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
@@ -1324,10 +1295,8 @@
 				033E71C8206001FE00CB9BD8 /* NSBundle+APNumberPad.m in Sources */,
 				6A2F2D721EF1C49A007CA921 /* OSTSessionManager.m in Sources */,
 				D52BBFDF22852BD30035FE07 /* OSTRunnerBadgeViewModel.m in Sources */,
-				6AA6E9D21EF0DF320061EEB0 /* OSTNetworkManager+Events.m in Sources */,
 				6A41ADFF1EF7F2BF00C9F834 /* _EffortModel.m in Sources */,
 				6AA399801EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */,
-				6AA3997C1EFC1FE50097ED63 /* JSONResponseSerializerWithData.m in Sources */,
 				6A11A06E1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */,
 				6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */,
 				D524F05D21A443B6006DF352 /* OSTCheckmarkView.m in Sources */,
@@ -1355,6 +1324,7 @@
 				C6401B6575B5EC2BA6DF5564 /* OSTEditEntryViewController.swift in Sources */,
 				9C7CA330A1B919DC81EA2721 /* OSTAuthBridge.swift in Sources */,
 				3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */,
+				6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

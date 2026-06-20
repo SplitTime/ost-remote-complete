@@ -10,7 +10,6 @@
 import UIKit
 import MFSideMenu
 import MagicalRecord
-import AFNetworking
 import CoreData
 
 @objc(OSTUtilitiesViewController)
@@ -164,7 +163,7 @@ class OSTUtilitiesViewController: OSTBaseViewController {
 
     @IBAction func onLogout(_ sender: Any) {
         let app = AppDelegate.getInstance()
-        if app?.getNetworkManager()?.reachabilityManager.isReachable == false {
+        if app?.getNetworkManager()?.isReachable == false {
             let alert = UIAlertController(title: "Logout is disabled",
                                           message: "Please try again when you have an Internet connection",
                                           preferredStyle: .alert)

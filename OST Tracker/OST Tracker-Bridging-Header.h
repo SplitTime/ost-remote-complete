@@ -15,7 +15,6 @@
 #import "AppDelegate.h"
 #import "OSTBaseViewController.h"
 #import "UIViewController+OSTSafeArea.h"
-#import "OSTNetworkManager+Events.h"
 #import "OSTNetworkManager+Login.h"
 #import "UITextField+RemoveInputAssistant.h"
 // Review/Sync (Phase 2) Swift screen dependencies

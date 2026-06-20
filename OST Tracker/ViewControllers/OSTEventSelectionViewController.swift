@@ -18,7 +18,6 @@ import UIKit
 import CoreData
 import MFSideMenu
 import MagicalRecord
-import AFNetworking
 import IQDropDownTextField
 import IQKeyboardManager
 

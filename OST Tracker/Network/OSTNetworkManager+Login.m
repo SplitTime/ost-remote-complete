@@ -8,7 +8,6 @@
 
 #import "OSTNetworkManager+Login.h"
 #import "OSTSessionManager.h"
-#import "OSTLoginViewController.h"
 // OSTAuthBridge (Swift) performs the login POST through APIClient.
 #if __has_include("OST_Remote-Swift.h")
 #import "OST_Remote-Swift.h"
@@ -56,22 +55,7 @@
             [[AppDelegate getInstance].getNetworkManager addTokenToHeader:object[@"token"]];
             onCompletion(object);
     } errorBlock:^(NSError *error) {
-        if([[error errorsFromDictionary] containsString:@" errors: Invalid email or password"])
-        {
-            UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-            
-            while (topController.presentedViewController) {
-                topController = topController.presentedViewController;
-            }
-
-            OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
-            [topController presentViewController:loginVC animated:YES completion:nil];
-            loginVC.completionBlock = onCompletion;
-        }
-        else
-        {
-            onError(error);
-        }
+        onError(error);
     }];
 }
 

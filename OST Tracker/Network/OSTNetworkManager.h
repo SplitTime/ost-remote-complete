@@ -5,10 +5,12 @@
 //  Created by Luciano Castro on 6/12/17.
 //  Copyright © 2017 OST. All rights reserved.
 //
+//  No longer an AFHTTPSessionManager — all requests now run through the Swift
+//  APIClient/OSTBackend. This class is reduced to the shared auth-token holder
+//  (set after login, read by the submit) plus native reachability.
+//
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPSessionManager.h"
-#import "AFNetworking.h"
 
 typedef void (^VoidBlock)(void);
 typedef void (^OSTCompletionNumberBlock)(NSNumber* _Nullable number);
@@ -35,10 +37,14 @@ typedef void (^OSTErrorBlock)(NSError* _Nullable error);
 
 @end
 
-@interface OSTNetworkManager : AFHTTPSessionManager
+@interface OSTNetworkManager : NSObject
 
 @property (nonatomic,strong) NSString * _Nullable serviceURL;
+/// Raw bearer token from the last login; the submit reads it via the request.
+@property (nonatomic,copy) NSString * _Nullable authToken;
+@property (nonatomic,readonly) BOOL isReachable;
 
 - (void)addTokenToHeader: (NSString*_Nullable) token;
+- (void)startMonitoring;
 
 @end

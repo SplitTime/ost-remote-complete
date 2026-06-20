@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "OSTLoginViewController.h"
 #import "MFSideMenu.h"
 // Generated Swift header — module name differs between the two app targets.
 #if __has_include("OST_Remote-Swift.h")
@@ -50,7 +49,7 @@
     if (self.networkManager == nil)
     {
         self.networkManager = [[OSTNetworkManager alloc] init];
-        [self.networkManager.reachabilityManager startMonitoring];
+        [self.networkManager startMonitoring];
     }
     return self.networkManager;
 }
