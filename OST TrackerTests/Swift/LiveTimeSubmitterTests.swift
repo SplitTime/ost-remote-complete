@@ -56,8 +56,8 @@ final class LiveTimeSubmitterTests: XCTestCase {
         let submitter = LiveTimeSubmitter(
             login: { $0(.success(())) },
             postBatch: { _, _, done in
-                defer { batchIndex += 1 }
-                done(batchIndex == 0 ? .success(()) : .failure(URLError(.badServerResponse)))
+                let i = batchIndex; batchIndex += 1
+                done(i == 0 ? .success(()) : .failure(URLError(.badServerResponse)))
             },
             markSubmitted: { marked.append(contentsOf: $0) })
         let exp = expectation(description: "done")
