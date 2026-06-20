@@ -130,7 +130,6 @@
 		6A5E0CF91EF1B25E00399EEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC0C1EEF83DA009EEE21 /* AppDelegate.m */; };
 		6A5E0CFB1EF1B25E00399EEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
 		6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
-		6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
 		6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
 		6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
@@ -148,7 +147,6 @@
 		6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
 		6AA399801EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
-		6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */; };
 		6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
 		6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DD1EF0E7D70061EEB0 /* _EventModel.m */; };
 		6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DF1EF0E7D70061EEB0 /* EntryModel.m */; };
@@ -366,7 +364,6 @@
 		6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckHeader.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
 		6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+OSTErrors.m"; sourceTree = "<group>"; };
-		6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTRunnerTrackerViewController.xib; sourceTree = "<group>"; };
 		6AA6E9DA1EF0E7D70061EEB0 /* _EntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EntryModel.h; sourceTree = "<group>"; };
 		6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EntryModel.m; sourceTree = "<group>"; };
 		6AA6E9DC1EF0E7D70061EEB0 /* _EventModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EventModel.h; sourceTree = "<group>"; };
@@ -607,7 +604,6 @@
 			isa = PBXGroup;
 			children = (
 				6A41AE021EF8B58300C9F834 /* TableViewCells */,
-				6AA6E9CD1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib */,
 				6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */,
 				6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */,
 				6A11A0541EF2CAF800D6D2CA /* OSTRightMenuViewController.xib */,
@@ -990,7 +986,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
-				6A5E0D001EF1B25E00399EEC /* OSTRunnerTrackerViewController.xib in Resources */,
 				D52BBFD0227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
@@ -1019,7 +1014,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
-				6AA6E9CF1EF02CAB0061EEB0 /* OSTRunnerTrackerViewController.xib in Resources */,
 				D52BBFD1227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
