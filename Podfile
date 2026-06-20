@@ -11,7 +11,6 @@ def used_pods
 # JTObjectMapping, FXKeychain, Reachability (→ NWPathMonitor), DejalActivityView
 # (→ OSTSpinner), SimpleKeychain (session manager uses Security framework).
 pod 'MagicalRecord', '2.2'
-pod 'IQDropDownTextField', '1.1.0'
 pod 'MFSideMenu','0.5.5'
 
 end

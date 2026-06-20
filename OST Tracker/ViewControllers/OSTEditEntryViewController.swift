@@ -19,7 +19,6 @@
 import UIKit
 import CoreData
 import MagicalRecord
-import IQDropDownTextField
 
 @objc(OSTEditEntryViewController)
 class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
@@ -35,7 +34,7 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblRunner: UILabel!
     @IBOutlet weak var swchStoppedHere: UIButton!
-    @IBOutlet weak var txtDate: IQDropDownTextField!
+    @IBOutlet weak var txtDate: OSTDropDownField!
     @IBOutlet weak var pacerAndAidView: UIView!
     @IBOutlet weak var txtTime: UITextField!
     @IBOutlet weak var btnDelete: UIButton!
@@ -217,7 +216,7 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
         swchPacer.isSelected = (entry.withPacer as NSString?)?.boolValue ?? false
         swchStoppedHere.isSelected = (entry.stoppedHere as NSString?)?.boolValue ?? false
 
-        txtDate.date = entry.entryTime
+        txtDate.date = entry.entryTime ?? Date()
 
         let components = Calendar.current.dateComponents([.hour, .minute, .second], from: entry.entryTime ?? Date())
         customPicker.hours = components.hour ?? 0
@@ -240,12 +239,12 @@ class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {
 
     private func populateTimeAndFlags(_ entry: EntryModel) {
         entry.fullName = effort?.fullName
-        entry.entryTime = txtDate.date?.addingTimeInterval(Double(customPicker.getTimeInMS() / 1000))
+        entry.entryTime = txtDate.date.addingTimeInterval(Double(customPicker.getTimeInMS() / 1000))
         entry.displayTime = txtTime.text
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        let dayString = txtDate.date.map { formatter.string(from: $0) } ?? ""
+        let dayString = formatter.string(from: txtDate.date)
         let tzOffset = TimeZone.current.secondsFromGMT() / 60 / 60
         let sign = tzOffset < 0 ? "" : "+"
         entry.absoluteTime = String(format: "%@ %@\(sign)%02d:00", dayString, txtTime.text ?? "", tzOffset)

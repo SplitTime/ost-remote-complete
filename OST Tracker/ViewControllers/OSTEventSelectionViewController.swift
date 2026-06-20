@@ -18,7 +18,6 @@ import UIKit
 import CoreData
 import MFSideMenu
 import MagicalRecord
-import IQDropDownTextField
 
 @objc(OSTEventSelectionViewController)
 class OSTEventSelectionViewController: UIViewController {
@@ -37,8 +36,8 @@ class OSTEventSelectionViewController: UIViewController {
 
     // MARK: - XIB outlets
     @IBOutlet weak var btnNext: UIButton!
-    @IBOutlet weak var txtEvent: IQDropDownTextField!
-    @IBOutlet weak var txtStation: IQDropDownTextField!
+    @IBOutlet weak var txtEvent: OSTDropDownField!
+    @IBOutlet weak var txtStation: OSTDropDownField!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var imgTriangleAidStation: UIImageView!
     @IBOutlet weak var progressLabel: UILabel!

@@ -14,7 +14,6 @@ import UIKit
 import CoreData
 import MFSideMenu
 import MagicalRecord
-import IQDropDownTextField
 
 @objc(OSTReviewSubmitViewController)
 class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSource, UITableViewDelegate {
@@ -30,7 +29,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var btnReturnToLiveEntry: UIButton!
-    @IBOutlet weak var txtSortBy: IQDropDownTextField!
+    @IBOutlet weak var txtSortBy: OSTDropDownField!
     @IBOutlet weak var btnSync: UIButton!
     @IBOutlet weak var lblBadge: UILabel!
     @IBOutlet weak var syncIndicator: UIActivityIndicatorView!
