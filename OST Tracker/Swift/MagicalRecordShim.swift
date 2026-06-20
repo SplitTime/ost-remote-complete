@@ -147,6 +147,47 @@ extension NSManagedObject {
         return managed
     }
 
+    /// Reconciles this entity's table against a JSON:API `included` array.
+    /// Upserts every member whose `type` equals `type` (by the entity's
+    /// `relatedByAttribute`, via `mr_import`), then deletes any existing row whose
+    /// primary key is absent from that set — i.e. rows removed on the server.
+    /// No-ops when no member matches `type`, so a partial or malformed response
+    /// can't wipe the table.
+    ///
+    /// Pruning matches server vs. stored keys by their `String(describing:)` form,
+    /// so this is only reliable for String-keyed entities (e.g. `EffortModel` →
+    /// `effortId`). Numeric primary keys could stringify asymmetrically.
+    @objc(mr_reconcileFromIncluded:ofType:)
+    class func mr_reconcile(fromIncluded included: [[String: Any]], ofType type: String) {
+        let members = included.filter { ($0["type"] as? String) == type }
+        guard !members.isEmpty else { return }
+
+        let context = CoreDataStack.shared.viewContext
+        guard let entity = mrEntityDescription(in: context),
+              let primaryKey = entity.userInfo?["relatedByAttribute"] as? String,
+              let primaryAttr = entity.attributesByName[primaryKey] else { return }
+        let mappedKey = (primaryAttr.userInfo?["mappedKeyName"] as? String) ?? primaryKey
+
+        var serverKeys = Set<String>()
+        for object in members {
+            if let raw = mrValue(forKeyPath: mappedKey, in: object),
+               let value = mrConvert(raw, for: primaryAttr) {
+                serverKeys.insert(String(describing: value))
+            }
+            _ = mr_import(from: object)
+        }
+
+        for case let managed as NSManagedObject in mrFetch(predicate: nil, sort: nil, limit: 0) {
+            let key = managed.value(forKey: primaryKey).map { String(describing: $0) }
+            if key == nil || !serverKeys.contains(key!) {
+                context.delete(managed)
+            }
+        }
+
+        context.processPendingChanges()
+        NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+    }
+
     // MARK: - Private helpers
 
     /// Upsert by the entity's `relatedByAttribute` (the import primary key), mirroring
