@@ -21,7 +21,6 @@
 // Review/Sync (Phase 2) Swift screen dependencies
 #import "OSTReviewTableViewCell.h"
 #import "OSTReviewSectionHeader.h"
-#import "OSTEditEntryViewController.h"
 #import "UIView+Additions.h"
 #import "UILabel+Extension.h"
 #import "NSError+OSTErrors.h"
@@ -35,3 +34,4 @@
 #import "APNumberPad.h"
 #import "OSTSound.h"
 #import "OSTRunnerBadge.h"
+#import "CustomUIDatePicker.h"
