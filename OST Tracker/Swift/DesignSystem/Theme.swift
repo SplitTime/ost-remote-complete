@@ -32,6 +32,13 @@ enum Theme {
         static let field = UIFont.systemFont(ofSize: 17)
         static let button = UIFont.systemFont(ofSize: 18, weight: .semibold)
         static let caption = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        static let clock = UIFont.systemFont(ofSize: 34, weight: .bold)
+        static let bib = UIFont.systemFont(ofSize: 64, weight: .bold)
+        static let runnerName = UIFont.systemFont(ofSize: 24, weight: .bold)
+        /// Returns `font` resized to `size`, preserving weight/traits. For iPad up-scaling.
+        static func resized(_ font: UIFont, to size: CGFloat) -> UIFont {
+            UIFont(descriptor: font.fontDescriptor, size: size)
+        }
     }
 
     // MARK: Dynamic resolver
