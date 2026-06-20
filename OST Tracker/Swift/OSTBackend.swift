@@ -51,6 +51,44 @@ import Foundation
         request(LiveReadsRequest.path(groupId: groupId, splitName: splitName), completion: completion)
     }
 
+    // MARK: - Race Status reads (typed)
+
+    func fetchSpread(eventSlug: String,
+                     completion: @escaping (Result<EventSpread, Error>) -> Void) {
+        decodableRequest("events/\(eventSlug)/spread", as: EventSpread.self, completion: completion)
+    }
+
+    func fetchEvents(inGroup groupId: String,
+                     completion: @escaping (Result<[EventRef], Error>) -> Void) {
+        decodableRequest("event_groups/\(groupId)?include=events", as: JSONAPIDoc.self) { result in
+            switch result {
+            case .success(let doc):
+                let refs = doc.included
+                    .filter { $0.type == "events" }
+                    .map { EventRef(slug: $0.attributes.slug ?? "", name: $0.attributes.name ?? "") }
+                    .filter { !$0.slug.isEmpty }
+                completion(.success(refs))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    /// Connectivity-checked (autologin) typed GET, decoded via `APIClient.get`,
+    /// delivered on the main queue. Mirrors `request(_:completion:)` but Codable.
+    private func decodableRequest<T: Decodable>(_ path: String, as type: T.Type,
+                                                completion: @escaping (Result<T, Error>) -> Void) {
+        checker.check { [client] loginError in
+            if let loginError = loginError {
+                DispatchQueue.main.async { completion(.failure(loginError)) }
+                return
+            }
+            client.get(path, as: T.self) { result in
+                DispatchQueue.main.async { completion(result) }
+            }
+        }
+    }
+
     // MARK: - Write (entry submit) — transport only
 
     /// POSTs an already-built JSON body to an absolute URL, off AFNetworking. The
