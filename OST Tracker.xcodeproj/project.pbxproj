@@ -144,7 +144,9 @@
 		6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
+		6B8F15D17250506FBC189CE9 /* SelectableOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7797786BCBA7794199B51B1E /* SelectableOptionList.swift */; };
 		6D70E4F0EF0645CC8298D887 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
+		6E0D36197F9817CA1E6B2788 /* SelectableOptionListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88D389E588C940A41129B11 /* SelectableOptionListTests.swift */; };
 		73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */; };
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
@@ -223,6 +225,7 @@
 		D5C5BC5C217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
 		E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
+		E7EE459C85E5B615EE627351 /* SelectableOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7797786BCBA7794199B51B1E /* SelectableOptionList.swift */; };
 		E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		F7A6DDBC1CC23AE8E87A4B56 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
 		F88DCA28419AC14B875704BB /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
@@ -350,6 +353,7 @@
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DisclosureSelectFieldTests.swift; path = "OST TrackerTests/Swift/DisclosureSelectFieldTests.swift"; sourceTree = "<group>"; };
+		7797786BCBA7794199B51B1E /* SelectableOptionList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectableOptionList.swift; path = "OST Tracker/Swift/DesignSystem/SelectableOptionList.swift"; sourceTree = "<group>"; };
 		79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StyledTextFieldTests.swift; path = "OST TrackerTests/Swift/StyledTextFieldTests.swift"; sourceTree = "<group>"; };
 		7E637BB81DCDE0328194710B /* LoginControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = "OST TrackerTests/Swift/LoginControllerTests.swift"; sourceTree = "<group>"; };
 		7FC88DAF080C3B90276428C3 /* LoginController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = "OST Tracker/Swift/LoginController.swift"; sourceTree = "<group>"; };
@@ -361,6 +365,7 @@
 		A2C1A7214138790605CD98F9 /* PrimaryButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimaryButton.swift; path = "OST Tracker/Swift/DesignSystem/PrimaryButton.swift"; sourceTree = "<group>"; };
 		A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTAlert.swift"; sourceTree = "<group>"; };
 		A802EAD220AFB69CF7A7E5BF /* fixtures */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fixtures; path = Verification/fixtures; sourceTree = SOURCE_ROOT; };
+		A88D389E588C940A41129B11 /* SelectableOptionListTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectableOptionListTests.swift; path = "OST TrackerTests/Swift/SelectableOptionListTests.swift"; sourceTree = "<group>"; };
 		B8904C060C056AB96E283D0F /* CoreDataStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = "OST Tracker/Swift/CoreDataStack.swift"; sourceTree = "<group>"; };
 		BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEditEntryViewController.swift; sourceTree = "<group>"; };
 		BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTBackend.swift; path = "OST Tracker/Swift/OSTBackend.swift"; sourceTree = "<group>"; };
@@ -454,6 +459,7 @@
 				A2C1A7214138790605CD98F9 /* PrimaryButton.swift */,
 				98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */,
 				49F45D2979B93934E473811C /* DisclosureSelectField.swift */,
+				7797786BCBA7794199B51B1E /* SelectableOptionList.swift */,
 			);
 			name = DesignSystem;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */,
 				79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */,
 				6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */,
+				A88D389E588C940A41129B11 /* SelectableOptionListTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1033,6 +1040,7 @@
 				C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */,
 				B8E3F8114ACBCAE49A256BA9 /* StyledTextField.swift in Sources */,
 				23815C2FF2173716D7561366 /* DisclosureSelectField.swift in Sources */,
+				6B8F15D17250506FBC189CE9 /* SelectableOptionList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,6 +1116,7 @@
 				BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */,
 				99317695D8197AFD8F74757A /* StyledTextField.swift in Sources */,
 				B90CC0EE71010BB4DDE14B23 /* DisclosureSelectField.swift in Sources */,
+				E7EE459C85E5B615EE627351 /* SelectableOptionList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,6 +1144,7 @@
 				3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */,
 				FBC482C7F2B2010C1EF9C35D /* StyledTextFieldTests.swift in Sources */,
 				597C364A72D083E3D40B1FA5 /* DisclosureSelectFieldTests.swift in Sources */,
+				6E0D36197F9817CA1E6B2788 /* SelectableOptionListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
