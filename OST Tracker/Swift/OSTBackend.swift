@@ -18,6 +18,7 @@ import Foundation
     @objc static let shared = OSTBackend()
 
     private let client: APIClient
+    private lazy var checker = ConnectivityChecker(auth: client, store: SessionCredentialStore())
 
     private override init() {
         let urlString = (Bundle.main.object(forInfoDictionaryKey: "BACKEND_URL") as? String) ?? ""
@@ -80,11 +81,11 @@ import Foundation
     // MARK: - Pre-logout connectivity check
 
     /// Active connectivity + credential check used before logout. Runs the same
-    /// `autoLogin` (POST `auth` with stored credentials) the read endpoints use.
-    /// `nil` == reachable and credentials valid (200); non-nil == blocked.
-    /// Completion is delivered on the main queue.
+    /// `ConnectivityChecker` the read endpoints use, then delivers the result on
+    /// the main queue. `nil` == reachable and credentials valid (200); non-nil ==
+    /// blocked.
     @objc func verifyConnection(completion: @escaping (Error?) -> Void) {
-        autoLogin { error in
+        checker.check { error in
             DispatchQueue.main.async { completion(error) }
         }
     }
@@ -92,7 +93,7 @@ import Foundation
     // MARK: - Plumbing
 
     private func request(_ path: String, completion: @escaping (Any?, Error?) -> Void) {
-        autoLogin { [client] loginError in
+        checker.check { [client] loginError in
             if let loginError = loginError {
                 DispatchQueue.main.async { completion(nil, loginError) }
                 return
@@ -107,17 +108,31 @@ import Foundation
             }
         }
     }
+}
 
-    /// Login with the stored credentials so the client holds a fresh bearer token.
-    private func autoLogin(_ completion: @escaping (Error?) -> Void) {
-        let email = OSTSessionManager.getStoredUserName() ?? ""
-        let password = OSTSessionManager.getStoredPassword() ?? ""
-        guard !email.isEmpty, !password.isEmpty else {
+/// The pre-auth credential check shared by `OSTBackend`'s read endpoints and the
+/// pre-logout verification: read the stored credentials, then authenticate.
+/// `nil` == reachable and credentials valid (200); non-nil == blocked (no stored
+/// credentials, or the auth request failed). Queue-agnostic — callers hop to the
+/// main queue as needed. `auth`/`store` are injectable so it is testable without
+/// the network, mirroring `LoginController`.
+final class ConnectivityChecker {
+    private let auth: Authenticating
+    private let store: CredentialStore
+
+    init(auth: Authenticating, store: CredentialStore) {
+        self.auth = auth
+        self.store = store
+    }
+
+    func check(completion: @escaping (Error?) -> Void) {
+        guard let email = store.email, !email.isEmpty,
+              let password = store.password, !password.isEmpty else {
             completion(NSError(domain: "OST", code: 401,
                                userInfo: [NSLocalizedDescriptionKey: "Missing stored credentials. Please log in again."]))
             return
         }
-        client.login(email: email, password: password) { result in
+        auth.authenticate(email: email, password: password) { result in
             switch result {
             case .success: completion(nil)
             case .failure(let error): completion(error)

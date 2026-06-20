@@ -151,6 +151,7 @@
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		87A8BA63C84B1968781A8A24 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
 		8BE0411983BC48E1D1C14C5D /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E637BB81DCDE0328194710B /* LoginControllerTests.swift */; };
+		C0A1F1C0DE5704C7A11C3E02 /* ConnectivityCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1F1C0DE5704C7A11C3E01 /* ConnectivityCheckerTests.swift */; };
 		8C786E44B17259466456F007 /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
 		8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
@@ -352,6 +353,7 @@
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E637BB81DCDE0328194710B /* LoginControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = "OST TrackerTests/Swift/LoginControllerTests.swift"; sourceTree = "<group>"; };
+		C0A1F1C0DE5704C7A11C3E01 /* ConnectivityCheckerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConnectivityCheckerTests.swift; path = "OST TrackerTests/Swift/ConnectivityCheckerTests.swift"; sourceTree = "<group>"; };
 		7FC88DAF080C3B90276428C3 /* LoginController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = "OST Tracker/Swift/LoginController.swift"; sourceTree = "<group>"; };
 		809E391C45FA035A2E0209DC /* APIClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = "OST Tracker/Swift/APIClient.swift"; sourceTree = "<group>"; };
 		98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDropDownField.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */,
 				9E2CE940B9754C16E1809394 /* LiveAPITests.swift */,
 				7E637BB81DCDE0328194710B /* LoginControllerTests.swift */,
+				C0A1F1C0DE5704C7A11C3E01 /* ConnectivityCheckerTests.swift */,
 				42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */,
 				30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */,
 			);
@@ -1133,6 +1136,7 @@
 				2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */,
 				65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */,
 				8BE0411983BC48E1D1C14C5D /* LoginControllerTests.swift in Sources */,
+				C0A1F1C0DE5704C7A11C3E02 /* ConnectivityCheckerTests.swift in Sources */,
 				276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */,
 				61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */,
 			);
