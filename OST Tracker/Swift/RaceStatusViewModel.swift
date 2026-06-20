@@ -21,6 +21,17 @@ enum RaceStatusFormat {
         return f.string(from: t)
     }
 
+    /// Weekday + 12-hour wall-clock in the event's zone, e.g. "Fri 9:08AM".
+    /// Used where one richer timestamp per row reads better than the compact
+    /// 24-hour `timeOfDay` (the aid-station field view).
+    static func clockWithDay(_ t: Date, in tz: TimeZone) -> String {
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = tz
+        f.dateFormat = "EEE h:mma"
+        return f.string(from: t)
+    }
+
     static func dayOffset(from start: Date, to t: Date, in tz: TimeZone) -> Int {
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = tz
@@ -167,6 +178,7 @@ struct StationField {
 
 func stationField(splitIndex idx: Int, spread: EventSpread) -> StationField {
     let start = spread.eventStartTime
+    let tz = spread.eventTimeZone
     let ordered = sortedField(spread.efforts, atSplit: idx, headers: spread.splitHeaders)
     var throughCount = 0
     let rows: [FieldRow] = ordered.map { e in
@@ -177,7 +189,7 @@ func stationField(splitIndex idx: Int, spread: EventSpread) -> StationField {
         case .through(let arrival):
             throughCount += 1
             statusText = "Through"
-            timeText = RaceStatusFormat.elapsed(from: start, to: arrival)
+            timeText = "\(RaceStatusFormat.elapsed(from: start, to: arrival)) (\(RaceStatusFormat.clockWithDay(arrival, in: tz)))"
         case .expected:
             statusText = "Expected"; timeText = ""
         case .dropped(let station):

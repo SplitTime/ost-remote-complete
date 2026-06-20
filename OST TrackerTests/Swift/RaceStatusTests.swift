@@ -225,7 +225,14 @@ extension RaceStatusTests {
         let field = stationField(splitIndex: 2, spread: spread) // Antero
         XCTAssertEqual(field.rows.count, 151)
         XCTAssertEqual(field.countText, "147 of 151 through")
-        // The first row is whoever came through Antero earliest.
+        // The first row is whoever came through Antero earliest (bib 79, Fri 9:08AM).
         XCTAssertEqual(field.rows.first?.status, "Through")
+        XCTAssertEqual(field.rows.first?.time, "3:08 (Fri 9:08AM)")
+    }
+
+    func test_clockWithDayFormatsWeekdayAnd12Hour() {
+        let tz = mtZone()
+        let friMorning = date(2022, 7, 22, 9, 8, tz: tz) // 2022-07-22 is a Friday
+        XCTAssertEqual(RaceStatusFormat.clockWithDay(friMorning, in: tz), "Fri 9:08AM")
     }
 }
