@@ -46,6 +46,7 @@
 		193DC8E6351F712773C9444D /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
 		2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */; };
 		24AB60374315832E06352A0E /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
+		2555576285D9B872FF42B077 /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */; };
 		276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */; };
 		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
@@ -151,10 +152,12 @@
 		6CFEE4469591BCC4143A8443 /* OSTReachabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7FB78E64CFC8F667CC53E7 /* OSTReachabilityTests.swift */; };
 		73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */; };
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
+		7798A47732EB9FCC217FA997 /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		87A8BA63C84B1968781A8A24 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
 		8BE0411983BC48E1D1C14C5D /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E637BB81DCDE0328194710B /* LoginControllerTests.swift */; };
 		8C786E44B17259466456F007 /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
+		8CF9BAE07760F98277BEC24C /* AutoSyncStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E5543390C6D18C53205C9D /* AutoSyncStatusTests.swift */; };
 		8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		99517852C35EF5C3914336BF /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
@@ -271,6 +274,7 @@
 		2D7FB78E64CFC8F667CC53E7 /* OSTReachabilityTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "OST TrackerTests/Swift/OSTReachabilityTests.swift"; sourceTree = "<group>"; };
 		30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MagicalRecordShimTests.swift; path = "OST TrackerTests/Swift/MagicalRecordShimTests.swift"; sourceTree = "<group>"; };
 		3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftSmoke.swift; path = "OST Tracker/Swift/SwiftSmoke.swift"; sourceTree = "<group>"; };
+		3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncStatus.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncStatus.swift"; sourceTree = "<group>"; };
 		42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainRoundTripTests.swift; path = "OST TrackerTests/Swift/KeychainRoundTripTests.swift"; sourceTree = "<group>"; };
 		43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDrawerContainer.swift; sourceTree = "<group>"; };
 		440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTAboutViewController.swift; sourceTree = "<group>"; };
@@ -402,6 +406,7 @@
 		F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIParsingTests.swift; path = "OST TrackerTests/Swift/APIParsingTests.swift"; sourceTree = "<group>"; };
 		F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEventSelectionViewController.swift; sourceTree = "<group>"; };
 		F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OSTSafeArea.h"; sourceTree = "<group>"; };
+		F7E5543390C6D18C53205C9D /* AutoSyncStatusTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncStatusTests.swift; path = "OST TrackerTests/Swift/AutoSyncStatusTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,6 +498,7 @@
 				BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */,
 				11F1BAE4B6BD10048636F490 /* OSTReachability.swift */,
 				55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */,
+				366D1B744A09CBB91967E35A /* AutoSync */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -511,9 +517,18 @@
 				42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */,
 				30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */,
 				2D7FB78E64CFC8F667CC53E7 /* OSTReachabilityTests.swift */,
+				F7E5543390C6D18C53205C9D /* AutoSyncStatusTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
+		};
+		366D1B744A09CBB91967E35A /* AutoSync */ = {
+			isa = PBXGroup;
+			children = (
+				3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */,
+			);
+			name = AutoSync;
+			sourceTree = "<group>";
 		};
 		6A2F2D6E1EF1C46B007CA921 /* SessionManager */ = {
 			isa = PBXGroup;
@@ -1052,6 +1067,7 @@
 				B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */,
 				0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */,
 				C99F414EAB739A70BA4BDADC /* MagicalRecordShim.swift in Sources */,
+				7798A47732EB9FCC217FA997 /* AutoSyncStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1125,6 +1141,7 @@
 				567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */,
 				471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */,
 				CBE1B03D1D5DAA79E7736BCE /* MagicalRecordShim.swift in Sources */,
+				2555576285D9B872FF42B077 /* AutoSyncStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,6 +1162,7 @@
 				276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */,
 				61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */,
 				6CFEE4469591BCC4143A8443 /* OSTReachabilityTests.swift in Sources */,
+				8CF9BAE07760F98277BEC24C /* AutoSyncStatusTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
