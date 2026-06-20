@@ -26,6 +26,11 @@ class OSTUtilitiesViewController: OSTBaseViewController {
     @IBOutlet weak var remoteLbl: UILabel!
     @IBOutlet weak var btnRetry: UIButton!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if #available(iOS 13.0, *) {} else { view.viewWithTag(99)?.isHidden = true }
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         ostApplySafeAreaFix()
@@ -155,6 +160,21 @@ class OSTUtilitiesViewController: OSTBaseViewController {
         let event = OSTEventSelectionViewController(nibName: nil, bundle: nil)
         event.changeStation = true
         present(event, animated: true)
+    }
+
+    @IBAction func onAppearance(_ sender: Any) {
+        let sheet = UIAlertController(title: "Appearance", message: nil, preferredStyle: .actionSheet)
+        let choose: (String, AppearanceMode) -> UIAlertAction = { title, mode in
+            UIAlertAction(title: title, style: .default) { _ in AppearanceController.shared.mode = mode }
+        }
+        sheet.addAction(choose("System", .system))
+        sheet.addAction(choose("Light", .light))
+        sheet.addAction(choose("Dark", .dark))
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        if let pop = sheet.popoverPresentationController, let v = sender as? UIView {
+            pop.sourceView = v; pop.sourceRect = v.bounds
+        }
+        present(sheet, animated: true)
     }
 
     @IBAction func onLogout(_ sender: Any) {
