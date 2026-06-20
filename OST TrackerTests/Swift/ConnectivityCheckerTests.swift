@@ -32,12 +32,10 @@ final class ConnectivityCheckerTests: XCTestCase {
         let sut = ConnectivityChecker(auth: auth, store: StubStore(email: "a@b.com", password: "pw"))
 
         let exp = expectation(description: "check")
-        var completed = false
         var receivedError: Error?
-        sut.check { error in receivedError = error; completed = true; exp.fulfill() }
+        sut.check { error in receivedError = error; exp.fulfill() }
         wait(for: [exp], timeout: 1)
 
-        XCTAssertTrue(completed)
         XCTAssertNil(receivedError, "a successful auth should yield a nil error")
         XCTAssertEqual(auth.calledWith?.0, "a@b.com")
         XCTAssertEqual(auth.calledWith?.1, "pw")
@@ -68,7 +66,8 @@ final class ConnectivityCheckerTests: XCTestCase {
         sut.check { error in receivedError = error; exp.fulfill() }
         wait(for: [exp], timeout: 1)
 
-        XCTAssertNotNil(receivedError, "missing credentials must be blocked")
+        XCTAssertEqual((receivedError as NSError?)?.domain, "OST")
+        XCTAssertEqual((receivedError as NSError?)?.code, 401, "missing credentials must yield the 401 'please log in again' error")
         XCTAssertNil(auth.calledWith, "must not authenticate when credentials are missing")
     }
 
@@ -82,7 +81,7 @@ final class ConnectivityCheckerTests: XCTestCase {
         sut.check { error in receivedError = error; exp.fulfill() }
         wait(for: [exp], timeout: 1)
 
-        XCTAssertNotNil(receivedError, "blank credentials must be treated as missing")
+        XCTAssertEqual((receivedError as NSError?)?.code, 401, "blank credentials must be treated as missing (same 401)")
         XCTAssertNil(auth.calledWith, "must not authenticate with blank credentials")
     }
 }
