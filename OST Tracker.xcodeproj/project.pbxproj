@@ -34,6 +34,7 @@
 		193DC8E6351F712773C9444D /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
 		2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */; };
 		22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA22B20B858EF2CA668A00B /* AppearanceController.swift */; };
+		23815C2FF2173716D7561366 /* DisclosureSelectField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45D2979B93934E473811C /* DisclosureSelectField.swift */; };
 		24AB60374315832E06352A0E /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */; };
 		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
@@ -53,6 +54,7 @@
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		532D5B3FE4BD1FB322981FF6 /* OSTEditEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */; };
 		567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */; };
+		597C364A72D083E3D40B1FA5 /* DisclosureSelectFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */; };
 		5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */; };
@@ -162,6 +164,7 @@
 		A6612E6709955310ED669A97 /* SwiftSmoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C09B122C398664262A9B8E3 /* SwiftSmoke.swift */; };
 		B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */; };
 		B8E3F8114ACBCAE49A256BA9 /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */; };
+		B90CC0EE71010BB4DDE14B23 /* DisclosureSelectField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45D2979B93934E473811C /* DisclosureSelectField.swift */; };
 		BD0F5B3D9588B36A254205A3 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		BD36B2CD522E4F5E7D9DCD53 /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
 		BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1A7214138790605CD98F9 /* PrimaryButton.swift */; };
@@ -266,6 +269,7 @@
 		42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainRoundTripTests.swift; path = "OST TrackerTests/Swift/KeychainRoundTripTests.swift"; sourceTree = "<group>"; };
 		43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDrawerContainer.swift; sourceTree = "<group>"; };
 		440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTAboutViewController.swift; sourceTree = "<group>"; };
+		49F45D2979B93934E473811C /* DisclosureSelectField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DisclosureSelectField.swift; path = "OST Tracker/Swift/DesignSystem/DisclosureSelectField.swift"; sourceTree = "<group>"; };
 		54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTRunnerTrackerViewController.swift; sourceTree = "<group>"; };
 		55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MagicalRecordShim.swift; path = "OST Tracker/Swift/MagicalRecordShim.swift"; sourceTree = "<group>"; };
 		5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTReviewSubmitViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 		6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OST TrackerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DisclosureSelectFieldTests.swift; path = "OST TrackerTests/Swift/DisclosureSelectFieldTests.swift"; sourceTree = "<group>"; };
 		79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StyledTextFieldTests.swift; path = "OST TrackerTests/Swift/StyledTextFieldTests.swift"; sourceTree = "<group>"; };
 		7E637BB81DCDE0328194710B /* LoginControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = "OST TrackerTests/Swift/LoginControllerTests.swift"; sourceTree = "<group>"; };
 		7FC88DAF080C3B90276428C3 /* LoginController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = "OST Tracker/Swift/LoginController.swift"; sourceTree = "<group>"; };
@@ -451,6 +456,7 @@
 				9DA22B20B858EF2CA668A00B /* AppearanceController.swift */,
 				A2C1A7214138790605CD98F9 /* PrimaryButton.swift */,
 				98B26FBEB7B5603BC7BB43DD /* StyledTextField.swift */,
+				49F45D2979B93934E473811C /* DisclosureSelectField.swift */,
 			);
 			name = DesignSystem;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 				354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */,
 				FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */,
 				79489B3987C3A333F9220B93 /* StyledTextFieldTests.swift */,
+				6FE322BE2BC844B77D979A20 /* DisclosureSelectFieldTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1031,6 +1038,7 @@
 				18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */,
 				C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */,
 				B8E3F8114ACBCAE49A256BA9 /* StyledTextField.swift in Sources */,
+				23815C2FF2173716D7561366 /* DisclosureSelectField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1105,6 +1113,7 @@
 				22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */,
 				BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */,
 				99317695D8197AFD8F74757A /* StyledTextField.swift in Sources */,
+				B90CC0EE71010BB4DDE14B23 /* DisclosureSelectField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1131,6 +1140,7 @@
 				64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */,
 				3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */,
 				FBC482C7F2B2010C1EF9C35D /* StyledTextFieldTests.swift in Sources */,
+				597C364A72D083E3D40B1FA5 /* DisclosureSelectFieldTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
