@@ -60,7 +60,9 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    if ([CurrentCourse getCurrentCourse])
+    CurrentCourse *savedCourse = [CurrentCourse getCurrentCourse];
+    NSLog(@"[OST] launch: savedCourse eventId=%@ name=%@", savedCourse.eventId, savedCourse.eventName);
+    if (savedCourse)
     {
         [self loadLeftMenu];
     }
@@ -145,7 +147,8 @@
 
 - (void) initializeCoredata
 {
-    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:OSTCoredataFile];
+    // Native CoreDataStack (replaces MagicalRecord); opens the same on-disk store.
+    [OSTCoreData bootstrap];
 }
 
 

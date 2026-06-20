@@ -11,7 +11,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 @objc(OSTCrossCheckViewController)
 class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSource, UICollectionViewDelegate {

@@ -12,7 +12,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 @objc(OSTReviewSubmitViewController)
 class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSource, UITableViewDelegate {

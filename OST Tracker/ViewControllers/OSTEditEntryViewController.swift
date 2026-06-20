@@ -18,7 +18,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 @objc(OSTEditEntryViewController)
 class OSTEditEntryViewController: UIViewController, APNumberPadDelegate {

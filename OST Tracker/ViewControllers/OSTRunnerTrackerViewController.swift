@@ -15,7 +15,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 @objc(OSTRunnerTrackerViewController)
 class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate, UITextFieldDelegate {

@@ -16,7 +16,6 @@
 
 import UIKit
 import CoreData
-import MagicalRecord
 
 @objc(OSTEventSelectionViewController)
 class OSTEventSelectionViewController: UIViewController {

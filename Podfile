@@ -7,10 +7,12 @@ use_frameworks!
 
 def used_pods
 
-# Dropped after the Swift migration (now unused): NSDate+Helper, OHAlertView,
-# JTObjectMapping, FXKeychain, Reachability (→ NWPathMonitor), DejalActivityView
-# (→ OSTSpinner), SimpleKeychain (session manager uses Security framework).
-pod 'MagicalRecord', '2.2'
+# No third-party pods remain — the Swift migration replaced every dependency:
+#   AFNetworking → URLSession/APIClient; Reachability → NWPathMonitor;
+#   MagicalRecord → native CoreDataStack (+ MagicalRecordShim.swift);
+#   OHAlertView/Dejal/IQ*/MFSideMenu/CHCSVParser/Toast/keychains → native equivalents.
+# The Podfile is kept (empty) so the workspace stays valid; CocoaPods can be fully
+# deintegrated as a final cleanup step.
 
 end
 

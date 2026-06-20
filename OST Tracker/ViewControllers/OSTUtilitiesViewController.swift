@@ -8,7 +8,6 @@
 //
 
 import UIKit
-import MagicalRecord
 import CoreData
 
 @objc(OSTUtilitiesViewController)

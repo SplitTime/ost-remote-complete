@@ -22,8 +22,9 @@
 // Constants
 #import "OSTConstants.h"
 
-// Core Data
-#import "CoreData+MagicalRecord.h"
+// Core Data — native CoreDataStack + MagicalRecord-compatibility shim
+// (the mr_*/MR_* selectors come from the generated Swift header, imported per-file).
+#import <CoreData/CoreData.h>
 
 // Helpers
 #import "NSError+OSTErrors.h"
