@@ -79,6 +79,11 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         txtSortBy.removeInputAssistant()
 
         btnSync.setBackgroundImage(UIImage(named: "GrayButton"), for: .highlighted)
+        // In the XIB the Sync button sits *behind* the table; on the short legacy
+        // design it stuck out below, but on tall screens the grown table covers it
+        // entirely. Lift it just above the table (still below the sync icon, which
+        // is later in the order and rides on the button).
+        view.insertSubview(btnSync, aboveSubview: tableView)
 
         lblBadge.layer.cornerRadius = lblBadge.frame.width / 2
         lblBadge.clipsToBounds = true
@@ -134,6 +139,14 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         //    leaves the Sync button stranded ~70pt above the rest of the bar.
         //    Bottom-align it back onto the bar's baseline.
         btnSync.frame.origin.y = safeBottom - btnSync.frame.height
+
+        // The table now extends behind the bottom bar; inset it so the last rows
+        // can scroll clear of the Sync button rather than hiding under it.
+        let overlap = max(0, tableView.frame.maxY - btnSync.frame.minY)
+        if abs(tableView.contentInset.bottom - overlap) > 0.5 {
+            tableView.contentInset.bottom = overlap
+            tableView.verticalScrollIndicatorInsets.bottom = overlap
+        }
     }
 
     // MARK: - Data
