@@ -26,6 +26,7 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
     private var selectedSplitIndex: Int?
     private var rows: [DisplayRow] = []
     private var isFetchingSpread = false
+    private var inFlightSlug: String?
 
     private var groupId: String { CurrentCourse.getCurrentCourse()?.eventGroupId ?? "" }
 
@@ -89,12 +90,17 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
 
     private func loadSpread() {
         guard let event = selectedEvent else { ostHideBlockingSpinner(); return }
-        guard !isFetchingSpread else { return }
+        // Block a duplicate fetch for the SAME event, but let an event switch supersede an in-flight one.
+        if isFetchingSpread, inFlightSlug == event.slug { return }
         isFetchingSpread = true
+        inFlightSlug = event.slug
         ostShowBlockingSpinner()
         OSTBackend.shared.fetchSpread(eventSlug: event.slug) { [weak self] result in
             guard let self = self else { return }
+            // Ignore a stale response for an event the user has since switched away from.
+            guard event.slug == self.selectedEvent?.slug else { return }
             self.isFetchingSpread = false
+            self.inFlightSlug = nil
             self.ostHideBlockingSpinner()
             switch result {
             case .failure:

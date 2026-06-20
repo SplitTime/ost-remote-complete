@@ -81,6 +81,13 @@ extension RaceStatusTests {
         XCTAssertEqual(RaceStatusFormat.dayOffset(from: start, to: sameDay, in: tz), 0)
         XCTAssertEqual(RaceStatusFormat.dayOffset(from: start, to: nextDay, in: tz), 1)
     }
+
+    func test_elapsedNegativeIntervalReturnsDash() {
+        let tz = mtZone()
+        let start = date(2022, 7, 22, 9, 0, tz: tz)
+        let earlier = date(2022, 7, 22, 6, 0, tz: tz)
+        XCTAssertEqual(RaceStatusFormat.elapsed(from: start, to: earlier), "—")
+    }
 }
 
 extension RaceStatusTests {
