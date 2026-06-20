@@ -186,7 +186,7 @@ class OSTUtilitiesViewController: OSTBaseViewController {
     /// Online: confirm, then log out.
     private func presentLogoutConfirmation() {
         let alert = UIAlertController(title: "Are you sure you would like to log out?",
-                                      message: "You will not be able to log back in or add entries until you have a data connection again.",
+                                      message: "You can log back in using your current connection, but you won't be able to add entries or log back in if you lose it.",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
