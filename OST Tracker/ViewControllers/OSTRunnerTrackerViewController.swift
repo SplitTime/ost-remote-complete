@@ -17,7 +17,7 @@ import UIKit
 import CoreData
 
 @objc(OSTRunnerTrackerViewController)
-class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate, UITextFieldDelegate {
+class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate {
 
     @IBOutlet weak var txtBibNumber: UITextField!
     @IBOutlet weak var numberPadContainerView: UIView!
@@ -114,14 +114,11 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
             lblSecondaryInfo.height += 30
         }
 
-        let numberPad = APNumberPad(delegate: self)
-        numberPad.leftFunctionButton.setTitle("*", for: .normal)
-        numberPad.leftFunctionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        let numberPad = NumberPadView()
         numberPad.frame = numberPadContainerView.bounds
         numberPad.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        numberPad.backgroundColor = .clear
         numberPadContainerView.addSubview(numberPad)
-        numberPad.setTextField(txtBibNumber)
+        numberPad.attach(to: txtBibNumber)
 
         lblOutTimeBadge.layer.cornerRadius = lblOutTimeBadge.width / 2
         lblInTimeBadge.layer.cornerRadius = lblInTimeBadge.width / 2
@@ -440,10 +437,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
             return
         }
 
-        var effort: EffortModel?
-        if !bib.contains("*") {
-            effort = EffortModel.mr_findFirst(with: NSPredicate(format: "bibNumber == %@", NSDecimalNumber(string: bib))) as? EffortModel
-        }
+        let effort = EffortModel.mr_findFirst(with: NSPredicate(format: "bibNumber == %@", NSDecimalNumber(string: bib))) as? EffortModel
 
         guard let racer = effort else {
             lblRunnerInfo.text = "Bib Not Found"
@@ -502,17 +496,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
 
     deinit {
         txtBibNumber?.removeObserver(self, forKeyPath: "text")
-    }
-
-    // MARK: - APNumberPadDelegate
-
-    func numberPad(_ numberPad: APNumberPad, functionButtonAction functionButton: UIButton,
-                   textInput: UIResponder & UITextInput) {
-        if let textField = textInput as? UITextField {
-            textField.text = "\(textField.text ?? "")*"
-        } else {
-            textInput.insertText("*")
-        }
     }
 
     // MARK: - Rotation
