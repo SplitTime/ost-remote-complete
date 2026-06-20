@@ -67,21 +67,6 @@ extension RaceStatusTests {
         XCTAssertEqual(RaceStatusFormat.elapsed(from: start, to: t), "24:20")
     }
 
-    func test_timeOfDayInEventZone() {
-        let tz = mtZone()
-        let t = date(2022, 7, 22, 9, 13, tz: tz)
-        XCTAssertEqual(RaceStatusFormat.timeOfDay(t, in: tz), "09:13")
-    }
-
-    func test_dayOffsetCrossesMidnight() {
-        let tz = mtZone()
-        let start = date(2022, 7, 22, 6, 0, tz: tz)
-        let sameDay = date(2022, 7, 22, 23, 0, tz: tz)
-        let nextDay = date(2022, 7, 23, 2, 0, tz: tz)
-        XCTAssertEqual(RaceStatusFormat.dayOffset(from: start, to: sameDay, in: tz), 0)
-        XCTAssertEqual(RaceStatusFormat.dayOffset(from: start, to: nextDay, in: tz), 1)
-    }
-
     func test_elapsedNegativeIntervalReturnsDash() {
         let tz = mtZone()
         let start = date(2022, 7, 22, 9, 0, tz: tz)
@@ -209,15 +194,17 @@ extension RaceStatusTests {
         XCTAssertEqual(progress.summary.bib, "28")
         XCTAssertEqual(progress.summary.name, "Raul Beer")
         XCTAssertEqual(progress.rows.count, 18)
-        // Start: one line, no label.
+        // Start: one line, no label. Clock shows weekday + 12-hour, same as the field view.
         XCTAssertEqual(progress.rows[0].lines.count, 1)
         XCTAssertNil(progress.rows[0].lines[0].label)
         XCTAssertEqual(progress.rows[0].lines[0].elapsed, "0:00")
+        XCTAssertEqual(progress.rows[0].lines[0].timeOfDay, "(Fri 6:00AM)")
         // Raspberry 1: In/Out → two labelled lines.
         XCTAssertEqual(progress.rows[1].lines.count, 2)
         XCTAssertEqual(progress.rows[1].lines[0].label, "In")
         XCTAssertEqual(progress.rows[1].lines[1].label, "Out")
         XCTAssertEqual(progress.rows[1].lines[0].elapsed, "1:05")
+        XCTAssertEqual(progress.rows[1].lines[0].timeOfDay, "(Fri 7:05AM)")
     }
 
     func test_stationField_fromFixture() throws {

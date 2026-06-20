@@ -13,31 +13,14 @@ enum RaceStatusFormat {
         return String(format: "%d:%02d", hours, minutes)
     }
 
-    static func timeOfDay(_ t: Date, in tz: TimeZone) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "en_US_POSIX")
-        f.timeZone = tz
-        f.dateFormat = "HH:mm"
-        return f.string(from: t)
-    }
-
     /// Weekday + 12-hour wall-clock in the event's zone, e.g. "Fri 9:08AM".
-    /// Used where one richer timestamp per row reads better than the compact
-    /// 24-hour `timeOfDay` (the aid-station field view).
+    /// Shown beside the elapsed time in both the runner and aid-station views.
     static func clockWithDay(_ t: Date, in tz: TimeZone) -> String {
         let f = DateFormatter()
         f.locale = Locale(identifier: "en_US_POSIX")
         f.timeZone = tz
         f.dateFormat = "EEE h:mma"
         return f.string(from: t)
-    }
-
-    static func dayOffset(from start: Date, to t: Date, in tz: TimeZone) -> Int {
-        var cal = Calendar(identifier: .gregorian)
-        cal.timeZone = tz
-        let a = cal.startOfDay(for: start)
-        let b = cal.startOfDay(for: t)
-        return cal.dateComponents([.day], from: a, to: b).day ?? 0
     }
 }
 
@@ -130,12 +113,6 @@ struct RunnerProgress {
     let rows: [RunnerStationRow]
 }
 
-private func timeOfDayWithDay(_ t: Date, start: Date, tz: TimeZone) -> String {
-    let clock = RaceStatusFormat.timeOfDay(t, in: tz)
-    let day = RaceStatusFormat.dayOffset(from: start, to: t, in: tz)
-    return day > 0 ? "\(clock) +\(day)d" : clock
-}
-
 func runnerProgress(_ e: EffortRow, spread: EventSpread) -> RunnerProgress {
     let start = spread.eventStartTime
     let tz = spread.eventTimeZone
@@ -154,7 +131,7 @@ func runnerProgress(_ e: EffortRow, spread: EventSpread) -> RunnerProgress {
             if let date = date {
                 return RunnerStationLine(label: label,
                                          elapsed: RaceStatusFormat.elapsed(from: start, to: date),
-                                         timeOfDay: timeOfDayWithDay(date, start: start, tz: tz))
+                                         timeOfDay: "(\(RaceStatusFormat.clockWithDay(date, in: tz)))")
             }
             return RunnerStationLine(label: label, elapsed: "—", timeOfDay: "")
         }
