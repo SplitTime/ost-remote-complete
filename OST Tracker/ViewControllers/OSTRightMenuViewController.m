@@ -164,6 +164,13 @@
     [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
+- (IBAction)onRaceStatus:(id)sender
+{
+    OSTRaceStatusViewController *controller = [[OSTRaceStatusViewController alloc] init];
+    [AppDelegate getInstance].rightMenuVC.centerViewController = controller;
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
+}
+
 - (IBAction)onSubmit:(id)sender
 {
     [[AppDelegate getInstance] showTracker];
