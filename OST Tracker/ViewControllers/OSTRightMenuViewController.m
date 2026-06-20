@@ -36,19 +36,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.buttonViews = [self sortOutletCollectionByTag:self.buttonViews];
     self.separatorViews = [self sortOutletCollectionByTag:self.separatorViews];
-    
+
     // Do any additional setup after loading the view from its nib.
     self.scrollView.contentSize = CGSizeMake(0, 668);
     if(IS_IPHONE_5)
     {
         [self rearrangeViews];
     }
-    
+
     self.lblBadge.layer.cornerRadius = self.lblBadge.width/2;
     self.lblBadge.clipsToBounds = YES;
+
+    // Auto Sync row (label + switch), placed below the last menu item.
+    // Computed after rearrangeViews so the row sits below the final button positions
+    // on both normal and IS_IPHONE_5 layouts.
+    CGFloat rowY = 0;
+    for (UIView *v in self.buttonViews) { rowY = MAX(rowY, CGRectGetMaxY(v.frame)); }
+    rowY += 24;
+
+    UILabel *autoLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, rowY, 180, 30)];
+    autoLabel.text = @"Auto Sync";
+    autoLabel.textColor = [UIColor whiteColor];
+    autoLabel.font = [UIFont systemFontOfSize:20];
+    [self.scrollView addSubview:autoLabel];
+
+    UISwitch *autoSwitch = [[UISwitch alloc] init];
+    autoSwitch.frame = CGRectMake(CGRectGetMaxX(self.scrollView.frame) - 70, rowY, 51, 31);
+    autoSwitch.on = [AutoSyncController shared].autoSyncEnabled;
+    [autoSwitch addTarget:self action:@selector(onAutoSyncSwitch:) forControlEvents:UIControlEventValueChanged];
+    [self.scrollView addSubview:autoSwitch];
+
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, MAX(self.scrollView.contentSize.height, rowY + 60));
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -174,7 +195,10 @@
     [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
 
-
+- (IBAction)onAutoSyncSwitch:(UISwitch *)sender
+{
+    [AutoSyncController shared].autoSyncEnabled = sender.isOn;
+}
 
 #pragma mark - AutoSyncObserver
 
