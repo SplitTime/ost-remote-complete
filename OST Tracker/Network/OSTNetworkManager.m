@@ -39,9 +39,12 @@
 {
     if (token.length == 0)
     {
+        // Clear the header — without the early return this fell through and set a
+        // malformed "bearer (null)", which the server then rejected.
         [self.requestSerializer setValue:@"" forHTTPHeaderField:@"Authorization"];
+        return;
     }
-    
+
     [self.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",token] forHTTPHeaderField:@"Authorization"];
 }
 
