@@ -62,7 +62,6 @@
 		5A9417047C20E1FA8111462C /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		5E98746E92EDFFFBABA93CFB /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C24566B72849E7915F9603 /* APIModels.swift */; };
 		61B645BAEE8528D49FAC0D1C /* MagicalRecordShimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9314751018C2B8AE038D2 /* MagicalRecordShimTests.swift */; };
-		6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1BAE4B6BD10048636F490 /* OSTReachability.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
@@ -140,7 +139,6 @@
 		6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9E11EF0E7D70061EEB0 /* EventModel.m */; };
 		6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
 		6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA7C2F41F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m */; };
-		6AB4A6C295D91E387E2ED658 /* OSTReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F1BAE4B6BD10048636F490 /* OSTReachability.swift */; };
 		6ABFC1E11EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6ABFC1E21EFD56E900A0F1AC /* CustomUIDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABFC1E01EFD56E900A0F1AC /* CustomUIDatePicker.m */; };
 		6AEFFC0A1EEF83DA009EEE21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC091EEF83DA009EEE21 /* main.m */; };
@@ -258,7 +256,6 @@
 		033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apnumberpad_backspace_icon@3x.png"; sourceTree = "<group>"; };
 		0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OSTSafeArea.m"; sourceTree = "<group>"; };
 		0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTSpinner.swift"; sourceTree = "<group>"; };
-		11F1BAE4B6BD10048636F490 /* OSTReachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTReachability.swift; path = "OST Tracker/Swift/OSTReachability.swift"; sourceTree = "<group>"; };
 		149C18108290E0987474D395 /* LiveTimeEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeEntry.swift; path = "OST Tracker/Swift/LiveTimeEntry.swift"; sourceTree = "<group>"; };
 		14C24566B72849E7915F9603 /* APIModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIModels.swift; path = "OST Tracker/Swift/APIModels.swift"; sourceTree = "<group>"; };
 		16BAED92F7B8A3B859B03965 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "OST Tracker/Swift/LoginViewController.swift"; sourceTree = "<group>"; };
@@ -489,7 +486,6 @@
 				16BAED92F7B8A3B859B03965 /* LoginViewController.swift */,
 				69B24303991152304B820254 /* OSTAuthBridge.swift */,
 				BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */,
-				11F1BAE4B6BD10048636F490 /* OSTReachability.swift */,
 				55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */,
 			);
 			name = Swift;
@@ -1045,7 +1041,6 @@
 				532D5B3FE4BD1FB322981FF6 /* OSTEditEntryViewController.swift in Sources */,
 				E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */,
 				BFA683CE97A77D461E74E7CA /* OSTBackend.swift in Sources */,
-				6AB4A6C295D91E387E2ED658 /* OSTReachability.swift in Sources */,
 				B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */,
 				0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */,
 				C99F414EAB739A70BA4BDADC /* MagicalRecordShim.swift in Sources */,
@@ -1118,7 +1113,6 @@
 				C6401B6575B5EC2BA6DF5564 /* OSTEditEntryViewController.swift in Sources */,
 				9C7CA330A1B919DC81EA2721 /* OSTAuthBridge.swift in Sources */,
 				3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */,
-				6352FB64F94E51BC6382617F /* OSTReachability.swift in Sources */,
 				567002343C2A20353F446D96 /* OSTDropDownField.swift in Sources */,
 				471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */,
 				CBE1B03D1D5DAA79E7736BCE /* MagicalRecordShim.swift in Sources */,
