@@ -1,4 +1,5 @@
 import UIKit
+import AudioToolbox
 
 /// Native Swift number pad view that replaces the retired Obj-C keypad library.
 ///
@@ -9,10 +10,29 @@ import UIKit
 /// KVO on "text").
 final class NumberPadView: UIView {
 
+    /// How a key tap produces sound.
+    enum TapSound {
+        /// System keyboard click; honors the user's iOS "Keyboard Clicks"
+        /// setting. Only audible when the pad is a text field's `inputView`.
+        case systemKeyboardClick
+        /// Always plays the standard keyboard click, regardless of system
+        /// settings. Use for an embedded pad that is not an `inputView`.
+        case alwaysClick
+    }
+
+    /// Sound played on each key tap. Defaults to the system-configurable click,
+    /// which suits the `inputView` usage; embedded hosts set `.alwaysClick`.
+    var tapSound: TapSound = .systemKeyboardClick
+
     /// Field this pad edits. Weak to avoid a retain cycle with the host.
     weak var textField: UITextField?
 
     private let backspaceGlyph = "\u{232B}" // ⌫
+
+    /// Default size used when created without a frame, so the pad still has
+    /// height when assigned as a text field `inputView` (a zero-height input
+    /// view renders nothing). Embedded hosts override the frame.
+    private static let defaultSize = CGSize(width: 320, height: 260)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +45,10 @@ final class NumberPadView: UIView {
     }
 
     private func commonInit() {
+        if bounds.isEmpty {
+            frame = CGRect(origin: .zero, size: Self.defaultSize)
+        }
+        autoresizingMask = .flexibleWidth
         backgroundColor = .clear
         buildGrid()
     }
@@ -98,11 +122,25 @@ final class NumberPadView: UIView {
     }
 
     @objc private func keyTapped(_ sender: UIButton) {
+        playClick()
         let title = sender.title(for: .normal) ?? ""
         if title == backspaceGlyph {
             deleteBackward()
         } else {
             insertDigit(title)
+        }
+    }
+
+    private func playClick() {
+        switch tapSound {
+        case .systemKeyboardClick:
+            // Only audible when this view is the current inputView; honors the
+            // user's iOS "Keyboard Clicks" setting via UIInputViewAudioFeedback.
+            UIDevice.current.playInputClick()
+        case .alwaysClick:
+            // 1104 is the standard keyboard click; plays for embedded pads where
+            // playInputClick() is a no-op (not part of the input-view hierarchy).
+            AudioServicesPlaySystemSound(1104)
         }
     }
 
@@ -112,4 +150,10 @@ final class NumberPadView: UIView {
             ctx.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
         }
     }
+}
+
+// Lets the system keyboard click play for the `.systemKeyboardClick` mode when
+// the pad is used as a text field `inputView`.
+extension NumberPadView: UIInputViewAudioFeedback {
+    var enableInputClicksWhenVisible: Bool { true }
 }

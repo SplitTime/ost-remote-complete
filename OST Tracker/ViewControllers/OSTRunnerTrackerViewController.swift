@@ -118,6 +118,9 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         let numberPad = NumberPadView()
         numberPad.frame = numberPadContainerView.bounds
         numberPad.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        // Embedded pad (not an inputView), so playInputClick() can't fire —
+        // play the click directly so key taps are audible on the timing screen.
+        numberPad.tapSound = .alwaysClick
         numberPadContainerView.addSubview(numberPad)
         numberPad.attach(to: txtBibNumber)
 
