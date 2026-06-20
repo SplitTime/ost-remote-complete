@@ -112,9 +112,7 @@ class OSTUtilitiesViewController: OSTBaseViewController {
             currentCourse.dataEntryGroups = attributes?["dataEntryGroups"]
 
             let included = root?["included"] as? [[String: Any]] ?? []
-            for dataObject in included where (dataObject["type"] as? String) == "efforts" {
-                EffortModel.mr_import(from: dataObject)
-            }
+            EffortModel.mr_reconcile(fromIncluded: included, ofType: "efforts")
             currentCourse.monitorPacers = attributes?["monitorPacers"] as? NSNumber
 
             var eventIdsAndSplits = [String: [Any]]()
