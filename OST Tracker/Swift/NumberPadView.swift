@@ -89,8 +89,8 @@ final class NumberPadView: UIView {
         button.backgroundColor = .white
         button.layer.cornerRadius = 5
         button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.25
-        button.layer.shadowRadius = 0
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 1
         button.layer.shadowOffset = CGSize(width: 0, height: 1)
         button.setBackgroundImage(solidImage(UIColor(white: 0.82, alpha: 1)), for: .highlighted)
         button.addTarget(self, action: #selector(keyTapped(_:)), for: .touchUpInside)
