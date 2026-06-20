@@ -80,4 +80,45 @@ final class MagicalRecordShimTests: XCTestCase {
         let remaining = (effort.mr_findAll(with: nil) as? [NSManagedObject]) ?? []
         XCTAssertEqual(remaining.count, 0)
     }
+
+    // MARK: - mr_reconcile (prune deleted roster entries)
+
+    /// All effortId values currently in the store.
+    private func allEffortIds() -> Set<String> {
+        let all = (effort.mr_findAll(with: nil) as? [NSManagedObject]) ?? []
+        return Set(all.compactMap { $0.value(forKey: "effortId") as? String })
+    }
+
+    func test_reconcile_prunesEffortsMissingFromResponse() {
+        effort.mr_reconcile(fromIncluded: [effortJSON(id: "1", bib: 1, name: "Alice"),
+                                           effortJSON(id: "2", bib: 2, name: "Bob"),
+                                           effortJSON(id: "3", bib: 3, name: "Carol")],
+                            ofType: "efforts")
+        XCTAssertEqual(allEffortIds(), ["1", "2", "3"])
+
+        // Bob (id 2) was removed from the roster on the server.
+        effort.mr_reconcile(fromIncluded: [effortJSON(id: "1", bib: 1, name: "Alice"),
+                                           effortJSON(id: "3", bib: 3, name: "Carol")],
+                            ofType: "efforts")
+        XCTAssertEqual(allEffortIds(), ["1", "3"], "A runner removed from the server roster must be pruned locally")
+    }
+
+    func test_reconcile_emptyEffortsLeavesRosterIntact() {
+        effort.mr_reconcile(fromIncluded: [effortJSON(id: "1", bib: 1, name: "Alice"),
+                                           effortJSON(id: "2", bib: 2, name: "Bob")],
+                            ofType: "efforts")
+        // A response carrying no efforts (partial / malformed) must NOT wipe the roster.
+        let eventsOnly: [[String: Any]] = [["id": "471", "type": "events",
+                                            "attributes": ["shortName": "L100"]]]
+        effort.mr_reconcile(fromIncluded: eventsOnly, ofType: "efforts")
+        XCTAssertEqual(allEffortIds(), ["1", "2"], "Safety guard: no matching members must not prune")
+    }
+
+    func test_reconcile_unchangedRosterAddsAndRemovesNothing() {
+        let roster = [effortJSON(id: "1", bib: 1, name: "Alice"),
+                      effortJSON(id: "2", bib: 2, name: "Bob")]
+        effort.mr_reconcile(fromIncluded: roster, ofType: "efforts")
+        effort.mr_reconcile(fromIncluded: roster, ofType: "efforts")
+        XCTAssertEqual(allEffortIds(), ["1", "2"])
+    }
 }

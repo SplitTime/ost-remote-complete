@@ -330,9 +330,7 @@ class OSTEventSelectionViewController: UIViewController {
             currentCourse.dataEntryGroups = attributes?["dataEntryGroups"]
 
             let included = root?["included"] as? [[String: Any]] ?? []
-            for dataObject in included where (dataObject["type"] as? String) == "efforts" {
-                EffortModel.mr_import(from: dataObject)
-            }
+            EffortModel.mr_reconcile(fromIncluded: included, ofType: "efforts")
 
             currentCourse.eventId = selectedEvent.eventId
             currentCourse.splitId = splitId
