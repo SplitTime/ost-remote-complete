@@ -51,7 +51,6 @@
 		471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
-		413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
 		YEQOIHDHANGCO8FM7KNHGQX0 /* RawTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5KB4RMEIXZ3PDUBFGCPTVIWH /* RawTime.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
@@ -76,7 +75,6 @@
 		64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
 		678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */; };
-		67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
 		6A11A0551EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
 		6A11A0561EF2CAF800D6D2CA /* OSTRightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0531EF2CAF800D6D2CA /* OSTRightMenuViewController.m */; };
@@ -158,7 +156,6 @@
 		6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC161EEF83DA009EEE21 /* LaunchScreen.storyboard */; };
 		6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */; };
-		6D70E4F0EF0645CC8298D887 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
 		73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */; };
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
