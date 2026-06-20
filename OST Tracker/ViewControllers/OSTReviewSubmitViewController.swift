@@ -46,7 +46,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         super.viewDidLayoutSubviews()
         ostApplySafeAreaFix()
         ostPositionBadgeAtMenu()
-        liftSyncButtonAboveHomeIndicator()
+        liftBottomBarAboveHomeIndicator()
     }
 
     override func viewDidLoad() {
@@ -99,23 +99,40 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         OSTSyncManager.shared().showToastOnCompletion = true
     }
 
-    // The shared safe-area fix only lifts near-full-width bottom bars; the Sync
-    // button is a nested, centered button, so it ends up below the home indicator.
-    // Pin its bottom edge just above the safe area, working in the button's own
-    // superview coordinate space (the earlier self.view-space attempt missed
-    // because the button is nested). Modern devices only.
-    private func liftSyncButtonAboveHomeIndicator() {
-        let bottomInset = view.safeAreaInsets.bottom
-        guard bottomInset > 0.5, let container = btnSync.superview else { return }
-        let desiredBottomInView = view.bounds.height - bottomInset - 12
-        let desiredBottomInContainer = container.convert(CGPoint(x: 0, y: desiredBottomInView), from: view).y
-        let desiredY = desiredBottomInContainer - btnSync.frame.height
-        let delta = desiredY - btnSync.frame.origin.y
-        guard abs(delta) > 0.5 else { return }
-        btnSync.frame.origin.y += delta
-        if syncIndicator.superview == container {
-            syncIndicator.frame.origin.y += delta
+    // The XIB lays the bottom action bar (Sync button + export/sync icons + badge
+    // + spinner) with springs that leave it under / below the home indicator on
+    // modern devices, and the shared safe-area pass actually pushes it *down*
+    // (the Sync button is just under the 85%-width bottom-bar threshold). Lift the
+    // whole bottom cluster uniformly so its lowest edge clears the safe area.
+    // Works on the live frames (no outlets needed for the icons) and only ever
+    // moves things up. NSLog instrumentation stays until verified on device.
+    private func liftBottomBarAboveHomeIndicator() {
+        var bottomInset = view.safeAreaInsets.bottom
+        if bottomInset <= 0.5 { bottomInset = view.window?.safeAreaInsets.bottom ?? 0 }
+        NSLog("[OST] review bottom-bar check: viewInset=%.1f windowInset=%.1f boundsH=%.1f",
+              view.safeAreaInsets.bottom, view.window?.safeAreaInsets.bottom ?? -1, view.bounds.height)
+        guard bottomInset > 0.5 else { return }
+
+        let safeBottom = view.bounds.height - bottomInset - 8 // small gap above the indicator
+        let fullScreen = view.bounds
+
+        var cluster: [UIView] = []
+        var lowestMaxY: CGFloat = 0
+        for sub in view.subviews {
+            if sub == tableView { continue }
+            if sub is UIImageView && sub.frame == fullScreen { continue } // background
+            if sub.frame.origin.y > view.bounds.height * 0.7 {            // bottom band
+                cluster.append(sub)
+                lowestMaxY = max(lowestMaxY, sub.frame.maxY)
+            }
         }
+        guard !cluster.isEmpty else { return }
+
+        let delta = safeBottom - lowestMaxY
+        NSLog("[OST] review bottom-bar lift: count=%d lowestMaxY=%.1f safeBottom=%.1f delta=%.1f",
+              cluster.count, lowestMaxY, safeBottom, delta)
+        guard delta < -0.5 else { return } // only lift up
+        for sub in cluster { sub.frame.origin.y += delta }
     }
 
     // MARK: - Data
