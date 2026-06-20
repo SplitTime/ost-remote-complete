@@ -220,6 +220,7 @@ class OSTEventSelectionViewController: UIViewController {
         eventList.isHidden = false
         aidStationField.isHidden = (selectedEvent == nil)
         nextButton.isHidden = false
+        nextButton.alpha = (selectedEvent == nil || aidStationField.value == nil) ? 0 : 1
         progressLabel.isHidden = true
         progressBar.isHidden = true
     }
@@ -300,7 +301,6 @@ class OSTEventSelectionViewController: UIViewController {
                 return
             }
             self.progressBar.progress = 1
-            self.loadingSpinner.stopAnimating()
 
             guard let currentCourse = CurrentCourse.mr_createEntity() as? CurrentCourse else { return }
 
