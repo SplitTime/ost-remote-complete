@@ -3,13 +3,14 @@
 //  OST Tracker
 //
 //  Migrated from Objective-C (Phase 2). The app's core bib-entry screen. Keeps the
-//  XIB (@objc), the Obj-C APNumberPad, OSTSound, OSTRunnerBadge and MagicalRecord
-//  via bridging, and the UIView+Additions frame helpers (.top/.width/.centerX…).
+//  XIB (@objc), OSTSound, OSTRunnerBadge and MagicalRecord via bridging, and the
+//  UIView+Additions frame helpers (.top/.width/.centerX…). The native NumberPadView
+//  is embedded directly (no bridging needed).
 //  Dropped the dead iPhone-5/6P/X/XR exact-height layout hacks (none fire on the
 //  iPhone 7 / iPad mini fleet or modern sims); the iPad block + the generic
 //  safe-area shift are preserved.
 //
-//  The bib field is watched via KVO on `text` because APNumberPad mutates the text
+//  The bib field is watched via KVO on `text` because NumberPadView mutates the text
 //  programmatically (a target/action editingChanged event would not fire).
 //
 
@@ -17,7 +18,7 @@ import UIKit
 import CoreData
 
 @objc(OSTRunnerTrackerViewController)
-class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate, UITextFieldDelegate {
+class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate {
 
     @IBOutlet weak var txtBibNumber: UITextField!
     @IBOutlet weak var numberPadContainerView: UIView!
@@ -114,14 +115,11 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
             lblSecondaryInfo.height += 30
         }
 
-        let numberPad = APNumberPad(delegate: self)
-        numberPad.leftFunctionButton.setTitle("*", for: .normal)
-        numberPad.leftFunctionButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        let numberPad = NumberPadView()
         numberPad.frame = numberPadContainerView.bounds
         numberPad.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        numberPad.backgroundColor = .clear
         numberPadContainerView.addSubview(numberPad)
-        numberPad.setTextField(txtBibNumber)
+        numberPad.attach(to: txtBibNumber)
 
         lblOutTimeBadge.layer.cornerRadius = lblOutTimeBadge.width / 2
         lblInTimeBadge.layer.cornerRadius = lblInTimeBadge.width / 2
@@ -440,10 +438,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
             return
         }
 
-        var effort: EffortModel?
-        if !bib.contains("*") {
-            effort = EffortModel.mr_findFirst(with: NSPredicate(format: "bibNumber == %@", NSDecimalNumber(string: bib))) as? EffortModel
-        }
+        let effort = EffortModel.mr_findFirst(with: NSPredicate(format: "bibNumber == %@", NSDecimalNumber(string: bib))) as? EffortModel
 
         guard let racer = effort else {
             lblRunnerInfo.text = "Bib Not Found"
@@ -502,17 +497,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, APNumberPadDelegate
 
     deinit {
         txtBibNumber?.removeObserver(self, forKeyPath: "text")
-    }
-
-    // MARK: - APNumberPadDelegate
-
-    func numberPad(_ numberPad: APNumberPad, functionButtonAction functionButton: UIButton,
-                   textInput: UIResponder & UITextInput) {
-        if let textField = textInput as? UITextField {
-            textField.text = "\(textField.text ?? "")*"
-        } else {
-            textInput.insertText("*")
-        }
     }
 
     // MARK: - Rotation
