@@ -96,22 +96,17 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
 
     private func fetchNotExpected() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        AppDelegate.getInstance()?.getNetworkManager()?.fetchNotExpected(
-            CurrentCourse.getCurrentCourse()?.eventGroupId,
-            splitName: splitName,
-            useAlternateServer: false,
-            completionBlock: { [weak self] object in
-                guard let self = self else { return }
-                if let bibNumbers = (object as? NSDictionary)?.value(forKeyPath: "data.bib_numbers") as? [Any] {
-                    self.bulkNotExpected(bibNumbers: bibNumbers)
-                    self.setFiltersQuantities()
-                    self.crossCheckCollection.reloadData()
-                }
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            },
-            errorBlock: { _ in
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            })
+        OSTBackend.shared.fetchNotExpected(groupId: CurrentCourse.getCurrentCourse()?.eventGroupId ?? "",
+                                           splitName: splitName) { [weak self] object, error in
+            guard let self = self else { return }
+            if error == nil,
+               let bibNumbers = (object as? NSDictionary)?.value(forKeyPath: "data.bib_numbers") as? [Any] {
+                self.bulkNotExpected(bibNumbers: bibNumbers)
+                self.setFiltersQuantities()
+                self.crossCheckCollection.reloadData()
+            }
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }
     }
 
     private func reloadData() {

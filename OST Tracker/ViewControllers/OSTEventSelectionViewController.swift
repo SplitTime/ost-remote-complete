@@ -62,11 +62,22 @@ class OSTEventSelectionViewController: UIViewController {
         let eventVC = OSTEventSelectionViewController(nibName: nil, bundle: nil)
         eventVC.tempContext = NSManagedObjectContext.mr_context(withParent: NSManagedObjectContext.mr_default())
 
-        let network = AppDelegate.getInstance()?.getNetworkManager()
-        network?.getAllEvents(completionBlock: { object in
+        OSTBackend.shared.getAllEvents { object, error in
+            if let error = error {
+                let alert = UIAlertController(title: "Error",
+                                             message: "Couldn't get the events",
+                                             preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Try Again", style: .cancel) { _ in
+                    OSTEventSelectionViewController.loadEventDataAndPresent(from: presenter, completion: completion)
+                })
+                presenter.present(alert, animated: true)
+                completion?(error)
+                return
+            }
+
             let data = (object as? [String: Any])?["data"] as? [Any]
             if (data?.count ?? 0) == 0 {
-                network?.addToken(toHeader: nil)
+                AppDelegate.getInstance()?.getNetworkManager()?.addToken(toHeader: nil)
                 presenter.ostPresentAlert(title: "No Events Available",
                                           message: "You are not authorized for any live events. Make sure your event is enabled for live entry and that you are authorized as a steward.")
                 completion?(NSError(domain: "OST", code: 1,
@@ -96,17 +107,7 @@ class OSTEventSelectionViewController: UIViewController {
             UserDefaults.standard.synchronize()
 
             completion?(nil)
-        }, progressBlock: { _ in
-        }, errorBlock: { error in
-            let alert = UIAlertController(title: "Error",
-                                          message: "Couldn't get the events",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Try Again", style: .cancel) { _ in
-                OSTEventSelectionViewController.loadEventDataAndPresent(from: presenter, completion: completion)
-            })
-            presenter.present(alert, animated: true)
-            completion?(error)
-        })
+        }
     }
 
     // MARK: - Lifecycle
@@ -320,8 +321,13 @@ class OSTEventSelectionViewController: UIViewController {
         progressBar.progress = 0.5
 
         guard let selectedEvent = selectedEvent else { return }
-        AppDelegate.getInstance()?.getNetworkManager()?.getEventsDetails(selectedEvent.eventId, completionBlock: { [weak self] object in
+        OSTBackend.shared.getEventsDetails(selectedEvent.eventId ?? "") { [weak self] object, error in
             guard let self = self else { return }
+            if error != nil {
+                self.showSelectFields()
+                self.ostPresentAlert(title: "Error", message: "Couldn't get course details")
+                return
+            }
             self.progressBar.progress = 1
             self.activityIndicator.stopAnimating()
 
@@ -364,11 +370,7 @@ class OSTEventSelectionViewController: UIViewController {
             NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
 
             AppDelegate.getInstance()?.loadLeftMenu()
-        }, errorBlock: { [weak self] _ in
-            guard let self = self else { return }
-            self.showSelectFields()
-            self.ostPresentAlert(title: "Error", message: "Couldn't get course details")
-        })
+        }
     }
 
     // MARK: - Helpers

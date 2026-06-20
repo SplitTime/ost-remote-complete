@@ -101,8 +101,12 @@ class OSTUtilitiesViewController: OSTBaseViewController {
         progressBar.progress = 0.5
         guard let currentCourse = CurrentCourse.getCurrentCourse() else { return }
 
-        AppDelegate.getInstance()?.getNetworkManager()?.getEventsDetails(currentCourse.eventId, completionBlock: { [weak self] object in
+        OSTBackend.shared.getEventsDetails(currentCourse.eventId ?? "") { [weak self] object, error in
             guard let self = self else { return }
+            if let error = error {
+                UIView.animate(withDuration: 0.5) { self.showFinishLoadingErrorValues(error.localizedDescription) }
+                return
+            }
             self.progressBar.progress = 1
             self.activityIndicator.stopAnimating()
 
@@ -134,10 +138,7 @@ class OSTUtilitiesViewController: OSTBaseViewController {
             UIView.animate(withDuration: 0.5) { self.showFinishLoadingValues() }
             NSManagedObjectContext.mr_default().processPendingChanges()
             NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
-
-        }, errorBlock: { [weak self] error in
-            UIView.animate(withDuration: 0.5) { self?.showFinishLoadingErrorValues(error?.localizedDescription ?? "Error") }
-        })
+        }
     }
 
     @IBAction func onReturnToLiveEntry(_ sender: Any) {
