@@ -8,7 +8,6 @@ final class LoginViewController: UIViewController {
 
     private let controller: LoginController
     private let store: CredentialStore
-    private let brandBlue = UIColor(red: 47/255, green: 143/255, blue: 208/255, alpha: 1)
 
     // MARK: Init
 
@@ -37,43 +36,22 @@ final class LoginViewController: UIViewController {
         l.textAlignment = .center
         return l
     }()
-    private let emailField = LoginViewController.makeField(placeholder: "Username", secure: false)
-    private let passwordField = LoginViewController.makeField(placeholder: "Password", secure: true)
-    private let loginButton: UIButton = {
-        let b = UIButton(type: .system)
-        b.setTitle("Login", for: .normal)
-        b.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        b.setTitleColor(.white, for: .normal)
-        b.backgroundColor = UIColor(red: 52/255, green: 199/255, blue: 89/255, alpha: 1) // systemGreen
-        b.layer.cornerRadius = 12
-        b.heightAnchor.constraint(equalToConstant: 52).isActive = true
-        return b
-    }()
+    private let emailField = StyledTextField(placeholder: "Username", secure: false)
+    private let passwordField = StyledTextField(placeholder: "Password", secure: true)
+    private let loginButton = PrimaryButton(title: "Login", role: .success)
     private let spinner: UIActivityIndicatorView = {
         let s = UIActivityIndicatorView(style: .gray)   // iOS 12-safe
         s.hidesWhenStopped = true
         return s
     }()
 
-    private static func makeField(placeholder: String, secure: Bool) -> UITextField {
-        let tf = UITextField()
-        tf.placeholder = placeholder
-        tf.borderStyle = .roundedRect
-        tf.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        tf.font = .systemFont(ofSize: 17)
-        tf.isSecureTextEntry = secure
-        tf.autocapitalizationType = .none
-        tf.autocorrectionType = .no
-        tf.textContentField(secure: secure)
-        tf.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        return tf
-    }
-
     // MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = Theme.background
+        titleLabel.textColor = Theme.label
+        titleLabel.font = Theme.Font.title
 
         emailField.text = store.email
         passwordField.text = store.password
@@ -147,11 +125,5 @@ final class LoginViewController: UIViewController {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
-    }
-}
-
-private extension UITextField {
-    func textContentField(secure: Bool) {
-        textContentType = secure ? .password : .username
     }
 }
