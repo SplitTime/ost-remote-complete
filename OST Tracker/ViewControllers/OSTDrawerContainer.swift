@@ -16,6 +16,7 @@ class OSTDrawerContainer: UIViewController {
     private static let menuWidth: CGFloat = 270
 
     private(set) var isOpen = false
+    private var panStartX: CGFloat = 0
 
     @objc var rightMenuViewController: UIViewController? {
         didSet {
@@ -52,8 +53,46 @@ class OSTDrawerContainer: UIViewController {
         overlay.backgroundColor = UIColor(white: 0, alpha: 0)
         overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         overlay.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeDrawer)))
+        overlay.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:))))
         return overlay
     }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Swipe in from the right edge to open (matches MFSideMenu's slide-to-open).
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        edgePan.edges = .right
+        view.addGestureRecognizer(edgePan)
+    }
+
+    // MARK: - Interactive pan
+
+    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
+        guard let centerVC = centerViewController, let center = centerVC.view else { return }
+        let translation = gesture.translation(in: view).x
+
+        switch gesture.state {
+        case .began:
+            panStartX = center.frame.origin.x // 0 when closed, -menuWidth when open
+            view.endEditing(true)
+            if overlay.superview == nil {
+                attachOverlay(to: centerVC)
+                overlay.backgroundColor = UIColor(white: 0, alpha: 0)
+            }
+        case .changed:
+            let x = min(0, max(-Self.menuWidth, panStartX + translation))
+            center.frame = view.bounds.offsetBy(dx: x, dy: 0)
+            overlay.frame = center.bounds
+            overlay.backgroundColor = UIColor(white: 0, alpha: 0.3 * (-x / Self.menuWidth))
+        case .ended, .cancelled:
+            let velocity = gesture.velocity(in: view).x
+            let x = center.frame.origin.x
+            let shouldOpen = velocity < -300 || (velocity <= 300 && x < -Self.menuWidth / 2)
+            if shouldOpen { open(nil) } else { close(nil) }
+        default:
+            break
+        }
+    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
