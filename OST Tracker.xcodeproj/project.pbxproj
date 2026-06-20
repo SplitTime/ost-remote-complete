@@ -71,6 +71,8 @@
 		16845BB33D8C07587228 /* LiveReadsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D788CC23A1A220B2901A /* LiveReadsRequest.swift */; };
 		FEAFFF17A27634AD9187 /* LiveReadsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D788CC23A1A220B2901A /* LiveReadsRequest.swift */; };
 		1E20B1532196107FCB71 /* LiveReadsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91083BFC39CDE8C3D3 /* LiveReadsRequestTests.swift */; };
+		A1B2C3D4E5F60718293A4B5C /* OSTLiveReadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6071829A3B4C5D6 /* OSTLiveReadsViewController.swift */; };
+		C3D4E5F607182940B4C5D6E7 /* OSTLiveReadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6071829A3B4C5D6 /* OSTLiveReadsViewController.swift */; };
 		64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */; };
 		65BC4D51D04E65FFE0AF2615 /* LiveAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2CE940B9754C16E1809394 /* LiveAPITests.swift */; };
 		678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */; };
@@ -386,6 +388,7 @@
 		VIW6YQ1J7WYYD24G41DKP7C9 /* RawTimeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RawTimeTests.swift; path = "OST TrackerTests/Swift/RawTimeTests.swift"; sourceTree = "<group>"; };
 		7ED544AB7CCD4472A253 /* LiveReadsMergeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsMergeTests.swift; path = "OST TrackerTests/Swift/LiveReadsMergeTests.swift"; sourceTree = "<group>"; };
 		D788CC23A1A220B2901A /* LiveReadsRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsRequest.swift; path = "OST Tracker/Swift/LiveReadsRequest.swift"; sourceTree = "<group>"; };
+		B2C3D4E5F6071829A3B4C5D6 /* OSTLiveReadsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTLiveReadsViewController.swift; sourceTree = "<group>"; };
 		BB91083BFC39CDE8C3D3 /* LiveReadsRequestTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsRequestTests.swift; path = "OST TrackerTests/Swift/LiveReadsRequestTests.swift"; sourceTree = "<group>"; };
 		CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadViewTests.swift; path = "OST TrackerTests/Swift/NumberPadViewTests.swift"; sourceTree = "<group>"; };
 		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
@@ -595,6 +598,7 @@
 				BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */,
 				98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */,
 				43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */,
+				B2C3D4E5F6071829A3B4C5D6 /* OSTLiveReadsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1058,6 +1062,7 @@
 				YEQOIHDHANGCO8FM7KNHGQX0 /* RawTime.swift in Sources */,
 				16845BB33D8C07587228 /* LiveReadsRequest.swift in Sources */,
 				3F85C867A8294929AA2C /* LiveReadsMerge.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5C /* OSTLiveReadsViewController.swift in Sources */,
 				2F5AB1F5E6634215E9CE16EA /* Theme.swift in Sources */,
 				18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */,
 				C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */,
@@ -1136,6 +1141,7 @@
 				ESTJBA3JU6IXXCTE8Y04P6FX /* RawTime.swift in Sources */,
 				FEAFFF17A27634AD9187 /* LiveReadsRequest.swift in Sources */,
 				2E7F8C5A9B6D4A2C8F1E3B /* LiveReadsMerge.swift in Sources */,
+				C3D4E5F607182940B4C5D6E7 /* OSTLiveReadsViewController.swift in Sources */,
 				29304C5004AE7D8B6CFAE5ED /* Theme.swift in Sources */,
 				22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */,
 				BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */,
