@@ -42,6 +42,15 @@ import Foundation
         request("event_groups/\(groupId)/not_expected?split_name=\(escaped)", completion: completion)
     }
 
+    /// Polls the raw_times JSON:API for the given event group + station, newest
+    /// first, capped at the server max page size. Returns the parsed JSON dict
+    /// (callers run it through `RawTime.parse`). Mirrors `fetchNotExpected`.
+    @objc func fetchRawTimes(groupId: String,
+                             splitName: String,
+                             completion: @escaping (Any?, Error?) -> Void) {
+        request(LiveReadsRequest.path(groupId: groupId, splitName: splitName), completion: completion)
+    }
+
     // MARK: - Write (entry submit) — transport only
 
     /// POSTs an already-built JSON body to an absolute URL, off AFNetworking. The
