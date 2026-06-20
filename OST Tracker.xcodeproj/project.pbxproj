@@ -42,6 +42,7 @@
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		384837C7720AAB88FADDA238 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */; };
+		3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */; };
 		413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
 		471CC414A6DD84CDA2B9BD6F /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
@@ -161,6 +162,7 @@
 		B1C144EB0CEE814903F1DFCD /* OSTDropDownField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */; };
 		BD0F5B3D9588B36A254205A3 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		BD36B2CD522E4F5E7D9DCD53 /* OSTCrossCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95F945DAF72BE6077EFCE14 /* OSTCrossCheckViewController.swift */; };
+		BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1A7214138790605CD98F9 /* PrimaryButton.swift */; };
 		BE78BEF2EBB61A1DA47D7171 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
 		BEF2C7720B262AB677278BD4 /* OSTRunnerTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B465D35BBF1D04A64501A2 /* OSTRunnerTrackerViewController.swift */; };
 		BFA683CE97A77D461E74E7CA /* OSTBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */; };
@@ -170,6 +172,7 @@
 		C1A21A365A3C880DE61C4DC7 /* OSTUtilitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9518A0888B6394EC5ED8C34 /* OSTUtilitiesViewController.swift */; };
 		C261404CBC1C810470E0C24A /* SubmitPayloadGoldenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */; };
 		C6401B6575B5EC2BA6DF5564 /* OSTEditEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */; };
+		C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C1A7214138790605CD98F9 /* PrimaryButton.swift */; };
 		C8529C88216D0FD12C16BEA9 /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		C8BB3E1FB7830997009E7720 /* UIViewController+OSTSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */; };
 		C99F414EAB739A70BA4BDADC /* MagicalRecordShim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A20F2AF8BFB1CD0060475E /* MagicalRecordShim.swift */; };
@@ -348,6 +351,7 @@
 		98A7909F2F37F42E9721DE8F /* OSTDropDownField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTDropDownField.swift; sourceTree = "<group>"; };
 		9DA22B20B858EF2CA668A00B /* AppearanceController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppearanceController.swift; path = "OST Tracker/Swift/DesignSystem/AppearanceController.swift"; sourceTree = "<group>"; };
 		9E2CE940B9754C16E1809394 /* LiveAPITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveAPITests.swift; path = "OST TrackerTests/Swift/LiveAPITests.swift"; sourceTree = "<group>"; };
+		A2C1A7214138790605CD98F9 /* PrimaryButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimaryButton.swift; path = "OST Tracker/Swift/DesignSystem/PrimaryButton.swift"; sourceTree = "<group>"; };
 		A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTAlert.swift"; sourceTree = "<group>"; };
 		A802EAD220AFB69CF7A7E5BF /* fixtures */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = fixtures; path = Verification/fixtures; sourceTree = SOURCE_ROOT; };
 		B8904C060C056AB96E283D0F /* CoreDataStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = "OST Tracker/Swift/CoreDataStack.swift"; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 		F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEventSelectionViewController.swift; sourceTree = "<group>"; };
 		F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OSTSafeArea.h"; sourceTree = "<group>"; };
 		FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThemeTests.swift; path = "OST TrackerTests/Swift/ThemeTests.swift"; sourceTree = "<group>"; };
+		FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PrimaryButtonTests.swift; path = "OST TrackerTests/Swift/PrimaryButtonTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +444,7 @@
 			children = (
 				1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */,
 				9DA22B20B858EF2CA668A00B /* AppearanceController.swift */,
+				A2C1A7214138790605CD98F9 /* PrimaryButton.swift */,
 			);
 			name = DesignSystem;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 				1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */,
 				FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */,
 				354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */,
+				FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1015,6 +1022,7 @@
 				413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */,
 				2F5AB1F5E6634215E9CE16EA /* Theme.swift in Sources */,
 				18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */,
+				C67EDCC4B7A72E34A76ACD89 /* PrimaryButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1095,7 @@
 				6D70E4F0EF0645CC8298D887 /* BibEntry.swift in Sources */,
 				29304C5004AE7D8B6CFAE5ED /* Theme.swift in Sources */,
 				22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */,
+				BE4D4C18020BC96B4F374E0A /* PrimaryButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1111,6 +1120,7 @@
 				67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */,
 				678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */,
 				64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */,
+				3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
