@@ -13,6 +13,7 @@
 #import "OSTSessionManager.h"
 #import "OSTNetworkManager.h"
 #import "AppDelegate.h"
+#import "AutoSyncObserver.h"
 #import "OSTBaseViewController.h"
 #import "UIViewController+OSTSafeArea.h"
 #import "OSTNetworkManager+Login.h"

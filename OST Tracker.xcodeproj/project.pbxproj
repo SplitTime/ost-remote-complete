@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		013846B2926BB5BB40AC283F /* AutoSyncControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC37FCC6D34931884EF6A498 /* AutoSyncControllerTests.swift */; };
 		033E71C1206001FE00CB9BD8 /* APNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B4206001FD00CB9BD8 /* APNumberButton.m */; };
 		033E71C2206001FE00CB9BD8 /* APNumberButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B4206001FD00CB9BD8 /* APNumberButton.m */; };
 		033E71C3206001FE00CB9BD8 /* APNumberPadDefaultStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 033E71B5206001FD00CB9BD8 /* APNumberPadDefaultStyle.m */; };
@@ -37,7 +38,9 @@
 		033E71CE206001FE00CB9BD8 /* apnumberpad_backspace_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 033E71C0206001FD00CB9BD8 /* apnumberpad_backspace_icon@3x.png */; };
 		0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */; };
 		0D51F3C8E8E225ECAFD65F48 /* OSTDrawerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F5AACB43C4FCEF82C1D795 /* OSTDrawerContainer.swift */; };
+		0E9178CF59ADF2CC7247CB37 /* OSTToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */; };
 		0F9B083BD28E4F013F81593A /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB852C200761E0B7347D354 /* AutoSyncScheduler.swift */; };
+		10EB1E547C106BA0FAF6B410 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */; };
 		13FB6B36B5859F37C82D1D9F /* AutoSyncEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F7445A94282241B11860BD /* AutoSyncEngineTests.swift */; };
 		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
@@ -52,6 +55,7 @@
 		2555576285D9B872FF42B077 /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */; };
 		276A42763A88180C23004767 /* KeychainRoundTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42754A874CADDE59B43D5F49 /* KeychainRoundTripTests.swift */; };
 		2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE66B71CDC4C7B7B3AD2D24 /* HarnessSmokeTests.swift */; };
+		2B651D5CB30312A95CAAF677 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */; };
 		32F6062638B19F0C26134B5F /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		384837C7720AAB88FADDA238 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8904C060C056AB96E283D0F /* CoreDataStack.swift */; };
 		3AAFBB447515EC2DFF675562 /* OSTBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */; };
@@ -158,6 +162,7 @@
 		73A9D4C3D087F44F7FADCCBD /* APIParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B5AE288C2ACCF63583BFB1 /* APIParsingTests.swift */; };
 		7653A88D540B4EBBA48434B6 /* FixtureLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F2986C3890234A3A81A335 /* FixtureLoader.swift */; };
 		7798A47732EB9FCC217FA997 /* AutoSyncStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3C8D7F11A3C710A4DA38D /* AutoSyncStatus.swift */; };
+		79034041655DA33AFA0592FC /* OSTToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */; };
 		7922FAB16C1A315313EB9E86 /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB852C200761E0B7347D354 /* AutoSyncScheduler.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		87A8BA63C84B1968781A8A24 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
@@ -273,6 +278,7 @@
 		11F1BAE4B6BD10048636F490 /* OSTReachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTReachability.swift; path = "OST Tracker/Swift/OSTReachability.swift"; sourceTree = "<group>"; };
 		149C18108290E0987474D395 /* LiveTimeEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeEntry.swift; path = "OST Tracker/Swift/LiveTimeEntry.swift"; sourceTree = "<group>"; };
 		14C24566B72849E7915F9603 /* APIModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIModels.swift; path = "OST Tracker/Swift/APIModels.swift"; sourceTree = "<group>"; };
+		15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTToast.swift; path = "OST Tracker/Swift/AutoSync/OSTToast.swift"; sourceTree = "<group>"; };
 		16BAED92F7B8A3B859B03965 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "OST Tracker/Swift/LoginViewController.swift"; sourceTree = "<group>"; };
 		177BC33990DA88662548DD92 /* OST Tracker-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OST Tracker-Bridging-Header.h"; path = "OST Tracker/OST Tracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		189B47392427175300F384E8 /* OSTAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTAboutViewController.xib; sourceTree = "<group>"; };
@@ -383,6 +389,9 @@
 		B8904C060C056AB96E283D0F /* CoreDataStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = "OST Tracker/Swift/CoreDataStack.swift"; sourceTree = "<group>"; };
 		BC21002489A311F7BBD81428 /* OSTEditEntryViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTEditEntryViewController.swift; sourceTree = "<group>"; };
 		BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTBackend.swift; path = "OST Tracker/Swift/OSTBackend.swift"; sourceTree = "<group>"; };
+		CC37FCC6D34931884EF6A498 /* AutoSyncControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncControllerTests.swift; path = "OST TrackerTests/Swift/AutoSyncControllerTests.swift"; sourceTree = "<group>"; };
+		D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncController.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncController.swift"; sourceTree = "<group>"; };
+		D369E3734621F4E93ED41607 /* AutoSyncObserver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = AutoSyncObserver.h; sourceTree = "<group>"; };
 		D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTBaseViewController.h; sourceTree = "<group>"; };
 		D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTBaseViewController.m; sourceTree = "<group>"; };
 		D50DFA9022786B5D002F5FBF /* OSTSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTSlider.h; sourceTree = "<group>"; };
@@ -533,6 +542,7 @@
 				F7E5543390C6D18C53205C9D /* AutoSyncStatusTests.swift */,
 				B0F7445A94282241B11860BD /* AutoSyncEngineTests.swift */,
 				5A947E854625AA11C16D5C1F /* LiveTimeSubmitterTests.swift */,
+				CC37FCC6D34931884EF6A498 /* AutoSyncControllerTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -544,6 +554,8 @@
 				2AB852C200761E0B7347D354 /* AutoSyncScheduler.swift */,
 				9E94C7F62FB900C9ECD59945 /* AutoSyncEngine.swift */,
 				AEDEB320285D7D1EC890CB4E /* LiveTimeSubmitter.swift */,
+				D248D1013D49D7886B6EF6F8 /* AutoSyncController.swift */,
+				15C0BDAF6BBCC44D8ADC039B /* OSTToast.swift */,
 			);
 			name = AutoSync;
 			sourceTree = "<group>";
@@ -802,6 +814,7 @@
 			children = (
 				D5C5BC59217E1CE70071D6CF /* OSTSyncManager.h */,
 				D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */,
+				D369E3734621F4E93ED41607 /* AutoSyncObserver.h */,
 			);
 			path = SyncManager;
 			sourceTree = "<group>";
@@ -1089,6 +1102,8 @@
 				0F9B083BD28E4F013F81593A /* AutoSyncScheduler.swift in Sources */,
 				B6CAF806BCAB59B40FA46C27 /* AutoSyncEngine.swift in Sources */,
 				4485A54D2239B31DFA467E51 /* LiveTimeSubmitter.swift in Sources */,
+				2B651D5CB30312A95CAAF677 /* AutoSyncController.swift in Sources */,
+				79034041655DA33AFA0592FC /* OSTToast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1166,6 +1181,8 @@
 				7922FAB16C1A315313EB9E86 /* AutoSyncScheduler.swift in Sources */,
 				6644D3AAE50D85A94C2D7E45 /* AutoSyncEngine.swift in Sources */,
 				FEFBCD27972C4B7E6C715034 /* LiveTimeSubmitter.swift in Sources */,
+				10EB1E547C106BA0FAF6B410 /* AutoSyncController.swift in Sources */,
+				0E9178CF59ADF2CC7247CB37 /* OSTToast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1189,6 +1206,7 @@
 				8CF9BAE07760F98277BEC24C /* AutoSyncStatusTests.swift in Sources */,
 				13FB6B36B5859F37C82D1D9F /* AutoSyncEngineTests.swift in Sources */,
 				1CF7D9CAD45B10AD2CF4B2B0 /* LiveTimeSubmitterTests.swift in Sources */,
+				013846B2926BB5BB40AC283F /* AutoSyncControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
