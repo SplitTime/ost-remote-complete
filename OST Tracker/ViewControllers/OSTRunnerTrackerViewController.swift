@@ -2,16 +2,20 @@
 //  OSTRunnerTrackerViewController.swift
 //  OST Tracker
 //
-//  Migrated from Objective-C (Phase 2). The app's core bib-entry screen. Keeps the
-//  XIB (@objc), OSTSound, OSTRunnerBadge and MagicalRecord via bridging, and the
-//  UIView+Additions frame helpers (.top/.width/.centerX…). The native NumberPadView
-//  is embedded directly (no bridging needed).
-//  Dropped the dead iPhone-5/6P/X/XR exact-height layout hacks (none fire on the
-//  iPhone 7 / iPad mini fleet or modern sims); the iPad block + the generic
-//  safe-area shift are preserved.
+//  The app's core bib-entry screen, rebuilt in the new design language. The view
+//  hierarchy is now a single adaptive Auto Layout tree (root vertical UIStackView
+//  pinned to the safe-area guide) built entirely in code — no XIB, no frame-math.
+//  Styling is sourced from `Theme` (colors + Font roles); the entry/toggle buttons
+//  mirror `PrimaryButton`. The embedded `NumberPadView` and `OSTRunnerBadge` are
+//  reused as-is.
 //
-//  The bib field is watched via KVO on `text` because NumberPadView mutates the text
-//  programmatically (a target/action editingChanged event would not fire).
+//  Behavior is preserved verbatim from the prior implementation: the entry-button
+//  permutations (1-in / 1-out / 1-in+1-out / 2-in / 2-out) with their
+//  leftBitKey/rightBitKey semantics, the bib lookup, the record flow, and the
+//  edit-sheet present flow.
+//
+//  The bib field is watched via KVO on `text` because NumberPadView mutates the
+//  text programmatically (a target/action editingChanged event would not fire).
 //
 
 import UIKit
@@ -20,30 +24,43 @@ import CoreData
 @objc(OSTRunnerTrackerViewController)
 class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var txtBibNumber: UITextField!
-    @IBOutlet weak var numberPadContainerView: UIView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblTime: UILabel!
-    @IBOutlet weak var btnLeft: UIButton!
-    @IBOutlet weak var btnRight: UIButton!
-    @IBOutlet weak var pacerAndAidView: UIView!
-    @IBOutlet weak var btnRightMenu: UIButton!
-    @IBOutlet weak var lblPersonAdded: UILabel!
-    @IBOutlet weak var lblOutTimeBadge: UILabel!
-    @IBOutlet weak var lblInTimeBadge: UILabel!
-    @IBOutlet weak var lblRunnerInfo: UILabel!
-    @IBOutlet weak var lblAdded: UILabel!
-    @IBOutlet weak var btnStopped: UIButton!
-    @IBOutlet weak var btnPacer: UIButton!
-    @IBOutlet weak var headerContainerView: UIView!
-    // Not wired in the XIB (was a silently-nil outlet in Obj-C) — keep optional so
-    // the .isHidden calls stay no-ops instead of crashing on an implicit unwrap.
-    @IBOutlet weak var lblWithPacer: UILabel?
-    @IBOutlet weak var lblSecondaryInfo: UILabel!
-    @IBOutlet weak var timeContainerView: UIView?
-    @IBOutlet weak var separatoryLine: UIView!
-    @IBOutlet weak var lblTimeOfTheDay: UILabel!
-    @IBOutlet weak var runnerBadge: OSTRunnerBadge!
+    // MARK: - Programmatic views (formerly XIB outlets)
+
+    @objc let txtBibNumber = UITextField()
+    private let numberPad = NumberPadView()
+
+    private let lblTitle = UILabel()
+    private let lblTime = UILabel()
+    private let lblTimeOfTheDay = UILabel()
+    private let btnMenu = UIButton(type: .system)
+    private let syncBadgeLabel = UILabel()
+
+    private let btnLeft = UIButton(type: .custom)
+    private let btnRight = UIButton(type: .custom)
+    private let lblInTimeBadge = UILabel()
+    private let lblOutTimeBadge = UILabel()
+
+    private let btnStopped = UIButton(type: .custom)
+    private let btnPacer = UIButton(type: .custom)
+    private let lblWithPacer = UILabel()
+
+    private let lblPersonAdded = UILabel()
+    private let lblRunnerInfo = UILabel()
+    private let lblSecondaryInfo = UILabel()
+    private let lblAdded = UILabel()
+    private let runnerBadge = OSTRunnerBadge(frame: CGRect(x: 0, y: 0, width: 320, height: 120))
+
+    // Toggle row: a horizontal stack so the pacer toggle can be hidden cleanly.
+    private let toggleRow = UIStackView()
+    // Entry buttons live in a horizontal stack; permutations hide a button instead
+    // of doing width math.
+    private let entryRow = UIStackView()
+    // Display zone + number-pad split. In landscape we flip this axis to side-by-side.
+    private let bodyStack = UIStackView()
+
+    private var entryButtonHeight: NSLayoutConstraint?
+
+    // MARK: - State
 
     private var timer: Timer?
     private var dayString = ""
@@ -52,7 +69,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     private var lastEntry: EntryModel?
     private var leftBitKey: String?
     private var rightBitKey: String?
-    private var didApplySafeAreaShift = false
+
+    private static let didRegisterBibNotification = Notification.Name("OSTRunnerTrackerViewControllerDidRegisterBibNotification")
 
     // MARK: - Auto Sync status strip
 
@@ -62,32 +80,33 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         l.font = .systemFont(ofSize: 13, weight: .semibold)
         l.isUserInteractionEnabled = true
         l.isHidden = true
+        l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
-    private var statusStripHeight: CGFloat = 28
+    private var statusStripHeight: NSLayoutConstraint?
     private var didInsertStatusStrip = false
-    private var appliedStripShift: CGFloat = 0
 
     private func color(for state: AutoSyncState) -> (UIColor, UIColor) {
         switch state {
-        case .synced:  return (UIColor(red: 88/255, green: 182/255, blue: 73/255, alpha: 1), .white)
-        case .pending: return (UIColor(red: 52/255, green: 120/255, blue: 200/255, alpha: 1), .white)
+        case .synced:  return (Theme.success, .white)
+        case .pending: return (Theme.tint, .white)
         case .syncing: return (UIColor(red: 1, green: 0.85, blue: 0.30, alpha: 1), .black)
-        case .failed:  return (UIColor(red: 247/255, green: 45/255, blue: 0, alpha: 1), .white)
-        case .offline: return (UIColor(white: 0.55, alpha: 1), .white)
+        case .failed:  return (Theme.destructive, .white)
+        case .offline: return (Theme.secondaryLabel, .white)
         case .disabled: return (.clear, .clear)
         }
     }
 
     private func renderStatus(_ status: AutoSyncStatus) {
+        installStatusStripIfNeeded()
         let visible = status.state != .disabled
         statusStrip.isHidden = !visible
-        guard visible else { layoutStatusStrip(); return }
+        statusStripHeight?.constant = visible ? 28 : 0
+        guard visible else { return }
         let (bg, fg) = color(for: status.state)
         statusStrip.backgroundColor = bg
         statusStrip.textColor = fg
         statusStrip.text = status.stripText
-        layoutStatusStrip()
     }
 
     @objc private func onStatusChanged() { renderStatus(AutoSyncController.shared.currentStatus) }
@@ -97,34 +116,27 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         AutoSyncController.shared.forceRetry()
     }
 
-    private func layoutStatusStrip() {
-        if !didInsertStatusStrip {
-            didInsertStatusStrip = true
-            view.addSubview(statusStrip)
-            statusStrip.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onStripTapped)))
-        }
-        let visible = !statusStrip.isHidden
-        let top = headerContainerView.frame.maxY
-        statusStrip.frame = CGRect(x: 0, y: top, width: view.bounds.width, height: visible ? statusStripHeight : 0)
-        view.bringSubviewToFront(statusStrip)
-
-        let shift = visible ? statusStripHeight : 0
-        applyStripShift(to: shift)
+    /// The status strip sits just below the header bar and pushes the body down via
+    /// its own height constraint (no frame shifting).
+    private func installStatusStripIfNeeded() {
+        guard !didInsertStatusStrip else { return }
+        didInsertStatusStrip = true
+        statusStrip.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onStripTapped)))
+        rootStack.insertArrangedSubview(statusStrip, at: 1)
+        let h = statusStrip.heightAnchor.constraint(equalToConstant: 0)
+        h.isActive = true
+        statusStripHeight = h
     }
 
-    private func applyStripShift(to shift: CGFloat) {
-        let delta = shift - appliedStripShift
-        guard abs(delta) > 0.5 else { return }
-        appliedStripShift = shift
-        for sub in view.subviews {
-            if sub == numberPadContainerView || sub == headerContainerView || sub == statusStrip { continue }
-            sub.frame.origin.y += delta
-        }
-    }
-
-    private static let didRegisterBibNotification = Notification.Name("OSTRunnerTrackerViewControllerDidRegisterBibNotification")
+    private let rootStack = UIStackView()
 
     // MARK: - Lifecycle
+
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = Theme.background
+        buildUI()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,106 +144,360 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self,
                                      selector: #selector(onTick(_:)), userInfo: nil, repeats: true)
 
-        btnLeft.titleLabel?.textAlignment = .center
-        btnRight.titleLabel?.textAlignment = .center
-
-        lblInTimeBadge.removeFromSuperview()
-        lblOutTimeBadge.removeFromSuperview()
-        btnLeft.addSubview(lblInTimeBadge)
-        btnRight.addSubview(lblOutTimeBadge)
-
-        lblInTimeBadge.top = 0
-        lblInTimeBadge.right = btnLeft.width
-        lblOutTimeBadge.top = 0
-        lblOutTimeBadge.right = btnRight.width
-
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            numberPadContainerView.height = view.height / 2
-            numberPadContainerView.top = view.height / 2
-
-            headerContainerView.height = 210
-            pacerAndAidView.top = headerContainerView.bottom
-            txtBibNumber.font = UIFont(name: "Helvetica Bold", size: 75)
-            btnLeft.top = pacerAndAidView.bottom + 10
-            btnRight.top = pacerAndAidView.bottom + 10
-            btnLeft.height = 143
-            btnRight.height = 143
-
-            btnLeft.titleLabel?.font = UIFont(name: "Helvetica Bold", size: 33)
-            btnRight.titleLabel?.font = UIFont(name: "Helvetica Bold", size: 33)
-            lblPersonAdded.font = UIFont(name: "Helvetica Bold", size: 36)
-            lblRunnerInfo.font = lblPersonAdded.font
-            lblAdded.font = UIFont(name: "Helvetica", size: 28)
-            lblSecondaryInfo.font = UIFont(name: "Helvetica", size: 28)
-            lblAdded.top = lblAdded.top + 12
-            lblTime.font = UIFont(name: "Helvetica Bold", size: 36)
-            txtBibNumber.font = UIFont(name: "Helvetica Bold", size: 100)
-            lblTimeOfTheDay.font = UIFont(name: "Helvetica Bold", size: 20)
-            separatoryLine.right += 50
-            lblTimeOfTheDay.width += 30
-            lblTimeOfTheDay.height += 6
-            lblTimeOfTheDay.top -= 10
-            lblTimeOfTheDay.left += 5
-            lblTime.width += 50
-            txtBibNumber.width += 50
-            lblTime.height += 15
-            btnPacer.width = 174
-            btnStopped.width = 174
-            btnPacer.height = 56
-            btnStopped.height = 56
-            lblSecondaryInfo.top -= 50
-            lblSecondaryInfo.height += 30
-        }
-
-        let numberPad = NumberPadView()
-        numberPad.frame = numberPadContainerView.bounds
-        numberPad.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         // Embedded pad (not an inputView), so playInputClick() can't fire —
         // play the click directly so key taps are audible on the timing screen.
         numberPad.tapSound = .alwaysClick
-        numberPadContainerView.addSubview(numberPad)
         numberPad.attach(to: txtBibNumber)
-
-        lblOutTimeBadge.layer.cornerRadius = lblOutTimeBadge.width / 2
-        lblInTimeBadge.layer.cornerRadius = lblInTimeBadge.width / 2
-        lblOutTimeBadge.clipsToBounds = true
-        lblInTimeBadge.clipsToBounds = true
-        lblOutTimeBadge.isHidden = true
-        lblInTimeBadge.isHidden = true
-
-        btnLeft.setBackgroundImage(UIImage(named: "GrayButton"), for: .highlighted)
-        btnRight.setBackgroundImage(UIImage(named: "GrayButton"), for: .highlighted)
 
         txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
         AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(onStatusChanged),
+                                               name: AutoSyncController.statusChangedNotification, object: nil)
+        renderStatus(AutoSyncController.shared.currentStatus)
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
+        lblTitle.text = CurrentCourse.getCurrentCourse()?.splitName
+
+        configureEntryButtons()
+        configurePacerToggle()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: AutoSyncController.statusChangedNotification, object: nil)
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        applySafeAreaShiftIfNeeded()
-        layoutStatusStrip()
-        runnerBadge.width = min(0.58 * view.width, 350)
-        runnerBadge.centerX = lblPersonAdded.centerX
+        ostPositionBadgeAtMenu()
         runnerBadge.adjustFontSizes()
     }
 
-    // This XIB predates safe-area layout: the header bar sat at y=0, so "Menu" and
-    // the bib display bled under the Dynamic Island. One-time fix: shift all content
-    // (except the bottom number pad) down by the extra top inset, and grow the header
-    // to fill behind the status bar with its own content pushed below the island.
-    private func applySafeAreaShiftIfNeeded() {
-        if didApplySafeAreaShift { return }
-        let inset = view.safeAreaInsets.top - 20.0 // old design assumed a 20pt status bar
-        if inset <= 0.5 { return }                 // legacy devices (iPad mini 2/3 etc.)
-        didApplySafeAreaShift = true
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        applyAdaptiveSizing()
+    }
 
-        for sub in view.subviews {
-            if sub == numberPadContainerView || sub == headerContainerView { continue }
-            sub.frame.origin.y += inset
+    // MARK: - UI construction
+
+    private func buildUI() {
+        rootStack.axis = .vertical
+        rootStack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rootStack)
+
+        rootStack.addArrangedSubview(makeHeader())
+        rootStack.addArrangedSubview(makeBody())
+
+        let guide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            rootStack.topAnchor.constraint(equalTo: guide.topAnchor),
+            rootStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            rootStack.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            rootStack.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+        ])
+    }
+
+    private func makeHeader() -> UIView {
+        let header = UIView()
+        header.backgroundColor = Theme.secondaryBackground
+
+        lblTitle.font = Theme.Font.button
+        lblTitle.textColor = Theme.label
+        lblTitle.translatesAutoresizingMaskIntoConstraints = false
+
+        btnMenu.setTitle("☰ Menu", for: .normal)
+        btnMenu.setTitleColor(Theme.tint, for: .normal)
+        btnMenu.titleLabel?.font = Theme.Font.button
+        btnMenu.addTarget(self, action: #selector(onRight(_:)), for: .touchUpInside)
+        btnMenu.translatesAutoresizingMaskIntoConstraints = false
+
+        // Sync-count badge, overlaid on the menu button (base VC drives its text via
+        // `menuButton`/`badgeLabel` + `updateSyncBadge` / `ostPositionBadgeAtMenu`).
+        syncBadgeLabel.backgroundColor = Theme.destructive
+        syncBadgeLabel.textColor = .white
+        syncBadgeLabel.font = Theme.Font.caption
+        syncBadgeLabel.textAlignment = .center
+        syncBadgeLabel.clipsToBounds = true
+        syncBadgeLabel.isHidden = true
+        syncBadgeLabel.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        syncBadgeLabel.layer.cornerRadius = 11
+
+        let headerStack = UIStackView(arrangedSubviews: [lblTitle, UIView(), btnMenu])
+        headerStack.alignment = .center
+        headerStack.spacing = 10
+        headerStack.translatesAutoresizingMaskIntoConstraints = false
+        header.addSubview(headerStack)
+        header.addSubview(syncBadgeLabel)
+
+        // Wire the base-VC sync-badge machinery to our programmatic views.
+        menuButton = btnMenu
+        badgeLabel = syncBadgeLabel
+
+        NSLayoutConstraint.activate([
+            header.heightAnchor.constraint(equalToConstant: 56),
+            headerStack.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 16),
+            headerStack.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16),
+            headerStack.centerYAnchor.constraint(equalTo: header.centerYAnchor),
+        ])
+        return header
+    }
+
+    private func makeBody() -> UIView {
+        bodyStack.axis = .vertical
+        bodyStack.spacing = 0
+
+        bodyStack.addArrangedSubview(makeDisplayZone())
+        bodyStack.addArrangedSubview(makeNumberPadContainer())
+        return bodyStack
+    }
+
+    private func makeDisplayZone() -> UIView {
+        let zone = UIView()
+        zone.backgroundColor = Theme.background
+
+        // Clock + time-of-day
+        lblTime.font = Theme.Font.clock
+        lblTime.textColor = Theme.label
+        lblTime.textAlignment = .center
+
+        lblTimeOfTheDay.font = Theme.Font.caption
+        lblTimeOfTheDay.textColor = Theme.secondaryLabel
+        lblTimeOfTheDay.textAlignment = .center
+
+        // Bib field
+        txtBibNumber.font = Theme.Font.bib
+        txtBibNumber.textColor = Theme.label
+        txtBibNumber.textAlignment = .center
+        txtBibNumber.keyboardType = .numberPad
+        txtBibNumber.delegate = self
+        txtBibNumber.placeholder = ""
+        txtBibNumber.adjustsFontSizeToFitWidth = true
+        txtBibNumber.minimumFontSize = 28
+        // The embedded pad drives input; suppress the system keyboard.
+        txtBibNumber.inputView = UIView()
+
+        // Runner result line
+        lblPersonAdded.font = Theme.Font.runnerName
+        lblPersonAdded.textColor = Theme.label
+        lblPersonAdded.textAlignment = .center
+        lblPersonAdded.numberOfLines = 1
+        lblPersonAdded.adjustsFontSizeToFitWidth = true
+        lblPersonAdded.minimumScaleFactor = 0.6
+        lblPersonAdded.text = "Enter Bib Number"
+
+        lblRunnerInfo.font = Theme.Font.button
+        lblRunnerInfo.textColor = Theme.secondaryLabel
+        lblRunnerInfo.textAlignment = .center
+
+        lblSecondaryInfo.font = Theme.Font.field
+        lblSecondaryInfo.textColor = Theme.secondaryLabel
+        lblSecondaryInfo.textAlignment = .center
+        lblSecondaryInfo.numberOfLines = 0
+
+        lblAdded.font = Theme.Font.field
+        lblAdded.textColor = Theme.secondaryLabel
+        lblAdded.textAlignment = .center
+        lblAdded.isHidden = true
+
+        runnerBadge.isHidden = true
+        runnerBadge.isUserInteractionEnabled = true
+        runnerBadge.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onRunnerInfo(_:))))
+
+        let displayStack = UIStackView(arrangedSubviews: [
+            lblTime, lblTimeOfTheDay, txtBibNumber,
+            lblPersonAdded, lblRunnerInfo, lblSecondaryInfo, lblAdded,
+            runnerBadge,
+            makeToggleRow(), makeEntryRow(),
+        ])
+        displayStack.axis = .vertical
+        displayStack.alignment = .fill
+        displayStack.spacing = 8
+        displayStack.translatesAutoresizingMaskIntoConstraints = false
+        displayStack.setCustomSpacing(2, after: lblTime)
+        displayStack.setCustomSpacing(14, after: txtBibNumber)
+        zone.addSubview(displayStack)
+
+        NSLayoutConstraint.activate([
+            displayStack.topAnchor.constraint(equalTo: zone.topAnchor, constant: 8),
+            displayStack.leadingAnchor.constraint(equalTo: zone.leadingAnchor, constant: 16),
+            displayStack.trailingAnchor.constraint(equalTo: zone.trailingAnchor, constant: -16),
+            displayStack.bottomAnchor.constraint(lessThanOrEqualTo: zone.bottomAnchor, constant: -8),
+            runnerBadge.heightAnchor.constraint(equalToConstant: 120),
+        ])
+        return zone
+    }
+
+    private func makeToggleRow() -> UIView {
+        styleToggle(btnStopped, title: "Stopped here")
+        styleToggle(btnPacer, title: "With pacer")
+        btnStopped.addTarget(self, action: #selector(onBtnStopped(_:)), for: .touchUpInside)
+        btnPacer.addTarget(self, action: #selector(onButtonPacer(_:)), for: .touchUpInside)
+
+        toggleRow.axis = .horizontal
+        toggleRow.distribution = .fillEqually
+        toggleRow.spacing = 10
+        toggleRow.addArrangedSubview(btnStopped)
+        toggleRow.addArrangedSubview(btnPacer)
+        return toggleRow
+    }
+
+    private func styleToggle(_ button: UIButton, title: String) {
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = Theme.Font.button
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.layer.cornerRadius = Theme.Metric.cornerRadius
+        button.layer.borderWidth = 1.5
+        button.layer.borderColor = Theme.tint.cgColor
+        refreshToggleStyle(button)
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    }
+
+    /// Selected = filled tint; unselected = outlined.
+    private func refreshToggleStyle(_ button: UIButton) {
+        if button.isSelected {
+            button.backgroundColor = Theme.tint
+            button.setTitleColor(.white, for: .normal)
+        } else {
+            button.backgroundColor = .clear
+            button.setTitleColor(Theme.tint, for: .normal)
         }
-        headerContainerView.frame.size.height += inset
-        for child in headerContainerView.subviews {
-            child.frame.origin.y += inset
+    }
+
+    private func makeEntryRow() -> UIView {
+        styleEntryButton(btnLeft, tag: 1, badge: lblInTimeBadge)
+        styleEntryButton(btnRight, tag: 2, badge: lblOutTimeBadge)
+
+        entryRow.axis = .horizontal
+        entryRow.distribution = .fillEqually
+        entryRow.spacing = 8
+        entryRow.addArrangedSubview(btnLeft)
+        entryRow.addArrangedSubview(btnRight)
+
+        let h = btnLeft.heightAnchor.constraint(equalToConstant: Theme.Metric.buttonHeight + 16)
+        h.isActive = true
+        entryButtonHeight = h
+        btnRight.heightAnchor.constraint(equalTo: btnLeft.heightAnchor).isActive = true
+        return entryRow
+    }
+
+    private func styleEntryButton(_ button: UIButton, tag: Int, badge: UILabel) {
+        button.tag = tag
+        button.titleLabel?.font = Theme.Font.button
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.numberOfLines = 2
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = Theme.tint
+        button.layer.cornerRadius = Theme.Metric.cornerRadius
+        button.addTarget(self, action: #selector(onEntryButton(_:)), for: .touchUpInside)
+
+        // Count badge overlaid in the top-right corner.
+        badge.font = Theme.Font.caption
+        badge.textColor = .white
+        badge.backgroundColor = Theme.destructive
+        badge.textAlignment = .center
+        badge.clipsToBounds = true
+        badge.layer.cornerRadius = 11
+        badge.isHidden = true
+        badge.translatesAutoresizingMaskIntoConstraints = false
+        button.addSubview(badge)
+        NSLayoutConstraint.activate([
+            badge.widthAnchor.constraint(equalToConstant: 22),
+            badge.heightAnchor.constraint(equalToConstant: 22),
+            badge.topAnchor.constraint(equalTo: button.topAnchor, constant: 4),
+            badge.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -4),
+        ])
+    }
+
+    private func makeNumberPadContainer() -> UIView {
+        let container = UIView()
+        container.backgroundColor = Theme.background
+        numberPad.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(numberPad)
+        NSLayoutConstraint.activate([
+            numberPad.topAnchor.constraint(equalTo: container.topAnchor, constant: 4),
+            numberPad.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 4),
+            numberPad.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -4),
+            numberPad.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -4),
+        ])
+        return container
+    }
+
+    // MARK: - Entry-button permutations
+
+    /// Reproduces the data-driven setup from the old `viewWillAppear`: read
+    /// `splitAttributes["entries"]`, filter `subSplitKind` in/out, then set button
+    /// titles, visibility, and leftBitKey/rightBitKey identically. Layout is driven
+    /// by hiding a button in the horizontal stack (no width math).
+    private func configureEntryButtons() {
+        btnLeft.isHidden = false
+        btnRight.isHidden = false
+        leftBitKey = nil
+        rightBitKey = nil
+
+        let entries = (CurrentCourse.getCurrentCourse()?.splitAttributes as? [String: Any])?["entries"] as? [[String: Any]] ?? []
+        let splitEntriesIn = entries.filter { ($0["subSplitKind"] as? String) == "in" }
+        let splitEntriesOut = entries.filter { ($0["subSplitKind"] as? String) == "out" }
+
+        if splitEntriesIn.count == 1 && splitEntriesOut.count == 0 {
+            btnRight.isHidden = true
+            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
+            leftBitKey = "in"
+        }
+        if splitEntriesIn.count == 0 && splitEntriesOut.count == 1 {
+            btnLeft.isHidden = true
+            rightBitKey = "out"
+            btnRight.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
+        } else if splitEntriesIn.count == 1 && splitEntriesOut.count == 1 {
+            btnRight.isHidden = false
+            btnLeft.isHidden = false
+            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
+            btnRight.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
+            leftBitKey = "in"
+            rightBitKey = "out"
+        } else if splitEntriesIn.count == 2 {
+            btnRight.isHidden = false
+            btnLeft.isHidden = false
+            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
+            btnRight.setTitle(splitEntriesIn[1]["label"] as? String, for: .normal)
+            leftBitKey = "in"
+            rightBitKey = "in"
+        } else if splitEntriesOut.count == 2 {
+            btnRight.isHidden = false
+            btnLeft.isHidden = false
+            btnLeft.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
+            btnRight.setTitle(splitEntriesOut[1]["label"] as? String, for: .normal)
+            leftBitKey = "out"
+            rightBitKey = "out"
+        }
+    }
+
+    private func configurePacerToggle() {
+        let monitors = CurrentCourse.getCurrentCourse()?.monitorPacers?.boolValue == true
+        lblWithPacer.isHidden = !monitors
+        btnPacer.isHidden = !monitors
+    }
+
+    // MARK: - Adaptivity
+
+    /// Scale clock/bib/runner-name fonts and the entry-button height up on iPad, and
+    /// flip the display-zone↔number-pad arrangement side-by-side in landscape. No
+    /// frame-math — only font sizes and the body stack axis change.
+    private func applyAdaptiveSizing() {
+        let isPad = traitCollection.userInterfaceIdiom == .pad
+
+        lblTime.font = isPad ? Theme.Font.resized(Theme.Font.clock, to: 52) : Theme.Font.clock
+        txtBibNumber.font = isPad ? Theme.Font.resized(Theme.Font.bib, to: 96) : Theme.Font.bib
+        lblPersonAdded.font = isPad ? Theme.Font.resized(Theme.Font.runnerName, to: 34) : Theme.Font.runnerName
+        entryButtonHeight?.constant = isPad ? 110 : Theme.Metric.buttonHeight + 16
+
+        let landscape = view.bounds.width > view.bounds.height
+        let desiredAxis: NSLayoutConstraint.Axis = landscape ? .horizontal : .vertical
+        if bodyStack.axis != desiredAxis {
+            bodyStack.axis = desiredAxis
+            bodyStack.distribution = landscape ? .fillEqually : .fill
         }
     }
 
@@ -248,96 +514,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         entryDateTime = date
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(onStatusChanged),
-                                               name: AutoSyncController.statusChangedNotification, object: nil)
-        renderStatus(AutoSyncController.shared.currentStatus)
-        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
-        lblTitle.text = CurrentCourse.getCurrentCourse()?.splitName
-
-        btnLeft.width = view.width / 2 - 4
-        btnRight.width = view.width / 2 - 4
-        btnLeft.left = 0
-        btnRight.right = view.width
-
-        let entries = (CurrentCourse.getCurrentCourse()?.splitAttributes as? [String: Any])?["entries"] as? [[String: Any]] ?? []
-        let splitEntriesIn = entries.filter { ($0["subSplitKind"] as? String) == "in" }
-        let splitEntriesOut = entries.filter { ($0["subSplitKind"] as? String) == "out" }
-
-        if splitEntriesIn.count == 1 && splitEntriesOut.count == 0 {
-            btnLeft.width = btnRight.right - btnLeft.left
-            btnRight.isHidden = true
-            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
-            leftBitKey = "in"
-        }
-        if splitEntriesIn.count == 0 && splitEntriesOut.count == 1 {
-            btnRight.width = btnRight.right - btnLeft.left
-            btnLeft.isHidden = true
-            btnRight.left = btnLeft.left
-            rightBitKey = "out"
-            btnRight.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
-        } else if splitEntriesIn.count == 1 && splitEntriesOut.count == 1 {
-            btnRight.isHidden = false
-            btnLeft.isHidden = false
-            btnLeft.width = view.width / 2 - 4
-            btnRight.width = view.width / 2 - 4
-            btnLeft.left = 0
-            btnRight.right = view.width
-            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
-            btnRight.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
-            leftBitKey = "in"
-            rightBitKey = "out"
-        } else if splitEntriesIn.count == 2 {
-            btnRight.isHidden = false
-            btnLeft.isHidden = false
-            btnLeft.width = view.width / 2 - 4
-            btnRight.width = view.width / 2 - 4
-            btnLeft.left = 0
-            btnRight.right = view.width
-            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
-            btnRight.setTitle(splitEntriesIn[1]["label"] as? String, for: .normal)
-            leftBitKey = "in"
-            rightBitKey = "in"
-        } else if splitEntriesOut.count == 2 {
-            btnRight.isHidden = false
-            btnLeft.isHidden = false
-            btnLeft.width = view.width / 2 - 4
-            btnRight.width = view.width / 2 - 4
-            btnLeft.left = 0
-            btnRight.right = view.width
-            btnLeft.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
-            btnRight.setTitle(splitEntriesOut[1]["label"] as? String, for: .normal)
-            leftBitKey = "out"
-            rightBitKey = "out"
-        }
-
-        if CurrentCourse.getCurrentCourse()?.monitorPacers?.boolValue != true {
-            lblWithPacer?.isHidden = true
-            btnPacer.isHidden = true
-            btnStopped.center = CGPoint(x: pacerAndAidView.width / 2, y: pacerAndAidView.height / 2)
-        } else {
-            lblWithPacer?.isHidden = false
-            btnPacer.isHidden = false
-            btnStopped.center = CGPoint(x: pacerAndAidView.width / 4, y: pacerAndAidView.height / 2)
-            btnPacer.center = CGPoint(x: pacerAndAidView.width / 4 * 3, y: pacerAndAidView.height / 2)
-        }
-
-        if UIApplication.shared.statusBarOrientation.isLandscape {
-            btnLeft.width = view.height / 2.7
-            btnRight.width = view.height / 2.7
-            btnLeft.left = 10
-            btnLeft.top = view.width / 2.5
-            btnRight.right = view.right - 10
-            btnRight.top = btnLeft.top
-        }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: AutoSyncController.statusChangedNotification, object: nil)
-    }
-
     // MARK: - Actions
 
     @IBAction func onRight(_ sender: Any) {
@@ -351,6 +527,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         lblRunnerInfo.isHidden = true
         btnPacer.isSelected = false
         btnStopped.isSelected = false
+        refreshToggleStyle(btnPacer)
+        refreshToggleStyle(btnStopped)
         txtBibNumber.text = nil
         lblInTimeBadge.isHidden = true
         lblOutTimeBadge.isHidden = true
@@ -435,6 +613,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         txtBibNumber.text = ""
         btnPacer.isSelected = false
         btnStopped.isSelected = false
+        refreshToggleStyle(btnPacer)
+        refreshToggleStyle(btnStopped)
         txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
     }
 
@@ -469,9 +649,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
             self.lblRunnerInfo.text = ""
             self.lblSecondaryInfo.text = ""
             self.lblAdded.text = ""
-            let red = UIColor(red: 159.0/255, green: 34.0/255, blue: 40.0/255, alpha: 1)
-            self.lblRunnerInfo.textColor = red
-            self.txtBibNumber.textColor = red
+            self.lblRunnerInfo.textColor = Theme.destructive
+            self.txtBibNumber.textColor = Theme.destructive
         }
         editVC.entryHasBeenUpdatedBlock = { [weak self] effort in
             guard let self = self else { return }
@@ -486,11 +665,13 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
     @IBAction func onButtonPacer(_ sender: Any) {
         btnPacer.isSelected.toggle()
+        refreshToggleStyle(btnPacer)
         OSTSound.shared().play("ost-remote-switch-1")
     }
 
     @IBAction func onBtnStopped(_ sender: Any) {
         btnStopped.isSelected.toggle()
+        refreshToggleStyle(btnStopped)
         OSTSound.shared().play("ost-remote-switch-1")
     }
 
@@ -507,8 +688,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         lblOutTimeBadge.isHidden = true
         lblInTimeBadge.isHidden = true
         racer = nil
-        lblRunnerInfo.textColor = .darkGray
-        txtBibNumber.textColor = .black
+        lblRunnerInfo.textColor = Theme.secondaryLabel
+        txtBibNumber.textColor = Theme.label
 
         let bib = txtBibNumber.text ?? ""
         if bib.isEmpty {
@@ -523,9 +704,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
         guard let racer = effort else {
             lblRunnerInfo.text = "Bib Not Found"
-            let red = UIColor(red: 159.0/255, green: 34.0/255, blue: 40.0/255, alpha: 1)
-            lblRunnerInfo.textColor = red
-            txtBibNumber.textColor = red
+            lblRunnerInfo.textColor = Theme.destructive
+            txtBibNumber.textColor = Theme.destructive
             lblPersonAdded.text = ""
             lblSecondaryInfo.text = ""
             return
@@ -577,36 +757,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     }
 
     deinit {
-        txtBibNumber?.removeObserver(self, forKeyPath: "text")
-    }
-
-    // MARK: - Rotation
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        if UIApplication.shared.statusBarOrientation.isPortrait {
-            btnLeft.width = view.width / 2.7
-            btnRight.width = view.width / 2.7
-            btnLeft.left = 10
-            btnLeft.top = view.height / 2.5
-            btnRight.right = view.right - 10
-            btnRight.top = btnLeft.top
-        } else {
-            btnLeft.top = pacerAndAidView.bottom + 10
-            btnRight.top = pacerAndAidView.bottom + 10
-            btnRight.right = view.right
-            btnLeft.left = view.left
-            btnLeft.height = 143
-            btnRight.height = 143
-            if btnRight.isHidden || btnLeft.isHidden {
-                btnLeft.width = view.height
-                btnRight.width = view.height
-            } else {
-                btnLeft.width = view.height / 2 - 4
-                btnRight.width = view.height / 2 - 4
-            }
-        }
+        txtBibNumber.removeObserver(self, forKeyPath: "text")
     }
 
     // MARK: - Helpers
