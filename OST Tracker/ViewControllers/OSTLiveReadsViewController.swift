@@ -83,6 +83,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
             self.liveDot.backgroundColor = Theme.success
             self.updatedLabel.text = "Updated " + Self.clock.string(from: Date())
             self.tableView.reloadData()
+            self.newIds = []
         }
     }
 
