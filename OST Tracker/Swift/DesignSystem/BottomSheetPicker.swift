@@ -64,6 +64,7 @@ final class BottomSheetPicker: UIViewController {
             rows.addArrangedSubview(row)
         }
         let scroll = UIScrollView()
+        scroll.accessibilityIdentifier = "BottomSheetPicker.scroll"
         scroll.translatesAutoresizingMaskIntoConstraints = false
         rows.translatesAutoresizingMaskIntoConstraints = false
         scroll.addSubview(rows)
@@ -102,6 +103,14 @@ final class BottomSheetPicker: UIViewController {
             rows.trailingAnchor.constraint(equalTo: scroll.trailingAnchor),
             rows.widthAnchor.constraint(equalTo: scroll.widthAnchor),
         ])
+
+        // A UIScrollView has no intrinsic content height, so inside the vertical
+        // content stack it would collapse to zero (hiding every row). Size it to
+        // its content, but at a priority that yields to the panel's top cap so a
+        // long list scrolls within the available height instead of overflowing.
+        let scrollHeight = scroll.heightAnchor.constraint(equalTo: rows.heightAnchor)
+        scrollHeight.priority = .defaultHigh
+        scrollHeight.isActive = true
     }
 
     func animateIn() {
