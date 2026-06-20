@@ -22,6 +22,7 @@
                 <outletCollection property="buttonViews" destination="E6C-C6-KVQ" id="eMs-sP-3fj"/>
                 <outletCollection property="buttonViews" destination="ytQ-Vi-DxC" id="oCo-Rf-dsK"/>
                 <outletCollection property="buttonViews" destination="IUC-tS-Q6X" id="FLF-AC-v4z"/>
+                <outletCollection property="buttonViews" destination="LiV-Rd-001" id="LiV-Rd-003"/>
                 <outletCollection property="buttonViews" destination="hdU-6b-1CU" id="eOu-KK-Zcj"/>
                 <outletCollection property="buttonViews" destination="Xgn-Mr-CM2" id="6NV-5z-a2S"/>
             </connections>
@@ -156,6 +157,17 @@ Remote</string>
                             </state>
                             <connections>
                                 <action selector="onCrossCheck:" destination="-1" eventType="touchUpInside" id="Wfy-ef-INU"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiV-Rd-001">
+                            <rect key="frame" x="81" y="461" width="225" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <state key="normal" title="Live Reads">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onLiveReads:" destination="-1" eventType="touchUpInside" id="LiV-Rd-002"/>
                             </connections>
                         </button>
                     </subviews>

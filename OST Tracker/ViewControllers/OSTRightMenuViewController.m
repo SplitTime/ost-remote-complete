@@ -152,7 +152,14 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"CrossCheck" bundle:nil];
     UIViewController *controller = [storyboard instantiateInitialViewController];
-    
+
+    [AppDelegate getInstance].rightMenuVC.centerViewController = controller;
+    [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
+}
+
+- (IBAction)onLiveReads:(id)sender
+{
+    OSTLiveReadsViewController *controller = [[OSTLiveReadsViewController alloc] init];
     [AppDelegate getInstance].rightMenuVC.centerViewController = controller;
     [[AppDelegate getInstance].rightMenuVC toggleRightSideMenuCompletion:nil];
 }
