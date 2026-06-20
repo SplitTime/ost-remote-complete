@@ -11,9 +11,10 @@
 import UIKit
 
 @objc(OSTDrawerContainer)
-class OSTDrawerContainer: UIViewController {
+class OSTDrawerContainer: UIViewController, UIGestureRecognizerDelegate {
 
     private static let menuWidth: CGFloat = 270
+    private static let edgeGrabWidth: CGFloat = 40
 
     private(set) var isOpen = false
     private var panStartX: CGFloat = 0
@@ -57,12 +58,34 @@ class OSTDrawerContainer: UIViewController {
         return overlay
     }()
 
+    private lazy var openPan: UIPanGestureRecognizer = {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        pan.delegate = self
+        return pan
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Swipe in from the right edge to open (matches MFSideMenu's slide-to-open).
-        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        edgePan.edges = .right
-        view.addGestureRecognizer(edgePan)
+        // A plain pan on the container (gated by the delegate below) recognises the
+        // edge swipe even over the center content's own scroll/tap gestures.
+        view.addGestureRecognizer(openPan)
+    }
+
+    // MARK: - UIGestureRecognizerDelegate
+
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gestureRecognizer === openPan else { return true }
+        if isOpen { return false } // closing is handled by the overlay's pan
+        let startsAtRightEdge = openPan.location(in: view).x > view.bounds.width - Self.edgeGrabWidth
+        let velocity = openPan.velocity(in: view)
+        let leftwardHorizontal = abs(velocity.x) > abs(velocity.y) && velocity.x < 0
+        return startsAtRightEdge && leftwardHorizontal
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith other: UIGestureRecognizer) -> Bool {
+        return true
     }
 
     // MARK: - Interactive pan
