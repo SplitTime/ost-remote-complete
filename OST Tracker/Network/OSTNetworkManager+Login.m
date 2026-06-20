@@ -9,8 +9,12 @@
 #import "OSTNetworkManager+Login.h"
 #import "OSTSessionManager.h"
 #import "OSTLoginViewController.h"
-
-#define OSTLoginEndpoint @"auth"
+// OSTAuthBridge (Swift) performs the login POST through APIClient.
+#if __has_include("OST_Remote-Swift.h")
+#import "OST_Remote-Swift.h"
+#elif __has_include("OST_Remote_Dev-Swift.h")
+#import "OST_Remote_Dev-Swift.h"
+#endif
 
 @implementation OSTNetworkManager (Login)
 
@@ -28,31 +32,22 @@
         return nil;
     }
 
-    self.requestSerializer = [AFHTTPRequestSerializer serializer];
-    [self.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-    
-    [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
-    [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    
-    NSDictionary * params = @{@"user[email]":email,@"user[password]":password};
-    
-    NSURLSessionDataTask *dataTask = [self POST:OSTLoginEndpoint parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-    {
-        self.requestSerializer = [AFJSONRequestSerializer serializer];
-        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
-        [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-        onCompletion(responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        self.requestSerializer = [AFJSONRequestSerializer serializer];
-        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [self.requestSerializer setValue:@"no-cache" forHTTPHeaderField:@"cache-control"];
-        [self.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-        onError(error);
+    // Perform the login POST through the Swift APIClient. AFNetworking's form
+    // encoding of the credentials was being rejected by the server ("Invalid email
+    // or password") on autoLogin even for valid stored creds — the same creds that
+    // logged in fine via APIClient. Callers consume object[@"token"].
+    [OSTAuthBridge loginWithEmail:email password:password completion:^(NSString *token, NSError *error) {
+        if (token.length)
+        {
+            onCompletion(@{@"token": token});
+        }
+        else if (onError)
+        {
+            onError(error ?: [NSError errorWithDomain:@"OST" code:401
+                                             userInfo:@{NSLocalizedDescriptionKey: @"Login failed"}]);
+        }
     }];
-    
-    [dataTask resume];
-    return dataTask;
+    return nil;
 }
 
 - (NSURLSessionDataTask*)autoLoginWithCompletionBlock:(OSTCompletionObjectBlock)onCompletion errorBlock:(OSTErrorBlock)onError

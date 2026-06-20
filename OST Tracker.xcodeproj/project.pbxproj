@@ -161,6 +161,7 @@
 		8E1C73930BB63C2E23E828D2 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
 		8ED05FE6647A4E0802F8121A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		99517852C35EF5C3914336BF /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
+		9C7CA330A1B919DC81EA2721 /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		9CF9FB3B3E1F8787224192B9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
 		9DABDD777FB885613F1F99DC /* fixtures in Resources */ = {isa = PBXBuildFile; fileRef = A802EAD220AFB69CF7A7E5BF /* fixtures */; };
 		A63C9E647D0756AA05143661 /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
@@ -217,6 +218,7 @@
 		D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		D5C5BC5B217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
 		D5C5BC5C217E1CE70071D6CF /* OSTSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC5A217E1CE70071D6CF /* OSTSyncManager.m */; };
+		E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
 		E8ECA0CF677919054ECF4737 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF24CABF2B5EAD65649ACBC /* SyncService.swift */; };
 		F7A6DDBC1CC23AE8E87A4B56 /* OSTReviewSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */; };
@@ -275,6 +277,7 @@
 		579586310034B8FBCFE130B5 /* Pods-OST Remote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OST Remote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OST Remote/Pods-OST Remote.debug.xcconfig"; sourceTree = "<group>"; };
 		5AF749E7C51C15472D393820 /* OSTReviewSubmitViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OSTReviewSubmitViewController.swift; sourceTree = "<group>"; };
 		68F2986C3890234A3A81A335 /* FixtureLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FixtureLoader.swift; path = "OST TrackerTests/Swift/FixtureLoader.swift"; sourceTree = "<group>"; };
+		69B24303991152304B820254 /* OSTAuthBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTAuthBridge.swift; path = "OST Tracker/Swift/OSTAuthBridge.swift"; sourceTree = "<group>"; };
 		6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Login.h"; sourceTree = "<group>"; };
 		6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Login.m"; sourceTree = "<group>"; };
 		6A11A0521EF2CAF800D6D2CA /* OSTRightMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTRightMenuViewController.h; sourceTree = "<group>"; };
@@ -504,6 +507,7 @@
 				1EF24CABF2B5EAD65649ACBC /* SyncService.swift */,
 				7FC88DAF080C3B90276428C3 /* LoginController.swift */,
 				16BAED92F7B8A3B859B03965 /* LoginViewController.swift */,
+				69B24303991152304B820254 /* OSTAuthBridge.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1273,6 +1277,7 @@
 				0ADA71D2F7827E6A8F4F4B4D /* UIViewController+OSTSpinner.swift in Sources */,
 				BEF2C7720B262AB677278BD4 /* OSTRunnerTrackerViewController.swift in Sources */,
 				532D5B3FE4BD1FB322981FF6 /* OSTEditEntryViewController.swift in Sources */,
+				E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1343,6 +1348,7 @@
 				8C786E44B17259466456F007 /* UIViewController+OSTSpinner.swift in Sources */,
 				BD0F5B3D9588B36A254205A3 /* OSTRunnerTrackerViewController.swift in Sources */,
 				C6401B6575B5EC2BA6DF5564 /* OSTEditEntryViewController.swift in Sources */,
+				9C7CA330A1B919DC81EA2721 /* OSTAuthBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
