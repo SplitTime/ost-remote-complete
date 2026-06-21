@@ -14,6 +14,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
     private var rows: [RawTime] = []
     private var highWaterMark = 0
     private var newIds: Set<Int> = []
+    private var nameByBib: [String: String] = [:]
     private var timer: Timer?
 
     private var groupId: String { CurrentCourse.getCurrentCourse()?.eventGroupId ?? "" }
@@ -35,6 +36,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         super.viewWillAppear(animated)
         titleLabel.text = "Live Reads — \(stationName)"
         rows = []; highWaterMark = 0; newIds = []
+        loadRoster()
         tableView.reloadData()
         guard !groupId.isEmpty, !stationName.isEmpty else { updatedLabel.text = "No station selected"; return }
         fetch(showSpinner: true)
@@ -63,6 +65,18 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
     @objc private func onRefresh() { fetch(showSpinner: false); startPolling() }
 
     @objc private func onGoToLiveEntry() { AppDelegate.getInstance()?.showTracker() }
+
+    /// Builds a bib → runner-name map from the locally-cached roster so reads can
+    /// be labeled with names. Same source the live tracker uses to resolve a bib.
+    private func loadRoster() {
+        let efforts = EffortModel.mr_findAll(with: nil) as? [EffortModel] ?? []
+        var map: [String: String] = [:]
+        for e in efforts {
+            guard let bib = e.bibNumber?.stringValue, let name = e.fullName, !name.isEmpty else { continue }
+            map[bib] = name
+        }
+        nameByBib = map
+    }
 
     @objc private func onMenu() {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
@@ -107,14 +121,15 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         let r = rows[indexPath.row]
         let kind = (r.subSplitKind ?? "").uppercased()
         let time = LiveReadsFormat.clock(enteredTime: r.enteredTime, absoluteTime: r.absoluteTime)
-        cell.textLabel?.text = "#\(r.bib)   \(time)" + (kind.isEmpty ? "" : "   [\(kind)]")
+        cell.textLabel?.text = LiveReadsFormat.nameLine(bib: r.bib, name: nameByBib[r.bib])
         cell.textLabel?.textColor = Theme.label
         var flags: [String] = []
         if let lap = r.lap, lap > 1 { flags.append("L\(lap)") }
         if r.withPacer { flags.append("pacer") }
         if r.stoppedHere { flags.append("stopped") }
         let source = LiveReadsFormat.friendlySource(r.source, myUUID: OSTSessionManager.getUUIDString())
-        cell.detailTextLabel?.text = [source, flags.joined(separator: " · ")].filter { !$0.isEmpty }.joined(separator: "   ")
+        let meta = [time, kind.isEmpty ? "" : "[\(kind)]", source, flags.joined(separator: " · ")]
+        cell.detailTextLabel?.text = meta.filter { !$0.isEmpty }.joined(separator: "   ")
         cell.detailTextLabel?.textColor = Theme.secondaryLabel
         cell.contentView.backgroundColor = newIds.contains(r.id) ? Theme.tint.withAlphaComponent(0.15) : .clear
         if newIds.contains(r.id) {
