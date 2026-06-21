@@ -1,20 +1,36 @@
 // OST Tracker/ViewControllers/OSTRightMenuViewController.swift
 import UIKit
+import CoreData
 
-/// Right-side navigation drawer, rebuilt onto the design system: a clean themed
-/// list (no background photo), built programmatically. Subclasses the Obj-C
-/// `OSTBaseViewController` for the unsynced-count badge + AutoSync observer.
-/// Hosted by `OSTDrawerContainer` as its `rightMenuViewController`.
+/// Right-side navigation drawer on the design system. Two themed cards — a
+/// NAVIGATION section (screens) and a SETTINGS section (former Utilities actions)
+/// — plus the Auto Sync toggle and a destructive Log Out button, all inside a
+/// scroll view so the list never clips. Subclasses the Obj-C `OSTBaseViewController`
+/// for the unsynced-count badge + AutoSync observer. Hosted by `OSTDrawerContainer`.
 @objc(OSTRightMenuViewController)
 final class OSTRightMenuViewController: OSTBaseViewController {
 
+    // Navigation
     private let liveEntryRow  = MenuRow(title: "Live Entry")
     private let reviewSyncRow = MenuRow(title: "Review / Sync")
     private let crossCheckRow = MenuRow(title: "Cross Check")
     private let liveReadsRow  = MenuRow(title: "Live Reads")
     private let raceStatusRow = MenuRow(title: "Race Status")
-    private let utilitiesRow  = MenuRow(title: "Utilities")
+
+    // Settings (formerly the Utilities screen)
+    private let refreshRosterRow = MenuRow(title: "Refresh Roster")
+    private let changeStationRow = MenuRow(title: "Change Station")
+    private let appearanceRow    = MenuRow(title: "Appearance")
+    private let aboutRow         = MenuRow(title: "About")
+
     private let autoSyncSwitch = UISwitch()
+    private let logoutButton: UIButton = {
+        let b = UIButton(type: .system)
+        b.setTitle("Log Out", for: .normal)
+        b.setTitleColor(Theme.destructive, for: .normal)
+        b.titleLabel?.font = Theme.Font.button
+        return b
+    }()
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -33,6 +49,7 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         super.viewWillAppear(animated)
         reviewSyncRow.showsSpinner = AutoSyncController.shared.isSyncing
         autoSyncSwitch.isOn = AutoSyncController.shared.autoSyncEnabled
+        appearanceRow.detailText = AppearanceController.shared.mode.displayName
         updateSyncBadge()
     }
 
@@ -64,17 +81,72 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         crossCheckRow.addTarget(self, action: #selector(onCrossCheck), for: .touchUpInside)
         liveReadsRow.addTarget(self, action: #selector(onLiveReads), for: .touchUpInside)
         raceStatusRow.addTarget(self, action: #selector(onRaceStatus), for: .touchUpInside)
-        utilitiesRow.addTarget(self, action: #selector(onUtilities), for: .touchUpInside)
+        let navCard = makeCard(rows: [liveEntryRow, reviewSyncRow, crossCheckRow, liveReadsRow, raceStatusRow])
 
-        let rows: [MenuRow] = [liveEntryRow, reviewSyncRow, crossCheckRow,
-                               liveReadsRow, raceStatusRow, utilitiesRow]
+        refreshRosterRow.showsChevron = false
+        refreshRosterRow.addTarget(self, action: #selector(onRefreshRoster), for: .touchUpInside)
+        changeStationRow.addTarget(self, action: #selector(onChangeStation), for: .touchUpInside)
+        appearanceRow.detailText = AppearanceController.shared.mode.displayName
+        appearanceRow.addTarget(self, action: #selector(onAppearance), for: .touchUpInside)
+        aboutRow.addTarget(self, action: #selector(onAbout), for: .touchUpInside)
+        let settingsCard = makeCard(rows: [refreshRosterRow, changeStationRow, appearanceRow, aboutRow])
+
+        let autoLabel = UILabel()
+        autoLabel.text = "Auto Sync"
+        autoLabel.font = Theme.Font.field
+        autoLabel.textColor = Theme.label
+        autoSyncSwitch.isOn = AutoSyncController.shared.autoSyncEnabled
+        autoSyncSwitch.addTarget(self, action: #selector(onAutoSyncSwitch(_:)), for: .valueChanged)
+        let autoRow = UIStackView(arrangedSubviews: [autoLabel, UIView(), autoSyncSwitch])
+        autoRow.alignment = .center
+        autoRow.isLayoutMarginsRelativeArrangement = true
+        autoRow.layoutMargins = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+
+        logoutButton.addTarget(self, action: #selector(onLogout), for: .touchUpInside)
+
+        let content = UIStackView(arrangedSubviews: [
+            closeRow, brandRow,
+            makeSectionHeader("NAVIGATION"), navCard,
+            makeSectionHeader("SETTINGS"), settingsCard,
+            autoRow,
+            logoutButton,
+        ])
+        content.axis = .vertical
+        content.spacing = 12
+        content.setCustomSpacing(20, after: brandRow)
+        content.setCustomSpacing(20, after: navCard)
+        content.setCustomSpacing(16, after: settingsCard)
+        content.setCustomSpacing(24, after: autoRow)
+        content.translatesAutoresizingMaskIntoConstraints = false
+
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        scroll.alwaysBounceVertical = true
+        view.addSubview(scroll)
+        scroll.addSubview(content)
+
+        let guide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            scroll.topAnchor.constraint(equalTo: guide.topAnchor),
+            scroll.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+            scroll.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            scroll.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+
+            content.topAnchor.constraint(equalTo: scroll.contentLayoutGuide.topAnchor, constant: 12),
+            content.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor, constant: -16),
+            content.leadingAnchor.constraint(equalTo: scroll.contentLayoutGuide.leadingAnchor, constant: 16),
+            content.trailingAnchor.constraint(equalTo: scroll.contentLayoutGuide.trailingAnchor, constant: -16),
+            content.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor, constant: -32),
+        ])
+    }
+
+    private func makeCard(rows: [MenuRow]) -> UIView {
         let listStack = UIStackView()
         listStack.axis = .vertical
         for (i, row) in rows.enumerated() {
             listStack.addArrangedSubview(row)
             if i < rows.count - 1 { listStack.addArrangedSubview(makeSeparator()) }
         }
-
         let card = UIView()
         card.backgroundColor = Theme.fieldFill
         card.layer.cornerRadius = Theme.Metric.cornerRadius
@@ -87,36 +159,15 @@ final class OSTRightMenuViewController: OSTBaseViewController {
             listStack.leadingAnchor.constraint(equalTo: card.leadingAnchor),
             listStack.trailingAnchor.constraint(equalTo: card.trailingAnchor),
         ])
+        return card
+    }
 
-        let autoLabel = UILabel()
-        autoLabel.text = "Auto Sync"
-        autoLabel.font = Theme.Font.field
-        autoLabel.textColor = Theme.label
-        autoSyncSwitch.isOn = AutoSyncController.shared.autoSyncEnabled
-        autoSyncSwitch.addTarget(self, action: #selector(onAutoSyncSwitch(_:)), for: .valueChanged)
-        let autoRow = UIStackView(arrangedSubviews: [autoLabel, UIView(), autoSyncSwitch])
-        autoRow.alignment = .center
-
-        let content = UIStackView(arrangedSubviews: [closeRow, brandRow, card])
-        content.axis = .vertical
-        content.spacing = 16
-        content.setCustomSpacing(20, after: brandRow)
-        content.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(content)
-
-        autoRow.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(autoRow)
-
-        let guide = view.safeAreaLayoutGuide
-        NSLayoutConstraint.activate([
-            content.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12),
-            content.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 16),
-            content.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -16),
-
-            autoRow.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 16),
-            autoRow.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -16),
-            autoRow.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -16),
-        ])
+    private func makeSectionHeader(_ text: String) -> UILabel {
+        let l = UILabel()
+        l.text = text
+        l.font = Theme.Font.caption
+        l.textColor = Theme.secondaryLabel
+        return l
     }
 
     private func makeSeparator() -> UIView {
@@ -126,7 +177,7 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         return v
     }
 
-    // MARK: - Actions (behavior identical to the former Obj-C menu)
+    // MARK: - Navigation actions
 
     @objc private func onClose() {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
@@ -163,13 +214,144 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
-    @objc private func onUtilities() {
-        AppDelegate.getInstance()?.showUtilities()
+    @objc private func onAutoSyncSwitch(_ sender: UISwitch) {
+        AutoSyncController.shared.autoSyncEnabled = sender.isOn
+    }
+
+    // MARK: - Settings actions (ported from OSTUtilitiesViewController)
+
+    @objc private func onRefreshRoster() {
+        guard let currentCourse = CurrentCourse.getCurrentCourse() else { return }
+        refreshRosterRow.showsSpinner = true
+        refreshRosterRow.isEnabled = false
+
+        OSTBackend.shared.getEventsDetails(currentCourse.eventId ?? "") { [weak self] object, error in
+            guard let self = self else { return }
+            self.refreshRosterRow.showsSpinner = false
+            self.refreshRosterRow.isEnabled = true
+
+            if let error = error {
+                let alert = UIAlertController(title: "Couldn't refresh roster",
+                                              message: error.localizedDescription,
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Retry", style: .default) { _ in self.onRefreshRoster() })
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                self.present(alert, animated: true)
+                return
+            }
+
+            let root = object as? [String: Any]
+            let attributes = (root?["data"] as? [String: Any])?["attributes"] as? [String: Any]
+            currentCourse.dataEntryGroups = attributes?["dataEntryGroups"]
+
+            let included = root?["included"] as? [[String: Any]] ?? []
+            EffortModel.mr_reconcile(fromIncluded: included, ofType: "efforts")
+            currentCourse.monitorPacers = attributes?["monitorPacers"] as? NSNumber
+
+            var eventIdsAndSplits = [String: [Any]]()
+            var eventShortNames = [String: String]()
+            for dict in included where (dict["type"] as? String) == "events" {
+                guard let eventId = dict["id"] as? String else { continue }
+                let attrs = dict["attributes"] as? [String: Any]
+                if let shortName = attrs?["shortName"] as? String { eventShortNames[eventId] = shortName }
+                var arr = eventIdsAndSplits[eventId] ?? []
+                if let psn = attrs?["parameterizedSplitNames"] { arr.append(psn) }
+                eventIdsAndSplits[eventId] = arr
+            }
+            currentCourse.eventIdsAndSplits = eventIdsAndSplits
+            currentCourse.eventShortNames = eventShortNames
+
+            NSManagedObjectContext.mr_default().processPendingChanges()
+            NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+            OSTToast.show(message: "Roster updated.", success: true)
+        }
+    }
+
+    @objc private func onChangeStation() {
+        let app = AppDelegate.getInstance()
+        app?.rightMenuVC.toggleRightSideMenuCompletion {
+            let event = OSTEventSelectionViewController(nibName: nil, bundle: nil)
+            event.changeStation = true
+            app?.rightMenuVC.centerViewController?.present(event, animated: true)
+        }
+    }
+
+    @objc private func onAppearance() {
+        BottomSheetPicker.present(from: self, title: "Appearance",
+                                  options: ["System", "Light", "Dark"],
+                                  selected: AppearanceController.shared.mode.displayName) { [weak self] choice in
+            let mode: AppearanceMode
+            switch choice {
+            case "Light": mode = .light
+            case "Dark":  mode = .dark
+            default:      mode = .system
+            }
+            AppearanceController.shared.mode = mode
+            self?.appearanceRow.detailText = mode.displayName
+        }
+    }
+
+    @objc private func onAbout() {
+        AppDelegate.getInstance()?.showAbout()
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
-    @objc private func onAutoSyncSwitch(_ sender: UISwitch) {
-        AutoSyncController.shared.autoSyncEnabled = sender.isOn
+    // MARK: - Logout (ported from OSTUtilitiesViewController)
+
+    @objc private func onLogout() {
+        let checking = UIAlertController(title: "Checking connection…",
+                                         message: "\n\n",
+                                         preferredStyle: .alert)
+        let spinner = UIActivityIndicatorView(style: .gray)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        checking.view.addSubview(spinner)
+        NSLayoutConstraint.activate([
+            spinner.centerXAnchor.constraint(equalTo: checking.view.centerXAnchor),
+            spinner.bottomAnchor.constraint(equalTo: checking.view.bottomAnchor, constant: -16)
+        ])
+        present(checking, animated: true)
+
+        OSTBackend.shared.verifyConnection { [weak self] error in
+            guard let self = self else { return }
+            checking.dismiss(animated: true) {
+                if error == nil {
+                    self.presentLogoutConfirmation()
+                } else {
+                    self.presentLogoutOverride()
+                }
+            }
+        }
+    }
+
+    /// Online: confirm, then log out.
+    private func presentLogoutConfirmation() {
+        let alert = UIAlertController(title: "Are you sure you would like to log out?",
+                                      message: "You can log back in using your current connection, but you won't be able to add entries or log back in if you lose it.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
+            self?.performLogout()
+        })
+        present(alert, animated: true)
+    }
+
+    /// Check failed: block, but allow an immediate override.
+    private func presentLogoutOverride() {
+        let alert = UIAlertController(title: "Can't reach OpenSplitTime",
+                                      message: "You will not be able to log back in or add entries until you have a data connection again.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Log Out Anyway", style: .destructive) { [weak self] _ in
+            self?.performLogout()
+        })
+        present(alert, animated: true)
+    }
+
+    private func performLogout() {
+        let app = AppDelegate.getInstance()
+        app?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+        app?.logout()
     }
 
     // MARK: - Badge + sync observer (override the Obj-C base)
