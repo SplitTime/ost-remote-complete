@@ -16,6 +16,7 @@ final class OSTRunnerBadge: UIView {
     private let captionLabel = UILabel()
     private let droppingChip = OSTRunnerBadge.makeChip("DROPPING", color: Theme.destructive)
     private let pacerChip = OSTRunnerBadge.makeChip("PACER", color: Theme.tint)
+    private let chipRow = UIStackView()
 
     /// Commit action for the just-recorded entry. The host wires the target and
     /// toggles `isHidden`; it lives inside the badge (center-bottom of the detail
@@ -34,6 +35,7 @@ final class OSTRunnerBadge: UIView {
         captionLabel.isHidden = (viewModel.caption ?? "").isEmpty
         droppingChip.isHidden = !viewModel.dropping
         pacerChip.isHidden = !viewModel.withPacer
+        chipRow.isHidden = !(viewModel.dropping || viewModel.withPacer)
     }
 
     /// Retained for API compatibility with the runner tracker. Auto Layout + the
@@ -60,14 +62,30 @@ final class OSTRunnerBadge: UIView {
         bibLabel.adjustsFontSizeToFitWidth = true
         bibLabel.minimumScaleFactor = 0.4
 
-        let leadingStack = UIStackView(arrangedSubviews: [checkLabel, bibLabel])
-        leadingStack.spacing = 10
+        // Bib row + flag chips beneath it, all in the roomy green panel (keeps the
+        // detail column on the right uncramped).
+        let bibRow = UIStackView(arrangedSubviews: [checkLabel, bibLabel])
+        bibRow.spacing = 10
+        bibRow.alignment = .center
+
+        droppingChip.isHidden = true
+        pacerChip.isHidden = true
+        chipRow.axis = .horizontal
+        chipRow.alignment = .center
+        chipRow.spacing = 6
+        chipRow.addArrangedSubview(droppingChip)
+        chipRow.addArrangedSubview(pacerChip)
+        chipRow.isHidden = true
+
+        let leadingStack = UIStackView(arrangedSubviews: [bibRow, chipRow])
+        leadingStack.axis = .vertical
         leadingStack.alignment = .center
+        leadingStack.spacing = 8
         leadingStack.translatesAutoresizingMaskIntoConstraints = false
         leadingPanel.addSubview(leadingStack)
 
-        // Detail column: time, a meta row (caption + flag chips), then the Confirm
-        // button — stacked and centered so nothing overlaps.
+        // Detail column: time, caption, then the Confirm button — stacked and
+        // centered so nothing overlaps.
         timeLabel.font = .monospacedDigitSystemFont(ofSize: 34, weight: .bold)
         timeLabel.textColor = Theme.label
         timeLabel.adjustsFontSizeToFitWidth = true
@@ -78,14 +96,6 @@ final class OSTRunnerBadge: UIView {
         captionLabel.textColor = Theme.secondaryLabel
         captionLabel.textAlignment = .center
         captionLabel.isHidden = true
-        captionLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        droppingChip.isHidden = true
-        pacerChip.isHidden = true
-
-        let metaRow = UIStackView(arrangedSubviews: [captionLabel, droppingChip, pacerChip])
-        metaRow.axis = .horizontal
-        metaRow.alignment = .center
-        metaRow.spacing = 6
 
         confirmButton.setTitle("Confirm", for: .normal)
         confirmButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
@@ -95,7 +105,7 @@ final class OSTRunnerBadge: UIView {
         confirmButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
         confirmButton.isHidden = true
 
-        let detailStack = UIStackView(arrangedSubviews: [timeLabel, metaRow, confirmButton])
+        let detailStack = UIStackView(arrangedSubviews: [timeLabel, captionLabel, confirmButton])
         detailStack.axis = .vertical
         detailStack.alignment = .center
         detailStack.spacing = 6
