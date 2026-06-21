@@ -128,11 +128,15 @@ enum SpreadDate {
         if s.hasSuffix("Z") { return TimeZone(secondsFromGMT: 0) ?? .current }
         let tail = String(s.suffix(6)) // e.g. "-06:00"
         guard tail.count == 6, tail.contains(":"),
-              let hours = Int(tail.prefix(3)), let minutes = Int(tail.suffix(2)) else {
+              let signChar = tail.first, signChar == "+" || signChar == "-",
+              let hours = Int(tail.dropFirst().prefix(2)), let minutes = Int(tail.suffix(2)) else {
             return .current
         }
-        let sign = hours < 0 ? -1 : 1
-        return TimeZone(secondsFromGMT: hours * 3600 + sign * minutes * 60) ?? .current
+        // Sign must come from the leading character, not the parsed hour: a
+        // "-00:30" offset has hours == 0, so inferring the sign from the hour
+        // would wrongly treat it as positive.
+        let sign = signChar == "-" ? -1 : 1
+        return TimeZone(secondsFromGMT: sign * (hours * 3600 + minutes * 60)) ?? .current
     }
 }
 

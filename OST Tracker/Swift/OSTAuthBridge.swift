@@ -15,18 +15,14 @@ import Foundation
 @objc final class OSTAuthBridge: NSObject {
 
     /// POST `auth` with the given credentials via APIClient. Calls back with the
-    /// bearer token on success, or an NSError on failure. Base URL comes from the
-    /// app's `BACKEND_URL` Info.plist value (same one OSTNetworkManager uses).
+    /// bearer token on success, or an NSError on failure. Base URL is resolved by
+    /// the shared `OSTBackend.backendBaseURL` (the same source the read endpoints
+    /// use), so a missing/malformed `BACKEND_URL` falls back to production rather
+    /// than failing differently here than everywhere else.
     @objc static func login(email: String,
                             password: String,
                             completion: @escaping (String?, Error?) -> Void) {
-        guard let urlString = Bundle.main.object(forInfoDictionaryKey: "BACKEND_URL") as? String,
-              let baseURL = URL(string: urlString) else {
-            completion(nil, NSError(domain: "OST", code: -1,
-                                    userInfo: [NSLocalizedDescriptionKey: "Missing BACKEND_URL"]))
-            return
-        }
-        APIClient(baseURL: baseURL).login(email: email, password: password) { result in
+        APIClient(baseURL: OSTBackend.backendBaseURL).login(email: email, password: password) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let auth): completion(auth.token, nil)

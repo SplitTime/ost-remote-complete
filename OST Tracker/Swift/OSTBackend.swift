@@ -17,12 +17,18 @@ import Foundation
 @objc final class OSTBackend: NSObject {
     @objc static let shared = OSTBackend()
 
+    /// Backend base URL from Info.plist `BACKEND_URL`, falling back to production
+    /// if it's missing or malformed. Single source for every backend caller.
+    static let backendBaseURL: URL = {
+        let urlString = (Bundle.main.object(forInfoDictionaryKey: "BACKEND_URL") as? String) ?? ""
+        return URL(string: urlString) ?? URL(string: "https://www.opensplittime.org/api/v1/")!
+    }()
+
     private let client: APIClient
     private lazy var checker = ConnectivityChecker(auth: client, store: SessionCredentialStore())
 
     private override init() {
-        let urlString = (Bundle.main.object(forInfoDictionaryKey: "BACKEND_URL") as? String) ?? ""
-        client = APIClient(baseURL: URL(string: urlString) ?? URL(string: "https://www.opensplittime.org/api/v1/")!)
+        client = APIClient(baseURL: OSTBackend.backendBaseURL)
         super.init()
     }
 
@@ -78,15 +84,22 @@ import Foundation
     /// delivered on the main queue. Mirrors `request(_:completion:)` but Codable.
     private func decodableRequest<T: Decodable>(_ path: String, as type: T.Type,
                                                 completion: @escaping (Result<T, Error>) -> Void) {
-        checker.check { [client] loginError in
+        checker.check { [weak self, client] loginError in
             if let loginError = loginError {
                 DispatchQueue.main.async { completion(.failure(loginError)) }
                 return
             }
             client.get(path, as: T.self) { result in
+                if case .failure(let error) = result { self?.invalidateIfUnauthorized(error) }
                 DispatchQueue.main.async { completion(result) }
             }
         }
+    }
+
+    /// A 401 on a read means the cached token went stale inside its trust window;
+    /// drop it so the next request re-authenticates rather than reusing it.
+    private func invalidateIfUnauthorized(_ error: Error) {
+        if (error as NSError).code == 401 { checker.invalidate() }
     }
 
     // MARK: - Write (entry submit) — transport only
@@ -109,17 +122,24 @@ import Foundation
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.setValue("no-cache", forHTTPHeaderField: "cache-control")
         if let authorization = authorization { req.setValue(authorization, forHTTPHeaderField: "Authorization") }
+        // Never POST an empty body on an encode failure: the server would reject it
+        // with an opaque error and the real cause would be lost. Validate first —
+        // JSONSerialization.data raises an NSException (not a Swift error) on an
+        // invalid type, which `try` would not catch.
+        func encodeFailure(_ detail: String) {
+            DispatchQueue.main.async {
+                completion(nil, NSError(domain: "OST", code: -1, userInfo: [
+                    NSLocalizedDescriptionKey: "Could not encode submit payload: \(detail)"
+                ]))
+            }
+        }
+        guard JSONSerialization.isValidJSONObject(body) else {
+            encodeFailure("body contains a non-JSON value"); return
+        }
         do {
             req.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
         } catch {
-            // Never POST an empty body on an encode failure: the server would
-            // reject it with an opaque error and the real cause would be lost.
-            DispatchQueue.main.async {
-                completion(nil, NSError(domain: "OST", code: -1, userInfo: [
-                    NSLocalizedDescriptionKey: "Could not encode submit payload: \(error.localizedDescription)"
-                ]))
-            }
-            return
+            encodeFailure(error.localizedDescription); return
         }
 
         URLSession.shared.dataTask(with: req) { data, response, error in
@@ -151,12 +171,13 @@ import Foundation
     // MARK: - Plumbing
 
     private func request(_ path: String, completion: @escaping (Any?, Error?) -> Void) {
-        checker.check { [client] loginError in
+        checker.check { [weak self, client] loginError in
             if let loginError = loginError {
                 DispatchQueue.main.async { completion(nil, loginError) }
                 return
             }
             client.getJSONObject(path) { result in
+                if case .failure(let error) = result { self?.invalidateIfUnauthorized(error) }
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let json): completion(json, nil)
@@ -177,6 +198,18 @@ import Foundation
 final class ConnectivityChecker {
     private let auth: Authenticating
     private let store: CredentialStore
+    /// When the current token stops being trusted. While in the future, reads
+    /// reuse the existing bearer token instead of re-authenticating — live polling
+    /// otherwise paid a full login round-trip before every single GET.
+    private var validUntil: Date?
+
+    /// Trust window when the auth response carries no usable expiration.
+    private static let defaultCacheWindow: TimeInterval = 60
+    /// Re-authenticate this long before a known expiry to avoid racing it.
+    private static let expiryMargin: TimeInterval = 60
+    /// Never trust a cached token longer than this regardless of a far-future
+    /// expiration — guards against clock skew / early server-side invalidation.
+    private static let maxCacheWindow: TimeInterval = 600
 
     init(auth: Authenticating, store: CredentialStore) {
         self.auth = auth
@@ -186,15 +219,44 @@ final class ConnectivityChecker {
     func check(completion: @escaping (Error?) -> Void) {
         guard let email = store.email, !email.isEmpty,
               let password = store.password, !password.isEmpty else {
+            validUntil = nil
             completion(NSError(domain: "OST", code: 401,
                                userInfo: [NSLocalizedDescriptionKey: "Missing stored credentials. Please log in again."]))
             return
         }
-        auth.authenticate(email: email, password: password) { result in
+        if let validUntil = validUntil, validUntil > Date() {
+            completion(nil) // still-valid token; skip the re-auth round-trip
+            return
+        }
+        auth.authenticate(email: email, password: password) { [weak self] result in
             switch result {
-            case .success: completion(nil)
-            case .failure(let error): completion(error)
+            case .success(let response):
+                self?.validUntil = ConnectivityChecker.cacheExpiry(from: response.expiration)
+                completion(nil)
+            case .failure(let error):
+                self?.validUntil = nil
+                completion(error)
             }
         }
     }
+
+    /// Drop the cached token so the next `check` re-authenticates. Call when a read
+    /// is rejected for auth (401): the token went stale inside its trust window.
+    func invalidate() { validUntil = nil }
+
+    private static func cacheExpiry(from expiration: String?, now: Date = Date()) -> Date {
+        let cap = now.addingTimeInterval(maxCacheWindow)
+        guard let expiration = expiration,
+              let expiry = iso.date(from: expiration) ?? isoFractional.date(from: expiration) else {
+            return now.addingTimeInterval(defaultCacheWindow)
+        }
+        return min(expiry.addingTimeInterval(-expiryMargin), cap)
+    }
+
+    private static let iso: ISO8601DateFormatter = {
+        let f = ISO8601DateFormatter(); f.formatOptions = [.withInternetDateTime]; return f
+    }()
+    private static let isoFractional: ISO8601DateFormatter = {
+        let f = ISO8601DateFormatter(); f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]; return f
+    }()
 }

@@ -25,6 +25,9 @@ struct LiveTimeEntry {
 
     /// `POST events/{id}/import` body, matching the old code's `uniqueKey` + `data`.
     static func eventImportPayload(_ entries: [LiveTimeEntry]) -> [String: Any] {
+        // "bitkey" (lowercase k) is intentional — it's the server's uniqueKey field
+        // name, distinct from the per-entry "subSplitKind" attribute above. Locked
+        // by SubmitPayloadGoldenTests; do not "fix" the casing.
         ["uniqueKey": ["enteredTime", "bitkey", "bibNumber", "source", "withPacer", "stoppedHere"],
          "data": entries.map { ["type": "live_time", "attributes": $0.attributes] }]
     }

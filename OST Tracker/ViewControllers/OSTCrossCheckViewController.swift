@@ -71,17 +71,25 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         let currentCourseSplitName = CurrentCourse.getCurrentCourse()?.splitName
         splitName = currentCourseSplitName ?? ""
 
-        for entrie in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
-            let entries = entrie["entries"] as? [[String: Any]] ?? []
-            if entries.count == 1 { continue }
-            if (entrie["title"] as? String) == currentCourseSplitName {
-                let k0 = entries[0]["subSplitKind"] as? String
-                let k1 = entries[1]["subSplitKind"] as? String
-                if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") {
-                    splitName = entries[0]["splitName"] as? String ?? splitName
-                }
-            }
+        if let matched = matchedInOutSubEntries() {
+            splitName = matched[0]["splitName"] as? String ?? splitName
         }
+    }
+
+    /// The two sub-entries of the current split's data-entry group when they form a
+    /// matched in/in or out/out pair (the case that exposes the location toggle).
+    /// Returns nil for a normal single in+out split. Shared by viewDidLoad and the
+    /// section header so the detection lives in one place.
+    private func matchedInOutSubEntries() -> [[String: Any]]? {
+        let current = CurrentCourse.getCurrentCourse()?.splitName
+        for group in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
+            let entries = group["entries"] as? [[String: Any]] ?? []
+            guard entries.count != 1, (group["title"] as? String) == current else { continue }
+            let k0 = entries[0]["subSplitKind"] as? String
+            let k1 = entries[1]["subSplitKind"] as? String
+            if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") { return entries }
+        }
+        return nil
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -194,14 +202,29 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         return currentEfforts.count
     }
 
+    /// An effort with no recorded entry at this split is in the Expected /
+    /// Not-Expected state — the only state that's bulk-selectable and shows the
+    /// expected toggle. Derive it from the model rather than the rendered cell label
+    /// (which breaks on any copy/localization change to the status text).
+    private func isUnrecorded(_ effort: EffortModel) -> Bool {
+        (effort.entries(forSplitName: splitName) ?? []).isEmpty
+    }
+
+    /// Mirrors the cell's Expected-vs-Not-Expected split: Not-Expected only when
+    /// the effort is explicitly flagged `expected == NO` for this split.
+    private func isExpectedHere(_ effort: EffortModel) -> Bool {
+        let expected = effort.expected(withSplitName: splitName)
+        let explicitlyNotExpected = expected?.isEqual(NSNumber(value: false)) ?? false
+        return !explicitlyNotExpected
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OSTCrossCheckCell", for: indexPath) as! OSTCrossCheckCell
         cell.splitName = splitName
         cell.configure(withEffort: currentEfforts[indexPath.row])
 
         if bulkSelect {
-            let status = cell.lblStatus.text
-            cell.noBulkSelectView.isHidden = (status == "Expected" || status == "Not Expected")
+            cell.noBulkSelectView.isHidden = isUnrecorded(currentEfforts[indexPath.row])
         }
         if currentEfforts[indexPath.row].bulkSelected {
             cell.noBulkSelectView.isHidden = false
@@ -213,8 +236,7 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         if bulkSelect {
             let effort = currentEfforts[indexPath.row]
             guard let cell = collectionView.cellForItem(at: indexPath) as? OSTCrossCheckCell else { return }
-            let status = cell.lblStatus.text
-            if status != "Expected" && status != "Not Expected" { return }
+            guard isUnrecorded(effort) else { return }
             effort.bulkSelected.toggle()
             cell.configure(withEffort: effort)
             return
@@ -231,12 +253,12 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         popupBibNumber.textColor = cell.lblBibNumber.textColor
         popupCellStatusLabel.backgroundColor = cell.lblStatus.backgroundColor
         popupBibNumber.text = cell.lblBibNumber.text
-        popupCellStatusLabel.text = cell.lblStatus.text
+        popupCellStatusLabel.text = cell.lblStatus.text // display mirror only
 
-        if popupCellStatusLabel.text == "Expected" || popupCellStatusLabel.text == "Not Expected" {
+        if isUnrecorded(popupEffort!) {
             popupSegmentedView.isHidden = false
             btnReviewEntries.isHidden = true
-            swchPopupExpected.isOn = (popupCellStatusLabel.text == "Expected")
+            swchPopupExpected.isOn = isExpectedHere(popupEffort!)
         } else {
             popupSegmentedView.isHidden = true
             btnReviewEntries.isHidden = false
@@ -252,27 +274,16 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
             headerView.segLocation.isHidden = true
             headerView.lblStationName.isHidden = false
 
-            for entrie in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
-                let entries = entrie["entries"] as? [[String: Any]] ?? []
-                if entries.count == 1 { continue }
-                if (entrie["title"] as? String) == CurrentCourse.getCurrentCourse()?.splitName {
-                    let k0 = entries[0]["subSplitKind"] as? String
-                    let k1 = entries[1]["subSplitKind"] as? String
-                    if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") {
-                        headerView.segLocation.isHidden = false
-                        headerView.lblStationName.isHidden = true
-                        headerView.segLocation.setTitle(entries[0]["splitName"] as? String, forSegmentAt: 0)
-                        headerView.segLocation.setTitle(entries[1]["splitName"] as? String, forSegmentAt: 1)
-                        headerView.splitChange = { [weak self] newSplitName in
-                            guard let self = self else { return }
-                            self.splitName = newSplitName ?? ""
-                            for effort in self.efforts { effort.clearVariables() }
-                            self.reloadData()
-                        }
-                    } else {
-                        headerView.segLocation.isHidden = true
-                        headerView.lblStationName.isHidden = false
-                    }
+            if let matched = matchedInOutSubEntries() {
+                headerView.segLocation.isHidden = false
+                headerView.lblStationName.isHidden = true
+                headerView.segLocation.setTitle(matched[0]["splitName"] as? String, forSegmentAt: 0)
+                headerView.segLocation.setTitle(matched[1]["splitName"] as? String, forSegmentAt: 1)
+                headerView.splitChange = { [weak self] newSplitName in
+                    guard let self = self else { return }
+                    self.splitName = newSplitName ?? ""
+                    for effort in self.efforts { effort.clearVariables() }
+                    self.reloadData()
                 }
             }
             return headerView
@@ -426,7 +437,6 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
     }
 
     private func saveContext() {
-        NSManagedObjectContext.mr_default().processPendingChanges()
-        NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+        NSManagedObjectContext.mr_saveDefaultContext()
     }
 }

@@ -62,6 +62,15 @@ extension NSManagedObjectContext {
         mr_saveOnlySelfAndWait()
     }
 
+    /// Flush pending edits and persist the default context — the save dance that
+    /// was hand-written at every entry-recording / mutation call site.
+    @objc(mr_saveDefaultContext)
+    static func mr_saveDefaultContext() {
+        let ctx = mr_default()
+        ctx.processPendingChanges()
+        ctx.mr_saveOnlySelfAndWait()
+    }
+
     /// A child context fed by `parent`. Matches the one call site, which imports
     /// transient picker objects on the main thread, so it is a main-queue child.
     @objc(mr_contextWithParent:)
@@ -184,8 +193,15 @@ extension NSManagedObject {
             }
         }
 
+        // Save with reconcile-specific context: a swallowed failure here leaves the
+        // local roster stale (the "deleted runners stuck Expected" bug class), so
+        // make the failure diagnosable rather than generic.
         context.processPendingChanges()
-        NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+        context.performAndWait {
+            guard context.hasChanges else { return }
+            do { try context.save() }
+            catch { NSLog("[CoreData] reconcile prune save failed for '%@': %@", type, "\(error)") }
+        }
     }
 
     // MARK: - Private helpers
@@ -200,9 +216,12 @@ extension NSManagedObject {
            let primaryAttr = entity.attributesByName[primaryKey] {
             let mappedKey = (primaryAttr.userInfo?["mappedKeyName"] as? String) ?? primaryKey
             if let raw = mrValue(forKeyPath: mappedKey, in: source),
-               let value = mrConvert(raw, for: primaryAttr) {
+               let value = mrConvert(raw, for: primaryAttr),
+               let key = value as? CVarArg {
+                // A non-CVarArg primary key (e.g. a transformable/binary attribute)
+                // can't be matched here; fall through to insert rather than trap.
                 let request = NSFetchRequest<NSManagedObject>(entityName: entityName)
-                request.predicate = NSPredicate(format: "%K == %@", primaryKey, value as! CVarArg)
+                request.predicate = NSPredicate(format: "%K == %@", primaryKey, key)
                 request.fetchLimit = 1
                 if let existing = (try? context.fetch(request))?.first {
                     return existing

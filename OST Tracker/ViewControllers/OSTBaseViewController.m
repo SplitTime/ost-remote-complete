@@ -96,9 +96,9 @@
 - (void)updateSyncBadge
 {
     // Count only entries that actually need syncing — the same eligibility the sync
-    // engine uses (submitted == NIL && bibNumber != "-1"). The "-1" placeholder bib
-    // is never submitted, so including it here inflated the badge above "All Synced".
-    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]];
+    // engine uses (submitted == NIL). (The old "-1" placeholder bib no longer exists,
+    // so there's nothing extra to exclude here.)
+    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]];
     CGFloat badgeRightEdge = self.badgeLabel.right;
     if (entries.count == 0)
     {
