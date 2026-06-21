@@ -64,6 +64,15 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
 
     @objc private func onGoToLiveEntry() { AppDelegate.getInstance()?.showTracker() }
 
+    @objc private func onMenu() {
+        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        ostPositionBadgeAtMenu()
+    }
+
     private func fetch(showSpinner: Bool) {
         guard !groupId.isEmpty, !stationName.isEmpty else { return }
         if showSpinner { ostShowBlockingSpinner() }
@@ -97,14 +106,14 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         let cell = tableView.dequeueReusableCell(withIdentifier: "read") ?? UITableViewCell(style: .subtitle, reuseIdentifier: "read")
         let r = rows[indexPath.row]
         let kind = (r.subSplitKind ?? "").uppercased()
-        let time = r.enteredTime ?? Self.shortTime(from: r.absoluteTime) ?? "—"
+        let time = LiveReadsFormat.clock(enteredTime: r.enteredTime, absoluteTime: r.absoluteTime)
         cell.textLabel?.text = "#\(r.bib)   \(time)" + (kind.isEmpty ? "" : "   [\(kind)]")
         cell.textLabel?.textColor = Theme.label
         var flags: [String] = []
         if let lap = r.lap, lap > 1 { flags.append("L\(lap)") }
         if r.withPacer { flags.append("pacer") }
         if r.stoppedHere { flags.append("stopped") }
-        let source = r.source ?? ""
+        let source = LiveReadsFormat.friendlySource(r.source, myUUID: OSTSessionManager.getUUIDString())
         cell.detailTextLabel?.text = [source, flags.joined(separator: " · ")].filter { !$0.isEmpty }.joined(separator: "   ")
         cell.detailTextLabel?.textColor = Theme.secondaryLabel
         cell.contentView.backgroundColor = newIds.contains(r.id) ? Theme.tint.withAlphaComponent(0.15) : .clear
@@ -119,14 +128,6 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
     private static let clock: DateFormatter = {
         let f = DateFormatter(); f.dateFormat = "HH:mm:ss"; return f
     }()
-
-    private static func shortTime(from iso: String?) -> String? {
-        guard let iso = iso else { return nil }
-        let inF = ISO8601DateFormatter()
-        inF.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        guard let d = inF.date(from: iso) ?? ISO8601DateFormatter().date(from: iso) else { return iso }
-        return clock.string(from: d)
-    }
 
     private func buildUI() {
         let header = UIView()
@@ -151,6 +152,13 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         refresh.titleLabel?.font = Theme.Font.button
         refresh.addTarget(self, action: #selector(onRefresh), for: .touchUpInside)
 
+        let menuBtn = UIButton(type: .system)
+        menuBtn.setTitle("Menu ☰", for: .normal)
+        menuBtn.setTitleColor(Theme.tint, for: .normal)
+        menuBtn.titleLabel?.font = Theme.Font.button
+        menuBtn.addTarget(self, action: #selector(onMenu), for: .touchUpInside)
+        menuButton = menuBtn // base VC anchors the sync badge to this
+
         let goLive = PrimaryButton(title: "Go to Live Entry", role: .primary)
         goLive.translatesAutoresizingMaskIntoConstraints = false
         goLive.addTarget(self, action: #selector(onGoToLiveEntry), for: .touchUpInside)
@@ -159,7 +167,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         statusStack.alignment = .center
         statusStack.spacing = 6
 
-        let headerStack = UIStackView(arrangedSubviews: [titleLabel, UIView(), statusStack, refresh])
+        let headerStack = UIStackView(arrangedSubviews: [titleLabel, UIView(), statusStack, refresh, menuBtn])
         headerStack.alignment = .center
         headerStack.spacing = 10
         headerStack.translatesAutoresizingMaskIntoConstraints = false
