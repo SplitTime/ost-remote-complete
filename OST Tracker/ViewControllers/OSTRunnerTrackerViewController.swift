@@ -158,7 +158,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         numberPad.attach(to: txtBibNumber)
 
         txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
-        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -166,7 +165,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         NotificationCenter.default.addObserver(self, selector: #selector(onStatusChanged),
                                                name: AutoSyncController.statusChangedNotification, object: nil)
         renderStatus(AutoSyncController.shared.currentStatus)
-        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
         lblTitle.text = CurrentCourse.getCurrentCourse()?.splitName
 
         configureEntryButtons()
