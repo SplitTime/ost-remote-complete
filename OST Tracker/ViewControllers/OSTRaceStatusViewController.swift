@@ -232,9 +232,8 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
                 return "\(prefix)\(line.elapsed)\(tod)"
             }.joined(separator: "\n")
         case .fieldRow(let f):
-            let time = f.time.isEmpty ? "" : "   \(f.time)"
             cell.textLabel?.text = "#\(f.bib)  \(f.name)"
-            cell.detailTextLabel?.text = "\(f.status)\(time)"
+            cell.detailTextLabel?.text = [f.status, f.time].filter { !$0.isEmpty }.joined(separator: "   ")
         case .message(let m):
             cell.textLabel?.text = m
             cell.detailTextLabel?.text = nil

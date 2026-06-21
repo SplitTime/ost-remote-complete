@@ -153,30 +153,52 @@ struct StationField {
     let rows: [FieldRow]
 }
 
+/// The sub-split time at `sub` (0 = In, 1 = Out) for a split, or nil if absent.
+private func subTime(_ e: EffortRow, atSplit idx: Int, sub: Int) -> Date? {
+    guard idx >= 0, idx < e.absoluteTimes.count, sub < e.absoluteTimes[idx].count else { return nil }
+    return e.absoluteTimes[idx][sub]
+}
+
+/// One runner's row at a station. In/Out stations show both times inline (no
+/// "Through" word); a recorded In with no Out yet reads "still here". Plain
+/// stations keep the single "Through" + time.
+func fieldRow(_ e: EffortRow, status: EffortStatus, atSplit idx: Int,
+              header: SplitHeader, start: Date, tz: TimeZone) -> FieldRow {
+    func display(_ d: Date) -> String {
+        "\(RaceStatusFormat.elapsed(from: start, to: d)) (\(RaceStatusFormat.clockWithDay(d, in: tz)))"
+    }
+    let statusText: String
+    let timeText: String
+    switch status {
+    case .through(let arrival):
+        if header.hasInOut {
+            let inDate = subTime(e, atSplit: idx, sub: 0) ?? arrival
+            let outPart = subTime(e, atSplit: idx, sub: 1).map { "Out \(display($0))" } ?? "still here"
+            statusText = ""
+            timeText = "In \(display(inDate))   \(outPart)"
+        } else {
+            statusText = "Through"
+            timeText = display(arrival)
+        }
+    case .expected:
+        statusText = "Expected"; timeText = ""
+    case .dropped(let station):
+        statusText = "Dropped @\(station)"; timeText = ""
+    case .notStarted:
+        statusText = "Not started"; timeText = ""
+    }
+    return FieldRow(bib: String(e.bibNumber), name: e.fullName,
+                    status: statusText, time: timeText)
+}
+
 func stationField(splitIndex idx: Int, spread: EventSpread) -> StationField {
     let start = spread.eventStartTime
     let tz = spread.eventTimeZone
+    let header = spread.splitHeaders[idx]
     let ordered = sortedField(spread.efforts, atSplit: idx, headers: spread.splitHeaders)
-    var throughCount = 0
-    let rows: [FieldRow] = ordered.map { e in
-        let status = effortStatus(e, atSplit: idx, headers: spread.splitHeaders)
-        let statusText: String
-        let timeText: String
-        switch status {
-        case .through(let arrival):
-            throughCount += 1
-            statusText = "Through"
-            timeText = "\(RaceStatusFormat.elapsed(from: start, to: arrival)) (\(RaceStatusFormat.clockWithDay(arrival, in: tz)))"
-        case .expected:
-            statusText = "Expected"; timeText = ""
-        case .dropped(let station):
-            statusText = "Dropped @\(station)"; timeText = ""
-        case .notStarted:
-            statusText = "Not started"; timeText = ""
-        }
-        return FieldRow(bib: String(e.bibNumber), name: e.fullName,
-                        status: statusText, time: timeText)
-    }
+    let tagged = ordered.map { ($0, effortStatus($0, atSplit: idx, headers: spread.splitHeaders)) }
+    let throughCount = tagged.filter { if case .through = $0.1 { return true } else { return false } }.count
+    let rows = tagged.map { fieldRow($0.0, status: $0.1, atSplit: idx, header: header, start: start, tz: tz) }
     return StationField(countText: "\(throughCount) of \(spread.efforts.count) through",
                         rows: rows)
 }
