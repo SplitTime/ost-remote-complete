@@ -261,8 +261,7 @@ final class OSTRightMenuViewController: OSTBaseViewController {
             currentCourse.eventIdsAndSplits = eventIdsAndSplits
             currentCourse.eventShortNames = eventShortNames
 
-            NSManagedObjectContext.mr_default().processPendingChanges()
-            NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+            NSManagedObjectContext.mr_saveDefaultContext()
             OSTToast.show(message: "Roster updated.", success: true)
         }
     }

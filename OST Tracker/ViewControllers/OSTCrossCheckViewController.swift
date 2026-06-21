@@ -426,7 +426,6 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
     }
 
     private func saveContext() {
-        NSManagedObjectContext.mr_default().processPendingChanges()
-        NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+        NSManagedObjectContext.mr_saveDefaultContext()
     }
 }

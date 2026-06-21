@@ -62,6 +62,15 @@ extension NSManagedObjectContext {
         mr_saveOnlySelfAndWait()
     }
 
+    /// Flush pending edits and persist the default context — the save dance that
+    /// was hand-written at every entry-recording / mutation call site.
+    @objc(mr_saveDefaultContext)
+    static func mr_saveDefaultContext() {
+        let ctx = mr_default()
+        ctx.processPendingChanges()
+        ctx.mr_saveOnlySelfAndWait()
+    }
+
     /// A child context fed by `parent`. Matches the one call site, which imports
     /// transient picker objects on the main thread, so it is a main-queue child.
     @objc(mr_contextWithParent:)

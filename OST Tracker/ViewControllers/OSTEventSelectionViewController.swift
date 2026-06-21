@@ -272,8 +272,7 @@ class OSTEventSelectionViewController: UIViewController {
             currentCourse?.splitId = splitId
             currentCourse?.splitName = title
             currentCourse?.splitAttributes = firstFound
-            NSManagedObjectContext.mr_default().processPendingChanges()
-            NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+            NSManagedObjectContext.mr_saveDefaultContext()
 
             AppDelegate.getInstance()?.showTracker()
             dismiss(animated: true, completion: nil)
@@ -327,8 +326,7 @@ class OSTEventSelectionViewController: UIViewController {
             currentCourse.eventIdsAndSplits = eventIdsAndSplits
             currentCourse.eventShortNames = eventShortNames
 
-            NSManagedObjectContext.mr_default().processPendingChanges()
-            NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+            NSManagedObjectContext.mr_saveDefaultContext()
 
             AppDelegate.getInstance()?.loadLeftMenu()
         }
