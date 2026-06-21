@@ -2,153 +2,174 @@
 //  OSTReviewSubmitViewController.swift
 //  OST Tracker
 //
-//  Migrated from Objective-C (Phase 2). Keeps the existing XIB via
-//  @objc(OSTReviewSubmitViewController). Uses AutoSyncController,
-//  MagicalRecord and IQDropDownTextField via bridging. OHAlertView -> native
-//  UIAlertController. The dead `onSubmit_old:` / `submitEntries:` path (not wired
-//  in the XIB) and the iPhone-X/XR-only +7pt nudge (never fires on the iOS-12
-//  device fleet) were dropped during the port.
+//  Programmatic DesignSystem rewrite. Header (event name + Export + sort row),
+//  a grouped table of entries, and a pinned full-width Sync button with an inline
+//  progress bar; completion is signalled by OSTToast. All sync/export/edit logic
+//  is preserved from the prior XIB-driven version.
 //
 
 import UIKit
 import CoreData
 
+private extension ReviewEntryDisplay {
+    init(entry: EntryModel) {
+        self.init(displayTime: entry.displayTime,
+                  fullName: entry.fullName,
+                  bibNumber: entry.bibNumber,
+                  bitKey: entry.bitKey,
+                  submitted: entry.submitted?.boolValue ?? false,
+                  withPacer: entry.withPacer,
+                  stoppedHere: entry.stoppedHere)
+    }
+}
+
 @objc(OSTReviewSubmitViewController)
 class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblSyncing: UILabel!
-    @IBOutlet var loadingView: UIView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var btnRightMenu: UIButton!
-    @IBOutlet weak var lblYourDataIsSynced: UILabel!
-    @IBOutlet weak var imgCheckMark: UIImageView!
-    @IBOutlet weak var lblSuccess: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var btnReturnToLiveEntry: UIButton!
-    @IBOutlet weak var txtSortBy: OSTDropDownField!
-    @IBOutlet weak var btnSync: UIButton!
-    @IBOutlet weak var lblBadge: UILabel!
-    @IBOutlet weak var syncIndicator: UIActivityIndicatorView!
+    private let titleLabel = UILabel()
+    private let menuBtn = UIButton(type: .system)
+    private let badgeView = UILabel()
+    private let exportButton = UIButton(type: .system)
+    private let sortButton = UIButton(type: .system)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let syncButton = PrimaryButton(title: "All Synced", role: .primary)
+    private let progressBar = UIProgressView(progressViewStyle: .default)
 
-    // entries[section] is the (sorted) entries for splitTitles[section]
+    // entries[section] is the sorted entries for splitTitles[section]
     private var entries: [[EntryModel]] = []
     private var splitTitles: [String] = []
 
-    // MARK: - Lifecycle
+    private let sortOptions = ["Name", "Time Displayed", "Time Entered", "Bib #"]
+    private var sortSelection = 2 // default: Time Entered
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        ostApplySafeAreaFix()
-        ostPositionBadgeAtMenu()
-        liftBottomBarAboveHomeIndicator()
-    }
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = Theme.background
+        buildUI()
 
-        tableView.register(UINib(nibName: "OSTReviewTableViewCell", bundle: nil),
-                           forCellReuseIdentifier: "OSTReviewTableViewCell")
-
-        txtSortBy.isOptionalDropDown = false
-        txtSortBy.layer.borderColor = UIColor.white.cgColor
-        txtSortBy.layer.borderWidth = 1
-        txtSortBy.layer.cornerRadius = 3
-        txtSortBy.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 20))
-        txtSortBy.leftViewMode = .always
-        txtSortBy.itemList = ["Name", "Time Displayed", "Time Entered", "Bib #"]
+        // Hand the base VC its badge + menu button so updateSyncBadge keeps working.
+        menuButton = menuBtn
+        badgeLabel = badgeView
 
         if let stored = UserDefaults.standard.object(forKey: "reviewScreenPicklistValue") as? NSNumber {
-            txtSortBy.selectedRow = stored.intValue
-        } else {
-            txtSortBy.selectedRow = 2
+            sortSelection = stored.intValue
         }
+        updateSortButtonTitle()
 
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneSelectedSortBy(_:)))
-        ]
-        txtSortBy.inputAccessoryView = toolbar
-        txtSortBy.removeInputAssistant()
-
-        btnSync.setBackgroundImage(UIImage(named: "GrayButton"), for: .highlighted)
-        // In the XIB the Sync button sits *behind* the table; on the short legacy
-        // design it stuck out below, but on tall screens the grown table covers it
-        // entirely. Lift it just above the table (still below the sync icon, which
-        // is later in the order and rides on the button).
-        view.insertSubview(btnSync, aboveSubview: tableView)
-
-        lblBadge.layer.cornerRadius = lblBadge.frame.width / 2
-        lblBadge.clipsToBounds = true
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = Theme.background
+        tableView.separatorColor = Theme.separator
+        tableView.register(ReviewEntryCell.self, forCellReuseIdentifier: ReviewEntryCell.reuseID)
+        tableView.register(ReviewSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: ReviewSectionHeaderView.reuseID)
 
         AutoSyncController.shared.showToastOnCompletion = true
         updateSyncButtonState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        loadingView.frame.size = view.frame.size
+        super.viewWillAppear(animated)
         loadData()
         updateSyncBadge()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        super.viewDidDisappear(animated)
         AutoSyncController.shared.showToastOnCompletion = true
     }
 
-    // The XIB lays the bottom action bar (Sync button + export/sync icons + badge
-    // + spinner) with springs that leave it under / below the home indicator on
-    // modern devices, and the shared safe-area pass actually pushes it *down*
-    // (the Sync button is just under the 85%-width bottom-bar threshold). Lift the
-    // whole bottom cluster uniformly so its lowest edge clears the safe area.
-    // Works on the live frames (no outlets needed for the icons) and only ever
-    // moves things up. NSLog instrumentation stays until verified on device.
-    private func liftBottomBarAboveHomeIndicator() {
-        var bottomInset = view.safeAreaInsets.bottom
-        if bottomInset <= 0.5 { bottomInset = view.window?.safeAreaInsets.bottom ?? 0 }
-        guard bottomInset > 0.5 else { return }
+    // MARK: - UI
 
-        let safeBottom = view.bounds.height - bottomInset - 8 // small gap above the indicator
-        let fullScreen = view.bounds
+    private func buildUI() {
+        titleLabel.font = Theme.Font.brand
+        titleLabel.textColor = Theme.label
+        titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        // 1) Lift the whole bottom band so its lowest edge clears the safe area.
-        var cluster: [UIView] = []
-        var lowestMaxY: CGFloat = 0
-        for sub in view.subviews {
-            if sub == tableView { continue }
-            if sub is UIImageView && sub.frame == fullScreen { continue } // background
-            if sub.frame.origin.y > view.bounds.height * 0.7 {            // bottom band
-                cluster.append(sub)
-                lowestMaxY = max(lowestMaxY, sub.frame.maxY)
-            }
-        }
-        guard !cluster.isEmpty else { return }
-        let delta = safeBottom - lowestMaxY
-        if delta < -0.5 { for sub in cluster { sub.frame.origin.y += delta } }
+        menuBtn.setTitle("\u{2630}", for: .normal) // ☰
+        menuBtn.setTitleColor(Theme.label, for: .normal)
+        menuBtn.titleLabel?.font = .systemFont(ofSize: 24)
+        menuBtn.addTarget(self, action: #selector(onRightMenu as () -> Void), for: .touchUpInside)
+        menuBtn.widthAnchor.constraint(equalToConstant: 34).isActive = true
 
-        // 2) The shared safe-area pass treats the wide Sync button as a full-width
-        //    bottom bar and lifts it, while the narrow icons get pushed down — which
-        //    leaves the Sync button stranded ~70pt above the rest of the bar.
-        //    Re-align it to the bar by matching the share button's vertical frame
-        //    (same top and height) so the two read as one unified bottom bar.
-        if let shareButton = cluster.first(where: { $0 is UIButton && $0 != btnSync }) {
-            btnSync.frame.origin.y = shareButton.frame.origin.y
-            btnSync.frame.size.height = shareButton.frame.size.height
-        } else {
-            btnSync.frame.origin.y = safeBottom - btnSync.frame.height
-        }
+        exportButton.setTitle("Export", for: .normal)
+        exportButton.setTitleColor(Theme.tint, for: .normal)
+        exportButton.titleLabel?.font = Theme.Font.button
+        exportButton.addTarget(self, action: #selector(onExport(_:)), for: .touchUpInside)
 
-        // The table now extends behind the bottom bar; inset it so the last rows
-        // can scroll clear of the Sync button rather than hiding under it.
-        let overlap = max(0, tableView.frame.maxY - btnSync.frame.minY)
-        if abs(tableView.contentInset.bottom - overlap) > 0.5 {
-            tableView.contentInset.bottom = overlap
-            tableView.verticalScrollIndicatorInsets.bottom = overlap
-        }
+        let headerRow = UIStackView(arrangedSubviews: [menuBtn, titleLabel, exportButton])
+        headerRow.axis = .horizontal
+        headerRow.alignment = .center
+        headerRow.spacing = 12
+
+        // Count badge pinned to the menu button's top-trailing corner.
+        badgeView.font = .systemFont(ofSize: 12, weight: .bold)
+        badgeView.textColor = .white
+        badgeView.backgroundColor = Theme.destructive
+        badgeView.textAlignment = .center
+        badgeView.layer.cornerRadius = 9
+        badgeView.clipsToBounds = true
+        badgeView.isHidden = true
+        badgeView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(badgeView)
+
+        sortButton.contentHorizontalAlignment = .left
+        sortButton.setTitleColor(Theme.label, for: .normal)
+        sortButton.titleLabel?.font = Theme.Font.field
+        sortButton.backgroundColor = Theme.fieldFill
+        sortButton.layer.cornerRadius = Theme.Metric.cornerRadius
+        sortButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        sortButton.heightAnchor.constraint(equalToConstant: Theme.Metric.fieldHeight).isActive = true
+        sortButton.addTarget(self, action: #selector(onSortTapped), for: .touchUpInside)
+
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        progressBar.progressTintColor = Theme.tint
+        progressBar.trackTintColor = Theme.separator
+        progressBar.isHidden = true
+
+        syncButton.addTarget(self, action: #selector(onSubmit(_:)), for: .touchUpInside)
+
+        let bottomBar = UIStackView(arrangedSubviews: [progressBar, syncButton])
+        bottomBar.axis = .vertical
+        bottomBar.spacing = 8
+
+        let topStack = UIStackView(arrangedSubviews: [headerRow, sortButton])
+        topStack.axis = .vertical
+        topStack.spacing = 12
+        topStack.translatesAutoresizingMaskIntoConstraints = false
+        bottomBar.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(topStack)
+        view.addSubview(tableView)
+        view.addSubview(bottomBar)
+
+        let guide = view.safeAreaLayoutGuide
+        let inset = Theme.Metric.horizontalInset
+        NSLayoutConstraint.activate([
+            topStack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12),
+            topStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
+            topStack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
+
+            tableView.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 12),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor, constant: -8),
+
+            bottomBar.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
+            bottomBar.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
+            bottomBar.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12),
+
+            badgeView.topAnchor.constraint(equalTo: menuBtn.topAnchor, constant: -4),
+            badgeView.leadingAnchor.constraint(equalTo: menuBtn.trailingAnchor, constant: -14),
+            badgeView.heightAnchor.constraint(equalToConstant: 18),
+            badgeView.widthAnchor.constraint(greaterThanOrEqualToConstant: 18),
+        ])
+    }
+
+    private func updateSortButtonTitle() {
+        sortButton.setTitle("Sort:  \(sortOptions[sortSelection])  \u{25BE}", for: .normal) // ▾
     }
 
     // MARK: - Data
@@ -171,7 +192,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
         var sortKey = "fullName"
         var ascending = true
-        switch txtSortBy.selectedRow {
+        switch sortSelection {
         case 1: sortKey = "entryTime"; ascending = false
         case 2: sortKey = "timeEntered"; ascending = false
         case 3: sortKey = "bibNumberDecimal"
@@ -184,59 +205,37 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             entries.append(sorted)
         }
 
-        lblTitle.text = course.eventName
+        titleLabel.text = course.eventName
         tableView.reloadData()
+        updateSyncButtonState()
     }
 
-    // MARK: - Loading overlay
-
-    private func showLoadingScreen() {
-        loadingView.frame.size = view.frame.size
-        view.addSubview(loadingView)
-        view.bringSubviewToFront(loadingView)
-        loadingView.alpha = 0
-        UIView.animate(withDuration: 0.5) { self.loadingView.alpha = 1 }
-    }
-
-    private func showLoadingValues() {
-        imgCheckMark.isHidden = true
-        lblSuccess.isHidden = true
-        lblYourDataIsSynced.isHidden = true
-        btnReturnToLiveEntry.frame.origin.y = progressBar.frame.maxY + 20
-
-        activityIndicator.startAnimating()
-        lblSyncing.isHidden = false
-        progressBar.isHidden = false
-
-        AutoSyncController.shared.showToastOnCompletion = false
-    }
-
-    private func showFinishLoadingValues() {
-        imgCheckMark.isHidden = false
-        lblSuccess.isHidden = false
-        lblYourDataIsSynced.isHidden = false
-        btnReturnToLiveEntry.frame.origin.y = lblSuccess.frame.maxY + 50
-
-        activityIndicator.stopAnimating()
-        lblSyncing.isHidden = true
-        progressBar.isHidden = true
+    private func unsyncedCount() -> Int {
+        guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return 0 }
+        let toSubmit = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && submitted == NIL && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
+        return toSubmit.count
     }
 
     private func updateSyncButtonState() {
         let isSyncing = AutoSyncController.shared.isSyncing
-        btnSync.isEnabled = !isSyncing
-        btnSync.alpha = isSyncing ? 0.7 : 1
-        syncIndicator.isHidden = !isSyncing
-        if isSyncing { showLoadingValues() } else { showFinishLoadingValues() }
+        progressBar.isHidden = !isSyncing
+        if isSyncing {
+            syncButton.setTitle("Syncing\u{2026}", for: .normal)
+            syncButton.isEnabled = false
+            syncButton.alpha = 0.7
+        } else {
+            let count = unsyncedCount()
+            syncButton.setTitle(ReviewSyncButton.title(unsyncedCount: count), for: .normal)
+            syncButton.isEnabled = ReviewSyncButton.isEnabled(unsyncedCount: count, isSyncing: false)
+            syncButton.alpha = syncButton.isEnabled ? 1 : 0.7
+        }
     }
 
     // MARK: - Badge
 
     override func updateSyncBadge() {
+        // super sets badgeLabel.text + hidden + shape on our badgeView label.
         super.updateSyncBadge()
-        lblBadge.isHidden = !shouldShowBadge
-        lblBadge.text = badge as String?
-        lblBadge.updateBadgeShape()
     }
 
     // MARK: - Sync manager delegate
@@ -248,14 +247,14 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     override func syncManager(_ manager: AutoSyncController, progress: CGFloat) {
         super.syncManager(manager, progress: progress)
-        progressBar.progress = Float(progress)
+        progressBar.setProgress(Float(progress), animated: true)
     }
 
     override func syncManagerDidFinishSynchronization(_ manager: AutoSyncController) {
         super.syncManagerDidFinishSynchronization(manager)
-        updateSyncButtonState()
-        if loadingView.superview != nil { showFinishLoadingValues() }
         loadData()
+        updateSyncButtonState()
+        updateSyncBadge()
     }
 
     override func syncManager(_ manager: AutoSyncController, didFinishSynchronizationWithErrors errors: [Error], alternateServer: Bool) {
@@ -273,33 +272,31 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             ostPresentAlert(title: "Unable to sync",
                             message: "Primary server returned: \(message1), alternate server: \(message2)")
         }
-
-        loadingView.removeFromSuperview()
-        showFinishLoadingValues()
         loadData()
     }
 
     // MARK: - Actions
 
-    @objc func onDoneSelectedSortBy(_ sender: Any) {
-        UserDefaults.standard.set(txtSortBy.selectedRow, forKey: "reviewScreenPicklistValue")
-        UserDefaults.standard.synchronize()
-        txtSortBy.resignFirstResponder()
-        loadData()
+    @objc private func onSortTapped() {
+        BottomSheetPicker.present(from: self, title: "Sort By", options: sortOptions,
+                                  selected: sortOptions[sortSelection]) { [weak self] choice in
+            guard let self = self, let idx = self.sortOptions.firstIndex(of: choice) else { return }
+            self.sortSelection = idx
+            UserDefaults.standard.set(idx, forKey: "reviewScreenPicklistValue")
+            UserDefaults.standard.synchronize()
+            self.updateSortButtonTitle()
+            self.loadData()
+        }
     }
 
-    @IBAction func onRightMenu(_ sender: Any) {
+    @objc func onRightMenu(_ sender: Any) {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
-    @IBAction func onReturnToLiveEntry(_ sender: Any) {
-        activityIndicator.stopAnimating()
-        loadingView.isHidden = true
-        loadingView.removeFromSuperview()
-        AppDelegate.getInstance()?.showTracker()
-    }
+    // Parameterless overload so the menu button's selector matches.
+    @objc func onRightMenu() { onRightMenu(self) }
 
-    @IBAction func onSubmit(_ sender: Any) {
+    @objc func onSubmit(_ sender: Any) {
         UIDevice.current.playInputClick()
         guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return }
 
@@ -309,12 +306,12 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             return
         }
 
+        progressBar.setProgress(0, animated: false)
         AutoSyncController.shared.syncEntries(toSubmit)
-        showLoadingScreen()
-        showLoadingValues()
+        updateSyncButtonState()
     }
 
-    @IBAction func onExport(_ sender: Any) {
+    @objc func onExport(_ sender: Any) {
         guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return }
         let toExport = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
         if toExport.isEmpty {
@@ -365,15 +362,14 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = OSTReviewSectionHeader.instanceFromNib() as? OSTReviewSectionHeader
-        header?.lblTitle.text = "\(splitTitles[section]) Entries:"
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReviewSectionHeaderView.reuseID) as? ReviewSectionHeaderView
+        header?.configure(title: "\(splitTitles[section]) Entries:")
         return header
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OSTReviewTableViewCell", for: indexPath) as! OSTReviewTableViewCell
-        cell.selectionStyle = .none
-        cell.configure(withEntry:entries[indexPath.section][indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReviewEntryCell.reuseID, for: indexPath) as! ReviewEntryCell
+        cell.configure(with: ReviewEntryDisplay(entry: entries[indexPath.section][indexPath.row]))
         return cell
     }
 
@@ -399,7 +395,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
                 }
                 editVC.creatingNew = true
                 self.present(editVC, animated: true)
-                editVC.configure(withEntry:entry)
+                editVC.configure(withEntry: entry)
             })
             present(alert, animated: true)
             return
@@ -415,6 +411,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             self?.updateSyncBadge()
         }
         present(editVC, animated: true)
-        editVC.configure(withEntry:entry)
+        editVC.configure(withEntry: entry)
     }
 }
