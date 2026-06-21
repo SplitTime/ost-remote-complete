@@ -42,7 +42,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
     private let btnStopped = UIButton(type: .custom)
     private let btnPacer = UIButton(type: .custom)
-    private let lblWithPacer = UILabel()
 
     private let lblPersonAdded = UILabel()
     private let lblRunnerInfo = UILabel()
@@ -71,6 +70,18 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     private var rightBitKey: String?
 
     private static let didRegisterBibNotification = Notification.Name("OSTRunnerTrackerViewControllerDidRegisterBibNotification")
+
+    // Hoisted so onTick (fires ~10×/s) doesn't allocate formatters each tick.
+    private static let clockFormatter: DateFormatter = {
+        let f = DateFormatter(); f.dateFormat = "HH:mm:ss"; return f
+    }()
+    private static let dayKeyFormatter: DateFormatter = {
+        let f = DateFormatter(); f.dateFormat = "yyyy-MM-dd"; return f
+    }()
+    // Weekday + 12-hour clock, matching the aid-station field view ("Fri 7:05AM").
+    private static let dayClockFormatter: DateFormatter = {
+        let f = DateFormatter(); f.dateFormat = "EEE h:mma"; return f
+    }()
 
     // MARK: - Auto Sync status strip
 
@@ -141,9 +152,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self,
-                                     selector: #selector(onTick(_:)), userInfo: nil, repeats: true)
-
         // Embedded pad (not an inputView), so playInputClick() can't fire —
         // play the click directly so key taps are audible on the timing screen.
         numberPad.tapSound = .alwaysClick
@@ -163,11 +171,14 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
         configureEntryButtons()
         configurePacerToggle()
+        startClock()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: AutoSyncController.statusChangedNotification, object: nil)
+        timer?.invalidate()
+        timer = nil
     }
 
     override func viewDidLayoutSubviews() {
@@ -476,7 +487,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
     private func configurePacerToggle() {
         let monitors = CurrentCourse.getCurrentCourse()?.monitorPacers?.boolValue == true
-        lblWithPacer.isHidden = !monitors
         btnPacer.isHidden = !monitors
     }
 
@@ -501,16 +511,21 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         }
     }
 
-    @objc func onTick(_ timer: Timer) {
+    /// Runs only while the screen is visible (started in viewWillAppear, invalidated
+    /// in viewWillDisappear). Block-based with [weak self] so it never retains the VC.
+    private func startClock() {
+        timer?.invalidate()
+        onTick() // populate immediately so the clock doesn't flash empty on appear
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            self?.onTick()
+        }
+    }
+
+    private func onTick() {
         let date = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:mm:ss"
-        lblTime.text = timeFormatter.string(from: date)
-
-        let dayFormatter = DateFormatter()
-        dayFormatter.dateFormat = "yyyy-MM-dd"
-        dayString = dayFormatter.string(from: date)
-
+        lblTime.text = Self.clockFormatter.string(from: date)
+        lblTimeOfTheDay.text = Self.dayClockFormatter.string(from: date)
+        dayString = Self.dayKeyFormatter.string(from: date)
         entryDateTime = date
     }
 
