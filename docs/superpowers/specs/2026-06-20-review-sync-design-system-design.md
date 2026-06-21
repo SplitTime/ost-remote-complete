@@ -73,9 +73,9 @@ A vertical structure pinned to `view.safeAreaLayoutGuide`:
 - Leading: existing menu/hamburger button (`onRightMenu`), with the unsynced-count
   badge overlaid on it (replaces `ostPositionBadgeAtMenu` with a constrained badge).
 - Center/leading title: event name (`Theme.Font.title`-scale, `Theme.label`).
-- Trailing: **Export** control — `UIButton` with SF Symbol `square.and.arrow.up`,
-  tinted `Theme.tint`. Plain button (no `UIMenu`; iOS 12-safe). Calls the existing
-  `onExport`.
+- Trailing: **Export** control — a plain text `UIButton` titled "Export", tinted
+  `Theme.tint` (SF Symbols are iOS 13+, below the iOS 12 floor; no `UIMenu`).
+  Calls the existing `onExport`.
 - Sort control: a tappable field/row showing `Sort: <current>` with a trailing
   chevron. Tapping presents `BottomSheetPicker.present(from:title:"Sort By",
   options:["Name","Time Displayed","Time Entered","Bib #"], selected:<current>,
@@ -116,9 +116,9 @@ legacy cell did:
 - **Unsynced, found:** `Theme.label`.
 - **Unsynced, bib not found:** name in `Theme.destructive`, bold — preserves the
   current "Bib not found" emphasis.
-- Pacer/stopped icons keep their existing asset images for the non-synced state, or
-  are migrated to tinted SF Symbols; either is acceptable as long as visibility
-  toggling matches today (`!withPacer` / `!stoppedHere` hidden).
+- Pacer/stopped icons keep their existing asset images (green variants when synced,
+  blue/red otherwise), with visibility toggling matching today (`!withPacer` /
+  `!stoppedHere` hidden). SF Symbols are not used (iOS 12 floor).
 
 Tapping a row keeps today's behavior exactly: syncing-entry guard alert, the
 "already synced → create replacement?" flow, and the normal edit path — all via the
