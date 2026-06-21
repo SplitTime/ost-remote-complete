@@ -26,10 +26,10 @@ struct ReviewEntryDisplay: Equatable {
         let resolvedName = (fullName?.isEmpty ?? true) ? "Bib not found" : fullName!
         self.name = resolvedName
         self.isBibMissing = (resolvedName == "Bib not found")
-        if let bibNumber = bibNumber, bibNumber != "-1" {
+        if let bibNumber = bibNumber, !bibNumber.isEmpty, bibNumber != "-1" {
             self.bib = "#\(bibNumber)"
         } else {
-            self.bib = nil
+            self.bib = nil // missing / empty / "-1" placeholder → no bib chip (not a lone "#")
         }
         self.inOut = (bitKey ?? "").capitalized
         self.isSynced = submitted

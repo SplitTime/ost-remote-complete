@@ -23,8 +23,6 @@
 #import "UILabel+Extension.h"
 #import "NSError+OSTErrors.h"
 // Cross Check (Phase 2) Swift screen dependencies
-#import "OSTCrossCheckCell.h"
-#import "OSTCrossCheckHeader.h"
 #import "OSTCheckmarkView.h"
 #import "CrossCheckEntriesModel.h"
 #import "OSTNetworkManager+Entries.h"

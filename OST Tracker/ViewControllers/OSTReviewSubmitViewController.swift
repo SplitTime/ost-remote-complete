@@ -41,6 +41,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     private let sortOptions = ["Name", "Time Displayed", "Time Entered", "Bib #"]
     private var sortSelection = 2 // default: Time Entered
+    private static let sortSelectionDefaultsKey = "reviewScreenPicklistValue"
 
     // MARK: - Lifecycle
 
@@ -53,7 +54,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         menuButton = menuBtn
         badgeLabel = badgeView
 
-        if let stored = UserDefaults.standard.object(forKey: "reviewScreenPicklistValue") as? NSNumber {
+        if let stored = UserDefaults.standard.object(forKey: Self.sortSelectionDefaultsKey) as? NSNumber {
             sortSelection = stored.intValue
         }
         updateSortButtonTitle()
@@ -185,9 +186,9 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         guard let course = CurrentCourse.getCurrentCourse(), let courseId = course.eventId else { return }
 
         let all = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@", courseId)) as? [EntryModel]) ?? []
-        var titlesSet = Set<String>()
-        for entry in all { if let name = entry.splitName { titlesSet.insert(name) } }
-        var titles = Array(titlesSet)
+        // Group once in memory instead of re-fetching per split (was N+1 fetches).
+        let bySplit = Dictionary(grouping: all) { $0.splitName ?? "" }
+        var titles = Array(bySplit.keys.filter { !$0.isEmpty })
 
         // Surface the current aid station's split at the top.
         if let currentSplit = course.splitName, let idx = titles.firstIndex(of: currentSplit) {
@@ -206,7 +207,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         }
 
         for title in splitTitles {
-            let splitEntries = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && splitName == %@", courseId, title)) as? [EntryModel]) ?? []
+            let splitEntries = bySplit[title] ?? []
             let sorted = (splitEntries as NSArray).sortedArray(using: [NSSortDescriptor(key: sortKey, ascending: ascending)]) as? [EntryModel] ?? splitEntries
             entries.append(sorted)
         }
@@ -216,11 +217,15 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         updateSyncButtonState()
     }
 
-    private func unsyncedCount() -> Int {
-        guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return 0 }
-        let toSubmit = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && submitted == NIL && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
-        return toSubmit.count
+    /// The entries the Sync button submits for the current course: everything
+    /// unsynced. Single source of truth for the Sync count, the Submit action, and
+    /// (matching predicate) the base class's badge count.
+    private func entriesToSync() -> [EntryModel] {
+        guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return [] }
+        return (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && submitted == NIL", courseId)) as? [EntryModel]) ?? []
     }
+
+    private func unsyncedCount() -> Int { entriesToSync().count }
 
     private func updateSyncButtonState() {
         let isSyncing = AutoSyncController.shared.isSyncing
@@ -291,8 +296,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
                                   selected: sortOptions[sortSelection]) { [weak self] choice in
             guard let self = self, let idx = self.sortOptions.firstIndex(of: choice) else { return }
             self.sortSelection = idx
-            UserDefaults.standard.set(idx, forKey: "reviewScreenPicklistValue")
-            UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(idx, forKey: Self.sortSelectionDefaultsKey)
             self.updateSortButtonTitle()
             self.loadData()
         }
@@ -309,9 +313,8 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     @objc func onSubmit(_ sender: Any) {
         UIDevice.current.playInputClick()
-        guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return }
 
-        let toSubmit = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && submitted == NIL && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
+        let toSubmit = entriesToSync()
         if toSubmit.isEmpty {
             ostPresentAlert(title: "", message: noEntriesEntered ? "No times have been entered." : "All times have been synced.")
             return
@@ -324,7 +327,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     @objc func onExport(_ sender: Any) {
         guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return }
-        let toExport = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
+        let toExport = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@", courseId)) as? [EntryModel]) ?? []
         if toExport.isEmpty {
             ostPresentAlert(title: "", message: noEntriesEntered ? "No times have been entered." : "All times have been synced.")
             return
@@ -388,7 +391,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         let entry = entries[indexPath.section][indexPath.row]
 
         if AutoSyncController.shared.isSyncingEntry(entry) {
-            ostPresentAlert(title: "Unable to edit time", message: "Time is been synced.")
+            ostPresentAlert(title: "Unable to edit time", message: "Time is being synced.")
             return
         }
 

@@ -1,424 +1,361 @@
-//
 //  OSTCrossCheckViewController.swift
 //  OST Tracker
 //
-//  Migrated from Objective-C (Phase 2). Keeps the CrossCheck.storyboard (the VC
-//  resolves via @objc) and the Obj-C cell/header/footer/checkmark classes. Still
-//  uses MagicalRecord + the Obj-C network manager via bridging. DejalBezelActivity
-//  View replaced by the shared native blocking spinner. The iPhone-X/XR-only +7pt
-//  nudge was dropped (never fires on the iOS-12 device fleet).
-//
+//  Programmatic DesignSystem rebuild of the aid-station Cross Check board.
+//  Top "Still out — Expected" list + Recorded/Dropped/Not-expected summary rows;
+//  tap a bib for the action sheet, tap a summary row to drill in. Bulk-select and
+//  the storyboard/Obj-C cell stack are retired. CoreData operations preserved.
 
 import UIKit
 import CoreData
 
 @objc(OSTCrossCheckViewController)
-class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource, UITableViewDelegate {
 
-    private enum Filter: Int {
-        case all = 0, recorded = 1, droppedHere = 2, expected = 3, notExpected = 4
-    }
+    // Sections
+    private enum Section: Int, CaseIterable { case expected = 0, summary = 1 }
 
-    // MARK: - Outlets
-    @IBOutlet weak var popupOverlay: UIView!
-    @IBOutlet weak var popupView: UIView!
-    @IBOutlet weak var btnReviewEntries: UIButton!
-    @IBOutlet weak var lblPupupEntryName: UILabel!
-    @IBOutlet weak var bulkSelectMenuView: UIView!
-    @IBOutlet weak var footerViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var btnBulkSelect: UIButton!
-    @IBOutlet weak var swchPopupExpected: UISwitch!
-    @IBOutlet weak var popupCrossCheckContainer: UIView!
-    @IBOutlet weak var popupSegmentedView: UIView!
-    @IBOutlet weak var crossCheckCollection: UICollectionView!
-    @IBOutlet weak var popupCellStatusLabel: UILabel!
-    @IBOutlet weak var popupAidIcon: UIImageView!
-    @IBOutlet weak var popupBibNumber: UILabel!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var popupDroppedHereIcon: UIImageView!
-    @IBOutlet weak var btnRightMenu: UIButton!
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet weak var selectedFilterView: OSTCheckmarkView!
-    @IBOutlet var checkMarkFilters: [OSTCheckmarkView]!
+    // UI
+    private let titleLabel = UILabel()
+    private let subtitleLabel = UILabel()
+    private let menuBtn = UIButton(type: .system)
+    private let badgeView = UILabel()
+    private let inOutControl = UISegmentedControl(items: ["In", "Out"])
+    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let reviewButton = PrimaryButton(title: "Review \u{2192}", role: .primary)
 
-    // MARK: - State
+    // Data
     private var efforts: [EffortModel] = []
-    private var currentEfforts: [EffortModel] = []
-    private var popupEffort: EffortModel?
-    private var popupCrossCheckModel: CrossCheckEntriesModel?
-    private var bulkSelect = false
+    private var board = CrossCheckBoard(expected: [], recorded: [], droppedHere: [], notExpected: [])
     private var splitName = ""
-    private var filter: Filter = .all
+    private var hasInOut = false
+    private var inOutNames: [String] = []   // [inSplitName, outSplitName] when hasInOut
+
+    // Summary rows shown in the summary section, in order.
+    private var summaryItems: [(status: CrossCheckStatus, title: String, count: Int, rows: [CrossCheckRow])] {
+        [
+            (.recorded,    "Recorded",     board.recordedCount,    board.recorded),
+            (.droppedHere, "Dropped here", board.droppedHereCount, board.droppedHere),
+            (.notExpected, "Not expected", board.notExpectedCount, board.notExpected),
+        ]
+    }
 
     // MARK: - Lifecycle
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = Theme.background
+        buildUI()
+
+        menuButton = menuBtn
+        badgeLabel = badgeView
+
+        resolveSplitName()
+        configureInOutControl()
+
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
+        updateSyncBadge()
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        ostApplySafeAreaFix()
         ostPositionBadgeAtMenu()
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        popupView.frame.origin.y = view.frame.maxY
+    // MARK: - UI
 
-        adjustCrossCheckCollectionBottomInset()
+    private func buildUI() {
+        titleLabel.text = "Cross Check"
+        titleLabel.font = Theme.Font.brand
+        titleLabel.textColor = Theme.label
 
-        filter = Filter(rawValue: selectedFilterView.tag) ?? .all
-        selectedFilterView.isSelected = true
+        subtitleLabel.font = Theme.Font.field
+        subtitleLabel.textColor = Theme.secondaryLabel
 
-        popupCrossCheckContainer.layer.cornerRadius = 6
-        let currentCourseSplitName = CurrentCourse.getCurrentCourse()?.splitName
-        splitName = currentCourseSplitName ?? ""
+        menuBtn.setTitle("Menu \u{2630}", for: .normal)
+        menuBtn.setTitleColor(Theme.tint, for: .normal)
+        menuBtn.titleLabel?.font = Theme.Font.button
+        menuBtn.addTarget(self, action: #selector(onMenu), for: .touchUpInside)
 
-        for entrie in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
-            let entries = entrie["entries"] as? [[String: Any]] ?? []
-            if entries.count == 1 { continue }
-            if (entrie["title"] as? String) == currentCourseSplitName {
+        badgeView.font = .systemFont(ofSize: 12, weight: .bold)
+        badgeView.textColor = .white
+        badgeView.backgroundColor = Theme.destructive
+        badgeView.textAlignment = .center
+        badgeView.layer.cornerRadius = 9
+        badgeView.clipsToBounds = true
+        badgeView.isHidden = true
+        badgeView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(badgeView)
+
+        inOutControl.addTarget(self, action: #selector(onInOutChanged), for: .valueChanged)
+        inOutControl.selectedSegmentIndex = 0
+
+        let headerRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), menuBtn])
+        headerRow.axis = .horizontal
+        headerRow.alignment = .center
+        headerRow.spacing = 12
+
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = Theme.background
+        tableView.separatorColor = Theme.separator
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 56
+        tableView.register(CrossCheckExpectedCell.self, forCellReuseIdentifier: CrossCheckExpectedCell.reuseID)
+        tableView.register(CrossCheckSummaryCell.self, forCellReuseIdentifier: CrossCheckSummaryCell.reuseID)
+        tableView.register(ReviewSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: ReviewSectionHeaderView.reuseID)
+
+        reviewButton.addTarget(self, action: #selector(onReview), for: .touchUpInside)
+
+        let topStack = UIStackView(arrangedSubviews: [headerRow, subtitleLabel, inOutControl])
+        topStack.axis = .vertical
+        topStack.spacing = 10
+        topStack.translatesAutoresizingMaskIntoConstraints = false
+
+        let bottomBar = UIStackView(arrangedSubviews: [reviewButton])
+        bottomBar.axis = .vertical
+        bottomBar.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(topStack)
+        view.addSubview(tableView)
+        view.addSubview(bottomBar)
+
+        let guide = view.safeAreaLayoutGuide
+        let inset = Theme.Metric.horizontalInset
+        NSLayoutConstraint.activate([
+            topStack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12),
+            topStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
+            topStack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
+
+            tableView.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 12),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor, constant: -8),
+
+            bottomBar.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
+            bottomBar.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
+            bottomBar.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12),
+
+            badgeView.topAnchor.constraint(equalTo: menuBtn.topAnchor, constant: -4),
+            badgeView.leadingAnchor.constraint(equalTo: menuBtn.trailingAnchor, constant: -14),
+            badgeView.heightAnchor.constraint(equalToConstant: 18),
+            badgeView.widthAnchor.constraint(greaterThanOrEqualToConstant: 18),
+        ])
+    }
+
+    // MARK: - Split / In-Out resolution (ported from legacy)
+
+    private func resolveSplitName() {
+        let currentName = CurrentCourse.getCurrentCourse()?.splitName
+        splitName = currentName ?? ""
+        inOutNames = []
+        hasInOut = false
+        for group in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
+            let entries = group["entries"] as? [[String: Any]] ?? []
+            if entries.count < 2 { continue }
+            if (group["title"] as? String) == currentName {
                 let k0 = entries[0]["subSplitKind"] as? String
                 let k1 = entries[1]["subSplitKind"] as? String
                 if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") {
-                    splitName = entries[0]["splitName"] as? String ?? splitName
+                    hasInOut = true
+                    let n0 = entries[0]["splitName"] as? String ?? splitName
+                    let n1 = entries[1]["splitName"] as? String ?? splitName
+                    inOutNames = [n0, n1]
+                    if splitName != n0 && splitName != n1 { splitName = n0 }
                 }
             }
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        adjustCrossCheckCollectionBottomInset()
+    private func configureInOutControl() {
+        inOutControl.isHidden = !hasInOut
+        if hasInOut, inOutNames.count == 2 {
+            inOutControl.setTitle(inOutNames[0], forSegmentAt: 0)
+            inOutControl.setTitle(inOutNames[1], forSegmentAt: 1)
+            inOutControl.selectedSegmentIndex = (splitName == inOutNames[1]) ? 1 : 0
+        }
+    }
+
+    @objc private func onInOutChanged() {
+        guard hasInOut, inOutNames.count == 2 else { return }
+        splitName = inOutNames[inOutControl.selectedSegmentIndex]
+        for effort in efforts { effort.clearVariables() }
         reloadData()
     }
 
     // MARK: - Data
 
-    private func fetchNotExpected(completion: @escaping () -> Void) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        OSTBackend.shared.fetchNotExpected(groupId: CurrentCourse.getCurrentCourse()?.eventGroupId ?? "",
-                                           splitName: splitName) { [weak self] object, error in
-            guard let self = self else { return }
-            if error == nil,
-               let bibNumbers = (object as? NSDictionary)?.value(forKeyPath: "data.bib_numbers") as? [Any] {
-                self.bulkNotExpected(bibNumbers: bibNumbers)
-            }
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            completion()
-        }
-    }
-
     private func reloadData() {
         ostShowBlockingSpinner()
-
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.efforts = (EffortModel.mr_findAllSorted(by: "bibNumber", ascending: true,
-                                                         with: NSPredicate(format: "bibNumber != nil")) as? [EffortModel]) ?? []
-            // Fold the not-expected fetch into this reload: mark not-expected first,
-            // then filter and render exactly once. The old code fired this fetch
-            // and-forgot, so its async completion reloaded the collection after the
-            // spinner had hidden and the filter had been applied — racing and
-            // clobbering the rendered view.
+                              with: NSPredicate(format: "bibNumber != nil")) as? [EffortModel]) ?? []
             self.fetchNotExpected { [weak self] in
                 guard let self = self else { return }
-                var entriesThatShouldBeHere: [EffortModel] = []
+                var here: [EffortModel] = []
                 for effort in self.efforts {
-                    if effort.checkIfEffortShouldBe(inSplit: CurrentCourse.getCurrentCourse()?.splitName, selectedSplitName: self.splitName) {
+                    if effort.checkIfEffortShouldBe(inSplit: CurrentCourse.getCurrentCourse()?.splitName,
+                                                    selectedSplitName: self.splitName) {
                         _ = effort.expected(withSplitName: self.splitName)
-                        entriesThatShouldBeHere.append(effort)
+                        here.append(effort)
                     }
                 }
-                self.efforts = entriesThatShouldBeHere
-                self.applyFilter()                 // setFiltersQuantities + collection reload
+                self.efforts = here
+                self.board = CrossCheckPresentation.build(from: here.map { self.facts(for: $0) })
+                self.refreshSubtitle()
+                self.tableView.reloadData()
                 self.ostHideBlockingSpinner()
             }
         }
     }
 
-    private func recordedEfforts(droppedHere: Bool) -> [EffortModel] {
-        var filtered: [EffortModel] = []
+    private func facts(for effort: EffortModel) -> EffortFacts {
+        let entries = effort.entries(forSplitName: splitName) ?? []
+        let hasEntries = entries.count > 0
+        let isStopped = effort.stoppedHere?.boolValue ?? false
+        let expectedValue = effort.expected(withSplitName: splitName)
+        let isExpected = (expectedValue == nil) || (expectedValue == NSNumber(value: true))
+        return EffortFacts(bib: effort.bibNumber?.stringValue ?? "",
+                           name: effort.fullName ?? "",
+                           hasEntries: hasEntries,
+                           isStopped: isStopped,
+                           isExpected: isExpected,
+                           time: nil)
+    }
+
+    private func refreshSubtitle() {
+        let station = CurrentCourse.getCurrentCourse()?.splitName ?? ""
+        let total = board.expectedCount + board.recordedCount + board.droppedHereCount + board.notExpectedCount
+        subtitleLabel.text = "\(station) \u{00B7} \(total) runners"
+    }
+
+    private func fetchNotExpected(completion: @escaping () -> Void) {
+        OSTBackend.shared.fetchNotExpected(groupId: CurrentCourse.getCurrentCourse()?.eventGroupId ?? "",
+                                           splitName: splitName) { [weak self] object, error in
+            guard let self = self else { completion(); return }
+            if error == nil,
+               let bibNumbers = (object as? NSDictionary)?.value(forKeyPath: "data.bib_numbers") as? [Any] {
+                self.applyServerNotExpected(bibNumbers: bibNumbers)
+            }
+            completion()
+        }
+    }
+
+    // Server-driven not-expected marking (ported from legacy bulkNotExpected).
+    private func applyServerNotExpected(bibNumbers: [Any]) {
         for effort in efforts {
-            let entries = effort.entries(forSplitName: splitName) ?? []
-            if entries.count > 0 {
-                if let stopped = effort.stoppedHere, stopped.boolValue {
-                    if droppedHere { filtered.append(effort) }
-                } else {
-                    if !droppedHere { filtered.append(effort) }
-                }
-            }
-        }
-        return filtered
-    }
-
-    private func nonRecordedEfforts(includeExpected: Bool) -> [EffortModel] {
-        var filtered: [EffortModel] = []
-        for effort in efforts {
-            let entries = effort.entries(forSplitName: splitName) ?? []
-            if entries.count == 0 {
-                let value = effort.expected(withSplitName: splitName)
-                let expected = value == nil || value == NSNumber(value: true)
-                if (includeExpected && expected) || (!includeExpected && !expected) {
-                    filtered.append(effort)
-                }
-            }
-        }
-        return filtered
-    }
-
-    private func setFiltersQuantities() {
-        for checkMark in checkMarkFilters {
-            switch Filter(rawValue: checkMark.tag) {
-            case .all:         checkMark.number = "(\(efforts.count))"
-            case .recorded:    checkMark.number = "(\(recordedEfforts(droppedHere: false).count))"
-            case .droppedHere: checkMark.number = "(\(recordedEfforts(droppedHere: true).count))"
-            case .expected:    checkMark.number = "(\(nonRecordedEfforts(includeExpected: true).count))"
-            case .notExpected: checkMark.number = "(\(nonRecordedEfforts(includeExpected: false).count))"
-            case .none:        break
-            }
-        }
-    }
-
-    private func applyFilter() {
-        switch filter {
-        case .all:         currentEfforts = efforts
-        case .recorded:    currentEfforts = recordedEfforts(droppedHere: false)
-        case .droppedHere: currentEfforts = recordedEfforts(droppedHere: true)
-        case .expected:    currentEfforts = nonRecordedEfforts(includeExpected: true)
-        case .notExpected: currentEfforts = nonRecordedEfforts(includeExpected: false)
-        }
-        setFiltersQuantities()
-        crossCheckCollection.reloadData()
-    }
-
-    // MARK: - UICollectionView
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentEfforts.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OSTCrossCheckCell", for: indexPath) as! OSTCrossCheckCell
-        cell.splitName = splitName
-        cell.configure(withEffort: currentEfforts[indexPath.row])
-
-        if bulkSelect {
-            let status = cell.lblStatus.text
-            cell.noBulkSelectView.isHidden = (status == "Expected" || status == "Not Expected")
-        }
-        if currentEfforts[indexPath.row].bulkSelected {
-            cell.noBulkSelectView.isHidden = false
-        }
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if bulkSelect {
-            let effort = currentEfforts[indexPath.row]
-            guard let cell = collectionView.cellForItem(at: indexPath) as? OSTCrossCheckCell else { return }
-            let status = cell.lblStatus.text
-            if status != "Expected" && status != "Not Expected" { return }
-            effort.bulkSelected.toggle()
-            cell.configure(withEffort: effort)
-            return
-        }
-
-        popupEffort = currentEfforts[indexPath.row]
-        lblPupupEntryName.text = popupEffort?.fullName
-
-        guard let cell = collectionView.cellForItem(at: indexPath) as? OSTCrossCheckCell else { return }
-        popupAidIcon.isHidden = cell.imgAid.isHidden
-        popupDroppedHereIcon.isHidden = cell.imgDroppedHere.isHidden
-
-        popupCrossCheckContainer.backgroundColor = cell.backgroundColor
-        popupBibNumber.textColor = cell.lblBibNumber.textColor
-        popupCellStatusLabel.backgroundColor = cell.lblStatus.backgroundColor
-        popupBibNumber.text = cell.lblBibNumber.text
-        popupCellStatusLabel.text = cell.lblStatus.text
-
-        if popupCellStatusLabel.text == "Expected" || popupCellStatusLabel.text == "Not Expected" {
-            popupSegmentedView.isHidden = false
-            btnReviewEntries.isHidden = true
-            swchPopupExpected.isOn = (popupCellStatusLabel.text == "Expected")
-        } else {
-            popupSegmentedView.isHidden = true
-            btnReviewEntries.isHidden = false
-        }
-        showPopup()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "OSTCrossCheckHeader", for: indexPath) as! OSTCrossCheckHeader
-
-            headerView.lblStationName.text = CurrentCourse.getCurrentCourse()?.splitName
-            headerView.segLocation.isHidden = true
-            headerView.lblStationName.isHidden = false
-
-            for entrie in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
-                let entries = entrie["entries"] as? [[String: Any]] ?? []
-                if entries.count == 1 { continue }
-                if (entrie["title"] as? String) == CurrentCourse.getCurrentCourse()?.splitName {
-                    let k0 = entries[0]["subSplitKind"] as? String
-                    let k1 = entries[1]["subSplitKind"] as? String
-                    if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") {
-                        headerView.segLocation.isHidden = false
-                        headerView.lblStationName.isHidden = true
-                        headerView.segLocation.setTitle(entries[0]["splitName"] as? String, forSegmentAt: 0)
-                        headerView.segLocation.setTitle(entries[1]["splitName"] as? String, forSegmentAt: 1)
-                        headerView.splitChange = { [weak self] newSplitName in
-                            guard let self = self else { return }
-                            self.splitName = newSplitName ?? ""
-                            for effort in self.efforts { effort.clearVariables() }
-                            self.reloadData()
-                        }
-                    } else {
-                        headerView.segLocation.isHidden = true
-                        headerView.lblStationName.isHidden = false
-                    }
-                }
-            }
-            return headerView
-        }
-
-        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "OSTCrossCheckFooter", for: indexPath)
-    }
-
-    // MARK: - Actions
-
-    @IBAction func onFilter(_ checkmark: OSTCheckmarkView) {
-        selectedFilterView?.isSelected = false
-        filter = Filter(rawValue: checkmark.tag) ?? .all
-        applyFilter()
-        selectedFilterView = checkmark
-    }
-
-    @IBAction func changedSwich(_ sender: Any) {
-    }
-
-    @IBAction func onMenu(_ sender: Any) {
-        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
-    }
-
-    @IBAction func onBulkSelect(_ sender: Any) {
-        for effort in efforts { effort.bulkSelected = false }
-
-        if bulkSelect {
-            bulkSelect = false
-            footerViewHeightConstraint.constant = 82
-            btnBulkSelect.setTitle("Bulk Select", for: .normal)
-            bulkSelectMenuView.isHidden = true
-        } else {
-            bulkSelect = true
-            footerViewHeightConstraint.constant = 132
-            btnBulkSelect.setTitle("Cancel", for: .normal)
-            bulkSelectMenuView.isHidden = false
-        }
-
-        footerView.frame.origin.y = view.frame.height - footerView.frame.height
-        adjustCrossCheckCollectionBottomInset()
-        setFiltersQuantities()
-        crossCheckCollection.reloadData()
-    }
-
-    private func adjustCrossCheckCollectionBottomInset() {
-        crossCheckCollection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: footerView.frame.height, right: 0)
-    }
-
-    @IBAction func onClosePopup(_ sender: Any) {
-        if !swchPopupExpected.isHidden {
-            if let model = popupCrossCheckModel {
-                if swchPopupExpected.isOn {
-                    model.mr_deleteEntity()
-                    saveContext()
-                    popupEffort?.expected = NSNumber(value: true)
-                }
-            } else if !swchPopupExpected.isOn {
-                if let entry = CrossCheckEntriesModel.mr_createEntity() as? CrossCheckEntriesModel {
-                    entry.bibNumber = popupEffort?.bibNumber?.stringValue
-                    entry.splitName = splitName
-                    entry.courseId = CurrentCourse.getCurrentCourse()?.eventId
-                    saveContext()
-                    popupEffort?.expected = NSNumber(value: false)
-                }
-            }
-        }
-        setFiltersQuantities()
-        crossCheckCollection.reloadData()
-        hidePopup()
-    }
-
-    private func hidePopup() {
-        UIView.animate(withDuration: 0.25) {
-            self.popupView.frame.origin.y = self.view.frame.maxY
-            self.popupOverlay.alpha = 0
-        }
-    }
-
-    @IBAction func onBulkExpected(_ sender: Any) {
-        for effort in efforts where effort.bulkSelected {
-            if let bib = effort.bibNumber?.stringValue,
-               let entry = CrossCheckEntriesModel.mr_findFirst(with: crossCheckPredicate(bib: bib)) as? CrossCheckEntriesModel {
-                entry.mr_deleteEntity()
-                saveContext()
-            }
-            effort.expected = NSNumber(value: true)
-        }
-        applyFilter()
-        onBulkSelect(self)
-    }
-
-    private func bulkNotExpected(bibNumbers: [Any]) {
-        var notExpected: [EffortModel] = []
-        for effort in efforts {
-            // Recorded/Dropped efforts keep their current state regardless of the list.
             if (effort.entries(forSplitName: splitName) ?? []).count > 0 { continue }
-
-            if let bib = effort.bibNumber, (bibNumbers as NSArray).contains(bib) {
-                notExpected.append(effort)
-            } else if let bib = effort.bibNumber?.stringValue,
-                      let entry = CrossCheckEntriesModel.mr_findFirst(with: crossCheckPredicate(bib: bib)) as? CrossCheckEntriesModel {
-                entry.mr_deleteEntity()
-                saveContext()
-                effort.expected = NSNumber(value: true)
-            }
-        }
-        bulkNotExpected(efforts: notExpected)
-    }
-
-    private func bulkNotExpected(efforts: [EffortModel]) {
-        for effort in efforts {
-            guard let bib = effort.bibNumber?.stringValue else { continue }
-            if CrossCheckEntriesModel.mr_findFirst(with: crossCheckPredicate(bib: bib)) as? CrossCheckEntriesModel == nil {
-                if let entry = CrossCheckEntriesModel.mr_createEntity() as? CrossCheckEntriesModel {
-                    entry.bibNumber = bib
+            guard let bibStr = effort.bibNumber?.stringValue else { continue }
+            let inList = (effort.bibNumber != nil) && (bibNumbers as NSArray).contains(effort.bibNumber!)
+            if inList {
+                if CrossCheckEntriesModel.mr_findFirst(with: crossCheckPredicate(bib: bibStr)) as? CrossCheckEntriesModel == nil,
+                   let entry = CrossCheckEntriesModel.mr_createEntity() as? CrossCheckEntriesModel {
+                    entry.bibNumber = bibStr
                     entry.splitName = splitName
                     entry.courseId = CurrentCourse.getCurrentCourse()?.eventId
                     saveContext()
                     effort.expected = NSNumber(value: false)
                 }
+            } else if let entry = CrossCheckEntriesModel.mr_findFirst(with: crossCheckPredicate(bib: bibStr)) as? CrossCheckEntriesModel {
+                entry.mr_deleteEntity()
+                saveContext()
+                effort.expected = NSNumber(value: true)
             }
         }
     }
 
-    @IBAction func onBulkNotExpected(_ sender: Any) {
-        let selected = efforts.filter { $0.bulkSelected }
-        bulkNotExpected(efforts: selected)
-        applyFilter()
-        onBulkSelect(self)
+    // MARK: - Mark expected / not-expected (ported from legacy onClosePopup)
+
+    private func setExpected(_ expected: Bool, forBib bib: String) {
+        let existing = CrossCheckEntriesModel.mr_findFirst(with: crossCheckPredicate(bib: bib)) as? CrossCheckEntriesModel
+        if expected {
+            existing?.mr_deleteEntity()
+            saveContext()
+        } else if existing == nil, let entry = CrossCheckEntriesModel.mr_createEntity() as? CrossCheckEntriesModel {
+            entry.bibNumber = bib
+            entry.splitName = splitName
+            entry.courseId = CurrentCourse.getCurrentCourse()?.eventId
+            saveContext()
+        }
+        if let effort = efforts.first(where: { $0.bibNumber?.stringValue == bib }) {
+            effort.expected = NSNumber(value: expected)
+        }
+        board = CrossCheckPresentation.build(from: efforts.map { facts(for: $0) })
+        refreshSubtitle()
+        tableView.reloadData()
     }
 
-    @IBAction func onReviewEntries(_ sender: Any) {
+    // MARK: - Actions
+
+    @objc private func onMenu() {
+        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+    }
+
+    @objc private func onReview() {
         AppDelegate.getInstance()?.showReview()
     }
 
-    private func showPopup() {
-        let bib = popupEffort?.bibNumber?.stringValue ?? ""
-        popupCrossCheckModel = CrossCheckEntriesModel.mr_findFirst(with: crossCheckPredicate(bib: bib)) as? CrossCheckEntriesModel
-        UIView.animate(withDuration: 0.25) {
-            self.popupView.frame.origin.y = self.view.frame.maxY - self.popupView.frame.height
-            self.popupOverlay.alpha = 0.3
+    private func presentSheet(for row: CrossCheckRow) {
+        CrossCheckActionSheet.present(from: self,
+                                      config: CrossCheckPresentation.sheetConfig(for: row),
+                                      onSetExpected: { [weak self] expected in self?.setExpected(expected, forBib: row.bib) },
+                                      onReviewEntries: { [weak self] in self?.onReview() })
+    }
+
+    // MARK: - UITableView
+
+    func numberOfSections(in tableView: UITableView) -> Int { Section.allCases.count }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch Section(rawValue: section)! {
+        case .expected: return board.expectedCount
+        case .summary:  return summaryItems.count
         }
     }
 
-    // MARK: - Helpers
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard Section(rawValue: section) == .expected else { return nil }
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReviewSectionHeaderView.reuseID) as? ReviewSectionHeaderView
+        header?.configure(title: "STILL OUT \u{2014} EXPECTED (\(board.expectedCount))")
+        return header
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch Section(rawValue: indexPath.section)! {
+        case .expected:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CrossCheckExpectedCell.reuseID, for: indexPath) as! CrossCheckExpectedCell
+            cell.configure(with: board.expected[indexPath.row])
+            return cell
+        case .summary:
+            let item = summaryItems[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: CrossCheckSummaryCell.reuseID, for: indexPath) as! CrossCheckSummaryCell
+            cell.configure(status: item.status, title: item.title, count: item.count)
+            return cell
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch Section(rawValue: indexPath.section)! {
+        case .expected:
+            presentSheet(for: board.expected[indexPath.row])
+        case .summary:
+            let item = summaryItems[indexPath.row]
+            let groupVC = CrossCheckGroupViewController(
+                title: item.title, rows: item.rows,
+                onSetExpected: { [weak self] row, expected in self?.setExpected(expected, forBib: row.bib) },
+                onReviewEntries: { [weak self] in self?.onReview() })
+            present(groupVC, animated: true)
+        }
+    }
+
+    // MARK: - Helpers (ported)
 
     private func crossCheckPredicate(bib: String) -> NSPredicate {
         NSPredicate(format: "bibNumber LIKE[c] %@ && courseId LIKE[c] %@ && splitName LIKE[c] %@",
@@ -426,7 +363,6 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
     }
 
     private func saveContext() {
-        NSManagedObjectContext.mr_default().processPendingChanges()
-        NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+        NSManagedObjectContext.mr_saveDefaultContext()
     }
 }

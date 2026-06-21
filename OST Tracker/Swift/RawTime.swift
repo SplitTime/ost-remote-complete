@@ -50,6 +50,9 @@ struct RawTime {
     private static func boolValue(_ any: Any?) -> Bool {
         if let b = any as? Bool { return b }
         if let n = any as? NSNumber { return n.boolValue }
+        // A stringly-typed "true"/"false" from the API must not silently read as
+        // false (the MagicalRecord shim's bool coercion accepts strings too).
+        if let s = any as? String { return (s as NSString).boolValue }
         return false
     }
 }

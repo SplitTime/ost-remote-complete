@@ -17,6 +17,7 @@ enum Theme {
     static var tint: UIColor { dynamic(light: Palette.lightTint, dark: Palette.darkTint) }
     static var success: UIColor { dynamic(light: Palette.lightSuccess, dark: Palette.darkSuccess) }
     static var destructive: UIColor { dynamic(light: Palette.lightDestructive, dark: Palette.darkDestructive) }
+    static var warning: UIColor { dynamic(light: Palette.lightWarning, dark: Palette.darkWarning) }
 
     // MARK: Metrics
     enum Metric {
@@ -73,4 +74,6 @@ enum Palette {
     static let darkSuccess              = UIColor(red: 48/255, green: 209/255, blue: 88/255,  alpha: 1)
     static let lightDestructive         = UIColor(red: 255/255, green: 59/255, blue: 48/255,  alpha: 1) // systemRed
     static let darkDestructive          = UIColor(red: 255/255, green: 69/255, blue: 58/255,  alpha: 1)
+    static let lightWarning             = UIColor(red: 255/255, green: 149/255, blue: 0/255,  alpha: 1) // systemOrange
+    static let darkWarning              = UIColor(red: 255/255, green: 159/255, blue: 10/255, alpha: 1)
 }
