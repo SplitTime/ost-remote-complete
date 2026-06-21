@@ -14,7 +14,7 @@
 - All colors/fonts/metrics come from `Theme` — never hardcode colors.
 - Tests: XCTest, `@testable import OST_Remote`, assert via public "test seam" properties (follow `OST TrackerTests/Swift/MenuRowTests.swift`).
 - Build/test command (substitute any available sim from `xcrun simctl list devices available`):
-  `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' test`
+  `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' test`
 - Preserve the base VC's unsynced-count badge + AutoSync observer wiring on the Review / Sync row (the `updateSyncBadge` / `syncManager…` overrides).
 - Commit after each task.
 
@@ -71,7 +71,7 @@ Add to `OST TrackerTests/Swift/MenuRowTests.swift` (inside the existing class):
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' test`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' test`
 Expected: FAIL — compile error, `value of type 'MenuRow' has no member 'detailText' / 'detailLabelText' / 'isShowingDetail' / 'showsChevron' / 'isShowingChevron'`.
 
 - [ ] **Step 3: Add the detail label + chevron toggle to `MenuRow`**
@@ -117,7 +117,7 @@ Add the public properties and test seams (next to `badgeCount` / `showsSpinner`)
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' test`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' test`
 Expected: PASS (all `MenuRowTests` green).
 
 - [ ] **Step 5: Commit**
@@ -158,10 +158,14 @@ final class AppearanceModeTests: XCTestCase {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' test`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' test`
 Expected: FAIL — compile error, `value of type 'AppearanceMode' has no member 'displayName'`.
 
-> NOTE: This new test file must be added to the `OST TrackerTests` target. If the project does not auto-include it, add it via the same group as `MenuRowTests.swift` in `project.pbxproj` (mirror an existing test file's `PBXBuildFile` + `PBXFileReference` + group + Sources entries). Re-run after adding.
+> NOTE: This new test file must be registered in the `OST TrackerTests` target. Do NOT hand-edit `project.pbxproj`. After creating the file, run the existing helper:
+> ```bash
+> ruby scripts/add_file_to_targets.rb "OST TrackerTests/Swift/AppearanceModeTests.swift" "OST TrackerTests"
+> ```
+> Then re-run the test command. (The helper is idempotent.)
 
 - [ ] **Step 3: Add the `displayName` computed property**
 
@@ -182,7 +186,7 @@ extension AppearanceMode {
 
 - [ ] **Step 4: Run test to verify it passes**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' test`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' test`
 Expected: PASS.
 
 - [ ] **Step 5: Commit**
@@ -257,7 +261,7 @@ Replace the body of `OSTToast` (the `show(success:)` method) with:
 
 - [ ] **Step 2: Build to verify it compiles**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' build`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' build`
 Expected: BUILD SUCCEEDED.
 
 - [ ] **Step 3: Commit**
@@ -667,14 +671,14 @@ final class OSTRightMenuViewController: OSTBaseViewController {
 
 - [ ] **Step 2: Build to verify it compiles**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' build`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' build`
 Expected: BUILD SUCCEEDED.
 
 > If the build fails on `currentCourse.eventId`, `EffortModel.mr_reconcile`, or `NSManagedObjectContext.mr_default()`, confirm `import CoreData` is present (it is, at the top) — these bridge in exactly as they did in `OSTUtilitiesViewController.swift`.
 
 - [ ] **Step 3: Run the test suite to confirm nothing regressed**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' test`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' test`
 Expected: PASS (existing + Task 1/2 tests green).
 
 - [ ] **Step 4: Commit**
@@ -731,9 +735,16 @@ In `OST Tracker/AppDelegate.m`, delete the whole method:
 
 (Delete the entire method body through its closing `}`.) Also remove any `#import "OSTUtilitiesViewController.h"` line and the stale `// OSTUtilitiesViewController and OSTAboutViewController are now Swift` comment if it only concerns Utilities. In `OST Tracker/AppDelegate.h`, remove the `- (void) showUtilities;` declaration if it exists.
 
-- [ ] **Step 4: Remove the project references from `project.pbxproj`**
+- [ ] **Step 4: Remove the project references via the helper script**
 
-Remove every line in `OST Tracker.xcodeproj/project.pbxproj` that mentions `OSTUtilitiesViewController` — these come in matched sets: `PBXBuildFile` entries (`… OSTUtilitiesViewController.swift in Sources`, `… .xib in Resources`, for both the "OST Remote" and "OST Remote Dev" targets), the two `PBXFileReference` entries, the two group `children` entries, and the `Sources` / `Resources` build-phase entries. After editing, verify none remain:
+Do NOT hand-edit `project.pbxproj`. Use the existing helper, which cascades to every target's Sources/Resources phase:
+
+```bash
+ruby scripts/remove_file_from_xcodeproj.rb OSTUtilitiesViewController.swift
+ruby scripts/remove_file_from_xcodeproj.rb OSTUtilitiesViewController.xib
+```
+
+Then verify none remain:
 
 ```bash
 grep -n "OSTUtilitiesViewController" "OST Tracker.xcodeproj/project.pbxproj"
@@ -742,7 +753,7 @@ Expected: no output.
 
 - [ ] **Step 5: Build + test to verify the project is still valid**
 
-Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,name=iPad mini (A17 Pro)' test`
+Run: `xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote" -destination 'platform=iOS Simulator,id=14ADF692-F8EC-4F09-B930-4A8BC9366C4A' test`
 Expected: BUILD SUCCEEDED and all tests PASS. (A broken pbxproj edit typically fails with "Build input file cannot be found" or a project-parse error — if so, restore the file refs you removed in matched sets.)
 
 - [ ] **Step 6: Commit**
