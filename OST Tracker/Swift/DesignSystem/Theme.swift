@@ -31,6 +31,8 @@ enum Theme {
         static let title = UIFont.systemFont(ofSize: 30, weight: .bold)
         static let brand = UIFont.systemFont(ofSize: 22, weight: .bold)   // wordmark at list/header scale
         static let field = UIFont.systemFont(ofSize: 17)
+        /// Bold variant of `field`, derived from its descriptor so the point size lives in one place.
+        static let fieldBold = UIFont(descriptor: field.fontDescriptor.withSymbolicTraits(.traitBold) ?? field.fontDescriptor, size: 0)
         static let button = UIFont.systemFont(ofSize: 18, weight: .semibold)
         static let caption = UIFont.systemFont(ofSize: 12, weight: .semibold)
         static let clock = UIFont.systemFont(ofSize: 34, weight: .bold)

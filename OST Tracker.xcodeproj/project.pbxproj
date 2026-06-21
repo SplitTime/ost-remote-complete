@@ -64,6 +64,12 @@
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
 		4DDAC9290F0FFAE67EBBD659 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53D229A9F62EF7554F1D81 /* MenuRow.swift */; };
+		0CC24ADF64544C9DAEF63070 /* ReviewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */; };
+		6E3CAA9FD27A4EE78DA169D4 /* ReviewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */; };
+		68F5BFD5FD734AFCBAD9C024 /* ReviewPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5685098562F46B2825FEDBB /* ReviewPresentationTests.swift */; };
+		F5F6446419364AD292605011 /* ReviewListViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3135AE2A24296882ABE9B /* ReviewListViews.swift */; };
+		FF9B2889358C40F1A0887280 /* ReviewListViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3135AE2A24296882ABE9B /* ReviewListViews.swift */; };
+		8519CAE237FE457CB10DBA35 /* ReviewEntryCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E0938A6604A768E54C2D5 /* ReviewEntryCellTests.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
@@ -82,8 +88,7 @@
 		678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */; };
 		67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */; };
 		6A056B691EEF9608004E0B45 /* OSTNetworkManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */; };
-		6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
-		6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */; };
+
 		6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
 		6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */; };
 		6A11A06D1EF2CE5C00D6D2CA /* CurrentCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A11A06A1EF2CE5C00D6D2CA /* CurrentCourse.m */; };
@@ -102,16 +107,10 @@
 		6A41ADFF1EF7F2BF00C9F834 /* _EffortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41ADFB1EF7F2BF00C9F834 /* _EffortModel.m */; };
 		6A41AE001EF7F2BF00C9F834 /* EffortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */; };
 		6A41AE011EF7F2BF00C9F834 /* EffortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */; };
-		6A41AE061EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */; };
-		6A41AE071EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */; };
-		6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */; };
-		6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */; };
+
 		6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */; };
 		6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */; };
-		6A5005EA1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */; };
-		6A5005EB1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */; };
-		6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */; };
-		6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */; };
+
 		6A52A2D03CB42BCEA0B22188 /* SpreadModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E80BAED426CC43D47DE085 /* SpreadModels.swift */; };
 		6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E4A1EEF866F00783F80 /* OSTDataModel.xcdatamodeld */; };
 		6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */; };
@@ -308,7 +307,7 @@
 		69B24303991152304B820254 /* OSTAuthBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTAuthBridge.swift; path = "OST Tracker/Swift/OSTAuthBridge.swift"; sourceTree = "<group>"; };
 		6A056B671EEF9608004E0B45 /* OSTNetworkManager+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OSTNetworkManager+Login.h"; sourceTree = "<group>"; };
 		6A056B681EEF9608004E0B45 /* OSTNetworkManager+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OSTNetworkManager+Login.m"; sourceTree = "<group>"; };
-		6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewSubmitViewController.xib; sourceTree = "<group>"; };
+
 		6A11A0671EF2CE5C00D6D2CA /* _CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CurrentCourse.h; sourceTree = "<group>"; };
 		6A11A0681EF2CE5C00D6D2CA /* _CurrentCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CurrentCourse.m; sourceTree = "<group>"; };
 		6A11A0691EF2CE5C00D6D2CA /* CurrentCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentCourse.h; sourceTree = "<group>"; };
@@ -326,14 +325,10 @@
 		6A41ADFB1EF7F2BF00C9F834 /* _EffortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EffortModel.m; sourceTree = "<group>"; };
 		6A41ADFC1EF7F2BF00C9F834 /* EffortModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffortModel.h; sourceTree = "<group>"; };
 		6A41ADFD1EF7F2BF00C9F834 /* EffortModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffortModel.m; sourceTree = "<group>"; };
-		6A41AE031EF8B59D00C9F834 /* OSTReviewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTReviewTableViewCell.h; sourceTree = "<group>"; };
-		6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTReviewTableViewCell.m; sourceTree = "<group>"; };
-		6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewTableViewCell.xib; sourceTree = "<group>"; };
+
 		6A41AE0A1EF8D71500C9F834 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
 		6A41AE0B1EF8D71500C9F834 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
-		6A5005E81EFA187F00FA1751 /* OSTReviewSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTReviewSectionHeader.h; sourceTree = "<group>"; };
-		6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTReviewSectionHeader.m; sourceTree = "<group>"; };
-		6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OSTReviewSectionHeader.xib; sourceTree = "<group>"; };
+
 		6A549E4B1EEF866F00783F80 /* OSTDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OSTDataModel.xcdatamodel; sourceTree = "<group>"; };
 		6A549E581EEF8A5E00783F80 /* OSTNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTNetworkManager.h; sourceTree = "<group>"; };
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
@@ -378,6 +373,10 @@
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B53D229A9F62EF7554F1D81 /* MenuRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MenuRow.swift; path = "OST Tracker/Swift/DesignSystem/MenuRow.swift"; sourceTree = "<group>"; };
+		ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewPresentation.swift; path = "OST Tracker/Swift/Review/ReviewPresentation.swift"; sourceTree = "<group>"; };
+		D5685098562F46B2825FEDBB /* ReviewPresentationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewPresentationTests.swift; path = "OST TrackerTests/Swift/ReviewPresentationTests.swift"; sourceTree = "<group>"; };
+		18D3135AE2A24296882ABE9B /* ReviewListViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewListViews.swift; path = "OST Tracker/Swift/Review/ReviewListViews.swift"; sourceTree = "<group>"; };
+		187E0938A6604A768E54C2D5 /* ReviewEntryCellTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewEntryCellTests.swift; path = "OST TrackerTests/Swift/ReviewEntryCellTests.swift"; sourceTree = "<group>"; };
 		72465498F29B8EE0996EC60B /* RaceStatusTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RaceStatusTests.swift; path = "OST TrackerTests/Swift/RaceStatusTests.swift"; sourceTree = "<group>"; };
 		7797786BCBA7794199B51B1E /* SelectableOptionList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectableOptionList.swift; path = "OST Tracker/Swift/DesignSystem/SelectableOptionList.swift"; sourceTree = "<group>"; };
 		77A686F1D356962B113CE83F /* AutoSyncEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngine.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncEngine.swift"; sourceTree = "<group>"; };
@@ -507,6 +506,15 @@
 			name = DesignSystem;
 			sourceTree = "<group>";
 		};
+		95856145C94C4CE99E039377 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */,
+				18D3135AE2A24296882ABE9B /* ReviewListViews.swift */,
+			);
+			name = Review;
+			sourceTree = "<group>";
+		};
 		2642D7360B1335B5908AFA8F /* Swift */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +535,7 @@
 				0C5B979BBF614BE8B9DD /* LiveReadsMerge.swift */,
 				D788CC23A1A220B2901A /* LiveReadsRequest.swift */,
 				19F59D3151C20881599BF039 /* DesignSystem */,
+				95856145C94C4CE99E039377 /* Review */,
 				DAC07AE6DD736F838E1F649C /* AutoSync */,
 			);
 			name = Swift;
@@ -563,6 +572,8 @@
 				A03DBD0080108659979FB912 /* AutoSyncStatusTests.swift */,
 				7F1D7FC4F826A30098C0F452 /* LiveTimeSubmitterTests.swift */,
 				D9642AFAB581C9F265888D7E /* MenuRowTests.swift */,
+				D5685098562F46B2825FEDBB /* ReviewPresentationTests.swift */,
+				187E0938A6604A768E54C2D5 /* ReviewEntryCellTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -576,16 +587,7 @@
 			path = SessionManager;
 			sourceTree = "<group>";
 		};
-		6A41AE021EF8B58300C9F834 /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-				6A41AE031EF8B59D00C9F834 /* OSTReviewTableViewCell.h */,
-				6A41AE041EF8B59D00C9F834 /* OSTReviewTableViewCell.m */,
-				6A41AE051EF8B59D00C9F834 /* OSTReviewTableViewCell.xib */,
-			);
-			path = TableViewCells;
-			sourceTree = "<group>";
-		};
+
 		6A549E471EEF865100783F80 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,11 +599,7 @@
 		6A549E491EEF865100783F80 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6A41AE021EF8B58300C9F834 /* TableViewCells */,
-				6A11A05B1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib */,
-				6A5005E81EFA187F00FA1751 /* OSTReviewSectionHeader.h */,
-				6A5005E91EFA187F00FA1751 /* OSTReviewSectionHeader.m */,
-				6A5005EC1EFA189100FA1751 /* OSTReviewSectionHeader.xib */,
+	
 				6A7D79641F9A6946001149B0 /* OSTCrossCheckCell.h */,
 				6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */,
 				6A95F5571F9F013B00E87570 /* OSTCrossCheckFooter.h */,
@@ -978,16 +976,13 @@
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
-				6A41AE081EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9D2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
 				6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */,
-				6A5005ED1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0E2190AE5800454448 /* delete.wav in Resources */,
 				D52BBFCC227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */,
-				6A11A05E1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				D50DFA9522786B67002F5FBF /* OSTSlider.xib in Resources */,
 				D5C5BC4E217E0AE70071D6CF /* click.wav in Resources */,
 			);
@@ -1002,16 +997,13 @@
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
 				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
-				6A41AE091EF8B59D00C9F834 /* OSTReviewTableViewCell.xib in Resources */,
 				D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
 				D51C2E9E2295CE2D00880465 /* ost-remote-keypress-negative.wav in Resources */,
 				6AEFFC151EEF83DA009EEE21 /* Assets.xcassets in Resources */,
-				6A5005EE1EFA189100FA1751 /* OSTReviewSectionHeader.xib in Resources */,
 				D529FA0F2190AE5800454448 /* delete.wav in Resources */,
 				D52BBFCD227E0B360035FE07 /* ost-remote-bib-wrong-event-2.wav in Resources */,
-				6A11A05F1EF2CB0D00D6D2CA /* OSTReviewSubmitViewController.xib in Resources */,
 				D50DFA9622786B67002F5FBF /* OSTSlider.xib in Resources */,
 				D5C5BC4F217E0AE70071D6CF /* click.wav in Resources */,
 			);
@@ -1048,7 +1040,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A41AE061EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
 				6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
@@ -1063,7 +1054,6 @@
 				6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
-				6A5005EA1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
 				6A5E0CF61EF1B25E00399EEC /* EntryModel.m in Sources */,
 				6A5E0CF71EF1B25E00399EEC /* _EventModel.m in Sources */,
@@ -1129,6 +1119,8 @@
 				C31ECF7DEBAB9900DB4CD9D3 /* MenuRow.swift in Sources */,
 				3610069709680EB51D849B85 /* OSTRightMenuViewController.swift in Sources */,
 				15EA34EA2840D7FAA277617B /* OSTRunnerBadge.swift in Sources */,
+				0CC24ADF64544C9DAEF63070 /* ReviewPresentation.swift in Sources */,
+				F5F6446419364AD292605011 /* ReviewListViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1136,7 +1128,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A41AE071EF8B59D00C9F834 /* OSTReviewTableViewCell.m in Sources */,
 				6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
@@ -1151,7 +1142,6 @@
 				6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
-				6A5005EB1EFA187F00FA1751 /* OSTReviewSectionHeader.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
 				6AA6E9E41EF0E7D70061EEB0 /* EntryModel.m in Sources */,
 				6AA6E9E31EF0E7D70061EEB0 /* _EventModel.m in Sources */,
@@ -1217,6 +1207,8 @@
 				4DDAC9290F0FFAE67EBBD659 /* MenuRow.swift in Sources */,
 				E0855920D4908DBFCDA77FEF /* OSTRightMenuViewController.swift in Sources */,
 				06C3EEE68745FC569DF0C048 /* OSTRunnerBadge.swift in Sources */,
+				6E3CAA9FD27A4EE78DA169D4 /* ReviewPresentation.swift in Sources */,
+				FF9B2889358C40F1A0887280 /* ReviewListViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1256,6 +1248,8 @@
 				009831BADDC027659B3D29C1 /* LiveTimeSubmitterTests.swift in Sources */,
 				788968DCA5FF4A27DE6CF54E /* MenuRowTests.swift in Sources */,
 				2EB9E232738AFC8E55777940 /* AppearanceModeTests.swift in Sources */,
+				68F5BFD5FD734AFCBAD9C024 /* ReviewPresentationTests.swift in Sources */,
+				8519CAE237FE457CB10DBA35 /* ReviewEntryCellTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
