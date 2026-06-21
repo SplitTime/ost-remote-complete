@@ -21,6 +21,46 @@
 import UIKit
 import CoreData
 
+/// The two record buttons derived from a split's data-entry sub-entries. Pure so
+/// the permutation logic (1-in / 1-out / 1-in+1-out / 2-in / 2-out) is unit-tested
+/// without the view controller.
+struct EntryButtonLayout: Equatable {
+    var leftTitle: String?
+    var rightTitle: String?
+    var leftHidden = false
+    var rightHidden = false
+    var leftBitKey: String?
+    var rightBitKey: String?
+}
+
+/// Maps a split's `entries` (each with `subSplitKind` "in"/"out" and a `label`) to
+/// the two record buttons, preserving the legacy permutations exactly.
+func entryButtonLayout(for entries: [[String: Any]]) -> EntryButtonLayout {
+    let ins = entries.filter { ($0["subSplitKind"] as? String) == "in" }
+    let outs = entries.filter { ($0["subSplitKind"] as? String) == "out" }
+    func label(_ e: [String: Any]) -> String? { e["label"] as? String }
+
+    if ins.count == 1, outs.isEmpty {
+        return EntryButtonLayout(leftTitle: label(ins[0]), rightHidden: true, leftBitKey: "in")
+    }
+    if ins.isEmpty, outs.count == 1 {
+        return EntryButtonLayout(rightTitle: label(outs[0]), leftHidden: true, rightBitKey: "out")
+    }
+    if ins.count == 1, outs.count == 1 {
+        return EntryButtonLayout(leftTitle: label(ins[0]), rightTitle: label(outs[0]),
+                                 leftBitKey: "in", rightBitKey: "out")
+    }
+    if ins.count == 2 {
+        return EntryButtonLayout(leftTitle: label(ins[0]), rightTitle: label(ins[1]),
+                                 leftBitKey: "in", rightBitKey: "in")
+    }
+    if outs.count == 2 {
+        return EntryButtonLayout(leftTitle: label(outs[0]), rightTitle: label(outs[1]),
+                                 leftBitKey: "out", rightBitKey: "out")
+    }
+    return EntryButtonLayout() // degenerate config: both buttons visible, no keys
+}
+
 @objc(OSTRunnerTrackerViewController)
 class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate {
 
@@ -535,46 +575,14 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     /// titles, visibility, and leftBitKey/rightBitKey identically. Layout is driven
     /// by hiding a button in the horizontal stack (no width math).
     private func configureEntryButtons() {
-        btnLeft.isHidden = false
-        btnRight.isHidden = false
-        leftBitKey = nil
-        rightBitKey = nil
-
         let entries = (CurrentCourse.getCurrentCourse()?.splitAttributes as? [String: Any])?["entries"] as? [[String: Any]] ?? []
-        let splitEntriesIn = entries.filter { ($0["subSplitKind"] as? String) == "in" }
-        let splitEntriesOut = entries.filter { ($0["subSplitKind"] as? String) == "out" }
-
-        if splitEntriesIn.count == 1 && splitEntriesOut.count == 0 {
-            btnRight.isHidden = true
-            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
-            leftBitKey = "in"
-        }
-        if splitEntriesIn.count == 0 && splitEntriesOut.count == 1 {
-            btnLeft.isHidden = true
-            rightBitKey = "out"
-            btnRight.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
-        } else if splitEntriesIn.count == 1 && splitEntriesOut.count == 1 {
-            btnRight.isHidden = false
-            btnLeft.isHidden = false
-            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
-            btnRight.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
-            leftBitKey = "in"
-            rightBitKey = "out"
-        } else if splitEntriesIn.count == 2 {
-            btnRight.isHidden = false
-            btnLeft.isHidden = false
-            btnLeft.setTitle(splitEntriesIn[0]["label"] as? String, for: .normal)
-            btnRight.setTitle(splitEntriesIn[1]["label"] as? String, for: .normal)
-            leftBitKey = "in"
-            rightBitKey = "in"
-        } else if splitEntriesOut.count == 2 {
-            btnRight.isHidden = false
-            btnLeft.isHidden = false
-            btnLeft.setTitle(splitEntriesOut[0]["label"] as? String, for: .normal)
-            btnRight.setTitle(splitEntriesOut[1]["label"] as? String, for: .normal)
-            leftBitKey = "out"
-            rightBitKey = "out"
-        }
+        let layout = entryButtonLayout(for: entries)
+        btnLeft.isHidden = layout.leftHidden
+        btnRight.isHidden = layout.rightHidden
+        btnLeft.setTitle(layout.leftTitle, for: .normal)
+        btnRight.setTitle(layout.rightTitle, for: .normal)
+        leftBitKey = layout.leftBitKey
+        rightBitKey = layout.rightBitKey
     }
 
     private func configurePacerToggle() {
