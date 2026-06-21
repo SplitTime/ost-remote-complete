@@ -92,10 +92,15 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         menuBtn.titleLabel?.font = Theme.Font.button
         menuBtn.addTarget(self, action: #selector(onRightMenu), for: .touchUpInside)
 
-        exportButton.setTitle("Export", for: .normal)
-        exportButton.setTitleColor(Theme.tint, for: .normal)
-        exportButton.titleLabel?.font = Theme.Font.button
+        // Standard iOS share glyph (bundled asset; SF Symbols need iOS 13+). The
+        // source PNG is 512px, so render it as a tinted template at a fixed size.
+        exportButton.setImage(UIImage(named: "share-icon")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        exportButton.tintColor = Theme.tint
+        exportButton.imageView?.contentMode = .scaleAspectFit
+        exportButton.accessibilityLabel = "Export"
         exportButton.addTarget(self, action: #selector(onExport(_:)), for: .touchUpInside)
+        exportButton.widthAnchor.constraint(equalToConstant: 28).isActive = true
+        exportButton.heightAnchor.constraint(equalToConstant: 28).isActive = true
 
         // Title leading; Export + Menu on the trailing edge (the hamburger opens the
         // right-side drawer), matching the other screens' header convention.
