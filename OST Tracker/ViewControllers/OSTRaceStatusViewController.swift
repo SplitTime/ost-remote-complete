@@ -260,15 +260,17 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
         titleLabel.textColor = Theme.label
 
         let refresh = UIButton(type: .system)
-        refresh.setTitle("⟳ Refresh", for: .normal)
+        refresh.setTitle("⟳", for: .normal)
         refresh.setTitleColor(Theme.tint, for: .normal)
-        refresh.titleLabel?.font = Theme.Font.button
+        refresh.titleLabel?.font = .systemFont(ofSize: 26, weight: .semibold)
+        refresh.accessibilityLabel = "Refresh"
         refresh.addTarget(self, action: #selector(onRefresh), for: .touchUpInside)
 
         let menuBtn = UIButton(type: .system)
-        menuBtn.setTitle("Menu ☰", for: .normal)
+        menuBtn.setTitle("☰", for: .normal)
         menuBtn.setTitleColor(Theme.tint, for: .normal)
-        menuBtn.titleLabel?.font = Theme.Font.button
+        menuBtn.titleLabel?.font = .systemFont(ofSize: 26)
+        menuBtn.accessibilityLabel = "Menu"
         menuBtn.addTarget(self, action: #selector(onMenu), for: .touchUpInside)
         menuButton = menuBtn // base VC anchors the sync badge to this
 
