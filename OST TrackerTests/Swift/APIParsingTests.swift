@@ -20,4 +20,27 @@ final class APIParsingTests: XCTestCase {
         let auth = try JSONDecoder().decode(AuthResponse.self, from: Fixture.data("auth_response"))
         XCTAssertEqual(auth.token, "<<REDACTED_TOKEN>>")
     }
+
+    // MARK: - SpreadDate.timeZone offset parsing
+
+    func test_timeZone_parsesZuluAsUTC() {
+        XCTAssertEqual(SpreadDate.timeZone(from: "2026-06-20T10:00:00Z").secondsFromGMT(), 0)
+    }
+
+    func test_timeZone_parsesPositiveAndNegativeWholeHours() {
+        XCTAssertEqual(SpreadDate.timeZone(from: "2026-06-20T10:00:00-06:00").secondsFromGMT(), -6 * 3600)
+        XCTAssertEqual(SpreadDate.timeZone(from: "2026-06-20T10:00:00+05:00").secondsFromGMT(), 5 * 3600)
+    }
+
+    func test_timeZone_appliesSignToMinutes() {
+        // Half-hour zones: the sign must apply to the minutes too.
+        XCTAssertEqual(SpreadDate.timeZone(from: "2026-06-20T10:00:00+05:30").secondsFromGMT(), 5 * 3600 + 30 * 60)
+        XCTAssertEqual(SpreadDate.timeZone(from: "2026-06-20T10:00:00-09:30").secondsFromGMT(), -(9 * 3600 + 30 * 60))
+    }
+
+    func test_timeZone_negativeSubHourOffsetKeepsSign() {
+        // Regression: "-00:30" has hours == 0, so inferring the sign from the hour
+        // (the old bug) yielded +30min instead of -30min.
+        XCTAssertEqual(SpreadDate.timeZone(from: "2026-06-20T10:00:00-00:30").secondsFromGMT(), -30 * 60)
+    }
 }
