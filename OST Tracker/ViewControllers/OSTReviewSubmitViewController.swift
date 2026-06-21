@@ -87,18 +87,19 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         titleLabel.textColor = Theme.label
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        menuBtn.setTitle("\u{2630}", for: .normal) // ☰
-        menuBtn.setTitleColor(Theme.label, for: .normal)
-        menuBtn.titleLabel?.font = .systemFont(ofSize: 24)
+        menuBtn.setTitle("Menu \u{2630}", for: .normal) // ☰ — opens the right-side drawer
+        menuBtn.setTitleColor(Theme.tint, for: .normal)
+        menuBtn.titleLabel?.font = Theme.Font.button
         menuBtn.addTarget(self, action: #selector(onRightMenu), for: .touchUpInside)
-        menuBtn.widthAnchor.constraint(equalToConstant: 34).isActive = true
 
         exportButton.setTitle("Export", for: .normal)
         exportButton.setTitleColor(Theme.tint, for: .normal)
         exportButton.titleLabel?.font = Theme.Font.button
         exportButton.addTarget(self, action: #selector(onExport(_:)), for: .touchUpInside)
 
-        let headerRow = UIStackView(arrangedSubviews: [menuBtn, titleLabel, exportButton])
+        // Title leading; Export + Menu on the trailing edge (the hamburger opens the
+        // right-side drawer), matching the other screens' header convention.
+        let headerRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), exportButton, menuBtn])
         headerRow.axis = .horizontal
         headerRow.alignment = .center
         headerRow.spacing = 12
