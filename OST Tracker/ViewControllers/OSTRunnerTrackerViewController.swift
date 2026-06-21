@@ -219,7 +219,9 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         lblTitle.textColor = Theme.label
         lblTitle.translatesAutoresizingMaskIntoConstraints = false
 
-        btnMenu.setTitle("☰ Menu", for: .normal)
+        // Hamburger on the right so the sync badge (anchored top-right by the base
+        // VC's ostPositionBadgeAtMenu) sits over the icon, not the word.
+        btnMenu.setTitle("Menu ☰", for: .normal)
         btnMenu.setTitleColor(Theme.tint, for: .normal)
         btnMenu.titleLabel?.font = Theme.Font.button
         btnMenu.addTarget(self, action: #selector(onRight(_:)), for: .touchUpInside)
@@ -282,6 +284,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         txtBibNumber.font = Theme.Font.bib
         txtBibNumber.textColor = Theme.label
         txtBibNumber.textAlignment = .center
+        txtBibNumber.tintColor = .clear // hide the caret — the embedded number pad drives input
         txtBibNumber.keyboardType = .numberPad
         txtBibNumber.delegate = self
         txtBibNumber.placeholder = ""
