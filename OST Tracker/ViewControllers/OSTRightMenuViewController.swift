@@ -201,11 +201,8 @@ final class OSTRightMenuViewController: OSTBaseViewController {
     }
 
     @objc private func onCrossCheck() {
-        let storyboard = UIStoryboard(name: "CrossCheck", bundle: nil)
-        if let controller = storyboard.instantiateInitialViewController() {
-            AppDelegate.getInstance()?.rightMenuVC.centerViewController = controller
-            AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
-        }
+        AppDelegate.getInstance()?.rightMenuVC.centerViewController = OSTCrossCheckViewController()
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
     @objc private func onLiveReads() {

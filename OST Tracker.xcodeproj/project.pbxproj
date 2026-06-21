@@ -137,18 +137,10 @@
 		6A5E0D021EF1B25E00399EEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AEFFC141EEF83DA009EEE21 /* Assets.xcassets */; };
 		6A676FDE1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
 		6A676FDF1F5F401E0051C8CB /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */; };
-		6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */; };
-		6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */; };
-		6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */; };
-		6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */; };
 		6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */; };
 		6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */; };
 		6A95F5551F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */; };
 		6A95F5561F9ED0BA00E87570 /* CrossCheckEntriesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */; };
-		6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */; };
-		6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */; };
-		6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */; };
-		6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */; };
 		6AA3997F1EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
 		6AA399801EFC221D0097ED63 /* NSError+OSTErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */; };
 		6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA6E9DB1EF0E7D70061EEB0 /* _EntryModel.m */; };
@@ -348,17 +340,10 @@
 		6A5E0D091EF1B25E00399EEC /* OST Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A676FDC1F5F401E0051C8CB /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
-		6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CrossCheck.storyboard; sourceTree = "<group>"; };
-		6A7D79641F9A6946001149B0 /* OSTCrossCheckCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckCell.h; sourceTree = "<group>"; };
-		6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckCell.m; sourceTree = "<group>"; };
 		6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CrossCheckEntriesModel.m; sourceTree = "<group>"; };
 		6A95F5501F9ED0BA00E87570 /* CrossCheckEntriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossCheckEntriesModel.h; sourceTree = "<group>"; };
 		6A95F5511F9ED0BA00E87570 /* _CrossCheckEntriesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CrossCheckEntriesModel.h; sourceTree = "<group>"; };
 		6A95F5521F9ED0BA00E87570 /* CrossCheckEntriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossCheckEntriesModel.m; sourceTree = "<group>"; };
-		6A95F5571F9F013B00E87570 /* OSTCrossCheckFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckFooter.h; sourceTree = "<group>"; };
-		6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckFooter.m; sourceTree = "<group>"; };
-		6A95F55B1F9F019F00E87570 /* OSTCrossCheckHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSTCrossCheckHeader.h; sourceTree = "<group>"; };
-		6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSTCrossCheckHeader.m; sourceTree = "<group>"; };
 		6AA3997D1EFC221D0097ED63 /* NSError+OSTErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OSTErrors.h"; sourceTree = "<group>"; };
 		6AA3997E1EFC221D0097ED63 /* NSError+OSTErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+OSTErrors.m"; sourceTree = "<group>"; };
 		6AA6E9DA1EF0E7D70061EEB0 /* _EntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EntryModel.h; sourceTree = "<group>"; };
@@ -634,14 +619,7 @@
 			isa = PBXGroup;
 			children = (
 	
-				6A7D79641F9A6946001149B0 /* OSTCrossCheckCell.h */,
-				6A7D79651F9A6946001149B0 /* OSTCrossCheckCell.m */,
-				6A95F5571F9F013B00E87570 /* OSTCrossCheckFooter.h */,
-				6A95F5581F9F013B00E87570 /* OSTCrossCheckFooter.m */,
-				6A95F55B1F9F019F00E87570 /* OSTCrossCheckHeader.h */,
-				6A95F55C1F9F019F00E87570 /* OSTCrossCheckHeader.m */,
-				6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */,
-				D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */,
+					D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */,
 				D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */,
 				0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */,
 				F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */,
@@ -1007,7 +985,6 @@
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				D52BBFD0227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
-				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				D5C5BC4C217E0AE70071D6CF /* input_click.wav in Resources */,
@@ -1027,7 +1004,6 @@
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				D52BBFD1227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
-				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
 				D5C5BC4D217E0AE70071D6CF /* input_click.wav in Resources */,
@@ -1071,18 +1047,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A95F55D1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06B1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A5E0CF01EF1B25E00399EEC /* OSTNetworkManager.m in Sources */,
 				6A95F5531F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
-				6A95F5591F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				6AA7C2F51F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0731EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA12298186100880465 /* UILabel+Extension.m in Sources */,
 				6A5E0CF11EF1B25E00399EEC /* OSTDataModel.xcdatamodeld in Sources */,
 				D50DFA9222786B5D002F5FBF /* OSTSlider.m in Sources */,
 				6A5E0CF21EF1B25E00399EEC /* EventModel.m in Sources */,
-				6A7D79661F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0751EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A41AE0C1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6A5E0CF41EF1B25E00399EEC /* _EntryModel.m in Sources */,
@@ -1164,18 +1137,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A95F55E1F9F019F00E87570 /* OSTCrossCheckHeader.m in Sources */,
 				6A11A06C1EF2CE5C00D6D2CA /* _CurrentCourse.m in Sources */,
 				6A549E5A1EEF8A5E00783F80 /* OSTNetworkManager.m in Sources */,
 				6A95F5541F9ED0BA00E87570 /* _CrossCheckEntriesModel.m in Sources */,
-				6A95F55A1F9F013B00E87570 /* OSTCrossCheckFooter.m in Sources */,
 				6AA7C2F61F5DE58300D9F952 /* UITextField+RemoveInputAssistant.m in Sources */,
 				6A11A0741EF372DE00D6D2CA /* _CourseSplits.m in Sources */,
 				D51C2EA22298186100880465 /* UILabel+Extension.m in Sources */,
 				6A549E4C1EEF866F00783F80 /* OSTDataModel.xcdatamodeld in Sources */,
 				D50DFA9322786B5D002F5FBF /* OSTSlider.m in Sources */,
 				6AA6E9E51EF0E7D70061EEB0 /* EventModel.m in Sources */,
-				6A7D79671F9A6946001149B0 /* OSTCrossCheckCell.m in Sources */,
 				6A11A0761EF372DE00D6D2CA /* CourseSplits.m in Sources */,
 				6A41AE0D1EF8D71500C9F834 /* UIView+Additions.m in Sources */,
 				6AA6E9E21EF0E7D70061EEB0 /* _EntryModel.m in Sources */,
