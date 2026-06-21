@@ -70,7 +70,7 @@ final class ReviewEntryCell: UITableViewCell {
         nameLabel.textColor = color(for: style.nameRole)
         bibLabel.textColor = color(for: style.bibRole)
         inOutLabel.textColor = color(for: style.inOutRole)
-        nameLabel.font = style.nameBold ? .systemFont(ofSize: 17, weight: .bold) : Theme.Font.field
+        nameLabel.font = style.nameBold ? Theme.Font.fieldBold : Theme.Font.field
 
         pacerView.image = UIImage(named: display.isSynced ? "Pacer Symbol Green" : "Pacer Symbol Blue")
         stoppedView.image = UIImage(named: display.isSynced ? "Green Hand" : "Red Hand")
