@@ -15,7 +15,9 @@ extension CrossCheckStatus {
         .notExpected: Theme.secondaryLabel,
     ]
 
-    var dotColor: UIColor { CrossCheckStatus.colors[self]! }
+    // The dict is exhaustive over all cases; the fallback only guards a future
+    // case from becoming a runtime crash (and keeps a single instance per status).
+    var dotColor: UIColor { CrossCheckStatus.colors[self] ?? Theme.secondaryLabel }
 }
 
 /// A "still out" row: large bib + full name + chevron.
