@@ -51,21 +51,21 @@ final class MenuRow: UIControl {
         // on every iOS version regardless of title length.
         let accessories = UIStackView(arrangedSubviews: [spinner, badge, detail, chevron])
         accessories.alignment = .center
-        accessories.spacing = 8
+        accessories.spacing = Theme.Metric.spacing
         accessories.isUserInteractionEnabled = false
         accessories.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addSubview(accessories)
 
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Theme.Metric.rowInset),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-            accessories.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: 8),
-            accessories.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            accessories.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: Theme.Metric.spacing),
+            accessories.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Theme.Metric.rowInset),
             accessories.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-            heightAnchor.constraint(equalToConstant: 52),
+            heightAnchor.constraint(equalToConstant: Theme.Metric.rowHeight),
             badge.heightAnchor.constraint(equalToConstant: 20),
             badge.widthAnchor.constraint(greaterThanOrEqualToConstant: 20),
         ])

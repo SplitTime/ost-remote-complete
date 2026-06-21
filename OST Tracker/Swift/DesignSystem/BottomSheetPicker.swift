@@ -184,10 +184,10 @@ private final class SheetRow: UIControl {
         addSubview(row)
         addSubview(sep)
         NSLayoutConstraint.activate([
-            row.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            row.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            row.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Theme.Metric.rowInset),
+            row.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Theme.Metric.rowInset),
             row.centerYAnchor.constraint(equalTo: centerYAnchor),
-            heightAnchor.constraint(equalToConstant: 52),
+            heightAnchor.constraint(equalToConstant: Theme.Metric.rowHeight),
             sep.heightAnchor.constraint(equalToConstant: 1),
             sep.leadingAnchor.constraint(equalTo: leadingAnchor),
             sep.trailingAnchor.constraint(equalTo: trailingAnchor),

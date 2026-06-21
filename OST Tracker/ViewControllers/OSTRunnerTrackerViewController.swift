@@ -96,7 +96,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         switch state {
         case .synced:  return (Theme.success, .white)
         case .pending: return (Theme.tint, .white)
-        case .syncing: return (UIColor(red: 1, green: 0.85, blue: 0.30, alpha: 1), .black)
+        case .syncing: return (Theme.warning, .black)
         case .failed:  return (Theme.destructive, .white)
         case .offline: return (Theme.secondaryLabel, .white)
         case .disabled: return (.clear, .clear)

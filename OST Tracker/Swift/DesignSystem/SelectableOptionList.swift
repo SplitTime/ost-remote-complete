@@ -24,11 +24,11 @@ final class SelectableOptionList: UIView {
         caption.textColor = Theme.secondaryLabel
 
         rowsStack.axis = .vertical
-        rowsStack.spacing = 8
+        rowsStack.spacing = Theme.Metric.spacing
 
         let outer = UIStackView(arrangedSubviews: [caption, rowsStack])
         outer.axis = .vertical
-        outer.spacing = 8
+        outer.spacing = Theme.Metric.spacing
         outer.translatesAutoresizingMaskIntoConstraints = false
         addSubview(outer)
         NSLayoutConstraint.activate([
@@ -130,7 +130,7 @@ private final class OptionRow: UIControl {
 
         let row = UIStackView(arrangedSubviews: [label, radio, chevron])
         row.alignment = .center
-        row.spacing = 8
+        row.spacing = Theme.Metric.spacing
         row.translatesAutoresizingMaskIntoConstraints = false
         row.isUserInteractionEnabled = false
         addSubview(row)

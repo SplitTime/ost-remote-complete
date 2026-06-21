@@ -25,6 +25,10 @@ enum Theme {
         static let fieldHeight: CGFloat = 48
         static let buttonHeight: CGFloat = 52
         static let horizontalInset: CGFloat = 28
+        /// List-row metrics shared by MenuRow / SheetRow / OptionRow.
+        static let rowHeight: CGFloat = 52
+        static let rowInset: CGFloat = 16
+        static let spacing: CGFloat = 8
     }
 
     // MARK: Fonts
