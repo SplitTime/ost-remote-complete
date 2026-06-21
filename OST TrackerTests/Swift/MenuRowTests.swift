@@ -26,4 +26,34 @@ final class MenuRowTests: XCTestCase {
         row.badgeCount = 0
         XCTAssertFalse(row.isShowingBadge)
     }
+
+    func test_detailText_setsLabelAndShows() {
+        let row = MenuRow(title: "Appearance")
+        row.detailText = "System"
+        XCTAssertEqual(row.detailLabelText, "System")
+        XCTAssertTrue(row.isShowingDetail)
+    }
+
+    func test_detailText_hiddenWhenNil() {
+        let row = MenuRow(title: "Appearance")
+        XCTAssertFalse(row.isShowingDetail)
+    }
+
+    func test_detailText_hiddenWhenClearedToNil() {
+        let row = MenuRow(title: "Appearance")
+        row.detailText = "Dark"
+        row.detailText = nil
+        XCTAssertFalse(row.isShowingDetail)
+    }
+
+    func test_chevron_shownByDefault() {
+        let row = MenuRow(title: "About")
+        XCTAssertTrue(row.isShowingChevron)
+    }
+
+    func test_chevron_hiddenWhenShowsChevronFalse() {
+        let row = MenuRow(title: "Refresh Roster")
+        row.showsChevron = false
+        XCTAssertFalse(row.isShowingChevron)
+    }
 }

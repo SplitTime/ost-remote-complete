@@ -11,6 +11,7 @@ final class MenuRow: UIControl {
     private let chevron = UILabel()
     private let badge = UILabel()
     private let spinner = UIActivityIndicatorView(style: .gray)
+    private let detail = UILabel()
 
     init(title: String) {
         self.title = title
@@ -32,11 +33,15 @@ final class MenuRow: UIControl {
 
         spinner.hidesWhenStopped = true
 
+        detail.font = .systemFont(ofSize: 15)
+        detail.textColor = Theme.secondaryLabel
+        detail.isHidden = true
+
         chevron.text = "›"
         chevron.font = .systemFont(ofSize: 18, weight: .semibold)
         chevron.textColor = Theme.secondaryLabel
 
-        let row = UIStackView(arrangedSubviews: [titleLabel, spinner, badge, chevron])
+        let row = UIStackView(arrangedSubviews: [titleLabel, spinner, badge, detail, chevron])
         row.alignment = .center
         row.spacing = 8
         row.isUserInteractionEnabled = false
@@ -65,7 +70,21 @@ final class MenuRow: UIControl {
         didSet { showsSpinner ? spinner.startAnimating() : spinner.stopAnimating() }
     }
 
+    var detailText: String? {
+        didSet {
+            detail.text = detailText
+            detail.isHidden = (detailText?.isEmpty ?? true)
+        }
+    }
+
+    var showsChevron: Bool = true {
+        didSet { chevron.isHidden = !showsChevron }
+    }
+
     // Test seams.
     var isShowingBadge: Bool { !badge.isHidden }
     var badgeText: String? { badge.text }
+    var isShowingDetail: Bool { !detail.isHidden }
+    var detailLabelText: String? { detail.text }
+    var isShowingChevron: Bool { !chevron.isHidden }
 }
