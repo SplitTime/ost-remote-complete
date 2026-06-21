@@ -209,17 +209,64 @@ extension RaceStatusTests {
 
     func test_stationField_fromFixture() throws {
         let spread = try loadSpread()
-        let field = stationField(splitIndex: 2, spread: spread) // Antero
+        let field = stationField(splitIndex: 2, spread: spread) // Antero (In/Out)
         XCTAssertEqual(field.rows.count, 151)
         XCTAssertEqual(field.countText, "147 of 151 through")
-        // The first row is whoever came through Antero earliest (bib 79, Fri 9:08AM).
-        XCTAssertEqual(field.rows.first?.status, "Through")
-        XCTAssertEqual(field.rows.first?.time, "3:08 (Fri 9:08AM)")
+        // The first row is whoever came through Antero earliest (bib 79).
+        // Antero is an In/Out station, so the row shows both inline, no "Through" word.
+        XCTAssertEqual(field.rows.first?.status, "")
+        XCTAssertEqual(field.rows.first?.time, "In 3:08 (Fri 9:08AM)   Out 3:10 (Fri 9:10AM)")
     }
 
     func test_clockWithDayFormatsWeekdayAnd12Hour() {
         let tz = mtZone()
         let friMorning = date(2022, 7, 22, 9, 8, tz: tz) // 2022-07-22 is a Friday
         XCTAssertEqual(RaceStatusFormat.clockWithDay(friMorning, in: tz), "Fri 9:08AM")
+    }
+}
+
+extension RaceStatusTests {
+    private func inOutHeader() -> SplitHeader {
+        SplitHeader(title: "Aid", splitName: "Aid", distanceMeters: 1000, extensions: ["In", "Out"], lap: 1)
+    }
+    private func plainHeader() -> SplitHeader {
+        SplitHeader(title: "Start", splitName: "Start", distanceMeters: 0, extensions: [], lap: 1)
+    }
+
+    // In/Out station, both times present → inline "In … Out …", no "Through" word.
+    func test_fieldRow_inOutStation_showsInAndOut() {
+        let tz = mtZone()
+        let start = date(2022, 7, 22, 6, 0, tz: tz)
+        let inAt  = date(2022, 7, 22, 9, 8, tz: tz)
+        let outAt = date(2022, 7, 22, 9, 10, tz: tz)
+        let e = effort(bib: 79, times: [[inAt, outAt]])
+        let row = fieldRow(e, status: .through(arrival: inAt), atSplit: 0,
+                           header: inOutHeader(), start: start, tz: tz)
+        XCTAssertEqual(row.status, "")
+        XCTAssertEqual(row.time, "In 3:08 (Fri 9:08AM)   Out 3:10 (Fri 9:10AM)")
+    }
+
+    // In/Out station, In recorded but no Out yet → flag "still here".
+    func test_fieldRow_inOutStation_stillHere_whenNoOut() {
+        let tz = mtZone()
+        let start = date(2022, 7, 22, 6, 0, tz: tz)
+        let inAt  = date(2022, 7, 22, 9, 8, tz: tz)
+        let e = effort(bib: 79, times: [[inAt, nil]])
+        let row = fieldRow(e, status: .through(arrival: inAt), atSplit: 0,
+                           header: inOutHeader(), start: start, tz: tz)
+        XCTAssertEqual(row.status, "")
+        XCTAssertEqual(row.time, "In 3:08 (Fri 9:08AM)   still here")
+    }
+
+    // Plain (no In/Out) station keeps the existing "Through" wording.
+    func test_fieldRow_plainStation_keepsThrough() {
+        let tz = mtZone()
+        let start = date(2022, 7, 22, 6, 0, tz: tz)
+        let at    = date(2022, 7, 22, 9, 8, tz: tz)
+        let e = effort(bib: 79, times: [[at]])
+        let row = fieldRow(e, status: .through(arrival: at), atSplit: 0,
+                           header: plainHeader(), start: start, tz: tz)
+        XCTAssertEqual(row.status, "Through")
+        XCTAssertEqual(row.time, "3:08 (Fri 9:08AM)")
     }
 }
