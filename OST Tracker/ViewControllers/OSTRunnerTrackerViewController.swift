@@ -317,10 +317,13 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         runnerBadge.isUserInteractionEnabled = true
         runnerBadge.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onRunnerInfo(_:))))
 
+        // Constant-height result slot so recording an entry swaps detail-lines →
+        // badge WITHOUT changing height: the toggle/entry buttons below never shift.
+        let resultSlot = makeResultSlot()
+
         let displayStack = UIStackView(arrangedSubviews: [
             lblTime, lblTimeOfTheDay, txtBibNumber,
-            lblPersonAdded, lblRunnerInfo, lblSecondaryInfo, lblAdded,
-            runnerBadge,
+            lblPersonAdded, resultSlot,
             makeToggleRow(), makeEntryRow(),
         ])
         displayStack.axis = .vertical
@@ -336,9 +339,42 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
             displayStack.leadingAnchor.constraint(equalTo: zone.leadingAnchor, constant: 16),
             displayStack.trailingAnchor.constraint(equalTo: zone.trailingAnchor, constant: -16),
             displayStack.bottomAnchor.constraint(lessThanOrEqualTo: zone.bottomAnchor, constant: -8),
-            runnerBadge.heightAnchor.constraint(equalToConstant: 120),
         ])
         return zone
+    }
+
+    /// The constant-height area below the runner name. The bib-lookup detail lines
+    /// (runner info / secondary / location) and the recorded-runner badge are
+    /// overlaid in the same slot and pinned to it; the action methods toggle which
+    /// one is shown. Because the slot height is fixed, showing the badge never
+    /// reflows the layout — the toggle and entry buttons stay put.
+    private func makeResultSlot() -> UIView {
+        let slot = UIView()
+        slot.translatesAutoresizingMaskIntoConstraints = false
+
+        let secondaryStack = UIStackView(arrangedSubviews: [lblRunnerInfo, lblSecondaryInfo, lblAdded])
+        secondaryStack.axis = .vertical
+        secondaryStack.alignment = .fill
+        secondaryStack.spacing = 2
+        secondaryStack.translatesAutoresizingMaskIntoConstraints = false
+        slot.addSubview(secondaryStack)
+
+        runnerBadge.translatesAutoresizingMaskIntoConstraints = false
+        slot.addSubview(runnerBadge)
+
+        NSLayoutConstraint.activate([
+            slot.heightAnchor.constraint(equalToConstant: 120),
+
+            secondaryStack.leadingAnchor.constraint(equalTo: slot.leadingAnchor),
+            secondaryStack.trailingAnchor.constraint(equalTo: slot.trailingAnchor),
+            secondaryStack.centerYAnchor.constraint(equalTo: slot.centerYAnchor),
+
+            runnerBadge.leadingAnchor.constraint(equalTo: slot.leadingAnchor),
+            runnerBadge.trailingAnchor.constraint(equalTo: slot.trailingAnchor),
+            runnerBadge.topAnchor.constraint(equalTo: slot.topAnchor),
+            runnerBadge.bottomAnchor.constraint(equalTo: slot.bottomAnchor),
+        ])
+        return slot
     }
 
     private func makeToggleRow() -> UIView {
