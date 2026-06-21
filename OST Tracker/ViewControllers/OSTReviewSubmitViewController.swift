@@ -90,7 +90,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         menuBtn.setTitle("\u{2630}", for: .normal) // ☰
         menuBtn.setTitleColor(Theme.label, for: .normal)
         menuBtn.titleLabel?.font = .systemFont(ofSize: 24)
-        menuBtn.addTarget(self, action: #selector(onRightMenu as () -> Void), for: .touchUpInside)
+        menuBtn.addTarget(self, action: #selector(onRightMenu), for: .touchUpInside)
         menuBtn.widthAnchor.constraint(equalToConstant: 34).isActive = true
 
         exportButton.setTitle("Export", for: .normal)
@@ -289,12 +289,9 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         }
     }
 
-    @objc func onRightMenu(_ sender: Any) {
+    @objc func onRightMenu() {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
-
-    // Parameterless overload so the menu button's selector matches.
-    @objc func onRightMenu() { onRightMenu(self) }
 
     @objc func onSubmit(_ sender: Any) {
         UIDevice.current.playInputClick()
