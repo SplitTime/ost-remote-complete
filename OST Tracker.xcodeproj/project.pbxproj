@@ -245,6 +245,7 @@
 		D5C5BC56217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		D5C5BC57217E0B980071D6CF /* OSTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5BC55217E0B980071D6CF /* OSTSound.m */; };
 		DEC344A5901722DC72E4C591 /* AutoSyncEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126838CE715CD49532177CC /* AutoSyncEngineTests.swift */; };
+		AAEE110000000000000000B1 /* AutoSyncEligibilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE110000000000000000F1 /* AutoSyncEligibilityTests.swift */; };
 		E0855920D4908DBFCDA77FEF /* OSTRightMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C32EE56853BF4E478C1CFE2 /* OSTRightMenuViewController.swift */; };
 		E1210C56E67F408C2454FB3E /* OSTAuthBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B24303991152304B820254 /* OSTAuthBridge.swift */; };
 		E5A7A3248C062B858F1529EA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BAED92F7B8A3B859B03965 /* LoginViewController.swift */; };
@@ -413,6 +414,7 @@
 		BE70D922A1F4FED852ECB3D9 /* OSTBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTBackend.swift; path = "OST Tracker/Swift/OSTBackend.swift"; sourceTree = "<group>"; };
 		C0A1F1C0DE5704C7A11C3E01 /* ConnectivityCheckerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConnectivityCheckerTests.swift; path = "OST TrackerTests/Swift/ConnectivityCheckerTests.swift"; sourceTree = "<group>"; };
 		C126838CE715CD49532177CC /* AutoSyncEngineTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngineTests.swift; path = "OST TrackerTests/Swift/AutoSyncEngineTests.swift"; sourceTree = "<group>"; };
+		AAEE110000000000000000F1 /* AutoSyncEligibilityTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEligibilityTests.swift; path = "OST TrackerTests/Swift/AutoSyncEligibilityTests.swift"; sourceTree = "<group>"; };
 		C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadView.swift; path = "OST Tracker/Swift/NumberPadView.swift"; sourceTree = "<group>"; };
 		CD2AE8C5A28F8375CB2CB7CB /* NumberPadViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NumberPadViewTests.swift; path = "OST TrackerTests/Swift/NumberPadViewTests.swift"; sourceTree = "<group>"; };
 		D359F175681A099706509F21 /* AutoSyncScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncScheduler.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncScheduler.swift"; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				8787A94BCAFE95DD1345B3B6 /* BottomSheetPickerTests.swift */,
 				2B6F4B33014E05F02E69E8B3 /* AutoSyncControllerTests.swift */,
 				C126838CE715CD49532177CC /* AutoSyncEngineTests.swift */,
+				AAEE110000000000000000F1 /* AutoSyncEligibilityTests.swift */,
 				A03DBD0080108659979FB912 /* AutoSyncStatusTests.swift */,
 				7F1D7FC4F826A30098C0F452 /* LiveTimeSubmitterTests.swift */,
 				D9642AFAB581C9F265888D7E /* MenuRowTests.swift */,
@@ -1259,6 +1262,7 @@
 				56BD86D00D0D0D2CF76968D3 /* RaceStatusTests.swift in Sources */,
 				3656E03ADC163D6DCBBBDEC7 /* AutoSyncControllerTests.swift in Sources */,
 				DEC344A5901722DC72E4C591 /* AutoSyncEngineTests.swift in Sources */,
+				AAEE110000000000000000B1 /* AutoSyncEligibilityTests.swift in Sources */,
 				561AADB59F503F338CC7E536 /* AutoSyncStatusTests.swift in Sources */,
 				009831BADDC027659B3D29C1 /* LiveTimeSubmitterTests.swift in Sources */,
 				788968DCA5FF4A27DE6CF54E /* MenuRowTests.swift in Sources */,

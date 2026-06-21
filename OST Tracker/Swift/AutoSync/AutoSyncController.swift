@@ -20,6 +20,15 @@ import Foundation
 import CoreData
 import UIKit
 
+/// Pure hold-aware filter: the entry currently displayed (held) on the entry
+/// screen is kept out of the Auto Sync batch until the user confirms or moves on.
+/// Manual sync passes `heldEntryID: nil`, so it always drains everything.
+func entriesEligibleForAutoSync(_ all: [NSManagedObject],
+                                heldEntryID: NSManagedObjectID?) -> [NSManagedObject] {
+    guard let held = heldEntryID else { return all }
+    return all.filter { $0.objectID != held }
+}
+
 @objc(AutoSyncController)
 final class AutoSyncController: NSObject {
     @objc static let shared = AutoSyncController()
@@ -32,6 +41,10 @@ final class AutoSyncController: NSObject {
     private var inFlightEntries: [NSManagedObject] = []
     private var usedAlternateServer = false
 
+    /// The entry currently displayed (held) on the entry screen. Auto Sync skips it
+    /// until the user confirms, records the next runner, types a new bib, or leaves.
+    private var heldEntryID: NSManagedObjectID?
+
     @objc var showToastOnCompletion = true
     @objc private(set) var isSyncing = false
 
@@ -40,7 +53,7 @@ final class AutoSyncController: NSObject {
         let enabled = UserDefaults.standard.bool(forKey: Self.enabledKey)
         engine = AutoSyncEngine(
             enabled: enabled, debounceSeconds: 3, scheduler: TimerScheduler(),
-            pendingCount: { [weak self] in self?.fetchPending().count ?? 0 },
+            pendingCount: { [weak self] in self?.fetchPending(excludingHeld: true).count ?? 0 },
             performSync: { [weak self] completion in self?.performAutoSync(completion) },
             onStatusChange: { [weak self] status in self?.broadcast(status) })
 
@@ -84,8 +97,30 @@ final class AutoSyncController: NSObject {
     }
 
     @objc func applicationDidBecomeActive() { engine.enterForeground() }
-    @objc func applicationDidEnterBackground() { engine.enterBackground() }
+    @objc func applicationDidEnterBackground() {
+        // Never leave a recorded time stuck behind the hold: drop it so the next
+        // foreground resume syncs it. No poke needed — enterForeground re-attempts.
+        heldEntryID = nil
+        engine.enterBackground()
+    }
     @objc func forceRetry() { engine.forceRetry() }
+
+    // MARK: - On-screen hold (entry screen)
+
+    /// Mark the entry currently displayed on the entry screen as held: Auto Sync
+    /// skips it until it's released. Refreshes status only — does not start a sync.
+    @objc func holdEntry(_ entry: NSManagedObject) {
+        heldEntryID = entry.objectID
+        engine.refresh()
+    }
+
+    /// Release the held entry back into the Auto Sync batch and poke a sync on the
+    /// normal debounce. No-op (no poke) when nothing is held.
+    @objc func releaseHeldEntry() {
+        guard heldEntryID != nil else { return }
+        heldEntryID = nil
+        engine.noteEntriesChanged()
+    }
 
     // MARK: - Observers (parity with the old delegate list)
 
@@ -113,12 +148,15 @@ final class AutoSyncController: NSObject {
 
     // MARK: - Sync execution
 
-    private func fetchPending() -> [NSManagedObject] {
+    /// `excludingHeld` is true for the auto path (skip the on-screen held entry) and
+    /// false for the manual path (Sync Now drains everything, hold ignored).
+    private func fetchPending(excludingHeld: Bool = false) -> [NSManagedObject] {
         guard let eventId = CurrentCourse.getCurrentCourse()?.eventId else { return [] }
         let req = NSFetchRequest<NSManagedObject>(entityName: "EntryModel")
         req.predicate = NSPredicate(format: "combinedCourseId == %@ && submitted == NIL && bibNumber != %@", eventId, "-1")
         let ctx = NSManagedObjectContext.mr_default()
-        return (try? ctx.fetch(req)) ?? []
+        let all = (try? ctx.fetch(req)) ?? []
+        return entriesEligibleForAutoSync(all, heldEntryID: excludingHeld ? heldEntryID : nil)
     }
 
     /// Used by the engine's auto path: gather + sync, classifying the submit
@@ -126,7 +164,7 @@ final class AutoSyncController: NSObject {
     /// URL error (-1009) maps to `.offline` (the same test the legacy Review pane
     /// used for "device is not connected"); any other failure maps to `.failed`.
     private func performAutoSync(_ completion: @escaping (SyncOutcome) -> Void) {
-        runSync(fetchPending()) { result in
+        runSync(fetchPending(excludingHeld: true)) { result in
             switch result {
             case .success:
                 completion(.success)

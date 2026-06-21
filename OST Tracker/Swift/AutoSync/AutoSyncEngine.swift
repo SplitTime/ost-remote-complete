@@ -96,6 +96,10 @@ final class AutoSyncEngine {
         attemptSync()
     }
 
+    /// Re-publish the current status without scheduling a sync. Used when the
+    /// on-screen hold changes the eligible pending count but nothing should sync yet.
+    func refresh() { publish() }
+
     // MARK: - Core
 
     private func attemptSync() {
