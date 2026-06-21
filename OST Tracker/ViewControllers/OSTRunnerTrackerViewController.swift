@@ -62,9 +62,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     // MARK: - State
 
     private var timer: Timer?
-    private var dayString = ""
     private var racer: EffortModel?
-    private var entryDateTime: Date?
     private var lastEntry: EntryModel?
     private var leftBitKey: String?
     private var rightBitKey: String?
@@ -627,8 +625,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         let date = Date()
         lblTime.text = Self.clockFormatter.string(from: date)
         lblTimeOfTheDay.text = Self.dayClockFormatter.string(from: date)
-        dayString = Self.dayKeyFormatter.string(from: date)
-        entryDateTime = date
     }
 
     // MARK: - Actions
@@ -670,10 +666,14 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         entry.bibNumber = txtBibNumber.text
         entry.bitKey = ((sender as? UIButton) == btnLeft) ? leftBitKey : rightBitKey
 
+        // Capture the tap moment once so the recorded time is exact, not whatever
+        // the ~10Hz clock tick last wrote (which could be up to 100ms stale).
+        let now = Date()
+        let timeString = Self.clockFormatter.string(from: now)
         let tzOffset = TimeZone.current.secondsFromGMT() / 60 / 60
         let sign = tzOffset < 0 ? "" : "+"
-        entry.absoluteTime = String(format: "%@ %@\(sign)%02d:00", dayString, lblTime.text ?? "", tzOffset)
-        entry.displayTime = lblTime.text
+        entry.absoluteTime = String(format: "%@ %@\(sign)%02d:00", Self.dayKeyFormatter.string(from: now), timeString, tzOffset)
+        entry.displayTime = timeString
         entry.withPacer = btnPacer.isSelected ? "true" : "false"
         entry.stoppedHere = btnStopped.isSelected ? "true" : "false"
         entry.courseName = course.eventName
@@ -694,8 +694,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
             }
         }
 
-        entry.entryTime = entryDateTime
-        entry.timeEntered = Date()
+        entry.entryTime = now
+        entry.timeEntered = now
         if let racer = racer { entry.fullName = racer.fullName }
         entry.source = "ost-remote-\(OSTSessionManager.getUUIDString() ?? "")"
 

@@ -185,9 +185,9 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         guard let course = CurrentCourse.getCurrentCourse(), let courseId = course.eventId else { return }
 
         let all = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@", courseId)) as? [EntryModel]) ?? []
-        var titlesSet = Set<String>()
-        for entry in all { if let name = entry.splitName { titlesSet.insert(name) } }
-        var titles = Array(titlesSet)
+        // Group once in memory instead of re-fetching per split (was N+1 fetches).
+        let bySplit = Dictionary(grouping: all) { $0.splitName ?? "" }
+        var titles = Array(bySplit.keys.filter { !$0.isEmpty })
 
         // Surface the current aid station's split at the top.
         if let currentSplit = course.splitName, let idx = titles.firstIndex(of: currentSplit) {
@@ -206,7 +206,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         }
 
         for title in splitTitles {
-            let splitEntries = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && splitName == %@", courseId, title)) as? [EntryModel]) ?? []
+            let splitEntries = bySplit[title] ?? []
             let sorted = (splitEntries as NSArray).sortedArray(using: [NSSortDescriptor(key: sortKey, ascending: ascending)]) as? [EntryModel] ?? splitEntries
             entries.append(sorted)
         }
