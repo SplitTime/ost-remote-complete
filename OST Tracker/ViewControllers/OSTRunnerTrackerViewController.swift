@@ -659,11 +659,14 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
     @IBAction func onEntryButton(_ sender: Any) {
         txtBibNumber.removeObserver(self, forKeyPath: "text")
+        // Re-add on every exit path so the observer count stays balanced with
+        // deinit's removeObserver. An early return below would otherwise leave
+        // the field unobserved and trap ("not registered") on teardown.
+        defer { txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil) }
         UIDevice.current.playInputClick()
 
         if !BibEntry.isRecordable(txtBibNumber.text) {
             OSTSound.shared().play("ost-remote-bib-not-found")
-            txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
             return
         }
 
@@ -742,7 +745,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         btnStopped.isSelected = false
         refreshToggleStyle(btnPacer)
         refreshToggleStyle(btnStopped)
-        txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
