@@ -217,12 +217,12 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         updateSyncButtonState()
     }
 
-    /// The entries the Sync button submits for the current course: unsynced and
-    /// not the "-1" placeholder. Single source of truth for the Sync count, the
-    /// Submit action, and (matching predicate) the base class's badge count.
+    /// The entries the Sync button submits for the current course: everything
+    /// unsynced. Single source of truth for the Sync count, the Submit action, and
+    /// (matching predicate) the base class's badge count.
     private func entriesToSync() -> [EntryModel] {
         guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return [] }
-        return (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && submitted == NIL && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
+        return (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && submitted == NIL", courseId)) as? [EntryModel]) ?? []
     }
 
     private func unsyncedCount() -> Int { entriesToSync().count }
@@ -327,7 +327,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     @objc func onExport(_ sender: Any) {
         guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return }
-        let toExport = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
+        let toExport = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@", courseId)) as? [EntryModel]) ?? []
         if toExport.isEmpty {
             ostPresentAlert(title: "", message: noEntriesEntered ? "No times have been entered." : "All times have been synced.")
             return

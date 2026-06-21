@@ -171,7 +171,7 @@ final class AutoSyncController: NSObject {
     private func fetchPending(excludingHeld: Bool = false) -> [NSManagedObject] {
         guard let eventId = CurrentCourse.getCurrentCourse()?.eventId else { return [] }
         let req = NSFetchRequest<NSManagedObject>(entityName: "EntryModel")
-        req.predicate = NSPredicate(format: "combinedCourseId == %@ && submitted == NIL && bibNumber != %@", eventId, "-1")
+        req.predicate = NSPredicate(format: "combinedCourseId == %@ && submitted == NIL", eventId)
         let ctx = NSManagedObjectContext.mr_default()
         let all = (try? ctx.fetch(req)) ?? []
         return entriesEligibleForAutoSync(all, heldEntryID: excludingHeld ? heldEntryID : nil)
