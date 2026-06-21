@@ -32,7 +32,10 @@ final class ReviewEntryCell: UITableViewCell {
         bibLabel.font = Theme.Font.field
         inOutLabel.font = Theme.Font.field
         nameLabel.font = Theme.Font.field
-        nameLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        // The name hugs its own text and sits flush after the time; only a very
+        // long name (low compression resistance) truncates rather than shoving the
+        // right-hand group off the cell.
+        nameLabel.setContentHuggingPriority(.required, for: .horizontal)
         nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
         for v in [pacerView, stoppedView] {
@@ -43,7 +46,17 @@ final class ReviewEntryCell: UITableViewCell {
         let icons = UIStackView(arrangedSubviews: [pacerView, stoppedView])
         icons.spacing = 6
 
-        let row = UIStackView(arrangedSubviews: [timeLabel, nameLabel, icons, bibLabel, inOutLabel])
+        // A single empty spacer absorbs all the row's slack, so every row lays out
+        // identically regardless of which icons (if any) are showing: time + name
+        // flush on the left, icon → bib → In/Out group flush on the right. Relying
+        // on a label to stretch is ambiguous — a UILabel and the icon UIStackView
+        // both default to content-hugging 250 and the stack splits slack between
+        // them unpredictably. The spacer is the only low-hugging view, so it wins.
+        let spacer = UIView()
+        spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
+        let row = UIStackView(arrangedSubviews: [timeLabel, nameLabel, spacer, icons, bibLabel, inOutLabel])
         row.axis = .horizontal
         row.alignment = .center
         row.spacing = 10

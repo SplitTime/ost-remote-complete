@@ -186,32 +186,36 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         }
     }
 
+    // Picking a destination always *closes* the drawer — never toggle here, or a
+    // destination that closes the drawer itself (see OSTRunnerTrackerViewController)
+    // would flip `isOpen` first and turn this toggle into a re-open.
+
     @objc private func onLiveEntry() {
         AppDelegate.getInstance()?.showTracker()
-        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
     @objc private func onReviewSync() {
         AppDelegate.getInstance()?.showReview()
-        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
     @objc private func onCrossCheck() {
         let storyboard = UIStoryboard(name: "CrossCheck", bundle: nil)
         if let controller = storyboard.instantiateInitialViewController() {
             AppDelegate.getInstance()?.rightMenuVC.centerViewController = controller
-            AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+            AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
         }
     }
 
     @objc private func onLiveReads() {
         AppDelegate.getInstance()?.rightMenuVC.centerViewController = OSTLiveReadsViewController()
-        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
     @objc private func onRaceOverview() {
         AppDelegate.getInstance()?.rightMenuVC.centerViewController = OSTRaceOverviewViewController()
-        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+        AppDelegate.getInstance()?.rightMenuVC.closeDrawer()
     }
 
     @objc private func onAutoSyncSwitch(_ sender: UISwitch) {

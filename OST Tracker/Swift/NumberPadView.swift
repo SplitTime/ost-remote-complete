@@ -27,6 +27,11 @@ final class NumberPadView: UIView {
     /// Field this pad edits. Weak to avoid a retain cycle with the host.
     weak var textField: UITextField?
 
+    /// Called after the pad mutates the attached field's text. Lets hosts react
+    /// to edits the way `.editingChanged` would for a system keyboard, which does
+    /// not fire for the programmatic `.text` assignments this pad makes.
+    var onChange: (() -> Void)?
+
     private let backspaceGlyph = "\u{232B}" // ⌫
 
     /// Default size used when created without a frame, so the pad still has
@@ -63,11 +68,13 @@ final class NumberPadView: UIView {
     func insertDigit(_ digit: String) {
         guard let field = textField else { return }
         field.text = (field.text ?? "") + digit
+        onChange?()
     }
 
     func deleteBackward() {
         guard let field = textField, let text = field.text, !text.isEmpty else { return }
         field.text = String(text.dropLast())
+        onChange?()
     }
 
     // MARK: - Layout
