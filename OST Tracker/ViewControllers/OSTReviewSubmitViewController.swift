@@ -41,6 +41,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     private let sortOptions = ["Name", "Time Displayed", "Time Entered", "Bib #"]
     private var sortSelection = 2 // default: Time Entered
+    private static let sortSelectionDefaultsKey = "reviewScreenPicklistValue"
 
     // MARK: - Lifecycle
 
@@ -53,7 +54,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         menuButton = menuBtn
         badgeLabel = badgeView
 
-        if let stored = UserDefaults.standard.object(forKey: "reviewScreenPicklistValue") as? NSNumber {
+        if let stored = UserDefaults.standard.object(forKey: Self.sortSelectionDefaultsKey) as? NSNumber {
             sortSelection = stored.intValue
         }
         updateSortButtonTitle()
@@ -295,8 +296,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
                                   selected: sortOptions[sortSelection]) { [weak self] choice in
             guard let self = self, let idx = self.sortOptions.firstIndex(of: choice) else { return }
             self.sortSelection = idx
-            UserDefaults.standard.set(idx, forKey: "reviewScreenPicklistValue")
-            UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(idx, forKey: Self.sortSelectionDefaultsKey)
             self.updateSortButtonTitle()
             self.loadData()
         }
@@ -391,7 +391,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         let entry = entries[indexPath.section][indexPath.row]
 
         if AutoSyncController.shared.isSyncingEntry(entry) {
-            ostPresentAlert(title: "Unable to edit time", message: "Time is been synced.")
+            ostPresentAlert(title: "Unable to edit time", message: "Time is being synced.")
             return
         }
 

@@ -35,6 +35,10 @@ final class ReviewPresentationTests: XCTestCase {
         XCTAssertNil(display(bib: nil).bib)
     }
 
+    func test_display_emptyBib_isNil_notLoneHash() {
+        XCTAssertNil(display(bib: "").bib, "an empty bib must render no chip, not a lone \"#\"")
+    }
+
     func test_display_inOutCapitalized() {
         XCTAssertEqual(display(bitKey: "in").inOut, "In")
         XCTAssertEqual(display(bitKey: "out").inOut, "Out")
