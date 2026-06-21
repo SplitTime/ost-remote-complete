@@ -16,6 +16,12 @@ final class AutoSyncEngine {
     private let debounceSeconds: TimeInterval
     private let backoff: [TimeInterval] = [5, 15, 30, 60]
 
+    /// Upper bound on how long a single sync may run before we assume its
+    /// completion was dropped and recover. Generous so it never fires on a slow
+    /// but legitimate multi-batch submit.
+    static let defaultWatchdogSeconds: TimeInterval = 120
+    private let watchdogSeconds: TimeInterval
+
     private var enabled: Bool
     private(set) var isSyncing = false
     private var active = true
@@ -26,15 +32,21 @@ final class AutoSyncEngine {
     private var lastFailure: AutoSyncState?
     private var debounceToken: AutoSyncCancellable?
     private var retryToken: AutoSyncCancellable?
+    private var watchdogToken: AutoSyncCancellable?
+    /// Bumped each time a sync starts so a late or duplicate completion (or a
+    /// watchdog that lost the race to the real callback) can be ignored.
+    private var syncGeneration = 0
     private var lastPublished: AutoSyncStatus?
 
     init(enabled: Bool, debounceSeconds: TimeInterval = 3,
+         watchdogSeconds: TimeInterval = AutoSyncEngine.defaultWatchdogSeconds,
          scheduler: AutoSyncScheduler,
          pendingCount: @escaping () -> Int,
          performSync: @escaping (@escaping (SyncOutcome) -> Void) -> Void,
          onStatusChange: @escaping (AutoSyncStatus) -> Void) {
         self.enabled = enabled
         self.debounceSeconds = debounceSeconds
+        self.watchdogSeconds = watchdogSeconds
         self.scheduler = scheduler
         self.pendingCount = pendingCount
         self.performSync = performSync
@@ -83,6 +95,9 @@ final class AutoSyncEngine {
 
     func enterForeground() {
         active = true
+        // Connectivity most often recovers exactly here, so retry from a clean
+        // backoff rather than the long delay accumulated while suspended.
+        backoffIndex = 0
         if enabled, pendingCount() > 0 { attemptSync() } else { publish() }
     }
 
@@ -107,25 +122,43 @@ final class AutoSyncEngine {
         retryToken?.cancel(); retryToken = nil
         isSyncing = true
         publish()
+
+        syncGeneration += 1
+        let generation = syncGeneration
+        // Guard against a performSync that never calls back: a dropped network
+        // completion would otherwise latch isSyncing forever. If the watchdog
+        // fires first we treat the attempt as failed and let the retry loop recover.
+        watchdogToken?.cancel()
+        watchdogToken = scheduler.schedule(after: watchdogSeconds) { [weak self] in
+            self?.finishSync(generation: generation, outcome: .failed)
+        }
         performSync { [weak self] outcome in
-            guard let self = self else { return }
-            self.isSyncing = false
-            switch outcome {
-            case .success:
-                self.lastFailure = nil
-                self.lastSyncDate = Date()
-                self.backoffIndex = 0
-                self.publish()
-                if self.pendingCount() > 0 { self.scheduleRetry() } // more arrived mid-sync
-            case .offline:
-                self.lastFailure = .offline
-                self.publish()
-                self.scheduleRetry()
-            case .failed:
-                self.lastFailure = .failed
-                self.publish()
-                self.scheduleRetry()
-            }
+            self?.finishSync(generation: generation, outcome: outcome)
+        }
+    }
+
+    /// Apply the result of a sync attempt exactly once. A callback that lost the
+    /// race to the watchdog — or arrived after a background/disable reset — carries
+    /// a stale generation (or finds isSyncing already false) and is ignored.
+    private func finishSync(generation: Int, outcome: SyncOutcome) {
+        guard isSyncing, generation == syncGeneration else { return }
+        watchdogToken?.cancel(); watchdogToken = nil
+        isSyncing = false
+        switch outcome {
+        case .success:
+            lastFailure = nil
+            lastSyncDate = Date()
+            backoffIndex = 0
+            publish()
+            if pendingCount() > 0 { scheduleRetry() } // more arrived mid-sync
+        case .offline:
+            lastFailure = .offline
+            publish()
+            scheduleRetry()
+        case .failed:
+            lastFailure = .failed
+            publish()
+            scheduleRetry()
         }
     }
 
@@ -143,10 +176,22 @@ final class AutoSyncEngine {
     private func cancelTimers() {
         debounceToken?.cancel(); debounceToken = nil
         retryToken?.cancel(); retryToken = nil
+        // Abandon any in-flight sync too. Its late callback carries a stale
+        // generation, and the next attempt re-derives pending from Core Data, so
+        // dropping the engine-side result here is safe and keeps isSyncing from
+        // latching across a background/disable teardown.
+        watchdogToken?.cancel(); watchdogToken = nil
+        if isSyncing {
+            isSyncing = false
+            syncGeneration += 1
+        }
     }
 
     private func publish() {
         let s = currentStatus
+        // Once we've resolved to synced there's nothing outstanding we failed on;
+        // drop the stale failure so a later new entry rests at .pending, not .failed.
+        if s.state == .synced { lastFailure = nil }
         guard s != lastPublished else { return }
         lastPublished = s
         onStatusChange(s)

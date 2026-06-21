@@ -9,17 +9,28 @@ private final class ManualScheduler: AutoSyncScheduler {
     }
     struct Scheduled { let delay: TimeInterval; let work: () -> Void; let token: Token }
     private(set) var scheduled: [Scheduled] = []
-    var delays: [TimeInterval] { scheduled.filter { !$0.token.cancelled }.map { $0.delay } }
+    private static let watchdog = AutoSyncEngine.defaultWatchdogSeconds
+    // Retry/debounce delays only — exclude the debounce (3) and the sync watchdog.
+    var delays: [TimeInterval] {
+        scheduled.filter { !$0.token.cancelled && $0.delay != Self.watchdog }.map { $0.delay }
+    }
     var allRetryDelays: [TimeInterval] = []
 
     func schedule(after seconds: TimeInterval, _ work: @escaping () -> Void) -> AutoSyncCancellable {
-        if seconds != 3 { allRetryDelays.append(seconds) }
+        if seconds != 3 && seconds != Self.watchdog { allRetryDelays.append(seconds) }
         let t = Token(); scheduled.append(Scheduled(delay: seconds, work: work, token: t)); return t
     }
-    /// Fire all currently-pending (non-cancelled) blocks once, in order.
+    /// Fire all currently-pending (non-cancelled) blocks once, in order — except
+    /// the long-running sync watchdog, which is fired explicitly via fireWatchdog().
     func fireAll() {
-        let live = scheduled.filter { !$0.token.cancelled }
-        scheduled.removeAll()
+        let live = scheduled.filter { !$0.token.cancelled && $0.delay != Self.watchdog }
+        scheduled.removeAll { s in live.contains { $0.token === s.token } }
+        live.forEach { $0.work() }
+    }
+    /// Fire only the armed sync watchdog(s), simulating a dropped completion.
+    func fireWatchdog() {
+        let live = scheduled.filter { !$0.token.cancelled && $0.delay == Self.watchdog }
+        scheduled.removeAll { s in live.contains { $0.token === s.token } }
         live.forEach { $0.work() }
     }
 }
@@ -150,6 +161,42 @@ final class AutoSyncEngineTests: XCTestCase {
         XCTAssertEqual(syncCalls, 0, "no sync while backgrounded")
         e.enterForeground()
         XCTAssertEqual(syncCalls, 1, "foreground resumes and syncs pending")
+    }
+
+    func test_watchdog_recoversDroppedCompletion() {
+        pending = 1
+        let e = makeEngine()
+        e.noteEntriesChanged(); sched.fireAll()              // attempt 1 starts
+        XCTAssertEqual(syncCalls, 1)
+        XCTAssertEqual(e.currentStatus.state, .syncing)
+        pendingSyncCompletion = nil                          // completion is never called
+        sched.fireWatchdog()                                 // watchdog fires instead
+        XCTAssertEqual(e.currentStatus.state, .failed, "stuck sync recovers to failed")
+        sched.fireAll()                                      // retry fires
+        XCTAssertEqual(syncCalls, 2, "engine re-attempts after watchdog recovery")
+    }
+
+    func test_lateCompletion_afterWatchdog_isIgnored() {
+        pending = 1
+        let e = makeEngine()
+        e.noteEntriesChanged(); sched.fireAll()
+        let stale = pendingSyncCompletion                    // capture the in-flight completion
+        sched.fireWatchdog()                                 // watchdog already resolved this attempt
+        XCTAssertEqual(e.currentStatus.state, .failed)
+        stale?(.success)                                     // a late success must not flip state
+        XCTAssertEqual(e.currentStatus.state, .failed, "stale completion ignored after watchdog")
+    }
+
+    func test_foreground_resetsBackoff() {
+        pending = 1
+        let e = makeEngine()
+        e.noteEntriesChanged(); sched.fireAll()
+        fail()                                               // backoff advances past the first step
+        e.enterBackground()
+        e.enterForeground()                                  // resets backoff and re-attempts
+        XCTAssertEqual(syncCalls, 2)
+        fail()                                               // next failure should schedule at 5 again
+        XCTAssertEqual(lastRetryDelay(e), 5, "foreground reset the backoff to the first step")
     }
 
     // Helpers: the retry timer is the only multi-second schedule the engine makes
