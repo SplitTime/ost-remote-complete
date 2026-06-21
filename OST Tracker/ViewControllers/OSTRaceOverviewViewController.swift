@@ -3,7 +3,7 @@ import UIKit
 /// Read-only "race state" screen. Manual refresh. Two modes on one page:
 /// By Runner (search an effort → their splits) and By Aid Station (pick a split →
 /// the whole field). Event selector hides when the group has one event.
-final class OSTRaceStatusViewController: OSTBaseViewController,
+final class OSTRaceOverviewViewController: OSTBaseViewController,
                                          UITableViewDataSource, UITableViewDelegate,
                                          UITextFieldDelegate {
 
@@ -254,7 +254,7 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
     // MARK: - UI construction
 
     private func buildUI() {
-        titleLabel.text = "Race Status"
+        titleLabel.text = "Race Overview"
         titleLabel.font = Theme.Font.title
         titleLabel.textColor = Theme.label
 

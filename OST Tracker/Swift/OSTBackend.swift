@@ -51,7 +51,7 @@ import Foundation
         request(LiveReadsRequest.path(groupId: groupId, splitName: splitName), completion: completion)
     }
 
-    // MARK: - Race Status reads (typed)
+    // MARK: - Race Overview reads (typed)
 
     func fetchSpread(eventSlug: String,
                      completion: @escaping (Result<EventSpread, Error>) -> Void) {

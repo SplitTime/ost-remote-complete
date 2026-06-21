@@ -1,7 +1,7 @@
 import Foundation
 
 /// Pure formatting for race-status times. No UIKit, no global state.
-enum RaceStatusFormat {
+enum RaceOverviewFormat {
 
     /// Elapsed since `start` as `H:MM`; hours are unbounded (race can exceed a day).
     static func elapsed(from start: Date, to t: Date) -> String {
@@ -130,8 +130,8 @@ func runnerProgress(_ e: EffortRow, spread: EventSpread) -> RunnerProgress {
             let date = k < subTimes.count ? subTimes[k] : nil
             if let date = date {
                 return RunnerStationLine(label: label,
-                                         elapsed: RaceStatusFormat.elapsed(from: start, to: date),
-                                         timeOfDay: "(\(RaceStatusFormat.clockWithDay(date, in: tz)))")
+                                         elapsed: RaceOverviewFormat.elapsed(from: start, to: date),
+                                         timeOfDay: "(\(RaceOverviewFormat.clockWithDay(date, in: tz)))")
             }
             return RunnerStationLine(label: label, elapsed: "—", timeOfDay: "")
         }
@@ -165,7 +165,7 @@ private func subTime(_ e: EffortRow, atSplit idx: Int, sub: Int) -> Date? {
 func fieldRow(_ e: EffortRow, status: EffortStatus, atSplit idx: Int,
               header: SplitHeader, start: Date, tz: TimeZone) -> FieldRow {
     func display(_ d: Date) -> String {
-        "\(RaceStatusFormat.elapsed(from: start, to: d)) (\(RaceStatusFormat.clockWithDay(d, in: tz)))"
+        "\(RaceOverviewFormat.elapsed(from: start, to: d)) (\(RaceOverviewFormat.clockWithDay(d, in: tz)))"
     }
     let statusText: String
     let timeText: String
