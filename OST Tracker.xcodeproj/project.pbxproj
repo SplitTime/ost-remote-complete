@@ -54,6 +54,8 @@
 		3AEBECA5574945897B072809 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234099818880084FF76C4A4 /* AutoSyncController.swift */; };
 		3C046498F0225804359B6EA4 /* PrimaryButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F20C83E347F676008C694 /* PrimaryButtonTests.swift */; };
 		3F85C867A8294929AA2C /* LiveReadsMerge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B979BBF614BE8B9DD /* LiveReadsMerge.swift */; };
+		A1F0000000000000000F0002 /* LiveReadsFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0000000000000000F0001 /* LiveReadsFormat.swift */; };
+		A1F0000000000000000F0003 /* LiveReadsFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0000000000000000F0001 /* LiveReadsFormat.swift */; };
 		40D89C1B4A8A374BDE3E8FA4 /* BottomSheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A710059E1088BE6106E8F2 /* BottomSheetPicker.swift */; };
 		413853394FFD4390A6ED8C64 /* BibEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC13D2600034E4CB79A1E5F /* BibEntry.swift */; };
 		424F45A6AEDD408A51665F48 /* LiveTimeEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C18108290E0987474D395 /* LiveTimeEntry.swift */; };
@@ -164,6 +166,7 @@
 		788968DCA5FF4A27DE6CF54E /* MenuRowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9642AFAB581C9F265888D7E /* MenuRowTests.swift */; };
 		7A8DDEFE6FEB6AE0F0D5111A /* AutoSyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A686F1D356962B113CE83F /* AutoSyncEngine.swift */; };
 		7D601200BB2A4398B455 /* LiveReadsMergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED544AB7CCD4472A253 /* LiveReadsMergeTests.swift */; };
+		A1F0000000000000000F0005 /* LiveReadsFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F0000000000000000F0004 /* LiveReadsFormatTests.swift */; };
 		7E43E7040188AB731BADBAE8 /* AutoSyncController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234099818880084FF76C4A4 /* AutoSyncController.swift */; };
 		83858563EB432C038511CCE2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E391C45FA035A2E0209DC /* APIClient.swift */; };
 		842F53692CB4DE7DB9B016CE /* AutoSyncScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D359F175681A099706509F21 /* AutoSyncScheduler.swift */; };
@@ -278,6 +281,7 @@
 		02287D88E202ABD75D0FC1F1 /* SubmitPayloadGoldenTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SubmitPayloadGoldenTests.swift; path = "OST TrackerTests/Swift/SubmitPayloadGoldenTests.swift"; sourceTree = "<group>"; };
 		0234099818880084FF76C4A4 /* AutoSyncController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncController.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncController.swift"; sourceTree = "<group>"; };
 		0C5B979BBF614BE8B9DD /* LiveReadsMerge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsMerge.swift; path = "OST Tracker/Swift/LiveReadsMerge.swift"; sourceTree = "<group>"; };
+		A1F0000000000000000F0001 /* LiveReadsFormat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsFormat.swift; path = "OST Tracker/Swift/LiveReadsFormat.swift"; sourceTree = "<group>"; };
 		0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+OSTSafeArea.m"; sourceTree = "<group>"; };
 		0FBF69BBAC4C431212BBF32D /* UIViewController+OSTSpinner.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIViewController+OSTSpinner.swift"; sourceTree = "<group>"; };
 		149C18108290E0987474D395 /* LiveTimeEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeEntry.swift; path = "OST Tracker/Swift/LiveTimeEntry.swift"; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 		7C55CF36A31CA556F5668957 /* OSTRaceStatusViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OSTRaceStatusViewController.swift; path = "OST Tracker/ViewControllers/OSTRaceStatusViewController.swift"; sourceTree = "<group>"; };
 		7E637BB81DCDE0328194710B /* LoginControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = "OST TrackerTests/Swift/LoginControllerTests.swift"; sourceTree = "<group>"; };
 		7ED544AB7CCD4472A253 /* LiveReadsMergeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsMergeTests.swift; path = "OST TrackerTests/Swift/LiveReadsMergeTests.swift"; sourceTree = "<group>"; };
+		A1F0000000000000000F0004 /* LiveReadsFormatTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveReadsFormatTests.swift; path = "OST TrackerTests/Swift/LiveReadsFormatTests.swift"; sourceTree = "<group>"; };
 		7F1D7FC4F826A30098C0F452 /* LiveTimeSubmitterTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LiveTimeSubmitterTests.swift; path = "OST TrackerTests/Swift/LiveTimeSubmitterTests.swift"; sourceTree = "<group>"; };
 		7FC88DAF080C3B90276428C3 /* LoginController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = "OST Tracker/Swift/LoginController.swift"; sourceTree = "<group>"; };
 		809E391C45FA035A2E0209DC /* APIClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIClient.swift; path = "OST Tracker/Swift/APIClient.swift"; sourceTree = "<group>"; };
@@ -533,6 +538,7 @@
 				3FC13D2600034E4CB79A1E5F /* BibEntry.swift */,
 				5KB4RMEIXZ3PDUBFGCPTVIWH /* RawTime.swift */,
 				0C5B979BBF614BE8B9DD /* LiveReadsMerge.swift */,
+				A1F0000000000000000F0001 /* LiveReadsFormat.swift */,
 				D788CC23A1A220B2901A /* LiveReadsRequest.swift */,
 				19F59D3151C20881599BF039 /* DesignSystem */,
 				95856145C94C4CE99E039377 /* Review */,
@@ -559,6 +565,7 @@
 				1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */,
 				VIW6YQ1J7WYYD24G41DKP7C9 /* RawTimeTests.swift */,
 				7ED544AB7CCD4472A253 /* LiveReadsMergeTests.swift */,
+				A1F0000000000000000F0004 /* LiveReadsFormatTests.swift */,
 				BB91083BFC39CDE8C3D3 /* LiveReadsRequestTests.swift */,
 				FB1FB4A5C73B534B9B27DF2E /* ThemeTests.swift */,
 				354E4C02CE3C8066359157B4 /* AppearanceControllerTests.swift */,
@@ -1100,6 +1107,7 @@
 				YEQOIHDHANGCO8FM7KNHGQX0 /* RawTime.swift in Sources */,
 				16845BB33D8C07587228 /* LiveReadsRequest.swift in Sources */,
 				3F85C867A8294929AA2C /* LiveReadsMerge.swift in Sources */,
+				A1F0000000000000000F0002 /* LiveReadsFormat.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5C /* OSTLiveReadsViewController.swift in Sources */,
 				2F5AB1F5E6634215E9CE16EA /* Theme.swift in Sources */,
 				18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */,
@@ -1188,6 +1196,7 @@
 				ESTJBA3JU6IXXCTE8Y04P6FX /* RawTime.swift in Sources */,
 				FEAFFF17A27634AD9187 /* LiveReadsRequest.swift in Sources */,
 				2E7F8C5A9B6D4A2C8F1E3B /* LiveReadsMerge.swift in Sources */,
+				A1F0000000000000000F0003 /* LiveReadsFormat.swift in Sources */,
 				C3D4E5F607182940B4C5D6E7 /* OSTLiveReadsViewController.swift in Sources */,
 				29304C5004AE7D8B6CFAE5ED /* Theme.swift in Sources */,
 				22361706FDD1D64AA6B5D207 /* AppearanceController.swift in Sources */,
@@ -1233,6 +1242,7 @@
 				67A35A34EE9E465F90D0E2A3 /* BibEntryTests.swift in Sources */,
 				YLVDQCFGQ33Y2ZNKO4J1KVSE /* RawTimeTests.swift in Sources */,
 				7D601200BB2A4398B455 /* LiveReadsMergeTests.swift in Sources */,
+				A1F0000000000000000F0005 /* LiveReadsFormatTests.swift in Sources */,
 				1E20B1532196107FCB71 /* LiveReadsRequestTests.swift in Sources */,
 				678DAAF1807129A2F49F62C2 /* ThemeTests.swift in Sources */,
 				64AAF28175013B6F59B14E96 /* AppearanceControllerTests.swift in Sources */,

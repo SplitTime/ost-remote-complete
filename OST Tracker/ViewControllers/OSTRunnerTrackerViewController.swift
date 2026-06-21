@@ -48,9 +48,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     private let lblSecondaryInfo = UILabel()
     private let lblAdded = UILabel()
     private let runnerBadge = OSTRunnerBadge(frame: CGRect(x: 0, y: 0, width: 320, height: 120))
-    // Commits the just-recorded entry: clears the badge and releases it to Auto Sync.
-    // Shown only while the runner badge is visible; overlaid so the slot never reflows.
-    private let btnConfirm = UIButton(type: .system)
 
     // Toggle row: a horizontal stack so the pacer toggle can be hidden cleanly.
     private let toggleRow = UIStackView()
@@ -189,7 +186,19 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         ostPositionBadgeAtMenu()
+        refreshDynamicBorders()
         runnerBadge.adjustFontSizes()
+    }
+
+    /// Re-resolves layer border colors that were set from dynamic Theme colors as
+    /// CGColors (which don't follow a light/dark switch). Without this the menu
+    /// badge's ring stayed white in dark mode.
+    private func refreshDynamicBorders() {
+        guard #available(iOS 13.0, *) else { return }
+        syncBadgeLabel.layer.borderColor = Theme.secondaryBackground.resolvedColor(with: traitCollection).cgColor
+        let separator = Theme.separator.resolvedColor(with: traitCollection).cgColor
+        btnStopped.layer.borderColor = separator
+        btnPacer.layer.borderColor = separator
     }
 
     /// Positions the sync badge as a corner badge poking out beyond the menu
@@ -385,20 +394,10 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         slot.addSubview(secondaryStack)
 
         runnerBadge.translatesAutoresizingMaskIntoConstraints = false
+        // The Confirm button lives inside the badge (center-bottom of its detail
+        // column); the host just wires the action and toggles its visibility.
+        runnerBadge.confirmButton.addTarget(self, action: #selector(onConfirmEntry(_:)), for: .touchUpInside)
         slot.addSubview(runnerBadge)
-
-        // Confirm pill, overlaid on the badge's top-right corner (above the badge so
-        // its tap isn't swallowed by the badge's edit gesture). Hidden until a badge shows.
-        btnConfirm.setTitle("Confirm", for: .normal)
-        btnConfirm.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
-        btnConfirm.setTitleColor(.white, for: .normal)
-        btnConfirm.backgroundColor = Theme.tint
-        btnConfirm.layer.cornerRadius = 15
-        btnConfirm.contentEdgeInsets = UIEdgeInsets(top: 6, left: 16, bottom: 6, right: 16)
-        btnConfirm.isHidden = true
-        btnConfirm.addTarget(self, action: #selector(onConfirmEntry(_:)), for: .touchUpInside)
-        btnConfirm.translatesAutoresizingMaskIntoConstraints = false
-        slot.addSubview(btnConfirm)
 
         NSLayoutConstraint.activate([
             slot.heightAnchor.constraint(equalToConstant: 120),
@@ -411,10 +410,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
             runnerBadge.trailingAnchor.constraint(equalTo: slot.trailingAnchor),
             runnerBadge.topAnchor.constraint(equalTo: slot.topAnchor),
             runnerBadge.bottomAnchor.constraint(equalTo: slot.bottomAnchor),
-
-            btnConfirm.topAnchor.constraint(equalTo: slot.topAnchor, constant: 6),
-            btnConfirm.trailingAnchor.constraint(equalTo: slot.trailingAnchor, constant: -6),
-            btnConfirm.heightAnchor.constraint(equalToConstant: 30),
         ])
         return slot
     }
@@ -645,13 +640,10 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     @objc func cleanData() {
         lastEntry = nil
         runnerBadge.isHidden = true
-        btnConfirm.isHidden = true
+        runnerBadge.confirmButton.isHidden = true
         lblAdded.isHidden = true
         lblRunnerInfo.isHidden = true
-        btnPacer.isSelected = false
-        btnStopped.isSelected = false
-        refreshToggleStyle(btnPacer)
-        refreshToggleStyle(btnStopped)
+        resetFlagToggles()
         txtBibNumber.text = nil
         lblInTimeBadge.isHidden = true
         lblOutTimeBadge.isHidden = true
@@ -735,16 +727,16 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         // (Recording the next runner overwrites the hold, releasing this one.)
         AutoSyncController.shared.holdEntry(entry)
         runnerBadge.isHidden = false
-        btnConfirm.isHidden = false
-        runnerBadge.update(with: runnerBadgeViewModel(racer: racer, time: lblTime.text, bibNumber: txtBibNumber.text))
+        runnerBadge.confirmButton.isHidden = false
+        runnerBadge.update(with: runnerBadgeViewModel(racer: racer, time: lblTime.text, bibNumber: txtBibNumber.text,
+                                                      dropping: btnStopped.isSelected, withPacer: btnPacer.isSelected))
         lblAdded.text = ""
         lblSecondaryInfo.text = ""
 
+        // Leave the flag toggles reflecting the recorded entry so they can be
+        // toggled retroactively while it's in limbo (applyHeldEntryFlags). Typing
+        // the next bib clears them (updateBibInfo).
         txtBibNumber.text = ""
-        btnPacer.isSelected = false
-        btnStopped.isSelected = false
-        refreshToggleStyle(btnPacer)
-        refreshToggleStyle(btnStopped)
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -772,9 +764,10 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         editVC.entryHasBeenDeletedBlock = { [weak self] in
             guard let self = self else { return }
             self.lastEntry = nil
+            self.resetFlagToggles()
             AutoSyncController.shared.releaseHeldEntry()
             self.runnerBadge.isHidden = true
-            self.btnConfirm.isHidden = true
+            self.runnerBadge.confirmButton.isHidden = true
             self.lblAdded.isHidden = true
             self.lblPersonAdded.text = "Enter Bib Number"
             self.lblRunnerInfo.text = ""
@@ -789,7 +782,15 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
             self.lblPersonAdded.text = (entryName?.isEmpty ?? true) ? "Bib not found" : effort?.fullName
             self.runnerBadge.update(with: self.runnerBadgeViewModel(racer: effort,
                                                                          time: self.lastEntry?.displayTime,
-                                                                         bibNumber: self.lastEntry?.bibNumber))
+                                                                         bibNumber: self.lastEntry?.bibNumber,
+                                                                         dropping: self.lastEntry?.stoppedHere == "true",
+                                                                         withPacer: self.lastEntry?.withPacer == "true"))
+            // Keep the toggles in sync with the edited entry so further limbo edits apply correctly.
+            self.racer = effort
+            self.btnPacer.isSelected = self.lastEntry?.withPacer == "true"
+            self.btnStopped.isSelected = self.lastEntry?.stoppedHere == "true"
+            self.refreshToggleStyle(self.btnPacer)
+            self.refreshToggleStyle(self.btnStopped)
         }
         editVC.configure(withEntry: lastEntry)
     }
@@ -808,12 +809,35 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         btnPacer.isSelected.toggle()
         refreshToggleStyle(btnPacer)
         OSTSound.shared().play("ost-remote-switch-1")
+        applyHeldEntryFlags()
     }
 
     @IBAction func onBtnStopped(_ sender: Any) {
         btnStopped.isSelected.toggle()
         refreshToggleStyle(btnStopped)
         OSTSound.shared().play("ost-remote-switch-1")
+        applyHeldEntryFlags()
+    }
+
+    private func resetFlagToggles() {
+        btnPacer.isSelected = false
+        btnStopped.isSelected = false
+        refreshToggleStyle(btnPacer)
+        refreshToggleStyle(btnStopped)
+    }
+
+    /// While a just-recorded entry is on screen (the "limbo" held state), the flag
+    /// toggles edit that entry retroactively: apply them to the held entry, persist,
+    /// and refresh the badge's chips. No-op when composing a new entry.
+    private func applyHeldEntryFlags() {
+        guard let entry = lastEntry else { return }
+        entry.withPacer = btnPacer.isSelected ? "true" : "false"
+        entry.stoppedHere = btnStopped.isSelected ? "true" : "false"
+        saveContext()
+        runnerBadge.update(with: runnerBadgeViewModel(racer: racer, time: entry.displayTime,
+                                                      bibNumber: entry.bibNumber,
+                                                      dropping: btnStopped.isSelected,
+                                                      withPacer: btnPacer.isSelected))
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?,
@@ -823,12 +847,15 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
     private func updateBibInfo() {
         lblRunnerInfo.isHidden = false
-        lastEntry = nil
         // Typing a new bib means the user has moved past the recorded entry: release
-        // it to Auto Sync (no-op if nothing was held).
+        // it to Auto Sync (no-op if nothing was held) and clear the flags so the next
+        // entry starts fresh.
+        let wasShowingHeldEntry = (lastEntry != nil)
+        lastEntry = nil
         AutoSyncController.shared.releaseHeldEntry()
+        if wasShowingHeldEntry { resetFlagToggles() }
         runnerBadge.isHidden = true
-        btnConfirm.isHidden = true
+        runnerBadge.confirmButton.isHidden = true
         lblAdded.isHidden = true
         lblOutTimeBadge.isHidden = true
         lblInTimeBadge.isHidden = true
@@ -907,7 +934,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
     // MARK: - Helpers
 
-    private func runnerBadgeViewModel(racer: EffortModel?, time: String?, bibNumber: String?) -> OSTRunnerBadgeViewModel {
+    private func runnerBadgeViewModel(racer: EffortModel?, time: String?, bibNumber: String?,
+                                      dropping: Bool, withPacer: Bool) -> OSTRunnerBadgeViewModel {
         let viewModel = OSTRunnerBadgeViewModel()
         viewModel.bibNumber = bibNumber ?? ""
         viewModel.time = time ?? ""
@@ -917,6 +945,8 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
             caption += (racer?.gender != nil) ? " (\(age))" : "\(age)"
         }
         viewModel.caption = caption
+        viewModel.dropping = dropping
+        viewModel.withPacer = withPacer
         return viewModel
     }
 

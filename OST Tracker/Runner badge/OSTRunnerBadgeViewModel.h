@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *bibNumber;
 @property (nonatomic,strong) NSString *time;
 @property (nonatomic,strong) NSString *caption;
+@property (nonatomic) BOOL withPacer;
+@property (nonatomic) BOOL dropping;
 
 @end
 
