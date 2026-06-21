@@ -67,6 +67,9 @@
 		4A641758ACA8CD6756B6FD9B /* OSTEventSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F434763BE4FFD216FC525BF3 /* OSTEventSelectionViewController.swift */; };
 		4BA23D950F22CA88126A7EE5 /* NumberPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A1258C1AE8F78B5A4264A /* NumberPadView.swift */; };
 		4DDAC9290F0FFAE67EBBD659 /* MenuRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53D229A9F62EF7554F1D81 /* MenuRow.swift */; };
+		0CC24ADF64544C9DAEF63070 /* ReviewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */; };
+		6E3CAA9FD27A4EE78DA169D4 /* ReviewPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */; };
+		68F5BFD5FD734AFCBAD9C024 /* ReviewPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5685098562F46B2825FEDBB /* ReviewPresentationTests.swift */; };
 		4E2790C35BC118B7D9369D7E /* UIViewController+OSTAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A34ECF9D0AADA4508A859 /* UIViewController+OSTAlert.swift */; };
 		515C30B36AD04A78905BD60C /* OSTAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */; };
 		5193DA49A2926D54A6864C9F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC88DAF080C3B90276428C3 /* LoginController.swift */; };
@@ -382,6 +385,8 @@
 		6AEFFC221EEF83DA009EEE21 /* OST_TrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OST_TrackerTests.m; sourceTree = "<group>"; };
 		6AEFFC241EEF83DA009EEE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B53D229A9F62EF7554F1D81 /* MenuRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MenuRow.swift; path = "OST Tracker/Swift/DesignSystem/MenuRow.swift"; sourceTree = "<group>"; };
+		ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewPresentation.swift; path = "OST Tracker/Swift/Review/ReviewPresentation.swift"; sourceTree = "<group>"; };
+		D5685098562F46B2825FEDBB /* ReviewPresentationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReviewPresentationTests.swift; path = "OST TrackerTests/Swift/ReviewPresentationTests.swift"; sourceTree = "<group>"; };
 		72465498F29B8EE0996EC60B /* RaceStatusTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RaceStatusTests.swift; path = "OST TrackerTests/Swift/RaceStatusTests.swift"; sourceTree = "<group>"; };
 		7797786BCBA7794199B51B1E /* SelectableOptionList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectableOptionList.swift; path = "OST Tracker/Swift/DesignSystem/SelectableOptionList.swift"; sourceTree = "<group>"; };
 		77A686F1D356962B113CE83F /* AutoSyncEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoSyncEngine.swift; path = "OST Tracker/Swift/AutoSync/AutoSyncEngine.swift"; sourceTree = "<group>"; };
@@ -512,6 +517,14 @@
 			name = DesignSystem;
 			sourceTree = "<group>";
 		};
+		95856145C94C4CE99E039377 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				ED84CEBD1B744A78B02C38E6 /* ReviewPresentation.swift */,
+			);
+			name = Review;
+			sourceTree = "<group>";
+		};
 		2642D7360B1335B5908AFA8F /* Swift */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,6 +545,7 @@
 				0C5B979BBF614BE8B9DD /* LiveReadsMerge.swift */,
 				D788CC23A1A220B2901A /* LiveReadsRequest.swift */,
 				19F59D3151C20881599BF039 /* DesignSystem */,
+				95856145C94C4CE99E039377 /* Review */,
 				DAC07AE6DD736F838E1F649C /* AutoSync */,
 			);
 			name = Swift;
@@ -568,6 +582,7 @@
 				A03DBD0080108659979FB912 /* AutoSyncStatusTests.swift */,
 				7F1D7FC4F826A30098C0F452 /* LiveTimeSubmitterTests.swift */,
 				D9642AFAB581C9F265888D7E /* MenuRowTests.swift */,
+				D5685098562F46B2825FEDBB /* ReviewPresentationTests.swift */,
 			);
 			name = Swift;
 			sourceTree = SOURCE_ROOT;
@@ -1139,6 +1154,7 @@
 				C31ECF7DEBAB9900DB4CD9D3 /* MenuRow.swift in Sources */,
 				3610069709680EB51D849B85 /* OSTRightMenuViewController.swift in Sources */,
 				15EA34EA2840D7FAA277617B /* OSTRunnerBadge.swift in Sources */,
+				0CC24ADF64544C9DAEF63070 /* ReviewPresentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1228,6 +1244,7 @@
 				4DDAC9290F0FFAE67EBBD659 /* MenuRow.swift in Sources */,
 				E0855920D4908DBFCDA77FEF /* OSTRightMenuViewController.swift in Sources */,
 				06C3EEE68745FC569DF0C048 /* OSTRunnerBadge.swift in Sources */,
+				6E3CAA9FD27A4EE78DA169D4 /* ReviewPresentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1266,6 +1283,7 @@
 				561AADB59F503F338CC7E536 /* AutoSyncStatusTests.swift in Sources */,
 				009831BADDC027659B3D29C1 /* LiveTimeSubmitterTests.swift in Sources */,
 				788968DCA5FF4A27DE6CF54E /* MenuRowTests.swift in Sources */,
+				68F5BFD5FD734AFCBAD9C024 /* ReviewPresentationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
