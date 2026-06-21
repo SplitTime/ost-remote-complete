@@ -21,8 +21,6 @@
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
-// OSTUtilitiesViewController and OSTAboutViewController are now Swift
-// (visible via the generated OST_Remote-Swift.h imported above).
 
 @interface AppDelegate ()
 
@@ -125,11 +123,6 @@
     [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
 }
 
-- (void) showUtilities
-{
-    self.rightMenuVC.centerViewController = [[OSTUtilitiesViewController alloc] initWithNibName:nil bundle:nil];
-    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
-}
 - (void) showAbout
 {
     self.rightMenuVC.centerViewController = [[OSTAboutViewController alloc] initWithNibName:nil bundle:nil];

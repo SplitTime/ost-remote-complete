@@ -6,6 +6,17 @@ import UIKit
     case dark   = 2
 }
 
+extension AppearanceMode {
+    /// Human-readable label for menus / pickers.
+    var displayName: String {
+        switch self {
+        case .system: return "System"
+        case .light:  return "Light"
+        case .dark:   return "Dark"
+        }
+    }
+}
+
 /// Persists the user's appearance choice and applies it to the app window on
 /// iOS 13+. No-op on iOS 12 (there is no theme to switch to).
 @objc final class AppearanceController: NSObject {
