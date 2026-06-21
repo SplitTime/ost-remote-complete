@@ -26,6 +26,14 @@ enum LiveReadsFormat {
         return "—"
     }
 
+    /// Title line for a read: the bib, plus the runner's name when it could be
+    /// resolved from the local roster. Falls back to the bare bib when the name
+    /// is missing or blank (e.g. an unmatched read).
+    static func nameLine(bib: String, name: String?) -> String {
+        let trimmed = (name ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? "#\(bib)" : "#\(bib)  \(trimmed)"
+    }
+
     /// Human-readable label for a read's `source`. Reads from this device →
     /// "This app"; any other `ost-remote` device → "Remote device"; everything
     /// else passes through verbatim (e.g. "Rake Task"). Empty when missing.

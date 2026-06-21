@@ -28,6 +28,20 @@ final class LiveReadsFormatTests: XCTestCase {
         XCTAssertEqual(LiveReadsFormat.clock(enteredTime: nil, absoluteTime: nil), "—")
     }
 
+    // MARK: nameLine
+
+    func test_nameLine_includesNameWhenKnown() {
+        XCTAssertEqual(LiveReadsFormat.nameLine(bib: "68", name: "Jane Doe"), "#68  Jane Doe")
+    }
+
+    func test_nameLine_bibOnlyWhenNameUnknown() {
+        XCTAssertEqual(LiveReadsFormat.nameLine(bib: "68", name: nil), "#68")
+    }
+
+    func test_nameLine_bibOnlyWhenNameBlank() {
+        XCTAssertEqual(LiveReadsFormat.nameLine(bib: "68", name: "   "), "#68")
+    }
+
     // MARK: friendlySource
 
     func test_friendlySource_ownDeviceReadsAsThisApp() {
