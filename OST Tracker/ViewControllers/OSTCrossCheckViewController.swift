@@ -92,7 +92,7 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
 
     // MARK: - Data
 
-    private func fetchNotExpected() {
+    private func fetchNotExpected(completion: @escaping () -> Void) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         OSTBackend.shared.fetchNotExpected(groupId: CurrentCourse.getCurrentCourse()?.eventGroupId ?? "",
                                            splitName: splitName) { [weak self] object, error in
@@ -100,33 +100,34 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
             if error == nil,
                let bibNumbers = (object as? NSDictionary)?.value(forKeyPath: "data.bib_numbers") as? [Any] {
                 self.bulkNotExpected(bibNumbers: bibNumbers)
-                self.setFiltersQuantities()
-                self.crossCheckCollection.reloadData()
             }
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            completion()
         }
     }
 
     private func reloadData() {
-        var entriesThatShouldBeHere: [EffortModel] = []
         ostShowBlockingSpinner()
 
         DispatchQueue.main.async {
             self.efforts = (EffortModel.mr_findAllSorted(by: "bibNumber", ascending: true,
                                                          with: NSPredicate(format: "bibNumber != nil")) as? [EffortModel]) ?? []
-            self.fetchNotExpected()
-            self.setFiltersQuantities()
-
-            for effort in self.efforts {
-                if effort.checkIfEffortShouldBe(inSplit: CurrentCourse.getCurrentCourse()?.splitName, selectedSplitName: self.splitName) {
-                    _ = effort.expected(withSplitName: self.splitName)
-                    entriesThatShouldBeHere.append(effort)
+            // Fold the not-expected fetch into this reload: mark not-expected first,
+            // then filter and render exactly once. The old code fired this fetch
+            // and-forgot, so its async completion reloaded the collection after the
+            // spinner had hidden and the filter had been applied — racing and
+            // clobbering the rendered view.
+            self.fetchNotExpected { [weak self] in
+                guard let self = self else { return }
+                var entriesThatShouldBeHere: [EffortModel] = []
+                for effort in self.efforts {
+                    if effort.checkIfEffortShouldBe(inSplit: CurrentCourse.getCurrentCourse()?.splitName, selectedSplitName: self.splitName) {
+                        _ = effort.expected(withSplitName: self.splitName)
+                        entriesThatShouldBeHere.append(effort)
+                    }
                 }
-            }
-
-            DispatchQueue.main.async {
                 self.efforts = entriesThatShouldBeHere
-                self.applyFilter()
+                self.applyFilter()                 // setFiltersQuantities + collection reload
                 self.ostHideBlockingSpinner()
             }
         }

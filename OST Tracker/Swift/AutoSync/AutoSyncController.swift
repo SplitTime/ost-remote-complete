@@ -40,6 +40,9 @@ final class AutoSyncController: NSObject {
     private let observers = NSHashTable<AnyObject>.weakObjects()
     private var inFlightEntries: [NSManagedObject] = []
     private var usedAlternateServer = false
+    /// Set tightly around our own submitted-flag save so `contextDidSave` can tell
+    /// it apart from a genuine new entry recorded by the user mid-sync.
+    private var isSavingSubmittedFlags = false
 
     /// The entry currently displayed (held) on the entry screen. Auto Sync skips it
     /// until the user confirms, records the next runner, types a new bib, or leaves.
@@ -91,8 +94,10 @@ final class AutoSyncController: NSObject {
     // MARK: - Triggers
 
     @objc private func contextDidSave(_ note: Notification) {
-        // Ignore the controller's own submitted-flag save to avoid a re-trigger loop.
-        guard !isSyncing else { return }
+        // Ignore only our own submitted-flag save (to avoid a re-trigger loop). A
+        // real entry recorded mid-sync still pokes the engine immediately instead
+        // of waiting for the post-sync retry tick.
+        guard !isSavingSubmittedFlags else { return }
         engine.noteEntriesChanged()
     }
 
@@ -197,11 +202,15 @@ final class AutoSyncController: NSObject {
                     completionBlock: { _ in done(.success(())) },
                     errorBlock: { err in done(.failure(err ?? URLError(.unknown))) })
             },
-            markSubmitted: { batch in
+            markSubmitted: { [weak self] batch in
                 batch.forEach { $0.setValue(NSNumber(value: true), forKey: "submitted") }
                 let ctx = NSManagedObjectContext.mr_default()
+                // mr_saveOnlySelfAndWait posts NSManagedObjectContextDidSave
+                // synchronously; flag it so contextDidSave skips our own save.
+                self?.isSavingSubmittedFlags = true
                 ctx.processPendingChanges()
                 ctx.mr_saveOnlySelfAndWait()
+                self?.isSavingSubmittedFlags = false
             })
 
         submitter.submit(pending, progress: { [weak self] p in

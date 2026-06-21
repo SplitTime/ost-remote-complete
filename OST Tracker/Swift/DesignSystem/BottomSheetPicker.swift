@@ -13,6 +13,7 @@ final class BottomSheetPicker: UIViewController {
     private let scrim = UIView()
     private let panel = UIView()
     private var panelBottom: NSLayoutConstraint!
+    private var isPresented = false
 
     init(title: String, options: [String], selected: String?, onSelect: @escaping (String) -> Void) {
         self.sheetTitle = title
@@ -76,7 +77,11 @@ final class BottomSheetPicker: UIViewController {
         content.translatesAutoresizingMaskIntoConstraints = false
         panel.addSubview(content)
 
-        panelBottom = panel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 600) // start off-screen
+        // Park the panel fully off-screen. The screen height is a safe initial
+        // offset (always >= the panel's capped height); viewDidLayoutSubviews
+        // tightens it to the panel's measured height once it's known. A fixed
+        // offset (e.g. 600) leaves a taller panel partly on-screen on iPad/splits.
+        panelBottom = panel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: UIScreen.main.bounds.height)
         NSLayoutConstraint.activate([
             scrim.topAnchor.constraint(equalTo: view.topAnchor),
             scrim.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -113,8 +118,17 @@ final class BottomSheetPicker: UIViewController {
         scrollHeight.isActive = true
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // While hidden, keep the panel parked just below the screen by its own
+        // measured height — robust to any panel/device size where a fixed offset
+        // would leave a tall panel partly visible.
+        if !isPresented { panelBottom.constant = panel.bounds.height }
+    }
+
     func animateIn() {
         view.layoutIfNeeded()
+        isPresented = true
         panelBottom.constant = 0
         UIView.animate(withDuration: 0.28) {
             self.scrim.backgroundColor = UIColor.black.withAlphaComponent(0.3)
@@ -123,7 +137,8 @@ final class BottomSheetPicker: UIViewController {
     }
 
     private func animateOut(then completion: (() -> Void)?) {
-        panelBottom.constant = 600
+        isPresented = false
+        panelBottom.constant = panel.bounds.height
         UIView.animate(withDuration: 0.22, animations: {
             self.scrim.backgroundColor = UIColor.black.withAlphaComponent(0)
             self.view.layoutIfNeeded()
