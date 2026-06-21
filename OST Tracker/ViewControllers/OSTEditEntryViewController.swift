@@ -250,18 +250,11 @@ class OSTEditEntryViewController: UIViewController {
             (dateField.inputView as? UIDatePicker)?.preferredDatePickerStyle = .wheels
         }
 
-        // Time field: CustomUIDatePicker (H:M:S) + Cancel/Done toolbar accessory.
+        // Time field: CustomUIDatePicker (H:M:S). Commits in place as the wheels
+        // spin (matching the date field), so it needs no Done/Cancel accessory.
         customPicker = CustomUIDatePicker(frame: CGRect(x: 0, y: 0, width: 320, height: 200))
+        customPicker.onChange = { [weak self] in self?.updateTimeFieldText() }
         timeField.inputView = customPicker
-
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onDoneSelectedTime(_:))),
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneSelectedTime(_:)))
-        ]
-        timeField.inputAccessoryView = toolbar
 
         // Bib field: number pad.
         let numberPad = NumberPadView()
@@ -301,6 +294,10 @@ class OSTEditEntryViewController: UIViewController {
     // MARK: - Actions
 
     @objc func timeEndEditing(_ sender: Any) {
+        updateTimeFieldText()
+    }
+
+    private func updateTimeFieldText() {
         timeField.text = String(format: "%02ld:%02ld:%02ld", customPicker.hours, customPicker.mins, customPicker.secs)
     }
 

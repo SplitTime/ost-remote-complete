@@ -14,6 +14,10 @@
 @property NSInteger mins;
 @property NSInteger secs;
 
+/// Fired whenever the user spins a wheel (after hours/mins/secs update), so a
+/// host can reflect the value live and commit in place — no Done button needed.
+@property (nonatomic, copy, nullable) void (^onChange)(void);
+
 - (void) selectRowsInPicker;
 -(NSInteger) getPickerTimeInMS;
 -(void) initialize;
