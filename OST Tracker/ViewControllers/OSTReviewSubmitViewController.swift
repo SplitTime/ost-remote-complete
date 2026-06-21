@@ -271,10 +271,13 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         if !alternateServer {
             ostPresentAlert(title: "Unable to sync", message: nsErrors.first?.errorsFromDictionary() ?? "")
         } else {
-            let error1 = nsErrors[0]
-            let message1 = error1.code == -1009 ? "The device is not connected" : "Error: \(error1.errorsFromDictionary() ?? "")"
-            let error2 = nsErrors[1]
-            let message2 = "Error: \(error2.errorsFromDictionary() ?? "")"
+            let message1: String
+            if let error1 = nsErrors.first {
+                message1 = error1.code == -1009 ? "The device is not connected" : "Error: \(error1.errorsFromDictionary() ?? "")"
+            } else {
+                message1 = "Unknown error"
+            }
+            let message2 = nsErrors.count > 1 ? "Error: \(nsErrors[1].errorsFromDictionary() ?? "")" : "Unknown error"
             ostPresentAlert(title: "Unable to sync",
                             message: "Primary server returned: \(message1), alternate server: \(message2)")
         }
