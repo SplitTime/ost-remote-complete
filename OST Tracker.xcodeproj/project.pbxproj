@@ -74,6 +74,8 @@
 		44A70919933040A6A6284EB5 /* CrossCheckListViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF21E2FB0AF04A12862D6C76 /* CrossCheckListViews.swift */; };
 		17CFF50A7A334227BB8E127F /* CrossCheckActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C36E483BDC49579FB759CB /* CrossCheckActionSheet.swift */; };
 		E406E58DA63E444D9E579188 /* CrossCheckActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C36E483BDC49579FB759CB /* CrossCheckActionSheet.swift */; };
+		248D11E74AD44576BB3496CE /* CrossCheckGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8122333D3B445C0B82ED73E /* CrossCheckGroupViewController.swift */; };
+		4D9813D8599043578B085716 /* CrossCheckGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8122333D3B445C0B82ED73E /* CrossCheckGroupViewController.swift */; };
 		392A70FFD61648338AED7B4C /* CrossCheckListViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDA28D2AAE94492A0367B00 /* CrossCheckListViewsTests.swift */; };
 		F5F6446419364AD292605011 /* ReviewListViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3135AE2A24296882ABE9B /* ReviewListViews.swift */; };
 		FF9B2889358C40F1A0887280 /* ReviewListViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D3135AE2A24296882ABE9B /* ReviewListViews.swift */; };
@@ -390,6 +392,7 @@
 		A96D00D0633D43DAAB998688 /* CrossCheckPresentationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrossCheckPresentationTests.swift; path = "OST TrackerTests/Swift/CrossCheckPresentationTests.swift"; sourceTree = "<group>"; };
 		AF21E2FB0AF04A12862D6C76 /* CrossCheckListViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrossCheckListViews.swift; path = "OST Tracker/Swift/CrossCheck/CrossCheckListViews.swift"; sourceTree = "<group>"; };
 		97C36E483BDC49579FB759CB /* CrossCheckActionSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrossCheckActionSheet.swift; path = "OST Tracker/Swift/CrossCheck/CrossCheckActionSheet.swift"; sourceTree = "<group>"; };
+		D8122333D3B445C0B82ED73E /* CrossCheckGroupViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrossCheckGroupViewController.swift; path = "OST Tracker/Swift/CrossCheck/CrossCheckGroupViewController.swift"; sourceTree = "<group>"; };
 		8BDA28D2AAE94492A0367B00 /* CrossCheckListViewsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrossCheckListViewsTests.swift; path = "OST TrackerTests/Swift/CrossCheckListViewsTests.swift"; sourceTree = "<group>"; };
 		72465498F29B8EE0996EC60B /* RaceOverviewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RaceOverviewTests.swift; path = "OST TrackerTests/Swift/RaceOverviewTests.swift"; sourceTree = "<group>"; };
 		7797786BCBA7794199B51B1E /* SelectableOptionList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SelectableOptionList.swift; path = "OST Tracker/Swift/DesignSystem/SelectableOptionList.swift"; sourceTree = "<group>"; };
@@ -536,6 +539,7 @@
 				18F89DA34A42453D8A4D780A /* CrossCheckPresentation.swift */,
 				AF21E2FB0AF04A12862D6C76 /* CrossCheckListViews.swift */,
 				97C36E483BDC49579FB759CB /* CrossCheckActionSheet.swift */,
+				D8122333D3B445C0B82ED73E /* CrossCheckGroupViewController.swift */,
 			);
 			name = CrossCheck;
 			sourceTree = "<group>";
@@ -1152,6 +1156,7 @@
 				D36FC0EDFE7243AA883B814E /* CrossCheckPresentation.swift in Sources */,
 				CC2ABFAEC53C4553926B0D5A /* CrossCheckListViews.swift in Sources */,
 				17CFF50A7A334227BB8E127F /* CrossCheckActionSheet.swift in Sources */,
+				248D11E74AD44576BB3496CE /* CrossCheckGroupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,6 +1249,7 @@
 				B2BCF9F056A54B98A8E6E2D1 /* CrossCheckPresentation.swift in Sources */,
 				44A70919933040A6A6284EB5 /* CrossCheckListViews.swift in Sources */,
 				E406E58DA63E444D9E579188 /* CrossCheckActionSheet.swift in Sources */,
+				4D9813D8599043578B085716 /* CrossCheckGroupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
