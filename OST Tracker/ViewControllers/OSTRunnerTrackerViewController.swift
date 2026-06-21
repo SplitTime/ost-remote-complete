@@ -73,9 +73,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     private static let clockFormatter: DateFormatter = {
         let f = DateFormatter(); f.dateFormat = "HH:mm:ss"; return f
     }()
-    private static let dayKeyFormatter: DateFormatter = {
-        let f = DateFormatter(); f.dateFormat = "yyyy-MM-dd"; return f
-    }()
     // Weekday + 12-hour clock, matching the aid-station field view ("Fri 7:05AM").
     private static let dayClockFormatter: DateFormatter = {
         let f = DateFormatter(); f.dateFormat = "EEE h:mma"; return f
@@ -668,9 +665,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         // the ~10Hz clock tick last wrote (which could be up to 100ms stale).
         let now = Date()
         let timeString = Self.clockFormatter.string(from: now)
-        let tzOffset = TimeZone.current.secondsFromGMT() / 60 / 60
-        let sign = tzOffset < 0 ? "" : "+"
-        entry.absoluteTime = String(format: "%@ %@\(sign)%02d:00", Self.dayKeyFormatter.string(from: now), timeString, tzOffset)
+        entry.absoluteTime = EntryTimeFormat.absoluteTime(day: now, timeOfDay: timeString)
         entry.displayTime = timeString
         entry.withPacer = btnPacer.isSelected ? "true" : "false"
         entry.stoppedHere = btnStopped.isSelected ? "true" : "false"

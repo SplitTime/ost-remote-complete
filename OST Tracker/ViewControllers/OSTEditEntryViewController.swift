@@ -386,10 +386,8 @@ class OSTEditEntryViewController: UIViewController {
         self.entry = entry
         loadViewIfNeeded()
 
-        if entry.bibNumber != "-1" {
-            bibField.text = entry.bibNumber
-            bibField.selectedTextRange = bibField.textRange(from: bibField.endOfDocument, to: bibField.endOfDocument)
-        }
+        bibField.text = entry.bibNumber
+        bibField.selectedTextRange = bibField.textRange(from: bibField.endOfDocument, to: bibField.endOfDocument)
         titleLabel.text = entry.courseName
         pacerRow.isOn = (entry.withPacer as NSString?)?.boolValue ?? false
         stoppedRow.isOn = (entry.stoppedHere as NSString?)?.boolValue ?? false
@@ -413,12 +411,7 @@ class OSTEditEntryViewController: UIViewController {
         entry.entryTime = dateField.date.addingTimeInterval(Double(customPicker.getTimeInMS() / 1000))
         entry.displayTime = timeField.text
 
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let dayString = formatter.string(from: dateField.date)
-        let tzOffset = TimeZone.current.secondsFromGMT() / 60 / 60
-        let sign = tzOffset < 0 ? "" : "+"
-        entry.absoluteTime = String(format: "%@ %@\(sign)%02d:00", dayString, timeField.text ?? "", tzOffset)
+        entry.absoluteTime = EntryTimeFormat.absoluteTime(day: dateField.date, timeOfDay: timeField.text ?? "")
 
         entry.withPacer = pacerRow.isOn ? "true" : "false"
         entry.stoppedHere = stoppedRow.isOn ? "true" : "false"

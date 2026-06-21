@@ -44,6 +44,22 @@ final class APIParsingTests: XCTestCase {
         XCTAssertEqual(SpreadDate.timeZone(from: "2026-06-20T10:00:00-00:30").secondsFromGMT(), -30 * 60)
     }
 
+    // MARK: - EntryTimeFormat.absoluteTime
+
+    func test_entryTimeFormat_preservesHalfHourAndPadsNegativeSign() {
+        let india = TimeZone(secondsFromGMT: 5 * 3600 + 30 * 60)!   // +05:30
+        XCTAssertTrue(EntryTimeFormat.absoluteTime(day: Date(), timeOfDay: "10:00:00", timeZone: india)
+                        .hasSuffix("10:00:00+05:30"), "half-hour zones must keep their minutes")
+
+        let utcMinus6 = TimeZone(secondsFromGMT: -6 * 3600)!        // -06:00 (old code emitted "-6:00")
+        XCTAssertTrue(EntryTimeFormat.absoluteTime(day: Date(), timeOfDay: "10:00:00", timeZone: utcMinus6)
+                        .hasSuffix("10:00:00-06:00"), "negative whole-hour offset must be zero-padded")
+
+        let utc = TimeZone(secondsFromGMT: 0)!
+        XCTAssertTrue(EntryTimeFormat.absoluteTime(day: Date(), timeOfDay: "09:00:00", timeZone: utc)
+                        .hasSuffix("09:00:00+00:00"))
+    }
+
     // MARK: - APIClient transport (URLProtocol-stubbed, no network)
 
     private func makeClient() -> APIClient {
