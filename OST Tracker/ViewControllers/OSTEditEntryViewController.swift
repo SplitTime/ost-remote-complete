@@ -256,9 +256,11 @@ class OSTEditEntryViewController: UIViewController {
         customPicker.onChange = { [weak self] in self?.updateTimeFieldText() }
         timeField.inputView = customPicker
 
-        // Bib field: number pad.
+        // Bib field: number pad. The pad assigns `.text` programmatically, which
+        // does not fire `.editingChanged`, so refresh the lookup via its callback.
         let numberPad = NumberPadView()
         numberPad.attach(to: bibField)
+        numberPad.onChange = { [weak self] in self?.onBibNumberChanged(nil) }
         bibField.inputView = numberPad
 
         timeField.removeInputAssistant()
@@ -425,6 +427,9 @@ class OSTEditEntryViewController: UIViewController {
     private func saveContext() {
         NSManagedObjectContext.mr_default().processPendingChanges()
         NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+        // An entry was created / edited / deleted: recompute every screen's badge so
+        // it doesn't go stale (sync lifecycle events don't fire on a manual edit).
+        AutoSyncController.shared.refreshBadges()
     }
 }
 
