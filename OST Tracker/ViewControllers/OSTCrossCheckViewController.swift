@@ -194,14 +194,29 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         return currentEfforts.count
     }
 
+    /// An effort with no recorded entry at this split is in the Expected /
+    /// Not-Expected state — the only state that's bulk-selectable and shows the
+    /// expected toggle. Derive it from the model rather than the rendered cell label
+    /// (which breaks on any copy/localization change to the status text).
+    private func isUnrecorded(_ effort: EffortModel) -> Bool {
+        (effort.entries(forSplitName: splitName) ?? []).isEmpty
+    }
+
+    /// Mirrors the cell's Expected-vs-Not-Expected split: Not-Expected only when
+    /// the effort is explicitly flagged `expected == NO` for this split.
+    private func isExpectedHere(_ effort: EffortModel) -> Bool {
+        let expected = effort.expected(withSplitName: splitName)
+        let explicitlyNotExpected = expected?.isEqual(NSNumber(value: false)) ?? false
+        return !explicitlyNotExpected
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OSTCrossCheckCell", for: indexPath) as! OSTCrossCheckCell
         cell.splitName = splitName
         cell.configure(withEffort: currentEfforts[indexPath.row])
 
         if bulkSelect {
-            let status = cell.lblStatus.text
-            cell.noBulkSelectView.isHidden = (status == "Expected" || status == "Not Expected")
+            cell.noBulkSelectView.isHidden = isUnrecorded(currentEfforts[indexPath.row])
         }
         if currentEfforts[indexPath.row].bulkSelected {
             cell.noBulkSelectView.isHidden = false
@@ -213,8 +228,7 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         if bulkSelect {
             let effort = currentEfforts[indexPath.row]
             guard let cell = collectionView.cellForItem(at: indexPath) as? OSTCrossCheckCell else { return }
-            let status = cell.lblStatus.text
-            if status != "Expected" && status != "Not Expected" { return }
+            guard isUnrecorded(effort) else { return }
             effort.bulkSelected.toggle()
             cell.configure(withEffort: effort)
             return
@@ -231,12 +245,12 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         popupBibNumber.textColor = cell.lblBibNumber.textColor
         popupCellStatusLabel.backgroundColor = cell.lblStatus.backgroundColor
         popupBibNumber.text = cell.lblBibNumber.text
-        popupCellStatusLabel.text = cell.lblStatus.text
+        popupCellStatusLabel.text = cell.lblStatus.text // display mirror only
 
-        if popupCellStatusLabel.text == "Expected" || popupCellStatusLabel.text == "Not Expected" {
+        if isUnrecorded(popupEffort!) {
             popupSegmentedView.isHidden = false
             btnReviewEntries.isHidden = true
-            swchPopupExpected.isOn = (popupCellStatusLabel.text == "Expected")
+            swchPopupExpected.isOn = isExpectedHere(popupEffort!)
         } else {
             popupSegmentedView.isHidden = true
             btnReviewEntries.isHidden = false
