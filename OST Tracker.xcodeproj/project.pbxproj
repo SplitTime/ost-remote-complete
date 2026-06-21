@@ -30,8 +30,6 @@
 		15EA34EA2840D7FAA277617B /* OSTRunnerBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF18AB4DCBF8B7CB716815A2 /* OSTRunnerBadge.swift */; };
 		16845BB33D8C07587228 /* LiveReadsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D788CC23A1A220B2901A /* LiveReadsRequest.swift */; };
 		18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA22B20B858EF2CA668A00B /* AppearanceController.swift */; };
-		189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
-		189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189B47392427175300F384E8 /* OSTAboutViewController.xib */; };
 		18D4194624246CD9002010E3 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		191225677F529E0E8F5C92DC /* BottomSheetPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8787A94BCAFE95DD1345B3B6 /* BottomSheetPickerTests.swift */; };
 		1E20B1532196107FCB71 /* LiveReadsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91083BFC39CDE8C3D3 /* LiveReadsRequestTests.swift */; };
@@ -288,7 +286,6 @@
 		14C24566B72849E7915F9603 /* APIModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = APIModels.swift; path = "OST Tracker/Swift/APIModels.swift"; sourceTree = "<group>"; };
 		16BAED92F7B8A3B859B03965 /* LoginViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = "OST Tracker/Swift/LoginViewController.swift"; sourceTree = "<group>"; };
 		177BC33990DA88662548DD92 /* OST Tracker-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OST Tracker-Bridging-Header.h"; path = "OST Tracker/OST Tracker-Bridging-Header.h"; sourceTree = "<group>"; };
-		189B47392427175300F384E8 /* OSTAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OSTAboutViewController.xib; sourceTree = "<group>"; };
 		1B0EE20CF5AF1CC7DFD6F38C /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = "OST Tracker/Swift/DesignSystem/Theme.swift"; sourceTree = "<group>"; };
 		1EF24CABF2B5EAD65649ACBC /* SyncService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SyncService.swift; path = "OST Tracker/Swift/SyncService.swift"; sourceTree = "<group>"; };
 		1EFCE96CA1594FBC974AA9FB /* BibEntryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BibEntryTests.swift; path = "OST TrackerTests/Swift/BibEntryTests.swift"; sourceTree = "<group>"; };
@@ -616,7 +613,6 @@
 				6A7D795D1F9A6453001149B0 /* CrossCheck.storyboard */,
 				D50DFA8B226DF867002F5FBF /* OSTBaseViewController.h */,
 				D50DFA8C226DF867002F5FBF /* OSTBaseViewController.m */,
-				189B47392427175300F384E8 /* OSTAboutViewController.xib */,
 				0ED83FEF0D5283813CD88DC4 /* UIViewController+OSTSafeArea.m */,
 				F4779EBFE99D1FB606474404 /* UIViewController+OSTSafeArea.h */,
 				440C564E9E1A73C1718477AA /* OSTAboutViewController.swift */,
@@ -981,7 +977,6 @@
 				6A5E0CFF1EF1B25E00399EEC /* LaunchScreen.storyboard in Resources */,
 				D52BBFD0227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				D524F05F21A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
-				189B473C2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795E1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				D52BBFCE227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD2227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,
@@ -1002,7 +997,6 @@
 				6AEFFC181EEF83DA009EEE21 /* LaunchScreen.storyboard in Resources */,
 				D52BBFD1227E0B360035FE07 /* ost-remote-bib-wrong-event-1.wav in Resources */,
 				D524F06021A443C1006DF352 /* OSTCheckmarkView.xib in Resources */,
-				189B473D2427175300F384E8 /* OSTAboutViewController.xib in Resources */,
 				6A7D795F1F9A6453001149B0 /* CrossCheck.storyboard in Resources */,
 				D52BBFCF227E0B360035FE07 /* ost-remote-bib-not-found.wav in Resources */,
 				D52BBFD3227E0B360035FE07 /* ost-remote-switch-1.wav in Resources */,

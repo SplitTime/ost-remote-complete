@@ -35,6 +35,46 @@ final class NumberPadViewTests: XCTestCase {
         XCTAssertEqual(field.text ?? "", "")
     }
 
+    // The pad assigns `.text` directly, which does not fire `.editingChanged`.
+    // Hosts (e.g. the edit-entry screen's found/not-found label) rely on
+    // `onChange` to refresh after each tap.
+    func test_insertDigit_firesOnChange() {
+        let field = UITextField()
+        let pad = NumberPadView()
+        pad.attach(to: field)
+        var calls = 0
+        pad.onChange = { calls += 1 }
+
+        pad.insertDigit("4")
+
+        XCTAssertEqual(calls, 1)
+    }
+
+    func test_deleteBackward_firesOnChange() {
+        let field = UITextField()
+        field.text = "12"
+        let pad = NumberPadView()
+        pad.attach(to: field)
+        var calls = 0
+        pad.onChange = { calls += 1 }
+
+        pad.deleteBackward()
+
+        XCTAssertEqual(calls, 1)
+    }
+
+    func test_deleteBackward_onEmptyField_doesNotFireOnChange() {
+        let field = UITextField()
+        let pad = NumberPadView()
+        pad.attach(to: field)
+        var calls = 0
+        pad.onChange = { calls += 1 }
+
+        pad.deleteBackward()
+
+        XCTAssertEqual(calls, 0, "no edit happened, so no change should be reported")
+    }
+
     func test_insertDigit_withNoAttachedField_doesNotCrash() {
         let pad = NumberPadView()
         pad.insertDigit("5")
