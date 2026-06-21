@@ -248,25 +248,7 @@ class OSTEventSelectionViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    @objc func onLogout(_ sender: Any) {
-        ostShowBlockingSpinner()
-        AppDelegate.getInstance()?.getNetworkManager()?.autoLogin(completionBlock: { [weak self] _ in
-            guard let self = self else { return }
-            self.ostHideBlockingSpinner()
-            let alert = UIAlertController(title: "Are you sure you would like to log out?",
-                                          message: "You will not be able to log back in or add entries until you have a data connection again.",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { _ in
-                AppDelegate.getInstance()?.logout()
-            })
-            self.present(alert, animated: true)
-        }, errorBlock: { [weak self] _ in
-            self?.ostHideBlockingSpinner()
-            self?.ostPresentAlert(title: "Logout is disabled",
-                                  message: "Please try again when you have an Internet connection")
-        })
-    }
+    @objc func onLogout(_ sender: Any) { ostPresentLogoutFlow() }
 
     @objc func onNext(_ sender: Any) {
         let groups: [[String: Any]]

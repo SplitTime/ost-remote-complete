@@ -296,63 +296,9 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
-    // MARK: - Logout (ported from OSTUtilitiesViewController)
+    // MARK: - Logout
 
-    @objc private func onLogout() {
-        let checking = UIAlertController(title: "Checking connection…",
-                                         message: "\n\n",
-                                         preferredStyle: .alert)
-        let spinner = UIActivityIndicatorView(style: .gray)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        spinner.startAnimating()
-        checking.view.addSubview(spinner)
-        NSLayoutConstraint.activate([
-            spinner.centerXAnchor.constraint(equalTo: checking.view.centerXAnchor),
-            spinner.bottomAnchor.constraint(equalTo: checking.view.bottomAnchor, constant: -16)
-        ])
-        present(checking, animated: true)
-
-        OSTBackend.shared.verifyConnection { [weak self] error in
-            guard let self = self else { return }
-            checking.dismiss(animated: true) {
-                if error == nil {
-                    self.presentLogoutConfirmation()
-                } else {
-                    self.presentLogoutOverride()
-                }
-            }
-        }
-    }
-
-    /// Online: confirm, then log out.
-    private func presentLogoutConfirmation() {
-        let alert = UIAlertController(title: "Are you sure you would like to log out?",
-                                      message: "You can log back in using your current connection, but you won't be able to add entries or log back in if you lose it.",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
-            self?.performLogout()
-        })
-        present(alert, animated: true)
-    }
-
-    /// Check failed: block, but allow an immediate override.
-    private func presentLogoutOverride() {
-        let alert = UIAlertController(title: "Can't reach OpenSplitTime",
-                                      message: "You will not be able to log back in or add entries until you have a data connection again.",
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Log Out Anyway", style: .destructive) { [weak self] _ in
-            self?.performLogout()
-        })
-        present(alert, animated: true)
-    }
-
-    private func performLogout() {
-        let app = AppDelegate.getInstance()
-        app?.rightMenuVC.toggleRightSideMenuCompletion(nil)
-        app?.logout()
-    }
+    @objc private func onLogout() { ostPresentLogoutFlow() }
 
     // MARK: - Badge + sync observer (override the Obj-C base)
 
