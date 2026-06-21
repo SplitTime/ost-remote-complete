@@ -187,6 +187,18 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         runnerBadge.adjustFontSizes()
     }
 
+    /// Positions the sync badge as a corner badge poking out beyond the menu
+    /// button's top-right, so it overlaps only the icon's corner — never the
+    /// "Menu" text. Overrides the base VC's inside-the-corner placement.
+    override func ostPositionBadgeAtMenu() {
+        guard let badgeSuper = syncBadgeLabel.superview, let menuSuper = btnMenu.superview else { return }
+        let corner = menuSuper.convert(CGPoint(x: btnMenu.frame.maxX, y: btnMenu.frame.minY), to: badgeSuper)
+        var f = syncBadgeLabel.frame
+        f.origin.x = (corner.x - f.width * 0.6).rounded()
+        f.origin.y = (corner.y - f.height * 0.35).rounded()
+        syncBadgeLabel.frame = f
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         applyAdaptiveSizing()
@@ -231,12 +243,16 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         // `menuButton`/`badgeLabel` + `updateSyncBadge` / `ostPositionBadgeAtMenu`).
         syncBadgeLabel.backgroundColor = Theme.destructive
         syncBadgeLabel.textColor = .white
-        syncBadgeLabel.font = Theme.Font.caption
+        syncBadgeLabel.font = .systemFont(ofSize: 12, weight: .bold)
         syncBadgeLabel.textAlignment = .center
         syncBadgeLabel.clipsToBounds = true
         syncBadgeLabel.isHidden = true
-        syncBadgeLabel.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
-        syncBadgeLabel.layer.cornerRadius = 11
+        syncBadgeLabel.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        syncBadgeLabel.layer.cornerRadius = 10
+        // Thin ring in the header color so the badge reads as a floating corner
+        // badge over the menu icon, not a blob sitting on it.
+        syncBadgeLabel.layer.borderWidth = 2
+        syncBadgeLabel.layer.borderColor = Theme.secondaryBackground.cgColor
 
         let headerStack = UIStackView(arrangedSubviews: [lblTitle, UIView(), btnMenu])
         headerStack.alignment = .center
