@@ -29,6 +29,7 @@ enum Theme {
     // MARK: Fonts
     enum Font {
         static let title = UIFont.systemFont(ofSize: 30, weight: .bold)
+        static let brand = UIFont.systemFont(ofSize: 22, weight: .bold)   // wordmark at list/header scale
         static let field = UIFont.systemFont(ofSize: 17)
         static let button = UIFont.systemFont(ofSize: 18, weight: .semibold)
         static let caption = UIFont.systemFont(ofSize: 12, weight: .semibold)

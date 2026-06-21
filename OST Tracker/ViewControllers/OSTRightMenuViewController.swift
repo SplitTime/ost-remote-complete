@@ -53,7 +53,7 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         logo.heightAnchor.constraint(equalToConstant: 34).isActive = true
         let brandLabel = UILabel()
         brandLabel.text = "OST Remote"
-        brandLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        brandLabel.font = Theme.Font.brand
         brandLabel.textColor = Theme.label
         let brandRow = UIStackView(arrangedSubviews: [logo, brandLabel, UIView()])
         brandRow.alignment = .center
@@ -182,10 +182,6 @@ final class OSTRightMenuViewController: OSTBaseViewController {
     override func syncManagerDidStartSynchronization(_ manager: AutoSyncController!) {
         super.syncManagerDidStartSynchronization(manager)
         reviewSyncRow.showsSpinner = true
-    }
-
-    override func syncManager(_ manager: AutoSyncController!, progress: CGFloat) {
-        super.syncManager(manager, progress: progress)
     }
 
     override func syncManagerDidFinishSynchronization(_ manager: AutoSyncController!) {
