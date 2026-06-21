@@ -1,7 +1,7 @@
 import XCTest
 @testable import OST_Remote
 
-final class RaceStatusTests: XCTestCase {
+final class RaceOverviewTests: XCTestCase {
 
     private func loadSpread() throws -> EventSpread {
         try EventSpread.decode(from: Fixture.data("spread-test-lonesome-100"))
@@ -43,7 +43,7 @@ final class RaceStatusTests: XCTestCase {
     }
 }
 
-extension RaceStatusTests {
+extension RaceOverviewTests {
     private func mtZone() -> TimeZone { TimeZone(secondsFromGMT: -6 * 3600)! }
 
     private func date(_ y: Int, _ mo: Int, _ d: Int, _ h: Int, _ mi: Int, tz: TimeZone) -> Date {
@@ -57,25 +57,25 @@ extension RaceStatusTests {
         let tz = mtZone()
         let start = date(2022, 7, 22, 6, 0, tz: tz)
         let t = date(2022, 7, 22, 9, 13, tz: tz)
-        XCTAssertEqual(RaceStatusFormat.elapsed(from: start, to: t), "3:13")
+        XCTAssertEqual(RaceOverviewFormat.elapsed(from: start, to: t), "3:13")
     }
 
     func test_elapsedExceeds24Hours() {
         let tz = mtZone()
         let start = date(2022, 7, 22, 6, 0, tz: tz)
         let t = date(2022, 7, 23, 6, 20, tz: tz)
-        XCTAssertEqual(RaceStatusFormat.elapsed(from: start, to: t), "24:20")
+        XCTAssertEqual(RaceOverviewFormat.elapsed(from: start, to: t), "24:20")
     }
 
     func test_elapsedNegativeIntervalReturnsDash() {
         let tz = mtZone()
         let start = date(2022, 7, 22, 9, 0, tz: tz)
         let earlier = date(2022, 7, 22, 6, 0, tz: tz)
-        XCTAssertEqual(RaceStatusFormat.elapsed(from: start, to: earlier), "—")
+        XCTAssertEqual(RaceOverviewFormat.elapsed(from: start, to: earlier), "—")
     }
 }
 
-extension RaceStatusTests {
+extension RaceOverviewTests {
     private func headers(_ n: Int) -> [SplitHeader] {
         (0..<n).map { SplitHeader(title: "S\($0)", splitName: "S\($0)",
                                   distanceMeters: Double($0) * 1000, extensions: ["In", "Out"], lap: 1) }
@@ -111,7 +111,7 @@ extension RaceStatusTests {
     }
 }
 
-extension RaceStatusTests {
+extension RaceOverviewTests {
     func test_sortedField_groupsAndOrders() {
         let h = headers(4)
         let early = Date(timeIntervalSince1970: 1000)
@@ -186,7 +186,7 @@ extension RaceStatusTests {
     }
 }
 
-extension RaceStatusTests {
+extension RaceOverviewTests {
     func test_runnerProgress_fromFixture() throws {
         let spread = try loadSpread()
         let beer = try XCTUnwrap(spread.efforts.first { $0.bibNumber == 28 })
@@ -221,11 +221,11 @@ extension RaceStatusTests {
     func test_clockWithDayFormatsWeekdayAnd12Hour() {
         let tz = mtZone()
         let friMorning = date(2022, 7, 22, 9, 8, tz: tz) // 2022-07-22 is a Friday
-        XCTAssertEqual(RaceStatusFormat.clockWithDay(friMorning, in: tz), "Fri 9:08AM")
+        XCTAssertEqual(RaceOverviewFormat.clockWithDay(friMorning, in: tz), "Fri 9:08AM")
     }
 }
 
-extension RaceStatusTests {
+extension RaceOverviewTests {
     private func inOutHeader() -> SplitHeader {
         SplitHeader(title: "Aid", splitName: "Aid", distanceMeters: 1000, extensions: ["In", "Out"], lap: 1)
     }

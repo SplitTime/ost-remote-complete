@@ -15,7 +15,7 @@ final class OSTRightMenuViewController: OSTBaseViewController {
     private let reviewSyncRow = MenuRow(title: "Review / Sync")
     private let crossCheckRow = MenuRow(title: "Cross Check")
     private let liveReadsRow  = MenuRow(title: "Live Reads")
-    private let raceStatusRow = MenuRow(title: "Race Status")
+    private let raceOverviewRow = MenuRow(title: "Race Overview")
 
     // Settings (formerly the Utilities screen)
     private let refreshRosterRow = MenuRow(title: "Refresh Roster")
@@ -80,8 +80,8 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         reviewSyncRow.addTarget(self, action: #selector(onReviewSync), for: .touchUpInside)
         crossCheckRow.addTarget(self, action: #selector(onCrossCheck), for: .touchUpInside)
         liveReadsRow.addTarget(self, action: #selector(onLiveReads), for: .touchUpInside)
-        raceStatusRow.addTarget(self, action: #selector(onRaceStatus), for: .touchUpInside)
-        let navCard = makeCard(rows: [liveEntryRow, reviewSyncRow, crossCheckRow, liveReadsRow, raceStatusRow])
+        raceOverviewRow.addTarget(self, action: #selector(onRaceOverview), for: .touchUpInside)
+        let navCard = makeCard(rows: [liveEntryRow, reviewSyncRow, crossCheckRow, liveReadsRow, raceOverviewRow])
 
         refreshRosterRow.showsChevron = false
         refreshRosterRow.addTarget(self, action: #selector(onRefreshRoster), for: .touchUpInside)
@@ -209,8 +209,8 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
-    @objc private func onRaceStatus() {
-        AppDelegate.getInstance()?.rightMenuVC.centerViewController = OSTRaceStatusViewController()
+    @objc private func onRaceOverview() {
+        AppDelegate.getInstance()?.rightMenuVC.centerViewController = OSTRaceOverviewViewController()
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
