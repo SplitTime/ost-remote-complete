@@ -48,10 +48,7 @@ class OSTAboutViewController: OSTBaseViewController {
         titleLabel.textColor = Theme.label
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        menuBtn.setTitle("Menu \u{2630}", for: .normal) // ☰ — opens the right-side drawer
-        menuBtn.setTitleColor(Theme.tint, for: .normal)
-        menuBtn.titleLabel?.font = Theme.Font.button
-        menuBtn.addTarget(self, action: #selector(onMenu), for: .touchUpInside)
+        menuBtn.configureAsMenuButton(target: self, action: #selector(onMenu))
 
         let headerRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), menuBtn])
         headerRow.axis = .horizontal

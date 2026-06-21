@@ -240,10 +240,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
         // Hamburger on the right so the sync badge (anchored top-right by the base
         // VC's ostPositionBadgeAtMenu) sits over the icon, not the word.
-        btnMenu.setTitle("Menu ☰", for: .normal)
-        btnMenu.setTitleColor(Theme.tint, for: .normal)
-        btnMenu.titleLabel?.font = Theme.Font.button
-        btnMenu.addTarget(self, action: #selector(onRight(_:)), for: .touchUpInside)
+        btnMenu.configureAsMenuButton(target: self, action: #selector(onRight(_:)))
         btnMenu.translatesAutoresizingMaskIntoConstraints = false
 
         // Sync-count badge, overlaid on the menu button (base VC drives its text via

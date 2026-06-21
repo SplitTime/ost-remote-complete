@@ -16,3 +16,16 @@ final class PrimaryButton: UIButton {
     }
     required init?(coder: NSCoder) { fatalError("init(coder:) not used") }
 }
+
+extension UIButton {
+    /// Style this button as the standard right-drawer hamburger used in every screen
+    /// header — one glyph, size, and tint so the menu affordance is identical
+    /// everywhere (some screens previously showed "Menu ☰", others a bare "☰").
+    func configureAsMenuButton(target: Any?, action: Selector) {
+        setTitle("\u{2630}", for: .normal)        // ☰
+        setTitleColor(Theme.tint, for: .normal)
+        titleLabel?.font = .systemFont(ofSize: 26)
+        accessibilityLabel = "Menu"
+        addTarget(target, action: action, for: .touchUpInside)
+    }
+}

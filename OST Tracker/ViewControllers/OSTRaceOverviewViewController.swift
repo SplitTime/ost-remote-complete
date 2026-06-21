@@ -266,11 +266,7 @@ final class OSTRaceOverviewViewController: OSTBaseViewController,
         refresh.addTarget(self, action: #selector(onRefresh), for: .touchUpInside)
 
         let menuBtn = UIButton(type: .system)
-        menuBtn.setTitle("☰", for: .normal)
-        menuBtn.setTitleColor(Theme.tint, for: .normal)
-        menuBtn.titleLabel?.font = .systemFont(ofSize: 26)
-        menuBtn.accessibilityLabel = "Menu"
-        menuBtn.addTarget(self, action: #selector(onMenu), for: .touchUpInside)
+        menuBtn.configureAsMenuButton(target: self, action: #selector(onMenu))
         menuButton = menuBtn // base VC anchors the sync badge to this
 
         let titleRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), refresh, menuBtn])

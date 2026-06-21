@@ -78,10 +78,7 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
         subtitleLabel.font = Theme.Font.field
         subtitleLabel.textColor = Theme.secondaryLabel
 
-        menuBtn.setTitle("Menu \u{2630}", for: .normal)
-        menuBtn.setTitleColor(Theme.tint, for: .normal)
-        menuBtn.titleLabel?.font = Theme.Font.button
-        menuBtn.addTarget(self, action: #selector(onMenu), for: .touchUpInside)
+        menuBtn.configureAsMenuButton(target: self, action: #selector(onMenu))
 
         badgeView.font = .systemFont(ofSize: 12, weight: .bold)
         badgeView.textColor = .white
