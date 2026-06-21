@@ -302,13 +302,18 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
+    /// `entries` is a list of split sections, so `entries.isEmpty` is true only
+    /// when there are no sections at all. A section with zero rows still means
+    /// nothing was entered, so check every section for rows.
+    private var noEntriesEntered: Bool { entries.allSatisfy { $0.isEmpty } }
+
     @objc func onSubmit(_ sender: Any) {
         UIDevice.current.playInputClick()
         guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return }
 
         let toSubmit = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && submitted == NIL && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
         if toSubmit.isEmpty {
-            ostPresentAlert(title: "", message: entries.isEmpty ? "No times have been entered." : "All times have been synced.")
+            ostPresentAlert(title: "", message: noEntriesEntered ? "No times have been entered." : "All times have been synced.")
             return
         }
 
@@ -321,7 +326,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         guard let courseId = CurrentCourse.getCurrentCourse()?.eventId else { return }
         let toExport = (EntryModel.mr_findAll(with: NSPredicate(format: "combinedCourseId == %@ && bibNumber != %@", courseId, "-1")) as? [EntryModel]) ?? []
         if toExport.isEmpty {
-            ostPresentAlert(title: "", message: entries.isEmpty ? "No times have been entered." : "All times have been synced.")
+            ostPresentAlert(title: "", message: noEntriesEntered ? "No times have been entered." : "All times have been synced.")
             return
         }
 

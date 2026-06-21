@@ -109,7 +109,18 @@ import Foundation
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.setValue("no-cache", forHTTPHeaderField: "cache-control")
         if let authorization = authorization { req.setValue(authorization, forHTTPHeaderField: "Authorization") }
-        req.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        do {
+            req.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+        } catch {
+            // Never POST an empty body on an encode failure: the server would
+            // reject it with an opaque error and the real cause would be lost.
+            DispatchQueue.main.async {
+                completion(nil, NSError(domain: "OST", code: -1, userInfo: [
+                    NSLocalizedDescriptionKey: "Could not encode submit payload: \(error.localizedDescription)"
+                ]))
+            }
+            return
+        }
 
         URLSession.shared.dataTask(with: req) { data, response, error in
             DispatchQueue.main.async {
