@@ -153,9 +153,8 @@ final class CrossCheckPresentationTests: XCTestCase {
         XCTAssertEqual(board.expected.map { $0.bib }, ["3", "4"])
     }
 
-    func testBuildExcludesPlaceholderBib() {
+    func testBuildExcludesEmptyBib() {
         let board = CrossCheckPresentation.build(from: [
-            facts(bib: "-1", isExpected: true),
             facts(bib: "", isExpected: true),
             facts(bib: "7", isExpected: true),
         ])
@@ -240,8 +239,10 @@ enum CrossCheckPresentation {
         return facts.isExpected ? .expected : .notExpected
     }
 
-    /// Buckets efforts by status. The legacy "-1" placeholder and empty bibs are
-    /// dropped (kept out of every bucket) for back-compat.
+    /// Buckets efforts by status. Empty bibs are dropped (roster efforts always
+    /// have a bib; this just guards a nil bibNumber that stringified to "").
+    /// (The legacy effort-side "-1" filter was removed upstream in e0feae1 as
+    /// obsolete — roster efforts never carry the "-1" entry placeholder.)
     static func build(from facts: [EffortFacts]) -> CrossCheckBoard {
         var expected: [CrossCheckRow] = []
         var recorded: [CrossCheckRow] = []
@@ -249,7 +250,7 @@ enum CrossCheckPresentation {
         var notExpected: [CrossCheckRow] = []
 
         for f in facts {
-            guard !f.bib.isEmpty, f.bib != "-1" else { continue }
+            guard !f.bib.isEmpty else { continue }
             let s = status(for: f)
             let row = CrossCheckRow(bib: f.bib, name: f.name, status: s, time: f.time)
             switch s {
@@ -1141,8 +1142,7 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
     }
 
     private func saveContext() {
-        NSManagedObjectContext.mr_default().processPendingChanges()
-        NSManagedObjectContext.mr_default().mr_saveOnlySelfAndWait()
+        NSManagedObjectContext.mr_saveDefaultContext()
     }
 }
 ```

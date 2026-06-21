@@ -176,7 +176,8 @@ removed.
 - **Counts** — summary counts match bucket sizes.
 - **Status mapping** — each effort's facts map to the expected
   `CrossCheckStatus` (expected / recorded / droppedHere / notExpected).
-- **Edge cases** — empty-bib filtering (legacy "-1" placeholder excluded),
+- **Edge cases** — empty-bib filtering (a nil bib that stringifies to "" is
+  dropped; the effort-side "-1" filter was removed upstream as obsolete),
   a runner with entries but `stoppedHere` → dropped not recorded, a runner with
   no entries + explicit not-expected mark → notExpected.
 
