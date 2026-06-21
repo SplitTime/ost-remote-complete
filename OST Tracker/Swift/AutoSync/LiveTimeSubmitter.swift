@@ -14,10 +14,11 @@ func liveTimeEntry(from entry: NSManagedObject) -> LiveTimeEntry {
 }
 
 /// The single sync path shared by auto-sync and the manual Submit button. Drives
-/// `SyncService` for login + deterministic 300-batching; for each batch it POSTs
-/// the *paired managed objects* (recovered by an offset cursor) via the injected
-/// `postBatch`, and marks them submitted on batch success so partial progress
-/// persists across a mid-run failure.
+/// `SyncService` for login + deterministic 300-batching over the managed objects
+/// themselves; for each batch it POSTs those objects via the injected `postBatch`
+/// and marks them submitted on batch success, so partial progress persists across
+/// a mid-run failure. Batching the objects directly keeps each batch's identity
+/// intact — no parallel wire array or offset cursor to drift out of sync.
 struct LiveTimeSubmitter {
     let login: (@escaping (Result<Void, Error>) -> Void) -> Void
     let postBatch: (_ entries: [NSManagedObject], _ useAlternate: Bool,
@@ -29,20 +30,18 @@ struct LiveTimeSubmitter {
                 completion: @escaping (Result<Void, Error>) -> Void) {
         let total = pending.count
         guard total > 0 else { completion(.success(())); return }
-        let wire = pending.map(liveTimeEntry(from:))
-        var offset = 0
-        let service = SyncService(login: login) { batch, useAlternate, done in
-            let slice = Array(pending[offset ..< offset + batch.count])
-            offset += batch.count
-            postBatch(slice, useAlternate) { result in
+        var submitted = 0
+        let service = SyncService<NSManagedObject>(login: login) { batch, useAlternate, done in
+            postBatch(batch, useAlternate) { result in
                 if case .success = result {
-                    markSubmitted(slice)
-                    progress(min(1, CGFloat(offset) / CGFloat(total)))
+                    markSubmitted(batch)
+                    submitted += batch.count
+                    progress(min(1, CGFloat(submitted) / CGFloat(total)))
                 }
                 done(result)
             }
         }
-        service.sync(wire) { [service] result in
+        service.sync(pending) { [service] result in
             _ = service            // keep SyncService alive until the async chain completes
             completion(result)
         }

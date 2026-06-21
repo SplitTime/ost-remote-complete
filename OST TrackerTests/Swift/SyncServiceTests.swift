@@ -13,7 +13,7 @@ final class SyncServiceTests: XCTestCase {
 
     func test_batchesIn300sInOrder() {
         var batchSizes: [Int] = []
-        let svc = SyncService(login: loginOK) { batch, _, done in batchSizes.append(batch.count); done(.success(())) }
+        let svc = SyncService<LiveTimeEntry>(login: loginOK) { batch, _, done in batchSizes.append(batch.count); done(.success(())) }
         let exp = expectation(description: "sync")
         svc.sync(entries(650)) { _ in exp.fulfill() }
         wait(for: [exp], timeout: 1)
@@ -22,7 +22,7 @@ final class SyncServiceTests: XCTestCase {
 
     func test_usesPrimaryServerWhenLoginSucceeds() {
         var serversUsed: [Bool] = []
-        let svc = SyncService(login: loginOK) { _, alt, done in serversUsed.append(alt); done(.success(())) }
+        let svc = SyncService<LiveTimeEntry>(login: loginOK) { _, alt, done in serversUsed.append(alt); done(.success(())) }
         let exp = expectation(description: "sync")
         svc.sync(entries(10)) { _ in exp.fulfill() }
         wait(for: [exp], timeout: 1)
@@ -31,7 +31,7 @@ final class SyncServiceTests: XCTestCase {
 
     func test_usesAlternateServerWhenLoginFails() {
         var serversUsed: [Bool] = []
-        let svc = SyncService(login: loginFail) { _, alt, done in serversUsed.append(alt); done(.success(())) }
+        let svc = SyncService<LiveTimeEntry>(login: loginFail) { _, alt, done in serversUsed.append(alt); done(.success(())) }
         let exp = expectation(description: "sync")
         svc.sync(entries(10)) { _ in exp.fulfill() }
         wait(for: [exp], timeout: 1)
@@ -39,7 +39,7 @@ final class SyncServiceTests: XCTestCase {
     }
 
     func test_propagatesSubmitError() {
-        let svc = SyncService(login: loginOK) { _, _, done in done(.failure(URLError(.badServerResponse))) }
+        let svc = SyncService<LiveTimeEntry>(login: loginOK) { _, _, done in done(.failure(URLError(.badServerResponse))) }
         let exp = expectation(description: "sync")
         svc.sync(entries(5)) { result in
             if case .failure(let e) = result { XCTAssertTrue(e is URLError) } else { XCTFail("expected error") }
