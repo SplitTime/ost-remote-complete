@@ -3,7 +3,7 @@ import UIKit
 /// Read-only live monitor of raw times ("reads") at the device's current
 /// station. Auto-polls every 5s while visible; pauses off-screen / backgrounded.
 /// New reads are highlighted briefly. Header Refresh button + Go-to-Live-Entry.
-final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSource {
+final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSource, UITableViewDelegate {
 
     private let pollInterval: TimeInterval = 5
     private let tableView = UITableView(frame: .zero, style: .plain)
@@ -14,6 +14,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
     private var rows: [RawTime] = []
     private var highWaterMark = 0
     private var newIds: Set<Int> = []
+    private var hasLoadedOnce = false
     private var nameByBib: [String: String] = [:]
     private var timer: Timer?
 
@@ -35,7 +36,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleLabel.text = "Live Reads — \(stationName)"
-        rows = []; highWaterMark = 0; newIds = []
+        rows = []; highWaterMark = 0; newIds = []; hasLoadedOnce = false
         loadRoster()
         tableView.reloadData()
         guard !groupId.isEmpty, !stationName.isEmpty else { updatedLabel.text = "No station selected"; return }
@@ -102,11 +103,14 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
             let result = LiveReadsMerge.merge(existing: self.rows, incoming: incoming, highWaterMark: self.highWaterMark)
             self.rows = result.rows
             self.highWaterMark = result.highWaterMark
-            self.newIds = Set(result.newIds)
+            // Flash only genuinely-new reads; suppress the first fill, where the
+            // empty→full diff would mark every row as "new". Cleared per-row in
+            // willDisplay so each id flashes exactly once.
+            if self.hasLoadedOnce { self.newIds.formUnion(result.newIds) }
+            self.hasLoadedOnce = true
             self.liveDot.backgroundColor = Theme.success
             self.updatedLabel.text = "Updated " + Self.clock.string(from: Date())
             self.tableView.reloadData()
-            self.newIds = []
         }
     }
 
@@ -131,11 +135,19 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         let meta = [time, kind.isEmpty ? "" : "[\(kind)]", source, flags.joined(separator: " · ")]
         cell.detailTextLabel?.text = meta.filter { !$0.isEmpty }.joined(separator: "   ")
         cell.detailTextLabel?.textColor = Theme.secondaryLabel
-        cell.contentView.backgroundColor = newIds.contains(r.id) ? Theme.tint.withAlphaComponent(0.15) : .clear
-        if newIds.contains(r.id) {
-            UIView.animate(withDuration: 1.5) { cell.contentView.backgroundColor = .clear }
-        }
+        cell.contentView.backgroundColor = .clear // highlight is applied in willDisplay
         return cell
+    }
+
+    /// Flash newly-arrived reads once, when the cell actually becomes visible
+    /// (starting the animation from `cellForRowAt` is unreliable). Removing the
+    /// id from `newIds` here means a row never re-flashes on scroll/reuse.
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard indexPath.row < rows.count, newIds.remove(rows[indexPath.row].id) != nil else { return }
+        cell.contentView.backgroundColor = Theme.tint.withAlphaComponent(0.25)
+        UIView.animate(withDuration: 1.2, delay: 0.4, options: [.allowUserInteraction]) {
+            cell.contentView.backgroundColor = .clear
+        }
     }
 
     // MARK: - UI construction
@@ -180,17 +192,25 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         goLive.translatesAutoresizingMaskIntoConstraints = false
         goLive.addTarget(self, action: #selector(onGoToLiveEntry), for: .touchUpInside)
 
-        let statusStack = UIStackView(arrangedSubviews: [liveDot, updatedLabel])
+        // Title + controls on top, live/updated status on its own line below —
+        // they don't both fit on one row at phone width.
+        let titleRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), refresh, menuBtn])
+        titleRow.alignment = .center
+        titleRow.spacing = 12
+
+        let statusStack = UIStackView(arrangedSubviews: [liveDot, updatedLabel, UIView()])
         statusStack.alignment = .center
         statusStack.spacing = 6
 
-        let headerStack = UIStackView(arrangedSubviews: [titleLabel, UIView(), statusStack, refresh, menuBtn])
-        headerStack.alignment = .center
-        headerStack.spacing = 10
+        let headerStack = UIStackView(arrangedSubviews: [titleRow, statusStack])
+        headerStack.axis = .vertical
+        headerStack.spacing = 4
+        headerStack.alignment = .fill
         headerStack.translatesAutoresizingMaskIntoConstraints = false
         header.addSubview(headerStack)
 
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = 56
         tableView.separatorColor = Theme.separator
@@ -207,7 +227,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
             header.topAnchor.constraint(equalTo: guide.topAnchor),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            header.heightAnchor.constraint(equalToConstant: 56),
+            header.heightAnchor.constraint(equalToConstant: 68),
             headerStack.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 16),
             headerStack.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16),
             headerStack.centerYAnchor.constraint(equalTo: header.centerYAnchor),

@@ -135,6 +135,19 @@ final class AutoSyncController: NSObject {
         observers.allObjects.compactMap { $0 as? AutoSyncObserver }.forEach(body)
     }
 
+    /// Recompute the sync-count badge on every observing screen. Sync lifecycle
+    /// events already refresh badges through the observer callbacks; call this for
+    /// entry mutations *outside* the sync flow (create / edit / delete) so badges
+    /// don't go stale — e.g. deleting the on-screen held entry used to leave the
+    /// count stuck at 1 because nothing told the badges to recount.
+    @objc func refreshBadges() {
+        onMain {
+            self.observers.allObjects
+                .compactMap { $0 as? OSTBaseViewController }
+                .forEach { $0.updateSyncBadge() }
+        }
+    }
+
     // MARK: - Manual path (Review pane)
 
     @objc var syncingEntries: [Any] { inFlightEntries }

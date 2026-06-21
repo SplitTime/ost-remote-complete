@@ -38,4 +38,23 @@ final class AutoSyncControllerTests: XCTestCase {
         wait(for: [exp], timeout: 1)
         AutoSyncController.shared.autoSyncEnabled = false
     }
+
+    /// A delete/edit/create persists outside the sync flow, so badges must be told
+    /// to recompute or they go stale (e.g. deleting the on-screen held entry left
+    /// the count at 1). `refreshBadges()` recomputes the badge on every observer.
+    func test_refreshBadges_recomputesBadgeOnObservers() {
+        let spy = BadgeSpyViewController()
+        AutoSyncController.shared.addObserver(spy)
+        defer { AutoSyncController.shared.removeObserver(spy) }
+
+        AutoSyncController.shared.refreshBadges()
+
+        XCTAssertEqual(spy.updateSyncBadgeCallCount, 1)
+    }
+}
+
+/// Test double: an observing screen that counts badge recomputations.
+private final class BadgeSpyViewController: OSTBaseViewController {
+    var updateSyncBadgeCallCount = 0
+    override func updateSyncBadge() { updateSyncBadgeCallCount += 1 }
 }
