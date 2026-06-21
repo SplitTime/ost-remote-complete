@@ -20,7 +20,9 @@ final class MenuRow: UIControl {
         titleLabel.text = title
         titleLabel.font = .systemFont(ofSize: 17, weight: .semibold)
         titleLabel.textColor = Theme.label
-        titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        // A long title truncates rather than shoving the chevron off the trailing edge.
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         badge.font = .systemFont(ofSize: 13, weight: .bold)
         badge.textColor = .white
@@ -41,17 +43,28 @@ final class MenuRow: UIControl {
         chevron.font = .systemFont(ofSize: 18, weight: .semibold)
         chevron.textColor = Theme.secondaryLabel
 
-        let row = UIStackView(arrangedSubviews: [titleLabel, spinner, badge, detail, chevron])
-        row.alignment = .center
-        row.spacing = 8
-        row.isUserInteractionEnabled = false
-        row.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(row)
+        // Title pinned to the leading edge; the accessories (spinner/badge/detail)
+        // and chevron pinned to the trailing edge. We deliberately avoid a single
+        // .fill stack: its slack distribution is ambiguous on iOS 26 and can hand
+        // the extra width to a hidden accessory instead of the title, stranding the
+        // chevron mid-row. Anchoring the chevron to `trailing` keeps it flush-right
+        // on every iOS version regardless of title length.
+        let accessories = UIStackView(arrangedSubviews: [spinner, badge, detail, chevron])
+        accessories.alignment = .center
+        accessories.spacing = 8
+        accessories.isUserInteractionEnabled = false
+        accessories.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(titleLabel)
+        addSubview(accessories)
 
         NSLayoutConstraint.activate([
-            row.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            row.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            row.centerYAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+
+            accessories.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: 8),
+            accessories.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            accessories.centerYAnchor.constraint(equalTo: centerYAnchor),
+
             heightAnchor.constraint(equalToConstant: 52),
             badge.heightAnchor.constraint(equalToConstant: 20),
             badge.widthAnchor.constraint(greaterThanOrEqualToConstant: 20),
@@ -87,4 +100,5 @@ final class MenuRow: UIControl {
     var isShowingDetail: Bool { !detail.isHidden }
     var detailLabelText: String? { detail.text }
     var isShowingChevron: Bool { !chevron.isHidden }
+    var chevronMaxXInRow: CGFloat { chevron.convert(chevron.bounds, to: self).maxX }
 }
