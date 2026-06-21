@@ -351,6 +351,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
         displayStack.translatesAutoresizingMaskIntoConstraints = false
         displayStack.setCustomSpacing(2, after: lblTime)
         displayStack.setCustomSpacing(14, after: txtBibNumber)
+        displayStack.setCustomSpacing(16, after: toggleRow) // separate flags from the In/Out actions
         zone.addSubview(displayStack)
 
         NSLayoutConstraint.activate([
@@ -397,7 +398,7 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     }
 
     private func makeToggleRow() -> UIView {
-        styleToggle(btnStopped, title: "Stopped here")
+        styleToggle(btnStopped, title: "Dropping")
         styleToggle(btnPacer, title: "With pacer")
         btnStopped.addTarget(self, action: #selector(onBtnStopped(_:)), for: .touchUpInside)
         btnPacer.addTarget(self, action: #selector(onButtonPacer(_:)), for: .touchUpInside)
@@ -412,24 +413,53 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
     private func styleToggle(_ button: UIButton, title: String) {
         button.setTitle(title, for: .normal)
-        button.titleLabel?.font = Theme.Font.button
+        button.titleLabel?.font = Theme.Font.field
         button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.7
+        button.setTitleColor(Theme.label, for: .normal)
         button.layer.cornerRadius = Theme.Metric.cornerRadius
-        button.layer.borderWidth = 1.5
-        button.layer.borderColor = Theme.tint.cgColor
+        button.layer.borderWidth = 1
+        button.layer.borderColor = Theme.separator.cgColor
+        // Leading checkbox makes these read as on/off flags, distinct from the
+        // solid In/Out action buttons directly below.
+        button.setImage(Self.checkboxImage(on: false), for: .normal)
+        button.setImage(Self.checkboxImage(on: true), for: .selected)
+        button.imageView?.contentMode = .center
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 18)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
         refreshToggleStyle(button)
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 46).isActive = true
     }
 
-    /// Selected = filled tint; unselected = outlined.
+    /// Neutral pill when off; a subtle tint wash when on — never the solid fill of
+    /// the entry buttons, so it stays legible as a checkbox rather than an action.
     private func refreshToggleStyle(_ button: UIButton) {
-        if button.isSelected {
-            button.backgroundColor = Theme.tint
-            button.setTitleColor(.white, for: .normal)
-        } else {
-            button.backgroundColor = .clear
-            button.setTitleColor(Theme.tint, for: .normal)
-        }
+        button.backgroundColor = button.isSelected
+            ? Theme.tint.withAlphaComponent(0.14)
+            : Theme.secondaryBackground
+    }
+
+    /// Checkbox glyph: rounded outline when off, filled tint with a white check when
+    /// on. (Baked image — colors don't re-resolve on a light/dark switch, matching
+    /// the file's other cgColor uses.)
+    private static func checkboxImage(on: Bool) -> UIImage {
+        UIGraphicsImageRenderer(size: CGSize(width: 24, height: 24)).image { _ in
+            let box = UIBezierPath(roundedRect: CGRect(x: 1.5, y: 1.5, width: 21, height: 21), cornerRadius: 6)
+            if on {
+                Theme.tint.setFill(); box.fill()
+                let check = UIBezierPath()
+                check.move(to: CGPoint(x: 6.5, y: 12.5))
+                check.addLine(to: CGPoint(x: 10.5, y: 16.5))
+                check.addLine(to: CGPoint(x: 17.5, y: 7.5))
+                check.lineWidth = 2.4
+                check.lineCapStyle = .round
+                check.lineJoinStyle = .round
+                UIColor.white.setStroke(); check.stroke()
+            } else {
+                box.lineWidth = 1.8
+                Theme.secondaryLabel.setStroke(); box.stroke()
+            }
+        }.withRenderingMode(.alwaysOriginal)
     }
 
     private func makeEntryRow() -> UIView {
