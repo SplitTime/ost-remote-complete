@@ -119,6 +119,15 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
 
     @objc private func onRefresh() { loadSpread() }
 
+    @objc private func onMenu() {
+        AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        ostPositionBadgeAtMenu()
+    }
+
     @objc private func onModeChanged() {
         mode = Mode(rawValue: modeControl.selectedSegmentIndex) ?? .runner
         updateControlVisibility()
@@ -256,8 +265,16 @@ final class OSTRaceStatusViewController: OSTBaseViewController,
         refresh.titleLabel?.font = Theme.Font.button
         refresh.addTarget(self, action: #selector(onRefresh), for: .touchUpInside)
 
-        let titleRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), refresh])
+        let menuBtn = UIButton(type: .system)
+        menuBtn.setTitle("Menu ☰", for: .normal)
+        menuBtn.setTitleColor(Theme.tint, for: .normal)
+        menuBtn.titleLabel?.font = Theme.Font.button
+        menuBtn.addTarget(self, action: #selector(onMenu), for: .touchUpInside)
+        menuButton = menuBtn // base VC anchors the sync badge to this
+
+        let titleRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), refresh, menuBtn])
         titleRow.alignment = .center
+        titleRow.spacing = 16
 
         eventList.onSelect = { [weak self] name in self?.onEventChosen(name) }
         eventList.isHidden = true
