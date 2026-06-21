@@ -14,9 +14,14 @@ final class OSTToast: NSObject {
 
     /// Green "synced successfully" on success, red "failed to sync" otherwise.
     @objc static func show(success: Bool) {
+        let message = success ? "Times synced successfully." : "Failed to sync times."
+        show(message: message, success: success)
+    }
+
+    /// Same toast with a caller-supplied message.
+    @objc static func show(message: String, success: Bool) {
         guard let window = AppDelegate.getInstance()?.window else { return }
 
-        let message = success ? "Times synced successfully." : "Failed to sync times."
         let bg = success
             ? UIColor(red: 88/255, green: 182/255, blue: 73/255, alpha: 1)
             : UIColor(red: 247/255, green: 45/255, blue: 0, alpha: 1)
