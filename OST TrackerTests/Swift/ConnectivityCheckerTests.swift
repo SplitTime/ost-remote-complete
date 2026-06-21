@@ -8,9 +8,11 @@ import XCTest
 private final class StubAuth: Authenticating {
     var result: Result<AuthResponse, Error> = .failure(URLError(.unknown))
     private(set) var calledWith: (String, String)?
+    private(set) var callCount = 0
     func authenticate(email: String, password: String,
                       completion: @escaping (Result<AuthResponse, Error>) -> Void) {
         calledWith = (email, password)
+        callCount += 1
         completion(result)
     }
 }
@@ -83,5 +85,39 @@ final class ConnectivityCheckerTests: XCTestCase {
 
         XCTAssertEqual((receivedError as NSError?)?.code, 401, "blank credentials must be treated as missing (same 401)")
         XCTAssertNil(auth.calledWith, "must not authenticate with blank credentials")
+    }
+
+    // MARK: - Token caching
+
+    private func check(_ sut: ConnectivityChecker) {
+        let exp = expectation(description: "check")
+        sut.check { _ in exp.fulfill() }
+        wait(for: [exp], timeout: 1)
+    }
+
+    /// A still-valid token is reused: the second read skips the auth round-trip.
+    func test_validToken_skipsReauthWithinWindow() {
+        let auth = StubAuth(); auth.result = .success(AuthResponse(token: "tok", expiration: nil))
+        let sut = ConnectivityChecker(auth: auth, store: StubStore(email: "a@b.com", password: "pw"))
+        check(sut); check(sut)
+        XCTAssertEqual(auth.callCount, 1, "second read within the trust window must not re-authenticate")
+    }
+
+    /// invalidate() drops the cache so the next read authenticates again.
+    func test_invalidate_forcesReauth() {
+        let auth = StubAuth(); auth.result = .success(AuthResponse(token: "tok", expiration: nil))
+        let sut = ConnectivityChecker(auth: auth, store: StubStore(email: "a@b.com", password: "pw"))
+        check(sut)
+        sut.invalidate()
+        check(sut)
+        XCTAssertEqual(auth.callCount, 2, "a stale token (invalidate) must re-authenticate")
+    }
+
+    /// A failed auth is never cached: the next read tries again.
+    func test_authFailure_isNotCached() {
+        let auth = StubAuth(); auth.result = .failure(URLError(.timedOut))
+        let sut = ConnectivityChecker(auth: auth, store: StubStore(email: "a@b.com", password: "pw"))
+        check(sut); check(sut)
+        XCTAssertEqual(auth.callCount, 2, "a failed auth must not be cached")
     }
 }
