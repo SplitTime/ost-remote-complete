@@ -17,12 +17,18 @@ import Foundation
 @objc final class OSTBackend: NSObject {
     @objc static let shared = OSTBackend()
 
+    /// Backend base URL from Info.plist `BACKEND_URL`, falling back to production
+    /// if it's missing or malformed. Single source for every backend caller.
+    static let backendBaseURL: URL = {
+        let urlString = (Bundle.main.object(forInfoDictionaryKey: "BACKEND_URL") as? String) ?? ""
+        return URL(string: urlString) ?? URL(string: "https://www.opensplittime.org/api/v1/")!
+    }()
+
     private let client: APIClient
     private lazy var checker = ConnectivityChecker(auth: client, store: SessionCredentialStore())
 
     private override init() {
-        let urlString = (Bundle.main.object(forInfoDictionaryKey: "BACKEND_URL") as? String) ?? ""
-        client = APIClient(baseURL: URL(string: urlString) ?? URL(string: "https://www.opensplittime.org/api/v1/")!)
+        client = APIClient(baseURL: OSTBackend.backendBaseURL)
         super.init()
     }
 

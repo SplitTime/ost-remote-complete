@@ -71,17 +71,25 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
         let currentCourseSplitName = CurrentCourse.getCurrentCourse()?.splitName
         splitName = currentCourseSplitName ?? ""
 
-        for entrie in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
-            let entries = entrie["entries"] as? [[String: Any]] ?? []
-            if entries.count == 1 { continue }
-            if (entrie["title"] as? String) == currentCourseSplitName {
-                let k0 = entries[0]["subSplitKind"] as? String
-                let k1 = entries[1]["subSplitKind"] as? String
-                if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") {
-                    splitName = entries[0]["splitName"] as? String ?? splitName
-                }
-            }
+        if let matched = matchedInOutSubEntries() {
+            splitName = matched[0]["splitName"] as? String ?? splitName
         }
+    }
+
+    /// The two sub-entries of the current split's data-entry group when they form a
+    /// matched in/in or out/out pair (the case that exposes the location toggle).
+    /// Returns nil for a normal single in+out split. Shared by viewDidLoad and the
+    /// section header so the detection lives in one place.
+    private func matchedInOutSubEntries() -> [[String: Any]]? {
+        let current = CurrentCourse.getCurrentCourse()?.splitName
+        for group in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
+            let entries = group["entries"] as? [[String: Any]] ?? []
+            guard entries.count != 1, (group["title"] as? String) == current else { continue }
+            let k0 = entries[0]["subSplitKind"] as? String
+            let k1 = entries[1]["subSplitKind"] as? String
+            if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") { return entries }
+        }
+        return nil
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -266,27 +274,16 @@ class OSTCrossCheckViewController: OSTBaseViewController, UICollectionViewDataSo
             headerView.segLocation.isHidden = true
             headerView.lblStationName.isHidden = false
 
-            for entrie in (CurrentCourse.getCurrentCourse()?.dataEntryGroups as? [[String: Any]]) ?? [] {
-                let entries = entrie["entries"] as? [[String: Any]] ?? []
-                if entries.count == 1 { continue }
-                if (entrie["title"] as? String) == CurrentCourse.getCurrentCourse()?.splitName {
-                    let k0 = entries[0]["subSplitKind"] as? String
-                    let k1 = entries[1]["subSplitKind"] as? String
-                    if (k0 == "in" && k1 == "in") || (k0 == "out" && k1 == "out") {
-                        headerView.segLocation.isHidden = false
-                        headerView.lblStationName.isHidden = true
-                        headerView.segLocation.setTitle(entries[0]["splitName"] as? String, forSegmentAt: 0)
-                        headerView.segLocation.setTitle(entries[1]["splitName"] as? String, forSegmentAt: 1)
-                        headerView.splitChange = { [weak self] newSplitName in
-                            guard let self = self else { return }
-                            self.splitName = newSplitName ?? ""
-                            for effort in self.efforts { effort.clearVariables() }
-                            self.reloadData()
-                        }
-                    } else {
-                        headerView.segLocation.isHidden = true
-                        headerView.lblStationName.isHidden = false
-                    }
+            if let matched = matchedInOutSubEntries() {
+                headerView.segLocation.isHidden = false
+                headerView.lblStationName.isHidden = true
+                headerView.segLocation.setTitle(matched[0]["splitName"] as? String, forSegmentAt: 0)
+                headerView.segLocation.setTitle(matched[1]["splitName"] as? String, forSegmentAt: 1)
+                headerView.splitChange = { [weak self] newSplitName in
+                    guard let self = self else { return }
+                    self.splitName = newSplitName ?? ""
+                    for effort in self.efforts { effort.clearVariables() }
+                    self.reloadData()
                 }
             }
             return headerView
