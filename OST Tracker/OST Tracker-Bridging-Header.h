@@ -32,5 +32,5 @@
 #import "OSTNetworkManager+Entries.h"
 // Live Entry / runner tracker (Phase 2) Swift screen dependencies
 #import "OSTSound.h"
-#import "OSTRunnerBadge.h"
+#import "OSTRunnerBadgeViewModel.h"
 #import "CustomUIDatePicker.h"
