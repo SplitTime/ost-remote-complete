@@ -117,11 +117,11 @@ final class OSTRunnerBadge: UIView {
         detailStack.spacing = 6
         detailStack.translatesAutoresizingMaskIntoConstraints = false
 
-        // Tap-to-edit cue, pinned to the badge's top-trailing corner over the
-        // light-green field. Decorative only — the badge-wide tap gesture does the work.
+        // Tap-to-edit cue, pinned to the badge's top-leading corner over the solid
+        // green panel. Decorative only — the badge-wide tap gesture does the work.
         pencilLabel.text = "\u{270E}"                       // ✎
-        pencilLabel.font = .systemFont(ofSize: 16)
-        pencilLabel.textColor = Theme.secondaryLabel
+        pencilLabel.font = .systemFont(ofSize: 18)
+        pencilLabel.textColor = Theme.label
         pencilLabel.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(leadingPanel)
@@ -130,7 +130,7 @@ final class OSTRunnerBadge: UIView {
 
         NSLayoutConstraint.activate([
             pencilLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            pencilLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            pencilLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
 
             leadingPanel.leadingAnchor.constraint(equalTo: leadingAnchor),
             leadingPanel.topAnchor.constraint(equalTo: topAnchor),
