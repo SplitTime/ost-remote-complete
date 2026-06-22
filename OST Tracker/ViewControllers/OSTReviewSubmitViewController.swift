@@ -27,7 +27,6 @@ private extension ReviewEntryDisplay {
 class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSource, UITableViewDelegate {
 
     private let titleLabel = UILabel()
-    private let menuBtn = UIButton(type: .system)
     private let badgeView = UILabel()
     private let exportButton = UIButton(type: .system)
     private let sortButton = UIButton(type: .system)
@@ -51,7 +50,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         buildUI()
 
         // Hand the base VC its badge + menu button so updateSyncBadge keeps working.
-        menuButton = menuBtn
         badgeLabel = badgeView
 
         if let stored = UserDefaults.standard.object(forKey: Self.sortSelectionDefaultsKey) as? NSNumber {
@@ -84,14 +82,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     // MARK: - UI
 
     private func buildUI() {
-        titleLabel.font = Theme.Font.brand
-        titleLabel.textColor = Theme.label
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
-
-        menuBtn.setTitle("Menu \u{2630}", for: .normal) // ☰ — opens the right-side drawer
-        menuBtn.setTitleColor(Theme.tint, for: .normal)
-        menuBtn.titleLabel?.font = Theme.Font.button
-        menuBtn.addTarget(self, action: #selector(onRightMenu), for: .touchUpInside)
 
         // Standard iOS share glyph (bundled asset; SF Symbols need iOS 13+). The
         // source PNG is 512px, so render it as a tinted template at a fixed size.
@@ -103,12 +94,12 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         exportButton.widthAnchor.constraint(equalToConstant: 28).isActive = true
         exportButton.heightAnchor.constraint(equalToConstant: 28).isActive = true
 
-        // Title leading; Export + Menu on the trailing edge (the hamburger opens the
-        // right-side drawer), matching the other screens' header convention.
-        let headerRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), exportButton, menuBtn])
-        headerRow.axis = .horizontal
-        headerRow.alignment = .center
-        headerRow.spacing = 12
+        let header = ScreenHeader.make(titleLabel: titleLabel,
+                                       trailingActions: [exportButton],
+                                       target: self,
+                                       onLiveEntry: #selector(onLiveEntry),
+                                       onMenu: #selector(onRightMenu))
+        menuButton = header.menuButton
 
         // Count badge pinned to the menu button's top-trailing corner.
         badgeView.font = .systemFont(ofSize: 12, weight: .bold)
@@ -142,7 +133,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         bottomBar.axis = .vertical
         bottomBar.spacing = 8
 
-        let topStack = UIStackView(arrangedSubviews: [headerRow, sortButton])
+        let topStack = UIStackView(arrangedSubviews: [header.header, sortButton])
         topStack.axis = .vertical
         topStack.spacing = 12
         topStack.translatesAutoresizingMaskIntoConstraints = false
@@ -168,8 +159,8 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             bottomBar.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
             bottomBar.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12),
 
-            badgeView.topAnchor.constraint(equalTo: menuBtn.topAnchor, constant: -4),
-            badgeView.leadingAnchor.constraint(equalTo: menuBtn.trailingAnchor, constant: -14),
+            badgeView.topAnchor.constraint(equalTo: header.menuButton.topAnchor, constant: -4),
+            badgeView.leadingAnchor.constraint(equalTo: header.menuButton.trailingAnchor, constant: -14),
             badgeView.heightAnchor.constraint(equalToConstant: 18),
             badgeView.widthAnchor.constraint(greaterThanOrEqualToConstant: 18),
         ])
@@ -290,6 +281,10 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     }
 
     // MARK: - Actions
+
+    @objc private func onLiveEntry() {
+        AppDelegate.getInstance()?.showTracker()
+    }
 
     @objc private func onSortTapped() {
         BottomSheetPicker.present(from: self, title: "Sort By", options: sortOptions,
