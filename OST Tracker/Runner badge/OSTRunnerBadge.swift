@@ -2,7 +2,8 @@ import UIKit
 
 /// Confirmation badge shown after a time is recorded: the bib number, the recorded
 /// clock time (same `displayTime` the review/sync screen shows), the runner's
-/// gender/age and any flag chips (Dropping / Pacer), plus a Confirm button. Rebuilt
+/// gender/age and any flag chips (Dropping / Pacer), plus a Confirm button and a
+/// top-corner pencil cue (the whole badge is tappable to edit the entry). Rebuilt
 /// in the design system — replaces the old Obj-C/XIB green clipboard badge. Keeps the
 /// `@objc` API the runner tracker calls: `OSTRunnerBadge(frame:)`, `update(with:)`,
 /// `adjustFontSizes()`. The host wires `confirmButton` and toggles its visibility.
@@ -14,6 +15,11 @@ final class OSTRunnerBadge: UIView {
     private let bibLabel = UILabel()
     private let timeLabel = UILabel()
     private let captionLabel = UILabel()
+    /// Affordance hint: the whole badge is tappable to edit the just-recorded entry
+    /// (the host wires the gesture). This pencil glyph in the top-trailing corner is
+    /// the only visual cue for that, so don't drop it. Glyph-in-label matches the
+    /// badge's `✓` and the menu's `☰` convention (no SF Symbols on the iOS 12 floor).
+    private let pencilLabel = UILabel()
     private let droppingChip = OSTRunnerBadge.makeChip("DROPPING", color: Theme.destructive)
     private let pacerChip = OSTRunnerBadge.makeChip("PACER", color: Theme.tint)
     private let chipRow = UIStackView()
@@ -111,10 +117,21 @@ final class OSTRunnerBadge: UIView {
         detailStack.spacing = 6
         detailStack.translatesAutoresizingMaskIntoConstraints = false
 
+        // Tap-to-edit cue, pinned to the badge's top-trailing corner over the
+        // light-green field. Decorative only — the badge-wide tap gesture does the work.
+        pencilLabel.text = "\u{270E}"                       // ✎
+        pencilLabel.font = .systemFont(ofSize: 16)
+        pencilLabel.textColor = Theme.secondaryLabel
+        pencilLabel.translatesAutoresizingMaskIntoConstraints = false
+
         addSubview(leadingPanel)
         addSubview(detailStack)
+        addSubview(pencilLabel)
 
         NSLayoutConstraint.activate([
+            pencilLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            pencilLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+
             leadingPanel.leadingAnchor.constraint(equalTo: leadingAnchor),
             leadingPanel.topAnchor.constraint(equalTo: topAnchor),
             leadingPanel.bottomAnchor.constraint(equalTo: bottomAnchor),
