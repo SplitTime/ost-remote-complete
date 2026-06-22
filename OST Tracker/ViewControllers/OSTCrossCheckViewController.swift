@@ -18,7 +18,6 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
     // UI
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
-    private let menuBtn = UIButton(type: .system)
     private let badgeView = UILabel()
     private let inOutControl = UISegmentedControl(items: ["In", "Out"])
     private let tableView = UITableView(frame: .zero, style: .grouped)
@@ -47,7 +46,6 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
         view.backgroundColor = Theme.background
         buildUI()
 
-        menuButton = menuBtn
         badgeLabel = badgeView
 
         resolveSplitName()
@@ -72,13 +70,15 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
 
     private func buildUI() {
         titleLabel.text = "Cross Check"
-        titleLabel.font = Theme.Font.brand
-        titleLabel.textColor = Theme.label
 
         subtitleLabel.font = Theme.Font.field
         subtitleLabel.textColor = Theme.secondaryLabel
 
-        menuBtn.configureAsMenuButton(target: self, action: #selector(onMenu))
+        let header = ScreenHeader.make(titleLabel: titleLabel,
+                                       target: self,
+                                       onLiveEntry: #selector(onLiveEntry),
+                                       onMenu: #selector(onMenu))
+        menuButton = header.menuButton
 
         badgeView.font = .systemFont(ofSize: 12, weight: .bold)
         badgeView.textColor = .white
@@ -93,10 +93,7 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
         inOutControl.addTarget(self, action: #selector(onInOutChanged), for: .valueChanged)
         inOutControl.selectedSegmentIndex = 0
 
-        let headerRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), menuBtn])
-        headerRow.axis = .horizontal
-        headerRow.alignment = .center
-        headerRow.spacing = 12
+        // header (utility row + title) supplied by ScreenHeader.make above
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = Theme.background
@@ -109,7 +106,7 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
 
         reviewButton.addTarget(self, action: #selector(onReview), for: .touchUpInside)
 
-        let topStack = UIStackView(arrangedSubviews: [headerRow, subtitleLabel, inOutControl])
+        let topStack = UIStackView(arrangedSubviews: [header.header, subtitleLabel, inOutControl])
         topStack.axis = .vertical
         topStack.spacing = 10
         topStack.translatesAutoresizingMaskIntoConstraints = false
@@ -138,8 +135,8 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
             bottomBar.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
             bottomBar.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12),
 
-            badgeView.topAnchor.constraint(equalTo: menuBtn.topAnchor, constant: -4),
-            badgeView.leadingAnchor.constraint(equalTo: menuBtn.trailingAnchor, constant: -14),
+            badgeView.topAnchor.constraint(equalTo: header.menuButton.topAnchor, constant: -4),
+            badgeView.leadingAnchor.constraint(equalTo: header.menuButton.trailingAnchor, constant: -14),
             badgeView.heightAnchor.constraint(equalToConstant: 18),
             badgeView.widthAnchor.constraint(greaterThanOrEqualToConstant: 18),
         ])
@@ -289,6 +286,10 @@ class OSTCrossCheckViewController: OSTBaseViewController, UITableViewDataSource,
     }
 
     // MARK: - Actions
+
+    @objc private func onLiveEntry() {
+        AppDelegate.getInstance()?.showTracker()
+    }
 
     @objc private func onMenu() {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)

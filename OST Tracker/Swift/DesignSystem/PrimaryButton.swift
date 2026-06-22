@@ -28,4 +28,16 @@ extension UIButton {
         accessibilityLabel = "Menu"
         addTarget(target, action: action, for: .touchUpInside)
     }
+
+    /// Style this button as the leading "‹ Live Entry" breadcrumb shown in every
+    /// non-live screen's header utility row — one tap back to bib entry. Mirrors
+    /// `configureAsMenuButton` so the affordance is identical on every screen.
+    func configureAsBreadcrumb(target: Any?, action: Selector) {
+        setTitle("\u{2039} Live Entry", for: .normal)   // ‹ Live Entry
+        setTitleColor(Theme.tint, for: .normal)
+        titleLabel?.font = Theme.Font.button
+        contentHorizontalAlignment = .leading
+        accessibilityLabel = "Back to Live Entry"
+        addTarget(target, action: action, for: .touchUpInside)
+    }
 }

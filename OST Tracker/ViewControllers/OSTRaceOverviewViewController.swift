@@ -119,6 +119,10 @@ final class OSTRaceOverviewViewController: OSTBaseViewController,
 
     @objc private func onRefresh() { loadSpread() }
 
+    @objc private func onLiveEntry() {
+        AppDelegate.getInstance()?.showTracker()
+    }
+
     @objc private func onMenu() {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
@@ -255,8 +259,6 @@ final class OSTRaceOverviewViewController: OSTBaseViewController,
 
     private func buildUI() {
         titleLabel.text = "Race Overview"
-        titleLabel.font = Theme.Font.title
-        titleLabel.textColor = Theme.label
 
         let refresh = UIButton(type: .system)
         refresh.setTitle("⟳", for: .normal)
@@ -265,13 +267,12 @@ final class OSTRaceOverviewViewController: OSTBaseViewController,
         refresh.accessibilityLabel = "Refresh"
         refresh.addTarget(self, action: #selector(onRefresh), for: .touchUpInside)
 
-        let menuBtn = UIButton(type: .system)
-        menuBtn.configureAsMenuButton(target: self, action: #selector(onMenu))
-        menuButton = menuBtn // base VC anchors the sync badge to this
-
-        let titleRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), refresh, menuBtn])
-        titleRow.alignment = .center
-        titleRow.spacing = 16
+        let header = ScreenHeader.make(titleLabel: titleLabel,
+                                       trailingActions: [refresh],
+                                       target: self,
+                                       onLiveEntry: #selector(onLiveEntry),
+                                       onMenu: #selector(onMenu))
+        menuButton = header.menuButton // base VC anchors the sync badge to this
 
         eventList.onSelect = { [weak self] name in self?.onEventChosen(name) }
         eventList.isHidden = true
@@ -299,7 +300,7 @@ final class OSTRaceOverviewViewController: OSTBaseViewController,
         infoLabel.textColor = Theme.secondaryLabel
         infoLabel.numberOfLines = 0
 
-        let controls = UIStackView(arrangedSubviews: [titleRow, eventList, modeControl,
+        let controls = UIStackView(arrangedSubviews: [header.header, eventList, modeControl,
                                                        searchField, stationButton, infoLabel])
         controls.axis = .vertical
         controls.spacing = 12
