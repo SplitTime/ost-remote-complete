@@ -65,7 +65,7 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
 
     @objc private func onRefresh() { fetch(showSpinner: false); startPolling() }
 
-    @objc private func onGoToLiveEntry() { AppDelegate.getInstance()?.showTracker() }
+    @objc private func onLiveEntry() { AppDelegate.getInstance()?.showTracker() }
 
     /// Builds a bib → runner-name map from the locally-cached roster so reads can
     /// be labeled with names. Same source the live tracker uses to resolve a bib.
@@ -161,8 +161,6 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         header.translatesAutoresizingMaskIntoConstraints = false
         header.backgroundColor = Theme.secondaryBackground
 
-        titleLabel.font = Theme.Font.button
-        titleLabel.textColor = Theme.label
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         liveDot.layer.cornerRadius = 5
@@ -180,25 +178,18 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
         refresh.accessibilityLabel = "Refresh"
         refresh.addTarget(self, action: #selector(onRefresh), for: .touchUpInside)
 
-        let menuBtn = UIButton(type: .system)
-        menuBtn.configureAsMenuButton(target: self, action: #selector(onMenu))
-        menuButton = menuBtn // base VC anchors the sync badge to this
-
-        let goLive = PrimaryButton(title: "Go to Live Entry", role: .primary)
-        goLive.translatesAutoresizingMaskIntoConstraints = false
-        goLive.addTarget(self, action: #selector(onGoToLiveEntry), for: .touchUpInside)
-
-        // Title + controls on top, live/updated status on its own line below —
-        // they don't both fit on one row at phone width.
-        let titleRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), refresh, menuBtn])
-        titleRow.alignment = .center
-        titleRow.spacing = 12
+        let screen = ScreenHeader.make(titleLabel: titleLabel,
+                                       trailingActions: [refresh],
+                                       target: self,
+                                       onLiveEntry: #selector(onLiveEntry),
+                                       onMenu: #selector(onMenu))
+        menuButton = screen.menuButton // base VC anchors the sync badge to this
 
         let statusStack = UIStackView(arrangedSubviews: [liveDot, updatedLabel, UIView()])
         statusStack.alignment = .center
         statusStack.spacing = 6
 
-        let headerStack = UIStackView(arrangedSubviews: [titleRow, statusStack])
+        let headerStack = UIStackView(arrangedSubviews: [screen.header, statusStack])
         headerStack.axis = .vertical
         headerStack.spacing = 4
         headerStack.alignment = .fill
@@ -213,7 +204,6 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
 
         view.addSubview(header)
         view.addSubview(tableView)
-        view.addSubview(goLive)
 
         let guide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
@@ -223,19 +213,15 @@ final class OSTLiveReadsViewController: OSTBaseViewController, UITableViewDataSo
             header.topAnchor.constraint(equalTo: guide.topAnchor),
             header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            header.heightAnchor.constraint(equalToConstant: 68),
             headerStack.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 16),
             headerStack.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16),
-            headerStack.centerYAnchor.constraint(equalTo: header.centerYAnchor),
+            headerStack.topAnchor.constraint(equalTo: header.topAnchor, constant: 8),
+            headerStack.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -8),
 
             tableView.topAnchor.constraint(equalTo: header.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: goLive.topAnchor, constant: -8),
-
-            goLive.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Theme.Metric.horizontalInset),
-            goLive.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Theme.Metric.horizontalInset),
-            goLive.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12),
+            tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
         ])
     }
 }
