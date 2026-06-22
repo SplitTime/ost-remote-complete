@@ -82,6 +82,7 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     // MARK: - UI
 
     private func buildUI() {
+        titleLabel.text = "Review & Sync"
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
         // Standard iOS share glyph (bundled asset; SF Symbols need iOS 13+). The
@@ -203,7 +204,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             entries.append(sorted)
         }
 
-        titleLabel.text = course.eventName
         tableView.reloadData()
         updateSyncButtonState()
     }
