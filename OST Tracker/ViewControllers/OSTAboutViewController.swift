@@ -4,8 +4,8 @@
 //
 //  Programmatic DesignSystem rewrite. A header (title + menu button with sync
 //  badge), the OST wordmark, app name/version, grouped info cards for the
-//  servers and contact, a copyright line, and a pinned "Return to Live Entry"
-//  button. The XIB is gone; all values come from the bundle/Info.plist.
+//  servers and contact, and a copyright line. The XIB is gone; all values
+//  come from the bundle/Info.plist.
 //
 
 import UIKit
@@ -14,13 +14,11 @@ import UIKit
 class OSTAboutViewController: OSTBaseViewController {
 
     private let titleLabel = UILabel()
-    private let menuBtn = UIButton(type: .system)
     private let badgeView = UILabel()
 
     private let logoView = UIImageView()
     private let appNameLabel = UILabel()
     private let versionLabel = UILabel()
-    private let returnButton = PrimaryButton(title: "Return to Live Entry", role: .primary)
 
     // MARK: - Lifecycle
 
@@ -30,8 +28,7 @@ class OSTAboutViewController: OSTBaseViewController {
         buildUI()
         populateFromBundle()
 
-        // Hand the base VC its badge + menu button so updateSyncBadge keeps working.
-        menuButton = menuBtn
+        // Hand the base VC its badge label so updateSyncBadge keeps working.
         badgeLabel = badgeView
     }
 
@@ -44,16 +41,13 @@ class OSTAboutViewController: OSTBaseViewController {
 
     private func buildUI() {
         titleLabel.text = "About"
-        titleLabel.font = Theme.Font.brand
-        titleLabel.textColor = Theme.label
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-        menuBtn.configureAsMenuButton(target: self, action: #selector(onMenu))
-
-        let headerRow = UIStackView(arrangedSubviews: [titleLabel, UIView(), menuBtn])
-        headerRow.axis = .horizontal
-        headerRow.alignment = .center
-        headerRow.spacing = 12
+        let header = ScreenHeader.make(titleLabel: titleLabel,
+                                       target: self,
+                                       onLiveEntry: #selector(onLiveEntry),
+                                       onMenu: #selector(onMenu))
+        menuButton = header.menuButton
 
         // Count badge pinned to the menu button's top-trailing corner.
         badgeView.font = .systemFont(ofSize: 12, weight: .bold)
@@ -103,9 +97,7 @@ class OSTAboutViewController: OSTBaseViewController {
         contentStack.spacing = 24
         contentStack.setCustomSpacing(12, after: contentStack.arrangedSubviews[2])
 
-        returnButton.addTarget(self, action: #selector(onReturnToLiveEntry), for: .touchUpInside)
-
-        for v in [headerRow, contentStack, returnButton] {
+        for v in [header.header, contentStack] {
             v.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(v)
         }
@@ -113,22 +105,17 @@ class OSTAboutViewController: OSTBaseViewController {
         let guide = view.safeAreaLayoutGuide
         let inset = Theme.Metric.horizontalInset
         NSLayoutConstraint.activate([
-            headerRow.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12),
-            headerRow.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
-            headerRow.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
+            header.header.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12),
+            header.header.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
+            header.header.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
 
             contentStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
             contentStack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
             contentStack.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
-            contentStack.topAnchor.constraint(greaterThanOrEqualTo: headerRow.bottomAnchor, constant: 24),
+            contentStack.topAnchor.constraint(greaterThanOrEqualTo: header.header.bottomAnchor, constant: 24),
 
-            returnButton.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
-            returnButton.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
-            returnButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12),
-            returnButton.topAnchor.constraint(greaterThanOrEqualTo: contentStack.bottomAnchor, constant: 24),
-
-            badgeView.topAnchor.constraint(equalTo: menuBtn.topAnchor, constant: -4),
-            badgeView.leadingAnchor.constraint(equalTo: menuBtn.trailingAnchor, constant: -14),
+            badgeView.topAnchor.constraint(equalTo: header.menuButton.topAnchor, constant: -4),
+            badgeView.leadingAnchor.constraint(equalTo: header.menuButton.trailingAnchor, constant: -14),
             badgeView.heightAnchor.constraint(equalToConstant: 18),
             badgeView.widthAnchor.constraint(greaterThanOrEqualToConstant: 18),
         ])
@@ -216,7 +203,7 @@ class OSTAboutViewController: OSTBaseViewController {
         AppDelegate.getInstance()?.rightMenuVC.toggleRightSideMenuCompletion(nil)
     }
 
-    @IBAction func onReturnToLiveEntry(_ sender: Any) {
+    @objc private func onLiveEntry() {
         AppDelegate.getInstance()?.showTracker()
     }
 }
