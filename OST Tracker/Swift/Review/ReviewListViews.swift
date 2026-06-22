@@ -15,6 +15,7 @@ final class ReviewEntryCell: UITableViewCell {
     private let inOutLabel = UILabel()
     private let pacerView = UIImageView()
     private let stoppedView = UIImageView()
+    private let checkLabel = UILabel()
 
     private(set) var appliedStyle: ReviewEntryStyle?
 
@@ -46,6 +47,14 @@ final class ReviewEntryCell: UITableViewCell {
         let icons = UIStackView(arrangedSubviews: [pacerView, stoppedView])
         icons.spacing = 6
 
+        // The "synced" confirmation lives here, not in the text color: a single green
+        // check at the trailing edge. Hidden on unsynced rows (the stack collapses the
+        // slot), so the right-hand group stays trailing-flush in both states.
+        checkLabel.text = "\u{2713}" // ✓
+        checkLabel.font = Theme.Font.fieldBold
+        checkLabel.textColor = Theme.success
+        checkLabel.setContentHuggingPriority(.required, for: .horizontal)
+
         // A single empty spacer absorbs all the row's slack, so every row lays out
         // identically regardless of which icons (if any) are showing: time + name
         // flush on the left, icon → bib → In/Out group flush on the right. Relying
@@ -56,7 +65,7 @@ final class ReviewEntryCell: UITableViewCell {
         spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
         spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
-        let row = UIStackView(arrangedSubviews: [timeLabel, nameLabel, spacer, icons, bibLabel, inOutLabel])
+        let row = UIStackView(arrangedSubviews: [timeLabel, nameLabel, spacer, icons, bibLabel, inOutLabel, checkLabel])
         row.axis = .horizontal
         row.alignment = .center
         row.spacing = 10
@@ -89,6 +98,13 @@ final class ReviewEntryCell: UITableViewCell {
         stoppedView.image = UIImage(named: display.isSynced ? "Green Hand" : "Red Hand")
         pacerView.isHidden = !display.showsPacer
         stoppedView.isHidden = !display.showsStopped
+
+        // A synced row reads as confirmed via a faint green wash + the trailing check;
+        // an unsynced row stays on the plain cell background with no check.
+        checkLabel.isHidden = !style.isSynced
+        let fill = style.isSynced ? Theme.successFill : Theme.secondaryBackground
+        backgroundColor = fill
+        contentView.backgroundColor = fill
     }
 
     private func color(for role: ReviewLabelRole) -> UIColor {
@@ -107,6 +123,8 @@ final class ReviewEntryCell: UITableViewCell {
     var inOutText: String? { inOutLabel.text }
     var isPacerHidden: Bool { pacerView.isHidden }
     var isStoppedHidden: Bool { stoppedView.isHidden }
+    var isCheckHidden: Bool { checkLabel.isHidden }
+    var isSyncedRow: Bool { appliedStyle?.isSynced ?? false }
 }
 
 final class ReviewSectionHeaderView: UITableViewHeaderFooterView {

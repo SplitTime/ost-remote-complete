@@ -16,6 +16,9 @@ enum Theme {
     static var secondaryLabel: UIColor { dynamic(light: Palette.lightSecondaryLabel, dark: Palette.darkSecondaryLabel) }
     static var tint: UIColor { dynamic(light: Palette.lightTint, dark: Palette.darkTint) }
     static var success: UIColor { dynamic(light: Palette.lightSuccess, dark: Palette.darkSuccess) }
+    /// Faint, opaque success wash for marking a whole row/cell as confirmed without
+    /// recoloring its text. Pale mint over white in light mode; a dim green over near-black in dark.
+    static var successFill: UIColor { dynamic(light: Palette.lightSuccessFill, dark: Palette.darkSuccessFill) }
     static var destructive: UIColor { dynamic(light: Palette.lightDestructive, dark: Palette.darkDestructive) }
     static var warning: UIColor { dynamic(light: Palette.lightWarning, dark: Palette.darkWarning) }
 
@@ -76,6 +79,8 @@ enum Palette {
     static let darkTint                 = UIColor(red: 10/255, green: 132/255, blue: 255/255, alpha: 1)
     static let lightSuccess             = UIColor(red: 52/255, green: 199/255, blue: 89/255,  alpha: 1) // systemGreen
     static let darkSuccess              = UIColor(red: 48/255, green: 209/255, blue: 88/255,  alpha: 1)
+    static let lightSuccessFill         = UIColor(red: 233/255, green: 248/255, blue: 238/255, alpha: 1) // systemGreen ~8% over white
+    static let darkSuccessFill          = UIColor(red: 24/255,  green: 40/255,  blue: 30/255,  alpha: 1) // dim green over near-black
     static let lightDestructive         = UIColor(red: 255/255, green: 59/255, blue: 48/255,  alpha: 1) // systemRed
     static let darkDestructive          = UIColor(red: 255/255, green: 69/255, blue: 58/255,  alpha: 1)
     static let lightWarning             = UIColor(red: 255/255, green: 149/255, blue: 0/255,  alpha: 1) // systemOrange

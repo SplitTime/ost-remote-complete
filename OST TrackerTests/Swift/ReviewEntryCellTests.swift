@@ -41,9 +41,32 @@ final class ReviewEntryCellTests: XCTestCase {
 
     func test_configure_reusedCell_updatesStyle() {
         let cell = ReviewEntryCell(style: .default, reuseIdentifier: nil)
-        cell.configure(with: display(name: "", submitted: false))   // destructive
-        cell.configure(with: display(name: "Jane Doe", submitted: true)) // success
-        XCTAssertEqual(cell.appliedStyle?.nameRole, .success)
+        cell.configure(with: display(name: "", submitted: false))   // unsynced + missing
+        cell.configure(with: display(name: "Jane Doe", submitted: true)) // synced + found
+        XCTAssertEqual(cell.appliedStyle?.nameRole, .normal)
+        XCTAssertTrue(cell.appliedStyle?.isSynced ?? false)
+    }
+
+    func test_configure_synced_showsTintAndCheck() {
+        let cell = ReviewEntryCell(style: .default, reuseIdentifier: nil)
+        cell.configure(with: display(submitted: true))
+        XCTAssertTrue(cell.isSyncedRow)
+        XCTAssertFalse(cell.isCheckHidden, "a synced row shows the trailing green check")
+    }
+
+    func test_configure_unsynced_hidesTintAndCheck() {
+        let cell = ReviewEntryCell(style: .default, reuseIdentifier: nil)
+        cell.configure(with: display(submitted: false))
+        XCTAssertFalse(cell.isSyncedRow)
+        XCTAssertTrue(cell.isCheckHidden, "an unsynced row shows no check")
+    }
+
+    func test_configure_reusedCell_clearsSyncedState() {
+        let cell = ReviewEntryCell(style: .default, reuseIdentifier: nil)
+        cell.configure(with: display(submitted: true))   // synced
+        cell.configure(with: display(submitted: false))  // reused as unsynced
+        XCTAssertFalse(cell.isSyncedRow)
+        XCTAssertTrue(cell.isCheckHidden)
     }
 
     func test_header_setsTitle() {

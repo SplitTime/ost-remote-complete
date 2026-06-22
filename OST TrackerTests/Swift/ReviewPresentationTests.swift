@@ -51,35 +51,41 @@ final class ReviewPresentationTests: XCTestCase {
         XCTAssertFalse(display(stopped: nil).showsStopped)
     }
 
-    // Style roles
-    func test_style_syncedFound_allSuccess_notBold() {
+    // Style roles — synced-ness no longer recolors the text; it drives the cell's
+    // green tint + trailing check (style.isSynced). Text keeps the same readable
+    // hierarchy as unsynced rows so a synced row stays legible.
+    func test_style_syncedFound_readableRoles_marksSynced() {
         let s = ReviewEntryStyle(display(submitted: true))
-        XCTAssertEqual(s.timeRole, .success)
-        XCTAssertEqual(s.nameRole, .success)
-        XCTAssertEqual(s.bibRole, .success)
-        XCTAssertEqual(s.inOutRole, .success)
+        XCTAssertEqual(s.timeRole, .normal)
+        XCTAssertEqual(s.nameRole, .normal)
+        XCTAssertEqual(s.bibRole, .secondary)
+        XCTAssertEqual(s.inOutRole, .secondary)
         XCTAssertFalse(s.nameBold)
+        XCTAssertTrue(s.isSynced)
     }
 
-    func test_style_syncedMissing_successBold() {
+    func test_style_syncedMissing_keepsMissingWarning() {
         let s = ReviewEntryStyle(display(name: "", submitted: true))
-        XCTAssertEqual(s.nameRole, .success)
+        XCTAssertEqual(s.nameRole, .destructive, "a missing bib stays flagged even once synced")
         XCTAssertTrue(s.nameBold)
+        XCTAssertTrue(s.isSynced)
     }
 
-    func test_style_unsyncedFound_normal_notBold() {
+    func test_style_unsyncedFound_normal_notBold_notSynced() {
         let s = ReviewEntryStyle(display())
         XCTAssertEqual(s.timeRole, .normal)
         XCTAssertEqual(s.nameRole, .normal)
         XCTAssertEqual(s.bibRole, .secondary)
         XCTAssertEqual(s.inOutRole, .secondary)
         XCTAssertFalse(s.nameBold)
+        XCTAssertFalse(s.isSynced)
     }
 
     func test_style_unsyncedMissing_destructiveBold() {
         let s = ReviewEntryStyle(display(name: ""))
         XCTAssertEqual(s.nameRole, .destructive)
         XCTAssertTrue(s.nameBold)
+        XCTAssertFalse(s.isSynced)
     }
 
     // Sync button

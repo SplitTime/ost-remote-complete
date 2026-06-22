@@ -42,24 +42,27 @@ struct ReviewEntryDisplay: Equatable {
 enum ReviewLabelRole { case normal, secondary, success, destructive }
 
 /// The per-label styling for a row, as a pure function of its display values.
+///
+/// Synced-ness no longer recolors the text — a synced row keeps the same readable
+/// hierarchy as an unsynced one, and `isSynced` instead drives the cell's faint
+/// green wash + trailing check. A missing bib stays flagged in either state.
 struct ReviewEntryStyle: Equatable {
     let timeRole: ReviewLabelRole
     let nameRole: ReviewLabelRole
     let bibRole: ReviewLabelRole
     let inOutRole: ReviewLabelRole
     let nameBold: Bool
+    let isSynced: Bool
 
     init(_ d: ReviewEntryDisplay) {
-        if d.isSynced {
-            timeRole = .success; nameRole = .success; bibRole = .success; inOutRole = .success
-            nameBold = d.isBibMissing
+        isSynced = d.isSynced
+        timeRole = .normal
+        bibRole = .secondary
+        inOutRole = .secondary
+        if d.isBibMissing {
+            nameRole = .destructive; nameBold = true
         } else {
-            timeRole = .normal; bibRole = .secondary; inOutRole = .secondary
-            if d.isBibMissing {
-                nameRole = .destructive; nameBold = true
-            } else {
-                nameRole = .normal; nameBold = false
-            }
+            nameRole = .normal; nameBold = false
         }
     }
 }
