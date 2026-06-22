@@ -2,8 +2,9 @@
 //  OSTReviewSubmitViewController.swift
 //  OST Tracker
 //
-//  Programmatic DesignSystem rewrite. Header (event name + Export + sort row),
-//  a grouped table of entries, and a pinned full-width Sync button with an inline
+//  Programmatic DesignSystem rewrite. Header (title + Export + menu),
+//  a grouped table of entries (per split, newest-entered first), and a pinned
+//  full-width Sync button with an inline
 //  progress bar; completion is signalled by OSTToast. All sync/export/edit logic
 //  is preserved from the prior XIB-driven version.
 //
@@ -29,7 +30,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     private let titleLabel = UILabel()
     private let badgeView = UILabel()
     private let exportButton = UIButton(type: .system)
-    private let sortButton = UIButton(type: .system)
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let syncButton = PrimaryButton(title: "All Synced", role: .primary)
     private let progressBar = UIProgressView(progressViewStyle: .default)
@@ -37,10 +37,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
     // entries[section] is the sorted entries for splitTitles[section]
     private var entries: [[EntryModel]] = []
     private var splitTitles: [String] = []
-
-    private let sortOptions = ["Name", "Time Displayed", "Time Entered", "Bib #"]
-    private var sortSelection = 2 // default: Time Entered
-    private static let sortSelectionDefaultsKey = "reviewScreenPicklistValue"
 
     // MARK: - Lifecycle
 
@@ -51,11 +47,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
         // Hand the base VC its badge + menu button so updateSyncBadge keeps working.
         badgeLabel = badgeView
-
-        if let stored = UserDefaults.standard.object(forKey: Self.sortSelectionDefaultsKey) as? NSNumber {
-            sortSelection = stored.intValue
-        }
-        updateSortButtonTitle()
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -113,15 +104,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         badgeView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(badgeView)
 
-        sortButton.contentHorizontalAlignment = .left
-        sortButton.setTitleColor(Theme.label, for: .normal)
-        sortButton.titleLabel?.font = Theme.Font.field
-        sortButton.backgroundColor = Theme.fieldFill
-        sortButton.layer.cornerRadius = Theme.Metric.cornerRadius
-        sortButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
-        sortButton.heightAnchor.constraint(equalToConstant: Theme.Metric.fieldHeight).isActive = true
-        sortButton.addTarget(self, action: #selector(onSortTapped), for: .touchUpInside)
-
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         progressBar.progressTintColor = Theme.tint
@@ -134,24 +116,21 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         bottomBar.axis = .vertical
         bottomBar.spacing = 8
 
-        let topStack = UIStackView(arrangedSubviews: [header.header, sortButton])
-        topStack.axis = .vertical
-        topStack.spacing = 12
-        topStack.translatesAutoresizingMaskIntoConstraints = false
+        header.header.translatesAutoresizingMaskIntoConstraints = false
         bottomBar.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addSubview(topStack)
+        view.addSubview(header.header)
         view.addSubview(tableView)
         view.addSubview(bottomBar)
 
         let guide = view.safeAreaLayoutGuide
         let inset = Theme.Metric.horizontalInset
         NSLayoutConstraint.activate([
-            topStack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12),
-            topStack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
-            topStack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
+            header.header.topAnchor.constraint(equalTo: guide.topAnchor, constant: 12),
+            header.header.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: inset),
+            header.header.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -inset),
 
-            tableView.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: 12),
+            tableView.topAnchor.constraint(equalTo: header.header.bottomAnchor, constant: 12),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomBar.topAnchor, constant: -8),
@@ -165,10 +144,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
             badgeView.heightAnchor.constraint(equalToConstant: 18),
             badgeView.widthAnchor.constraint(greaterThanOrEqualToConstant: 18),
         ])
-    }
-
-    private func updateSortButtonTitle() {
-        sortButton.setTitle("Sort:  \(sortOptions[sortSelection])  \u{25BE}", for: .normal) // ▾
     }
 
     // MARK: - Data
@@ -189,18 +164,10 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
         }
         splitTitles = titles
 
-        var sortKey = "fullName"
-        var ascending = true
-        switch sortSelection {
-        case 1: sortKey = "entryTime"; ascending = false
-        case 2: sortKey = "timeEntered"; ascending = false
-        case 3: sortKey = "bibNumberDecimal"
-        default: break // 0 -> fullName ascending
-        }
-
+        // Fixed order: newest-entered first within each split.
         for title in splitTitles {
             let splitEntries = bySplit[title] ?? []
-            let sorted = (splitEntries as NSArray).sortedArray(using: [NSSortDescriptor(key: sortKey, ascending: ascending)]) as? [EntryModel] ?? splitEntries
+            let sorted = (splitEntries as NSArray).sortedArray(using: [NSSortDescriptor(key: "timeEntered", ascending: false)]) as? [EntryModel] ?? splitEntries
             entries.append(sorted)
         }
 
@@ -284,17 +251,6 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
     @objc private func onLiveEntry() {
         AppDelegate.getInstance()?.showTracker()
-    }
-
-    @objc private func onSortTapped() {
-        BottomSheetPicker.present(from: self, title: "Sort By", options: sortOptions,
-                                  selected: sortOptions[sortSelection]) { [weak self] choice in
-            guard let self = self, let idx = self.sortOptions.firstIndex(of: choice) else { return }
-            self.sortSelection = idx
-            UserDefaults.standard.set(idx, forKey: Self.sortSelectionDefaultsKey)
-            self.updateSortButtonTitle()
-            self.loadData()
-        }
     }
 
     @objc func onRightMenu() {
