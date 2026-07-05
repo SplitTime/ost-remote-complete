@@ -14,11 +14,6 @@
 #import "OSTConstants.h"
 #import "UILabel+Extension.h"
 // MagicalRecord-compatibility shim (mr_*/MR_* selectors) is implemented in Swift.
-#if __has_include("OST_Remote-Swift.h")
-#import "OST_Remote-Swift.h"
-#elif __has_include("OST_Remote_Dev-Swift.h")
-#import "OST_Remote_Dev-Swift.h"
-#endif
 
 @interface OSTBaseViewController ()
 

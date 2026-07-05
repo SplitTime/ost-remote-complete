@@ -24,14 +24,15 @@ final class LoginViewController: UIViewController {
     // MARK: Views
 
     private let logo: UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "OST Logo"))
+        let iv = UIImageView(image: UIImage(named: "OSTLogoBadge"))
         iv.contentMode = .scaleAspectFit
-        iv.heightAnchor.constraint(equalToConstant: 72).isActive = true
+        iv.heightAnchor.constraint(equalToConstant: 88).isActive = true
+        iv.widthAnchor.constraint(equalToConstant: 88).isActive = true
         return iv
     }()
     private let titleLabel: UILabel = {
         let l = UILabel()
-        l.text = "OST Remote"
+        l.text = "OpenSplitTime Live"
         l.textAlignment = .center
         return l
     }()

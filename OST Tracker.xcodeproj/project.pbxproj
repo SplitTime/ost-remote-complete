@@ -33,7 +33,7 @@
 		1758ED7E7502A4DFDD6C7030 /* ScreenHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09A5270B4F23F3F2EFCB1A4 /* ScreenHeader.swift */; };
 		17CFF50A7A334227BB8E127F /* CrossCheckActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C36E483BDC49579FB759CB /* CrossCheckActionSheet.swift */; };
 		18532EB50E7FF80A5884890D /* AppearanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA22B20B858EF2CA668A00B /* AppearanceController.swift */; };
-		18D4194624246CD9002010E3 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		18D4194624246CD9002010E3 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		191225677F529E0E8F5C92DC /* BottomSheetPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8787A94BCAFE95DD1345B3B6 /* BottomSheetPickerTests.swift */; };
 		1E20B1532196107FCB71 /* LiveReadsRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB91083BFC39CDE8C3D3 /* LiveReadsRequestTests.swift */; };
 		2150BCB5B80943DDDFF91635 /* SyncServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25907ECF1D3B12B463F62600 /* SyncServiceTests.swift */; };
@@ -337,7 +337,7 @@
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
 		6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6A549E5C1EEF8B9400783F80 /* OSTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTConstants.h; sourceTree = "<group>"; };
-		6A5E0D091EF1B25E00399EEC /* OST Remote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A5E0D091EF1B25E00399EEC /* OpenSplitTime Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenSplitTime Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A676FDC1F5F401E0051C8CB /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
 		6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CrossCheckEntriesModel.m; sourceTree = "<group>"; };
@@ -705,7 +705,7 @@
 			children = (
 				6AEFFC051EEF83DA009EEE21 /* OST Remote Dev.app */,
 				6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */,
-				6A5E0D091EF1B25E00399EEC /* OST Remote.app */,
+				6A5E0D091EF1B25E00399EEC /* OpenSplitTime Live.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -863,9 +863,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6A5E0CEC1EF1B25E00399EEC /* OST Remote */ = {
+		6A5E0CEC1EF1B25E00399EEC /* OpenSplitTime Live */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OST Remote" */;
+			buildConfigurationList = 6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OpenSplitTime Live" */;
 			buildPhases = (
 				6A5E0CEE1EF1B25E00399EEC /* Sources */,
 				6A5E0CFC1EF1B25E00399EEC /* Frameworks */,
@@ -876,9 +876,9 @@
 			);
 			dependencies = (
 			);
-			name = "OST Remote";
+			name = "OpenSplitTime Live";
 			productName = "OST Tracker";
-			productReference = 6A5E0D091EF1B25E00399EEC /* OST Remote.app */;
+			productReference = 6A5E0D091EF1B25E00399EEC /* OpenSplitTime Live.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */ = {
@@ -929,7 +929,7 @@
 				ORGANIZATIONNAME = OST;
 				TargetAttributes = {
 					6A5E0CEC1EF1B25E00399EEC = {
-						DevelopmentTeam = MEL2GJ9CJX;
+						DevelopmentTeam = 3KGB746CR4;
 						ProvisioningStyle = Automatic;
 					};
 					6AA6E9D31EF0E4C70061EEB0 = {
@@ -968,7 +968,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6A5E0CEC1EF1B25E00399EEC /* OST Remote */,
+				6A5E0CEC1EF1B25E00399EEC /* OpenSplitTime Live */,
 				6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */,
 				6AEFFC1D1EEF83DA009EEE21 /* OST TrackerTests */,
 				6AA6E9D31EF0E4C70061EEB0 /* Mogenerator */,
@@ -1228,7 +1228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D4194624246CD9002010E3 /* BuildFile in Sources */,
+				18D4194624246CD9002010E3 /* (null) in Sources */,
 				6AEFFC231EEF83DA009EEE21 /* OST_TrackerTests.m in Sources */,
 				2826997C1856FEC414037E69 /* HarnessSmokeTests.swift in Sources */,
 				D0CD28493EF297F7A492C237 /* CoreDataStackTests.swift in Sources */,
@@ -1280,7 +1280,7 @@
 		851FE1CA0B3E86C940397F51 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "OST Remote";
-			target = 6A5E0CEC1EF1B25E00399EEC /* OST Remote */;
+			target = 6A5E0CEC1EF1B25E00399EEC /* OpenSplitTime Live */;
 			targetProxy = DD5DFB8804C4CDCA5B2D0873 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1310,7 +1310,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MEL2GJ9CJX;
+				DEVELOPMENT_TEAM = 3KGB746CR4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1327,10 +1327,11 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "OpenSplitTime Live";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.joneisen.OST-Live";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
@@ -1348,10 +1349,9 @@
 				BACKEND_URL = "https://www.opensplittime.org/api/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MEL2GJ9CJX;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1368,13 +1368,14 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "OpenSplitTime Live";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.joneisen.OST-Live";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "ost distribution guille";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1428,6 +1429,7 @@
 				GCC_PREFIX_HEADER = "OST Tracker/PrefixHeader.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					"OST_SWIFT_MODULE=$(PRODUCT_MODULE_NAME:c99extidentifier)",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1474,6 +1476,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "OST Tracker/PrefixHeader.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"OST_SWIFT_MODULE=$(PRODUCT_MODULE_NAME:c99extidentifier)",
+					"$(inherited)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1603,7 +1609,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OST Remote" */ = {
+		6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OpenSplitTime Live" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6A5E0D071EF1B25E00399EEC /* Debug */,

@@ -10,11 +10,6 @@
 #import "CurrentCourse.h"
 #import "EntryModel.h"
 // OSTBackend (Swift) submits over URLSession.
-#if __has_include("OST_Remote-Swift.h")
-#import "OST_Remote-Swift.h"
-#elif __has_include("OST_Remote_Dev-Swift.h")
-#import "OST_Remote_Dev-Swift.h"
-#endif
 
 #define OSTSubmitEventGroupEndpoint @"event_groups/%@/import?data_format=jsonapi_batch&limitedResponse=true"
 

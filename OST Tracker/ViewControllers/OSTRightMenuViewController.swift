@@ -69,7 +69,7 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         logo.widthAnchor.constraint(equalToConstant: 34).isActive = true
         logo.heightAnchor.constraint(equalToConstant: 34).isActive = true
         let brandLabel = UILabel()
-        brandLabel.text = "OST Remote"
+        brandLabel.text = "OST Live"
         brandLabel.font = Theme.Font.brand
         brandLabel.textColor = Theme.label
         let brandRow = UIStackView(arrangedSubviews: [logo, brandLabel, UIView()])

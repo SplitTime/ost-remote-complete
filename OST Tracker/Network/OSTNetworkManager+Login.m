@@ -8,12 +8,6 @@
 
 #import "OSTNetworkManager+Login.h"
 #import "OSTSessionManager.h"
-// OSTAuthBridge (Swift) performs the login POST through APIClient.
-#if __has_include("OST_Remote-Swift.h")
-#import "OST_Remote-Swift.h"
-#elif __has_include("OST_Remote_Dev-Swift.h")
-#import "OST_Remote_Dev-Swift.h"
-#endif
 
 @implementation OSTNetworkManager (Login)
 

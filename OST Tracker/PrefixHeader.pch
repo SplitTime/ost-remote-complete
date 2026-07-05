@@ -31,5 +31,14 @@
 #import "UITextField+RemoveInputAssistant.h"
 #import "UIImage+ImageWithColor.h"
 
+// Swift-generated interface — imported once here for every Obj-C unit so no
+// source file hard-codes the module name. OST_SWIFT_MODULE is defined per-target
+// as $(PRODUCT_MODULE_NAME), so renaming the target/product never breaks this.
+#define OST_SWIFT_STR2(x) #x
+#define OST_SWIFT_STR(x) OST_SWIFT_STR2(x)
+#if defined(OST_SWIFT_MODULE) && __has_include(OST_SWIFT_STR(OST_SWIFT_MODULE-Swift.h))
+#import OST_SWIFT_STR(OST_SWIFT_MODULE-Swift.h)
+#endif
+
 #endif /* PrefixHeader_pch */
 
