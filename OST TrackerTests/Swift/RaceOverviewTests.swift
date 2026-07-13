@@ -112,6 +112,20 @@ extension RaceOverviewTests {
 }
 
 extension RaceOverviewTests {
+    // The "n of m through" denominator counts only runners still expected to pass
+    // this station — through + expected. Dropped (before here) and not-started (DNS)
+    // runners will not come through, so they must be excluded from m.
+    func test_expectedThroughCount_excludesDroppedAndNotStarted() {
+        let statuses: [EffortStatus] = [
+            .through(arrival: Date()),
+            .expected,
+            .dropped(atStation: "S1"),
+            .notStarted,
+        ]
+        XCTAssertEqual(expectedThroughCount(statuses), 2,
+                       "denominator counts only through + expected, not dropped or not-started")
+    }
+
     func test_sortedField_groupsAndOrders() {
         let h = headers(4)
         let early = Date(timeIntervalSince1970: 1000)
@@ -211,7 +225,9 @@ extension RaceOverviewTests {
         let spread = try loadSpread()
         let field = stationField(splitIndex: 2, spread: spread) // Antero (In/Out)
         XCTAssertEqual(field.rows.count, 151)
-        XCTAssertEqual(field.countText, "147 of 151 through")
+        // 151 on the roster, but 3 are dropped/not-started at Antero and excluded
+        // from the denominator — only runners still expected through are counted.
+        XCTAssertEqual(field.countText, "147 of 148 through")
         // The first row is whoever came through Antero earliest (bib 79).
         // Antero is an In/Out station, so the row shows both inline, no "Through" word.
         XCTAssertEqual(field.rows.first?.status, "")

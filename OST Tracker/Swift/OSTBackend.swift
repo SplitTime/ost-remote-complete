@@ -202,6 +202,10 @@ final class ConnectivityChecker {
     /// reuse the existing bearer token instead of re-authenticating — live polling
     /// otherwise paid a full login round-trip before every single GET.
     private var validUntil: Date?
+    /// The email the cached token was minted for. The trust window is only honoured
+    /// while this still matches the stored credentials — switching users (log out as
+    /// A, log in as B) must re-authenticate rather than serve A's data on A's token.
+    private var authenticatedEmail: String?
 
     /// Trust window when the auth response carries no usable expiration.
     private static let defaultCacheWindow: TimeInterval = 60
@@ -224,13 +228,14 @@ final class ConnectivityChecker {
                                userInfo: [NSLocalizedDescriptionKey: "Missing stored credentials. Please log in again."]))
             return
         }
-        if let validUntil = validUntil, validUntil > Date() {
-            completion(nil) // still-valid token; skip the re-auth round-trip
+        if let validUntil = validUntil, validUntil > Date(), authenticatedEmail == email {
+            completion(nil) // still-valid token for this same user; skip the re-auth round-trip
             return
         }
         auth.authenticate(email: email, password: password) { [weak self] result in
             switch result {
             case .success(let response):
+                self?.authenticatedEmail = email
                 self?.validUntil = ConnectivityChecker.cacheExpiry(from: response.expiration)
                 completion(nil)
             case .failure(let error):

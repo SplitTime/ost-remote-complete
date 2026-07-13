@@ -113,6 +113,23 @@ final class ConnectivityCheckerTests: XCTestCase {
         XCTAssertEqual(auth.callCount, 2, "a stale token (invalidate) must re-authenticate")
     }
 
+    /// Switching users must not reuse the previous user's token. When the stored
+    /// credentials change to a different user inside the old trust window (log out
+    /// as A, log in as B, then fetch events), the read must re-authenticate as B
+    /// rather than serving A's data with A's cached bearer token.
+    func test_credentialChange_forcesReauth() {
+        let auth = StubAuth(); auth.result = .success(AuthResponse(token: "tokA", expiration: nil))
+        let store = StubStore(email: "a@b.com", password: "pwA")
+        let sut = ConnectivityChecker(auth: auth, store: store)
+        check(sut)
+        XCTAssertEqual(auth.callCount, 1)
+
+        store.save(email: "b@b.com", password: "pwB") // user B logs in, within A's window
+        check(sut)
+        XCTAssertEqual(auth.callCount, 2, "a change of stored user must force re-authentication")
+        XCTAssertEqual(auth.calledWith?.0, "b@b.com", "must re-authenticate as the new user")
+    }
+
     /// A failed auth is never cached: the next read tries again.
     func test_authFailure_isNotCached() {
         let auth = StubAuth(); auth.result = .failure(URLError(.timedOut))

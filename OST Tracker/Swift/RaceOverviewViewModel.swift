@@ -191,14 +191,27 @@ func fieldRow(_ e: EffortRow, status: EffortStatus, atSplit idx: Int,
                     status: statusText, time: timeText)
 }
 
+/// Runners still expected to pass this station: those already through plus those
+/// still en route (expected). Dropped (before here) and not-started (DNS) runners
+/// will not come through, so they are excluded — this is the "m" in "n of m through".
+func expectedThroughCount(_ statuses: [EffortStatus]) -> Int {
+    statuses.filter {
+        switch $0 {
+        case .through, .expected: return true
+        case .dropped, .notStarted: return false
+        }
+    }.count
+}
+
 func stationField(splitIndex idx: Int, spread: EventSpread) -> StationField {
     let start = spread.eventStartTime
     let tz = spread.eventTimeZone
     let header = spread.splitHeaders[idx]
     let ordered = sortedField(spread.efforts, atSplit: idx, headers: spread.splitHeaders)
     let tagged = ordered.map { ($0, effortStatus($0, atSplit: idx, headers: spread.splitHeaders)) }
-    let throughCount = tagged.filter { if case .through = $0.1 { return true } else { return false } }.count
+    let statuses = tagged.map { $0.1 }
+    let throughCount = statuses.filter { if case .through = $0 { return true } else { return false } }.count
     let rows = tagged.map { fieldRow($0.0, status: $0.1, atSplit: idx, header: header, start: start, tz: tz) }
-    return StationField(countText: "\(throughCount) of \(spread.efforts.count) through",
+    return StationField(countText: "\(throughCount) of \(expectedThroughCount(statuses)) through",
                         rows: rows)
 }
