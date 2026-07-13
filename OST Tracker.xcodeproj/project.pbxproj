@@ -1333,6 +1333,7 @@
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.joneisen.OST-Live";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = OST_Remote;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1374,6 +1375,7 @@
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.joneisen.OST-Live";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = OST_Remote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
@@ -1588,7 +1590,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Remote.app/OST Remote";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSplitTime Live.app/OpenSplitTime Live";
 			};
 			name = Debug;
 		};
@@ -1602,7 +1604,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Remote.app/OST Remote";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSplitTime Live.app/OpenSplitTime Live";
 			};
 			name = Release;
 		};
