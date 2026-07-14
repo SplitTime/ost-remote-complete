@@ -59,6 +59,7 @@ final class LoginViewController: UIViewController {
 
         // The keyboard covers the Login button, so give both ways around it:
         // return-key flow (Next → password, Go → submit) and tap-outside-to-dismiss.
+        emailField.keyboardType = .emailAddress   // OST usernames are always emails
         emailField.returnKeyType = .next
         passwordField.returnKeyType = .go
         emailField.delegate = self
