@@ -36,7 +36,7 @@ final class LoginViewController: UIViewController {
         l.textAlignment = .center
         return l
     }()
-    private let emailField = StyledTextField(placeholder: "Username", secure: false)
+    private let emailField = StyledTextField(placeholder: "Email", secure: false)
     private let passwordField = StyledTextField(placeholder: "Password", secure: true)
     private let loginButton = PrimaryButton(title: "Login", role: .success)
     private let spinner: UIActivityIndicatorView = {
