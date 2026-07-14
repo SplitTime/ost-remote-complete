@@ -1310,7 +1310,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3KGB746CR4;
+				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1327,11 +1327,11 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "OpenSplitTime Live";
+				INFOPLIST_KEY_CFBundleDisplayName = "OST Remote Live";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "me.joneisen.OST-Live";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-Live";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PRODUCT_MODULE_NAME = OST_Remote;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1352,7 +1352,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3KGB746CR4;
+				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
@@ -1369,11 +1369,11 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 				);
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "OpenSplitTime Live";
+				INFOPLIST_KEY_CFBundleDisplayName = "OST Remote Live";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "me.joneisen.OST-Live";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-Live";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PRODUCT_MODULE_NAME = OST_Remote;
 				PROVISIONING_PROFILE = "";
