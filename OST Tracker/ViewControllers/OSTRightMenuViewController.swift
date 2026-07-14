@@ -307,17 +307,17 @@ final class OSTRightMenuViewController: OSTBaseViewController {
         reviewSyncRow.badgeCount = shouldShowBadge ? (Int(badge as String? ?? "0") ?? 0) : 0
     }
 
-    override func syncManagerDidStartSynchronization(_ manager: AutoSyncController!) {
+    override func syncManagerDidStartSynchronization(_ manager: AutoSyncController) {
         super.syncManagerDidStartSynchronization(manager)
         reviewSyncRow.showsSpinner = true
     }
 
-    override func syncManagerDidFinishSynchronization(_ manager: AutoSyncController!) {
+    override func syncManagerDidFinishSynchronization(_ manager: AutoSyncController) {
         super.syncManagerDidFinishSynchronization(manager)
         reviewSyncRow.showsSpinner = false
     }
 
-    override func syncManager(_ manager: AutoSyncController!, didFinishSynchronizationWithErrors errors: [Error]!, alternateServer: Bool) {
+    override func syncManager(_ manager: AutoSyncController, didFinishSynchronizationWithErrors errors: [Error], alternateServer: Bool) {
         super.syncManager(manager, didFinishSynchronizationWithErrors: errors, alternateServer: alternateServer)
         reviewSyncRow.showsSpinner = false
     }

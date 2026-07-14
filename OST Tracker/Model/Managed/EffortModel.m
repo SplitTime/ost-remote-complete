@@ -55,7 +55,7 @@
                             return YES;
                         }
                     }@catch(id anException) {
-                        NSLog(anException);
+                        NSLog(@"%@", anException);
                     }
                 }
             }

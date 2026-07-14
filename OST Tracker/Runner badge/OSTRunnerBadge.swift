@@ -38,7 +38,7 @@ final class OSTRunnerBadge: UIView {
         bibLabel.text = viewModel.bibNumber
         timeLabel.text = viewModel.time
         captionLabel.text = viewModel.caption
-        captionLabel.isHidden = (viewModel.caption ?? "").isEmpty
+        captionLabel.isHidden = viewModel.caption.isEmpty
         droppingChip.isHidden = !viewModel.dropping
         pacerChip.isHidden = !viewModel.withPacer
         chipRow.isHidden = !(viewModel.dropping || viewModel.withPacer)
