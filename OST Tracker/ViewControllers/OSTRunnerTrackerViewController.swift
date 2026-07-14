@@ -325,13 +325,12 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
 
         // In the vertical arrangement the display zone soaks up all spare height
         // and the pad sits at its compact intrinsic size — fine on iPhone, but
-        // tiny keys on a tall iPad portrait screen. Guarantee the pad at least a
-        // quarter of the body: iPhone's natural layout and the landscape
-        // side-by-side arrangement (full-height pad) already satisfy this, so
-        // only iPad portrait grows. Below required so the display zone's content
-        // still wins if space is ever tight.
+        // tiny keys on a tall iPad portrait screen. Guarantee the pad a minimum
+        // share of the body; the landscape side-by-side arrangement (full-height
+        // pad) satisfies this trivially, so portrait is what grows. Below
+        // required so the display zone's content still wins if space is tight.
         let padShare = padContainer.heightAnchor.constraint(
-            greaterThanOrEqualTo: bodyStack.heightAnchor, multiplier: 0.25)
+            greaterThanOrEqualTo: bodyStack.heightAnchor, multiplier: 0.30)
         padShare.priority = UILayoutPriority(999)
         padShare.isActive = true
         return bodyStack
