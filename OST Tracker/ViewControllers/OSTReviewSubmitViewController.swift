@@ -273,7 +273,10 @@ class OSTReviewSubmitViewController: OSTBaseViewController, UITableViewDataSourc
 
         progressBar.setProgress(0, animated: false)
         AutoSyncController.shared.syncEntries(toSubmit)
-        updateSyncButtonState()
+        // Classic-app behavior: return to live entry immediately; the sync
+        // continues in the background (the controller is a singleton) and the
+        // completion toast reports success or failure over whatever screen is up.
+        AppDelegate.getInstance()?.showTracker()
     }
 
     @objc func onExport(_ sender: Any) {
