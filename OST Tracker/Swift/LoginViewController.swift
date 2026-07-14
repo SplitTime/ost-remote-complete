@@ -57,6 +57,16 @@ final class LoginViewController: UIViewController {
         passwordField.text = store.password
         loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
 
+        // The keyboard covers the Login button, so give both ways around it:
+        // return-key flow (Next → password, Go → submit) and tap-outside-to-dismiss.
+        emailField.returnKeyType = .next
+        passwordField.returnKeyType = .go
+        emailField.delegate = self
+        passwordField.delegate = self
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+
         let stack = UIStackView(arrangedSubviews: [logo, titleLabel,
                                                    spacer(20), emailField, passwordField,
                                                    spacer(8), loginButton])
@@ -89,6 +99,7 @@ final class LoginViewController: UIViewController {
     // MARK: Actions
 
     @objc private func didTapLogin() {
+        view.endEditing(true)
         let email = emailField.text ?? ""
         let password = passwordField.text ?? ""
         setLoading(true)
@@ -125,5 +136,16 @@ final class LoginViewController: UIViewController {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === emailField {
+            passwordField.becomeFirstResponder()
+        } else {
+            didTapLogin()
+        }
+        return true
     }
 }

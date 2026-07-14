@@ -109,13 +109,28 @@ class OSTEventSelectionViewController: UIViewController {
         stack.setCustomSpacing(4, after: titleLabel)
         stack.setCustomSpacing(22, after: hintLabel)
         stack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stack)
+
+        // Scroll view so a long event list stays reachable; the stack defines
+        // the content height and the frame guide fixes the width (no sideways scroll).
+        let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(stack)
+        view.addSubview(scrollView)
 
         let guide = view.safeAreaLayoutGuide
+        let content = scrollView.contentLayoutGuide
         NSLayoutConstraint.activate([
-            stack.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: Theme.Metric.horizontalInset),
-            stack.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -Theme.Metric.horizontalInset),
-            stack.topAnchor.constraint(equalTo: guide.topAnchor, constant: 24),
+            scrollView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: guide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+            stack.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: Theme.Metric.horizontalInset),
+            stack.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -Theme.Metric.horizontalInset),
+            stack.topAnchor.constraint(equalTo: content.topAnchor, constant: 24),
+            stack.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -24),
+            stack.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor,
+                                         constant: -2 * Theme.Metric.horizontalInset),
         ])
     }
 
