@@ -929,7 +929,7 @@
 				ORGANIZATIONNAME = OST;
 				TargetAttributes = {
 					6A5E0CEC1EF1B25E00399EEC = {
-						DevelopmentTeam = 3KGB746CR4;
+						DevelopmentTeam = MEL2GJ9CJX;
 						ProvisioningStyle = Automatic;
 					};
 					6AA6E9D31EF0E4C70061EEB0 = {
@@ -1332,8 +1332,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-Live";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				PRODUCT_MODULE_NAME = OST_Remote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1374,8 +1374,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-Live";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				PRODUCT_MODULE_NAME = OST_Remote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OST Tracker/OST Tracker-Bridging-Header.h";

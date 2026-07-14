@@ -187,9 +187,6 @@ class OSTRunnerTrackerViewController: OSTBaseViewController, UITextFieldDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Embedded pad (not an inputView), so playInputClick() can't fire —
-        // play the click directly so key taps are audible on the timing screen.
-        numberPad.tapSound = .alwaysClick
         numberPad.attach(to: txtBibNumber)
 
         txtBibNumber.addObserver(self, forKeyPath: "text", options: [.new, .old], context: nil)

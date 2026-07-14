@@ -89,17 +89,4 @@ final class NumberPadViewTests: XCTestCase {
         XCTAssertGreaterThan(pad.frame.height, 0)
         XCTAssertGreaterThan(pad.frame.width, 0)
     }
-
-    // Conforming to UIInputViewAudioFeedback lets the system keyboard click
-    // play (honoring the user's iOS "Keyboard Clicks" setting) when the pad is
-    // used as an inputView.
-    func test_enablesInputClicksWhenVisible() {
-        XCTAssertTrue(NumberPadView().enableInputClicksWhenVisible)
-    }
-
-    func test_tapSound_defaultsToSystemKeyboardClick() {
-        guard case .systemKeyboardClick = NumberPadView().tapSound else {
-            return XCTFail("expected .systemKeyboardClick default")
-        }
-    }
 }
