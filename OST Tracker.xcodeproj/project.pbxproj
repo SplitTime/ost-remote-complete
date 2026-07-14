@@ -337,7 +337,7 @@
 		6A549E591EEF8A5E00783F80 /* OSTNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSTNetworkManager.m; sourceTree = "<group>"; };
 		6A549E5B1EEF8B4100783F80 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		6A549E5C1EEF8B9400783F80 /* OSTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSTConstants.h; sourceTree = "<group>"; };
-		6A5E0D091EF1B25E00399EEC /* OpenSplitTime Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenSplitTime Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A5E0D091EF1B25E00399EEC /* OST Remote 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OST Remote 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A676FDC1F5F401E0051C8CB /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		6A676FDD1F5F401E0051C8CB /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
 		6A95F54F1F9ED0B900E87570 /* _CrossCheckEntriesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CrossCheckEntriesModel.m; sourceTree = "<group>"; };
@@ -705,7 +705,7 @@
 			children = (
 				6AEFFC051EEF83DA009EEE21 /* OST Remote Dev.app */,
 				6AEFFC1E1EEF83DA009EEE21 /* OST TrackerTests.xctest */,
-				6A5E0D091EF1B25E00399EEC /* OpenSplitTime Live.app */,
+				6A5E0D091EF1B25E00399EEC /* OST Remote 2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -863,9 +863,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6A5E0CEC1EF1B25E00399EEC /* OpenSplitTime Live */ = {
+		6A5E0CEC1EF1B25E00399EEC /* OST Remote 2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OpenSplitTime Live" */;
+			buildConfigurationList = 6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OST Remote 2" */;
 			buildPhases = (
 				6A5E0CEE1EF1B25E00399EEC /* Sources */,
 				6A5E0CFC1EF1B25E00399EEC /* Frameworks */,
@@ -876,9 +876,9 @@
 			);
 			dependencies = (
 			);
-			name = "OpenSplitTime Live";
+			name = "OST Remote 2";
 			productName = "OST Tracker";
-			productReference = 6A5E0D091EF1B25E00399EEC /* OpenSplitTime Live.app */;
+			productReference = 6A5E0D091EF1B25E00399EEC /* OST Remote 2.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */ = {
@@ -968,7 +968,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6A5E0CEC1EF1B25E00399EEC /* OpenSplitTime Live */,
+				6A5E0CEC1EF1B25E00399EEC /* OST Remote 2 */,
 				6AEFFC041EEF83DA009EEE21 /* OST Remote Dev */,
 				6AEFFC1D1EEF83DA009EEE21 /* OST TrackerTests */,
 				6AA6E9D31EF0E4C70061EEB0 /* Mogenerator */,
@@ -1280,7 +1280,7 @@
 		851FE1CA0B3E86C940397F51 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "OST Remote";
-			target = 6A5E0CEC1EF1B25E00399EEC /* OpenSplitTime Live */;
+			target = 6A5E0CEC1EF1B25E00399EEC /* OST Remote 2 */;
 			targetProxy = DD5DFB8804C4CDCA5B2D0873 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1313,11 +1313,11 @@
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "OST Remote Live";
+				INFOPLIST_KEY_CFBundleDisplayName = "OST Remote 2";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-Live";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-2";
 				PRODUCT_MODULE_NAME = OST_Remote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1341,11 +1341,11 @@
 				DEVELOPMENT_TEAM = MEL2GJ9CJX;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "OST Tracker/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "OST Remote Live";
+				INFOPLIST_KEY_CFBundleDisplayName = "OST Remote 2";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 4.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-Live";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.OpenSplitTime.OST-Remote-2";
 				PRODUCT_MODULE_NAME = OST_Remote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1534,7 +1534,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSplitTime Live.app/OpenSplitTime Live";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Remote 2.app/OST Remote 2";
 			};
 			name = Debug;
 		};
@@ -1548,14 +1548,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "HA.OST-TrackerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenSplitTime Live.app/OpenSplitTime Live";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OST Remote 2.app/OST Remote 2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OpenSplitTime Live" */ = {
+		6A5E0D061EF1B25E00399EEC /* Build configuration list for PBXNativeTarget "OST Remote 2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6A5E0D071EF1B25E00399EEC /* Debug */,

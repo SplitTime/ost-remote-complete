@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6A5E0CEC1EF1B25E00399EEC"
-               BuildableName = "OpenSplitTime Live.app"
-               BlueprintName = "OpenSplitTime Live"
+               BuildableName = "OST Remote 2.app"
+               BlueprintName = "OST Remote 2"
                ReferencedContainer = "container:OST Tracker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -55,8 +55,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6A5E0CEC1EF1B25E00399EEC"
-            BuildableName = "OpenSplitTime Live.app"
-            BlueprintName = "OpenSplitTime Live"
+            BuildableName = "OST Remote 2.app"
+            BlueprintName = "OST Remote 2"
             ReferencedContainer = "container:OST Tracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -72,8 +72,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6A5E0CEC1EF1B25E00399EEC"
-            BuildableName = "OpenSplitTime Live.app"
-            BlueprintName = "OpenSplitTime Live"
+            BuildableName = "OST Remote 2.app"
+            BlueprintName = "OST Remote 2"
             ReferencedContainer = "container:OST Tracker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -32,7 +32,7 @@ final class LoginViewController: UIViewController {
     }()
     private let titleLabel: UILabel = {
         let l = UILabel()
-        l.text = "OpenSplitTime Live"
+        l.text = "OST Remote 2"
         l.textAlignment = .center
         return l
     }()
