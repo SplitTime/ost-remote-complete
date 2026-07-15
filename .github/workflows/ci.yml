@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Run tests
+        run: |
+          set -o pipefail
+          DEVICE=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices[] | .[] | select(.name | test("^iPhone"))][0].name')
+          echo "Using simulator: $DEVICE"
+          xcodebuild -project "OST Tracker.xcodeproj" -scheme "OST Remote 2" \
+            -destination "platform=iOS Simulator,name=$DEVICE" \
+            test
