@@ -10,6 +10,12 @@
 
 #define OSTCoredataFile @"OSTDataModel"
 
+// Posted by the (now Swift) runner-tracker screen after a bib is registered;
+// observed by OSTBaseViewController to refresh the sync badge. Relocated here
+// from OSTRunnerTrackerViewController.h during the Swift migration. The Swift
+// side posts the same literal string.
+#define OSTRunnerTrackerViewControllerDidRegisterBibNotification @"OSTRunnerTrackerViewControllerDidRegisterBibNotification"
+
 #ifndef STR_PROP
     #define STR_PROP( prop ) [self mappedKeyName:NSStringFromSelector(@selector(prop))]
 #endif

@@ -1,4 +1,5 @@
 #import "CurrentCourse.h"
+// MagicalRecord-compatibility shim (mr_*/MR_* selectors) is implemented in Swift.
 
 @interface CurrentCourse ()
 

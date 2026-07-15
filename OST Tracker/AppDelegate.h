@@ -7,23 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MFSideMenu.h"
 
-//mariano.losangeles@gmail.com
-//json9999
+@class OSTDrawerContainer; // Swift native drawer (replaces MFSideMenu)
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UINavigationController *navigationController;
-@property (strong, nonatomic) MFSideMenuContainerViewController * rightMenuVC;
+@property (strong, nonatomic) OSTDrawerContainer * rightMenuVC;
 + (AppDelegate *)getInstance;
 - (OSTNetworkManager*) getNetworkManager;
 - (void) logout;
 - (void) loadLeftMenu;
 - (void) showTracker;
 - (void) showReview;
-- (void) showUtilities;
 - (void) showAbout;
 - (void) resetNetworkManager;
 

@@ -6,7 +6,7 @@
                 <entry key="mappedKeyName" value="title"/>
             </userInfo>
         </attribute>
-        <attribute name="entries" optional="YES" attributeType="Transformable" syncable="YES">
+        <attribute name="entries" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="entries"/>
             </userInfo>
@@ -21,15 +21,15 @@
         <attribute name="splitName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CurrentCourse" representedClassName="CurrentCourse" syncable="YES">
-        <attribute name="dataEntryGroups" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="dataEntryGroups" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" syncable="YES"/>
         <attribute name="eventGroupId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventIdsAndSplits" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="eventIdsAndSplits" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="eventShortNames" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="eventShortNames" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" syncable="YES"/>
         <attribute name="monitorPacers" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="multiLap" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="splitAttributes" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="splitAttributes" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" syncable="YES"/>
         <attribute name="splitId" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
@@ -103,7 +103,7 @@
         </fetchIndex>
     </entity>
     <entity name="EventModel" representedClassName="EventModel" syncable="YES">
-        <attribute name="dataEntryGroups" optional="YES" attributeType="Transformable" syncable="YES">
+        <attribute name="dataEntryGroups" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="attributes.dataEntryGroups"/>
             </userInfo>
@@ -133,7 +133,7 @@
                 <entry key="mappedKeyName" value="attributes.slug"/>
             </userInfo>
         </attribute>
-        <attribute name="splits" optional="YES" attributeType="Transformable" syncable="YES">
+        <attribute name="splits" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="relationships.splits.data"/>
             </userInfo>

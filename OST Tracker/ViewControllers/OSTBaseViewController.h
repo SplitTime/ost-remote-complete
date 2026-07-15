@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OSTSyncManager.h"
+#import "AutoSyncObserver.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OSTBaseViewController : UIViewController<OSTSyncManagerDelegate>
+@interface OSTBaseViewController : UIViewController<AutoSyncObserver>
 
 @property (nonatomic,weak) IBOutlet UIButton *menuButton;
 @property (nonatomic,weak) IBOutlet UILabel *badgeLabel;
@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,readonly) BOOL shouldShowBadge;
 
 - (void)updateSyncBadge;
+
+/// Positions the sync-count badge at the top-left corner of the menu (hamburger)
+/// button. Call after the safe-area fix in `viewDidLayoutSubviews` so the badge
+/// stays pinned to the hamburger wherever it ends up.
+- (void)ostPositionBadgeAtMenu;
 
 @end
 

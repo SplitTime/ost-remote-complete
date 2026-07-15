@@ -7,18 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "OSTLoginViewController.h"
-#import "MFSideMenu.h"
-#import "OSTRunnerTrackerViewController.h"
-#import "OSTRightMenuViewController.h"
-#import "OSTReviewSubmitViewController.h"
+// Generated Swift header — module name differs between the two app targets.
+// (Provides OSTDrawerContainer + the Swift screens.)
+// OSTRunnerTrackerViewController is now Swift (visible via the generated header above).
+// OSTRightMenuViewController is now Swift (visible via the generated header above).
+// OSTReviewSubmitViewController is now Swift (visible via the generated header above).
 #import "CurrentCourse.h"
-#import "IQKeyboardManager.h"
 #import "CourseSplits.h"
 #import "EffortModel.h"
 #import "UIView+Additions.h"
-#import "OSTUtilitiesViewController.h"
-#import "OSTAboutViewController.h"
 
 @interface AppDelegate ()
 
@@ -44,7 +41,6 @@
     if (self.networkManager == nil)
     {
         self.networkManager = [[OSTNetworkManager alloc] init];
-        [self.networkManager.reachabilityManager startMonitoring];
     }
     return self.networkManager;
 }
@@ -53,12 +49,17 @@
     // Override point for customization after application launch.
     
     [self initializeCoredata];
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 80;
-    
+
+    // Force lazy creation of the auto-sync controller so it begins observing
+    // Core Data saves.
+    // AutoSyncController.shared starts with autoSyncEnabled = false (UserDefaults default), so no sync fires at launch.
+    (void)[AutoSyncController shared];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    if ([CurrentCourse getCurrentCourse])
+    CurrentCourse *savedCourse = [CurrentCourse getCurrentCourse];
+    NSLog(@"[OST] launch: savedCourse eventId=%@ name=%@", savedCourse.eventId, savedCourse.eventName);
+    if (savedCourse)
     {
         [self loadLeftMenu];
     }
@@ -68,7 +69,8 @@
     }
     
     [self.window makeKeyAndVisible];
-    
+    [[AppearanceController shared] apply];
+
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = NO;
 
     return YES;
@@ -76,7 +78,7 @@
 
 - (void) loadLogin
 {
-    OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
+    LoginViewController * loginVC = [[LoginViewController alloc] init];
     
     self.window.rootViewController = loginVC;
 }
@@ -85,9 +87,8 @@
 {
     if (!self.rightMenuVC)
     {
-        self.rightMenuVC = [[MFSideMenuContainerViewController alloc] init];
+        self.rightMenuVC = [[OSTDrawerContainer alloc] init];
         self.rightMenuVC.rightMenuViewController = [[OSTRightMenuViewController alloc] initWithNibName:nil bundle:nil];
-        self.rightMenuVC.rightMenuViewController.view.height = self.window.height;
     }
 
     if (!self.OSTTrackerVC)
@@ -117,11 +118,6 @@
     [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
 }
 
-- (void) showUtilities
-{
-    self.rightMenuVC.centerViewController = [[OSTUtilitiesViewController alloc] initWithNibName:nil bundle:nil];
-    [[self.rightMenuVC.centerViewController view] setFrame:self.window.frame];
-}
 - (void) showAbout
 {
     self.rightMenuVC.centerViewController = [[OSTAboutViewController alloc] initWithNibName:nil bundle:nil];
@@ -136,7 +132,7 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveOnlySelfAndWait];
     [[AppDelegate getInstance].getNetworkManager addTokenToHeader:nil];
     
-    OSTLoginViewController * loginVC = [[OSTLoginViewController alloc] initWithNibName:nil bundle:nil];
+    LoginViewController * loginVC = [[LoginViewController alloc] init];
     self.window.rootViewController = loginVC;
 }
 
@@ -144,7 +140,8 @@
 
 - (void) initializeCoredata
 {
-    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:OSTCoredataFile];
+    // Native CoreDataStack (replaces MagicalRecord); opens the same on-disk store.
+    [OSTCoreData bootstrap];
 }
 
 
@@ -157,6 +154,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[AutoSyncController shared] applicationDidEnterBackground];
 }
 
 
@@ -167,6 +165,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[AutoSyncController shared] applicationDidBecomeActive];
 }
 
 

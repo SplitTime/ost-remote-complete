@@ -10,8 +10,10 @@
 #import "UIView+Additions.h"
 #import "EntryModel.h"
 #import "CurrentCourse.h"
-#import "OSTRunnerTrackerViewController.h"
+// Runner tracker is now Swift; the DidRegisterBib notification name lives in OSTConstants.
+#import "OSTConstants.h"
 #import "UILabel+Extension.h"
+// MagicalRecord-compatibility shim (mr_*/MR_* selectors) is implemented in Swift.
 
 @interface OSTBaseViewController ()
 
@@ -24,12 +26,12 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:OSTRunnerTrackerViewControllerDidRegisterBibNotification object:nil];
-    [[[OSTSyncManager shared] delegates] removeObject:self];
+    [[AutoSyncController shared] removeObserver:self];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[[OSTSyncManager shared] delegates] addObject:self];
+    [[AutoSyncController shared] addObserver:self];
     self.badgeLabel.layer.cornerRadius = self.badgeLabel.width/2;
     self.badgeLabel.clipsToBounds = YES;
     
@@ -42,24 +44,24 @@
     [self updateSyncBadge];
 }
 
-#pragma mark - OSTSyncManagerDelegate
+#pragma mark - AutoSyncObserver
 
-- (void)syncManagerDidStartSynchronization:(OSTSyncManager *)manager
+- (void)syncManagerDidStartSynchronization:(AutoSyncController *)manager
 {
     [self updateSyncBadge];
 }
 
-- (void)syncManager:(OSTSyncManager *)manager progress:(CGFloat)progress
+- (void)syncManager:(AutoSyncController *)manager progress:(CGFloat)progress
 {
-    
+
 }
 
-- (void)syncManagerDidFinishSynchronization:(OSTSyncManager *)manager
+- (void)syncManagerDidFinishSynchronization:(AutoSyncController *)manager
 {
     [self updateSyncBadge];
 }
 
-- (void)syncManager:(OSTSyncManager *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
+- (void)syncManager:(AutoSyncController *)manager didFinishSynchronizationWithErrors:(NSArray<NSError *> *)errors alternateServer:(BOOL)alternateServer
 {
     [self updateSyncBadge];
 }
@@ -69,45 +71,29 @@
     [self updateSyncBadge];
 }
 
-- (void)updateSyncBadge
+- (void)ostPositionBadgeAtMenu
 {
-    NSInteger entriesCount = 0;
-    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]];
-    
-    NSMutableSet * set = [NSMutableSet new];
-    for (EntryModel * entry in entries)
-    {
-        [set addObject:entry.splitName];
-    }
-    NSArray *splitTitles = set.allObjects;
-    
-    for (NSString * title in splitTitles)
-    {
-        NSArray *splitEntries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && splitName == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId,title]];
-        entriesCount += splitEntries.count;
-    }
-    
-    CGFloat badgeRightEdge = self.badgeLabel.right;
-    if (entriesCount == 0)
-    {
-        self.badgeLabel.hidden = YES;
-        shouldShowBadge = NO;
-    }
-    else
-    {
-        NSString *badge = [NSString stringWithFormat:@"%@",@(entriesCount)];
-        shouldShowBadge = YES;
-        self.badge = badge;
-        self.badgeLabel.hidden = NO;
-        self.badgeLabel.text = badge;
-        [self.badgeLabel updateBadgeShape];
-    }
-    self.badgeLabel.right = badgeRightEdge;
+    if (!self.menuButton || !self.badgeLabel) return;
+    UIView *menuSuper = self.menuButton.superview;
+    UIView *badgeSuper = self.badgeLabel.superview;
+    if (!menuSuper || !badgeSuper) return;
+    // The hamburger (≡) sits at the right end of the wide menu button. Anchor the
+    // badge's top-right corner ~2pt inside the menu button's top-right, matching the
+    // Live Entry screen exactly (menu button is a standard 122x44 on every screen).
+    CGRect mf = self.menuButton.frame;
+    CGPoint topRight = [menuSuper convertPoint:CGPointMake(CGRectGetMaxX(mf), CGRectGetMinY(mf)) toView:badgeSuper];
+    CGRect bf = self.badgeLabel.frame;
+    bf.origin.x = topRight.x - 2.0 - bf.size.width;
+    bf.origin.y = topRight.y + 2.0;
+    self.badgeLabel.frame = bf;
 }
 
-- (void)updateSyncBadge_old
+- (void)updateSyncBadge
 {
-    NSMutableArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL && bibNumber != %@",[CurrentCourse getCurrentCourse].eventId,@"-1"]].mutableCopy;
+    // Count only entries that actually need syncing — the same eligibility the sync
+    // engine uses (submitted == NIL). (The old "-1" placeholder bib no longer exists,
+    // so there's nothing extra to exclude here.)
+    NSArray * entries = [EntryModel MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"combinedCourseId == %@ && submitted == NIL",[CurrentCourse getCurrentCourse].eventId]];
     CGFloat badgeRightEdge = self.badgeLabel.right;
     if (entries.count == 0)
     {

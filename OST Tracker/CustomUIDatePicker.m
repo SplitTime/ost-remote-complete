@@ -62,6 +62,9 @@
     } else if (component == 2) {
         self.secs = row;
     }
+    if (self.onChange) {
+        self.onChange();
+    }
 }
 
 - (void) selectRowsInPicker

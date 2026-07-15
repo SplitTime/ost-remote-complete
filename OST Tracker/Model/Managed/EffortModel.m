@@ -1,6 +1,7 @@
 #import "EffortModel.h"
 #import "CurrentCourse.h"
 #import "EntryModel.h"
+// MagicalRecord-compatibility shim (mr_*/MR_* selectors) is implemented in Swift.
 
 @interface EffortModel ()
 
@@ -54,7 +55,7 @@
                             return YES;
                         }
                     }@catch(id anException) {
-                        NSLog(anException);
+                        NSLog(@"%@", anException);
                     }
                 }
             }
