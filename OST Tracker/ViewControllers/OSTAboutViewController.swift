@@ -124,7 +124,8 @@ class OSTAboutViewController: OSTBaseViewController {
     private func populateFromBundle() {
         appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-        versionLabel.text = "Version \(appVersion)"
+        let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+        versionLabel.text = "Version \(appVersion) (\(buildNumber))"
     }
 
     private func serverRows() -> [UIView] {
